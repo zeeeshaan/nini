@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/fa.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,10 +9,26 @@ class HomeScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     final items = [
-      _TaskItem('Design review', 'UI polish for onboarding flow', Icons.brush_outlined),
-      _TaskItem('Team sync', 'Weekly standup at 10:00 AM', Icons.groups_outlined),
-      _TaskItem('Ship release', 'v1.2.0 to the App Store', Icons.rocket_launch_outlined),
-      _TaskItem('Write docs', 'Update the API reference', Icons.description_outlined),
+      _TaskItem(
+        'بازبینی طراحی',
+        'بهبود رابط کاربری مراحل ورود',
+        Icons.brush_outlined,
+      ),
+      _TaskItem(
+        'جلسه تیمی',
+        'جلسه هفتگی، ساعت ۱۰:۰۰ صبح',
+        Icons.groups_outlined,
+      ),
+      _TaskItem(
+        'انتشار نسخه جدید',
+        'انتشار نسخه ۱٫۲٫۰ در اپ‌استور',
+        Icons.rocket_launch_outlined,
+      ),
+      _TaskItem(
+        'نوشتن مستندات',
+        'به‌روزرسانی مستندات رابط برنامه‌نویسی',
+        Icons.description_outlined,
+      ),
     ];
 
     return CustomScrollView(
@@ -25,16 +42,22 @@ class HomeScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Welcome back', style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    )),
-                    Text('Ali', style: theme.textTheme.headlineSmall),
+                    Text(
+                      'خوش آمدید',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    Text('علی', style: theme.textTheme.headlineSmall),
                   ],
                 ),
                 CircleAvatar(
                   radius: 22,
                   backgroundColor: theme.colorScheme.primaryContainer,
-                  child: Icon(Icons.person, color: theme.colorScheme.onPrimaryContainer),
+                  child: Icon(
+                    Icons.person,
+                    color: theme.colorScheme.onPrimaryContainer,
+                  ),
                 ),
               ],
             ),
@@ -42,14 +65,12 @@ class HomeScreen extends StatelessWidget {
         ),
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          sliver: SliverToBoxAdapter(
-            child: _SummaryCard(theme: theme),
-          ),
+          sliver: SliverToBoxAdapter(child: _SummaryCard(theme: theme)),
         ),
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
           sliver: SliverToBoxAdapter(
-            child: Text('Today\'s tasks', style: theme.textTheme.titleMedium),
+            child: Text('کارهای امروز', style: theme.textTheme.titleMedium),
           ),
         ),
         SliverPadding(
@@ -76,7 +97,10 @@ class _SummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: LinearGradient(
-          colors: [theme.colorScheme.primary, theme.colorScheme.primary.withValues(alpha: 0.75)],
+          colors: [
+            theme.colorScheme.primary,
+            theme.colorScheme.primary.withValues(alpha: 0.75),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -89,7 +113,7 @@ class _SummaryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Today\'s progress',
+                  'پیشرفت امروز',
                   style: TextStyle(
                     color: theme.colorScheme.onPrimary.withValues(alpha: 0.85),
                     fontWeight: FontWeight.w500,
@@ -97,7 +121,7 @@ class _SummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  '3 of 4 done',
+                  '${faDigits(3)} از ${faDigits(4)} انجام شد',
                   style: theme.textTheme.headlineSmall?.copyWith(
                     color: theme.colorScheme.onPrimary,
                   ),
@@ -114,14 +138,21 @@ class _SummaryCard extends StatelessWidget {
                 CircularProgressIndicator(
                   value: 0.75,
                   strokeWidth: 5,
-                  backgroundColor: theme.colorScheme.onPrimary.withValues(alpha: 0.25),
-                  valueColor: AlwaysStoppedAnimation(theme.colorScheme.onPrimary),
+                  backgroundColor: theme.colorScheme.onPrimary.withValues(
+                    alpha: 0.25,
+                  ),
+                  valueColor: AlwaysStoppedAnimation(
+                    theme.colorScheme.onPrimary,
+                  ),
                 ),
-                Text('75%', style: TextStyle(
-                  color: theme.colorScheme.onPrimary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                )),
+                Text(
+                  '${faDigits(75)}٪',
+                  style: TextStyle(
+                    color: theme.colorScheme.onPrimary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
           ),
@@ -157,7 +188,11 @@ class _TaskCard extends StatelessWidget {
                 color: theme.colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: Icon(item.icon, color: theme.colorScheme.onPrimaryContainer, size: 22),
+              child: Icon(
+                item.icon,
+                color: theme.colorScheme.onPrimaryContainer,
+                size: 22,
+              ),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -175,7 +210,10 @@ class _TaskCard extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant),
+            Icon(
+              Icons.chevron_right,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
           ],
         ),
       ),
