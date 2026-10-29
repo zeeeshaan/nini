@@ -1,0 +1,51 @@
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:flutter/material.dart';
+
+import 'package:nini/core/localization/app_strings.dart';
+
+/// The picker uses the device's emoji glyphs; the OS keyboard remains available.
+class ChatEmojiPanel extends StatelessWidget {
+  const ChatEmojiPanel({
+    super.key,
+    required this.controller,
+    required this.height,
+  });
+  final TextEditingController controller;
+  final double height;
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return SafeArea(
+      top: false,
+      child: EmojiPicker(
+        textEditingController: controller,
+        config: Config(
+          height: height,
+          locale: const Locale('fa'),
+          emojiTextStyle: const TextStyle(fontFamily: null),
+          emojiViewConfig: EmojiViewConfig(
+            columns: 7,
+            emojiSizeMax: 27,
+            backgroundColor: colors.surface,
+            noRecents: const Text(AppStrings.noRecentEmoji),
+          ),
+          categoryViewConfig: CategoryViewConfig(
+            initCategory: Category.SMILEYS,
+            backgroundColor: colors.surface,
+            iconColor: colors.onSurface.withValues(alpha: .5),
+            iconColorSelected: colors.onSurface,
+            indicatorColor: colors.onSurface,
+            backspaceColor: colors.onSurface,
+            dividerColor: Theme.of(context).dividerColor,
+          ),
+          bottomActionBarConfig: BottomActionBarConfig(
+            showSearchViewButton: false,
+            backgroundColor: colors.surface,
+            buttonColor: colors.surface,
+            buttonIconColor: colors.onSurface,
+          ),
+        ),
+      ),
+    );
+  }
+}

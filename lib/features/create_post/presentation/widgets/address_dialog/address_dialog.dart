@@ -16,10 +16,12 @@ class AddressDialog extends StatefulWidget {
     this.initial,
     this.saved = const [],
     this.tileProvider,
+    this.doneLabel = AppStrings.done,
   });
   final PostAddress? initial;
   final List<PostAddress> saved;
   final TileProvider? tileProvider;
+  final String doneLabel;
   @override
   State<AddressDialog> createState() => _AddressDialogState();
 }
@@ -120,7 +122,10 @@ class _AddressDialogState extends State<AddressDialog> {
               child: PostDialog(
                 title: AppStrings.address,
                 icon: AppIcons.map,
-                actions: PostDialogActions(onDone: _done),
+                actions: PostDialogActions(
+                  onDone: _done,
+                  doneLabel: widget.doneLabel,
+                ),
                 child: ListView(
                   shrinkWrap: true,
                   children: [

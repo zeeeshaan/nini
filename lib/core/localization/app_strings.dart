@@ -271,6 +271,112 @@ abstract final class AppStrings {
     _ => category,
   };
 
+  // Chat controls and messages.
+  static const chat = 'گفتگوها';
+  static const chatOptions = 'گزینه‌های گفتگو';
+  static const showAllChats = 'نمایش همه گفتگوها';
+  static const unreadChats = 'گفتگوهای خوانده‌نشده';
+  static const markAllRead = 'علامت‌گذاری همه به‌عنوان خوانده‌شده';
+  static const noUnreadChats = 'گفتگوی خوانده‌نشده‌ای وجود ندارد';
+  static const noChatsFound = 'گفتگویی یافت نشد';
+  static const noMessages = 'هنوز پیامی وجود ندارد';
+  static const startChatting = 'برای شروع گفتگو پیامی بفرستید';
+  static const messageHint = 'پیام';
+  static const sendMessage = 'ارسال پیام';
+  static const emoji = 'شکلک‌ها';
+  static const keyboard = 'صفحه‌کلید';
+  static const noRecentEmoji = 'هنوز شکلکی انتخاب نکرده‌اید';
+  static const attachments = 'پیوست‌ها';
+  static const document = 'سند';
+  static const camera = 'دوربین';
+  static const gallery = 'گالری';
+  static const cameraAccessDenied =
+      'دسترسی به دوربین را در تنظیمات دستگاه فعال کنید.';
+  static const cameraCaptureFailed = 'عکس گرفته نشد. دوباره تلاش کنید.';
+  static const sendLocation = 'ارسال موقعیت مکانی';
+  static const openLocation = 'نمایش در نقشه';
+  static const locationOpenFailed =
+      'باز کردن نقشه انجام نشد. دوباره تلاش کنید.';
+  static String sendSelectedAttachments(int count) =>
+      'ارسال (${persianDigits(count)})';
+  static const attachFile = 'پیوست فایل';
+  static const photosVideos = 'عکس‌ها و ویدیوها';
+  static const voiceMessage = 'پیام صوتی';
+  static const recordVoice = 'ضبط پیام صوتی';
+  static const stopRecording = 'پایان ضبط';
+  static const recording = 'در حال ضبط';
+  static const recordingPreview = 'بازبینی پیام صوتی';
+  static const microphoneDenied =
+      'برای ضبط پیام صوتی، دسترسی به میکروفون را در تنظیمات دستگاه فعال کنید.';
+  static const recordingFailed = 'ضبط پیام صوتی انجام نشد. دوباره تلاش کنید.';
+  static const recordingTooShort =
+      'پیام صوتی خیلی کوتاه است. کمی بیشتر ضبط کنید.';
+  static const mediaSendFailed =
+      'ارسال پیوست انجام نشد. لطفاً دوباره تلاش کنید.';
+  static const audioPlaybackFailed =
+      'پخش پیام صوتی انجام نشد. دوباره تلاش کنید.';
+  static const fileOpenFailed =
+      'این فایل باز نشد. برنامه مناسب برای باز کردن آن را بررسی کنید.';
+  static const playVoice = 'پخش پیام صوتی';
+  static const pauseVoice = 'توقف پخش';
+  static const sendingAttachment = 'در حال آماده‌سازی پیوست…';
+  static const selectMessages = 'انتخاب پیام‌ها';
+  static const deleteMessages = 'حذف پیام‌ها';
+  static const deleteSelectedMessages = 'حذف پیام‌های انتخاب‌شده';
+  static const selectMessagesHelp = 'برای انتخاب روی پیام‌ها بزنید';
+  static const selectAllMessages = 'انتخاب همه پیام‌ها';
+  static const delete = 'حذف';
+  static const clearConversation = 'پاک کردن گفتگو';
+  static const clearConversationQuestion = 'همه پیام‌های این گفتگو پاک شوند؟';
+  static const localDeleteHelp =
+      'پیام‌ها فقط از گفتگوی این دستگاه حذف می‌شوند.';
+  static const blockPerson = 'مسدود کردن کاربر';
+  static const unblockPerson = 'رفع مسدودیت کاربر';
+  static const blockQuestion = 'این کاربر مسدود شود؟';
+  static const blockHelp =
+      'تا زمانی که مسدودیت را بردارید، نمی‌توانید در این گفتگو پیام یا پیوست بفرستید.';
+  static const personBlocked = 'این کاربر را مسدود کرده‌اید.';
+  static const blocked = 'مسدودشده';
+  static const copiedMessage = 'پیام کپی شد';
+  static const copyMessage = 'کپی پیام';
+  static const audioCall = 'تماس صوتی';
+  static const videoCall = 'تماس تصویری';
+  // Call screen previews; no media is captured or transmitted.
+  static const callPreview = 'پیش‌نمایش تماس';
+  static const incomingCall = 'تماس ورودی…';
+  static const outgoingCall = 'در حال تماس…';
+  static const callConnecting = 'در حال اتصال…';
+  static const callEnded = 'تماس پایان یافت';
+  static const callFailed = 'برقراری تماس انجام نشد';
+  static const callControlFailed =
+      'تغییر تنظیمات تماس انجام نشد. دوباره تلاش کنید.';
+  static const answerCall = 'پاسخ به تماس';
+  static const declineCall = 'رد تماس';
+  static const endCall = 'پایان تماس';
+  static const returnToChat = 'بازگشت به گفتگو';
+  static const muteCall = 'قطع میکروفون';
+  static const unmuteCall = 'وصل میکروفون';
+  static const speakerOn = 'روشن کردن بلندگو';
+  static const speakerOff = 'خاموش کردن بلندگو';
+  static const turnCameraOff = 'خاموش کردن دوربین';
+  static const turnCameraOn = 'روشن کردن دوربین';
+  static const switchCamera = 'تعویض دوربین';
+  static const frontCamera = 'دوربین جلو';
+  static const rearCamera = 'دوربین پشت';
+  static const cameraOff = 'دوربین خاموش است';
+  static const you = 'شما';
+  static const showCallOptions = 'نمایش تنظیمات تماس';
+  static const hideCallOptions = 'بستن تنظیمات تماس';
+  static String selectedMessages(int count) =>
+      '${persianDigits(count)} پیام انتخاب‌شده';
+  static String deleteMessageQuestion(int count) =>
+      '${persianDigits(count)} پیام حذف شود؟';
+  static String unreadMessageCount(int count) =>
+      '${persianDigits(count)} پیام خوانده‌نشده';
+  static String chatTime(Duration value) => persianDigits(
+    '${value.inMinutes.toString().padLeft(2, '0')}:${(value.inSeconds % 60).toString().padLeft(2, '0')}',
+  );
+
   static String inStock(int count) => '${persianDigits(count)} عدد موجود';
 
   /// Localizes displayed numbers; model IDs and other internal values stay intact.

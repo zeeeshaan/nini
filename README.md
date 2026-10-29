@@ -1,13 +1,81 @@
-# Nini
+# Nini — mobile-hywork
 
-Flutter app with the client's original icon collection and shared light/dark themes.
+Flutter application maintained in the client's
+[mobile-hywork repository](https://github.com/mojtaba-zarabi/mobile-hywork).
+The Dart package name is `nini`, and the app UI is Persian (`fa_IR`).
+
+## Current implementation
+
+| Area | Implemented behavior |
+| --- | --- |
+| Client icons | 657 original transparent PNG icons, centralized `AppIcons` paths, and theme-aware `AppIcon` rendering. |
+| Themes | Light, Dark, and System modes; contrasting buttons, labels, icons, and loading spinners. |
+| Gallery | Photo/video selection with `photo_manager`, native file picking, Android/iOS permissions, and preview grids. |
+| Create post | Title, rich caption, pricing, stock, post type, preparation time, unit, schedule, address/map, features, tags, and alt text. |
+| Publishing | Validation, loading/duplicate-submit protection, durable local media copies, saved posts, and navigation back to the Home feed. |
+| Post details and analytics | Real published content, a **مشاهده آمار** entry point, five chart sections, and device-local activity tracking. |
+| Chat | Searchable inbox, text/voice/photo/video/file messages, device-emoji picker, local message deletion, and block/unblock controls. |
+| Call UI previews | Voice incoming/active screens and video screen with interactive controls; no calling backend. |
+| Persian UI | Translated screens, sheets, errors, hints, tooltips, chart labels, and displayed numbers. |
+| Code cleanup | Normalized names, separate domain models, typed post details, smaller form sections, configurable text direction, and individual chart files. |
+
+Publishing and analytics currently use storage on the device. Server upload,
+cross-device sync, scheduled background publication, and completed-order tracking
+are not connected. The sections below describe the implemented behavior and
+these integration boundaries.
 
 ## Run the app
 
+Use a Flutter installation whose bundled Dart SDK satisfies `^3.13.3`, as declared
+in [pubspec.yaml](pubspec.yaml). Gallery access should be checked on a configured
+Android/iOS emulator or physical device.
+
+For a fresh checkout:
+
 ```sh
+git clone https://github.com/mojtaba-zarabi/mobile-hywork.git
+cd mobile-hywork
 flutter pub get
 flutter run
 ```
+
+From an existing checkout, run `flutter pub get` and `flutter run`. Native plugin
+or permission changes require stopping and rebuilding the application; hot reload
+alone does not install native changes.
+
+## Client repository and Git workflow
+
+The project has been published to the client's **main** branch:
+[mobile-hywork/main](https://github.com/mojtaba-zarabi/mobile-hywork/tree/main).
+The import preserved both repositories' existing commit histories and did not use
+a force push. The earlier `zeeshan/nini-flutter-app` branch is an initial review
+copy; `main` is the current client delivery branch.
+
+In the existing development checkout:
+
+| Item | Configuration |
+| --- | --- |
+| Local working branch | `main` |
+| Upstream | `client/main` |
+| Client remote | `client` → `https://github.com/mojtaba-zarabi/mobile-hywork.git` |
+| Personal remote | `origin` remains the personal repository. |
+| Original personal branch | Local `master` remains associated with `origin/master`. |
+
+After reviewing and committing a future change on local `main`, `git push` sends
+it to the client repository:
+
+```sh
+git status
+git add README.md
+git commit -m "Update project documentation"
+git push
+```
+
+The example stages only `README.md`; stage the relevant source files when making
+an application change. To state the destination explicitly, use
+`git push client HEAD:main` from this checkout. A fresh clone of the client
+repository names that repository `origin` automatically, so the `client` alias
+is specific to the existing development checkout.
 
 ## Gallery packages and permissions
 
@@ -219,7 +287,8 @@ error, and re-enables Publish. Success returns a typed `PostItem` through detail
 | `features/posts/data/local_posts_repository.dart` | Copies gallery/picked media to private app storage, writes the post snapshot, and reloads published posts. |
 | `features/posts/presentation/cubit/posts_cubit.dart` | One shared feed above `MaterialApp`, plus load/publish state and duplicate-save protection. |
 | `features/posts/data/demo_posts.dart` | Existing sample posts, kept separate from user-created posts. |
-| `shared/models/post/post_item.dart` and `post_media.dart` | Post data, attachment types, metadata, and JSON serialization. |
+| `shared/models/post/post_item.dart` and `post_media.dart` | Post identity, media, compatibility accessors, and JSON serialization. |
+| `shared/models/post/post_details.dart` and `post_attributes.dart` | Typed caption, tags, address, schedule, features, stock/discount details, and legacy metadata compatibility. |
 | `shared/widgets/post_media/post_media_view.dart` | Displays app-owned image files, video thumbnails when available, and named file/video placeholders. |
 | `features/posts/presentation/widgets/published_post_content.dart` | Read-only rich caption, actual title/price/tags/address, and saved schedule metadata. |
 
@@ -295,7 +364,9 @@ app. [`AppIcon`](lib/shared/widgets/app_icons/app_icon.dart) displays an asset w
 transparency and aspect ratio preserved.
 
 ```dart
+import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 // Inherits black in light mode and white in dark mode.
@@ -303,18 +374,17 @@ const AppIcon(AppIcons.search, size: 28);
 
 // Give an interactive control its existing label and callback.
 IconButton(
-  tooltip: 'Search',
+  tooltip: AppStrings.search,
   onPressed: onSearch,
   icon: const AppIcon(AppIcons.search, size: 28),
 );
 
 // For a meaningful standalone image, supply an accessibility label.
-const AppIcon(AppIcons.cart, size: 28, semanticLabel: 'Cart');
+const AppIcon(AppIcons.cart, size: 28, semanticLabel: AppStrings.cart);
 ```
 
-Use the first two imports with `package:flutter/material.dart` when constructing
-buttons. Existing app controls retain their Persian labels, tooltips, callbacks,
-counts, and layout sizes.
+The example uses the shared Persian labels from `AppStrings`. Existing controls
+retain their callbacks, counts, and layout sizes.
 
 | App location/action | Client asset (relative to `assets/icons/`) |
 | --- | --- |
@@ -481,8 +551,50 @@ values and user-entered content retain their original values. Previously saved
 English Product/Services categories also display their Persian labels on home
 cards without rewriting saved records.
 
-
 ## Code organization and behavior-preserving cleanup
+
+```text
+lib/
+  main.dart                          # Existing startup and application wiring
+  core/                              # Theme, strings, icons, responsiveness, animation
+  shared/
+    models/post/                     # PostItem, PostMedia, PostDetails, typed attributes
+    widgets/                         # Buttons, icons, loader, fields, toasts, media views
+  features/
+    calls/
+      domain/models/                 # Call type, phase, and control state
+      domain/services/               # Call service interface
+      data/                          # UI-only preview call service
+      presentation/cubit/            # Session, timer, controls, and cleanup
+      presentation/pages/            # Shared voice/video call screen
+      presentation/widgets/          # Rings, avatar, actions, and video stages
+    chat/
+      domain/models/                 # Conversations, messages, typed attachments
+      domain/repositories/           # Message repository contract
+      domain/services/               # Recording, playback and media-copy interfaces
+      data/                          # In-memory messages and native media services
+      presentation/cubit/            # Inbox, conversation, recording and playback state
+      presentation/pages/            # Inbox and conversation screens
+      presentation/widgets/          # Header, body, composer, emoji, media and voice UI
+    create_post/
+      domain/models/                 # PostDraft, GalleryAttachment, typed choices
+      domain/validation/             # PostDraftValidator
+      presentation/cubit/            # Draft and gallery state
+      presentation/helpers/          # Caption synchronization and option selection
+      presentation/pages/            # Gallery and details screens
+      presentation/widgets/          # Dialogs, media grids, form sections
+    dashboard/presentation/          # Navigation Cubit, dashboard page and bottom bar
+    home/presentation/               # Home page, categories and post cards
+    post_detail/presentation/        # Published/sample post viewer and engagement
+    posts/
+      domain/                        # PostsRepository interface
+      data/                          # Local storage and sample posts
+      presentation/                  # Shared feed Cubit and published content
+    post_analytics/
+      domain/models/                 # Analytics events, periods and reports
+      data/                          # Persistent/in-memory analytics repositories
+      presentation/                  # Cubit, screen, tracking and chart widgets
+```
 
 Feature folders use lowercase names (`home`, `post_detail`, `create_post`), with
 `domain/models`, `presentation/cubit`, `presentation/pages`, and
@@ -505,8 +617,18 @@ without importing presentation Cubits. `PostDraftValidator` contains the existin
 required-field and schedule checks; presentation maps its issues to the same
 Persian messages in the same order.
 
-`CreatePostDetailsScreen` composes basic details, pricing/inventory, options, and
-publish actions from `widgets/post_form_sections/`. Individual options use
+`CreatePostDetailsScreen` was reduced from 449 to 194 lines. It composes basic
+details, pricing/inventory, options, and publish actions from
+`widgets/post_form_sections/`:
+
+| Widget | Responsibility |
+| --- | --- |
+| `PostBasicDetailsSection` | Post type, title, rich caption, and per-attachment alt text. |
+| `PostPricingInventorySection` | Price, discount, availability, and stock quantity. |
+| `PostOptionsSection` | Preparation time, unit, schedule, address, features, and tags. |
+| `PostPublishActions` | Existing Cancel/Publish actions and loading appearance. |
+
+Individual options use
 `BlocSelector` so unrelated draft edits do not rebuild the entire screen.
 `PostCaptionSynchronizer` handles editor-to-draft synchronization. The screen
 still owns and disposes its controllers, handles loading state and navigation,
@@ -521,4 +643,238 @@ No saved-post migration is required.
 All client icon paths are centralized in `AppIcons`. `AppTextField.textDirection`
 can be configured and defaults to the existing RTL behavior. Each analytics chart
 has its own file, with `analytics_charts.dart` exporting the four public widgets.
-Their drawing logic, colors, values, and interactions are unchanged.
+Their drawing logic, colors, values, and interactions are unchanged:
+
+- `analytics_line_chart.dart`: area/line chart, point selection, and tooltips.
+- `analytics_radar_chart.dart`: current/previous-period radar plot.
+- `analytics_polar_chart.dart`: impressions polar area plot.
+- `analytics_orders_chart.dart`: seven-day orders/bookings bars.
+
+## Verification
+
+Run the complete checks from the repository root:
+
+```sh
+flutter analyze
+flutter test
+```
+
+| Test file | Main coverage |
+| --- | --- |
+| [widget_test.dart](test/widget_test.dart) | Bundled client icons, Home/tab navigation, and post icon actions. |
+| [theme_test.dart](test/theme_test.dart) | Theme preferences, system changes, contrast, and state preservation. |
+| [app_button_test.dart](test/app_button_test.dart) | Primary/outlined buttons, loading spinners, and theme updates. |
+| [create_post_options_test.dart](test/create_post_options_test.dart) | Draft serialization, dialogs, validation, cancellation, map selection, and rich caption formatting. |
+| [publish_post_test.dart](test/publish_post_test.dart) | Media copying, reload, save recovery, duplicate-submit protection, navigation, and published content. |
+| [post_analytics_test.dart](test/post_analytics_test.dart) | Event persistence, aggregation, impressions, chart controls, narrow screens, and analytics navigation. |
+| [chat_attachments_test.dart](test/chat_attachments_test.dart) | Paperclip sheet, photo selection, picker routing, camera outcomes, location sharing, cancellation, and both themes. |
+| [calls_test.dart](test/calls_test.dart) | Call navigation, answer/end, timer cleanup, control states, draft preservation, and both themes. |
+| [chat_test.dart](test/chat_test.dart) | Voice lifecycle, media copying, playback races, deletion/blocking, emoji insertion, gallery reuse, and both themes. |
+| [post_models_test.dart](test/post_models_test.dart) | Lossless legacy metadata, typed details, validation precedence, schedule boundaries, and configurable text direction. |
+
+The latest completed application verification on **29 October 2026** reported
+**84 passing tests** and no analyzer issues. During the refactor, four temporary
+before/after comparisons also confirmed identical form pixels at widths 320 and
+390 in both light and dark mode. Those comparison fixtures were removed after
+verification; they are not part of the current 84-test suite. The chat changes add
+14 focused tests to the existing 50, followed by 7 call-preview tests and 13 attachment-flow tests. Chat media layouts were also rendered and
+checked in light and dark mode; native microphone behavior still needs a physical
+phone check.
+
+
+## Chat, voice notes, and attachments
+
+Open the Home messages button, then choose a conversation. The feature lives in
+`lib/features/chat/`, using the same `domain`, `data`, and `presentation` folders
+as the other features. `main.dart` is unchanged. Shared client artwork is referenced
+through `AppIcons`, and chat controls use Persian labels and the current theme.
+
+### Conversation actions
+
+- Type a message and tap Send, or use the keyboard send action. Empty messages
+  are ignored.
+- When the text field is empty, the Send button becomes a microphone. Tap it to
+  request microphone permission and start recording. Tap Stop to review the
+  recording, then Send or Cancel. Very short recordings are discarded.
+- Sent voice notes have play/pause, duration, and a seek slider. Only one note can
+  play at a time. Loading/playback failures show a localized error and allow retry.
+- Recording stops into a reviewable draft when the app is interrupted or covered
+  by another route; playback pauses. Leaving the conversation cancels unsent
+  recordings and releases the recorder, player, subscriptions, and timers.
+- The photo button opens the existing gallery's Photo tab. The paperclip opens
+  the attachment bottom sheet: Document, Location, Camera, and Gallery, above a
+  four-column grid of recent photos. Select thumbnails and tap Send to send them
+  directly. Document opens the existing File tab; Gallery opens the full gallery,
+  which retains its Video tab. All photo browsing reuses `GalleryCubit` and
+  `GalleryGrid`; the full picker also retains `GalleryPreview`. No path enters
+  the post-details form.
+- Photo messages open a zoomable viewer. Documents and videos open through the
+  device's native file viewer. Original picker files are copied into a private
+  chat cache before a message is added; temporary picker paths are not retained.
+- The emoji button toggles an in-app picker using the device's emoji glyphs.
+  Emojis are inserted at the current text selection. The keyboard button returns
+  to text input; the operating system's own emoji key is also available. This
+  does not programmatically switch the system keyboard into its emoji tab.
+
+The three-dot menu offers **Delete messages**, **Clear conversation**, and
+**Block/Unblock**. Choosing Delete messages, or long-pressing a bubble, enters
+selection mode. Tap messages to select/deselect them, use Select all if needed,
+and tap the trash action to confirm deletion. One selected text message can also
+be copied from the menu. Delete and Clear affect this device's conversation only.
+
+Blocking disables text, voice, and attachment sends. It also cancels an active
+recording. Unblock restores the composer. Blocking while a media copy is in flight
+prevents that pending send and removes the unused cached copy. Deleting messages
+removes their owned media copies and refreshes the inbox preview. Missing cached
+files, denied permissions, and failed media exports show recoverable errors.
+
+### Chat components
+
+| Component | Responsibility |
+| --- | --- |
+| `domain/models/chat_message.dart`, `chat_attachment.dart`, and `chat_location.dart` | Text, media metadata, voice duration, and validated location coordinates/address. |
+| `domain/repositories/chat_messages_repository.dart` | Message reads/adds, selected deletion, clearing, and local block state. |
+| `data/in_memory_chat_repository.dart` | Existing demo conversations' messages and block flags for the current app session. |
+| `data/local_chat_media_store.dart` | Streaming file copies, gallery export fallback, optional video thumbnails, batch rollback, and owned-cache cleanup. |
+| `data/device_voice_recorder.dart` | Microphone permission and mono AAC/M4A capture; native recorder creation is deferred until needed. |
+| `data/just_audio_chat_player.dart` | One lazily created native audio player per conversation. |
+| `data/device_chat_camera.dart` | Native photo capture and a streaming file adapter for the existing gallery media pipeline. |
+| `presentation/helpers/chat_attachment_flow.dart` | Sheet choices, existing gallery navigation, camera cancellation/errors, and address-picker results. |
+| `presentation/cubit/` | Inbox previews, send guards, selection/block state, recording lifecycle, and playback/load cancellation. |
+| `presentation/widgets/` | Conversation header/body, confirmation dialog, composer, attachment/voice bubbles, recording panel, and emoji panel. |
+
+`ConversationScreen` accepts repository, media store, recorder, and audio-player
+interfaces for tests or future integrations. Its inbox callback updates previews
+for text, voice, files, deletion, and blocking. Returning to or reopening an inbox
+refreshes previews and block state from the session repository.
+
+### Packages and native setup
+
+The chat additions use [record](https://pub.dev/packages/record),
+[just_audio](https://pub.dev/packages/just_audio),
+[emoji_picker_flutter](https://pub.dev/packages/emoji_picker_flutter), and
+[open_filex](https://pub.dev/packages/open_filex), plus
+[image_picker](https://pub.dev/packages/image_picker) for camera capture only.
+The existing photo-manager and file-picker packages still supply the gallery/file selection flow.
+
+- Android: `RECORD_AUDIO` is declared, with microphone hardware optional so the
+  app can still be installed on devices without a microphone. Runtime microphone
+  permission is requested when Record is tapped.
+- iOS: `NSMicrophoneUsageDescription` explains voice-note recording in Persian,
+  and `NSCameraUsageDescription` explains chat photo capture. The existing
+  photo-library description covers both posts and conversations.
+- Camera capture uses image_picker's native camera flow. Android requires no
+  additional camera permission declaration for this flow. Gallery browsing still
+  uses the existing photo-manager UI; image_picker does not replace it.
+- Gallery permissions remain the existing Android/iOS setup documented above.
+
+After pulling these native additions, fully stop the old app and rebuild it:
+
+```sh
+flutter pub get
+flutter run
+```
+
+Hot reload alone does not install the new native plugins or microphone permission
+configuration. Check recording, audible playback, gallery access, and external
+file viewing on a physical phone before release.
+
+### Current chat storage scope
+
+The chat repository is still **in memory**: there is no account connection,
+network delivery, server-side blocking, real read receipts, or durable conversation
+history. Sent attachments are copied into private temporary cache files, while
+message records and block flags last for the running app session. Reopening a
+conversation in that session retains them; restarting the app resets the demo
+chat state. The operating system may clear temporary media. Calling is an
+interactive UI preview, as described below; it does not connect devices.
+
+`test/chat_test.dart` covers microphone denial, recording preview/cancel/disposal,
+short recordings, permission responses after disposal, all-send blocking,
+blocking during media preparation, retries, selective deletion, inbox previews,
+media-copy rollback, source-file preservation, playback/load races, emoji input,
+the existing gallery return flow, voice-note sending, and 320/390-width layouts
+in both themes. Native recording/playback interfaces are replaced with fakes in
+these tests; they do not verify the phone's microphone hardware.
+
+The chat native-plugin additions were verified with Android debug APK and iOS
+simulator builds. Call previews add no native plugins or permissions.
+
+
+## Voice and video call UI previews
+
+The conversation header now routes its phone and video buttons to `CallScreen`
+in `lib/features/calls/`. As requested, this is **UI only**: no signaling,
+remote media, device microphone/camera capture, or incoming system notifications
+are implemented. No additional calling package or account setup is required.
+A small Persian preview label distinguishes these screens from real calls.
+
+- **Voice:** opens the incoming-call reference layout with concentric rings,
+  contact avatar/name, and red decline, green answer, and yellow message buttons.
+  Answer enters the active preview and starts the elapsed timer. Microphone and
+  speaker buttons toggle their displayed states.
+- **Video:** opens the active reference layout with a full-screen sample image,
+  small local-preview tile, name, timer, back arrow, and bottom call controls.
+  Camera-off replaces the small preview with a disabled-camera indicator.
+  Camera switch toggles the front/rear preview. The bottom chevron expands the
+  speaker option. White overlays remain readable over the image in either theme.
+- **Exit:** End, Decline, Message, and Back close the preview and return to the
+  conversation. Message returns to the existing composer; text drafts remain.
+  Closing the route cancels its timer and releases the preview session.
+- Blocked contacts and an active recording/attachment send disable call entry.
+
+`PreviewCallService` owns the simulated session and control states; `CallCubit`
+coordinates actions and elapsed time. The `CallService` interface is separate
+from the screen, so a later RTC implementation can replace the preview.
+`CallScreen` accepts optional local/remote video widgets for that later adapter.
+These extension points do not currently provide network calling.
+
+The preview reuses the app's bundled `assets/img1.png`, `img2.png`, and `img3.png`
+as sample pictures rather than adding remote image requests. A contact's existing
+avatar is used when available. Replace the preview pictures with client-provided
+high-resolution portraits if needed; they are static images, not video feeds.
+All new labels are in `AppStrings`. Voice surfaces inherit the app theme, and
+red/green/yellow call actions follow the supplied reference colors.
+
+`test/calls_test.dart` contains seven tests covering the preview state flow,
+320/390-width layouts in both themes, navigation from chat, preserved drafts,
+answer/decline/end/message/back, mute/speaker/camera controls, front/rear previews,
+and elapsed-time advancement/cleanup. No real call is made by these tests.
+
+
+### Paperclip attachment flow
+
+`ChatAttachmentSheet` lives in
+`lib/features/chat/presentation/widgets/attachment_sheet/`. Its drag handle,
+four circular actions, and four-column recent-photo grid follow the supplied
+reference. It inherits the app theme and uses the original client `AppIcons`.
+`GalleryGrid(compact: true)` removes the post toolbar/tab selector only inside
+this sheet; the default post-gallery layout is unchanged. Selection reveals the
+shared `AppButton` with the selected count. Failed thumbnails show a fallback;
+denied gallery access retains Settings/Retry and the other attachment actions.
+
+- **Document / Gallery:** close the sheet and open the existing full picker on
+  File / Photo respectively. Send returns the selected attachments to chat;
+  cancellation sends nothing.
+- **Camera:** closes the sheet and opens the phone's native photo capture/review
+  flow. Confirming copies the photo into the same private chat media cache and
+  adds an image message. Cancel sends nothing; permission failures show a Persian
+  error and restore the composer. A full app rebuild installs the new plugin.
+- **Location:** reuses `AddressDialog` and `LocationMap`. Choose a pin and enter
+  an address, then tap Send location. The selected coordinates/address become a
+  typed `ChatLocation` message with an Open map action. Tapping it opens the pin
+  in the external map viewer. This is manual pin sharing and needs no GPS access.
+
+The conversation pauses voice playback before opening the sheet. Its picker
+busy state prevents overlapping actions without showing a background loading
+spinner. Dismissal retains the text draft. The conversation checks its existing
+send/block state after pickers return, and owns media copying and message state.
+Location messages use the same local/session repository as other messages.
+
+`test/chat_attachments_test.dart` adds 13 tests for light/dark 320/390-width
+layouts, actual grid selection and direct sending, file/photo-tab routing,
+camera success/cancel/permission denial, map selection results, blocked/invalid
+locations, draft preservation, denied gallery access, and camera-file streaming.
+Native capture is replaced with a fake in widget tests; camera hardware still
+needs a physical-phone check. Android debug and iOS simulator builds succeed
+with the camera plugin.

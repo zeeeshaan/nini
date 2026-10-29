@@ -28,4 +28,12 @@ abstract final class AppIcons {
   static const ruler = 'assets/icons/education/ruler.png';
   static const analytics = 'assets/icons/charts/line-chart-up-01.png';
   static const target = 'assets/icons/general/target-01.png';
+  static const microphone = 'assets/icons/media/microphone-01.png';
+  static const camera = 'assets/icons/images/camera-01.png';
+  static const document = 'assets/icons/files/file-02.png';
+  static const attachment = 'assets/icons/editor/attachment-01.png';
+  static const image = 'assets/icons/images/image-01.png';
+  static const play = 'assets/icons/media/play-01.png';
+  static const pause = 'assets/icons/media/pause-01.png';
+  static const trash = 'assets/icons/general/trash-01.png';
 }

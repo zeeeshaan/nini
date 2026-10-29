@@ -8,7 +8,10 @@ import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart'
 import 'package:nini/features/create_post/presentation/widgets/gallery_preview/gallery_preview.dart';
 
 class GalleryGrid extends StatelessWidget {
-  const GalleryGrid({super.key});
+  const GalleryGrid({super.key, this.compact = false});
+
+  /// The chat sheet reuses the same assets/selection without the post toolbar.
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +19,7 @@ class GalleryGrid extends StatelessWidget {
 
     return BlocBuilder<GalleryCubit, GalleryState>(
       builder: (context, state) {
+        if (compact) return _GalleryBody(state: state, bottomPadding: 0);
         return ColoredBox(
           color: colors.surfaceContainerHighest,
           child: Column(
@@ -64,9 +68,10 @@ class GalleryGrid extends StatelessWidget {
 }
 
 class _GalleryBody extends StatelessWidget {
-  const _GalleryBody({required this.state});
+  const _GalleryBody({required this.state, this.bottomPadding = 90});
 
   final GalleryState state;
+  final double bottomPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +134,7 @@ class _GalleryBody extends StatelessWidget {
         return false;
       },
       child: GridView.builder(
-        padding: const EdgeInsets.only(bottom: 90),
+        padding: EdgeInsets.only(bottom: bottomPadding),
         itemCount: state.assets.length + (state.loadingMore ? 1 : 0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
@@ -193,6 +198,12 @@ class _GalleryTile extends StatelessWidget {
               isOriginal: false,
               thumbnailSize: const ThumbnailSize.square(240),
               fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => Center(
+                child: Icon(
+                  Icons.broken_image_outlined,
+                  color: colors.onSurface,
+                ),
+              ),
             ),
 
             if (asset.type == AssetType.video)

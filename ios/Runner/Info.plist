@@ -26,8 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>نینی برای گرفتن و ارسال عکس در گفتگو به دوربین نیاز دارد.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>نینی برای ضبط و ارسال پیام صوتی در گفتگو به میکروفون نیاز دارد.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>نینی برای انتخاب عکس‌ها و ویدیوهای پست‌های شما به گالری دسترسی نیاز دارد.</string>
+	<string>نینی برای انتخاب عکس‌ها و ویدیوها در پست‌ها و گفتگوهای شما به گالری دسترسی نیاز دارد.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
