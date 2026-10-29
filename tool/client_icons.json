@@ -1,0 +1,8543 @@
+[
+  {
+    "asset": "assets/icons/arrows/arrow-curve-left-down.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-left-down",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-curve-left-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-left-right",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-curve-left-up.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-left-up",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-left",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-curve-up-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-up-left",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-curve-right-up.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-right-up",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-left-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-left-square-contained",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-right-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-right-square-contained",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-square-contained",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-square-contained",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-left-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-left-square-contained",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-right-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-right-square-contained",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      79,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-right-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-right-square-contained",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      79,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-left-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-left-square-contained",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      79,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-left-contained-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-left-contained-02",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-left-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-left-contained",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-left-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-left-contained",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-right-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-right-contained",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-right-contained.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-right-contained",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-right-contained-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-right-contained-02",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-contained-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-contained-02",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-contained-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-contained-02",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-left-contained-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-left-contained-01",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      407,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-contained-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-contained-01",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      407,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-right-contained-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-right-contained-01",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      407,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-contained-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-contained-01",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      407,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-expand-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-expand-01",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      407,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-expand-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-expand-02",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      407,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-expand-03.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-expand-03",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-expand-04.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-expand-04",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/down-arrow.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "down-arrow",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-right",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-left",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-left",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-right",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-left-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-left",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      735,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-right",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      735,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-right-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-right",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      735,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-curve-up-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-curve-up-right",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      735,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-switch-horizontal.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-switch-horizontal",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      735,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-switch-vertical.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-switch-vertical",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      735,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-01",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-03.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-03",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-04.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-04",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-05.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-05",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-refresh-06.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-refresh-06",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-rotate-left-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-rotate-left-01",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-rotate-left-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-rotate-left-02",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-rotate-right-01.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-rotate-right-01",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1063,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-rotate-right-02.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-rotate-right-02",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1063,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-double-down.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-double-down",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1063,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-double-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-double-left",
+    "column": 4,
+    "row": 12,
+    "rect": [
+      1063,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-double-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-double-right",
+    "column": 4,
+    "row": 13,
+    "rect": [
+      1063,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-double-up.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-double-up",
+    "column": 4,
+    "row": 14,
+    "rect": [
+      1063,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-down.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-down",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-left",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-right",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/chevron-up.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "chevron-up",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/flip-left.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "flip-left",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/flip-right.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "flip-right",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-sm",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1391,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/down-arrow-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "down-arrow-sm",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1391,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-right-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-right-sm",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1391,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-left-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-left-sm",
+    "column": 5,
+    "row": 10,
+    "rect": [
+      1391,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-left-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-left-sm",
+    "column": 5,
+    "row": 11,
+    "rect": [
+      1391,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-right-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-right-sm",
+    "column": 5,
+    "row": 12,
+    "rect": [
+      1391,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-down-left-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-down-left-sm",
+    "column": 5,
+    "row": 13,
+    "rect": [
+      1391,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/arrows/arrow-up-right-sm.png",
+    "source": "assets/icons/source_sheets/Frame 10.png",
+    "label": "arrow-up-right-sm",
+    "column": 5,
+    "row": 14,
+    "rect": [
+      1391,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/activity.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "activity",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/add-square-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "add-square-01",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/add-square-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "add-square-02",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/add-square-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "add-square-03",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/add-square-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "add-square-04",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/calendar-05.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "calendar-05",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/calendar-06.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "calendar-06",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/calendar-07.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "calendar-07",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/cancel-left.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "cancel-left",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/cancel-right.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "cancel-right",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-01",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-02",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      79,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-broken.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-broken",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      79,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-contained",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      79,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-square-broken.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-square-broken",
+    "column": 1,
+    "row": 15,
+    "rect": [
+      79,
+      747,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/check-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "check-square-contained",
+    "column": 1,
+    "row": 16,
+    "rect": [
+      79,
+      791,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/copy-left.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "copy-left",
+    "column": 1,
+    "row": 17,
+    "rect": [
+      79,
+      835,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/copy-right.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "copy-right",
+    "column": 1,
+    "row": 18,
+    "rect": [
+      79,
+      879,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/component.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "component",
+    "column": 1,
+    "row": 19,
+    "rect": [
+      79,
+      923,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/compare.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "compare",
+    "column": 1,
+    "row": 20,
+    "rect": [
+      79,
+      967,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/dash.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "dash",
+    "column": 1,
+    "row": 21,
+    "rect": [
+      79,
+      1011,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/delivery.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "delivery",
+    "column": 1,
+    "row": 22,
+    "rect": [
+      79,
+      1055,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/download.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "download",
+    "column": 1,
+    "row": 23,
+    "rect": [
+      79,
+      1099,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/download-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "download-01",
+    "column": 1,
+    "row": 24,
+    "rect": [
+      79,
+      1143,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/download-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "download-02",
+    "column": 1,
+    "row": 25,
+    "rect": [
+      79,
+      1187,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/dot-horizontal.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "dot-horizontal",
+    "column": 1,
+    "row": 26,
+    "rect": [
+      79,
+      1231,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/dot-vertical.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "dot-vertical",
+    "column": 1,
+    "row": 27,
+    "rect": [
+      79,
+      1275,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/edit-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "edit-01",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/edit-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "edit-02",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/edit-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "edit-03",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/edit-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "edit-04",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/edit-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "edit-contained",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/email.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "email",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/embed.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "embed",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/eye-open.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "eye-open",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/eye-closed.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "eye-closed",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      407,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/equals.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "equals",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      407,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/equals-not.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "equals-not",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      407,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/expand-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "expand-01",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      407,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/expand-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "expand-02",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      407,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/favourite.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "favourite",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      407,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/file.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "file",
+    "column": 2,
+    "row": 15,
+    "rect": [
+      407,
+      747,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/filter.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "filter",
+    "column": 2,
+    "row": 16,
+    "rect": [
+      407,
+      791,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/gear.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "gear",
+    "column": 2,
+    "row": 17,
+    "rect": [
+      407,
+      835,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/globe.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "globe",
+    "column": 2,
+    "row": 18,
+    "rect": [
+      407,
+      879,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/hash-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "hash-01",
+    "column": 2,
+    "row": 19,
+    "rect": [
+      407,
+      923,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/hash-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "hash-02",
+    "column": 2,
+    "row": 20,
+    "rect": [
+      407,
+      967,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/heart.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "heart",
+    "column": 2,
+    "row": 21,
+    "rect": [
+      407,
+      1011,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/help.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "help",
+    "column": 2,
+    "row": 22,
+    "rect": [
+      407,
+      1055,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/help-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "help-circle-contained",
+    "column": 2,
+    "row": 23,
+    "rect": [
+      407,
+      1099,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/help-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "help-square-contained",
+    "column": 2,
+    "row": 24,
+    "rect": [
+      407,
+      1143,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/home-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "home-01",
+    "column": 2,
+    "row": 25,
+    "rect": [
+      407,
+      1187,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/home-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "home-02",
+    "column": 2,
+    "row": 26,
+    "rect": [
+      407,
+      1231,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/home-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "home-03",
+    "column": 2,
+    "row": 27,
+    "rect": [
+      407,
+      1275,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/home-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "home-04",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/home-05.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "home-05",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/image.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "image",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/information-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "information-circle-contained",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/info-square-01-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "info-square-01-contained",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/info-square-02-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "info-square-02-contained",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/lightning-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "lightning-circle-contained",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/lightning-filled.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "lightning-filled",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/lightning-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "lightning-square-contained",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      735,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/link.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "link",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      735,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/link-angled.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "link-angled",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      735,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/link-broken.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "link-broken",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      735,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/link-external.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "link-external",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      735,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/loader-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "loader-01",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      735,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/loader-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "loader-02",
+    "column": 3,
+    "row": 15,
+    "rect": [
+      735,
+      747,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/logout-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "logout-01",
+    "column": 3,
+    "row": 16,
+    "rect": [
+      735,
+      791,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/logout-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "logout-02",
+    "column": 3,
+    "row": 17,
+    "rect": [
+      735,
+      835,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/logout-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "logout-03",
+    "column": 3,
+    "row": 18,
+    "rect": [
+      735,
+      879,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/logout-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "logout-04",
+    "column": 3,
+    "row": 19,
+    "rect": [
+      735,
+      923,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/menu-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "menu-01",
+    "column": 3,
+    "row": 20,
+    "rect": [
+      735,
+      967,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/menu-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "menu-02",
+    "column": 3,
+    "row": 21,
+    "rect": [
+      735,
+      1011,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/menu-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "menu-03",
+    "column": 3,
+    "row": 22,
+    "rect": [
+      735,
+      1055,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/menu-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "menu-04",
+    "column": 3,
+    "row": 23,
+    "rect": [
+      735,
+      1099,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/menu-05.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "menu-05",
+    "column": 3,
+    "row": 24,
+    "rect": [
+      735,
+      1143,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/minus-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "minus-circle-contained",
+    "column": 3,
+    "row": 25,
+    "rect": [
+      735,
+      1187,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/minus-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "minus-square-contained",
+    "column": 3,
+    "row": 26,
+    "rect": [
+      735,
+      1231,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/percent-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "percent-01",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/percent-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "percent-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/percent-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "percent-03",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/plus-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "plus-01",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/plus-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "plus-02",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/plus-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "plus-03",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/paperclip.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "paperclip",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/progress.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "progress",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/quote.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "quote",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1063,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/save-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "save-01",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1063,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/save-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "save-02",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1063,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/search-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "search-01",
+    "column": 4,
+    "row": 12,
+    "rect": [
+      1063,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/search-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "search-02",
+    "column": 4,
+    "row": 13,
+    "rect": [
+      1063,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/settings.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "settings",
+    "column": 4,
+    "row": 14,
+    "rect": [
+      1063,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/share.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "share",
+    "column": 4,
+    "row": 15,
+    "rect": [
+      1063,
+      747,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/arrow-rotate-left-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "arrow-rotate-left-01",
+    "column": 4,
+    "row": 16,
+    "rect": [
+      1063,
+      791,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/slash-backward.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "slash-backward",
+    "column": 4,
+    "row": 17,
+    "rect": [
+      1063,
+      835,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/slash-forward.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "slash-forward",
+    "column": 4,
+    "row": 18,
+    "rect": [
+      1063,
+      879,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/slash-forward-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "slash-forward",
+    "column": 4,
+    "row": 19,
+    "rect": [
+      1063,
+      923,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/slash-backward-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "slash-backward",
+    "column": 4,
+    "row": 20,
+    "rect": [
+      1063,
+      967,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/sort-horizontal.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "sort-horizontal",
+    "column": 4,
+    "row": 21,
+    "rect": [
+      1063,
+      1011,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/sort-vertical-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "sort-vertical-01",
+    "column": 4,
+    "row": 22,
+    "rect": [
+      1063,
+      1055,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/sort-vertical-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "sort-vertical-02",
+    "column": 4,
+    "row": 23,
+    "rect": [
+      1063,
+      1099,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/target-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "target-01",
+    "column": 4,
+    "row": 24,
+    "rect": [
+      1063,
+      1143,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/target-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "target-02",
+    "column": 4,
+    "row": 25,
+    "rect": [
+      1063,
+      1187,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/target-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "target-03",
+    "column": 4,
+    "row": 26,
+    "rect": [
+      1063,
+      1231,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/target-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "target-04",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/toggle-right.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "toggle-right",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/toogle-left.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "toogle-left",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/trash-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "trash-01",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/trash-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "trash-02",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/trash-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "trash-03",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/trash-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "trash-04",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1391,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/upload-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "upload-01",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1391,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/upload-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "upload-02",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1391,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/upload-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "upload-03",
+    "column": 5,
+    "row": 10,
+    "rect": [
+      1391,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/upload-04.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "upload-04",
+    "column": 5,
+    "row": 11,
+    "rect": [
+      1391,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/variant.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "variant",
+    "column": 5,
+    "row": 12,
+    "rect": [
+      1391,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/x-01.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "x-01",
+    "column": 5,
+    "row": 13,
+    "rect": [
+      1391,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/x-02.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "x-02",
+    "column": 5,
+    "row": 14,
+    "rect": [
+      1391,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/x-03.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "x-03",
+    "column": 5,
+    "row": 15,
+    "rect": [
+      1391,
+      747,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/x-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "x-circle-contained",
+    "column": 5,
+    "row": 16,
+    "rect": [
+      1391,
+      791,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/x-square-contained.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "x-square-contained",
+    "column": 5,
+    "row": 17,
+    "rect": [
+      1391,
+      835,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/thumb-down.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "thumb-down",
+    "column": 5,
+    "row": 18,
+    "rect": [
+      1391,
+      879,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/thumb-up.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "thumb-up",
+    "column": 5,
+    "row": 19,
+    "rect": [
+      1391,
+      923,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/general/wrench.png",
+    "source": "assets/icons/source_sheets/Frame 11.png",
+    "label": "wrench",
+    "column": 5,
+    "row": 20,
+    "rect": [
+      1391,
+      967,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coins-rotate.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coins-rotate",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bag-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bag-01",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bag-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bag-02",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bag-03.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bag-03",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bag-04.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bag-04",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bag-05.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bag-05",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-01",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-02",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-03.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-03",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-04.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-04",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-05.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-05",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      79,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/bank-note-06.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "bank-note-06",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      79,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-01",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-02",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-add.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-add",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-check.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-check",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-down.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-down",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-edit.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-edit",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-lock.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-lock",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-minus.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-minus",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-number.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-number",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      407,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-shield.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-shield",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      407,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-up.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-up",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      407,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/card-x.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "card-x",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      407,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/cart.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "cart",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      407,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coins.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coins",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coin-broken.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coin-broken",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coin-hand.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coin-hand",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coin-number.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coin-number",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/coin-unbroken.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "coin-unbroken",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-bath.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-bath",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-bitcoin.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-bitcoin",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-cent.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-cent",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-bath.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-bath",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      735,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-bitcoin.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-bitcoin",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      735,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-cent.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-cent",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      735,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-dollar.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-dollar",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      735,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-euro.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-euro",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      735,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-pound.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-pound",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-rubel.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-rubel",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-rupee.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-rupee",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-coin-yen.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-coin-yen",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-dollar.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-dollar",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-euro.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-euro",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-pound.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-pound",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-rubel.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-rubel",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-rupee.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-rupee",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1063,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/currency-yen.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "currency-yen",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1063,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/diamond.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "diamond",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1063,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/discount-circle.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "discount-circle",
+    "column": 4,
+    "row": 12,
+    "rect": [
+      1063,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/discount-square.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "discount-square",
+    "column": 4,
+    "row": 13,
+    "rect": [
+      1063,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/discount-star-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "discount-star-01",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/discount-star-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "discount-star-02",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/discount-star-03.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "discount-star-03",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/gift-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "gift-01",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/gift-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "gift-02",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/receipt.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "receipt",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/receipt-lines.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "receipt-lines",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1391,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/tag.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "tag",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1391,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/wallet-01.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "wallet-01",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1391,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/wallet-02.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "wallet-02",
+    "column": 5,
+    "row": 10,
+    "rect": [
+      1391,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/wallet-03.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "wallet-03",
+    "column": 5,
+    "row": 11,
+    "rect": [
+      1391,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/finance/wallet-04.png",
+    "source": "assets/icons/source_sheets/Frame 12.png",
+    "label": "wallet-04",
+    "column": 5,
+    "row": 12,
+    "rect": [
+      1391,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/audio-settings-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "audio-settings-01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/audio-settings-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "audio-settings-02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-01",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-02",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-03.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-03",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-04.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-04",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-fill-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-fill-01",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-fill-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-fill-02",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-fill-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-fill-01",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/battery-empty.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "battery-empty",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/chromecast.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "chromecast",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/computer.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "computer",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      79,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/disc.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "disc",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      79,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/fast-backward.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "fast-backward",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      79,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/fast-forward.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "fast-forward",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/headphones.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "headphones",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/iphone-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "iphone-01",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/iphone-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "iphone-02",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/keyboard.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "keyboard",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/laptop-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "laptop-01",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/laptop-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "laptop-02",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/lightbulb-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "lightbulb-01",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/lightbulb-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "lightbulb-02",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      407,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/lightbulb-03.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "lightbulb-03",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      407,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/media-strip-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "media-strip-01",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      407,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/media-strip-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "media-strip-02",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      407,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/microphone-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "microphone-01",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      407,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/microphone-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "microphone-02",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      407,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/microphone-off-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "microphone-off-01",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/microphone-off-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "microphone-off-02",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/mouse.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "mouse",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/note-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "note-01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/note-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "note-02",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/pause-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "pause-01",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/pause-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "pause-02",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/pause-03.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "pause-03",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/play-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "play-01",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      735,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/play-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "play-02",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      735,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/play-03.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "play-03",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      735,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/power.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "power",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      735,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/refresh-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "refresh-01",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      735,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/refresh-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "refresh-01",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      735,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/rss.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "rss",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/shuffle.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "shuffle",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/signal.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "signal",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/skip-back.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "skip-back",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/skip-forward.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "skip-forward",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/speaker.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "speaker",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/stop-circle-contained.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "Stop circle contained",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/stop-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "stop-01",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/stop-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "stop-02",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1063,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/tv.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "tv",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1063,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/video-off.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "video-off",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1063,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/video-on.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "video-on",
+    "column": 4,
+    "row": 12,
+    "rect": [
+      1063,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-01",
+    "column": 4,
+    "row": 13,
+    "rect": [
+      1063,
+      659,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-02",
+    "column": 4,
+    "row": 14,
+    "rect": [
+      1063,
+      703,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-03.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-03",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-04.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-04",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-05.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-05",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-06.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-06",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/volume-07.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "volume-07",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/waveform.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "waveform",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/webcam.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "webcam",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1391,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/bluetooth-01.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "bluetooth-01",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1391,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/bluetooth-02.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "bluetooth-02",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1391,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/wifi-off.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "wifi-off",
+    "column": 5,
+    "row": 10,
+    "rect": [
+      1391,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/wifi-on.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "wifi-on",
+    "column": 5,
+    "row": 11,
+    "rect": [
+      1391,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/media/youtube.png",
+    "source": "assets/icons/source_sheets/Frame 13.png",
+    "label": "youtube",
+    "column": 5,
+    "row": 12,
+    "rect": [
+      1391,
+      615,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/alert-circle.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "alert-circle",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/alert-square.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "alert-square",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/alert-triangle.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "alert-triangle",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-01.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-01",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-02.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-02",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-03.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-03",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-04.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-04",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-off-01.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-off-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-off-02.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-off-02",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-ringing-01.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-ringing-01",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-ringing-02.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-ringing-02",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-ringing-03.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-ringing-03",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/bell-ringing-04.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "bell-ringing-04",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/notification-box.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "notification-box",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/notification-bubble.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "notification-bubble",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/notification-square-01.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "notification-square-01",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/alerts/notification-square-02.png",
+    "source": "assets/icons/source_sheets/Frame 14.png",
+    "label": "notification-square-02",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/camera-01.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "camera-01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/camera-02.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "camera-02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/camera-lens.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "camera-lens",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/camera-off.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "camera-off",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/colors-01.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "colors-01",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/colors-02.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "colors-02",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/flash-off.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "flash-off",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/flash-on.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "flash-on",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-01.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-02.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-02",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-03.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-03",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-04.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-04",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-add.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-add",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-avatar.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-avatar",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-check.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-check",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-down.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-down",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-focus.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-focus",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-minus.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-minus",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-no-borders.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-no-borders",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-question.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-question",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-up.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-up",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/images/image-x.png",
+    "source": "assets/icons/source_sheets/Frame 16.png",
+    "label": "image-x",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-attach-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-attach-01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-attach-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-attach-02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-attach-03.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-attach-03",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-01",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-02",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-03.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-03",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-04.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-04",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-05.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-05",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-06.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-06",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-branch.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-branch",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-check-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-check-01",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-check-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-check-02",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-down-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-down-01",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-down-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-down-02",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-edit-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-edit-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-edit-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-edit-02",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-eye-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-eye-01",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-eye-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-eye-02",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-minus-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-minus-01",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-minus-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-minus-02",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      407,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-multiple.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-multiple",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      407,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-none.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-none",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      407,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-plus-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-plus-01",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-plus-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-plus-01",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-question-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-question-01",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-question-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-question-02",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-return-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-return-01",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-return-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-return-02",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-search-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-search-01",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-search-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-search-02",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-shred.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-shred",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      735,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-up-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-up-01",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      735,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-up-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-up-02",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      735,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-up-02-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-up-02",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/file-x-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "file-x-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-down-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-down-01",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-down-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-down-02",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-minus-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-minus-01",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-minus-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-minus-01",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-open-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-open-01",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-open-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-open-02",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1063,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-open-03.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-open-03",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1063,
+      527,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-plus-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-plus-01",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1063,
+      571,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-plus-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-plus-02",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-search-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-search-01",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-search-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-search-02",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-up-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-up-01",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-up-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-up-02",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-x-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-x-01",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/folder-x-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "folder-x-02",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1391,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/paperclip-01.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "paperclip-01",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1391,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/files/paperclip-02.png",
+    "source": "assets/icons/source_sheets/Frame 17.png",
+    "label": "paperclip-02",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1391,
+      483,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-03.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-03",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-04.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-04",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-lightning.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-lightning",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-rain.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-rain",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-snow.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-snow",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/cloud-sun.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "cloud-sun",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/drop.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "drop",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/flame-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "flame-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/lightning-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "lightning-01",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/lightning-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "lightning-02",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/moon-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "moon-01",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/moon-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "moon-02",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/snowflake.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "snowflake",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/stars.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "stars",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/sun-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "sun-01",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/sun-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "sun-02",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/sun-03.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "sun-03",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/sun-down.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "sun-down",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/sun-up.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "sun-up",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/temperature-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "temperature-01",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/temperature-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "temperature-02",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/temperature-03.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "temperature-03",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/temperature-04.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "temperature-04",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/umbrella-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "umbrella-01",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/umbrella-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "umbrella-02",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/wind-01.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "wind-01",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/wind-02.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "wind-02",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/weather/wind-03.png",
+    "source": "assets/icons/source_sheets/Frame 18.png",
+    "label": "wind-03",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/box-filled.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "box-filled",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/globe-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "globe-01",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/globe-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "globe-02",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/globe-03.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "globe-03",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/globe-04.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "globe-04",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/globe-05.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "globe-05",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/luggage-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "luggage-01",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/luggage-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "luggage-02",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/luggage-03.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "luggage-03",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/luggage-04.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "luggage-04",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/code-03.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "code-03",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/map-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "map-01",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/map-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "map-01",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/map-03.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "map-03",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/map-04.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "map-04",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-01",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-02",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-03.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-03",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-04.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-04",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-05.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-05",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/marker-06.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "marker-06",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/passport.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "passport",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/plane.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "plane",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/pointer-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "pointer-01",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/pointer-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "pointer-02",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/target-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "target-01",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/target-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "target-02",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/ticket-01.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "ticket-01",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/terminal.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "terminal",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/ticket-02.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "ticket-02",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/train.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "train",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/truck.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "truck",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/car.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "car",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/travel_location/umbrella.png",
+    "source": "assets/icons/source_sheets/Frame 19.png",
+    "label": "umbrella",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-03",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-04.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-04",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-04-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-04",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-01",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-02",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-03",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-down-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-down-01",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      407,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-down-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-down-02",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      407,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-up-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-up-01",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      407,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-chart-square-up-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-chart-square-up-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      407,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-group-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-group-01",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      407,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-group-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-group-02",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      407,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/bar-group-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "bar-group-03",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      407,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/chart-breakout-circle.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "chart-breakout-circle",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      407,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/chart-breakout-square.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "chart-breakout-square",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      735,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/calculator-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "calculator-02",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      735,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/compass.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "compass",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      735,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/glasses-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "glasses-01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      735,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/glasses-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "glasses-02",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      735,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/horizontal-chart-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "horizontal-chart-01",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      735,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/horizontal-chart-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "horizontal-chart-02",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      735,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/horizontal-chart-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "horizontal-chart-03",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      735,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/line-chart-down-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "line-chart-down-01",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1063,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/line-chart-down-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "line-chart-down-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1063,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/line-chart-up-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "line-chart-up-01",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1063,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/line-chart-up-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "line-chart-up-02",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1063,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/pie-chart-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "pie-chart-01",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1063,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/pie-chart-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "pie-chart-02",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1063,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/pie-chart-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "pie-chart-03",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1063,
+      395,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/presentation-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "presentation-01",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1063,
+      439,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/presentation-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "presentation-02",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1391,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/presentation-03.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "presentation-03",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1391,
+      175,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/trend-down-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "trend-down-01",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1391,
+      219,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/trend-down-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "trend-down-02",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1391,
+      263,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/trend-up-01.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "trend-up-01",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1391,
+      307,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/charts/trend-up-02.png",
+    "source": "assets/icons/source_sheets/Frame 20.png",
+    "label": "trend-up-02",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1391,
+      351,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-check.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-check",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-minus.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-minus",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-plus.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-plus",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-slash.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-slash",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-typing.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-typing",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/brackets-x.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "brackets-X",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/browser.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "browser",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/browser-code.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "browser-code",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      463,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/code-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "code-01",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      463,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/code-02.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "code-02",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      463,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/code-03.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "code-03",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      463,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/code-04.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "code-04",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      463,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/data-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "data-01",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      463,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/data-02.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "data-02",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      463,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/data-03.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "data-03",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      463,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/data-04.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "data-04",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      833,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/file-code.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "file-code",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      833,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/folder-code.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "folder-code",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      833,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/git-branch-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "git-branch-01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      833,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/git-branch-02.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "git-branch-02",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      833,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/git-branch-03.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "git-branch-03",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      833,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/git-branch-04.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "git-branch-04",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      833,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/git-branch-05.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "git-branch-05",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      833,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-01",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1204,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-02.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1204,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-check.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-check",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1204,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-minus.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-minus",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1204,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-plus.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-plus",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1204,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/package-x.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "package-x",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1204,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-01",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1204,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-02.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-02",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1204,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-03.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-03",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1585,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-04.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-04",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1585,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-05.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-05",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1585,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-06.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-06",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1585,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-down.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-down",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1585,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/server-up.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "server-up",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1585,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/terminal.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "terminal",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1585,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/development/plug-01.png",
+    "source": "assets/icons/source_sheets/Frame 25.png",
+    "label": "plug-01",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1585,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/align-center.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "align-center",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/align-justify.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "align-justify",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/align-left.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "align-left",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/align-right.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "align-right",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/attachment-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "attatchment-01",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      79,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/attachment-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "attatchment-02",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      79,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/bezier-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "bezier-01",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      79,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/bezier-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "bezier-02",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      79,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/bold-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "bold-01",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      79,
+      499,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/bold-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "bold-02",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      79,
+      545,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/color-picker.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "color-picker",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      79,
+      591,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/color-swatch-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "color-swatch-01",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      79,
+      637,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/color-swatch-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "color-swatch-02",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      79,
+      683,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/contrast.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "contrast",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      79,
+      729,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/crop-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "crop-01",
+    "column": 1,
+    "row": 15,
+    "rect": [
+      79,
+      775,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/crop-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "crop-02",
+    "column": 1,
+    "row": 16,
+    "rect": [
+      79,
+      821,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-01",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      455,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-02",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      455,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-03",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      455,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-04.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-04",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      455,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-05.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-05",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      455,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/cursor-06.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "cursor-06",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      455,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/delete.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "delete",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      455,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/eraser-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "eraser-01",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      455,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/eraser-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "eraser-02",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      455,
+      499,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/feather-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "feather-01",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      455,
+      545,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/feather-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "feather-02",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      455,
+      591,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/flip-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "flip-01",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      455,
+      637,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/flip-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "flip-02",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      455,
+      683,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/header-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "header-01",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      455,
+      729,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/header-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "header-02",
+    "column": 2,
+    "row": 15,
+    "rect": [
+      455,
+      775,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/image-indent-left.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "image-indent-left",
+    "column": 2,
+    "row": 16,
+    "rect": [
+      455,
+      821,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/image-indent-right.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "image-indent-right",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      837,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/indent-decrease.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "indent-decrease",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      837,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/indent-increase.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "indent-increase",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      837,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/indent-right.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "indent-right",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      837,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/indent-left.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "indent-left",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      837,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/italics-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "italics-01",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      837,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/italics-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "italics-02",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      837,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/letter-spacing-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "letter-spacing-01",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      837,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/letter-spacing-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "letter-spacing-02",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      837,
+      499,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/letter-spacing-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "letter-spacing-03",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      837,
+      545,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/line-height.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "line-height",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      837,
+      591,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/list.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "list",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      837,
+      637,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/list-numbers.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "list-numbers",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      837,
+      683,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/move.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "move",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      837,
+      729,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/paint-bucket-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "paint-bucket-01",
+    "column": 3,
+    "row": 15,
+    "rect": [
+      837,
+      775,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/paint-bucket-2.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "paint-bucket-2",
+    "column": 3,
+    "row": 16,
+    "rect": [
+      837,
+      821,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/palette.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "palette",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1229,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pen-tool-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pen-tool-01",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1229,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pen-tool-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pen-tool-02",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1229,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pen-tool-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pen-tool-03",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1229,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pen-tool-04.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pen-tool-04",
+    "column": 4,
+    "row": 5,
+    "rect": [
+      1229,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pencil-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pencil-01",
+    "column": 4,
+    "row": 6,
+    "rect": [
+      1229,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pencil-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pencil-02",
+    "column": 4,
+    "row": 7,
+    "rect": [
+      1229,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/pencil-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "pencil-03",
+    "column": 4,
+    "row": 8,
+    "rect": [
+      1229,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/perspective.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "perspective",
+    "column": 4,
+    "row": 9,
+    "rect": [
+      1229,
+      499,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scale-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scale-01",
+    "column": 4,
+    "row": 10,
+    "rect": [
+      1229,
+      545,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scale-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scale-02",
+    "column": 4,
+    "row": 11,
+    "rect": [
+      1229,
+      591,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scale-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scale-03",
+    "column": 4,
+    "row": 12,
+    "rect": [
+      1229,
+      637,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scissors-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scissors-01",
+    "column": 4,
+    "row": 13,
+    "rect": [
+      1229,
+      683,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scissors-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scissors-02",
+    "column": 4,
+    "row": 14,
+    "rect": [
+      1229,
+      729,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scissors-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scissors-03",
+    "column": 4,
+    "row": 15,
+    "rect": [
+      1229,
+      775,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/scissors-04.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "scissors-04",
+    "column": 4,
+    "row": 16,
+    "rect": [
+      1229,
+      821,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/skew.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "skew",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1571,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/superscript.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "superscript",
+    "column": 5,
+    "row": 2,
+    "rect": [
+      1571,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/text-input-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "text-input-01",
+    "column": 5,
+    "row": 3,
+    "rect": [
+      1571,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/text-input-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "text-input-02",
+    "column": 5,
+    "row": 4,
+    "rect": [
+      1571,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/transform.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "transform",
+    "column": 5,
+    "row": 5,
+    "rect": [
+      1571,
+      315,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/type-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "type-01",
+    "column": 5,
+    "row": 6,
+    "rect": [
+      1571,
+      361,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/type-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "type-02",
+    "column": 5,
+    "row": 7,
+    "rect": [
+      1571,
+      407,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/type-03.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "type-03",
+    "column": 5,
+    "row": 8,
+    "rect": [
+      1571,
+      453,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/type-strike-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "type-strike-01",
+    "column": 5,
+    "row": 9,
+    "rect": [
+      1571,
+      499,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/type-strike-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "type-strike-02",
+    "column": 5,
+    "row": 10,
+    "rect": [
+      1571,
+      545,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/underline-01.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "underline-01",
+    "column": 5,
+    "row": 11,
+    "rect": [
+      1571,
+      591,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/underline-02.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "underline-02",
+    "column": 5,
+    "row": 12,
+    "rect": [
+      1571,
+      637,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/zoom-in.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "zoom-in",
+    "column": 5,
+    "row": 13,
+    "rect": [
+      1571,
+      683,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/editor/zoom-out.png",
+    "source": "assets/icons/source_sheets/Frame 28.png",
+    "label": "zoom-out",
+    "column": 5,
+    "row": 14,
+    "rect": [
+      1571,
+      729,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/atom.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "atom",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      79,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-01.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-01",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      79,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-02.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-02",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      79,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-03.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-03",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      79,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-04.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-04",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      433,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-05.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-05",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      433,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/book-06.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "book-06",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      433,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/calculator-01.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "calculator-01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      433,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/calculator-02.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "calculator-02",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      822,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/compass.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "compass",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      822,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/glasses-01.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "glasses-01",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      822,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/glasses-01-variant-2.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "glasses-01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      822,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/globe-01.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "globe-01",
+    "column": 4,
+    "row": 1,
+    "rect": [
+      1213,
+      131,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/globe-02.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "globe-02",
+    "column": 4,
+    "row": 2,
+    "rect": [
+      1213,
+      177,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/graduation-cap-01.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "graduation-cap-01",
+    "column": 4,
+    "row": 3,
+    "rect": [
+      1213,
+      223,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/graduation-cap-02.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "graduation-cap-02",
+    "column": 4,
+    "row": 4,
+    "rect": [
+      1213,
+      269,
+      26,
+      26
+    ]
+  },
+  {
+    "asset": "assets/icons/education/ruler.png",
+    "source": "assets/icons/source_sheets/Frame 29.png",
+    "label": "ruler",
+    "column": 5,
+    "row": 1,
+    "rect": [
+      1647,
+      131,
+      26,
+      26
+    ]
+  }
+]

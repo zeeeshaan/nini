@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+
+/// Displays an original client PNG, keeping its transparency and proportions.
+///
+/// Inherits the current icon theme (black in light mode, white in dark mode).
+/// [selected] adds a subtle background without changing the foreground color.
+/// Buttons should provide their own tooltip/semantic label;
+/// use [semanticLabel] for standalone meaningful icons.
+class AppIcon extends StatelessWidget {
+  const AppIcon(
+    this.asset, {
+    super.key,
+    this.size,
+    this.color,
+    this.semanticLabel,
+    this.selected = false,
+  });
+
+  final String asset;
+  final double? size;
+  final Color? color;
+  final String? semanticLabel;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    final iconTheme = IconTheme.of(context);
+    final dimension = size ?? iconTheme.size ?? 24;
+    final foreground =
+        color ?? iconTheme.color ?? Theme.of(context).colorScheme.onSurface;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: selected
+            ? foreground.withValues(alpha: 0.14)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Image.asset(
+        asset,
+        width: dimension,
+        height: dimension,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.medium,
+        color: foreground,
+        colorBlendMode: BlendMode.srcIn,
+        semanticLabel: semanticLabel,
+        excludeFromSemantics: semanticLabel == null,
+      ),
+    );
+  }
+}
