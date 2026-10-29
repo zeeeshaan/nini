@@ -89,8 +89,8 @@ class _MediaTile extends StatelessWidget {
 
           if (asset?.type == AssetType.video)
             Center(
-              child: Icon(
-                Icons.play_circle_outline,
+              child: AppIcon(
+                AppIcons.playCircle,
                 color: Colors.white,
                 size: 30,
               ),

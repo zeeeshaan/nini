@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
 import 'package:nini/features/calls/presentation/widgets/call_action_button.dart';
@@ -20,7 +23,11 @@ class CallVideoStage extends StatelessWidget {
             errorBuilder: (_, _, _) => const ColoredBox(
               color: Color(0xFF333333),
               child: Center(
-                child: Icon(Icons.person, color: Colors.white, size: 100),
+                child: AppIcon(
+                  AppIcons.profile,
+                  color: Colors.white,
+                  size: 100,
+                ),
               ),
             ),
           ),
@@ -58,7 +65,7 @@ class CallVideoHeader extends StatelessWidget {
       children: [
         CallActionButton(
           label: AppStrings.back,
-          icon: Icons.chevron_left,
+          icon: AppIcons.back,
           onPressed: onBack,
           color: const Color(0x55000000),
           foreground: Colors.white,
@@ -85,8 +92,8 @@ class CallVideoHeader extends StatelessWidget {
                     ),
               if (!session.cameraEnabled)
                 const Center(
-                  child: Icon(
-                    Icons.videocam_off_outlined,
+                  child: AppIcon(
+                    AppIcons.videoOff,
                     color: Colors.white,
                     size: 28,
                   ),
@@ -114,7 +121,7 @@ class CallVideoHeader extends StatelessWidget {
                 bottom: 2,
                 child: CallActionButton(
                   label: AppStrings.switchCamera,
-                  icon: Icons.cameraswitch_outlined,
+                  icon: AppIcons.refresh,
                   onPressed: session.cameraEnabled ? onSwitch : null,
                   size: 44,
                   color: const Color(0x66000000),

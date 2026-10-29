@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/features/calls/data/preview_call_service.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
@@ -205,10 +207,10 @@ class _CallViewState extends State<_CallView> {
                                   onPressed: () => setState(
                                     () => _optionsVisible = !_optionsVisible,
                                   ),
-                                  icon: Icon(
+                                  icon: AppIcon(
                                     _optionsVisible
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_up,
+                                        ? AppIcons.chevronDown
+                                        : AppIcons.chevronUp,
                                     color: Colors.white,
                                   ),
                                 ),

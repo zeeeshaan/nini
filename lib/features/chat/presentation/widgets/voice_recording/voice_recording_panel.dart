@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
 import 'package:nini/features/chat/presentation/widgets/voice_message/chat_voice_player.dart';
@@ -33,8 +36,8 @@ class VoiceRecordingPanel extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  preview ? Icons.mic_none : Icons.mic,
+                AppIcon(
+                  AppIcons.microphone,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 const SizedBox(width: 8),

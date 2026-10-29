@@ -131,9 +131,17 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
             onPressed: _publishing ? null : _goBack,
             icon: const AppIcon(AppIcons.back, size: 22),
           ),
-          title: Text(
-            AppStrings.createPost,
-            style: theme.textTheme.titleMedium,
+          title: Padding(
+            padding: const EdgeInsets.only(right: 14),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                AppStrings.createPost,
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+                style: theme.textTheme.titleMedium,
+              ),
+            ),
           ),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1),

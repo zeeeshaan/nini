@@ -58,13 +58,17 @@ class ChatMessageComposer extends StatelessWidget {
                   children: [
                     action(
                       emojiVisible ? AppStrings.keyboard : AppStrings.emoji,
-                      Icon(
-                        emojiVisible
-                            ? Icons.keyboard_outlined
-                            : Icons.emoji_emotions_outlined,
-                        color: colors.onPrimary,
-                        size: 22,
-                      ),
+                      emojiVisible
+                          ? AppIcon(
+                              AppIcons.keyboard,
+                              color: colors.onPrimary,
+                              size: 22,
+                            )
+                          : Icon(
+                              Icons.emoji_emotions_outlined,
+                              color: colors.onPrimary,
+                              size: 22,
+                            ),
                       onEmojiPressed,
                     ),
                     Expanded(

@@ -19,6 +19,8 @@ class GalleryState {
     this.hasMore = false,
     this.isPickingFiles = false,
     this.errorMessage,
+    this.permission,
+    this.loadMoreFailed = false,
   });
 
   final GalleryTab tab;
@@ -30,6 +32,10 @@ class GalleryState {
   final bool hasMore;
   final bool isPickingFiles;
   final String? errorMessage;
+  final PermissionState? permission;
+  final bool loadMoreFailed;
+  bool get limitedAccess =>
+      tab != GalleryTab.file && permission == PermissionState.limited;
 
   GalleryState copyWith({
     GalleryTab? tab,
@@ -40,6 +46,8 @@ class GalleryState {
     bool? hasMore,
     bool? isPickingFiles,
     String? errorMessage,
+    PermissionState? permission,
+    bool? loadMoreFailed,
   }) {
     return GalleryState(
       tab: tab ?? this.tab,
@@ -50,26 +58,90 @@ class GalleryState {
       hasMore: hasMore ?? this.hasMore,
       isPickingFiles: isPickingFiles ?? this.isPickingFiles,
       errorMessage: errorMessage,
+      permission: permission ?? this.permission,
+      loadMoreFailed: loadMoreFailed ?? this.loadMoreFailed,
     );
   }
 }
 
 class GalleryCubit extends Cubit<GalleryState> {
-  GalleryCubit() : super(const GalleryState());
+  GalleryCubit({
+    Future<List<PlatformFile>> Function()? filePicker,
+    Future<void> Function(RequestType)? limitedPicker,
+  }) : _filePicker = filePicker ?? _pickDeviceFiles,
+       _limitedPicker = limitedPicker ?? _presentLimited,
+       super(const GalleryState());
+  final Future<List<PlatformFile>> Function() _filePicker;
+  final Future<void> Function(RequestType) _limitedPicker;
+  static Future<void> _presentLimited(RequestType type) =>
+      PhotoManager.presentLimited(type: type);
+  static Future<List<PlatformFile>> _pickDeviceFiles() =>
+      FilePicker.pickFiles(type: FileType.any);
 
   static const int _pageSize = 60;
 
   AssetPathEntity? _album;
   int _nextPage = 0;
+  int _totalAssets = 0;
   int _loadVersion = 0;
+  bool _managingAccess = false, _refreshPending = false;
+
+  RequestType _type(GalleryTab tab) =>
+      tab == GalleryTab.video ? RequestType.video : RequestType.image;
+  PermissionRequestOption _permissionOption(GalleryTab tab) =>
+      PermissionRequestOption(
+        androidPermission: AndroidPermission(
+          type: _type(tab),
+          mediaLocation: false,
+        ),
+      );
+
+  /// Returning from Settings must refresh without opening a permission dialog
+  /// again. Files use their own picker and must never reopen on app resume.
+  Future<void> refresh() async {
+    if (isClosed || state.tab == GalleryTab.file || state.isPickingFiles) {
+      return;
+    }
+    if (_managingAccess || state.status == GalleryStatus.loading) {
+      _refreshPending = true;
+      return;
+    }
+    await changeTab(state.tab, requestPermission: false);
+  }
+
+  Future<void> manageAccess() async {
+    if (isClosed ||
+        _managingAccess ||
+        !state.limitedAccess ||
+        state.status == GalleryStatus.loading) {
+      return;
+    }
+    final tab = state.tab, version = _loadVersion;
+    _managingAccess = true;
+    try {
+      await _limitedPicker(_type(tab));
+    } catch (_) {
+      if (!isClosed && version == _loadVersion) {
+        emit(state.copyWith(errorMessage: AppStrings.galleryLoadFailed));
+      }
+    } finally {
+      _managingAccess = false;
+    }
+    if (!isClosed && version == _loadVersion) await refresh();
+  }
 
   Future<void> load() => changeTab(GalleryTab.photo);
 
-  Future<void> changeTab(GalleryTab tab) async {
+  Future<void> changeTab(
+    GalleryTab tab, {
+    bool requestPermission = true,
+  }) async {
     final version = ++_loadVersion;
+    _refreshPending = false;
 
     _album = null;
     _nextPage = 0;
+    _totalAssets = 0;
 
     if (tab == GalleryTab.file) {
       emit(
@@ -79,6 +151,7 @@ class GalleryCubit extends Cubit<GalleryState> {
           assets: const [],
           hasMore: false,
           loadingMore: false,
+          loadMoreFailed: false,
         ),
       );
 
@@ -94,13 +167,19 @@ class GalleryCubit extends Cubit<GalleryState> {
         assets: const [],
         hasMore: false,
         loadingMore: false,
+        loadMoreFailed: false,
       ),
     );
 
     try {
-      final permission = await PhotoManager.requestPermissionExtend();
+      final option = _permissionOption(tab);
+      final permission = requestPermission
+          ? await PhotoManager.requestPermissionExtend(requestOption: option)
+          : await PhotoManager.getPermissionState(requestOption: option);
 
       if (isClosed || version != _loadVersion) return;
+
+      emit(state.copyWith(permission: permission));
 
       if (!permission.hasAccess) {
         emit(
@@ -113,9 +192,7 @@ class GalleryCubit extends Cubit<GalleryState> {
         return;
       }
 
-      final requestType = tab == GalleryTab.photo
-          ? RequestType.image
-          : RequestType.video;
+      final requestType = _type(tab);
 
       final albums = await PhotoManager.getAssetPathList(
         type: requestType,
@@ -137,17 +214,21 @@ class GalleryCubit extends Cubit<GalleryState> {
 
       _album = albums.first;
 
-      final items = await _album!.getAssetListPaged(page: 0, size: _pageSize);
+      final album = _album!;
+      final total = await album.assetCountAsync;
+      if (isClosed || version != _loadVersion) return;
+      final items = await album.getAssetListPaged(page: 0, size: _pageSize);
 
       if (isClosed || version != _loadVersion) return;
 
       _nextPage = 1;
+      _totalAssets = total;
 
       emit(
         state.copyWith(
           status: GalleryStatus.ready,
           assets: items,
-          hasMore: items.length == _pageSize,
+          hasMore: _nextPage * _pageSize < _totalAssets,
           loadingMore: false,
         ),
       );
@@ -161,13 +242,19 @@ class GalleryCubit extends Cubit<GalleryState> {
           hasMore: false,
         ),
       );
+    } finally {
+      if (!isClosed && version == _loadVersion && _refreshPending) {
+        _refreshPending = false;
+        await refresh();
+      }
     }
   }
 
-  Future<void> loadMore() async {
+  Future<void> loadMore({bool retry = false}) async {
     if (state.status != GalleryStatus.ready ||
         state.loadingMore ||
         !state.hasMore ||
+        (state.loadMoreFailed && !retry) ||
         _album == null) {
       return;
     }
@@ -175,7 +262,7 @@ class GalleryCubit extends Cubit<GalleryState> {
     final version = _loadVersion;
     final album = _album!;
 
-    emit(state.copyWith(loadingMore: true));
+    emit(state.copyWith(loadingMore: true, loadMoreFailed: false));
 
     try {
       final items = await album.getAssetListPaged(
@@ -190,14 +277,14 @@ class GalleryCubit extends Cubit<GalleryState> {
       emit(
         state.copyWith(
           assets: [...state.assets, ...items],
-          hasMore: items.length == _pageSize,
+          hasMore: _nextPage * _pageSize < _totalAssets,
           loadingMore: false,
         ),
       );
     } catch (_) {
       if (isClosed || version != _loadVersion) return;
 
-      emit(state.copyWith(loadingMore: false, hasMore: false));
+      emit(state.copyWith(loadingMore: false, loadMoreFailed: true));
     }
   }
 
@@ -233,7 +320,7 @@ class GalleryCubit extends Cubit<GalleryState> {
     try {
       // file_picker 13.x:
       // pickFiles already supports multiple selections.
-      final files = await FilePicker.pickFiles(type: FileType.any);
+      final files = await _filePicker();
 
       if (isClosed) return;
 

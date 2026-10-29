@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/features/create_post/presentation/widgets/caption_editor/client_caption_toolbar.dart';
 
 /// A real rich-text editor. Its controller stores Quill Delta, so formatting is
 /// retained when leaving the screen; toolbar actions affect the selection.
@@ -43,41 +44,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
             QuillSimpleToolbar(
               controller: widget.controller,
               config: QuillSimpleToolbarConfig(
-                buttonOptions: QuillSimpleToolbarButtonOptions(
-                  undoHistory: const QuillToolbarHistoryButtonOptions(
-                    tooltip: AppStrings.undo,
-                  ),
-                  redoHistory: const QuillToolbarHistoryButtonOptions(
-                    tooltip: AppStrings.redo,
-                  ),
-                  base: QuillToolbarBaseButtonOptions(
-                    iconTheme: QuillIconTheme(
-                      iconButtonSelectedData: IconButtonData(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.primary,
-                          ),
-                          foregroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.onPrimary,
-                          ),
-                          iconColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
-                      iconButtonUnselectedData: IconButtonData(
-                        style: ButtonStyle(
-                          foregroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.onSurface,
-                          ),
-                          iconColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                buttonOptions: clientCaptionButtons(context),
                 multiRowsDisplay: false,
                 showFontFamily: false,
                 showFontSize: false,
@@ -99,13 +66,16 @@ class _CaptionEditorState extends State<CaptionEditor> {
             const Divider(height: 1),
             SizedBox(
               height: 180,
-              child: QuillEditor.basic(
-                controller: widget.controller,
-                focusNode: _focusNode,
-                scrollController: _scrollController,
-                config: const QuillEditorConfig(
-                  placeholder: AppStrings.writeCaption,
-                  padding: EdgeInsets.all(12),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: QuillEditor.basic(
+                  controller: widget.controller,
+                  focusNode: _focusNode,
+                  scrollController: _scrollController,
+                  config: const QuillEditorConfig(
+                    placeholder: AppStrings.writeCaption,
+                    padding: EdgeInsets.all(12),
+                  ),
                 ),
               ),
             ),

@@ -1,5 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -21,8 +24,8 @@ class GalleryPreview extends StatelessWidget {
       return ColoredBox(
         color: colors.surface,
         child: Center(
-          child: Icon(
-            Icons.collections_outlined,
+          child: AppIcon(
+            AppIcons.image,
             size: 180,
             color: colors.onSurface.withValues(alpha: 0.11),
           ),
@@ -47,8 +50,8 @@ class GalleryPreview extends StatelessWidget {
             ),
             if (asset.type == AssetType.video)
               Center(
-                child: Icon(
-                  Icons.play_circle_fill,
+                child: AppIcon(
+                  AppIcons.playCircle,
                   size: 56,
                   color: colors.onSurface,
                 ),
@@ -120,8 +123,8 @@ class _EmptyMediaTile extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Icon(
-          Icons.collections_outlined,
+        child: AppIcon(
+          AppIcons.image,
           size: 38,
           color: colors.onSurface.withValues(alpha: 0.10),
         ),
@@ -161,8 +164,8 @@ class _SelectedMediaTile extends StatelessWidget {
 
             if (asset?.type == AssetType.video)
               Center(
-                child: Icon(
-                  Icons.play_circle_outline,
+                child: AppIcon(
+                  AppIcons.playCircle,
                   size: 30,
                   color: colors.surface,
                 ),

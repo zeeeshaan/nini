@@ -230,7 +230,7 @@ class AnalyticsLegend extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: selected
-                  ? const Icon(Icons.check, size: 10, color: Colors.white)
+                  ? const AppIcon(AppIcons.check, size: 10, color: Colors.white)
                   : null,
             ),
             const SizedBox(width: 4),
@@ -285,8 +285,8 @@ class AnalyticsSummary extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            const Icon(
-              Icons.south_east,
+            const AppIcon(
+              AppIcons.arrowDownRight,
               color: AnalyticsColors.purple,
               size: 12,
             ),

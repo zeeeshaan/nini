@@ -8,6 +8,7 @@ import 'package:nini/features/create_post/domain/models/gallery_attachment.dart'
 import 'package:nini/features/create_post/presentation/widgets/gallery_preview/gallery_preview.dart';
 import 'package:nini/features/create_post/presentation/widgets/post_dialog/post_dialog.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class AltTextDialog extends StatefulWidget {
   const AltTextDialog({
@@ -82,7 +83,7 @@ class _AltTextDialogState extends State<AltTextDialog> {
                             thumbnailSize: const ThumbnailSize.square(180),
                             fit: BoxFit.cover,
                             errorBuilder: (_, error, stack) =>
-                                const Icon(Icons.broken_image_outlined),
+                                const AppIcon(AppIcons.imageUnavailable),
                           )
                         : GalleryFileTile(file: item.file!),
                   ),

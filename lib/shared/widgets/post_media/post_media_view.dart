@@ -42,10 +42,10 @@ class PostMediaView extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      AppIcon(
                         media.type == PostMediaType.video
-                            ? Icons.videocam_outlined
-                            : Icons.description_outlined,
+                            ? AppIcons.video
+                            : AppIcons.document,
                         size: 36,
                       ),
                       const SizedBox(height: 8),
@@ -71,7 +71,7 @@ class PostMediaView extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Icon(Icons.videocam_outlined, size: 20),
+                  child: const AppIcon(AppIcons.video, size: 20),
                 ),
               ),
           ],

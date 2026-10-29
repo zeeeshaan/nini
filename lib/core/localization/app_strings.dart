@@ -165,6 +165,13 @@ abstract final class AppStrings {
   static const separateTags = 'برچسب‌ها را با ویرگول جدا کنید';
   static const addTags = 'افزودن برچسب';
   static const galleryAccessRequired = 'اجازه دسترسی به گالری تصاویر را بدهید.';
+  static const limitedGalleryAccess =
+      'فقط عکس‌ها و ویدیوهای مجاز نمایش داده می‌شوند.';
+  static const selectMoreMedia = 'انتخاب موارد بیشتر';
+  static const fullGalleryAccess = 'دسترسی کامل در تنظیمات';
+  static const refreshGallery = 'تازه‌سازی گالری';
+  static const filesPickerHelp =
+      'برای دیدن فایل‌های گوشی و انتخاب آن‌ها، روی افزودن فایل بزنید.';
   static const openSettings = 'باز کردن تنظیمات';
   static const galleryLoadFailed = 'بارگذاری گالری انجام نشد.';
   static const yourGalleryLoadFailed = 'بارگذاری گالری شما انجام نشد.';

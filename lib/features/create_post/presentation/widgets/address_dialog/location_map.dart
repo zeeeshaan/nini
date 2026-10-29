@@ -4,6 +4,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class LocationMap extends StatefulWidget {
   const LocationMap({
@@ -110,7 +112,13 @@ class _LocationMapState extends State<LocationMap> {
                         shape: BoxShape.circle,
                         border: Border.all(color: colors.onSurface, width: 2),
                       ),
-                      child: Icon(Icons.location_on, color: colors.onSurface),
+                      child: Center(
+                        child: AppIcon(
+                          AppIcons.location,
+                          size: 24,
+                          color: colors.onSurface,
+                        ),
+                      ),
                     ),
                   ),
                 ],

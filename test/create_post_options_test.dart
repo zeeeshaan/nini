@@ -10,6 +10,8 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
@@ -355,7 +357,13 @@ void main() {
       await tester.tap(find.byTooltip('توپر'));
       await tester.pumpAndSettle();
       expect(
-        IconTheme.of(tester.element(find.byIcon(Icons.format_bold))).color,
+        IconTheme.of(
+          tester.element(
+            find.byWidgetPredicate(
+              (widget) => widget is AppIcon && widget.asset == AppIcons.bold,
+            ),
+          ),
+        ).color,
         mode == ThemeMode.dark ? Colors.black : Colors.white,
       );
       expect(

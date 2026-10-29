@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -11,17 +12,42 @@ Future<T?> showPostDialog<T>(BuildContext context, Widget dialog) {
     context: context,
     useSafeArea: true,
     isScrollControlled: true,
-    backgroundColor: Theme.of(context).colorScheme.surface,
+    backgroundColor: Colors.transparent,
     constraints: const BoxConstraints(maxWidth: 560),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
     ),
     clipBehavior: Clip.antiAlias,
-    builder: (context) => Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: dialog,
+    builder: (context) => _PostDialogSurface(
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.viewInsetsOf(context).bottom,
+        ),
+        child: dialog,
+      ),
     ),
   );
+}
+
+/// Only the sheet uses the opposite palette; the page keeps its app theme.
+/// Resolve it while building so an open sheet also follows later theme changes.
+class _PostDialogSurface extends StatelessWidget {
+  const _PostDialogSurface({required this.child});
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).brightness == Brightness.light
+        ? AppTheme.dark
+        : AppTheme.light;
+    return Theme(
+      data: theme,
+      child: Material(
+        key: const ValueKey('post-dialog-surface'),
+        color: theme.colorScheme.surface,
+        child: child,
+      ),
+    );
+  }
 }
 
 /// Shared layout for the reference sheets: handle, right-aligned heading,

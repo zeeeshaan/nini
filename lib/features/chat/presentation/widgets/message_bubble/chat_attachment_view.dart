@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:open_filex/open_filex.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
@@ -40,7 +43,7 @@ class ChatAttachmentView extends StatelessWidget {
                 child: Image.file(
                   File(attachment.path),
                   errorBuilder: (_, error, stack) =>
-                      const Icon(Icons.broken_image_outlined, size: 48),
+                      const AppIcon(AppIcons.imageUnavailable, size: 48),
                 ),
               ),
             ),
@@ -92,24 +95,24 @@ class ChatAttachmentView extends StatelessWidget {
                       fit: BoxFit.cover,
                       errorBuilder: (_, error, stack) => SizedBox(
                         height: 80,
-                        child: Icon(
-                          Icons.broken_image_outlined,
+                        child: AppIcon(
+                          AppIcons.imageUnavailable,
                           color: foreground,
                         ),
                       ),
                     ),
                     if (attachment.type == ChatAttachmentType.video)
-                      Icon(Icons.play_circle, color: foreground, size: 42),
+                      AppIcon(AppIcons.playCircle, color: foreground, size: 42),
                   ],
                 ),
               ),
             const SizedBox(height: 6),
             Row(
               children: [
-                Icon(
+                AppIcon(
                   attachment.type == ChatAttachmentType.video
-                      ? Icons.videocam_outlined
-                      : Icons.insert_drive_file_outlined,
+                      ? AppIcons.video
+                      : AppIcons.document,
                   color: foreground,
                   size: 21,
                 ),

@@ -38,20 +38,29 @@ class PostFormOptionTile extends StatelessWidget {
             children: [
               const AppIcon(AppIcons.back, size: 18),
               const SizedBox(width: 10),
-              if (value != null)
-                Flexible(
-                  child: Text(
-                    value!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall,
-                  ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      label,
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                    if (value?.isNotEmpty == true) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        value!,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ],
                 ),
-              const Spacer(),
-              Text(
-                label,
-                textAlign: TextAlign.right,
-                style: theme.textTheme.bodySmall,
               ),
               if (trailing != null) ...[const SizedBox(width: 6), trailing!],
             ],

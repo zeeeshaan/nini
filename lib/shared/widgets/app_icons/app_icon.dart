@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// Displays an original client PNG, keeping its transparency and proportions.
+/// Displays vector icons or legacy PNGs, preserving transparency/proportions.
 ///
 /// Inherits the current icon theme (black in light mode, white in dark mode).
 /// [selected] adds a subtle background without changing the foreground color.
@@ -36,17 +37,27 @@ class AppIcon extends StatelessWidget {
             : Colors.transparent,
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Image.asset(
-        asset,
-        width: dimension,
-        height: dimension,
-        fit: BoxFit.contain,
-        filterQuality: FilterQuality.medium,
-        color: foreground,
-        colorBlendMode: BlendMode.srcIn,
-        semanticLabel: semanticLabel,
-        excludeFromSemantics: semanticLabel == null,
-      ),
+      child: asset.toLowerCase().endsWith('.svg')
+          ? SvgPicture.asset(
+              asset,
+              width: dimension,
+              height: dimension,
+              fit: BoxFit.contain,
+              colorFilter: ColorFilter.mode(foreground, BlendMode.srcIn),
+              semanticsLabel: semanticLabel,
+              excludeFromSemantics: semanticLabel == null,
+            )
+          : Image.asset(
+              asset,
+              width: dimension,
+              height: dimension,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.medium,
+              color: foreground,
+              colorBlendMode: BlendMode.srcIn,
+              semanticLabel: semanticLabel,
+              excludeFromSemantics: semanticLabel == null,
+            ),
     );
   }
 }

@@ -56,6 +56,7 @@ dependencies:
   emoji_picker_flutter: ^4.5.4
   open_filex: ^5.0.0
   image_picker: ^1.2.4
+  flutter_svg: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +102,19 @@ flutter:
     - assets/icons/development/
     - assets/icons/editor/
     - assets/icons/education/
+    - assets/icons/vectors/arrows/
+    - assets/icons/vectors/files/
+    - assets/icons/vectors/interface/
+    - assets/icons/vectors/calendar/
+    - assets/icons/vectors/navigation/
+    - assets/icons/vectors/edit/
+    - assets/icons/vectors/communication/
+    - assets/icons/vectors/environment/
+    - assets/icons/vectors/media/
+    - assets/icons/vectors/system/
+    - assets/icons/vectors/user/
+    - assets/icons/vectors/shape/
+    - assets/icons/vectors/menu/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

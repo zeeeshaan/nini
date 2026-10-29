@@ -111,7 +111,7 @@ class ConversationHeader extends StatelessWidget
           IconButton(
             tooltip: AppStrings.selectAllMessages,
             onPressed: onSelectAll,
-            icon: const Icon(Icons.select_all),
+            icon: const AppIcon(AppIcons.selectAll),
           ),
           IconButton(
             tooltip: AppStrings.deleteSelectedMessages,
@@ -122,12 +122,12 @@ class ConversationHeader extends StatelessWidget
           IconButton(
             tooltip: AppStrings.audioCall,
             onPressed: blocked || busy ? null : onVoiceCall,
-            icon: const Icon(Icons.call_outlined, size: 23),
+            icon: const AppIcon(AppIcons.phone, size: 23),
           ),
           IconButton(
             tooltip: AppStrings.videoCall,
             onPressed: blocked || busy ? null : onVideoCall,
-            icon: const Icon(Icons.videocam_outlined, size: 25),
+            icon: const AppIcon(AppIcons.video, size: 25),
           ),
         ],
         PopupMenuButton<ConversationAction>(

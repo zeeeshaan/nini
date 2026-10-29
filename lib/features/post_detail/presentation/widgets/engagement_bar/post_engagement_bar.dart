@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +46,7 @@ class PostEngagementBar extends StatelessWidget {
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.star, size: 30),
+                            AppIcon(AppIcons.star, size: 30),
                             SizedBox(width: 3),
                             Text(
                               '۴٫۵',
@@ -101,10 +100,7 @@ class PostEngagementBar extends StatelessWidget {
 
                             _PostAction(
                               label: AppStrings.comments,
-                              icon: Icon(
-                                CupertinoIcons.chat_bubble,
-                                size: iconSize,
-                              ),
+                              icon: AppIcon(AppIcons.chat, size: iconSize),
                               count: showSampleMetrics ? '886' : '0',
                               textSize: textSize,
                               onTap: onCommentsPressed,

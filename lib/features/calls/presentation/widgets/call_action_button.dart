@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+
 class CallActionButton extends StatelessWidget {
   const CallActionButton({
     super.key,
@@ -10,13 +12,14 @@ class CallActionButton extends StatelessWidget {
     this.foreground,
     this.selected = false,
     this.size = 44,
+    this.rotation = 0,
   });
   final String label;
-  final IconData icon;
+  final String icon;
   final VoidCallback? onPressed;
   final Color? color, foreground;
   final bool selected;
-  final double size;
+  final double size, rotation;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,10 @@ class CallActionButton extends StatelessWidget {
           disabledForegroundColor: colors.onSurface.withValues(alpha: .4),
           padding: EdgeInsets.zero,
         ),
-        icon: Icon(icon, size: size >= 50 ? 25 : 21),
+        icon: Transform.rotate(
+          angle: rotation,
+          child: AppIcon(icon, size: size >= 50 ? 25 : 21),
+        ),
       ),
     );
   }

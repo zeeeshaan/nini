@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -66,7 +67,10 @@ void main() {
       }
       expect(labelColor(tester, AppStrings.publish), foreground);
       expect(labelColor(tester, AppStrings.done), foreground);
-      expect(tester.widget<Image>(find.byType(Image)).color, foreground);
+      expect(
+        tester.widget<SvgPicture>(find.byType(SvgPicture)).colorFilter,
+        ColorFilter.mode(foreground, BlendMode.srcIn),
+      );
       final outlined = buttonMaterial(tester, find.byType(OutlinedButton));
       expect(outlined.color, foreground);
       expect((outlined.shape as OutlinedBorder).side.style, BorderStyle.solid);

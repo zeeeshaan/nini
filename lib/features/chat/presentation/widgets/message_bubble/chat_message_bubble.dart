@@ -2,6 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/presentation/widgets/message_bubble/chat_attachment_view.dart';
@@ -88,10 +91,10 @@ class ChatMessageBubble extends StatelessWidget {
                     ),
                     if (message.isMine) ...[
                       const SizedBox(width: 4),
-                      Icon(
+                      AppIcon(
                         message.deliveryStatus == ChatDeliveryStatus.read
-                            ? Icons.done_all
-                            : Icons.check,
+                            ? AppIcons.checkAll
+                            : AppIcons.check,
                         size: 14,
                         color: foreground,
                       ),

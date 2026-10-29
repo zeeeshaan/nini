@@ -29,6 +29,7 @@ class PostOptionsSection extends StatelessWidget {
           builder: (context, value) => PostFormOptionTile(
             label: AppStrings.preparationTime,
             value: value.label,
+            trailing: const AppIcon(AppIcons.clock, size: 18),
             onTap: () => choosePostOption<PreparationTime>(
               context,
               PreparationTimeDialog(selected: draftCubit.state.preparationTime),

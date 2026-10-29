@@ -1,0 +1,8001 @@
+[
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-down-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Down_MD",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      72,
+      60,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-up-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Up_MD",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      72,
+      123,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-left-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Left_MD",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      72,
+      187,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-right-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Right_MD",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      72,
+      250,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-down.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Down",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      72,
+      314,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Up",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      72,
+      377,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Left",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      72,
+      441,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 0
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Right",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      72,
+      504,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-down-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Down_SM",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      72,
+      568,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-up-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Up_SM",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      72,
+      632,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-left-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Left_SM",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      72,
+      695,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-right-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Right_SM",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      72,
+      759,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_LG",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      72,
+      822,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_LG",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      72,
+      886,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-left-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Left_LG",
+    "column": 1,
+    "row": 15,
+    "rect": [
+      72,
+      949,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-right-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Right_LG",
+    "column": 1,
+    "row": 16,
+    "rect": [
+      72,
+      1013,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-left-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Left_LG",
+    "column": 1,
+    "row": 17,
+    "rect": [
+      72,
+      1077,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-left-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Left_LG",
+    "column": 1,
+    "row": 18,
+    "rect": [
+      72,
+      1140,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-right-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Right_LG",
+    "column": 1,
+    "row": 19,
+    "rect": [
+      72,
+      1204,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-right-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Right_LG",
+    "column": 1,
+    "row": 20,
+    "rect": [
+      72,
+      1267,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrows-reload-01.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrows_Reload_01",
+    "column": 1,
+    "row": 21,
+    "rect": [
+      72,
+      1331,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-reload-02.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Reload_02",
+    "column": 1,
+    "row": 22,
+    "rect": [
+      72,
+      1394,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-left-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Left_Right",
+    "column": 1,
+    "row": 23,
+    "rect": [
+      72,
+      1458,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Up",
+    "column": 1,
+    "row": 24,
+    "rect": [
+      72,
+      1521,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-circle-down.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Circle_Down",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      426,
+      60,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-circle-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Circle_Up",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      426,
+      123,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-circle-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Circle_Left",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      426,
+      187,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/caret-circle-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Caret_Circle_Right",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      426,
+      250,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-down.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Down",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      426,
+      314,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Up",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      426,
+      377,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Left",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      426,
+      441,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Right",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      426,
+      504,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-down-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Down_Left",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      426,
+      568,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-up-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Up_Left",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      426,
+      632,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-down-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Down_Right",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      426,
+      695,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-circle-up-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Circle_Up_Right",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      426,
+      759,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_MD",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      426,
+      822,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_MD",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      426,
+      886,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-left-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Left_MD",
+    "column": 2,
+    "row": 15,
+    "rect": [
+      426,
+      949,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-right-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Right_MD",
+    "column": 2,
+    "row": 16,
+    "rect": [
+      426,
+      1013,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-left-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Left_MD",
+    "column": 2,
+    "row": 17,
+    "rect": [
+      426,
+      1077,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-left-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Left_MD",
+    "column": 2,
+    "row": 18,
+    "rect": [
+      426,
+      1140,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-right-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Right_MD",
+    "column": 2,
+    "row": 19,
+    "rect": [
+      426,
+      1204,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-right-md.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Right_MD",
+    "column": 2,
+    "row": 20,
+    "rect": [
+      426,
+      1267,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/shrink.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Shrink",
+    "column": 2,
+    "row": 21,
+    "rect": [
+      426,
+      1331,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/expand.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Expand",
+    "column": 2,
+    "row": 22,
+    "rect": [
+      426,
+      1394,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/unfold-less.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Unfold_Less",
+    "column": 2,
+    "row": 23,
+    "rect": [
+      426,
+      1458,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/unfold-more.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Unfold_More",
+    "column": 2,
+    "row": 24,
+    "rect": [
+      426,
+      1521,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-right-down.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Right_Down",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      781,
+      60,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-right-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Right_Up",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      781,
+      123,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-left-down.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Left_Down",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      781,
+      187,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-left-up.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Left_Up",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      781,
+      250,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-down-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Down_Right",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      781,
+      314,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-up-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Up_Right",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      781,
+      377,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-down-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Down_Left",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      781,
+      441,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-sub-up-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Sub_Up_Left",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      781,
+      504,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-undo-up-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Undo_Up_Left",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      781,
+      568,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-undo-up-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Undo_Up_Right",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      781,
+      632,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-undo-down-left.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Undo_Down_Left",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      781,
+      695,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-undo-down-right.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Undo_Down_Right",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      781,
+      759,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_SM",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      781,
+      822,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_SM",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      781,
+      886,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-left-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Left_SM",
+    "column": 3,
+    "row": 15,
+    "rect": [
+      781,
+      949,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-right-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Right_SM",
+    "column": 3,
+    "row": 16,
+    "rect": [
+      781,
+      1013,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-left-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Left_SM",
+    "column": 3,
+    "row": 17,
+    "rect": [
+      781,
+      1077,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-left-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Left_SM",
+    "column": 3,
+    "row": 18,
+    "rect": [
+      781,
+      1140,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-up-right-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Up_Right_SM",
+    "column": 3,
+    "row": 19,
+    "rect": [
+      781,
+      1204,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/arrow-down-right-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Arrow_Down_Right_SM",
+    "column": 3,
+    "row": 20,
+    "rect": [
+      781,
+      1267,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-down-duo.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Down_Duo",
+    "column": 3,
+    "row": 21,
+    "rect": [
+      781,
+      1331,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-up-duo.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Up_Duo",
+    "column": 3,
+    "row": 22,
+    "rect": [
+      781,
+      1394,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-left-duo.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Left_Duo",
+    "column": 3,
+    "row": 23,
+    "rect": [
+      781,
+      1458,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/arrows/chevron-right-duo.png",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "label": "Chevron_Right_Duo",
+    "column": 3,
+    "row": 24,
+    "rect": [
+      781,
+      1521,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      75,
+      264,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-close.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Close",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      75,
+      327,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Remove",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      75,
+      391,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-check.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Check",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      75,
+      454,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-upload.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Upload",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      75,
+      518,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-code.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Code",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      75,
+      581,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-edit.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Edit",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      75,
+      645,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/note-search.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Note_Search",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      75,
+      709,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      75,
+      772,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-close.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Close",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      75,
+      836,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Remove",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      75,
+      899,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-document.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Document",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      75,
+      963,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folders.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folders",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      75,
+      1026,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-off.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Off",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      430,
+      264,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-download.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Download",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      430,
+      327,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-add.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Add",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      430,
+      391,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-close.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Close",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      430,
+      454,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Remove",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      430,
+      518,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-document.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Document",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      430,
+      581,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/files.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Files",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      430,
+      645,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/notebook.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Notebook",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      430,
+      709,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-open.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Open",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      430,
+      772,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-download.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Download",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      430,
+      836,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-add.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Add",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      430,
+      899,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-search.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Search",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      430,
+      963,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/archive.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Archive",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      430,
+      1026,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-check.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Check",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      784,
+      264,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/cloud-upload.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Cloud_Upload",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      784,
+      327,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-blank.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Blank",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      784,
+      391,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-download.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Download",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      784,
+      454,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-add.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Add",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      784,
+      518,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/file-search.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "File_Search",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      784,
+      581,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/note-edit.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Note_Edit",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      784,
+      645,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/note.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Note",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      784,
+      709,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-check.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Check",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      784,
+      772,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-upload.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Upload",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      784,
+      836,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-code.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Code",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      784,
+      899,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/folder-edit.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Folder_Edit",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      784,
+      963,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/files/download-package.png",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "label": "Download_Package",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      784,
+      1026,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/external-link.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "External_Link",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      70,
+      114,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/check.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Check",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      70,
+      178,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/check-all-big.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Check_All_Big",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      70,
+      241,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/link-break.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Link_Break",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      70,
+      305,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/log-out.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Log_Out",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      70,
+      368,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/settings-future.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Settings_Future",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      70,
+      432,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/slider-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Slider_01",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      70,
+      495,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/radio-unchecked.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Radio_Unchecked",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      70,
+      559,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/drag-vertical.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Drag_Vertical",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      70,
+      622,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/option.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Option",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      70,
+      686,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/dummy-square.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Dummy_Square",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      70,
+      750,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/dummy-circle-small.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Dummy_Circle_Small",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      70,
+      813,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/chart-bar-vertical-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Chart_Bar_Vertical_01",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      70,
+      877,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/handbag.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Handbag",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      70,
+      940,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/instance.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Instance",
+    "column": 1,
+    "row": 15,
+    "rect": [
+      70,
+      1004,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/checkbox-fill.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Checkbox_Fill",
+    "column": 1,
+    "row": 16,
+    "rect": [
+      70,
+      1067,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/credit-card-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Credit_Card_01",
+    "column": 1,
+    "row": 17,
+    "rect": [
+      70,
+      1131,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/line-xl.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Line_Xl",
+    "column": 1,
+    "row": 18,
+    "rect": [
+      70,
+      1194,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/line-s.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Line_S",
+    "column": 1,
+    "row": 19,
+    "rect": [
+      70,
+      1258,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/bookmark.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Bookmark",
+    "column": 1,
+    "row": 20,
+    "rect": [
+      70,
+      1321,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/magnifying-glass-plus.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Magnifying_Glass_Plus",
+    "column": 1,
+    "row": 21,
+    "rect": [
+      70,
+      1385,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/book.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Book",
+    "column": 1,
+    "row": 22,
+    "rect": [
+      70,
+      1449,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/trending-down.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Trending_Down",
+    "column": 1,
+    "row": 23,
+    "rect": [
+      70,
+      1512,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/shopping-cart-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Shopping_Cart_01",
+    "column": 1,
+    "row": 24,
+    "rect": [
+      70,
+      1576,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/main-component.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Main_Component",
+    "column": 1,
+    "row": 25,
+    "rect": [
+      70,
+      1639,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/link-horizontal-off.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Link_Horizontal_Off",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      424,
+      114,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/check-all.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Check_All",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      424,
+      178,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/link.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Link",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      424,
+      241,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/download.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Download",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      424,
+      305,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/exit.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Exit",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      424,
+      368,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/settings.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Settings",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      424,
+      432,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/slider-02.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Slider_02",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      424,
+      495,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/checkbox-unchecked.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Checkbox_Unchecked",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      424,
+      559,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/drag-horizontal.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Drag_Horizontal",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      424,
+      622,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/search-magnifying-glass.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Search_Magnifying_Glass",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      424,
+      686,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/dummy-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Dummy_Circle",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      424,
+      750,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/heart-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Heart_01",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      424,
+      813,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/chart-bar-horizontal-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Chart_Bar_Horizontal_01",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      424,
+      877,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/shopping-bag-01.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Shopping_Bag_01",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      424,
+      940,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/trash-empty.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Trash_Empty",
+    "column": 2,
+    "row": 15,
+    "rect": [
+      424,
+      1004,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/radio-fill.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Radio_Fill",
+    "column": 2,
+    "row": 16,
+    "rect": [
+      424,
+      1067,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/credit-card-02.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Credit_Card_02",
+    "column": 2,
+    "row": 17,
+    "rect": [
+      424,
+      1131,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/line-l.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Line_L",
+    "column": 2,
+    "row": 18,
+    "rect": [
+      424,
+      1194,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/gift.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Gift",
+    "column": 2,
+    "row": 19,
+    "rect": [
+      424,
+      1258,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/switch-left.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Switch_Left",
+    "column": 2,
+    "row": 20,
+    "rect": [
+      424,
+      1321,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/filter.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Filter",
+    "column": 2,
+    "row": 21,
+    "rect": [
+      424,
+      1385,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/book-open.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Book_Open",
+    "column": 2,
+    "row": 22,
+    "rect": [
+      424,
+      1449,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/trending-up.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Trending_Up",
+    "column": 2,
+    "row": 23,
+    "rect": [
+      424,
+      1512,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/shopping-cart-02.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Shopping_Cart_02",
+    "column": 2,
+    "row": 24,
+    "rect": [
+      424,
+      1576,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/link-horizontal.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Link_Horizontal",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      778,
+      114,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/check-big.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Check_Big",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      778,
+      178,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/link-vertical.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Link_Vertical",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      778,
+      241,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/star.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Star",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      778,
+      305,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/ticket-voucher.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Ticket_Voucher",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      778,
+      368,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/command.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Command",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      778,
+      432,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/slider-03.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Slider_03",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      778,
+      495,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/checkbox-check.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Checkbox_Check",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      778,
+      559,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/label.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Label",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      778,
+      622,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/magnifying-glass-minus.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Magnifying_Glass_Minus",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      778,
+      686,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/dummy-square-small.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Dummy_Square_Small",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      778,
+      750,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/heart-02.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Heart_02",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      778,
+      813,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/chart-line.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Chart_Line",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      778,
+      877,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/shopping-bag-02.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Shopping_Bag_02",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      778,
+      940,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/trash-full.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Trash_Full",
+    "column": 3,
+    "row": 15,
+    "rect": [
+      778,
+      1004,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/loading.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Loading",
+    "column": 3,
+    "row": 16,
+    "rect": [
+      778,
+      1067,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/tag.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Tag",
+    "column": 3,
+    "row": 17,
+    "rect": [
+      778,
+      1131,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/line-m.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Line_M",
+    "column": 3,
+    "row": 18,
+    "rect": [
+      778,
+      1194,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/suitcase.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Suitcase",
+    "column": 3,
+    "row": 19,
+    "rect": [
+      778,
+      1258,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/switch-right.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Switch_Right",
+    "column": 3,
+    "row": 20,
+    "rect": [
+      778,
+      1321,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/filter-off.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Filter_Off",
+    "column": 3,
+    "row": 21,
+    "rect": [
+      778,
+      1385,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/chart-pie.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Chart_Pie",
+    "column": 3,
+    "row": 22,
+    "rect": [
+      778,
+      1449,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/lock.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Lock",
+    "column": 3,
+    "row": 23,
+    "rect": [
+      778,
+      1512,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/interface/lock-open.png",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "label": "Lock_Open",
+    "column": 3,
+    "row": 24,
+    "rect": [
+      778,
+      1576,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      90,
+      292,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Remove",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      90,
+      355,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-event.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Event",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      90,
+      418,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/alarm.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Alarm",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      90,
+      482,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/timer-add.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Timer_Add",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      90,
+      546,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-check.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Check",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      444,
+      292,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-week.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Week",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      444,
+      355,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-days.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Days",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      444,
+      418,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/timer.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Timer",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      444,
+      482,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/timer-close.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Timer_Close",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      444,
+      546,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-add.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Add",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      798,
+      292,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/calendar-close.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Calendar_Close",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      798,
+      355,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/clock.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Clock",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      798,
+      418,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/calendar/timer-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "label": "Timer_Remove",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      798,
+      482,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/compass.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Compass",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      156,
+      274,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-03.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_03",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      156,
+      338,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-01.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_01",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      156,
+      402,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-check.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_Check",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      156,
+      465,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/building-03.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Building_03",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      156,
+      529,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/building-04.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Building_04",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      156,
+      592,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/globe.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Globe",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      510,
+      274,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_Remove",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      510,
+      338,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-02.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_02",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      510,
+      402,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/building-01.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Building_01",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      510,
+      465,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/flag.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Flag",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      510,
+      529,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/car-auto.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Car_Auto",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      510,
+      592,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/map-pin.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Map_Pin",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      864,
+      274,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-add.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_Add",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      864,
+      338,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/house-close.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "House_Close",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      864,
+      402,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/building-02.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Building_02",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      864,
+      465,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/navigation.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Navigation",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      864,
+      529,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/navigation/map.png",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "label": "Map",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      864,
+      592,
+      28,
+      28
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-to-queue.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_To_Queue",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      94,
+      254,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/layers.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Layers",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      94,
+      318,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/text-align-center.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Text_Align_Center",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      94,
+      382,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Remove",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      94,
+      445,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-unordered.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Unordered",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      94,
+      509,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/sort-descending.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Sort_Descending",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      94,
+      572,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/remove-minus-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Remove_Minus_Circle",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      94,
+      636,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-minus-square.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Minus_Square",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      94,
+      700,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/hide.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Hide",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      94,
+      763,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/move-horizontal.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Move_Horizontal",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      94,
+      827,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/paperclip-attachment-horizontal.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Paperclip_Attachment_Horizontal",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      94,
+      890,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      94,
+      954,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h3.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H3",
+    "column": 1,
+    "row": 13,
+    "rect": [
+      94,
+      1018,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h6.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H6",
+    "column": 1,
+    "row": 14,
+    "rect": [
+      94,
+      1081,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/text.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Text",
+    "column": 1,
+    "row": 15,
+    "rect": [
+      94,
+      1145,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/table.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Table",
+    "column": 1,
+    "row": 16,
+    "rect": [
+      94,
+      1208,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/combine-cells.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Combine_Cells",
+    "column": 1,
+    "row": 17,
+    "rect": [
+      94,
+      1272,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/double-quotes-r.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Double_Quotes_R",
+    "column": 1,
+    "row": 18,
+    "rect": [
+      94,
+      1336,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/delete-column.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Delete_Column",
+    "column": 1,
+    "row": 19,
+    "rect": [
+      94,
+      1399,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/single-quotes-l.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Single_Quotes_L",
+    "column": 1,
+    "row": 20,
+    "rect": [
+      94,
+      1463,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/copy.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Copy",
+    "column": 1,
+    "row": 21,
+    "rect": [
+      94,
+      1526,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/columns.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Columns",
+    "column": 1,
+    "row": 22,
+    "rect": [
+      94,
+      1590,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/edit-pencil-01.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Edit_Pencil_01",
+    "column": 1,
+    "row": 23,
+    "rect": [
+      94,
+      1653,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/path.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Path",
+    "column": 1,
+    "row": 24,
+    "rect": [
+      94,
+      1717,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/select-multiple.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Select_Multiple",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      448,
+      254,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/text-align-left.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Text_Align_Left",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      448,
+      318,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/text-align-justify.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Text_Align_Justify",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      448,
+      382,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-ordered.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Ordered",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      448,
+      445,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-checklist.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Checklist",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      448,
+      509,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/remove-minus.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Remove_Minus",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      448,
+      572,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-plus-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Plus_Circle",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      448,
+      636,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-plus-square.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Plus_Square",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      448,
+      700,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/show.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Show",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      448,
+      763,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/move-vertical.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Move_Vertical",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      448,
+      827,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/paperclip-attachment-tilt.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Paperclip_Attachment_Tilt",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      448,
+      890,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h1.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H1",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      448,
+      954,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h4.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H4",
+    "column": 2,
+    "row": 13,
+    "rect": [
+      448,
+      1018,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/font.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Font",
+    "column": 2,
+    "row": 14,
+    "rect": [
+      448,
+      1081,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/redo.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Redo",
+    "column": 2,
+    "row": 15,
+    "rect": [
+      448,
+      1145,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/table-add.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Table_Add",
+    "column": 2,
+    "row": 16,
+    "rect": [
+      448,
+      1208,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/bold.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Bold",
+    "column": 2,
+    "row": 17,
+    "rect": [
+      448,
+      1272,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/double-quotes-l.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Double_Quotes_L",
+    "column": 2,
+    "row": 18,
+    "rect": [
+      448,
+      1336,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-row.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Row",
+    "column": 2,
+    "row": 19,
+    "rect": [
+      448,
+      1399,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/single-quotes-r.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Single_Quotes_R",
+    "column": 2,
+    "row": 20,
+    "rect": [
+      448,
+      1463,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/italic.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Italic",
+    "column": 2,
+    "row": 21,
+    "rect": [
+      448,
+      1526,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/ruler.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Ruler",
+    "column": 2,
+    "row": 22,
+    "rect": [
+      448,
+      1590,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/edit-pencil-02.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Edit_Pencil_02",
+    "column": 2,
+    "row": 23,
+    "rect": [
+      448,
+      1653,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/swatches-palette.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Swatches_Palette",
+    "column": 2,
+    "row": 24,
+    "rect": [
+      448,
+      1717,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/layer.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Layer",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      802,
+      254,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/text-align-right.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Text_Align_Right",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      802,
+      318,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-check.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Check",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      802,
+      382,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/list-add.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "List_Add",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      802,
+      445,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/sort-ascending.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Sort_Ascending",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      802,
+      509,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-plus.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Plus",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      802,
+      572,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/close-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Close_Circle",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      802,
+      636,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/close-square.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Close_Square",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      802,
+      700,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/move.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Move",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      802,
+      763,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/mention.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Mention",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      802,
+      827,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/figma.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Figma",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      802,
+      890,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h2.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H2",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      802,
+      954,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/heading-h5.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Heading_H5",
+    "column": 3,
+    "row": 13,
+    "rect": [
+      802,
+      1018,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/strikethrough.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Strikethrough",
+    "column": 3,
+    "row": 14,
+    "rect": [
+      802,
+      1081,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/undo.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Undo",
+    "column": 3,
+    "row": 15,
+    "rect": [
+      802,
+      1145,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/table-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Table_Remove",
+    "column": 3,
+    "row": 16,
+    "rect": [
+      802,
+      1208,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/underline.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Underline",
+    "column": 3,
+    "row": 17,
+    "rect": [
+      802,
+      1272,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/delete-row.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Delete_Row",
+    "column": 3,
+    "row": 18,
+    "rect": [
+      802,
+      1336,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/add-column.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Add_Column",
+    "column": 3,
+    "row": 19,
+    "rect": [
+      802,
+      1399,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/paragraph.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Paragraph",
+    "column": 3,
+    "row": 20,
+    "rect": [
+      802,
+      1463,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/rows.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Rows",
+    "column": 3,
+    "row": 21,
+    "rect": [
+      802,
+      1526,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/edit-pencil-line-02.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Edit_Pencil_Line_02",
+    "column": 3,
+    "row": 22,
+    "rect": [
+      802,
+      1590,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/edit-pencil-line-01.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Edit_Pencil_Line_01",
+    "column": 3,
+    "row": 23,
+    "rect": [
+      802,
+      1653,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/edit/crop.png",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "label": "Crop",
+    "column": 3,
+    "row": 24,
+    "rect": [
+      802,
+      1717,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      98,
+      390,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle-dots.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle_Dots",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      98,
+      465,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      98,
+      540,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-dots.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Dots",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      98,
+      615,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-conversation-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Conversation_Circle",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      98,
+      690,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/phone.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Phone",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      98,
+      766,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/mail.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Mail",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      98,
+      841,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-ring.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Ring",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      98,
+      916,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Remove",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      98,
+      991,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle-close.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle_Close",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      518,
+      390,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle_Remove",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      518,
+      465,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-close.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Close",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      518,
+      540,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Remove",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      518,
+      615,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-conversation.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Conversation",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      518,
+      690,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/share-android.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Share_Android",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      518,
+      766,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/mail-open.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Mail_Open",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      518,
+      841,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      518,
+      916,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-add.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Add",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      518,
+      991,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle-check.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle_Check",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      936,
+      390,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-circle-add.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Circle_Add",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      936,
+      465,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-check.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Check",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      936,
+      540,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/chat-add.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Chat_Add",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      936,
+      615,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/paper-plane.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Paper_Plane",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      936,
+      690,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/share-ios-export.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Share_iOS_Export",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      936,
+      766,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-notification.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Notification",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      936,
+      841,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-off.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Off",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      936,
+      916,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/communication/bell-close.png",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "label": "Bell_Close",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      936,
+      991,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/puzzle.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Puzzle",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      74,
+      339,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/sun.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Sun",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      74,
+      414,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/bulb.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Bulb",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      74,
+      489,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/planet.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Planet",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      74,
+      564,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/leaf.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Leaf",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      74,
+      639,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/first-aid.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "First_Aid",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      492,
+      339,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/moon.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Moon",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      492,
+      414,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/cookie.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Cookie",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      492,
+      489,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/water-drop.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Water_Drop",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      492,
+      564,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/cupcake.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Cupcake",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      911,
+      339,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/rainbow.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Rainbow",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      911,
+      414,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/coffee-to-go.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Coffee_To_Go",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      911,
+      489,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/environment/coffee.png",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "label": "Coffee",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      911,
+      564,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/airplay.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Airplay",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      96,
+      268,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/skip-back.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Skip_Back",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      96,
+      343,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/play-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Play_Circle",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      96,
+      418,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/play.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Play",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      96,
+      493,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/rewind.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Rewind",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      96,
+      568,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/shuffle.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Shuffle",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      96,
+      644,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-minus.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Minus",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      96,
+      719,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-off-02.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Off_02",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      96,
+      794,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/chromecast.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Chromecast",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      514,
+      268,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/skip-forward.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Skip_Forward",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      514,
+      343,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/stop-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Stop_Circle",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      514,
+      418,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/pause.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Pause",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      514,
+      493,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/forward.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Forward",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      514,
+      568,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-max.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Max",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      514,
+      644,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-plus.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Plus",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      514,
+      719,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/pause-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Pause_Circle",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      933,
+      268,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/headphones.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Headphones",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      933,
+      343,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/stop.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Stop",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      933,
+      418,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/image-01.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Image_01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      933,
+      493,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/image-02.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Image_02",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      933,
+      568,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-min.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Min",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      933,
+      644,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/media/volume-off.png",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "label": "Volume_Off",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      933,
+      719,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/mobile-button.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Mobile_Button",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      28,
+      278,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/devices.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Devices",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      28,
+      353,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/monitor.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Monitor",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      28,
+      428,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      28,
+      503,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/desktop-tower.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Desktop_Tower",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      28,
+      578,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/bar-right.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Bar_Right",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      28,
+      653,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/save.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Save",
+    "column": 1,
+    "row": 7,
+    "rect": [
+      28,
+      728,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-medium.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_Medium",
+    "column": 1,
+    "row": 8,
+    "rect": [
+      28,
+      803,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-off.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_Off",
+    "column": 1,
+    "row": 9,
+    "rect": [
+      28,
+      878,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/keyboard.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Keyboard",
+    "column": 1,
+    "row": 10,
+    "rect": [
+      28,
+      953,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/data.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Data",
+    "column": 1,
+    "row": 11,
+    "rect": [
+      28,
+      1028,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window-terminal.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window_Terminal",
+    "column": 1,
+    "row": 12,
+    "rect": [
+      28,
+      1103,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/tablet.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Tablet",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      446,
+      278,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/laptop.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Laptop",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      446,
+      353,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/monitor-play.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Monitor_Play",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      446,
+      428,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window-check.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window_Check",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      446,
+      503,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/bar-bottom.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Bar_Bottom",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      446,
+      578,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window-sidebar.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window_Sidebar",
+    "column": 2,
+    "row": 6,
+    "rect": [
+      446,
+      653,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/qr-code.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Qr_Code",
+    "column": 2,
+    "row": 7,
+    "rect": [
+      446,
+      728,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-low.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_Low",
+    "column": 2,
+    "row": 8,
+    "rect": [
+      446,
+      803,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-problem.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_Problem",
+    "column": 2,
+    "row": 9,
+    "rect": [
+      446,
+      878,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/mouse.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Mouse",
+    "column": 2,
+    "row": 10,
+    "rect": [
+      446,
+      953,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/camera.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Camera",
+    "column": 2,
+    "row": 11,
+    "rect": [
+      446,
+      1028,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window-code-block.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window_Code_Block",
+    "column": 2,
+    "row": 12,
+    "rect": [
+      446,
+      1103,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/tablet-button.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Tablet_Button",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      865,
+      278,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/mobile.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Mobile",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      865,
+      353,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/desktop.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Desktop",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      865,
+      428,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/window-close.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Window_Close",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      865,
+      503,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/bar-left.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Bar_Left",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      865,
+      578,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/bar-top.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Bar_Top",
+    "column": 3,
+    "row": 6,
+    "rect": [
+      865,
+      653,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/cylinder.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Cylinder",
+    "column": 3,
+    "row": 7,
+    "rect": [
+      865,
+      728,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-none.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_None",
+    "column": 3,
+    "row": 8,
+    "rect": [
+      865,
+      803,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/wifi-high.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Wifi_High",
+    "column": 3,
+    "row": 9,
+    "rect": [
+      865,
+      878,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/printer.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Printer",
+    "column": 3,
+    "row": 10,
+    "rect": [
+      865,
+      953,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/moving-desk.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Moving_Desk",
+    "column": 3,
+    "row": 11,
+    "rect": [
+      865,
+      1028,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/system/terminal.png",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "label": "Terminal",
+    "column": 3,
+    "row": 12,
+    "rect": [
+      865,
+      1103,
+      34,
+      34
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-01.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_01",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      84,
+      310,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-02.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_02",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      84,
+      386,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/users.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "Users",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      84,
+      460,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-voice.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Voice",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      84,
+      536,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-card-id.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Card_ID",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      84,
+      610,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-add.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Add",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      504,
+      310,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-03.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_03",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      504,
+      386,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/users-group.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "Users_Group",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      504,
+      460,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-circle.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Circle",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      504,
+      536,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-close.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Close",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      922,
+      310,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-remove.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Remove",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      922,
+      386,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-check.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Check",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      922,
+      460,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/user/user-square.png",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "label": "User_Square",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      922,
+      536,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/wavy.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Wavy",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      74,
+      291,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/shield.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Shield",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      74,
+      366,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/octagon.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Octagon",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      494,
+      291,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/triangle.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Triangle",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      494,
+      366,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/circle.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Circle",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      912,
+      291,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/shape/square.png",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "label": "Square",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      912,
+      366,
+      32,
+      32
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/close-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Close_LG",
+    "column": 1,
+    "row": 1,
+    "rect": [
+      78,
+      292,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/hamburger-md.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Hamburger_MD",
+    "column": 1,
+    "row": 2,
+    "rect": [
+      78,
+      367,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-duo-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Duo_LG",
+    "column": 1,
+    "row": 3,
+    "rect": [
+      78,
+      442,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-alt-04.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Alt_04",
+    "column": 1,
+    "row": 4,
+    "rect": [
+      78,
+      517,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/more-horizontal.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "More_Horizontal",
+    "column": 1,
+    "row": 5,
+    "rect": [
+      78,
+      592,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/more-grid-big.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "More_Grid_Big",
+    "column": 1,
+    "row": 6,
+    "rect": [
+      78,
+      667,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/close-md.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Close_MD",
+    "column": 2,
+    "row": 1,
+    "rect": [
+      496,
+      292,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/hamburger-lg.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Hamburger_LG",
+    "column": 2,
+    "row": 2,
+    "rect": [
+      496,
+      367,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-alt-02.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Alt_02",
+    "column": 2,
+    "row": 3,
+    "rect": [
+      496,
+      442,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-alt-05.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Alt_05",
+    "column": 2,
+    "row": 4,
+    "rect": [
+      496,
+      517,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/more-vertical.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "More_Vertical",
+    "column": 2,
+    "row": 5,
+    "rect": [
+      496,
+      592,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/close-sm.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Close_SM",
+    "column": 3,
+    "row": 1,
+    "rect": [
+      916,
+      292,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-duo-md.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Duo_MD",
+    "column": 3,
+    "row": 2,
+    "rect": [
+      916,
+      367,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-alt-03.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Alt_03",
+    "column": 3,
+    "row": 3,
+    "rect": [
+      916,
+      442,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/menu-alt-01.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "Menu_Alt_01",
+    "column": 3,
+    "row": 4,
+    "rect": [
+      916,
+      517,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  },
+  {
+    "asset": "assets/icons/supplemental/menu/more-grid-small.png",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "label": "More_Grid_Small",
+    "column": 3,
+    "row": 5,
+    "rect": [
+      916,
+      592,
+      30,
+      30
+    ],
+    "background": [
+      31,
+      33,
+      38
+    ],
+    "max_composite_error": 1
+  }
+]

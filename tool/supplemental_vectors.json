@@ -1,0 +1,3791 @@
+[
+  {
+    "asset": "assets/icons/vectors/arrows/caret-down-md.svg",
+    "label": "Caret_Down_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-down-md.png",
+    "upstream": "coolicons.iconjar/icons/caret-down-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bed041f88ff34d8078daa25e5568d62decd62e2c99b1c23607db6b937c837873"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-up-md.svg",
+    "label": "Caret_Up_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-up-md.png",
+    "upstream": "coolicons.iconjar/icons/caret-up-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ec0ae9efef2211f645816ecabde9af80cb97277d5aa8a55ca3629ea1ff25b438"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-left-md.svg",
+    "label": "Chevron_Left_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-left-md.png",
+    "upstream": "coolicons.iconjar/icons/chevron-left-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0bcf3ce22933c5be58273dce52062228d90d21901e7f7a686d55a5eb9f8d57d1"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-right-md.svg",
+    "label": "Chevron_Right_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-right-md.png",
+    "upstream": "coolicons.iconjar/icons/chevron-right-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e3ab3cff6d97b9012af235f74f5e0ae9c4f780b6ce2130249748e739fbf1df05"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-down.svg",
+    "label": "Chevron_Down",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-down.png",
+    "upstream": "coolicons.iconjar/icons/chevron-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1d5da2c119e1f8a7bc0924d23c2ae970b5ee18357b924e0c32db97a9f5b73d0b"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-up.svg",
+    "label": "Chevron_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-up.png",
+    "upstream": "coolicons.iconjar/icons/chevron-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ff5a3017109bf5bb1d29c8b8e3e9a05684ed8024647c25670f2aefd8f458be14"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-left.svg",
+    "label": "Chevron_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-left.png",
+    "upstream": "coolicons.iconjar/icons/chevron-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cf1f9fdec64693147d6cf91fc2638af98b7eed584853fbc33fc983fbc34c817c"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-right.svg",
+    "label": "Chevron_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-right.png",
+    "upstream": "coolicons.iconjar/icons/chevron-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3a739f4f9b5de53425e9f0bd759409ea967fde877ab069444d271790f44bcca4"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-down-sm.svg",
+    "label": "Caret_Down_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-down-sm.png",
+    "upstream": "coolicons.iconjar/icons/caret-down-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "46a2bc7599b59202da81b757bd4e908db4bd8325948a71f2c185a187a5e7b3fe"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-up-sm.svg",
+    "label": "Caret_Up_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-up-sm.png",
+    "upstream": "coolicons.iconjar/icons/caret-up-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "80660fe93292a744232961906d0743c60afe682de3b95c9a2aeebac056f8a205"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-left-sm.svg",
+    "label": "Caret_Left_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-left-sm.png",
+    "upstream": "coolicons.iconjar/icons/caret-left-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "74040aef998ab697d6aba0c917fe92a1473de7af2b276dba7d51136bfce9432c"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-right-sm.svg",
+    "label": "Caret_Right_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-right-sm.png",
+    "upstream": "coolicons.iconjar/icons/caret-right-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "389a3c4b8ca472b72d0b866e710c81f0e373829a8b485f3cea3d8affa567b55d"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-lg.svg",
+    "label": "Arrow_Down_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "25b86d5ca742acd5d89d9770e0defd92be69d785c030bf1433b78fd0b0e2b075"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-lg.svg",
+    "label": "Arrow_Up_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f77f70f8da18d5cda79b518bab7bb9ce03b29f9a974efc39d5fde3d696f529d9"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-left-lg.svg",
+    "label": "Arrow_Left_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-left-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-left-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "086eb206df51101fdd1dee8262cf3ae6ccda2e05a5d314e2509614a975b3e6d9"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-right-lg.svg",
+    "label": "Arrow_Right_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-right-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-right-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "454c9844848e0929af8e9602a4f8d0f9baadbfe0a3f69c72536ab3d5f28a713f"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-left-lg.svg",
+    "label": "Arrow_Down_Left_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-left-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-left-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3e345479e373c18528fae3bf15c2e34b2ce66f5feeb80d2184e32b2a1e7f3b10"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-left-lg.svg",
+    "label": "Arrow_Up_Left_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-left-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-left-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "eae4296105528f7f50e1c6142c04eeb897789c1cc1be9a1245c190785103bd61"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-right-lg.svg",
+    "label": "Arrow_Up_Right_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-right-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-right-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "810f1006c0be8f06c08710bee3ca26cd0edda152df786f7ddb0c508d46a88e0e"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-right-lg.svg",
+    "label": "Arrow_Down_Right_LG",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-right-lg.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-right-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "eaec6a9e3237db60194fd7cd48772c1fb6b36efba7ec51bd802a24902378cad3"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrows-reload-01.svg",
+    "label": "Arrows_Reload_01",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrows-reload-01.png",
+    "upstream": "coolicons.iconjar/icons/arrows-reload-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4ad4597fe6e9d52a233a0b331fedab01aa5f5be1f7ba16c82abe5568cca417bc"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-reload-02.svg",
+    "label": "Arrow_Reload_02",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-reload-02.png",
+    "upstream": "coolicons.iconjar/icons/arrow-reload-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a5533cd89840311291e48512d70c6a8247da70bc28b8ea6691995ae276d50231"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-left-right.svg",
+    "label": "Arrow_Left_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-left-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-left-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a6350780105980ab7f487b7518af0c860406675ea1155d047a75d6118118b444"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-up.svg",
+    "label": "Arrow_Down_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-up.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "77694d2c826d7f8e4af4f05062131f630b41207b5c3366a641d9766bd01257d1"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-circle-down.svg",
+    "label": "Caret_Circle_Down",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-circle-down.png",
+    "upstream": "coolicons.iconjar/icons/caret-circle-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8cd6670dfef73ed18fcd5910b6e79c56a842769b264255ff82338b1eece37e82"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-circle-up.svg",
+    "label": "Caret_Circle_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-circle-up.png",
+    "upstream": "coolicons.iconjar/icons/caret-circle-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b5e39dcaeadb04f5a04b20ff07b930c4678319db56e416266be1c204e136682a"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-circle-left.svg",
+    "label": "Caret_Circle_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-circle-left.png",
+    "upstream": "coolicons.iconjar/icons/caret-circle-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "90d17151a373f8aaecbbefed910ec17570f879641fef7b987cca4fc6705f71b7"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/caret-circle-right.svg",
+    "label": "Caret_Circle_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/caret-circle-right.png",
+    "upstream": "coolicons.iconjar/icons/caret-circle-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "aac2e5ce05d8b2dc639d207c3a17db11b9191968808850f513ea7d3b9881c1a9"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-down.svg",
+    "label": "Arrow_Circle_Down",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-down.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "81537ad7f08d3dc6d8ea416b9e12106fb4f98c7ffd7bcc82f349dcee40aad3d6"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-up.svg",
+    "label": "Arrow_Circle_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-up.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1feec6b859412db490d9386eb2f9849651dbef1e37d0ff42c1ba2a0b5c7d4f8d"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-left.svg",
+    "label": "Arrow_Circle_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "242486017b50e686758edb297b2484d95376dcf40e9b0e05cddeeeaaa770c38c"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-right.svg",
+    "label": "Arrow_Circle_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "652a7fec6cb025424eb46adcf7c20ed72629116c3c20f43a5900861b5bf89c13"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-down-left.svg",
+    "label": "Arrow_Circle_Down_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-down-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-down-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7d7b615f587b3a3b1cc0808ae7c2688ad5f1a6efae4e7cd00811e178df9d7506"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-up-left.svg",
+    "label": "Arrow_Circle_Up_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-up-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-up-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7c56799a3e462472359230a8a085842dc97afe9f538e89e37791a817691e4211"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-down-right.svg",
+    "label": "Arrow_Circle_Down_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-down-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-down-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bc38a5c0f99fba50b2902c3966ed1977949ee0c7553a23967f0a7e0ee36e8e2f"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-circle-up-right.svg",
+    "label": "Arrow_Circle_Up_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-circle-up-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-circle-up-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cf2364887421f749dd7715b4c8fc7d58450de179651c5d21a9fc482880974087"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-md.svg",
+    "label": "Arrow_Down_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ac6ab089f05e6ae54e69a4335b097ed2cab46294c0487d086779cfaaeb0a8963"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-md.svg",
+    "label": "Arrow_Up_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2bd78457f01131728b1fe0cac50a551fade50377416f9d890404ab07dcc1a1da"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-left-md.svg",
+    "label": "Arrow_Left_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-left-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-left-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4fa8865caa3a96e0db0dcc41233dc6644cc51486e32f51dcb3ce965a8ac1c31e"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-right-md.svg",
+    "label": "Arrow_Right_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-right-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-right-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b67e70c3d1f46e75554257ac9b1dcedbcc139f5d753ff552261b6744c838ec49"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-left-md.svg",
+    "label": "Arrow_Down_Left_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-left-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-left-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "06f6273d9aa9efdc8a48cb2c4d4ddfdbcdeb3c6a81757640f1aa96c7191a1c85"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-left-md.svg",
+    "label": "Arrow_Up_Left_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-left-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-left-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e72f6162cc51ddf3d749acbd643c680c75fb53ffbab84b3172c7f5418670c1e2"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-right-md.svg",
+    "label": "Arrow_Up_Right_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-right-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-right-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1c66aa8e671f3b60cad406ad2bd54df10cd01d9cfd09db33ff581178bc770976"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-right-md.svg",
+    "label": "Arrow_Down_Right_MD",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-right-md.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-right-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "39e7bd8b5fdf14ad6e79e255d5d1af3820e31f67b20e24d0a3281ab15b971d3c"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/shrink.svg",
+    "label": "Shrink",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/shrink.png",
+    "upstream": "coolicons.iconjar/icons/shrink.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "13146b94fa3ecfad409ab9dbe28155ad75e320260586f5a553a2ab5536596977"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/expand.svg",
+    "label": "Expand",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/expand.png",
+    "upstream": "coolicons.iconjar/icons/expand.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d8acd3dc3316a1f426697037fd98f8bc7b507d0c8e09366a56c303fd7072fe2b"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/unfold-less.svg",
+    "label": "Unfold_Less",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/unfold-less.png",
+    "upstream": "coolicons.iconjar/icons/unfold-less.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "54a8a36ff9c9ed36632b1ae8113189267ae5321c162226ba3b1f667ddf7ffa69"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/unfold-more.svg",
+    "label": "Unfold_More",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/unfold-more.png",
+    "upstream": "coolicons.iconjar/icons/unfold-more.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b0b86b0f2e6086d8594fdf9d09435df8522d213944d55037342757bf4e7a018d"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-right-down.svg",
+    "label": "Arrow_Sub_Right_Down",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-right-down.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-right-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "57a312a4c0d6e73b7305404e9ed751cbb236e645c6484c6df702e566fc3997f2"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-right-up.svg",
+    "label": "Arrow_Sub_Right_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-right-up.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-right-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5b72b290b818bc3591d6de679045367395ee1efefcd41ca4d7d093d02b19e8d3"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-left-down.svg",
+    "label": "Arrow_Sub_Left_Down",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-left-down.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-left-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "34257fb4faf831e10d7fe78c13b38e4c31d2f43dad5b15157fea38820f598618"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-left-up.svg",
+    "label": "Arrow_Sub_Left_Up",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-left-up.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-left-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c44dacaa4ea25875895fb507af9c5b90149a2e770fce8ed0827f15ca2e6a4ed6"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-down-right.svg",
+    "label": "Arrow_Sub_Down_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-down-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-down-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a6b92e36297150a344898fc01d33229392931b0cecfffd00855d7a2ad69da03b"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-up-right.svg",
+    "label": "Arrow_Sub_Up_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-up-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-up-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1793ba75a9fcf9d46c285aa73ca7fb99f6d5b8c1bd964169a7322d3ae3d9d006"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-down-left.svg",
+    "label": "Arrow_Sub_Down_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-down-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-down-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e236cefdcbf7bed568dfc8f6ac8fc0bd7835455b3db51608406c10a9b6d78f0e"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-sub-up-left.svg",
+    "label": "Arrow_Sub_Up_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-sub-up-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-sub-up-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ff3c3dc17af033e5c9ab06bcbf60a4ca99e14b460927b74b089a0b0de2046ef7"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-undo-up-left.svg",
+    "label": "Arrow_Undo_Up_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-undo-up-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-undo-up-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "03f54abb75f097d717ebd6db82130a07344d9f98c8d4d1553ef2f2fedcc7deb8"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-undo-up-right.svg",
+    "label": "Arrow_Undo_Up_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-undo-up-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-undo-up-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "36c64c987256f21fefc00c22ad6f2453e836bb2934c63b9b9c95631e76a24860"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-undo-down-left.svg",
+    "label": "Arrow_Undo_Down_Left",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-undo-down-left.png",
+    "upstream": "coolicons.iconjar/icons/arrow-undo-down-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c78ef950c750826de38d73ac4812a09de48a03033135410ae65aff2d1e92c900"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-undo-down-right.svg",
+    "label": "Arrow_Undo_Down_Right",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-undo-down-right.png",
+    "upstream": "coolicons.iconjar/icons/arrow-undo-down-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2304b8a5354acc6bedf2c1a05908cdb13f82e6121d3fb0389c710546982e753b"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-sm.svg",
+    "label": "Arrow_Down_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "71b22a69f8ec88473e7501b5d2d443006adef0d2b46fcd95fa8a1b8f8d160d85"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-sm.svg",
+    "label": "Arrow_Up_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "05db0ee00e45557811ac805a9d0af28caccc7f85e672bb76208b4b3abc6ad48b"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-left-sm.svg",
+    "label": "Arrow_Left_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-left-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-left-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fdf8f6d68fb7490b1c6c5b0234c8eef19140fcae279b20f2a487e92ecec243eb"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-right-sm.svg",
+    "label": "Arrow_Right_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-right-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-right-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1c80055c30a11cf59272e99141279e522b1f76516e3b772d58a9aad58d3c8f85"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-left-sm.svg",
+    "label": "Arrow_Down_Left_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-left-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-left-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f590a1cc059706ba980f512df963a0d8e1978a7614e480e90ad150e18747eb09"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-left-sm.svg",
+    "label": "Arrow_Up_Left_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-left-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-left-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c88f8a8e4f309f5310eb7ad56e9e5f5a7f85a8702b29e707bb870f181ddabcae"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-up-right-sm.svg",
+    "label": "Arrow_Up_Right_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-up-right-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-up-right-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2a6431a25ab1c6d1450c4351206d688099f69db05d332468fcd350aa7a01344c"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/arrow-down-right-sm.svg",
+    "label": "Arrow_Down_Right_SM",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/arrow-down-right-sm.png",
+    "upstream": "coolicons.iconjar/icons/arrow-down-right-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a0d1e79ccb0bd285f5e0a6cde37e6bb2025451438325024c4abcf6d2d34d2a93"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-down-duo.svg",
+    "label": "Chevron_Down_Duo",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-down-duo.png",
+    "upstream": "coolicons.iconjar/icons/chevron-down-duo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fd16276c6224b2eed1bbe5e630baf11eeaa15c598e0b19c6956667231f8f40ec"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-up-duo.svg",
+    "label": "Chevron_Up_Duo",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-up-duo.png",
+    "upstream": "coolicons.iconjar/icons/chevron-up-duo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "566e8aa5ac898ded985221fc24af68d327ff0fa18f479a7e81f5a8e6df286c2e"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-left-duo.svg",
+    "label": "Chevron_Left_Duo",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-left-duo.png",
+    "upstream": "coolicons.iconjar/icons/chevron-left-duo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d40dbd69319c2078c0677672ba29f8e79fe2f16c0427e65417167f283d0f4bfb"
+  },
+  {
+    "asset": "assets/icons/vectors/arrows/chevron-right-duo.svg",
+    "label": "Chevron_Right_Duo",
+    "source": "assets/icons/supplemental/source_sheets/arrows.png",
+    "reference_crop": "assets/icons/supplemental/arrows/chevron-right-duo.png",
+    "upstream": "coolicons.iconjar/icons/chevron-right-duo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2cdbd3038a2d01b08366742d239bde27b0f5cfd1ba8720410d344322d979641c"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud.svg",
+    "label": "Cloud",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud.png",
+    "upstream": "coolicons.iconjar/icons/cloud.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0e0f7995a26ed4e277a690ee426e9d35ea39d405d4c5dc2bfb747c3faf9dd349"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-close.svg",
+    "label": "Cloud_Close",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-close.png",
+    "upstream": "coolicons.iconjar/icons/cloud-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a3ada7bbef4a1edf8322b8c303ee29b60c53bd41521b82a4caf4762792afc31f"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-remove.svg",
+    "label": "Cloud_Remove",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-remove.png",
+    "upstream": "coolicons.iconjar/icons/cloud-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "18ccb77c0529709a356b8b561565aeeaf44599c0fbeca276d62fbb6eb6af0bff"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-check.svg",
+    "label": "File_Check",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-check.png",
+    "upstream": "coolicons.iconjar/icons/file-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8c42334f81e42e6505cc9c9580ec2f4a80be8076c9695b07075094ff1fb45473"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-upload.svg",
+    "label": "File_Upload",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-upload.png",
+    "upstream": "coolicons.iconjar/icons/file-upload.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b9ec5545fe9637d50abab3768505420767ac6442c40d82cd14c78a2bc019413f"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-code.svg",
+    "label": "File_Code",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-code.png",
+    "upstream": "coolicons.iconjar/icons/file-code.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2d9c0b3a913a6088e7e3f39e8b2b0322ddb0b0647d85fcc95b103815c8cc03d3"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-edit.svg",
+    "label": "File_Edit",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-edit.png",
+    "upstream": "coolicons.iconjar/icons/file-edit.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c6d4ccff48239a588904cfd55fc385eaab07f52d8652400dbe8c303bccbab458"
+  },
+  {
+    "asset": "assets/icons/vectors/files/note-search.svg",
+    "label": "Note_Search",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/note-search.png",
+    "upstream": "coolicons.iconjar/icons/note-search.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "503ff95aa645260726d822a71cac0a323601057637f3a004fcb1ccec2f7314fe"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder.svg",
+    "label": "Folder",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder.png",
+    "upstream": "coolicons.iconjar/icons/folder.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9c7b972171775d1d9f1ca665f97d4131d07eb85ffa0a1945bf355a3ae3333138"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-close.svg",
+    "label": "Folder_Close",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-close.png",
+    "upstream": "coolicons.iconjar/icons/folder-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c1eb30bf193cfd5683dc92cbc543ef817deef37338e869337808758f1c21fd20"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-remove.svg",
+    "label": "Folder_Remove",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-remove.png",
+    "upstream": "coolicons.iconjar/icons/folder-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1c96cf12f2e175804ac57c9c5f435ade2b66b55c40266f83717e13947123208c"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-document.svg",
+    "label": "Folder_Document",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-document.png",
+    "upstream": "coolicons.iconjar/icons/folder-document.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b432eb0c17b6cdf93048631eac2385496cab8be94d87f6c93ae729f65cc35aff"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folders.svg",
+    "label": "Folders",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folders.png",
+    "upstream": "coolicons.iconjar/icons/folders.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7ef1a69ea6b8caf882b092172ddebaf0debb1cd7f8671e83266d30c3c2fd70bf"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-off.svg",
+    "label": "Cloud_Off",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-off.png",
+    "upstream": "coolicons.iconjar/icons/cloud-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e24bb89012542b930d378f446ce213090e2dbe70e271aa4130748d9fdf446553"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-download.svg",
+    "label": "Cloud_Download",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-download.png",
+    "upstream": "coolicons.iconjar/icons/cloud-download.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3c8ec79e2694cf884677bb6c92f27facfb5fd17e70b4970717341778ab670ad7"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-add.svg",
+    "label": "Cloud_Add",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-add.png",
+    "upstream": "coolicons.iconjar/icons/cloud-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d2640b64be1e403bf3f4a3f77c0dedbfdfcb60c6d67101c04e7838a15bf74850"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-close.svg",
+    "label": "File_Close",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-close.png",
+    "upstream": "coolicons.iconjar/icons/file-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f21c9677b814e02d9b8150301dd189ab06c9dea02a354e8d2cefaf1a59391a44"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-remove.svg",
+    "label": "File_Remove",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-remove.png",
+    "upstream": "coolicons.iconjar/icons/file-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2cd0016aa678cc8d8720edf399338b1c1ac1c8d6ac035fdf600611209e17863f"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-document.svg",
+    "label": "File_Document",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-document.png",
+    "upstream": "coolicons.iconjar/icons/file-document.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d52527e9a18eec0d533799a9f35c0414a698ca574300230bcf8efc3b92dd8a23"
+  },
+  {
+    "asset": "assets/icons/vectors/files/files.svg",
+    "label": "Files",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/files.png",
+    "upstream": "coolicons.iconjar/icons/files.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "40a2ba7ef5365519fdebec8ffc675005aa96ee5e7b69dfc01b12909c8117682e"
+  },
+  {
+    "asset": "assets/icons/vectors/files/notebook.svg",
+    "label": "Notebook",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/notebook.png",
+    "upstream": "coolicons.iconjar/icons/notebook.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9137e12a87b1cc4962851710109df286cf919d6ebdaf15627c0e7993400e859e"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-open.svg",
+    "label": "Folder_Open",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-open.png",
+    "upstream": "coolicons.iconjar/icons/folder-open.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "41d1c3ea5f8cb7c18b40b9246775dfb9f18c6e1b37e9a68ff3c2f21e58eecebb"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-download.svg",
+    "label": "Folder_Download",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-download.png",
+    "upstream": "coolicons.iconjar/icons/folder-download.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cbba3c1ebf6ff6eb337d5347c71f877bcef784693066ba4cf3d5d752faa12cf9"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-add.svg",
+    "label": "Folder_Add",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-add.png",
+    "upstream": "coolicons.iconjar/icons/folder-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "670a43aafe301eb4553b0f8562d1da31a375e436c2260be28a6bda55630689c4"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-search.svg",
+    "label": "Folder_Search",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-search.png",
+    "upstream": "coolicons.iconjar/icons/folder-search.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "22d48f5d9127d2a80e74e3651886ef24362bd37efdbaa603d051d7c4367fc186"
+  },
+  {
+    "asset": "assets/icons/vectors/files/archive.svg",
+    "label": "Archive",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/archive.png",
+    "upstream": "coolicons.iconjar/icons/archive.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8e4acb2c34cd66c114ded34cd39fbe7904a982c083417d4961e28ac50a54d305"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-check.svg",
+    "label": "Cloud_Check",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-check.png",
+    "upstream": "coolicons.iconjar/icons/cloud-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0fa0b10782a79225abf8cc2d586751e50cf61ec3d33112ccf79c7694700f7832"
+  },
+  {
+    "asset": "assets/icons/vectors/files/cloud-upload.svg",
+    "label": "Cloud_Upload",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/cloud-upload.png",
+    "upstream": "coolicons.iconjar/icons/cloud-upload.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6bb972107a80bbaa0fb233fe2ef67ab3bdbc323dacc8a1c69130e8d73d7e9070"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-blank.svg",
+    "label": "File_Blank",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-blank.png",
+    "upstream": "coolicons.iconjar/icons/file-blank.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "57055031fa1969d63c290b4161ca61b6a7368c3a24e33094ae2ce874d9f4a3ec"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-download.svg",
+    "label": "File_Download",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-download.png",
+    "upstream": "coolicons.iconjar/icons/file-download.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "54a25a70b0f189b9ebe4b5b3ec6de7c35dd46b07f1828eb42856bb678805571f"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-add.svg",
+    "label": "File_Add",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-add.png",
+    "upstream": "coolicons.iconjar/icons/file-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "07af3c3dabe636a37e9faddb010f07053c3aaa26ee2f8c5d892785187a265da7"
+  },
+  {
+    "asset": "assets/icons/vectors/files/file-search.svg",
+    "label": "File_Search",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/file-search.png",
+    "upstream": "coolicons.iconjar/icons/file-search.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1975a5a8a092f768336c8649388e307bf2b6e0a28a133ab1de1a5632ebd9e833"
+  },
+  {
+    "asset": "assets/icons/vectors/files/note-edit.svg",
+    "label": "Note_Edit",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/note-edit.png",
+    "upstream": "coolicons.iconjar/icons/note-edit.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7388a9a4649492ba61a747478e42bd0f8247c7517d6178511eba2b1eb90a7fb6"
+  },
+  {
+    "asset": "assets/icons/vectors/files/note.svg",
+    "label": "Note",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/note.png",
+    "upstream": "coolicons.iconjar/icons/note.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c1f2b8f51a1dfbede293ce58012e5c350e81055d0604116e13b33ffab56d1627"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-check.svg",
+    "label": "Folder_Check",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-check.png",
+    "upstream": "coolicons.iconjar/icons/folder-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "aa7201266d15240e51d7d02f37d58c881ddf1e661121023cf80f384ce1de2304"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-upload.svg",
+    "label": "Folder_Upload",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-upload.png",
+    "upstream": "coolicons.iconjar/icons/folder-upload.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8137ba7fe53b72e0668f9cba2d32a5855ae3072b9bee00d225c312dbaea8fafc"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-code.svg",
+    "label": "Folder_Code",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-code.png",
+    "upstream": "coolicons.iconjar/icons/folder-code.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "409d6350ae641866d43315b0d29faa12605d8c28ce85660e1baa6d4b4596ac8a"
+  },
+  {
+    "asset": "assets/icons/vectors/files/folder-edit.svg",
+    "label": "Folder_Edit",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/folder-edit.png",
+    "upstream": "coolicons.iconjar/icons/folder-edit.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3d76e7866ca982ef73518e02d93f41601ffa05523d7bacd5e0565f7a619fed81"
+  },
+  {
+    "asset": "assets/icons/vectors/files/download-package.svg",
+    "label": "Download_Package",
+    "source": "assets/icons/supplemental/source_sheets/files.png",
+    "reference_crop": "assets/icons/supplemental/files/download-package.png",
+    "upstream": "coolicons.iconjar/icons/download-package.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3625e27411333cf3fa94b4ead9fd255bcfce7f3a8c1b5ddd22f790f626e4b372"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/external-link.svg",
+    "label": "External_Link",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/external-link.png",
+    "upstream": "coolicons.iconjar/icons/external-link.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fe4dc114a93e11c88f7630e67035b0434cfc9abd3dcb9607b411749ad27f12f1"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/check.svg",
+    "label": "Check",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/check.png",
+    "upstream": "coolicons.iconjar/icons/check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "34c4f4be1c640f01ea931c7d14e92170c5de0e3b6724953d82e937f007e48062"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/check-all-big.svg",
+    "label": "Check_All_Big",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/check-all-big.png",
+    "upstream": "coolicons.iconjar/icons/check-all-big.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "18f712d646be460f1cb2eea7025dc3dfe82b3bbe8fc41a71b2a46b0e5c959280"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/link-break.svg",
+    "label": "Link_Break",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/link-break.png",
+    "upstream": "coolicons.iconjar/icons/link-break.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a70d8df66f63ad6564ec9c9107d89c5821168e33d8aa682eb0b00dcd9f390925"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/log-out.svg",
+    "label": "Log_Out",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/log-out.png",
+    "upstream": "coolicons.iconjar/icons/log-out.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a090bcd2bc9a00c0c6e5256938a79bdb0cf62978f250751adc8e9db6a4ba3c4b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/settings-future.svg",
+    "label": "Settings_Future",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/settings-future.png",
+    "upstream": "coolicons.iconjar/icons/settings-future.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cb18bd130b84c85630120547b50bbfcb9807ab945ff2a6d588a173787ad5c051"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/slider-01.svg",
+    "label": "Slider_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/slider-01.png",
+    "upstream": "coolicons.iconjar/icons/slider-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b979a340f482dabccd8ed4865dcf7dbcdcc888af6821c571d96ba05fc252fb4e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/radio-unchecked.svg",
+    "label": "Radio_Unchecked",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/radio-unchecked.png",
+    "upstream": "coolicons.iconjar/icons/radio-unchecked.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "dd214710122f714d29266434158eef14af07a8ea68ba5da2bd66555e91eb75fe"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/drag-vertical.svg",
+    "label": "Drag_Vertical",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/drag-vertical.png",
+    "upstream": "coolicons.iconjar/icons/drag-vertical.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "10efb13c0c9ff70daf7e86bd387cf76452fa1253b81f7d9bb206c56168464270"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/option.svg",
+    "label": "Option",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/option.png",
+    "upstream": "coolicons.iconjar/icons/option.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c01be327885cad2e21a6127cb9d553865d5bef15886b08e9429f3ffc51a0abfa"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/dummy-square.svg",
+    "label": "Dummy_Square",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/dummy-square.png",
+    "upstream": "coolicons.iconjar/icons/dummy-square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2ae720404b7c32ad817b1d689af18fb0316f305a398b848e94023a740d25e39b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/dummy-circle-small.svg",
+    "label": "Dummy_Circle_Small",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/dummy-circle-small.png",
+    "upstream": "coolicons.iconjar/icons/dummy-circle-small.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0cb0d824886a3c48992a92a7a8aac668068245bd36272375c690b98717deb339"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/chart-bar-vertical-01.svg",
+    "label": "Chart_Bar_Vertical_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/chart-bar-vertical-01.png",
+    "upstream": "coolicons.iconjar/icons/chart-bar-vertical-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "87b9f7773e3906257af71e801cd3fa05a1007d90da64e07e472dcd810709809b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/handbag.svg",
+    "label": "Handbag",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/handbag.png",
+    "upstream": "coolicons.iconjar/icons/handbag.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b0589fb4cf7e6203bf91a4f22e4c3dc208abd1b50d115223b19c29010ee10054"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/instance.svg",
+    "label": "Instance",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/instance.png",
+    "upstream": "coolicons.iconjar/icons/instance.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "46d22d13cb14e84af68e385298dfea8fda03f1d9baf520a43a7d869606e4b48e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/checkbox-fill.svg",
+    "label": "Checkbox_Fill",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/checkbox-fill.png",
+    "upstream": "coolicons.iconjar/icons/checkbox-fill.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "474899ca049e4b060062d2b4591bbcdde06c11b9a457b890092b8936eb777f14"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/credit-card-01.svg",
+    "label": "Credit_Card_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/credit-card-01.png",
+    "upstream": "coolicons.iconjar/icons/credit-card-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d51a780c2a0ce550830635edecac45c9e23bc3c19caf53ed2001cc7d34cdfe74"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/line-xl.svg",
+    "label": "Line_Xl",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/line-xl.png",
+    "upstream": "coolicons.iconjar/icons/line-xl.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4811f79533b030872848279e7cc9b398bc8c569198f403979e074b0eac2161f3"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/line-s.svg",
+    "label": "Line_S",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/line-s.png",
+    "upstream": "coolicons.iconjar/icons/line-s.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "876d3e66f05be9d75aafe14c0c3beda294b5b29c53a7f3fe00795cd79a975d3c"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/bookmark.svg",
+    "label": "Bookmark",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/bookmark.png",
+    "upstream": "coolicons.iconjar/icons/bookmark.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e26576ba85ea8d4e004a42add55a91fbe79927bf378b65209a23d884a4260174"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/magnifying-glass-plus.svg",
+    "label": "Magnifying_Glass_Plus",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/magnifying-glass-plus.png",
+    "upstream": "coolicons.iconjar/icons/magnifying-glass-plus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4bc87eaf0502bb5dcf3a261eb14753be72108c96f378ce96eaa30f9d4b59257f"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/book.svg",
+    "label": "Book",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/book.png",
+    "upstream": "coolicons.iconjar/icons/book.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b837d57d2c322a47b98b67348e225fd3677db048fbeaa7146a91e7dd14241b40"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/trending-down.svg",
+    "label": "Trending_Down",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/trending-down.png",
+    "upstream": "coolicons.iconjar/icons/trending-down.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "893fd358acdffa1deea2d1b14c6550f8c4ddbbedd6cb66ed79850cc85ac8ccd2"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/shopping-cart-01.svg",
+    "label": "Shopping_Cart_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/shopping-cart-01.png",
+    "upstream": "coolicons.iconjar/icons/shopping-cart-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "110f4d2cd170239843fc25d74c97efbbbd53da60be4909297de49fec53d8c27c"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/main-component.svg",
+    "label": "Main_Component",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/main-component.png",
+    "upstream": "coolicons.iconjar/icons/main-component.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "20a32b512d0cac3505912453af821eed7324b46da65d0d1f8a8cd66f0b5ce4ab"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/link-horizontal-off.svg",
+    "label": "Link_Horizontal_Off",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/link-horizontal-off.png",
+    "upstream": "coolicons.iconjar/icons/link-horizontal-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4caee8bfad653be21dd1f150618ed3a34513fc4c20e0987b1cffee5cd8a09e16"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/check-all.svg",
+    "label": "Check_All",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/check-all.png",
+    "upstream": "coolicons.iconjar/icons/check-all.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c376085fbd2fac12ace6a1193d59da4cd3bac3cd428f0e4fe32ae07cbc145075"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/link.svg",
+    "label": "Link",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/link.png",
+    "upstream": "coolicons.iconjar/icons/link.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1cb4008ea0b6a0dd3b6e0f5b6110e6b4983393ef323edc59049fcb8b1e753020"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/download.svg",
+    "label": "Download",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/download.png",
+    "upstream": "coolicons.iconjar/icons/download.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6638a45c6d05a0fcd83aa487201fb8eb6b8f466d4efbb4326e53526717a343af"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/exit.svg",
+    "label": "Exit",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/exit.png",
+    "upstream": "coolicons.iconjar/icons/exit.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "611f6c2fa3b188c0273e9f66ac6f8f7b45b724d5e94a859cefd0dca100c3bebe"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/settings.svg",
+    "label": "Settings",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/settings.png",
+    "upstream": "coolicons.iconjar/icons/settings.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "be4fb3cc0b9239716f1cc0b94e229024dc2584a645dec0146e75569cbde0bc21"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/slider-02.svg",
+    "label": "Slider_02",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/slider-02.png",
+    "upstream": "coolicons.iconjar/icons/slider-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4fc48de785649a84e01236a8b0f99d48ebf5211f42e1bc3601bbdfef61a7f456"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/checkbox-unchecked.svg",
+    "label": "Checkbox_Unchecked",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/checkbox-unchecked.png",
+    "upstream": "coolicons.iconjar/icons/checkbox-unchecked.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d86a2c704e6b510ac4a191fe479a2f713cfb3274deca8714a2f30b100d36a57b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/drag-horizontal.svg",
+    "label": "Drag_Horizontal",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/drag-horizontal.png",
+    "upstream": "coolicons.iconjar/icons/drag-horizontal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c1e4cca921f8eb45e538c5ff2a7089ced56042fb382c66410524cc504bc9a541"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/search-magnifying-glass.svg",
+    "label": "Search_Magnifying_Glass",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/search-magnifying-glass.png",
+    "upstream": "coolicons.iconjar/icons/search-magnifying-glass.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0b9e5e56b0ce3e953d14e52f3a5d3358d716b59d694e00fc4ac62887ea5538e1"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/dummy-circle.svg",
+    "label": "Dummy_Circle",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/dummy-circle.png",
+    "upstream": "coolicons.iconjar/icons/dummy-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ce577f11316b4330f5d8c4eadd37275d2b54d33ce407d2287198b418f2b6d226"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/heart-01.svg",
+    "label": "Heart_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/heart-01.png",
+    "upstream": "coolicons.iconjar/icons/heart-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "42102951cd3a5a574a60c563aca0ae5dfdbba17b3c6cf65b81090d07f510884e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/chart-bar-horizontal-01.svg",
+    "label": "Chart_Bar_Horizontal_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/chart-bar-horizontal-01.png",
+    "upstream": "coolicons.iconjar/icons/chart-bar-horizontal-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e65b482b0c3a123eb4261ec1bf0a4befd8bf51ffcaf948bc173154dbb98f483d"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/shopping-bag-01.svg",
+    "label": "Shopping_Bag_01",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/shopping-bag-01.png",
+    "upstream": "coolicons.iconjar/icons/shopping-bag-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6e4fbf3c2ba94cdc79504926b37da123e126b8707517ff0f430823854d021af8"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/trash-empty.svg",
+    "label": "Trash_Empty",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/trash-empty.png",
+    "upstream": "coolicons.iconjar/icons/trash-empty.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "daf68a1a643e62b28597c0a959db0a9c4c23b9631e9d8f302cd09e0b82946c7e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/radio-fill.svg",
+    "label": "Radio_Fill",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/radio-fill.png",
+    "upstream": "coolicons.iconjar/icons/radio-fill.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "68dbe35465fefa303e424786191e22f03c4ae1967caaf3ec27e4071e71ba9831"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/credit-card-02.svg",
+    "label": "Credit_Card_02",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/credit-card-02.png",
+    "upstream": "coolicons.iconjar/icons/credit-card-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "14bf42237a36a2f1a10d2bd33f6b229f8089d1e6df6338b2778ed68eac821f22"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/line-l.svg",
+    "label": "Line_L",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/line-l.png",
+    "upstream": "coolicons.iconjar/icons/line-l.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ee4b2b94858853384525cbd5c029f99a75444d4b82bbbe37314617c374aabe58"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/gift.svg",
+    "label": "Gift",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/gift.png",
+    "upstream": "coolicons.iconjar/icons/gift.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "01c3fe4f13a7373e345dde77591d9405d0844813ad090055135ac437624c326e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/switch-left.svg",
+    "label": "Switch_Left",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/switch-left.png",
+    "upstream": "coolicons.iconjar/icons/swicht-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2caf8d0e43eb4ba210d60d22aac3d094eb8fb888ebd01400dbe28ef054c9ea6c"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/filter.svg",
+    "label": "Filter",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/filter.png",
+    "upstream": "coolicons.iconjar/icons/filter.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "10636495fb12c5ecfc6ebfd97d2c19be3883ca11c059bef8cec7806e4032582e"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/book-open.svg",
+    "label": "Book_Open",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/book-open.png",
+    "upstream": "coolicons.iconjar/icons/book-open.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "00684d30c4163423064fe4407cafcca6a4e7d9f224d32726b68b738a8c9f7b7b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/trending-up.svg",
+    "label": "Trending_Up",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/trending-up.png",
+    "upstream": "coolicons.iconjar/icons/trending-up.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1b96008eb802437806bf2899c66ceac6a9349e101d89d3329bcea91370f37248"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/shopping-cart-02.svg",
+    "label": "Shopping_Cart_02",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/shopping-cart-02.png",
+    "upstream": "coolicons.iconjar/icons/shopping-cart-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4771a6a3d1a72565331086c2704f8854353d7eb59fd70f3f1d07397eda2c52c1"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/link-horizontal.svg",
+    "label": "Link_Horizontal",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/link-horizontal.png",
+    "upstream": "coolicons.iconjar/icons/link-horizontal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0cd22984ba1392d70099d06b98b2e4c96b3d60ad8b74f28bb4f54227e1f14287"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/check-big.svg",
+    "label": "Check_Big",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/check-big.png",
+    "upstream": "coolicons.iconjar/icons/check-big.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "605baefa51aeb68ef9b9bd262fe62c474d43c4408d10cc521cfdbc6b1ff95fa2"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/link-vertical.svg",
+    "label": "Link_Vertical",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/link-vertical.png",
+    "upstream": "coolicons.iconjar/icons/link-vertical.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "07cd45c634bc25f0f25a7bff6a9027119923e2204b132353789d4643d4cb4689"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/star.svg",
+    "label": "Star",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/star.png",
+    "upstream": "coolicons.iconjar/icons/star.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3c634c4d271c07648474444912d71d7f57061110e4e09ae25ad9dd1ed5bf3f65"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/ticket-voucher.svg",
+    "label": "Ticket_Voucher",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/ticket-voucher.png",
+    "upstream": "coolicons.iconjar/icons/ticket-voucher.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e50a6e5c2d6e66390b486fce7038e067a108ebb7a102b986eba9d4c7f86f28c8"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/command.svg",
+    "label": "Command",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/command.png",
+    "upstream": "coolicons.iconjar/icons/command.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "01fe57105225b28c267b22a053da3a3baa3f92464eb9895629c301fcb9d845c1"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/slider-03.svg",
+    "label": "Slider_03",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/slider-03.png",
+    "upstream": "coolicons.iconjar/icons/slider-03.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6f4852689aa5ad86181bdf3d958adc6b7ef4c7210ce51d6592d70d50deb7888d"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/checkbox-check.svg",
+    "label": "Checkbox_Check",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/checkbox-check.png",
+    "upstream": "coolicons.iconjar/icons/checkbox-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b1cae7865500d07890ee4f077d6773d6cc585eb52c9c46412c4c891fb9099c45"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/label.svg",
+    "label": "Label",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/label.png",
+    "upstream": "coolicons.iconjar/icons/label.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1a9f5d0dd0ecc0a36f6a37d1b9634047b20b35e1058a89d5e48d46f05bccf01d"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/magnifying-glass-minus.svg",
+    "label": "Magnifying_Glass_Minus",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/magnifying-glass-minus.png",
+    "upstream": "coolicons.iconjar/icons/magnifying-glass-minus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cc772d2ab08888e11a24bc7e3c1d5cabc9901b205395805c52317d41453e1c86"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/dummy-square-small.svg",
+    "label": "Dummy_Square_Small",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/dummy-square-small.png",
+    "upstream": "coolicons.iconjar/icons/dummy-square-small.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "84652e039d7881534bd80be1195a332b1918a555d30b40c77249c2974a27a439"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/heart-02.svg",
+    "label": "Heart_02",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/heart-02.png",
+    "upstream": "coolicons.iconjar/icons/heart-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7df4f12f2265ebb1b47a0e23165386088ad5baa12acf4af2d078669c66872880"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/chart-line.svg",
+    "label": "Chart_Line",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/chart-line.png",
+    "upstream": "coolicons.iconjar/icons/chart-line.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b4da7b8ea6ee90d962f053ff49227e83c832ced91d2839a5e63e8bd89c3aa861"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/shopping-bag-02.svg",
+    "label": "Shopping_Bag_02",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/shopping-bag-02.png",
+    "upstream": "coolicons.iconjar/icons/shopping-bag-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bdedb644049387a89e6ec95e935d7e0839f2aa662c0c93b4e41a557408d7bdd5"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/trash-full.svg",
+    "label": "Trash_Full",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/trash-full.png",
+    "upstream": "coolicons.iconjar/icons/trash-full.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5c785be9e413381ba4a7d5d5b87e343b4e17d3717f099e3866bebad9b71bbc02"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/loading.svg",
+    "label": "Loading",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/loading.png",
+    "upstream": "coolicons.iconjar/icons/loading.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "112e2da1a6e65b538705099d60de4eb8fe30820daf05d2bfa6ebd80d31ef6fe0"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/tag.svg",
+    "label": "Tag",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/tag.png",
+    "upstream": "coolicons.iconjar/icons/tag.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cf2755a3fe4d2980f3853f371944491c2d3a8f5caad5ca1894a9857759803691"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/line-m.svg",
+    "label": "Line_M",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/line-m.png",
+    "upstream": "coolicons.iconjar/icons/line-m.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8f0c3dfdb1967f595b60fd3ff965ef4c617c7d09f0f6f24ad3551f6e7267d8e0"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/suitcase.svg",
+    "label": "Suitcase",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/suitcase.png",
+    "upstream": "coolicons.iconjar/icons/suitcase.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "732fc7605cdf8d6af1c69edaa13defab00131547b63c94361dfeca9db7498f2b"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/switch-right.svg",
+    "label": "Switch_Right",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/switch-right.png",
+    "upstream": "coolicons.iconjar/icons/swicht-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "23723c760880888fce9bdbae3e22dd03ae66cf729dcd6f865708ca76af408386"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/filter-off.svg",
+    "label": "Filter_Off",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/filter-off.png",
+    "upstream": "coolicons.iconjar/icons/filter-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e301a8ec3f5de2a2e8fc4e5edc769f6ca78c1afd9f4a894358bd2ca5dcc061a6"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/chart-pie.svg",
+    "label": "Chart_Pie",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/chart-pie.png",
+    "upstream": "coolicons.iconjar/icons/chart-pie.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "09cc6de644b574201a3c5534271e04c60158fbbdd405cd976b90765a6c51f7dc"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/lock.svg",
+    "label": "Lock",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/lock.png",
+    "upstream": "coolicons.iconjar/icons/lock.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0f01cea478cd39545f0537ceb7d4de7735806cce92bdf0ba0913f0ec43d85e4a"
+  },
+  {
+    "asset": "assets/icons/vectors/interface/lock-open.svg",
+    "label": "Lock_Open",
+    "source": "assets/icons/supplemental/source_sheets/interface.png",
+    "reference_crop": "assets/icons/supplemental/interface/lock-open.png",
+    "upstream": "coolicons.iconjar/icons/lock-open.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d6278e50038399d265df2c678449e745592fd7db293aa3b941db95c91086d7ca"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar.svg",
+    "label": "Calendar",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar.png",
+    "upstream": "coolicons.iconjar/icons/calendar.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "05e4310cab4335d15847e5ce446e1d6ee36fc11dd8442697b89983a6cd48bd1a"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-remove.svg",
+    "label": "Calendar_Remove",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-remove.png",
+    "upstream": "coolicons.iconjar/icons/calendar-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "59f5d89af1d25f5d26facb04c7bda2544d7c304ba46c50d2364630467fc3993e"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-event.svg",
+    "label": "Calendar_Event",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-event.png",
+    "upstream": "coolicons.iconjar/icons/calendar-event.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "900f9291a53f42cc3171e8e3980cf6a6bf5f8187c77f134c2c5159933275f62f"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/alarm.svg",
+    "label": "Alarm",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/alarm.png",
+    "upstream": "coolicons.iconjar/icons/alarm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4eb7e34e197ce53a1f833dec7b61ddfa95d2fece67be0c577eb1e2c64f78c390"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/timer-add.svg",
+    "label": "Timer_Add",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/timer-add.png",
+    "upstream": "coolicons.iconjar/icons/timer-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4b6fc0ea508581cf570620ccfc11575e16d4d8968e54b99749b79a502d7deb42"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-check.svg",
+    "label": "Calendar_Check",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-check.png",
+    "upstream": "coolicons.iconjar/icons/calendar-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "60c229b84d6555db2099da699d5b86456fe5e097c59b234a02c06e3244b6c6a9"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-week.svg",
+    "label": "Calendar_Week",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-week.png",
+    "upstream": "coolicons.iconjar/icons/calendar-week.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ff8d3a77b063cdc7c42ce001f5465a5bc2ff099236906f4c1bb21a9f69d3626b"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-days.svg",
+    "label": "Calendar_Days",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-days.png",
+    "upstream": "coolicons.iconjar/icons/calendar-days.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f2c5cb4d5bfb8c165422c930e58e1c13603fb1a4519f13d4910967b7e8ceee2d"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/timer.svg",
+    "label": "Timer",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/timer.png",
+    "upstream": "coolicons.iconjar/icons/timer.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6284e628fbd2508fdc2bd63903c1bde29b4fef2a085b665fd751e7ee62f7c210"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/timer-close.svg",
+    "label": "Timer_Close",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/timer-close.png",
+    "upstream": "coolicons.iconjar/icons/timer-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "77225d3115b35a8d23d522600cb0e8157218c0148674402918fd258ba66728f8"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-add.svg",
+    "label": "Calendar_Add",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-add.png",
+    "upstream": "coolicons.iconjar/icons/calendar-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8337bdd697bae0fbf41daff4c5aaad227fe64d38926340c688f4224664a436bd"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/calendar-close.svg",
+    "label": "Calendar_Close",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/calendar-close.png",
+    "upstream": "coolicons.iconjar/icons/calendar-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d63ef313d1f97d812721267e3f8a8404fd01652ce6a86cd64650c8c2f7c1c9ba"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/clock.svg",
+    "label": "Clock",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/clock.png",
+    "upstream": "coolicons.iconjar/icons/clock.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0585f1162cbc23530a0f6f179657d72c687dab7c5d691800400b60edac32345a"
+  },
+  {
+    "asset": "assets/icons/vectors/calendar/timer-remove.svg",
+    "label": "Timer_Remove",
+    "source": "assets/icons/supplemental/source_sheets/calendar.png",
+    "reference_crop": "assets/icons/supplemental/calendar/timer-remove.png",
+    "upstream": "coolicons.iconjar/icons/timer-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cb70d5933dbeff529d3cb72e85417c0355a41bd2777a0b25073ca8f33a886442"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/compass.svg",
+    "label": "Compass",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/compass.png",
+    "upstream": "coolicons.iconjar/icons/compass.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "39c8314aafa1786393d78a066280e2f89925eee790f8309a797a7d057adfaba7"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-03.svg",
+    "label": "House_03",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-03.png",
+    "upstream": "coolicons.iconjar/icons/house-03.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c47dc911d22387d8a3a4ef0bf965f17f712cfc50ac038e70d5fdcca5cc2b24d7"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-01.svg",
+    "label": "House_01",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-01.png",
+    "upstream": "coolicons.iconjar/icons/house-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "268fbc8541bd3c4d1049b85d884417c9d9efe0ec27e6927ecdbe0fc1a7ce0ca2"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-check.svg",
+    "label": "House_Check",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-check.png",
+    "upstream": "coolicons.iconjar/icons/house-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b8e7e713614c58f0362f00273f76d4bd32e1ea8dad66437ed3e511492556428a"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/building-03.svg",
+    "label": "Building_03",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/building-03.png",
+    "upstream": "coolicons.iconjar/icons/building-03.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a0e5050254d4e05d85a591a467c79e2046b584d3544d8cdf4fdbd0a84238fdec"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/building-04.svg",
+    "label": "Building_04",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/building-04.png",
+    "upstream": "coolicons.iconjar/icons/building-04.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b1ac6260c66d5965e0b32165d830345dfbdeef372627f0269f18abb663d9e73b"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/globe.svg",
+    "label": "Globe",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/globe.png",
+    "upstream": "coolicons.iconjar/icons/globe.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d6efbd2c64930650ac6cb456ea6543c0c8d4277bbad5c10664607a342dccbf6e"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-remove.svg",
+    "label": "House_Remove",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-remove.png",
+    "upstream": "coolicons.iconjar/icons/house-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0af79c6acfe9e2485f5293d848917d6e3bf61486b91b2c69704547c33dbbccaa"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-02.svg",
+    "label": "House_02",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-02.png",
+    "upstream": "coolicons.iconjar/icons/house-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b9e6cc30dda21b270e66010a7e71d7beceab7c2028227eaae913dda85621f089"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/building-01.svg",
+    "label": "Building_01",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/building-01.png",
+    "upstream": "coolicons.iconjar/icons/building-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "92f09aa51481c43f54c47ca7a9b23e4b73b9f68283dd9e12cafa415c0b5ee34c"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/flag.svg",
+    "label": "Flag",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/flag.png",
+    "upstream": "coolicons.iconjar/icons/flag.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a2fbc1fcb2217fca87b823397b4654b3b41bb0bdd623286e21567f51063213cc"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/car-auto.svg",
+    "label": "Car_Auto",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/car-auto.png",
+    "upstream": "coolicons.iconjar/icons/car-auto.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "901f18bf7f96dbf5b0906a272e484d35507318de40408149d7920414bddb1e7c"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/map-pin.svg",
+    "label": "Map_Pin",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/map-pin.png",
+    "upstream": "coolicons.iconjar/icons/map-pin.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b4a13815734bde03696231d1fa8620e8104d1c5e4cacbc2b389fd4451b250819"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-add.svg",
+    "label": "House_Add",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-add.png",
+    "upstream": "coolicons.iconjar/icons/house-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "72330f15a6293509369ba84e7eb174da41f99c08ca2ebb4cff8025e5d5573d4c"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/house-close.svg",
+    "label": "House_Close",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/house-close.png",
+    "upstream": "coolicons.iconjar/icons/house-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "69dc4753fefe61cd3a1ad5eff9d7db7fd42594ca53f52224356c3f38bc6d80d5"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/building-02.svg",
+    "label": "Building_02",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/building-02.png",
+    "upstream": "coolicons.iconjar/icons/building-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c6d0a4533028655383b2e3d44ec77a462bf65f14c7fa78fcc24b6504ee497de3"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/navigation.svg",
+    "label": "Navigation",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/navigation.png",
+    "upstream": "coolicons.iconjar/icons/navigation.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "270133f1c97b8fef051c3bb0d7e6f10a64ac01b75f1915d0c0e13794d5de7fb9"
+  },
+  {
+    "asset": "assets/icons/vectors/navigation/map.svg",
+    "label": "Map",
+    "source": "assets/icons/supplemental/source_sheets/navigation.png",
+    "reference_crop": "assets/icons/supplemental/navigation/map.png",
+    "upstream": "coolicons.iconjar/icons/map.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0c867f3f95d91ea6d4f163a9e6013c63359be4a27cd1a8bee34bc83140c4ab8f"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-to-queue.svg",
+    "label": "Add_To_Queue",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-to-queue.png",
+    "upstream": "coolicons.iconjar/icons/add-to-queue.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e9cab679836ac55d1058f33d5441f3276acadb102cc92c7d3179b006f28b2469"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/layers.svg",
+    "label": "Layers",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/layers.png",
+    "upstream": "coolicons.iconjar/icons/layers.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "772a71cf0f9589484ec1d48836ecb3e2fb20919da0c3b09f9a29ee87fec52ec4"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/text-align-center.svg",
+    "label": "Text_Align_Center",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/text-align-center.png",
+    "upstream": "coolicons.iconjar/icons/text-align-center.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e55e57fd9ed8e556d6a1250301ca413eb5b2815b3d5e9e1ba3cc02e1bd784dbf"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-remove.svg",
+    "label": "List_Remove",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-remove.png",
+    "upstream": "coolicons.iconjar/icons/list-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1f309d35295b2507a65aaf202bddf513aed2373101d0a289cbaccbc795d9cbb5"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-unordered.svg",
+    "label": "List_Unordered",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-unordered.png",
+    "upstream": "coolicons.iconjar/icons/list-unordered.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5d1c614b508a7852ecd1ac028abe8d818ac617410ec53be61818659efc9fdd0f"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/sort-descending.svg",
+    "label": "Sort_Descending",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/sort-descending.png",
+    "upstream": "coolicons.iconjar/icons/sort-descending.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "59600eaf43b5bc55c3955da4210d325e5c2abde89065ef9fe5b03eb49657d899"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/remove-minus-circle.svg",
+    "label": "Remove_Minus_Circle",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/remove-minus-circle.png",
+    "upstream": "coolicons.iconjar/icons/remove-minus-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1938fdb8ba3224d5847b05506a109e5ba47f85d4de18a2374f28130a79933598"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-minus-square.svg",
+    "label": "Add_Minus_Square",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-minus-square.png",
+    "upstream": "coolicons.iconjar/icons/add-minus-square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "de25ce3eb8a5171314042ac7192cff3e1840bf12fb42895ea770666ca86ff3df"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/hide.svg",
+    "label": "Hide",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/hide.png",
+    "upstream": "coolicons.iconjar/icons/hide.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "483ce7c39dc489e7005afbb5f192677e59cdf0eab58255af7f356dfa04026109"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/move-horizontal.svg",
+    "label": "Move_Horizontal",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/move-horizontal.png",
+    "upstream": "coolicons.iconjar/icons/move-horizontal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fb6a88dea73682326850a01b707402babd2397fe6fe6e7ff55f2aca2ec6628ae"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/paperclip-attachment-horizontal.svg",
+    "label": "Paperclip_Attachment_Horizontal",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/paperclip-attachment-horizontal.png",
+    "upstream": "coolicons.iconjar/icons/paperclip-attechment-horizontal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c3bfe059abbb83bf22b5e38147ac7cae5eb866a5c089c047c1fe00cfd672e1f4"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading.svg",
+    "label": "Heading",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading.png",
+    "upstream": "coolicons.iconjar/icons/heading.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ea7f84afb658cc6bb8f2454b9533655db19b2ae9c2fecb0a2b92fa329ea48d2f"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h3.svg",
+    "label": "Heading_H3",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h3.png",
+    "upstream": "coolicons.iconjar/icons/heading-h3.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ea4bf97f2cad513883d64be0bf8724bbcd6ba00db747ccf61398c0910333cffb"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h6.svg",
+    "label": "Heading_H6",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h6.png",
+    "upstream": "coolicons.iconjar/icons/heading-h6.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "350493261d99e632858d4b41af4717d80714ab83e7a49cffe8b147b9dcb6d7b5"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/text.svg",
+    "label": "Text",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/text.png",
+    "upstream": "coolicons.iconjar/icons/text.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "adff72dc694baeff6b179df9b4bf9cacf29ee7f5d18dc12c0f87d52a60dab9ea"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/table.svg",
+    "label": "Table",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/table.png",
+    "upstream": "coolicons.iconjar/icons/table.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e0259fe1f95716645152a8da4bd5245c2869dcf51c62f504c96df0678579ba8d"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/combine-cells.svg",
+    "label": "Combine_Cells",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/combine-cells.png",
+    "upstream": "coolicons.iconjar/icons/combine-cells.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d7406bd382a5b3722678ce205d3b8dc89dac4b09ecbb1d4f9ff84de870e5972d"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/double-quotes-r.svg",
+    "label": "Double_Quotes_R",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/double-quotes-r.png",
+    "upstream": "coolicons.iconjar/icons/double-quotes-r.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ceabf4d6db83dd32f3e7a2ec888155436a89cf03b27a0049e0ff61be0cca5efc"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/delete-column.svg",
+    "label": "Delete_Column",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/delete-column.png",
+    "upstream": "coolicons.iconjar/icons/delete-column.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "df1777279eda459e15e24323d9b312e2ae526ead9713af8f7442acb2d50703bc"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/single-quotes-l.svg",
+    "label": "Single_Quotes_L",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/single-quotes-l.png",
+    "upstream": "coolicons.iconjar/icons/single-quotes-l.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cd5295202f69d0f69a4bc7a3e972b3e0aa5b6cbf481d240c5036a4218e4996c3"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/copy.svg",
+    "label": "Copy",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/copy.png",
+    "upstream": "coolicons.iconjar/icons/copy.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2e58b860c59c92234938ceb79c78d5fd69e420cf3c605db846e9086583e92b51"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/columns.svg",
+    "label": "Columns",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/columns.png",
+    "upstream": "coolicons.iconjar/icons/columns.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6ed5e367eaccb8ceeaccd3b4752ca31ade927ef81cbc83a6ceb3a964a72ff62a"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/edit-pencil-01.svg",
+    "label": "Edit_Pencil_01",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/edit-pencil-01.png",
+    "upstream": "coolicons.iconjar/icons/edit-pencil-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c86a3a19a6fd9a9ba2facdfcbcc1628ffa16c63fd8693ab67a92108f8adff60e"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/path.svg",
+    "label": "Path",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/path.png",
+    "upstream": "coolicons.iconjar/icons/path.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6cab298ff068959650364f4355ad638cdd3d6484b9d3e3e99ca47a25e05ba97e"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/select-multiple.svg",
+    "label": "Select_Multiple",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/select-multiple.png",
+    "upstream": "coolicons.iconjar/icons/select-multiple.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e8c2ea43ab2feeb4d9eedef985bace9e3ad3e45279604e3d32f618d48de5572f"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/text-align-left.svg",
+    "label": "Text_Align_Left",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/text-align-left.png",
+    "upstream": "coolicons.iconjar/icons/text-align-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ce0251d36bbeb813d7fe73633d9c72441b2be48a8d647806865aca2164df28bf"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/text-align-justify.svg",
+    "label": "Text_Align_Justify",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/text-align-justify.png",
+    "upstream": "coolicons.iconjar/icons/text-align-justify.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7bd22417bd512de935639d9a7e47e32980b0924d84baacbb4b4ae57e738d5cd0"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-ordered.svg",
+    "label": "List_Ordered",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-ordered.png",
+    "upstream": "coolicons.iconjar/icons/list-ordered.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ccdc1fbcfb404e8dc41b733cb95d6f7ad42428f5c79006d5a6a3444499161140"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-checklist.svg",
+    "label": "List_Checklist",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-checklist.png",
+    "upstream": "coolicons.iconjar/icons/list-checklist.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "723143483ccf5b2bb14c252603f35691fff6b5c3a6854ca2aae748fe23fd4ca2"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/remove-minus.svg",
+    "label": "Remove_Minus",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/remove-minus.png",
+    "upstream": "coolicons.iconjar/icons/remove-minus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9a8bc11680b65a4867ab99a01166f6e9cecab9db693462532d449b902342994e"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-plus-circle.svg",
+    "label": "Add_Plus_Circle",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-plus-circle.png",
+    "upstream": "coolicons.iconjar/icons/add-plus-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "dc60ace2bc4de336c6a021d56ad78f7b62f3e339b010a056b389d8f1fd8765d5"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-plus-square.svg",
+    "label": "Add_Plus_Square",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-plus-square.png",
+    "upstream": "coolicons.iconjar/icons/add-plus-square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "728b59e067a69124c86d80c9ba182471e88d7cdc4b9998b9d072b1eebda59565"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/show.svg",
+    "label": "Show",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/show.png",
+    "upstream": "coolicons.iconjar/icons/show.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ad3da1ef845da01eb0ba13eba386a32633f6f6d3909efe7efb1c39e7af3bbc8c"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/move-vertical.svg",
+    "label": "Move_Vertical",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/move-vertical.png",
+    "upstream": "coolicons.iconjar/icons/move-vertical.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d46e3222a2864da81b66cb6106900ac1cdb68ef624364c877b035abcdac1ec8c"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/paperclip-attachment-tilt.svg",
+    "label": "Paperclip_Attachment_Tilt",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/paperclip-attachment-tilt.png",
+    "upstream": "coolicons.iconjar/icons/paperclip-attechment-tilt.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "57045b4314f644c30868ef77e1864a5b704d64c34223d79d7c66823fb66f0d6a"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h1.svg",
+    "label": "Heading_H1",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h1.png",
+    "upstream": "coolicons.iconjar/icons/heading-h1.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c79a859b618b8af2cafed5fdb9999ded3be70d14e391da5edef9ec4b4b8fb6e5"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h4.svg",
+    "label": "Heading_H4",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h4.png",
+    "upstream": "coolicons.iconjar/icons/heading-h4.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7a920c47e0c5657d8dbb76fdf50cd611e7af171960171070b45719fcc2732641"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/font.svg",
+    "label": "Font",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/font.png",
+    "upstream": "coolicons.iconjar/icons/font.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0c9224eaec7038f42420083ee6390c378d8b1ae12a99932ae38df05dff0fbbe6"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/redo.svg",
+    "label": "Redo",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/redo.png",
+    "upstream": "coolicons.iconjar/icons/redo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6adb85aacdfff4b12db7ff8cafe126dc34b56e4d757078d77b629d21e0fd525d"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/table-add.svg",
+    "label": "Table_Add",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/table-add.png",
+    "upstream": "coolicons.iconjar/icons/table-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c10c4f5ae2cda58d86022bc711c32998f08e0aca6c390df6e9f88f67a5f07c07"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/bold.svg",
+    "label": "Bold",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/bold.png",
+    "upstream": "coolicons.iconjar/icons/bold.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "798bf0a595ce0d5831746efdc4ef667506c93ad240aa8d0c4e9ee9684d1c2652"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/double-quotes-l.svg",
+    "label": "Double_Quotes_L",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/double-quotes-l.png",
+    "upstream": "coolicons.iconjar/icons/double-quotes-l.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6b5024387907f728dd65a8a1348187c27d7d2b97a68840883e4154e809ef1076"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-row.svg",
+    "label": "Add_Row",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-row.png",
+    "upstream": "coolicons.iconjar/icons/add-row.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7e682ea08ca9d63672fa423a7ff3a3db6d4ba609af6f1808434b47d0f2d7dc66"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/single-quotes-r.svg",
+    "label": "Single_Quotes_R",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/single-quotes-r.png",
+    "upstream": "coolicons.iconjar/icons/single-quotes-r.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3df96e307929f78449b4c987b9d7686e7ea41126991d93a061634bd9f6a86e9c"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/italic.svg",
+    "label": "Italic",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/italic.png",
+    "upstream": "coolicons.iconjar/icons/italic.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "41cc4a1078ecc74c69959aa1621a70707c43ef163149e2cbe6106fa51b128622"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/ruler.svg",
+    "label": "Ruler",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/ruler.png",
+    "upstream": "coolicons.iconjar/icons/ruler.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e95fb3f72428597724da751386076fcaaae16dd711a59908f85f45ac2520639c"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/edit-pencil-02.svg",
+    "label": "Edit_Pencil_02",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/edit-pencil-02.png",
+    "upstream": "coolicons.iconjar/icons/edit-pencil-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "38aede8508855b216722b363d7b9d7e4b87c5a1f382b586cb336de48ef03c93e"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/swatches-palette.svg",
+    "label": "Swatches_Palette",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/swatches-palette.png",
+    "upstream": "coolicons.iconjar/icons/swatches-palette.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "257d5b760b2ad9c8045ee150c958422246814f6bd591b2cc279930d7a5bb66e7"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/layer.svg",
+    "label": "Layer",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/layer.png",
+    "upstream": "coolicons.iconjar/icons/layer.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f3126b47055f20a1cf78d9b5051ad5ac037b9ee905cdd22db8ff6e20a5c8f8d6"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/text-align-right.svg",
+    "label": "Text_Align_Right",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/text-align-right.png",
+    "upstream": "coolicons.iconjar/icons/text-align-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "47c3d82071e8ae2aadada03caea2a24ab7531ffd06fcb32956f46f3a00064991"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-check.svg",
+    "label": "List_Check",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-check.png",
+    "upstream": "coolicons.iconjar/icons/list-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8f827d50dc4c12f88e132d9ad23442d338985dda304a4091fa30bea0a8b183f2"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/list-add.svg",
+    "label": "List_Add",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/list-add.png",
+    "upstream": "coolicons.iconjar/icons/list-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0e14ce9a6afc0cac82780ba945be1c7a7f260085cebd55d495223a73f55338a6"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/sort-ascending.svg",
+    "label": "Sort_Ascending",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/sort-ascending.png",
+    "upstream": "coolicons.iconjar/icons/sort-ascending.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bb07aa40dadfa81dc534d1aa98432e5b9d880d7e0318916c2cc1bbdddf20ad82"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-plus.svg",
+    "label": "Add_Plus",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-plus.png",
+    "upstream": "coolicons.iconjar/icons/add-plus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6e4345922679636c54081f2e5488b170979826bb8d247f70daba2d7ab1787a34"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/close-circle.svg",
+    "label": "Close_Circle",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/close-circle.png",
+    "upstream": "coolicons.iconjar/icons/close-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "880e0ea42672306896416440c15771cfb2f604bf726b3c98e16e78fabb93ee69"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/close-square.svg",
+    "label": "Close_Square",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/close-square.png",
+    "upstream": "coolicons.iconjar/icons/close-square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "229d619c0de82a2f6343e410fda276b204b7e0a7e8585fe8f109994598878fd7"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/move.svg",
+    "label": "Move",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/move.png",
+    "upstream": "coolicons.iconjar/icons/move.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6a2036478791129b74b290a546137802dbcb19833f592bfd53112078ef2c431f"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/mention.svg",
+    "label": "Mention",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/mention.png",
+    "upstream": "coolicons.iconjar/icons/mention.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b24bd19cb10899b75cc6031af6a239da2a52965cc9a7af6c72e6e08d293dd75e"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/figma.svg",
+    "label": "Figma",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/figma.png",
+    "upstream": "coolicons.iconjar/icons/figma.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bce66600c068b96c6ddcf3967ecdde84d40016d53887af2801c16bc14881ff96"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h2.svg",
+    "label": "Heading_H2",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h2.png",
+    "upstream": "coolicons.iconjar/icons/heading-h2.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "706c63fa514904398c2f769b4d658021a731c1e2e005492909e91dfebd535a37"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/heading-h5.svg",
+    "label": "Heading_H5",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/heading-h5.png",
+    "upstream": "coolicons.iconjar/icons/heading-h5.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "262a116c773f7a2570f2313940dba46aaadf2e1ad96b92ca8252391665ed5b94"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/strikethrough.svg",
+    "label": "Strikethrough",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/strikethrough.png",
+    "upstream": "coolicons.iconjar/icons/strikethrough.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c65d311801dd06be872ac1b19ff68f4286a54df3227a4f3454d5c1f9c7285b55"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/undo.svg",
+    "label": "Undo",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/undo.png",
+    "upstream": "coolicons.iconjar/icons/undo.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fd1fc6c30857a96bf8115800e4222463d27f36eee62dd14fcf065cc654dd5b14"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/table-remove.svg",
+    "label": "Table_Remove",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/table-remove.png",
+    "upstream": "coolicons.iconjar/icons/table-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "02ba5e46508ae4c8ca6dccff5141227493e20ddd6614a24022a430c631d3149a"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/underline.svg",
+    "label": "Underline",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/underline.png",
+    "upstream": "coolicons.iconjar/icons/underline.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e2a3f754b3f077ca835126173e3ca5e28c4502c960b3a30b3a5dab280eea63a1"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/delete-row.svg",
+    "label": "Delete_Row",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/delete-row.png",
+    "upstream": "coolicons.iconjar/icons/delete-row.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ed54d8dbf58ad1b97ac83abfa27c0518d44a27f297c69547d374aa5a198669a2"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/add-column.svg",
+    "label": "Add_Column",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/add-column.png",
+    "upstream": "coolicons.iconjar/icons/add-column.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c3ce9b8debeed57a2139f42ef56eda9ce3db3d4faddec6299e5e4cb49a69a519"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/paragraph.svg",
+    "label": "Paragraph",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/paragraph.png",
+    "upstream": "coolicons.iconjar/icons/paragraph.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e81f9ab7b6bbce9b18303a132ea996e692eabcf69382df9419607b9f4c1e5a88"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/rows.svg",
+    "label": "Rows",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/rows.png",
+    "upstream": "coolicons.iconjar/icons/rows.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "84c292272a0124924ce56d68c36b3ca11746f26351219ce53f4d3ab2fa14a304"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/edit-pencil-line-02.svg",
+    "label": "Edit_Pencil_Line_02",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/edit-pencil-line-02.png",
+    "upstream": "coolicons.iconjar/icons/edit-pencil-line-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fbebbef5118eb2884feeee426145b991044331b06195d5a73f8d9e557714b3ae"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/edit-pencil-line-01.svg",
+    "label": "Edit_Pencil_Line_01",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/edit-pencil-line-01.png",
+    "upstream": "coolicons.iconjar/icons/edit-pencil-line-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3d252724261f32cc94291f2df523403f435588621337304c771a03648f91fbb1"
+  },
+  {
+    "asset": "assets/icons/vectors/edit/crop.svg",
+    "label": "Crop",
+    "source": "assets/icons/supplemental/source_sheets/edit.png",
+    "reference_crop": "assets/icons/supplemental/edit/crop.png",
+    "upstream": "coolicons.iconjar/icons/crop.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "eda2c9418a0035da6e6f8f41fceb80623ff77faecfbc154086a7dc9f3776341f"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle.svg",
+    "label": "Chat_Circle",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8a68db658247c656f0ba927e802368ce3396410e5796332e32f3787b3815fa07"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle-dots.svg",
+    "label": "Chat_Circle_Dots",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle-dots.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle-dots.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f5ac87db01b0a0ff9ef81d943d16249553e287a090f6dab75baa29bb5f66b8e5"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat.svg",
+    "label": "Chat",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat.png",
+    "upstream": "coolicons.iconjar/icons/chat.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "52d1efff0df1e0c4fc64867908d2e86cf8ac4f42d8dd8e06e4fb22ca80ae401e"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-dots.svg",
+    "label": "Chat_Dots",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-dots.png",
+    "upstream": "coolicons.iconjar/icons/chat-dots.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7c297861487a5dbe35075c4322947fc84ecdb153412ed112e4ca70b954e6bda9"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-conversation-circle.svg",
+    "label": "Chat_Conversation_Circle",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-conversation-circle.png",
+    "upstream": "coolicons.iconjar/icons/chat-conversation-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "526e9bb002fe476d8198b9ef7a932e3474541110bf2d2b6bf906216f68d019b6"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/phone.svg",
+    "label": "Phone",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/phone.png",
+    "upstream": "coolicons.iconjar/icons/phone.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "752c956d1a40bb2e1fb3a04bd1f5a6595e35fd1390fab031bd0fc36cc21b2a0d"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/mail.svg",
+    "label": "Mail",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/mail.png",
+    "upstream": "coolicons.iconjar/icons/mail.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2da7852d0093e9cf5598930aae4a4f0de2014e132ea269e46a9f1a28b96e8cf0"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-ring.svg",
+    "label": "Bell_Ring",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-ring.png",
+    "upstream": "coolicons.iconjar/icons/bell-ring.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d58b1c8713bb3112a6680cf38c0c832b58d6b3c9ed96282f6e75f306e7eb517c"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-remove.svg",
+    "label": "Bell_Remove",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-remove.png",
+    "upstream": "coolicons.iconjar/icons/bell-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9329bed889c3266aa918bcc7e5fc02e1bfe41366325f16ed614de16e69ee708b"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle-close.svg",
+    "label": "Chat_Circle_Close",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle-close.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "85ae2ee57a6d504bba944c583fbf6a5a9dda8055e66f47d289d5541db31e9a63"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle-remove.svg",
+    "label": "Chat_Circle_Remove",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle-remove.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f47726b72a3d8b2d0a30928cf43db6a6f6fc60835649a9d40bc294124bb51ba8"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-close.svg",
+    "label": "Chat_Close",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-close.png",
+    "upstream": "coolicons.iconjar/icons/chat-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b8cabf6beef265f4c2d709348c25bc84b49843135a0b89c62016c9b536730b02"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-remove.svg",
+    "label": "Chat_Remove",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-remove.png",
+    "upstream": "coolicons.iconjar/icons/chat-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f6c1eb702932424c2f9520028a7e013883dc358f8fedf56187b77ffb2cf9fea4"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-conversation.svg",
+    "label": "Chat_Conversation",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-conversation.png",
+    "upstream": "coolicons.iconjar/icons/chat-conversation.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5b41822d35577227d14c5382abc60c92eb0b2aae5ed06e852b83db16e16ca97e"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/share-android.svg",
+    "label": "Share_Android",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/share-android.png",
+    "upstream": "coolicons.iconjar/icons/share-android.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "da974e792bcdd67719e70285fcfc05d7be414f7c95b8e8ec85cdc22c1024ab88"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/mail-open.svg",
+    "label": "Mail_Open",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/mail-open.png",
+    "upstream": "coolicons.iconjar/icons/mail-open.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "8e381f18ed6055bb01bad422b7dd5c3ffa49d3ef25f1db1d883b3d38d5ad8bef"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell.svg",
+    "label": "Bell",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell.png",
+    "upstream": "coolicons.iconjar/icons/bell.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4ad0aae1d6f2b436bd14cc6c74d2523763a14053b82a34b62871d229a6c90652"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-add.svg",
+    "label": "Bell_Add",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-add.png",
+    "upstream": "coolicons.iconjar/icons/bell-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "83fce95d41753cfbf8e8a8e6aaa7266ef0a73369fe22a0a96cd405efa6acb921"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle-check.svg",
+    "label": "Chat_Circle_Check",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle-check.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f4d253355fda0354bdca7e68929611df3f74601ed3c39f40ed76ac64ef796f63"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-circle-add.svg",
+    "label": "Chat_Circle_Add",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-circle-add.png",
+    "upstream": "coolicons.iconjar/icons/chat-circle-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fbb7bac44d6b8a21c6e70ab94d7da17ecdbcbb91d792d34d6991608a7ca4142e"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-check.svg",
+    "label": "Chat_Check",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-check.png",
+    "upstream": "coolicons.iconjar/icons/chat-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "162aec14c96fae7e4bd017f4d725ed4eb9dfb373ca53c00148191228dd205a43"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/chat-add.svg",
+    "label": "Chat_Add",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/chat-add.png",
+    "upstream": "coolicons.iconjar/icons/chat-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5840e65f559b358479e68b53c27a171151854c15af2d995bd121638cf64e4ccb"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/paper-plane.svg",
+    "label": "Paper_Plane",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/paper-plane.png",
+    "upstream": "coolicons.iconjar/icons/paper-plane.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "59bcb34f96ab12f032d905bb4d29e6abe1694b64e1dd3e0d25b39eb71bac0823"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/share-ios-export.svg",
+    "label": "Share_iOS_Export",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/share-ios-export.png",
+    "upstream": "coolicons.iconjar/icons/share-ios-export.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "997252c989afde34d7941e9ce3087de9bfd194a75b63c7f2ee39abd3e9578fb1"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-notification.svg",
+    "label": "Bell_Notification",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-notification.png",
+    "upstream": "coolicons.iconjar/icons/bell-notification.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f15c7fe9c29aa620c895d295b7d200456c072c62f5f1573250e23f4a080889d7"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-off.svg",
+    "label": "Bell_Off",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-off.png",
+    "upstream": "coolicons.iconjar/icons/bell-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3b83b9c67e71cc9b913892ac6168582ec4a793f1e1ebff380f912232af0a912e"
+  },
+  {
+    "asset": "assets/icons/vectors/communication/bell-close.svg",
+    "label": "Bell_Close",
+    "source": "assets/icons/supplemental/source_sheets/communication.png",
+    "reference_crop": "assets/icons/supplemental/communication/bell-close.png",
+    "upstream": "coolicons.iconjar/icons/bell-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "127e1f713c89bda59347aa878abfa141d1e94fc425d906c12512f1a5252eef26"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/puzzle.svg",
+    "label": "Puzzle",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/puzzle.png",
+    "upstream": "coolicons.iconjar/icons/puzzle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f6287bd7b32b93742d4ee12156d08932028c5da08811cc011d765987c9b0feb7"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/sun.svg",
+    "label": "Sun",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/sun.png",
+    "upstream": "coolicons.iconjar/icons/sun.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b57b4b2f9a0a5d80c68ceb83e42f825dc033a608a38193b162deadbacd5169e7"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/bulb.svg",
+    "label": "Bulb",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/bulb.png",
+    "upstream": "coolicons.iconjar/icons/bulb.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e78021f3de219cb7fc9d41e605fc4d2aa56203343422f0d0efa299940b178fd3"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/planet.svg",
+    "label": "Planet",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/planet.png",
+    "upstream": "coolicons.iconjar/icons/planet.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5b931c430c82391380baf53a8973266d3324945e36935c0ca21913265e47b534"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/leaf.svg",
+    "label": "Leaf",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/leaf.png",
+    "upstream": "coolicons.iconjar/icons/leaf.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f7235de5e257532cbec10c60668036c83313e3ef112cd92b9d9b37bdee688d00"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/first-aid.svg",
+    "label": "First_Aid",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/first-aid.png",
+    "upstream": "coolicons.iconjar/icons/first-aid.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1d19c0f96e198d6fb3bb3730753608cff6d99f97366950bec5c761c23a7a8611"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/moon.svg",
+    "label": "Moon",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/moon.png",
+    "upstream": "coolicons.iconjar/icons/moon.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6f71ef50cb68868e6271b75dab90d710953341f2ae71466e3a976ba2038f51f0"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/cookie.svg",
+    "label": "Cookie",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/cookie.png",
+    "upstream": "coolicons.iconjar/icons/cookie.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "448b47fa6c18dc1a5bd7b0533ebe6458c0230043e2a94ea8fba83bedfc392fc3"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/water-drop.svg",
+    "label": "Water_Drop",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/water-drop.png",
+    "upstream": "coolicons.iconjar/icons/water-drop.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2ca03fb5a5c5945a0b636b401a0254d259322a2b36fcb88584be4cac5abc4615"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/cupcake.svg",
+    "label": "Cupcake",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/cupcake.png",
+    "upstream": "coolicons.iconjar/icons/cupcake.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "976e73999e6a84439468d7d087efbf068f421be47f71b8562a577dc19ad7d7e8"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/rainbow.svg",
+    "label": "Rainbow",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/rainbow.png",
+    "upstream": "coolicons.iconjar/icons/rainbow.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ea414703811b993cf96d58fabc0d1ad06e2090108aa890da97e45a76a1a90038"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/coffee-to-go.svg",
+    "label": "Coffee_To_Go",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/coffee-to-go.png",
+    "upstream": "coolicons.iconjar/icons/coffe-to-go.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "7105e451bc66a19c26dd086423b70626435dc1514f169fea1447a2f6027d1fdf"
+  },
+  {
+    "asset": "assets/icons/vectors/environment/coffee.svg",
+    "label": "Coffee",
+    "source": "assets/icons/supplemental/source_sheets/environment.png",
+    "reference_crop": "assets/icons/supplemental/environment/coffee.png",
+    "upstream": "coolicons.iconjar/icons/coffee.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2c74719034ef0abbc9f308e9179e623421c361e4bd686572231a3451690ec9f3"
+  },
+  {
+    "asset": "assets/icons/vectors/media/airplay.svg",
+    "label": "Airplay",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/airplay.png",
+    "upstream": "coolicons.iconjar/icons/airplay.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ee901cff9fc69eec57165ede40e7eb4d61362ec3dd542acd0c759cfc4776ddea"
+  },
+  {
+    "asset": "assets/icons/vectors/media/skip-back.svg",
+    "label": "Skip_Back",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/skip-back.png",
+    "upstream": "coolicons.iconjar/icons/skip-back.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e1b4b97273f122ad88c0d2191ed007a1f439d92dd3a68933b4fc61bf0f99dc51"
+  },
+  {
+    "asset": "assets/icons/vectors/media/play-circle.svg",
+    "label": "Play_Circle",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/play-circle.png",
+    "upstream": "coolicons.iconjar/icons/play-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "27aaea49aafd92c3a4c9f0b275d2bc139de430d0c3f5385f0d26d75b6971e219"
+  },
+  {
+    "asset": "assets/icons/vectors/media/play.svg",
+    "label": "Play",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/play.png",
+    "upstream": "coolicons.iconjar/icons/play.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b28d1b25f1d859bbd0aad56032e9a7ad8e69d92e2753a60869cfb12b15553fa7"
+  },
+  {
+    "asset": "assets/icons/vectors/media/rewind.svg",
+    "label": "Rewind",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/rewind.png",
+    "upstream": "coolicons.iconjar/icons/rewind.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "09f6e55f95083a80710fb9092963ca88281228b8dfc35671e2353a7691808dff"
+  },
+  {
+    "asset": "assets/icons/vectors/media/shuffle.svg",
+    "label": "Shuffle",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/shuffle.png",
+    "upstream": "coolicons.iconjar/icons/shuffle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "35a9e50113488bd019495127c6d00e7a1378d912711e0b48fc55e4b9a6613025"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-minus.svg",
+    "label": "Volume_Minus",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-minus.png",
+    "upstream": "coolicons.iconjar/icons/volume-minus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "67c2ecae75ecaec7e0dd14dd347dba57f9334f80a64062ddcb3eb105715e7467"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-off-02.svg",
+    "label": "Volume_Off_02",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-off-02.png",
+    "upstream": "coolicons.iconjar/icons/volume-off-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "907f13b6ff2d4eecb78f2ef8961e94d7d4bbdfaded1ed0add1d4cdccc907677b"
+  },
+  {
+    "asset": "assets/icons/vectors/media/chromecast.svg",
+    "label": "Chromecast",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/chromecast.png",
+    "upstream": "coolicons.iconjar/icons/chromecast.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b19afa160d23dfd1b53824856688d256016337262f0e1a3a9c830ef8a857ebee"
+  },
+  {
+    "asset": "assets/icons/vectors/media/skip-forward.svg",
+    "label": "Skip_Forward",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/skip-forward.png",
+    "upstream": "coolicons.iconjar/icons/skip-forward.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c1dc32e5ebda3ccf8ac6d7b03086d4936df2615a5ad449d5617daff236fa4d0c"
+  },
+  {
+    "asset": "assets/icons/vectors/media/stop-circle.svg",
+    "label": "Stop_Circle",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/stop-circle.png",
+    "upstream": "coolicons.iconjar/icons/stop-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9360a78b5f94f8a4f9f6cf3e8136de0c6621bce4ca88228337e4264a8afeed05"
+  },
+  {
+    "asset": "assets/icons/vectors/media/pause.svg",
+    "label": "Pause",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/pause.png",
+    "upstream": "coolicons.iconjar/icons/pause.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "63d67e829f2ec91ac3e56d2f55b20d128024305f9e60a4f75a7d208b91658168"
+  },
+  {
+    "asset": "assets/icons/vectors/media/forward.svg",
+    "label": "Forward",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/forward.png",
+    "upstream": "coolicons.iconjar/icons/forward.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c08c8a7295930d8ca09661211b9b0f0511ac91b1ad1022d949df4a56eb15ad3d"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-max.svg",
+    "label": "Volume_Max",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-max.png",
+    "upstream": "coolicons.iconjar/icons/volume-max.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "82dda3bcc80ad3e1c3a5fa02b3b77d17a301dd426c473cfe743d931af53244e0"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-plus.svg",
+    "label": "Volume_Plus",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-plus.png",
+    "upstream": "coolicons.iconjar/icons/volume-plus.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "329dddecb6b5291f9d216480e29298c6edb8f4c857eae35c9733641944581f53"
+  },
+  {
+    "asset": "assets/icons/vectors/media/pause-circle.svg",
+    "label": "Pause_Circle",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/pause-circle.png",
+    "upstream": "coolicons.iconjar/icons/pause-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "876143d5cd5e738af9b17d79e7f1ce8aed585b83d0ac50498ae2c340d8bca42f"
+  },
+  {
+    "asset": "assets/icons/vectors/media/headphones.svg",
+    "label": "Headphones",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/headphones.png",
+    "upstream": "coolicons.iconjar/icons/headphones.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c328df4e10b9fe7a5ce7b0d3ccc1c1af00a36886b12ea4cc8d536d5ea248b356"
+  },
+  {
+    "asset": "assets/icons/vectors/media/stop.svg",
+    "label": "Stop",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/stop.png",
+    "upstream": "coolicons.iconjar/icons/stop.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "158b898e84c453def226a493c682ca88b3408566ecadbd46da01ce9b7807f9bd"
+  },
+  {
+    "asset": "assets/icons/vectors/media/image-01.svg",
+    "label": "Image_01",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/image-01.png",
+    "upstream": "coolicons.iconjar/icons/image-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "eb49a85abc5d051145520501acbbf2e6bb71e94fcdda97cdf2ad8cf216fa5553"
+  },
+  {
+    "asset": "assets/icons/vectors/media/image-02.svg",
+    "label": "Image_02",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/image-02.png",
+    "upstream": "coolicons.iconjar/icons/image-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bdc00ed185056173efd7ad3fab66301cc00b82e14a916f0dc9c77b8abcc95002"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-min.svg",
+    "label": "Volume_Min",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-min.png",
+    "upstream": "coolicons.iconjar/icons/volume-min.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9b400eea4f014be25f28fb06c9ee1dd3d4f871a358c224685652ff77b63128dc"
+  },
+  {
+    "asset": "assets/icons/vectors/media/volume-off.svg",
+    "label": "Volume_Off",
+    "source": "assets/icons/supplemental/source_sheets/media.png",
+    "reference_crop": "assets/icons/supplemental/media/volume-off.png",
+    "upstream": "coolicons.iconjar/icons/volume-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "71d4883ee56986af017ec44f63443c2a8da421d832d2fed91a5f97d449599db6"
+  },
+  {
+    "asset": "assets/icons/vectors/system/mobile-button.svg",
+    "label": "Mobile_Button",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/mobile-button.png",
+    "upstream": "coolicons.iconjar/icons/mobile-button.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "1682de5d278d0419c5e803eb88ee9e0904c9850288af50178653f155fdf84c09"
+  },
+  {
+    "asset": "assets/icons/vectors/system/devices.svg",
+    "label": "Devices",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/devices.png",
+    "upstream": "coolicons.iconjar/icons/devices.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "09c00c6a0e42b125bb28ecc92218918e2cf8dadb9e97554a84306c0df2006e05"
+  },
+  {
+    "asset": "assets/icons/vectors/system/monitor.svg",
+    "label": "Monitor",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/monitor.png",
+    "upstream": "coolicons.iconjar/icons/monitor.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "399e6223c4a5a998be521b37c25b97e2d78c52086c2dcb93e08cde2f7e793eab"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window.svg",
+    "label": "Window",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window.png",
+    "upstream": "coolicons.iconjar/icons/window.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a9c7f219af7665f47b79a675983212eee62dde6f932fd7c0eccce589f765c267"
+  },
+  {
+    "asset": "assets/icons/vectors/system/desktop-tower.svg",
+    "label": "Desktop_Tower",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/desktop-tower.png",
+    "upstream": "coolicons.iconjar/icons/desktop-tower.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d4e49dd8abb47315985a104ac8db5607d7cc41abf136921431322e813b2e8429"
+  },
+  {
+    "asset": "assets/icons/vectors/system/bar-right.svg",
+    "label": "Bar_Right",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/bar-right.png",
+    "upstream": "coolicons.iconjar/icons/bar-right.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9d96b03dee0d42848562c31b1bdbba109a2be3318739c339538ef557822f04ad"
+  },
+  {
+    "asset": "assets/icons/vectors/system/save.svg",
+    "label": "Save",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/save.png",
+    "upstream": "coolicons.iconjar/icons/save.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2216b11eec37f9697baea62137eb8657fd546ef63f720f434d35b2cdb2819efd"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-medium.svg",
+    "label": "Wifi_Medium",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-medium.png",
+    "upstream": "coolicons.iconjar/icons/wifi-medium.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e2c506bec9815961d87ebbf8f3da939c6079cd3dacf97969689b098e2b4f4e37"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-off.svg",
+    "label": "Wifi_Off",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-off.png",
+    "upstream": "coolicons.iconjar/icons/wifi-off.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b4c01c3364ef1f0c32afd59b24139ea1dbd83ecb092a6bcde42c38b742d68ba4"
+  },
+  {
+    "asset": "assets/icons/vectors/system/keyboard.svg",
+    "label": "Keyboard",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/keyboard.png",
+    "upstream": "coolicons.iconjar/icons/keyboard.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "98834313742864a235acb5d5b03e7bacc53946f5bbeac7550c52838db2abc628"
+  },
+  {
+    "asset": "assets/icons/vectors/system/data.svg",
+    "label": "Data",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/data.png",
+    "upstream": "coolicons.iconjar/icons/data.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2130a6354ccbc8f0f06534648bf40332bbaf1dd8a2f69f46ca55e550e307195d"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window-terminal.svg",
+    "label": "Window_Terminal",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window-terminal.png",
+    "upstream": "coolicons.iconjar/icons/window-terminal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "562fc91482c1c5aaaf02676215ab040ddf444b4f19c5aabb167458beed45d98d"
+  },
+  {
+    "asset": "assets/icons/vectors/system/tablet.svg",
+    "label": "Tablet",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/tablet.png",
+    "upstream": "coolicons.iconjar/icons/tablet.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "47fff745d3dae2d5b4f95679da5e72d471fbe35cf6b5e7e227bda06489beca23"
+  },
+  {
+    "asset": "assets/icons/vectors/system/laptop.svg",
+    "label": "Laptop",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/laptop.png",
+    "upstream": "coolicons.iconjar/icons/laptop.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e199f96f06267a70c030b3153c6850be526d279602743c89adb8b6a3aa7bf925"
+  },
+  {
+    "asset": "assets/icons/vectors/system/monitor-play.svg",
+    "label": "Monitor_Play",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/monitor-play.png",
+    "upstream": "coolicons.iconjar/icons/monitor-play.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cf660268bd8f75c48461e7065f3d07974681ade314226ffac316b1250a461325"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window-check.svg",
+    "label": "Window_Check",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window-check.png",
+    "upstream": "coolicons.iconjar/icons/window-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "b8bd9dda250f6b5894147b11919909d3d6536e260184582db2c9f84f4a980415"
+  },
+  {
+    "asset": "assets/icons/vectors/system/bar-bottom.svg",
+    "label": "Bar_Bottom",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/bar-bottom.png",
+    "upstream": "coolicons.iconjar/icons/bar-bottom.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e38bd8510546200b30395bbe531194d908b67f984acb8419ae17b1c27b3473e9"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window-sidebar.svg",
+    "label": "Window_Sidebar",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window-sidebar.png",
+    "upstream": "coolicons.iconjar/icons/window-sidebar.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f07487720cf5cf946f246ec6907531630d85d48d3b5cd8f9f2ea074932799a50"
+  },
+  {
+    "asset": "assets/icons/vectors/system/qr-code.svg",
+    "label": "Qr_Code",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/qr-code.png",
+    "upstream": "coolicons.iconjar/icons/qr-code.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d4e63ccfab5a9e379de5ea24f95c3ecfa338e5d0366add484653c312bcbce37f"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-low.svg",
+    "label": "Wifi_Low",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-low.png",
+    "upstream": "coolicons.iconjar/icons/wifi-low.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "3e629f44a6136166aa482e5d8b92913c8597cbbc9dcd8a2bc30e6798428cf9ac"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-problem.svg",
+    "label": "Wifi_Problem",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-problem.png",
+    "upstream": "coolicons.iconjar/icons/wifi-problem.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "fd9a0ce59129849e4f7ab638b32971b27451f8dfeba5ebee0c2eed0b204282c3"
+  },
+  {
+    "asset": "assets/icons/vectors/system/mouse.svg",
+    "label": "Mouse",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/mouse.png",
+    "upstream": "coolicons.iconjar/icons/mouse.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e736a36ed7a6da597147e70736b8877d42295844122536cba902779187d3e6fa"
+  },
+  {
+    "asset": "assets/icons/vectors/system/camera.svg",
+    "label": "Camera",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/camera.png",
+    "upstream": "coolicons.iconjar/icons/camera.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bd21e169b79196962150180da97fe84a39e424ae4ec4563a702741b656325a8c"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window-code-block.svg",
+    "label": "Window_Code_Block",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window-code-block.png",
+    "upstream": "coolicons.iconjar/icons/window-code-block.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "641263d24069049def09f963098d94af4ba1c6768957be4fcc9ee5bf7654312f"
+  },
+  {
+    "asset": "assets/icons/vectors/system/tablet-button.svg",
+    "label": "Tablet_Button",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/tablet-button.png",
+    "upstream": "coolicons.iconjar/icons/tablet-button.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "52ef62bc3daeefc90006a1f574611cc33b98d63c6483e3830025f6193b7872ff"
+  },
+  {
+    "asset": "assets/icons/vectors/system/mobile.svg",
+    "label": "Mobile",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/mobile.png",
+    "upstream": "coolicons.iconjar/icons/mobile.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "20e104e077095d0a4efbe5644cb366e0758fe42ccc4f74afe1a3a77e3e42b962"
+  },
+  {
+    "asset": "assets/icons/vectors/system/desktop.svg",
+    "label": "Desktop",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/desktop.png",
+    "upstream": "coolicons.iconjar/icons/desktop.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4a1e244af0a9781f4bd9da05491fe14737b0914646db94f7ec0505c635f390bb"
+  },
+  {
+    "asset": "assets/icons/vectors/system/window-close.svg",
+    "label": "Window_Close",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/window-close.png",
+    "upstream": "coolicons.iconjar/icons/window-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "03983de684a85337af74eabfc7116bd696121ea8f4aa51991a83966787024c97"
+  },
+  {
+    "asset": "assets/icons/vectors/system/bar-left.svg",
+    "label": "Bar_Left",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/bar-left.png",
+    "upstream": "coolicons.iconjar/icons/bar-left.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f18f0050953158148af4dc0e4442d7da9a094f8d5535ad8daf06119cca2538ab"
+  },
+  {
+    "asset": "assets/icons/vectors/system/bar-top.svg",
+    "label": "Bar_Top",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/bar-top.png",
+    "upstream": "coolicons.iconjar/icons/bar-top.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4ceb4da77f961c50cd497d9fb28bb9d63d839e721044138c07fe55a5658c6264"
+  },
+  {
+    "asset": "assets/icons/vectors/system/cylinder.svg",
+    "label": "Cylinder",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/cylinder.png",
+    "upstream": "coolicons.iconjar/icons/cylinder.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9084122a96c0934af24ea1c41f31f279bcd2fc291b6759586dd1e4d22befcec1"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-none.svg",
+    "label": "Wifi_None",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-none.png",
+    "upstream": "coolicons.iconjar/icons/wifi-none.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "eb0c59d6aaaf2d031fe3610adf394233c05f5c3d3b90f98444c549ba27a028e2"
+  },
+  {
+    "asset": "assets/icons/vectors/system/wifi-high.svg",
+    "label": "Wifi_High",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/wifi-high.png",
+    "upstream": "coolicons.iconjar/icons/wifi-high.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cd4631757380b21be0d402e032ee6d5fb9e41f9ea9546b61810c698cf49a7ff4"
+  },
+  {
+    "asset": "assets/icons/vectors/system/printer.svg",
+    "label": "Printer",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/printer.png",
+    "upstream": "coolicons.iconjar/icons/printer.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "92716107cdd1eb0bdb585e77b8127fa123f6f758c9bd85462100a4c2681de9c7"
+  },
+  {
+    "asset": "assets/icons/vectors/system/moving-desk.svg",
+    "label": "Moving_Desk",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/moving-desk.png",
+    "upstream": "coolicons.iconjar/icons/moving-desk.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9bac81fb77979d95669965dbc3ab1a1060a02c65256d2ca52c88901e2928d28c"
+  },
+  {
+    "asset": "assets/icons/vectors/system/terminal.svg",
+    "label": "Terminal",
+    "source": "assets/icons/supplemental/source_sheets/system.png",
+    "reference_crop": "assets/icons/supplemental/system/terminal.png",
+    "upstream": "coolicons.iconjar/icons/terminal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e5ba2c9d9b56f37a0ec82b517d1f00723e5a12d644103bced4927af8a6e0d7f7"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-01.svg",
+    "label": "User_01",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-01.png",
+    "upstream": "coolicons.iconjar/icons/user-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "5946d5734757936a7b514eb701c38ea19ba50df13b943ca48b2ae01a37bd8564"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-02.svg",
+    "label": "User_02",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-02.png",
+    "upstream": "coolicons.iconjar/icons/user-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6253e853418ff7a2afccbe84a800229e39b129aea829f2b9ed7d908ff01f3bbe"
+  },
+  {
+    "asset": "assets/icons/vectors/user/users.svg",
+    "label": "Users",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/users.png",
+    "upstream": "coolicons.iconjar/icons/users.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "14d1deb270b9f7917d534c69a3e91a52c31d9fce521baa09607a7de73b5a7a9c"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-voice.svg",
+    "label": "User_Voice",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-voice.png",
+    "upstream": "coolicons.iconjar/icons/user-voice.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2f7c6129cf9907eb338851a28dc8babdb89b2dd0589636dd04c372bff4dab464"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-card-id.svg",
+    "label": "User_Card_ID",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-card-id.png",
+    "upstream": "coolicons.iconjar/icons/user-card-id.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6d16e5646211397efedfea92c8ab02e30488758539ca5ab273d4184924faea6c"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-add.svg",
+    "label": "User_Add",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-add.png",
+    "upstream": "coolicons.iconjar/icons/user-add.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4680a09dc10d83832031387e5b38748058cb6b7cf248f75ffec4ea253a99483f"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-03.svg",
+    "label": "User_03",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-03.png",
+    "upstream": "coolicons.iconjar/icons/user-03.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "37c16e2956c2dec7362c3f4c613091b99fe6bb3acd775f2d2782c5bde97ddd3f"
+  },
+  {
+    "asset": "assets/icons/vectors/user/users-group.svg",
+    "label": "Users_Group",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/users-group.png",
+    "upstream": "coolicons.iconjar/icons/users-group.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "33195aefad85968755b48ad9a47d207e1fbe7a39227eff601c96e2a14aa4ce60"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-circle.svg",
+    "label": "User_Circle",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-circle.png",
+    "upstream": "coolicons.iconjar/icons/user-circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "6801d670d4315b77ab71533bd973062f037510269c504a567025f96af40d7ed0"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-close.svg",
+    "label": "User_Close",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-close.png",
+    "upstream": "coolicons.iconjar/icons/user-close.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "97beb5eb1d6a38ab257db04ad01d8e4cbd1332489d0b651907e0390ec5e58125"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-remove.svg",
+    "label": "User_Remove",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-remove.png",
+    "upstream": "coolicons.iconjar/icons/user-remove.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "003e6993faedd3ddd56d87d619bf666fdf7cc1201ad1e0fa05ddb8fdd2ecbf7f"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-check.svg",
+    "label": "User_Check",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-check.png",
+    "upstream": "coolicons.iconjar/icons/user-check.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "08b2f8b64569271e281e45485c95d707af8ac3bcc83fe6fa1ed564cfb86e4c77"
+  },
+  {
+    "asset": "assets/icons/vectors/user/user-square.svg",
+    "label": "User_Square",
+    "source": "assets/icons/supplemental/source_sheets/user.png",
+    "reference_crop": "assets/icons/supplemental/user/user-square.png",
+    "upstream": "coolicons.iconjar/icons/user-square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "4993c9a750d1eeea04cfccd173b7577a0ae75a1ebe1e1a5dee8942188770673f"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/wavy.svg",
+    "label": "Wavy",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/wavy.png",
+    "upstream": "coolicons.iconjar/icons/wavy.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a2cb1cd56328101284baa9696a41516dd76c96e94b969da085bd22dea4133a07"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/shield.svg",
+    "label": "Shield",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/shield.png",
+    "upstream": "coolicons.iconjar/icons/shield.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "cafb6a47722a945c6a89ee11706205ae3e1a80135aad9e69bb98b3d61d4ef66f"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/octagon.svg",
+    "label": "Octagon",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/octagon.png",
+    "upstream": "coolicons.iconjar/icons/octagon.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "ed6d61681336cbcfc24d50af44ae3d064f8d44059e5f602f1f1903a4864a8ea5"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/triangle.svg",
+    "label": "Triangle",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/triangle.png",
+    "upstream": "coolicons.iconjar/icons/triangle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e9779460c201d7e9d734ed942e5e7ed493df2b48c85306116e4588a3e144734a"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/circle.svg",
+    "label": "Circle",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/circle.png",
+    "upstream": "coolicons.iconjar/icons/circle.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "9ef22b7ab27febcbe8685a36f3f2127abf8618d895befd9f852842711b4db714"
+  },
+  {
+    "asset": "assets/icons/vectors/shape/square.svg",
+    "label": "Square",
+    "source": "assets/icons/supplemental/source_sheets/shape.png",
+    "reference_crop": "assets/icons/supplemental/shape/square.png",
+    "upstream": "coolicons.iconjar/icons/square.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c4e2403fc8b2303d53a97d1abcb96450a28ea76d50980df6f7770968a0b92115"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/close-lg.svg",
+    "label": "Close_LG",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/close-lg.png",
+    "upstream": "coolicons.iconjar/icons/close-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "70e5f55e70afa1f8e8798f2610f77ee2d21f9e4c2b56998a74af8030a9166d7a"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/hamburger-md.svg",
+    "label": "Hamburger_MD",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/hamburger-md.png",
+    "upstream": "coolicons.iconjar/icons/hamburger-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "caf4cba25ecb25dd011d34a48112568c957237c1e5d8a38b01b507ab96384b57"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-duo-lg.svg",
+    "label": "Menu_Duo_LG",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-duo-lg.png",
+    "upstream": "coolicons.iconjar/icons/menu-duo-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "08c034dd89ba7f22b687101e7ac39a177265ece5747622bc8721a05e1a4e5f6e"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-alt-04.svg",
+    "label": "Menu_Alt_04",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-alt-04.png",
+    "upstream": "coolicons.iconjar/icons/menu-alt-04.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "da7b0ff69523f4a5d17be0f33e836631de9e58e74ff95b32d09e3756a8b9d601"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/more-horizontal.svg",
+    "label": "More_Horizontal",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/more-horizontal.png",
+    "upstream": "coolicons.iconjar/icons/more-horizontal.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "77e2b731ab4be03e26285456e19ee3d12f7ac7baeadbf835a0571da028df97f6"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/more-grid-big.svg",
+    "label": "More_Grid_Big",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/more-grid-big.png",
+    "upstream": "coolicons.iconjar/icons/more-grid-big.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "0431970267d1eac051adc4c84f7effe936ab97160464eb64da6009a7b89620d1"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/close-md.svg",
+    "label": "Close_MD",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/close-md.png",
+    "upstream": "coolicons.iconjar/icons/close-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d23a9cf093e80e3b1d166997a73e225815d89bc4e3ac5666b561d08966dadb89"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/hamburger-lg.svg",
+    "label": "Hamburger_LG",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/hamburger-lg.png",
+    "upstream": "coolicons.iconjar/icons/hamburger-lg.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "f2d152bcb735cdc4cb8a60fad78804be7a95ba75017d7a4f9ab0b0ef65d19d0f"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-alt-02.svg",
+    "label": "Menu_Alt_02",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-alt-02.png",
+    "upstream": "coolicons.iconjar/icons/menu-alt-02.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c8f41e26e0f406602c7e1071cb35984c5080a1739f268f4aab57e121138a48b4"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-alt-05.svg",
+    "label": "Menu_Alt_05",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-alt-05.png",
+    "upstream": "coolicons.iconjar/icons/menu-alt-05.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "bcb8997753490fa73c3d3603f293ea3505d00ef4421f92041607cdbf9e9a6fea"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/more-vertical.svg",
+    "label": "More_Vertical",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/more-vertical.png",
+    "upstream": "coolicons.iconjar/icons/more-vertical.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "d1d3581dd9e102cdb578a72439b8efbdc9d616cbe66fefe0a985e8f94e431e07"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/close-sm.svg",
+    "label": "Close_SM",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/close-sm.png",
+    "upstream": "coolicons.iconjar/icons/close-sm.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "34dbb9122bca4b80d28d6180978f39b743106641a2e5553c2603b4f3f8a9fce6"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-duo-md.svg",
+    "label": "Menu_Duo_MD",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-duo-md.png",
+    "upstream": "coolicons.iconjar/icons/menu-duo-md.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "e0ad4257d6051241e9545e5dc9a5122cf9b77cf3bf2390468194afe64f828e1f"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-alt-03.svg",
+    "label": "Menu_Alt_03",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-alt-03.png",
+    "upstream": "coolicons.iconjar/icons/menu-alt-03.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "2fdb82a0173052a09d76b6b9dd7248bad991477128acf3f82273f014ad51e753"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/menu-alt-01.svg",
+    "label": "Menu_Alt_01",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/menu-alt-01.png",
+    "upstream": "coolicons.iconjar/icons/menu-alt-01.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "c9c7b10e122a1dc16f8ee82009493ccfb1f51b34ce64ee7c2565da8d5509dff4"
+  },
+  {
+    "asset": "assets/icons/vectors/menu/more-grid-small.svg",
+    "label": "More_Grid_Small",
+    "source": "assets/icons/supplemental/source_sheets/menu.png",
+    "reference_crop": "assets/icons/supplemental/menu/more-grid-small.png",
+    "upstream": "coolicons.iconjar/icons/more-grid-small.svg",
+    "commit": "42d70477683a0c44cd1732b32a9def8a94469c5a",
+    "sha256": "a7f066bfd260d2c6daf1e4f909ddc4abe0de4c0aac4eb5bb5807b82a5052f902"
+  }
+]

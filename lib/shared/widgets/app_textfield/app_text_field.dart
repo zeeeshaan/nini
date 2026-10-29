@@ -60,31 +60,36 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      focusNode: focusNode,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      textAlign: textAlign,
+    // InputDecorator uses ambient direction for labels and floating labels;
+    // setting TextFormField.textDirection alone only changes the input text.
+    return Directionality(
       textDirection: textDirection,
-      maxLines: obscureText ? 1 : maxLines,
-      maxLength: maxLength,
-      obscureText: obscureText,
-      enabled: enabled,
-      readOnly: readOnly,
-      autofocus: autofocus,
-      autovalidateMode: autovalidateMode,
-      inputFormatters: inputFormatters,
-      validator: validator,
-      onChanged: onChanged,
-      onTap: onTap,
-      onFieldSubmitted: onSubmitted,
-      style: Theme.of(context).textTheme.bodyMedium,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
+      child: TextFormField(
+        controller: controller,
+        focusNode: focusNode,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        maxLines: obscureText ? 1 : maxLines,
+        maxLength: maxLength,
+        obscureText: obscureText,
+        enabled: enabled,
+        readOnly: readOnly,
+        autofocus: autofocus,
+        autovalidateMode: autovalidateMode,
+        inputFormatters: inputFormatters,
+        validator: validator,
+        onChanged: onChanged,
+        onTap: onTap,
+        onFieldSubmitted: onSubmitted,
+        style: Theme.of(context).textTheme.bodyMedium,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+        ),
       ),
     );
   }

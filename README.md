@@ -8,7 +8,7 @@ The Dart package name is `nini`, and the app UI is Persian (`fa_IR`).
 
 | Area | Implemented behavior |
 | --- | --- |
-| Client icons | 657 original transparent PNG icons, centralized `AppIcons` paths, and theme-aware `AppIcon` rendering. |
+| Client icons | 421 matching Coolicons SVGs plus 657 legacy PNG assets, with centralized paths and theme-aware rendering. Screenshot crops are retained only as references. |
 | Themes | Light, Dark, and System modes; contrasting buttons, labels, icons, and loading spinners. |
 | Gallery | Photo/video selection with `photo_manager`, native file picking, Android/iOS permissions, and preview grids. |
 | Create post | Title, rich caption, pricing, stock, post type, preparation time, unit, schedule, address/map, features, tags, and alt text. |
@@ -94,12 +94,29 @@ Native setup follows the [photo_manager documentation](https://pub.dev/packages/
 - `ios/Runner/Info.plist`: `NSPhotoLibraryUsageDescription` with a Persian
   explanation for selecting post photos/videos.
 
-The create-post gallery uses this setup for selecting photos, videos, and files.
-Request permission on the gallery action with
-`PhotoManager.requestPermissionExtend()`. Accept `state.hasAccess`, including
-limited access, before querying albums with `PhotoManager.getAssetPathList()`.
-Handle denial in the UI. `AssetEntityImage` / `AssetEntityImageProvider` display
-assets through the image-provider package. Native changes require a full rebuild.
+The create-post gallery requests permission for the active media tab:
+`RequestType.image` for Photo and `RequestType.video` for Video, using matching
+`AndroidPermission` options. This avoids blocking photos when Android video
+permission is denied (and vice versa). Both queries use the All album and paging;
+page continuation uses the album's total count so short pages do not hide later
+media. A failed page retains a Retry action.
+
+On iOS and Android 14+, limited permission exposes only the items the user has
+approved. A Persian notice offers Select more and Full access in Settings.
+The app cannot override that choice to show the entire library. `GalleryGrid`
+refreshes permission and assets after returning from Settings, without another
+permission prompt. Shared library-change notifications also reload changes to
+limited selections and newly added media, including the iOS 14 picker whose
+completion callback returns early. Refresh events during a query are queued.
+
+The File tab opens the native document browser and displays the files selected
+there. It does not enumerate every document on the phone. It needs no photo or
+video permission, and app resume never reopens the document picker. Selection
+persists when switching tabs or cancelling a later file selection.
+
+`AssetEntityImage` / `AssetEntityImageProvider` display thumbnails. Native changes
+require a full rebuild. Denial and initial-query failures have Settings/Retry
+recovery; the create-post and compact chat galleries share the same behavior.
 
 ## Light and dark mode
 
@@ -117,13 +134,25 @@ The theme logic lives in `lib/core/theme/`:
 | --- | --- | --- |
 | Main backgrounds | White (`#FFFFFF`) | Black (`#000000`) |
 | Surface text, including descriptions, prices, counts, and chip labels | Black (`#000000`) | White (`#FFFFFF`) |
-| Client PNG icons and built-in icons on page surfaces | Black | White |
+| Client icons and built-in icons on page surfaces | Black | White |
 | Primary elevated/filled button backgrounds | Black | White |
 | Primary button labels, icons, and loading spinners | White | Black |
 | Outlined/text/icon button labels and icons | Black | White |
 | Outlined button backgrounds | White with gray border | Black with gray border |
 | Placeholder and selected-chip surfaces | Light gray | Dark gray |
 | Dividers and borders | Light gray | Gray |
+
+Create-post option sheets intentionally use the **opposite palette** to the
+page: a light app shows black sheets with white text/icons, and a dark app shows
+white sheets with black text/icons. This applies to post type, preparation time,
+unit, schedule, features, address, alt text, and tags. `showPostDialog` scopes
+`AppTheme.dark` or `AppTheme.light` to the sheet in `post_dialog.dart`; the page
+keeps its original theme. Shared buttons, fields, choice indicators, calendar,
+and Cupertino time picker inherit that local palette. An open sheet follows
+later app-theme changes while preserving its form values.
+
+Sheet icons use `AppIcons` / `AppIcon`, including the tag add/remove controls,
+address-map pin, and alt-text image fallback. No client icon artwork is changed.
 
 Primary actions (Publish/Done) use `colorScheme.primary` for the fill and
 `colorScheme.onPrimary` for their labels, icons, and loading spinners. Secondary
@@ -135,7 +164,7 @@ contrast colors; loading still disables taps. `AppButton` in
 the Cancel/Publish pair on `CreatePostDetailsScreen`. Standalone icons and text
 buttons continue to use black in light mode and white in dark mode. Client icons are
 tinted **at runtime** using `BlendMode.srcIn`; only their opaque pixels change
-color, and their shapes/transparency are preserved. The PNG files stay unchanged.
+color, and their shapes/transparency are preserved. SVG paths remain vector at render time; legacy PNG files stay unchanged.
 Photos, existing red notification-badge backgrounds, and the author's green
 avatar ring retain their colors. Badge text follows the black/white text rule.
 Gallery indicators remain white over photos so their visibility does not depend
@@ -196,7 +225,7 @@ context.read<ThemeCubit>().toggleTheme(Theme.of(context).brightness);
   Use `Theme.of(context).brightness` when you need the actual rendered mode.
 
 [`test/theme_test.dart`](test/theme_test.dart) covers the controller, exact button
-foregrounds, real theme-menu interaction, rendered text/PNG colors, system changes,
+foregrounds, real theme-menu interaction, rendered text/SVG/PNG colors, system changes,
 manual overrides, and changing theme on a pushed post without losing its state.
 
 ## Create-post details, dialogs, and caption editor
@@ -322,7 +351,7 @@ inject an empty repository to avoid depending on native storage in widget tests.
 
 ## Client icons
 
-All 13 supplied PNG sheets are preserved, unchanged, in
+The original 13 supplied PNG sheets are preserved, unchanged, in
 [`assets/icons/source_sheets/`](assets/icons/source_sheets/). The collection contains
 **657 individual transparent PNG icons**, grouped under `assets/icons/`:
 
@@ -353,15 +382,91 @@ spelled consistently. Repeated labels receive `-variant-2` (and so on) so distin
 drawings are kept. [`tool/client_icons.json`](tool/client_icons.json) records every
 asset path, original sheet label, column, row, and exact crop rectangle.
 
-Only the 13 individual-icon folders are registered in [`pubspec.yaml`](pubspec.yaml).
+The original 13 PNG folders and 13 vector category folders are registered in [`pubspec.yaml`](pubspec.yaml).
 Original sheets and the extraction manifest are kept for reference and are not
 bundled into the app.
+
+### Supplemental screenshot icons (30 October 2026)
+
+The 13 new category screenshots are preserved under
+`assets/icons/supplemental/source_sheets/`. Their **421 icons** live in separate
+category folders under `assets/icons/supplemental/` as reference crops. They are
+**not bundled or used by the app**: these small bitmaps become pixelated when
+scaled, including at normal logical sizes on high-density phone displays.
+
+All 421 labels now map to original **Coolicons v4.1 SVGs** by Kryston Schwarze,
+copied unchanged into `assets/icons/vectors/<category>/`. These are real SVG paths,
+not embedded PNGs or automatically traced screenshots. `AppIcon` renders them
+using `flutter_svg` with its default vector picture rendering strategy. Theme
+tints, button actions, accessibility labels, and selection styles are preserved.
+The bundled collection contains **421 SVGs and 657 legacy PNGs**.
+
+Source: [Coolicons v4.1](https://github.com/krystonschwarze/coolicons/tree/v4.1),
+commit `42d70477683a0c44cd1732b32a9def8a94469c5a`. This release uses
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); attribution is retained
+in [`assets/icons/vectors/NOTICE.md`](assets/icons/vectors/NOTICE.md).
+`tool/supplemental_vectors.json` records every mapping, upstream filename, commit,
+and SHA-256 checksum. Reimport from the pinned checkout with:
+
+```sh
+git clone --depth 1 --branch v4.1 https://github.com/krystonschwarze/coolicons.git /tmp/coolicons-v4.1
+python3 tool/import_supplemental_vectors.py /tmp/coolicons-v4.1
+```
+
+The importer handles five spelling differences in upstream filenames while
+retaining readable app filenames. It validates the complete mapping before
+writing assets. The category counts below apply to both the reference crops and
+the matching runtime SVGs.
+
+| Category | Icons |
+| --- | ---: |
+| arrows | 72 |
+| files | 39 |
+| interface | 73 |
+| calendar | 14 |
+| navigation | 18 |
+| edit | 72 |
+| communication | 27 |
+| environment | 13 |
+| media | 22 |
+| system | 36 |
+| user | 13 |
+| shape | 6 |
+| menu | 16 |
+
+These screenshots have a baked-in dark background. The extraction removes that
+background and recovers white-foreground alpha; it preserves the native pixel
+grid, outline, antialiasing, and proportions. No drawing, tracing, or upscaling is
+performed. The crops are 28–34 pixels square with transparent margins. Repainting
+a crop over its recorded source background differs by at most two RGB levels
+from the screenshot due to alpha quantization. Labels and category headings are
+excluded, including clipped text beside otherwise complete icons.
+
+`tool/supplemental_icons.json` records each source, label, category row/column,
+crop rectangle, background color, and reconstruction error. Recreate the assets
+with Pillow installed:
+
+```sh
+python3 tool/extract_supplemental_icons.py
+```
+
+Only the 13 **vector** leaf folders are registered in `pubspec.yaml`; supplemental
+PNG crops, source sheets, and extraction metadata are excluded from the app bundle. Fully restart/rebuild
+the app after adding the new asset folders.
+
+The call controls now use client handset/chat assets and retain their callbacks,
+selected/disabled states, and contrasting colors. The hang-up button rotates the
+same handset at render time. The caption toolbar uses client bold, italic,
+underline, strikethrough, undo, and redo artwork through Quill's existing action
+callbacks. Other editor formatting controls and stored Delta data are unchanged.
 
 ## How icons are used
 
 [`AppIcons`](lib/core/icons/app_icons.dart) holds the paths currently used by the
 app. [`AppIcon`](lib/shared/widgets/app_icons/app_icon.dart) displays an asset with its
-transparency and aspect ratio preserved.
+transparency and aspect ratio preserved. SVGs use `SvgPicture.asset`; legacy PNGs
+use `Image.asset`. Do not convert screenshots to SVG wrappers: embedded bitmaps
+still pixelate.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -388,42 +493,51 @@ retain their callbacks, counts, and layout sizes.
 
 | App location/action | Client asset (relative to `assets/icons/`) |
 | --- | --- |
-| Bottom navigation: home | `general/home-04.png` |
-| Bottom navigation: cart | `finance/cart.png` |
-| Create tab and add category | `general/plus-01.png` |
-| Search tab | `general/search-01.png` |
-| Profile/avatar fallback | `images/image-avatar.png` |
-| Home header: theme menu | `weather/sun-03.png` / `weather/moon-01.png` |
-| Home header: messages | `travel_location/pointer-01.png` |
-| Home and post menus | `general/dot-vertical.png` |
-| Post detail: back | `arrows/chevron-left.png` |
-| Post detail: bookmark | `general/favourite.png` |
-| Post detail: like | `general/heart.png` |
-| Post detail: share | `general/share.png` |
-| Unavailable product/gallery image | `images/image-x.png` |
-| Product price tag | `finance/tag.png` |
+| Bottom navigation: home | `vectors/navigation/house-01.svg` |
+| Bottom navigation: cart | `vectors/interface/shopping-cart-01.svg` |
+| Create tab and add category | `vectors/edit/add-plus.svg` |
+| Search tab | `vectors/interface/search-magnifying-glass.svg` |
+| Profile/avatar fallback | `vectors/user/user-circle.svg` |
+| Home header: theme menu | `vectors/environment/sun.svg` / `moon.svg` |
+| Home header: messages and post comments | `vectors/communication/chat.svg` |
+| Menus and close | `vectors/menu/more-vertical.svg` / `close-md.svg` |
+| Back and refresh | `vectors/arrows/chevron-left-md.svg` / `arrows-reload-01.svg` |
+| Bookmark, heart, star, tag, trash | Matching `vectors/interface/` assets |
+| Call handset and chat send | `vectors/communication/phone.svg` / `paper-plane.svg` |
+| Gallery image/play/pause/volume | Matching `vectors/media/` assets |
+| Location and map | `vectors/navigation/map-pin.svg` / `map.svg` |
+| File, calendar, preparation time | `vectors/files/file-document.svg`, `calendar/calendar.svg`, `calendar/clock.svg` |
+| Camera and keyboard | `vectors/system/camera.svg` / `keyboard.svg` |
+| Attachment and rich caption formatting | Matching `vectors/edit/` assets |
+| Unavailable image, microphone, video camera | Original `images/` and `media/` assets, complementing the new collection |
 
 `AppIcon` inherits the current `IconTheme` color, falling back to
 `colorScheme.onSurface`: black in light mode and white in dark mode. Its optional
 `color` argument is an explicit override; normal app controls leave it unset.
 Use `selected: true` to add a subtle background highlight while keeping the same
 foreground. Like/bookmark toggles also expose their state to accessibility services.
-The existing rating star and plain comment bubble remain built-in icons because
-the supplied collection has no equivalent; notification bubbles have additional
-symbols and the weather stars have a different meaning.
+The supplemental collection now supplies the rating star and plain comment
+bubble. Controls without an equivalent in these screenshots retain a suitable
+original client asset or framework control, including native calendar/editor
+controls and the emoji glyph. Six active original icons still use PNGs:
+`imageUnavailable`, `target`, `microphone`, `microphoneOff`, `video`, and `videoOff`.
+Their artwork is absent from the supplied Coolicons screenshots. Matching original
+SVG exports are needed to make those six scalable without changing their design;
+enlarging PNGs or renaming their extension does not restore vector quality.
 
 ## How to add another icon
 
-1. Put the original transparent PNG in its category folder, for example
-   `assets/icons/general/new-icon.png`. Export individual icons from the designer
-   when available; do not use an entire labeled sheet as a button image.
+1. Export the original **SVG** from the design file and put it in a vector category
+   folder, for example `assets/icons/vectors/interface/new-icon.svg`. Keep genuine
+   vector paths and a valid `viewBox`. Do not crop screenshots for new UI icons.
+   PNG support remains for legacy artwork only.
 2. Existing category folders are already registered. If adding a new category,
    add its directory under `flutter: assets:` in `pubspec.yaml`; Flutter does not
    recursively include arbitrary subdirectories from the existing `assets/` entry.
 3. Add a descriptive constant in `lib/core/icons/app_icons.dart`:
 
    ```dart
-   static const newIcon = 'assets/icons/general/new-icon.png';
+   static const newIcon = 'assets/icons/vectors/interface/new-icon.svg';
    ```
 
 4. Use `const AppIcon(AppIcons.newIcon, size: 24)` at the relevant control. Keep
@@ -432,7 +546,8 @@ symbols and the weather stars have a different meaning.
 5. Run `flutter pub get` and fully restart the app after changing asset entries.
 
 Icons already in this collection can be used immediately by adding an `AppIcons`
-constant for their existing path. No dependency or icon font is needed.
+constant for their existing path. SVG rendering uses the `flutter_svg` dependency;
+an icon font is not required.
 
 ## Re-extract or verify the original collection
 
@@ -548,6 +663,11 @@ The app locale remains `fa_IR`. Material date/time controls use its localized
 labels. The caption editor explicitly loads Persian Quill/Flutter localization;
 Undo/Redo have Persian tooltip overrides because the installed Quill Persian
 translations leave those two labels in English. Input text reads right to left.
+Create-post headings, form labels, hints, input text, and selected option values
+align to the right. `AppTextField` scopes `Directionality` to its configured
+text direction so floating labels follow RTL too; explicit LTR fields remain
+supported. Option labels and values are grouped on the right, while caption
+paragraphs start RTL and still respect explicit rich-text alignment choices.
 Page navigation, photo order and chart timelines keep the existing layout.
 
 Numbers in analytics are formatted with `AppStrings.persianDigits` for display.
@@ -673,17 +793,21 @@ flutter test
 | [create_post_options_test.dart](test/create_post_options_test.dart) | Draft serialization, dialogs, validation, cancellation, map selection, and rich caption formatting. |
 | [publish_post_test.dart](test/publish_post_test.dart) | Media copying, reload, save recovery, duplicate-submit protection, navigation, and published content. |
 | [post_analytics_test.dart](test/post_analytics_test.dart) | Event persistence, aggregation, impressions, chart controls, narrow screens, and analytics navigation. |
+| [post_sheet_theme_test.dart](test/post_sheet_theme_test.dart) | Opposite palettes for all create-post sheets, button/icon contrast, page-theme isolation, and live theme changes without losing form input. |
+| [gallery_loading_test.dart](test/gallery_loading_test.dart) | Per-tab permission/query isolation, full/limited access, permission refresh races, partial-page continuation, retry, file selection, and lifecycle refresh. |
 | [chat_attachments_test.dart](test/chat_attachments_test.dart) | Paperclip sheet, photo selection, picker routing, camera outcomes, location sharing, cancellation, and both themes. |
 | [calls_test.dart](test/calls_test.dart) | Call navigation, answer/end, timer cleanup, control states, draft preservation, and both themes. |
 | [chat_test.dart](test/chat_test.dart) | Voice lifecycle, media copying, playback races, deletion/blocking, emoji insertion, gallery reuse, and both themes. |
 | [post_models_test.dart](test/post_models_test.dart) | Lossless legacy metadata, typed details, validation precedence, schedule boundaries, and configurable text direction. |
 
-The latest completed application verification on **29 October 2026** reported
-**84 passing tests** and no analyzer issues. During the refactor, four temporary
+The latest completed application verification on **30 October 2026** reported
+**98 passing tests** and no analyzer issues. During the refactor, four temporary
 before/after comparisons also confirmed identical form pixels at widths 320 and
 390 in both light and dark mode. Those comparison fixtures were removed after
-verification; they are not part of the current 84-test suite. The chat changes add
-14 focused tests to the existing 50, followed by 7 call-preview tests and 13 attachment-flow tests. Chat media layouts were also rendered and
+verification; they are not part of the current 98-test suite. The chat changes add
+14 focused tests to the existing 50, followed by 7 call-preview tests and 13
+attachment-flow tests. Gallery loading fixes add another 11 tests; sheet theme checks add 3. Chat media
+layouts were also rendered and
 checked in light and dark mode; native microphone behavior still needs a physical
 phone check.
 

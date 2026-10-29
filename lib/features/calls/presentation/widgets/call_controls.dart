@@ -1,4 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
+import 'package:nini/core/icons/app_icons.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
@@ -40,7 +44,7 @@ class CallControls extends StatelessWidget {
           if (!incoming)
             CallActionButton(
               label: AppStrings.returnToChat,
-              icon: Icons.chat_bubble_outline_rounded,
+              icon: AppIcons.chat,
               onPressed: onMessage,
             ),
           if (!incoming)
@@ -50,13 +54,14 @@ class CallControls extends StatelessWidget {
                   : AppStrings.muteCall,
               selected: session.microphoneMuted,
               icon: session.microphoneMuted
-                  ? Icons.mic_off_outlined
-                  : Icons.mic_none,
+                  ? AppIcons.microphoneOff
+                  : AppIcons.microphone,
               onPressed: connected ? onMute : null,
             ),
           CallActionButton(
             label: incoming ? AppStrings.declineCall : AppStrings.endCall,
-            icon: Icons.call_end_rounded,
+            icon: AppIcons.phone,
+            rotation: math.pi * .75,
             onPressed: onEnd,
             size: incoming ? 54 : 56,
             color: const Color(0xFFFF454D),
@@ -65,7 +70,7 @@ class CallControls extends StatelessWidget {
           if (incoming) ...[
             CallActionButton(
               label: AppStrings.answerCall,
-              icon: Icons.call_rounded,
+              icon: AppIcons.phone,
               onPressed: busy ? null : onAccept,
               size: 54,
               color: const Color(0xFF31EF73),
@@ -73,7 +78,7 @@ class CallControls extends StatelessWidget {
             ),
             CallActionButton(
               label: AppStrings.returnToChat,
-              icon: Icons.chat_bubble_rounded,
+              icon: AppIcons.chat,
               onPressed: onMessage,
               size: 54,
               color: const Color(0xFFFFD447),
@@ -86,8 +91,8 @@ class CallControls extends StatelessWidget {
                     ? AppStrings.turnCameraOff
                     : AppStrings.turnCameraOn,
                 icon: session.cameraEnabled
-                    ? Icons.videocam_outlined
-                    : Icons.videocam_off_outlined,
+                    ? AppIcons.video
+                    : AppIcons.videoOff,
                 selected: !session.cameraEnabled,
                 onPressed: connected ? onCamera : null,
               ),
@@ -98,8 +103,10 @@ class CallControls extends StatelessWidget {
                         ? AppStrings.speakerOff
                         : AppStrings.speakerOn),
               icon: video
-                  ? Icons.cameraswitch_outlined
-                  : Icons.volume_up_outlined,
+                  ? AppIcons.refresh
+                  : (session.speakerEnabled
+                        ? AppIcons.speaker
+                        : AppIcons.speakerQuiet),
               selected: !video && session.speakerEnabled,
               onPressed: connected
                   ? (video ? onSwitchCamera : onSpeaker)

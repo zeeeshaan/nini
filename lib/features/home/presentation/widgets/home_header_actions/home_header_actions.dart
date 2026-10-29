@@ -40,7 +40,7 @@ class HomeHeaderActions extends StatelessWidget {
             IconButton(
               onPressed: onMessagesPressed ?? () => _openChatScreen(context),
               tooltip: AppStrings.messages,
-              icon: const AppIcon(AppIcons.send, size: 27),
+              icon: const AppIcon(AppIcons.chat, size: 27),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 42, minHeight: 42),
             ),

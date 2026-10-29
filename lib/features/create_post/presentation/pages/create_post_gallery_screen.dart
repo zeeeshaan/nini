@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
@@ -126,8 +129,8 @@ class _CreatePostGalleryView extends StatelessWidget {
                       IconButton(
                         tooltip: AppStrings.close,
                         onPressed: () => _close(context),
-                        icon: Icon(
-                          Icons.close,
+                        icon: AppIcon(
+                          AppIcons.close,
                           size: 26,
                           color: colors.onSurface,
                         ),

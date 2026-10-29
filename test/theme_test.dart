@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -20,18 +21,32 @@ Finder clientIcon(String asset) => find.byWidgetPredicate(
   (widget) => widget is AppIcon && widget.asset == asset,
 );
 
-/// Check rendered text and PNG tints, including the disabled header buttons.
+/// Check rendered text and vector/legacy raster tints, including disabled buttons.
 void expectForeground(WidgetTester tester, Color color) {
   for (final element in find.byType(AppIcon).evaluate()) {
-    final image = tester.widget<Image>(
-      find.descendant(
-        of: find.byElementPredicate(
-          (candidate) => identical(candidate, element),
-        ),
-        matching: find.byType(Image),
-      ),
+    final icon = element.widget as AppIcon;
+    final descendants = find.descendant(
+      of: find.byElementPredicate((candidate) => identical(candidate, element)),
+      matching: find.byType(icon.asset.endsWith('.svg') ? SvgPicture : Image),
     );
-    expect(image.color, color, reason: (element.widget as AppIcon).asset);
+    if (icon.asset.endsWith('.svg')) {
+      expect(
+        tester.widget<SvgPicture>(descendants).colorFilter,
+        ColorFilter.mode(color, BlendMode.srcIn),
+        reason: icon.asset,
+      );
+      expect(
+        tester.widget<SvgPicture>(descendants).renderingStrategy.name,
+        'picture',
+        reason: icon.asset,
+      );
+    } else {
+      expect(
+        tester.widget<Image>(descendants).color,
+        color,
+        reason: icon.asset,
+      );
+    }
   }
   for (final element in find.byType(Text).evaluate()) {
     final richText = find.descendant(

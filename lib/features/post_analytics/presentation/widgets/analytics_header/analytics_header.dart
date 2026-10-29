@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/post_media/post_media_view.dart';
@@ -80,7 +83,7 @@ class AnalyticsPostHeader extends StatelessWidget {
                       post.imageAsset,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stack) => const Center(
-                        child: Icon(Icons.image_not_supported_outlined),
+                        child: AppIcon(AppIcons.imageUnavailable),
                       ),
                     ),
             ),

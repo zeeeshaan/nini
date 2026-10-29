@@ -27,18 +27,33 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('All client icons are bundled; reference sheets are excluded', () async {
-    final entries =
-        jsonDecode(File('tool/client_icons.json').readAsStringSync()) as List;
+    final entries = [
+      ...jsonDecode(File('tool/client_icons.json').readAsStringSync()) as List,
+      ...jsonDecode(File('tool/supplemental_vectors.json').readAsStringSync())
+          as List,
+    ];
     final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
     final assets = manifest.listAssets().toSet();
 
-    expect(entries, hasLength(657));
+    expect(entries, hasLength(1078));
     for (final entry in entries) {
       final asset = entry['asset'] as String;
       expect(assets, contains(asset), reason: 'Missing bundled client icon');
       final bytes = await rootBundle.load(asset);
       expect(bytes.lengthInBytes, greaterThan(0), reason: asset);
       expect(assets, isNot(contains(entry['source'])));
+      if (entry['reference_crop'] != null) {
+        expect(assets, isNot(contains(entry['reference_crop'])));
+        final svg = utf8.decode(
+          bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+        );
+        expect(svg, contains('<svg'));
+        expect(
+          svg,
+          isNot(contains('<image')),
+          reason: 'Vector must not embed a bitmap: $asset',
+        );
+      }
     }
   });
 
@@ -59,7 +74,7 @@ void main() {
 
     expect(clientIcon(AppIcons.home), findsOneWidget);
     expect(clientIcon(AppIcons.cart), findsOneWidget);
-    expect(clientIcon(AppIcons.send), findsOneWidget);
+    expect(clientIcon(AppIcons.chat), findsOneWidget);
     expect(clientIcon(AppIcons.more), findsOneWidget);
     expect(clientIcon(AppIcons.add), findsNWidgets(2));
     expect(tester.takeException(), isNull);

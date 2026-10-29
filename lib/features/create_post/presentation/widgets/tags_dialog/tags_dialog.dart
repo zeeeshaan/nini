@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/features/create_post/presentation/widgets/post_dialog/post_dialog.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 
@@ -38,6 +40,7 @@ class _TagsDialogState extends State<TagsDialog> {
   @override
   Widget build(BuildContext context) => PostDialog(
     title: AppStrings.tagsKeywords,
+    icon: AppIcons.tag,
     actions: PostDialogActions(
       onDone: () {
         _add();
@@ -55,7 +58,7 @@ class _TagsDialogState extends State<TagsDialog> {
             suffixIcon: IconButton(
               tooltip: AppStrings.addTags,
               onPressed: _add,
-              icon: const Icon(Icons.add),
+              icon: const AppIcon(AppIcons.add),
             ),
           ),
           const SizedBox(height: 18),
@@ -66,6 +69,7 @@ class _TagsDialogState extends State<TagsDialog> {
               for (final tag in _tags)
                 InputChip(
                   label: Text('#$tag'),
+                  deleteIcon: const AppIcon(AppIcons.close, size: 18),
                   onDeleted: () => setState(() => _tags.remove(tag)),
                 ),
             ],
