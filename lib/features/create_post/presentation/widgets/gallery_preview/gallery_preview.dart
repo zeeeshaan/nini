@@ -218,7 +218,7 @@ class GalleryFileTile extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              extension.length > 4 ? extension.substring(0, 4) : extension,
+              AppStrings.fileTypeLabel(extension),
               style: TextStyle(
                 color:
                     extension == 'PDF' ||

@@ -149,7 +149,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                 height: 48,
                 child: TextField(
                   controller: _searchController,
-                  textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.rtl,
                   textAlign: TextAlign.right,
                   textInputAction: TextInputAction.search,
                   onChanged: (value) {

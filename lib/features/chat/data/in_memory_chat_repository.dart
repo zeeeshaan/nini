@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/domain/repositories/chat_messages_repository.dart';
 
@@ -64,7 +65,7 @@ class InMemoryChatRepository implements ChatMessagesRepository {
       ChatMessage(
         id: '${conversationId}_1',
         conversationId: conversationId,
-        text: 'Hi! Is this still available?',
+        text: AppStrings.demoAskAvailability,
         sentAt: now.subtract(const Duration(minutes: 25)),
         isMine: true,
         deliveryStatus: ChatDeliveryStatus.read,
@@ -72,14 +73,14 @@ class InMemoryChatRepository implements ChatMessagesRepository {
       ChatMessage(
         id: '${conversationId}_2',
         conversationId: conversationId,
-        text: 'Hello! Yes, it is available.',
+        text: AppStrings.demoConfirmAvailability,
         sentAt: now.subtract(const Duration(minutes: 24)),
         isMine: false,
       ),
       ChatMessage(
         id: '${conversationId}_3',
         conversationId: conversationId,
-        text: 'Can you share more information about it?',
+        text: AppStrings.demoAskDetails,
         sentAt: now.subtract(const Duration(minutes: 22)),
         isMine: true,
         deliveryStatus: ChatDeliveryStatus.read,
@@ -87,14 +88,14 @@ class InMemoryChatRepository implements ChatMessagesRepository {
       ChatMessage(
         id: '${conversationId}_4',
         conversationId: conversationId,
-        text: 'Of course! I can share all the details with you.',
+        text: AppStrings.demoShareDetails,
         sentAt: now.subtract(const Duration(minutes: 20)),
         isMine: false,
       ),
       ChatMessage(
         id: '${conversationId}_5',
         conversationId: conversationId,
-        text: 'That would be great. Thank you!',
+        text: AppStrings.demoThankYou,
         sentAt: now.subtract(const Duration(minutes: 18)),
         isMine: true,
         deliveryStatus: ChatDeliveryStatus.read,

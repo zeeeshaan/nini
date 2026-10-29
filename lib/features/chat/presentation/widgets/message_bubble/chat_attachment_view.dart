@@ -127,8 +127,8 @@ class ChatAttachmentView extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                _size(attachment.sizeBytes),
-                textDirection: TextDirection.ltr,
+                AppStrings.chatFileSize(attachment.sizeBytes),
+                textDirection: TextDirection.rtl,
                 style: TextStyle(
                   fontSize: 10,
                   color: foreground.withValues(alpha: .7),
@@ -140,10 +140,4 @@ class ChatAttachmentView extends StatelessWidget {
       ),
     );
   }
-
-  String _size(int bytes) => AppStrings.persianDigits(
-    bytes >= 1048576
-        ? '${(bytes / 1048576).toStringAsFixed(1)} MB'
-        : '${(bytes / 1024).ceil()} KB',
-  );
 }

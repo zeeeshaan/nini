@@ -151,7 +151,7 @@ abstract final class AppStrings {
       'برای انتخاب موقعیت دقیق روی نقشه بزنید. نمای اولیه نقشه، تهران است.';
   static const mapUnavailable =
       'نقشه در دسترس نیست. اتصال اینترنت را بررسی کنید.';
-  static const mapAttribution = '© مشارکت‌کنندگان OpenStreetMap';
+  static const mapAttribution = '© مشارکت‌کنندگان اوپن‌استریت‌مپ';
   static const feature = 'ویژگی';
   static const featureValue = 'مقدار';
   static const addFeature = 'افزودن ویژگی';
@@ -270,6 +270,53 @@ abstract final class AppStrings {
     'Services' => services,
     _ => category,
   };
+
+  // Bundled demo contacts and messages, also used by the call preview headers.
+  static const chatSupportName = 'پشتیبانی';
+  static const demoObidName = 'عبید اماتی';
+  static const demoSarahName = 'سارا احمد';
+  static const demoAlexName = 'الکس مورگان';
+  static const demoDavidName = 'دیوید ویلسون';
+  static const demoNinaName = 'نینا پارکر';
+  static const demoJamesName = 'جیمز کارتر';
+  static const demoSupportPreview = 'امروز چطور می‌توانیم کمکتان کنیم؟';
+  static const demoThanksPreview = 'از پیامتان ممنونم.';
+  static const demoDetailsPreview = 'جزئیات را برایتان می‌فرستم.';
+  static const demoAvailabilityPreview = 'این محصول هنوز موجود است؟';
+  static const demoPricePreview = 'می‌توانیم درباره قیمت صحبت کنیم؟';
+  static const demoSoundsGoodPreview = 'خیلی خوب است، ممنون!';
+  static const demoSoonPreview = 'به‌زودی به شما پاسخ می‌دهم.';
+  static const demoMoreInfoPreview = 'لطفاً اطلاعات بیشتری بفرستید.';
+  static const demoAskAvailability = 'سلام! این کالا هنوز موجود است؟';
+  static const demoConfirmAvailability = 'سلام! بله، موجود است.';
+  static const demoAskDetails = 'می‌توانید اطلاعات بیشتری درباره آن بدهید؟';
+  static const demoShareDetails = 'حتماً! همه جزئیات را برایتان می‌فرستم.';
+  static const demoThankYou = 'عالی می‌شود. ممنون!';
+
+  static String chatFileSize(int bytes) => bytes >= 1048576
+      ? '${persianDigits((bytes / 1048576).toStringAsFixed(1))} مگابایت'
+      : '${persianDigits((bytes / 1024).ceil())} کیلوبایت';
+
+  /// Display-only file labels; extensions and original filenames stay intact.
+  static String fileTypeLabel(String extension) =>
+      switch (extension.toUpperCase()) {
+        'PDF' || 'DOC' || 'DOCX' || 'TXT' || 'RTF' || 'ODT' => document,
+        'JPG' ||
+        'JPEG' ||
+        'PNG' ||
+        'GIF' ||
+        'HEIC' ||
+        'HEIF' ||
+        'WEBP' ||
+        'BMP' ||
+        'SVG' => photo,
+        'MP4' || 'MKV' || 'MOV' || 'AVI' || 'WEBM' || 'M4V' => video,
+        'M4A' || 'AAC' || 'MP3' || 'WAV' || 'OGG' || 'FLAC' => 'صوت',
+        'ZIP' || 'RAR' || '7Z' || 'TAR' || 'GZ' => 'فشرده',
+        'XLS' || 'XLSX' || 'CSV' || 'ODS' => 'جدول',
+        'PPT' || 'PPTX' || 'ODP' => 'اسلاید',
+        _ => genericFile,
+      };
 
   // Chat controls and messages.
   static const chat = 'گفتگوها';

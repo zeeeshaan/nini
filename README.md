@@ -533,10 +533,16 @@ period/legend controls, navigation, and light/dark narrow-screen coverage.
 ## Persian text on the new screens
 
 Gallery selection, the create-post form, its option dialogs, publishing messages,
-and post analytics use Persian copy from `lib/core/localization/app_strings.dart`.
+post analytics, chat, call previews, and attachment sheets use Persian copy from
+`lib/core/localization/app_strings.dart`.
 This includes buttons, hints, validation errors, tooltips, chart legends, period
 menus, month/weekday labels, and numeric summaries. Add future UI labels there
 and reference `AppStrings` in widgets instead of hard-coding English text.
+Bundled contact names, inbox previews, and demo conversation messages are Persian
+as well. Chat search uses right-to-left input. Attachment sizes use Persian
+kilobyte/megabyte labels, and file badges show Persian type names while preserving
+original filenames and extensions. The map attribution is displayed in Persian
+and retains its OpenStreetMap credit link.
 
 The app locale remains `fa_IR`. Material date/time controls use its localized
 labels. The caption editor explicitly loads Persian Quill/Flutter localization;
