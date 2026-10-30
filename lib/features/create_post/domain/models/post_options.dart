@@ -2,6 +2,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/models/post/post_attributes.dart';
 
 export 'package:nini/shared/models/post/post_attributes.dart';
+export 'package:nini/shared/models/post/post_unit.dart';
 
 enum PreparationTime {
   none('آماده‌سازی ندارد', null),
@@ -18,22 +19,6 @@ enum PreparationTime {
   const PreparationTime(this.label, this.days);
   final String label;
   final int? days;
-}
-
-enum PostUnit {
-  piece(AppStrings.unitPiece),
-  item(AppStrings.unitItem),
-  hour(AppStrings.unitHour),
-  day(AppStrings.unitDay),
-  session(AppStrings.unitSession),
-  project(AppStrings.unitProject),
-  meter(AppStrings.unitMeter),
-  centimeter(AppStrings.unitCentimeter),
-  kilogram(AppStrings.unitKilogram),
-  set(AppStrings.unitSet);
-
-  const PostUnit(this.label);
-  final String label;
 }
 
 enum InventoryStatus {

@@ -14,6 +14,7 @@ import 'package:nini/features/post_detail/presentation/widgets/content/post_cont
 import 'package:nini/features/post_detail/presentation/widgets/engagement_bar/post_engagement_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/feature_table/post_features_table.dart';
 import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
+import 'package:nini/features/post_detail/presentation/widgets/pricing/post_pricing.dart';
 import 'package:nini/features/posts/presentation/widgets/published_post_content.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -129,6 +130,11 @@ class PostDetailScreen extends StatelessWidget {
 
                             StaggeredEntrance(
                               index: 3,
+                              child: PostPricing(post: post),
+                            ),
+
+                            StaggeredEntrance(
+                              index: 4,
                               child: post.isPublished
                                   ? PublishedPostContent(post: post)
                                   : const PostContent(),
@@ -136,7 +142,7 @@ class PostDetailScreen extends StatelessWidget {
 
                             if (!post.isPublished || post.features.isNotEmpty)
                               StaggeredEntrance(
-                                index: 4,
+                                index: 5,
                                 child: PostFeaturesTable(
                                   features: post.isPublished
                                       ? post.features

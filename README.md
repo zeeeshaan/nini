@@ -319,7 +319,17 @@ error, and re-enables Publish. Success returns a typed `PostItem` through detail
 | `shared/models/post/post_item.dart` and `post_media.dart` | Post identity, media, compatibility accessors, and JSON serialization. |
 | `shared/models/post/post_details.dart` and `post_attributes.dart` | Typed caption, tags, address, schedule, features, stock/discount details, and legacy metadata compatibility. |
 | `shared/widgets/post_media/post_media_view.dart` | Displays app-owned image files, video thumbnails when available, and named file/video placeholders. |
-| `features/posts/presentation/widgets/published_post_content.dart` | Read-only rich caption, actual title/price/tags/address, and saved schedule metadata. |
+| `features/posts/presentation/widgets/published_post_content.dart` | Read-only rich caption, actual title/tags/address, and saved schedule metadata. |
+| `features/post_detail/presentation/widgets/pricing/post_pricing.dart` | Shared single-post pricing block: saved sale price, struck-through original price when discounted, and the selected unit. |
+
+The single-post page displays pricing below the engagement bar for both sample
+and published posts. Prices use Persian digits, unit names use the existing
+Persian labels, and the block follows the page's light/dark theme and RTL layout.
+`PostDetails.unit` reads the unit already saved in draft metadata; existing posts
+need no storage migration. `PostUnit` lives in `shared/models/post/post_unit.dart`
+and is re-exported by create-post options so existing form imports still work.
+Sample products explicitly use the piece unit. Missing prices and missing or
+unknown legacy units are omitted rather than assigning invented values.
 
 Published posts and media are stored under `nini_posts/` in the application
 Documents directory (`path_provider` on other platforms; the iOS sandbox directly

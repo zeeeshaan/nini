@@ -1,6 +1,8 @@
 import 'package:nini/shared/models/post/post_attributes.dart';
+import 'package:nini/shared/models/post/post_unit.dart';
 
 export 'package:nini/shared/models/post/post_attributes.dart';
+export 'package:nini/shared/models/post/post_unit.dart';
 
 /// Typed details for presentation. Legacy metadata remains lossless at the JSON
 /// boundary, including fields not yet consumed by the app.
@@ -14,6 +16,7 @@ class PostDetails {
     this.features = const [],
     this.warehouseStock = '',
     this.discount = '',
+    this.unit,
     this.altTexts = const {},
   }) : _serialized = null;
 
@@ -26,11 +29,13 @@ class PostDetails {
     required this.features,
     required this.warehouseStock,
     required this.discount,
+    required this.unit,
     required this.altTexts,
     required Map<String, dynamic> this._serialized,
   });
 
   final String caption, warehouseStock, discount;
+  final PostUnit? unit;
   final List<Map<String, dynamic>> captionDelta;
   final List<String> tags;
   final PostAddress? address;
@@ -69,6 +74,7 @@ class PostDetails {
     ),
     warehouseStock: json['warehouseStock'] as String? ?? '',
     discount: json['discount']?.toString() ?? '',
+    unit: PostUnit.fromName(json['unit'] as String?),
     altTexts: Map<String, String>.unmodifiable(
       Map<String, String>.from(json['altTexts'] as Map? ?? {}),
     ),
@@ -86,6 +92,7 @@ class PostDetails {
         'features': features.map((feature) => feature.toJson()).toList(),
         'warehouseStock': warehouseStock,
         'discount': discount,
+        if (unit != null) 'unit': unit!.name,
         'altTexts': altTexts,
       };
 }

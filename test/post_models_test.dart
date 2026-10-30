@@ -59,6 +59,7 @@ void main() {
         DateTime.utc(2027, 2, 4, 5),
       );
       expect(post.details.tags, ['Handmade', 'دست‌ساز']);
+      expect(post.details.unit, PostUnit.hour);
       expect(post.details.features.single.name, 'Material');
       expect(post.details.altTexts['asset:one'], 'Image description');
       expect(post.caption, metadata['caption']);
@@ -89,15 +90,26 @@ void main() {
         stockCount: 0,
         price: '',
         originalPrice: '',
-        details: PostDetails(caption: 'Existing caption'),
+        details: PostDetails(caption: 'Existing caption', unit: PostUnit.hour),
       );
       expect(legacy.caption, typed.caption);
       expect(legacy.details.address, isNull);
+      expect(legacy.details.unit, isNull);
       expect(legacy.features, isEmpty);
       expect(legacy.metadata, {'caption': 'Existing caption'});
       expect(PostItem.fromJson(typed.toJson()).caption, typed.caption);
+      expect(PostItem.fromJson(typed.toJson()).details.unit, PostUnit.hour);
     },
   );
+
+  test('Unknown saved units remain lossless without guessing a sale unit', () {
+    final details = PostDetails.fromJson({'unit': 'future_unit'});
+    expect(details.unit, isNull);
+    expect(details.toJson(), {'unit': 'future_unit'});
+    for (final unit in PostUnit.values) {
+      expect(PostDetails.fromJson({'unit': unit.name}).unit, unit);
+    }
+  });
 
   test(
     'Publishing validation keeps error precedence and schedule boundaries',

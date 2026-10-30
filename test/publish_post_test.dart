@@ -25,6 +25,7 @@ import 'package:nini/features/create_post/presentation/widgets/caption_editor/ca
 import 'package:nini/features/create_post/presentation/widgets/gallery_grid/gallery_grid.dart';
 import 'package:nini/features/home/presentation/widgets/home_post_card/home_post_card.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
+import 'package:nini/features/post_detail/presentation/widgets/pricing/post_pricing.dart';
 import 'package:nini/features/posts/data/local_posts_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
@@ -90,6 +91,7 @@ PostDraft validDraft() => const PostDraft(
   price: '۲۰۰',
   discount: '25',
   warehouseStock: '3',
+  unit: PostUnit.hour,
   features: [PostFeature(name: 'Material', value: 'Steel')],
   tags: ['handmade'],
 );
@@ -140,6 +142,7 @@ void main() {
       expect(result.title, 'My published item');
       expect(result.price, '150');
       expect(result.originalPrice, '200');
+      expect(result.details.unit, PostUnit.hour);
       expect(result.stockCount, 3);
       expect(result.media.single.path, isNot(image.path));
       expect(
@@ -155,6 +158,7 @@ void main() {
       expect(await File(restored.single.media.single.path).exists(), isTrue);
       expect(restored.single.captionDelta.first['attributes'], {'bold': true});
       expect(restored.single.features, [('Material', 'Steel')]);
+      expect(restored.single.details.unit, PostUnit.hour);
       expect(restored.single.metadata['tags'], ['handmade']);
       final index = jsonDecode(
         await File(p.join(directory.path, 'nini_posts', 'posts.json'))
@@ -337,6 +341,7 @@ void main() {
             .element(find.byType(CreatePostDetailsScreen))
             .read<CreatePostCubit>();
         draft.selectPostType(CreatePostType.product);
+        draft.selectUnit(PostUnit.hour);
         await tester.ensureVisible(input(AppStrings.productServiceTitle));
         await tester.enterText(
           input(AppStrings.productServiceTitle),
@@ -384,6 +389,23 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byType(PostDetailScreen), findsOneWidget);
         expect(find.byType(PublishedPostContent), findsOneWidget);
+        final pricing = find.byType(PostPricing);
+        expect(pricing, findsOneWidget);
+        expect(
+          find.descendant(of: pricing, matching: find.text('۱۵۰')),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: pricing, matching: find.text('۲۰۰')),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: pricing,
+            matching: find.text('${AppStrings.unit}: ${AppStrings.unitHour}'),
+          ),
+          findsOneWidget,
+        );
         expect(find.text('Steel'), findsOneWidget);
         expect(find.text(AppStrings.postTitle), findsNothing);
         final contentEditor = tester.widget<quill.QuillEditor>(

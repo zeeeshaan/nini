@@ -52,13 +52,6 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
             style: theme.textTheme.titleLarge,
           ),
           const SizedBox(height: 12),
-          if (post.price.isNotEmpty)
-            Text(
-              AppStrings.persianDigits(post.price),
-              textAlign: TextAlign.right,
-              style: theme.textTheme.titleMedium,
-            ),
-          const SizedBox(height: 12),
           Localizations.override(
             context: context,
             delegates: const [quill.FlutterQuillLocalizations.delegate],

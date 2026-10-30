@@ -150,6 +150,12 @@ void main() {
       await tester.tap(find.byType(HomePostCard).first);
       await tester.pumpAndSettle();
       expect(find.byType(PostDetailScreen), findsOneWidget);
+      expect(find.text('${AppStrings.price}:'), findsOneWidget);
+      expect(find.text('۱۲٬۰۰۰'), findsOneWidget);
+      expect(
+        find.text('${AppStrings.unit}: ${AppStrings.unitPiece}'),
+        findsOneWidget,
+      );
       expectForeground(tester, Colors.white);
 
       await tester.tap(clientIcon(AppIcons.heart));

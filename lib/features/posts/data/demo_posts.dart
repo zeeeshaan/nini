@@ -10,6 +10,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_2',
@@ -19,6 +20,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_3',
@@ -28,6 +30,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_4',
@@ -37,6 +40,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_5',
@@ -46,6 +50,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_6',
@@ -55,6 +60,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_7',
@@ -64,6 +70,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_8',
@@ -73,6 +80,7 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
   PostItem(
     id: 'post_9',
@@ -82,5 +90,6 @@ const demoPosts = <PostItem>[
     stockCount: 2,
     price: '12,000',
     originalPrice: '13,000',
+    details: PostDetails(unit: PostUnit.piece),
   ),
 ];
