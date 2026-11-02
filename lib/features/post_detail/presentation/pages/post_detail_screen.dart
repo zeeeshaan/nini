@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/post_analytics/presentation/pages/post_analytics_screen.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/activity_tracking/post_activity_tracking.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/features/post_detail/presentation/widgets/author_header/post_author_header.dart';
-import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
-import 'package:nini/features/post_detail/presentation/widgets/engagement_bar/post_engagement_bar.dart';
-import 'package:nini/features/post_detail/presentation/widgets/feature_table/post_features_table.dart';
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
-import 'package:nini/features/post_detail/presentation/widgets/pricing/post_pricing.dart';
-import 'package:nini/features/posts/presentation/widgets/published_post_content.dart';
+import 'package:nini/features/post_detail/presentation/widgets/content/post_detail_body.dart';
+import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:nini/features/posts/presentation/helpers/manage_post_actions.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -27,6 +21,7 @@ class PostDetailScreen extends StatelessWidget {
     this.onCommentsPressed,
     this.onSharePressed,
     this.onMorePressed,
+    this.onEditPressed,
   });
 
   final PostItem post;
@@ -36,8 +31,25 @@ class PostDetailScreen extends StatelessWidget {
   final VoidCallback? onSharePressed;
   final VoidCallback? onMorePressed;
 
+  /// Supplied only for editable posts on the current user's profile.
+  final ValueChanged<PostItem>? onEditPressed;
+
   @override
   Widget build(BuildContext context) {
+    final posts = context.read<PostsCubit?>();
+    if (posts == null) return _buildDetail(context, post);
+    return BlocBuilder<PostsCubit, PostsState>(
+      bloc: posts,
+      buildWhen: (previous, current) => previous.posts != current.posts,
+      builder: (context, state) {
+        final current =
+            state.posts.where((item) => item.id == post.id).firstOrNull ?? post;
+        return _buildDetail(context, current);
+      },
+    );
+  }
+
+  Widget _buildDetail(BuildContext context, PostItem post) {
     final images = galleryImages != null && galleryImages!.isNotEmpty
         ? galleryImages!
         : <String>[post.imageAsset];
@@ -77,87 +89,16 @@ class PostDetailScreen extends StatelessWidget {
               ),
             ),
 
-            body: SafeArea(
-              top: false,
-              child: AppResponsiveBuilder(
-                builder: (context, responsive) {
-                  final maxWidth = responsive.adaptive<double>(
-                    compact: 600,
-                    medium: 640,
-                    expanded: 720,
-                  );
-
-                  return Align(
-                    alignment: Alignment.topCenter,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: maxWidth),
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            StaggeredEntrance(
-                              child: PostAuthorHeader(
-                                onMorePressed: onMorePressed,
-                                name: post.isPublished
-                                    ? AppStrings.sellerName
-                                    : AppStrings.authorName,
-                                location: post.isPublished
-                                    ? (post.details.address?.address ?? '')
-                                    : AppStrings.authorLocation,
-                                avatarAsset: post.isPublished
-                                    ? 'assets/Mask group.png'
-                                    : 'assets/images/profile_avatar.png',
-                              ),
-                            ),
-
-                            StaggeredEntrance(
-                              index: 1,
-                              child: PostImageCarousel(
-                                images: images,
-                                media: post.media,
-                              ),
-                            ),
-
-                            StaggeredEntrance(
-                              index: 2,
-                              child: PostEngagementBar(
-                                onCommentsPressed: onCommentsPressed,
-                                showSampleMetrics: !post.isPublished,
-                                onSharePressed: onSharePressed,
-                              ),
-                            ),
-
-                            StaggeredEntrance(
-                              index: 3,
-                              child: PostPricing(post: post),
-                            ),
-
-                            StaggeredEntrance(
-                              index: 4,
-                              child: post.isPublished
-                                  ? PublishedPostContent(post: post)
-                                  : const PostContent(),
-                            ),
-
-                            if (!post.isPublished || post.features.isNotEmpty)
-                              StaggeredEntrance(
-                                index: 5,
-                                child: PostFeaturesTable(
-                                  features: post.isPublished
-                                      ? post.features
-                                      : AppStrings.features,
-                                ),
-                              ),
-
-                            const SizedBox(height: 40),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+            body: PostDetailBody(
+              post: post,
+              images: images,
+              onCommentsPressed: onCommentsPressed,
+              onSharePressed: onSharePressed,
+              onMorePressed:
+                  context.read<PostsCubit?>()?.state.canManage(post) == true
+                  ? () =>
+                        managePostActions(context, post, onEdit: onEditPressed)
+                  : onMorePressed,
             ),
           ),
         ),

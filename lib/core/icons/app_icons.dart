@@ -6,15 +6,21 @@ abstract final class AppIcons {
   static const moon = 'assets/icons/vectors/environment/moon.svg';
   static const home = 'assets/icons/vectors/navigation/house-01.svg';
   static const cart = 'assets/icons/vectors/interface/shopping-cart-01.svg';
+  static const shoppingBag =
+      'assets/icons/vectors/interface/shopping-bag-02.svg';
   static const add = 'assets/icons/vectors/edit/add-plus.svg';
   static const search =
       'assets/icons/vectors/interface/search-magnifying-glass.svg';
   static const profile = 'assets/icons/vectors/user/user-circle.svg';
   static const send = 'assets/icons/vectors/communication/paper-plane.svg';
   static const more = 'assets/icons/vectors/menu/more-vertical.svg';
+  static const notifications = 'assets/icons/vectors/communication/bell.svg';
   static const back = 'assets/icons/vectors/arrows/chevron-left-md.svg';
   static const bookmark = 'assets/icons/vectors/interface/bookmark.svg';
+  static const bookmarkFilled =
+      'assets/icons/vectors/interface/bookmark-filled.svg';
   static const heart = 'assets/icons/vectors/interface/heart-01.svg';
+  static const heartFilled = 'assets/icons/vectors/interface/heart-filled.svg';
   static const share = 'assets/icons/vectors/communication/share-android.svg';
   static const imageUnavailable = 'assets/icons/images/image-x.png';
   static const tag = 'assets/icons/vectors/interface/tag.svg';
@@ -60,6 +66,15 @@ abstract final class AppIcons {
   static const strikethrough = 'assets/icons/vectors/edit/strikethrough.svg';
   static const undo = 'assets/icons/vectors/edit/undo.svg';
   static const redo = 'assets/icons/vectors/edit/redo.svg';
+  static const walletTopUp = 'assets/icons/finance/bank-note-04.png';
+  static const walletTransfer = 'assets/icons/finance/coins-rotate.png';
+  static const walletRequest = 'assets/icons/finance/coin-hand.png';
+  static const walletWithdraw = 'assets/icons/finance/wallet-03.png';
+  static const walletPayment =
+      'assets/icons/vectors/interface/credit-card-02.svg';
+  static const bank = 'assets/icons/finance/bank.png';
+  static const bankNote = 'assets/icons/finance/bank-note-01.png';
+  static const personOutline = 'assets/icons/vectors/user/user-01.svg';
   // Complementary icons not present in the supplemental screenshots.
   static const microphoneOff = 'assets/icons/media/microphone-off-01.png';
   static const video = 'assets/icons/media/video-on.png';

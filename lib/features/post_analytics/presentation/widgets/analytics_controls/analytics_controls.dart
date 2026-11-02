@@ -2,16 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-
-abstract final class AnalyticsColors {
-  static const purple = Color(0xFF9C83FF);
-  static const gold = Color(0xFFFFBC00);
-  static const blue = Color(0xFF009CFF);
-  static const pink = Color(0xFFFFA4DC);
-  static const orders = Color(0xFF2F80ED);
-}
 
 class AnalyticsSectionHeading extends StatelessWidget {
   const AnalyticsSectionHeading({
@@ -93,7 +86,7 @@ class AnalyticsTooltip extends StatelessWidget {
   final List<Color> colors;
   @override
   Widget build(BuildContext context) => Material(
-    color: Colors.transparent,
+    color: AppColors.transparent,
     child: Container(
       width: 176,
       padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
@@ -108,7 +101,7 @@ class AnalyticsTooltip extends StatelessWidget {
             : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .12),
+            color: AppColors.black.withValues(alpha: .12),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -225,12 +218,16 @@ class AnalyticsLegend extends StatelessWidget {
               width: 13,
               height: 13,
               decoration: BoxDecoration(
-                color: selected ? color : Colors.transparent,
+                color: selected ? color : AppColors.transparent,
                 border: Border.all(color: color),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: selected
-                  ? const AppIcon(AppIcons.check, size: 10, color: Colors.white)
+                  ? const AppIcon(
+                      AppIcons.check,
+                      size: 10,
+                      color: AppColors.white,
+                    )
                   : null,
             ),
             const SizedBox(width: 4),
@@ -287,7 +284,7 @@ class AnalyticsSummary extends StatelessWidget {
             const SizedBox(width: 4),
             const AppIcon(
               AppIcons.arrowDownRight,
-              color: AnalyticsColors.purple,
+              color: AppColors.analyticsPurple,
               size: 12,
             ),
           ],

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
+import 'package:nini/core/theme/app_colors.dart';
 
 class AnalyticsOrdersChart extends StatelessWidget {
   const AnalyticsOrdersChart({
@@ -41,7 +41,7 @@ class _OrdersPainter extends CustomPainter {
           Rect.fromLTWH(x, 0, width, plot.height),
           const Radius.circular(7),
         ),
-        Paint()..color = AnalyticsColors.orders.withValues(alpha: .23),
+        Paint()..color = AppColors.analyticsOrders.withValues(alpha: .23),
       );
       final height = values[i] / maxValue * plot.height;
       if (height > 0) {
@@ -50,7 +50,7 @@ class _OrdersPainter extends CustomPainter {
             Rect.fromLTWH(x, plot.bottom - height, width, height),
             const Radius.circular(7),
           ),
-          Paint()..color = AnalyticsColors.orders,
+          Paint()..color = AppColors.analyticsOrders,
         );
       }
       final text = TextPainter(

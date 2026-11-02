@@ -7,6 +7,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_theme.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/calls/data/preview_call_service.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
 import 'package:nini/features/calls/domain/services/call_service.dart';
@@ -92,7 +93,7 @@ class _CallViewState extends State<_CallView> {
     builder: (context, state) {
       final video = widget.type == CallType.video;
       final colors = Theme.of(context).colorScheme;
-      final foreground = video ? Colors.white : colors.onSurface;
+      final foreground = video ? AppColors.white : colors.onSurface;
       final controls = CallControls(
         session: state.session,
         video: video,
@@ -211,7 +212,7 @@ class _CallViewState extends State<_CallView> {
                                     _optionsVisible
                                         ? AppIcons.chevronDown
                                         : AppIcons.chevronUp,
-                                    color: Colors.white,
+                                    color: AppColors.white,
                                   ),
                                 ),
                                 if (_optionsVisible)

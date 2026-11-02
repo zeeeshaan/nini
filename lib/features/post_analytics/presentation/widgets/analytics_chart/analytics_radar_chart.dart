@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
+import 'package:nini/core/theme/app_colors.dart';
 
 class AnalyticsRadarChart extends StatelessWidget {
   const AnalyticsRadarChart({
@@ -113,8 +113,8 @@ class _RadarPainter extends CustomPainter {
       );
     }
 
-    if (showSecond) draw(second, AnalyticsColors.gold);
-    if (showFirst) draw(first, AnalyticsColors.purple);
+    if (showSecond) draw(second, AppColors.analyticsGold);
+    if (showFirst) draw(first, AppColors.analyticsPurple);
   }
 
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 /// Client artwork with Quill's existing selection, formatting, undo and redo
@@ -98,7 +98,7 @@ class _CaptionIconButton extends StatelessWidget {
       isSelected: selected,
       onPressed: onPressed,
       style: IconButton.styleFrom(
-        backgroundColor: selected ? colors.primary : Colors.transparent,
+        backgroundColor: selected ? colors.primary : AppColors.transparent,
         foregroundColor: selected ? colors.onPrimary : colors.onSurface,
         disabledForegroundColor: colors.onSurface.withValues(alpha: .4),
       ),

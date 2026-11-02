@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
@@ -50,19 +49,23 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
             post.title,
             textAlign: TextAlign.right,
             style: theme.textTheme.titleLarge,
+            textDirection: TextDirection.rtl,
           ),
           const SizedBox(height: 12),
           Localizations.override(
             context: context,
             delegates: const [quill.FlutterQuillLocalizations.delegate],
-            child: quill.QuillEditor.basic(
-              controller: _caption,
-              focusNode: _focus,
-              scrollController: _scroll,
-              config: const quill.QuillEditorConfig(
-                scrollable: false,
-                enableInteractiveSelection: false,
-                padding: EdgeInsets.zero,
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: quill.QuillEditor.basic(
+                controller: _caption,
+                focusNode: _focus,
+                scrollController: _scroll,
+                config: const quill.QuillEditorConfig(
+                  scrollable: false,
+                  enableInteractiveSelection: false,
+                  padding: EdgeInsets.zero,
+                ),
               ),
             ),
           ),
@@ -71,12 +74,25 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: [for (final tag in tags) Chip(label: Text('#$tag'))],
+              children: [
+                for (final tag in tags)
+                  Chip(
+                    label: Text(
+                      '#$tag',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+              ],
             ),
           ],
           if (address != null) ...[
             const SizedBox(height: 16),
-            Text(address.address, textAlign: TextAlign.right),
+            Text(
+              address.address,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+            ),
           ],
           if (schedule != null) ...[
             const SizedBox(height: 12),
@@ -86,6 +102,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
                     .formatMediumDate(schedule.startsAt),
               ),
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
           ],
         ],

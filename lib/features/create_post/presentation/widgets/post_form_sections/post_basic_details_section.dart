@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quill/flutter_quill.dart' as quill;
-
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
@@ -11,7 +9,10 @@ import 'package:nini/features/create_post/presentation/widgets/alt_text_dialog/a
 import 'package:nini/features/create_post/presentation/widgets/caption_editor/caption_editor.dart';
 import 'package:nini/features/create_post/presentation/widgets/post_form_option_tile/post_form_option_tile.dart';
 import 'package:nini/features/create_post/presentation/widgets/post_type_dialog/post_type_dialog.dart';
+import 'package:nini/features/posts/presentation/widgets/post_category_selector/post_category_selector.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+
+import 'package:flutter_quill/flutter_quill.dart' as quill;
 
 class PostBasicDetailsSection extends StatelessWidget {
   const PostBasicDetailsSection({
@@ -30,6 +31,8 @@ class PostBasicDetailsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        const PostCategorySelector(),
+        const SizedBox(height: 16),
         BlocSelector<CreatePostCubit, PostDraft, CreatePostType?>(
           selector: (state) => state.postType,
           builder: (context, value) => PostFormOptionTile(

@@ -1,123 +1,98 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/posts/data/demo_posts.dart';
-import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
-class PostsState {
-  const PostsState({
-    this.posts = demoPosts,
-    this.isLoading = false,
-    this.isPublishing = false,
-    this.loadFailed = false,
-    this.publishError,
-    this.lastPublished,
-  });
-  final List<PostItem> posts;
-  final bool isLoading, isPublishing, loadFailed;
-  final String? publishError;
-  final PostItem? lastPublished;
-}
+import '../../domain/models/post_media_changes.dart';
+import '../../domain/posts_repository.dart';
+import 'posts_state.dart';
+
+export 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this.repository) : super(const PostsState());
   final PostsRepository repository;
   Future<void>? _loading;
-  Future<void> load() => state.isPublishing
+  Future<void> load() => state.isBusy
       ? Future.value()
       : _loading ??= _load().whenComplete(() => _loading = null);
   Future<void> _load() async {
-    emit(
-      PostsState(
-        posts: state.posts,
-        isLoading: true,
-        lastPublished: state.lastPublished,
-      ),
-    );
+    emit(state.copyWith(isLoading: true));
     try {
       final saved = await repository.load();
-      if (isClosed) return;
-      emit(
-        PostsState(
-          posts: List.unmodifiable([...saved, ...demoPosts]),
-          isPublishing: state.isPublishing,
-          lastPublished: state.lastPublished,
-        ),
-      );
-    } catch (_) {
       if (!isClosed) {
         emit(
-          PostsState(
-            posts: state.posts,
-            loadFailed: true,
-            isPublishing: state.isPublishing,
-            lastPublished: state.lastPublished,
+          state.copyWith(
+            posts: List.unmodifiable(saved),
+            isLoading: false,
+            loadFailed: false,
           ),
         );
       }
+    } catch (_) {
+      if (!isClosed) emit(state.copyWith(isLoading: false, loadFailed: true));
     }
   }
 
   Future<PostItem?> publish(
     PostDraft draft,
     List<GalleryAttachment> attachments,
-  ) async {
-    if (state.isPublishing) return null;
-    // Mark busy before awaiting a startup load, so a rapid second tap cannot publish twice.
+  ) => _persist(
+    () => repository.publish(draft, List.unmodifiable(attachments)),
+    publishing: true,
+  );
+  Future<PostItem?> update(
+    String postId,
+    PostDraft draft, {
+    PostMediaChanges? mediaChanges,
+  }) => _persist(
+    () => repository.update(postId, draft, mediaChanges: mediaChanges),
+    publishing: false,
+  );
+
+  Future<PostItem?> _persist(
+    Future<PostItem> Function() operation, {
+    required bool publishing,
+  }) async {
+    if (state.isBusy) return null;
     final loading = _loading;
-    emit(
-      PostsState(
-        posts: state.posts,
-        isPublishing: true,
-        loadFailed: state.loadFailed,
-        lastPublished: state.lastPublished,
-      ),
-    );
+    emit(state.copyWith(isPublishing: true, clearPublishError: true));
     if (loading != null) await loading;
     if (isClosed) return null;
-    emit(
-      PostsState(
-        posts: state.posts,
-        isPublishing: true,
-        loadFailed: state.loadFailed,
-        lastPublished: state.lastPublished,
-      ),
-    );
     try {
-      final post = await repository.publish(
-        draft,
-        List.unmodifiable(attachments),
-      );
+      final post = await operation();
       if (isClosed) return post;
       emit(
-        PostsState(
-          posts: List.unmodifiable([
-            post,
-            ...state.posts.where((entry) => entry.id != post.id),
-          ]),
-          lastPublished: post,
-          loadFailed: state.loadFailed,
+        state.copyWith(
+          posts: List.unmodifiable(
+            publishing
+                ? [post, ...state.posts.where((item) => item.id != post.id)]
+                : [
+                    for (final item in state.posts)
+                      if (item.id == post.id) post else item,
+                  ],
+          ),
+          isPublishing: false,
+          lastPublished: publishing || state.lastPublished?.id == post.id
+              ? post
+              : state.lastPublished,
         ),
       );
       return post;
     } catch (error, stackTrace) {
-      if (kDebugMode) {
-        debugPrint('Post publish failed: $error');
-        debugPrintStack(stackTrace: stackTrace);
-      }
+      _logFailure(error, stackTrace);
       if (!isClosed) {
         emit(
-          PostsState(
-            posts: state.posts,
-            loadFailed: state.loadFailed,
-            lastPublished: state.lastPublished,
+          state.copyWith(
+            isPublishing: false,
             publishError: error is PostPublishException
                 ? error.message
+                : !publishing
+                ? ProfilePostStrings.saveFailed
                 : error is MissingPluginException
                 ? AppStrings.storagePluginUnavailable
                 : error is PlatformException
@@ -127,6 +102,50 @@ class PostsCubit extends Cubit<PostsState> {
         );
       }
       return null;
+    }
+  }
+
+  void clearDeleteError() {
+    if (state.deleteError != null) emit(state.copyWith(clearDeleteError: true));
+  }
+
+  Future<bool> delete(String postId) async {
+    if (state.isBusy) return false;
+    final loading = _loading;
+    emit(state.copyWith(deletingPostId: postId, clearDeleteError: true));
+    if (loading != null) await loading;
+    if (isClosed) return false;
+    try {
+      await repository.delete(postId);
+      if (isClosed) return true;
+      emit(
+        state.copyWith(
+          posts: List.unmodifiable(
+            state.posts.where((item) => item.id != postId),
+          ),
+          clearDeletingPostId: true,
+          clearLastPublished: state.lastPublished?.id == postId,
+        ),
+      );
+      return true;
+    } catch (error, stackTrace) {
+      _logFailure(error, stackTrace);
+      if (!isClosed) {
+        emit(
+          state.copyWith(
+            clearDeletingPostId: true,
+            deleteError: ProfilePostStrings.deleteFailed,
+          ),
+        );
+      }
+      return false;
+    }
+  }
+
+  void _logFailure(Object error, StackTrace stackTrace) {
+    if (kDebugMode) {
+      debugPrint('Post operation failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
     }
   }
 }

@@ -1,0 +1,91 @@
+// dart format width=100
+import 'package:nini/shared/models/post/post_unit.dart';
+
+import 'cart_order_status.dart';
+
+/// Prices are whole toman; quantities use hundredths (250 means 2.5 units).
+/// Totals therefore stay exact integer hundredths of a toman.
+class CartItem {
+  const CartItem({
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.unit,
+    required this.unitPrice,
+    this.quantity = 100,
+    this.discountPerUnit = 0,
+    this.maxQuantity = 999900,
+    this.imageUrl,
+    this.isPreOrder = false,
+    this.status = CartOrderStatus.pendingPay,
+  });
+  final String id, title, category;
+  final PostUnit unit;
+  final int unitPrice, quantity, discountPerUnit, maxQuantity;
+  final String? imageUrl;
+  final bool isPreOrder;
+  final CartOrderStatus? status;
+  bool get wholeUnits =>
+      unit != PostUnit.kilogram &&
+      unit != PostUnit.hour &&
+      unit != PostUnit.meter &&
+      unit != PostUnit.centimeter &&
+      unit != PostUnit.day;
+  int get subtotal => unitPrice * quantity;
+  int get discount => discountPerUnit * quantity;
+  int get total => subtotal - discount;
+  bool accepts(int value) => value > 0 && value <= maxQuantity && (!wholeUnits || value % 100 == 0);
+
+  CartItem withQuantity(int value) => CartItem(
+    id: id,
+    title: title,
+    category: category,
+    unit: unit,
+    unitPrice: unitPrice,
+    quantity: value,
+    discountPerUnit: discountPerUnit,
+    maxQuantity: maxQuantity,
+    imageUrl: imageUrl,
+    isPreOrder: isPreOrder,
+    status: status,
+  );
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'category': category,
+    'unit': unit.name,
+    'unitPrice': unitPrice,
+    'quantity': quantity,
+    'discountPerUnit': discountPerUnit,
+    'maxQuantity': maxQuantity,
+    'imageUrl': imageUrl,
+    'isPreOrder': isPreOrder,
+    'status': status?.name,
+  };
+  factory CartItem.fromJson(Map<String, dynamic> json) {
+    final unit = PostUnit.fromName(json['unit'] as String?);
+    if (unit == null) throw const FormatException('Unknown cart unit');
+    final item = CartItem(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      category: json['category'] as String,
+      unit: unit,
+      unitPrice: json['unitPrice'] as int,
+      quantity: json['quantity'] as int,
+      discountPerUnit: json['discountPerUnit'] as int,
+      maxQuantity: json['maxQuantity'] as int,
+      imageUrl: json['imageUrl'] as String?,
+      isPreOrder: json['isPreOrder'] as bool,
+      status: json.containsKey('status')
+          ? CartOrderStatus.fromName(json['status'] as String?)
+          : CartOrderStatus.pendingPay,
+    );
+    if (!item.accepts(item.quantity) ||
+        item.unitPrice < 0 ||
+        item.discountPerUnit < 0 ||
+        item.discountPerUnit > item.unitPrice) {
+      throw const FormatException('Invalid cart item');
+    }
+    return item;
+  }
+}

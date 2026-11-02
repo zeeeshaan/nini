@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
@@ -75,7 +76,7 @@ class _ClicksInteractionsSectionState extends State<ClicksInteractionsSection> {
                   label: report.isSample
                       ? AppStrings.sampleProducts[0]
                       : AppStrings.likesShares,
-                  color: AnalyticsColors.purple,
+                  color: AppColors.analyticsPurple,
                   selected: _first,
                   onTap: () => setState(() => _first = !_first),
                 ),
@@ -83,7 +84,7 @@ class _ClicksInteractionsSectionState extends State<ClicksInteractionsSection> {
                   label: report.isSample
                       ? AppStrings.sampleProducts[1]
                       : AppStrings.savesComments,
-                  color: AnalyticsColors.gold,
+                  color: AppColors.analyticsGold,
                   selected: _second,
                   onTap: () => setState(() => _second = !_second),
                 ),

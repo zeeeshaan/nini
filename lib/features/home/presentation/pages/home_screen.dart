@@ -1,127 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nini/features/home/presentation/widgets/home_feed_header/home_feed_header.dart';
+import 'package:nini/features/home/presentation/widgets/home_product_card/home_product_card.dart';
+import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
+import 'package:nini/features/notifications/presentation/pages/notifications_screen.dart';
 
-import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/home/presentation/widgets/category_chips/category_chips.dart';
-import 'package:nini/features/home/presentation/widgets/home_header_actions/home_header_actions.dart';
-import 'package:nini/features/home/presentation/widgets/home_profile_status/home_profile_status.dart';
-import 'package:nini/features/home/presentation/widgets/post_grid/home_post_grid.dart';
-import 'package:nini/features/home/presentation/widgets/profile_avatar/profile_avatar.dart';
-import 'package:nini/features/home/presentation/widgets/profile_identity/profile_identity.dart';
-import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+/// UI-only feed. Sample image URLs and text are kept here, not in a repository.
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, this.onViewCart});
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, this.onMessagesPressed, this.onMenuPressed});
+  final VoidCallback? onViewCart;
 
-  final VoidCallback? onMessagesPressed;
-  final VoidCallback? onMenuPressed;
+  // Google Pixel 9 Wintergreen, matching the phone in the reference.
+  // Source: https://www.smarty.sk/google-pixel-9-12gb-128gb-wintergreen-4p159917
+  static const phoneImageUrl =
+      'https://doc.smarty.sk/pic/0f1e8c73d99d417ea73a3db313bcd924-600-600.webp';
+  static const phoneTitle = 'گوشی گوگل پیکسل ۹\nرنگ سبز روشن';
 
-  void _openPost(BuildContext context, PostItem post) {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _notifications = NotificationsCubit();
+  @override
+  void dispose() {
+    _notifications.close();
+    super.dispose();
+  }
+
+  void _openNotifications() {
+    _notifications.search('');
     Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => PostDetailScreen(post: post)),
+      MaterialPageRoute<void>(
+        builder: (_) => BlocProvider.value(
+          value: _notifications,
+          child: const NotificationsScreen(),
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.surface,
-      child: AppResponsiveBuilder(
-        builder: (context, responsive) {
-          final avatarSize = responsive.adaptive<double>(
-            compact: 104,
-            medium: 124,
-            expanded: 136,
-          );
-
-          final maxWidth = responsive.adaptive<double>(
-            compact: 600,
-            medium: 600,
-            expanded: 720,
-          );
-
-          return SingleChildScrollView(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: maxWidth),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Header and category section
-                    // retain their horizontal padding.
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: responsive.horizontalPadding,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const SizedBox(height: 16),
-
-                          // Header actions
-                          StaggeredEntrance(
-                            child: HomeHeaderActions(
-                              onMessagesPressed: onMessagesPressed,
-                              onMenuPressed: onMenuPressed,
-                            ),
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          // Profile statistics and avatar
-                          StaggeredEntrance(
-                            index: 1,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: HomeProfileStats(
-                                    responsive: responsive,
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                HomeProfileAvatar(size: avatarSize),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          // Profile name, title and description
-                          StaggeredEntrance(
-                            index: 2,
-                            child: HomeProfileIdentity(responsive: responsive),
-                          ),
-
-                          const SizedBox(height: 16),
-
-                          // Horizontal category chips
-                          const StaggeredEntrance(
-                            index: 3,
-                            child: HomeCategoryChips(),
-                          ),
-
-                          const SizedBox(height: 16),
-                        ],
-                      ),
-                    ),
-
-                    // Full-width posts grid.
-                    // No horizontal padding.
-                    HomePostGrid(
-                      onPostTap: (post) {
-                        _openPost(context, post);
-                      },
-                    ),
-
-                    const SizedBox(height: 16),
-                  ],
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600),
+        child: ListView.builder(
+          key: const PageStorageKey('home_feed'),
+          padding: EdgeInsets.zero,
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return BlocBuilder<NotificationsCubit, NotificationsState>(
+                bloc: _notifications,
+                builder: (_, state) => HomeFeedHeader(
+                  unreadCount: state.unreadCount,
+                  onNotificationsPressed: _openNotifications,
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            }
+            return HomeProductCard(
+              key: ValueKey('home_phone_$index'),
+              imageUrl: HomeScreen.phoneImageUrl,
+              title: HomeScreen.phoneTitle,
+              onViewCart: widget.onViewCart,
+            );
+          },
+        ),
       ),
     );
   }

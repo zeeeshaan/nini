@@ -4,6 +4,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
 import 'package:nini/features/calls/presentation/widgets/call_action_button.dart';
 
@@ -21,11 +22,11 @@ class CallVideoStage extends StatelessWidget {
             avatarAsset ?? 'assets/img2.png',
             fit: BoxFit.cover,
             errorBuilder: (_, _, _) => const ColoredBox(
-              color: Color(0xFF333333),
+              color: AppColors.videoPlaceholder,
               child: Center(
                 child: AppIcon(
                   AppIcons.profile,
-                  color: Colors.white,
+                  color: AppColors.white,
                   size: 100,
                 ),
               ),
@@ -36,7 +37,11 @@ class CallVideoStage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0x44000000), Colors.transparent, Color(0xCC000000)],
+            colors: [
+              AppColors.videoGradientTop,
+              AppColors.transparent,
+              AppColors.videoGradientBottom,
+            ],
             stops: [0, .5, 1],
           ),
         ),
@@ -67,8 +72,8 @@ class CallVideoHeader extends StatelessWidget {
           label: AppStrings.back,
           icon: AppIcons.back,
           onPressed: onBack,
-          color: const Color(0x55000000),
-          foreground: Colors.white,
+          color: AppColors.videoBackButton,
+          foreground: AppColors.white,
         ),
         const Spacer(),
         Container(
@@ -76,7 +81,7 @@ class CallVideoHeader extends StatelessWidget {
           height: 138,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: const Color(0xFF333333),
+            color: AppColors.videoPlaceholder,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Stack(
@@ -94,7 +99,7 @@ class CallVideoHeader extends StatelessWidget {
                 const Center(
                   child: AppIcon(
                     AppIcons.videoOff,
-                    color: Colors.white,
+                    color: AppColors.white,
                     size: 28,
                   ),
                 ),
@@ -110,9 +115,9 @@ class CallVideoHeader extends StatelessWidget {
                       : AppStrings.cameraOff,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontSize: 10,
-                    shadows: [Shadow(blurRadius: 4, color: Colors.black)],
+                    shadows: [Shadow(blurRadius: 4, color: AppColors.black)],
                   ),
                 ),
               ),
@@ -124,8 +129,8 @@ class CallVideoHeader extends StatelessWidget {
                   icon: AppIcons.refresh,
                   onPressed: session.cameraEnabled ? onSwitch : null,
                   size: 44,
-                  color: const Color(0x66000000),
-                  foreground: Colors.white,
+                  color: AppColors.videoSwitchButton,
+                  foreground: AppColors.white,
                 ),
               ),
             ],

@@ -9,6 +9,7 @@ enum CreatePostType { product, services }
 class PostDraft {
   const PostDraft({
     this.postType,
+    this.profileCategoryId,
     this.title = '',
     this.caption = '',
     this.captionDelta = const [],
@@ -26,6 +27,7 @@ class PostDraft {
     this.altTexts = const {},
   });
   final CreatePostType? postType;
+  final String? profileCategoryId;
   final String title, caption, price, discount, warehouseStock;
   final List<Map<String, dynamic>> captionDelta;
   final PreparationTime preparationTime;
@@ -40,6 +42,8 @@ class PostDraft {
 
   PostDraft copyWith({
     CreatePostType? postType,
+    String? profileCategoryId,
+    bool clearProfileCategory = false,
     String? title,
     String? caption,
     List<Map<String, dynamic>>? captionDelta,
@@ -59,6 +63,9 @@ class PostDraft {
     Map<String, String>? altTexts,
   }) => PostDraft(
     postType: postType ?? this.postType,
+    profileCategoryId: clearProfileCategory
+        ? null
+        : profileCategoryId ?? this.profileCategoryId,
     title: title ?? this.title,
     caption: caption ?? this.caption,
     captionDelta: captionDelta == null
@@ -88,6 +95,7 @@ class PostDraft {
   /// formatting is kept as Quill Delta alongside searchable plain text.
   Map<String, dynamic> toJson() => {
     'postType': postType?.name,
+    'profileCategoryId': profileCategoryId,
     'title': title,
     'caption': caption,
     'captionDelta': captionDelta,

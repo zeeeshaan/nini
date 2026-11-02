@@ -20,9 +20,14 @@ class PostItem {
     this._metadata = const {},
     this._details,
     this.publishedAt,
+    this.profileCategoryId,
   });
   final String id, imageAsset, title, category, price, originalPrice;
   final int stockCount;
+
+  /// User-managed profile tab, independent of the Product/Service type.
+  /// Null or a deleted tab ID is shown only under All.
+  final String? profileCategoryId;
   final List<PostMedia> media;
   final Map<String, dynamic> _metadata;
   final PostDetails? _details;
@@ -42,6 +47,7 @@ class PostItem {
     'imageAsset': imageAsset,
     'title': title,
     'category': category,
+    'profileCategoryId': profileCategoryId,
     'stockCount': stockCount,
     'price': price,
     'originalPrice': originalPrice,
@@ -54,6 +60,7 @@ class PostItem {
     imageAsset: json['imageAsset'] as String? ?? '',
     title: json['title'] as String,
     category: json['category'] as String,
+    profileCategoryId: json['profileCategoryId'] as String?,
     stockCount: json['stockCount'] as int,
     price: json['price'] as String,
     originalPrice: json['originalPrice'] as String,

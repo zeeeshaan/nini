@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/create_post/presentation/widgets/caption_editor/client_caption_toolbar.dart';
 
@@ -72,9 +71,9 @@ class _CaptionEditorState extends State<CaptionEditor> {
                   controller: widget.controller,
                   focusNode: _focusNode,
                   scrollController: _scrollController,
-                  config: const QuillEditorConfig(
+                  config: QuillEditorConfig(
                     placeholder: AppStrings.writeCaption,
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                   ),
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/shared/models/post/post_media.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -28,6 +28,7 @@ class _PostImageCarouselState extends State<PostImageCarousel> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    context.read<PostDetailCubit>().changeImage(0);
   }
 
   @override
@@ -96,7 +97,7 @@ class _PostImageCarouselState extends State<PostImageCarousel> {
                         width: isActive ? 22 : 9,
                         height: 9,
                         decoration: BoxDecoration(
-                          color: isActive ? Colors.white : Colors.white70,
+                          color: isActive ? AppColors.white : AppColors.white70,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       );

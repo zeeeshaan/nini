@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+import '../../../domain/models/app_notification.dart';
+import '../notification_avatar/notification_avatar.dart';
+
+class NotificationTile extends StatelessWidget {
+  const NotificationTile({
+    super.key,
+    required this.notification,
+    required this.onTap,
+  });
+  final AppNotification notification;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: onTap,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 58,
+            child: Text(
+              notification.timeLabel,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onSurface
+                    .withValues(alpha: .6),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  notification.title,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  notification.message,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(fontSize: 11, height: 1.5),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          NotificationAvatar(notification: notification),
+        ],
+      ),
+    ),
+  );
+}

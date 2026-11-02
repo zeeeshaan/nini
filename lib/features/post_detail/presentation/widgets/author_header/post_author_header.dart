@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class PostAuthorHeader extends StatelessWidget {
@@ -62,7 +63,7 @@ class PostAuthorHeader extends StatelessWidget {
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFF00CB28), width: 2),
+                border: Border.all(color: AppColors.authorOnline, width: 2),
               ),
               child: ClipOval(
                 child: Image.asset(

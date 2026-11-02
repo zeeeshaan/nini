@@ -13,3 +13,10 @@ are copied without changes. The importer and `tool/supplemental_vectors.json`
 record upstream filenames, the pinned commit, and SHA-256 checksums. Runtime tinting
 follows the app theme. Original screenshot crops remain in
 `assets/icons/supplemental/` for reference and are excluded from the app bundle.
+
+The app also includes `interface/heart-filled.svg` and
+`interface/bookmark-filled.svg` as selected-state variants of the original
+`heart-01.svg` and `bookmark.svg`. Their path geometry is unchanged; the root fill
+is enabled so Home can use the same client icon shapes in both states. These two
+variants are app additions, separate from the 421 checksum-pinned upstream files,
+and retain the same attribution and license.

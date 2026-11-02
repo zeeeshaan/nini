@@ -14,6 +14,8 @@ class PostMediaView extends StatelessWidget {
   });
   final PostMedia media;
   final BoxFit fit;
+  Widget _imageError(BuildContext context, Object error, StackTrace? stack) =>
+      const Center(child: AppIcon(AppIcons.imageUnavailable, size: 36));
   @override
   Widget build(BuildContext context) {
     final preview = media.type == PostMediaType.image
@@ -27,14 +29,20 @@ class PostMediaView extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             if (preview != null)
-              Image.file(
-                File(preview),
-                fit: fit,
-                excludeFromSemantics: true,
-                errorBuilder: (context, error, stack) => const Center(
-                  child: AppIcon(AppIcons.imageUnavailable, size: 36),
-                ),
-              )
+              if (media.source == PostMediaSource.asset)
+                Image.asset(
+                  preview,
+                  fit: fit,
+                  excludeFromSemantics: true,
+                  errorBuilder: _imageError,
+                )
+              else
+                Image.file(
+                  File(preview),
+                  fit: fit,
+                  excludeFromSemantics: true,
+                  errorBuilder: _imageError,
+                )
             else
               Center(
                 child: Padding(

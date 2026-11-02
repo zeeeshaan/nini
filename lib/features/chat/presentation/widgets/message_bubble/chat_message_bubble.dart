@@ -6,6 +6,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/presentation/widgets/message_bubble/chat_attachment_view.dart';
 import 'package:nini/features/chat/presentation/widgets/message_bubble/chat_location_view.dart';
@@ -115,7 +116,7 @@ class ChatMessageBubble extends StatelessWidget {
         child: Container(
           color: selected
               ? colors.onSurface.withValues(alpha: .12)
-              : Colors.transparent,
+              : AppColors.transparent,
           child: AbsorbPointer(absorbing: selectionMode, child: content),
         ),
       ),

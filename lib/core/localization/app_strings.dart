@@ -7,6 +7,11 @@ abstract final class AppStrings {
   static const darkTheme = 'حالت تیره';
   static const home = 'خانه';
   static const cart = 'سبد خرید';
+  static const cartAdded = 'به سبد خرید اضافه شد';
+  static const viewCart = 'مشاهده سبد خرید';
+  static const cartStorageError =
+      'ذخیره‌سازی در دسترس نیست. تغییرات هنوز ذخیره نشده‌اند.';
+  static const cartStockExceeded = 'این مقدار از موجودی بیشتر است.';
   static const create = 'ایجاد پست';
   static const search = 'جستجو';
   static const profile = 'پروفایل';

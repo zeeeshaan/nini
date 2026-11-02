@@ -5,6 +5,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/widgets/gallery_preview/gallery_preview.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -91,7 +92,7 @@ class _MediaTile extends StatelessWidget {
             Center(
               child: AppIcon(
                 AppIcons.playCircle,
-                color: Colors.white,
+                color: AppColors.white,
                 size: 30,
               ),
             ),

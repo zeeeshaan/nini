@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_theme.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-Future<T?> showPostDialog<T>(BuildContext context, Widget dialog) {
+Future<T?> showPostDialog<T>(
+  BuildContext context,
+  Widget dialog, {
+  bool isDismissible = true,
+  bool enableDrag = true,
+}) {
   FocusScope.of(context).unfocus();
   return showModalBottomSheet<T>(
     context: context,
     useSafeArea: true,
+    isDismissible: isDismissible,
+    enableDrag: enableDrag,
     isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+    backgroundColor: AppColors.transparent,
     constraints: const BoxConstraints(maxWidth: 560),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
@@ -59,11 +67,13 @@ class PostDialog extends StatelessWidget {
     required this.child,
     this.icon,
     this.actions,
+    this.textDirection = TextDirection.rtl,
   });
   final String title;
   final String? icon;
   final Widget child;
   final Widget? actions;
+  final TextDirection textDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +102,7 @@ class PostDialog extends StatelessWidget {
                 Flexible(
                   child: Text(
                     title,
-                    textDirection: TextDirection.rtl,
+                    textDirection: textDirection,
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w600),

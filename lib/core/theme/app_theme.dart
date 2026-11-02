@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'app_colors.dart';
+
 /// Shared monochrome theme. Feature widgets inherit foreground colors here.
 abstract final class AppTheme {
   static final light = _build(Brightness.light);
@@ -8,12 +10,12 @@ abstract final class AppTheme {
 
   static ThemeData _build(Brightness brightness) {
     final isDark = brightness == Brightness.dark;
-    final foreground = isDark ? Colors.white : Colors.black;
-    final background = isDark ? Colors.black : Colors.white;
+    final foreground = isDark ? AppColors.white : AppColors.black;
+    final background = isDark ? AppColors.black : AppColors.white;
     final container = isDark
-        ? const Color(0xFF202020)
-        : const Color(0xFFF2F2F2);
-    final border = isDark ? const Color(0xFF666666) : const Color(0xFFDADADA);
+        ? AppColors.darkSurfaceContainer
+        : AppColors.lightSurfaceContainer;
+    final border = isDark ? AppColors.darkOutline : AppColors.lightOutline;
     final scheme =
         ColorScheme.fromSeed(
           seedColor: foreground,
@@ -41,7 +43,7 @@ abstract final class AppTheme {
           surfaceContainerHighest: container,
           surfaceDim: container,
           surfaceBright: background,
-          surfaceTint: Colors.transparent,
+          surfaceTint: AppColors.transparent,
           outline: border,
           outlineVariant: border,
         );
@@ -55,7 +57,7 @@ abstract final class AppTheme {
       foregroundColor: WidgetStatePropertyAll(scheme.onPrimary),
       iconColor: WidgetStatePropertyAll(scheme.onPrimary),
       backgroundColor: WidgetStatePropertyAll(scheme.primary),
-      surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+      surfaceTintColor: const WidgetStatePropertyAll(AppColors.transparent),
       elevation: const WidgetStatePropertyAll(0),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
@@ -65,7 +67,7 @@ abstract final class AppTheme {
       foregroundColor: WidgetStatePropertyAll(foreground),
       iconColor: WidgetStatePropertyAll(foreground),
       backgroundColor: WidgetStatePropertyAll(background),
-      surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+      surfaceTintColor: const WidgetStatePropertyAll(AppColors.transparent),
       side: WidgetStatePropertyAll(BorderSide(color: border)),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
@@ -109,10 +111,10 @@ abstract final class AppTheme {
       appBarTheme: AppBarThemeData(
         backgroundColor: background,
         foregroundColor: foreground,
-        surfaceTintColor: Colors.transparent,
+        surfaceTintColor: AppColors.transparent,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
+          statusBarColor: AppColors.transparent,
           statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
           statusBarBrightness: brightness,
           systemNavigationBarColor: background,
@@ -138,7 +140,7 @@ abstract final class AppTheme {
       ),
       popupMenuTheme: PopupMenuThemeData(
         color: background,
-        surfaceTintColor: Colors.transparent,
+        surfaceTintColor: AppColors.transparent,
         textStyle: TextStyle(color: foreground, fontFamily: 'YekanBakh'),
       ),
       tooltipTheme: TooltipThemeData(

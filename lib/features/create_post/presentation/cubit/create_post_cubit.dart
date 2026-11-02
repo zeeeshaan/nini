@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 
 class CreatePostCubit extends Cubit<PostDraft> {
-  CreatePostCubit() : super(const PostDraft());
+  CreatePostCubit({PostDraft initial = const PostDraft()}) : super(initial);
+  void selectProfileCategory(String? id) => emit(
+    state.copyWith(profileCategoryId: id, clearProfileCategory: id == null),
+  );
   void selectPostType(CreatePostType value) =>
       emit(state.copyWith(postType: value));
   void updateTitle(String value) => emit(state.copyWith(title: value));
@@ -22,6 +25,8 @@ class CreatePostCubit extends Cubit<PostDraft> {
       emit(state.copyWith(inventoryStatus: value));
   void setSchedule(PostSchedule? value) =>
       emit(state.copyWith(schedule: value, clearSchedule: value == null));
+  void updateAddress(PostAddress? value) =>
+      emit(state.copyWith(address: value, clearAddress: value == null));
   void setAddress(AddressSelection value) => emit(
     state.copyWith(address: value.selected, savedAddresses: value.saved),
   );

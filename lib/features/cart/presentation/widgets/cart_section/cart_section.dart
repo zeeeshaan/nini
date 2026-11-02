@@ -1,0 +1,27 @@
+// dart format width=100
+import 'package:flutter/material.dart';
+
+class CartSection extends StatelessWidget {
+  const CartSection({super.key, required this.title, required this.child});
+  final String title;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
+          child: Text(
+            title,
+            textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+          ),
+        ),
+        child,
+      ],
+    ),
+  );
+}

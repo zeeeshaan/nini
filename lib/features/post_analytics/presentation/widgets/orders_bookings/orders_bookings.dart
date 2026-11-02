@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
@@ -51,7 +52,7 @@ class _OrdersBookingsSectionState extends State<OrdersBookingsSection> {
                 child: AppIcon(
                   AppIcons.phone,
                   size: 21,
-                  color: AnalyticsColors.orders,
+                  color: AppColors.analyticsOrders,
                 ),
               ),
               const SizedBox(width: 4),

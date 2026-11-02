@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:nini/core/localization/persian_feature.dart';
+import 'package:nini/core/localization/wallet_strings.dart';
+
+import '../../widgets/wallet_screen_widgets/wallet_bottom_button.dart';
+import '../../widgets/wallet_screen_widgets/wallet_header.dart';
+import '../../widgets/withdraw_summary_screen_widgets/withdraw_illustration.dart';
+import '../../widgets/withdraw_summary_screen_widgets/withdraw_summary_details.dart';
+
+/// Summary preview only; these sample values do not represent a completed transfer.
+class WithdrawSummaryScreen extends StatelessWidget {
+  const WithdrawSummaryScreen({super.key});
+  @override
+  Widget build(BuildContext context) => PersianFeature(
+    child: Scaffold(
+      appBar: const WalletHeader(title: WalletStrings.withdraw),
+      body: SafeArea(
+        top: false,
+        bottom: false,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 430),
+            child: const SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(26, 0, 26, 24),
+              child: Column(
+                children: [
+                  WithdrawIllustration(),
+                  SizedBox(height: 72),
+                  WithdrawSummaryDetails(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: WalletBottomButton(
+        onPressed: () => Navigator.of(context).pop(true),
+      ),
+    ),
+  );
+}

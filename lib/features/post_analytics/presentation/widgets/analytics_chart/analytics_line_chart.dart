@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
 
 class AnalyticsLineChart extends StatefulWidget {
@@ -117,8 +118,8 @@ class _AnalyticsLineChartState extends State<AnalyticsLineChart> {
                                 : analyticsNumber(second),
                         ],
                         colors: [
-                          if (widget.showFirst) AnalyticsColors.purple,
-                          if (widget.showSecond) AnalyticsColors.gold,
+                          if (widget.showFirst) AppColors.analyticsPurple,
+                          if (widget.showSecond) AppColors.analyticsGold,
                         ],
                       ),
                     ),
@@ -232,7 +233,7 @@ class _LinePainter extends CustomPainter {
         canvas.drawPath(curve, stroke);
       }
       final position = positions[selected.clamp(0, positions.length - 1)];
-      canvas.drawCircle(position, 3.5, Paint()..color = Colors.white);
+      canvas.drawCircle(position, 3.5, Paint()..color = AppColors.white);
       canvas.drawCircle(
         position,
         3.5,
@@ -243,8 +244,8 @@ class _LinePainter extends CustomPainter {
       );
     }
 
-    if (showFirst) draw(first, AnalyticsColors.purple, false);
-    if (showSecond) draw(second, AnalyticsColors.gold, !area);
+    if (showFirst) draw(first, AppColors.analyticsPurple, false);
+    if (showSecond) draw(second, AppColors.analyticsGold, !area);
     canvas.restore();
   }
 

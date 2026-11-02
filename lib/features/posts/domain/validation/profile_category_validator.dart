@@ -1,0 +1,31 @@
+import 'package:nini/core/localization/profile_post_strings.dart';
+
+import '../models/profile_category.dart';
+
+abstract final class ProfileCategoryValidator {
+  static String? validateName(
+    String input,
+    List<ProfileCategory> categories, {
+    String? excludingId,
+  }) {
+    final name = input.trim();
+    if (name.isEmpty) return ProfilePostStrings.nameRequired;
+    if (name.runes.length > 50) return ProfilePostStrings.nameTooLong;
+    if (name.toLowerCase() == 'all' || name == 'همه') {
+      return ProfilePostStrings.reservedName;
+    }
+    if (categories.any(
+      (item) =>
+          item.id != excludingId &&
+          (item.name.toLowerCase() == name.toLowerCase() ||
+              ProfilePostStrings.categoryName(
+                    item.id,
+                    item.name,
+                  ).toLowerCase() ==
+                  name.toLowerCase()),
+    )) {
+      return ProfilePostStrings.duplicateName;
+    }
+    return null;
+  }
+}

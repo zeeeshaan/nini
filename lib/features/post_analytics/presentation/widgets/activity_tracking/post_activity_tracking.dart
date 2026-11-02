@@ -131,15 +131,17 @@ class _PostDetailActivityTrackerState extends State<PostDetailActivityTracker>
   bool _liked = false, _saved = false;
 }
 
-/// An impression occurs when at least half a home card becomes visible.
+/// An impression occurs when at least half a post card becomes visible.
 class PostImpressionTracker extends StatefulWidget {
   const PostImpressionTracker({
     super.key,
     required this.post,
     required this.child,
+    this.source = 'home',
   });
   final PostItem post;
   final Widget child;
+  final String source;
   @override
   State<PostImpressionTracker> createState() => _PostImpressionTrackerState();
 }
@@ -169,7 +171,7 @@ class _PostImpressionTrackerState extends State<PostImpressionTracker> {
             analytics.record(
               widget.post.id,
               AnalyticsEventType.impression,
-              source: 'home',
+              source: widget.source,
             ),
           );
         }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nini/core/theme/app_colors.dart';
 
 /// Displays vector icons or legacy PNGs, preserving transparency/proportions.
 ///
@@ -34,7 +36,7 @@ class AppIcon extends StatelessWidget {
       decoration: BoxDecoration(
         color: selected
             ? foreground.withValues(alpha: 0.14)
-            : Colors.transparent,
+            : AppColors.transparent,
         borderRadius: BorderRadius.circular(4),
       ),
       child: asset.toLowerCase().endsWith('.svg')

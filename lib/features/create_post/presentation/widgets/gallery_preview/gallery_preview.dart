@@ -8,6 +8,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 
@@ -198,11 +199,11 @@ class GalleryFileTile extends StatelessWidget {
 
     switch (extension) {
       case 'PDF':
-        badgeColor = const Color(0xFFEE5969);
+        badgeColor = AppColors.pdfBadge;
       case 'MKV':
       case 'MP4':
       case 'MOV':
-        badgeColor = const Color(0xFFA64CE6);
+        badgeColor = AppColors.videoBadge;
       default:
         badgeColor = colors.onSurface;
     }
@@ -228,7 +229,7 @@ class GalleryFileTile extends StatelessWidget {
                         extension == 'MKV' ||
                         extension == 'MP4' ||
                         extension == 'MOV'
-                    ? Colors.white
+                    ? AppColors.white
                     : colors.surface,
                 fontSize: 12,
                 fontWeight: FontWeight.w700,

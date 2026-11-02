@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
+import 'package:nini/core/theme/app_colors.dart';
 
 class AnalyticsPolarChart extends StatelessWidget {
   const AnalyticsPolarChart({super.key, required this.values});
@@ -32,10 +32,10 @@ class _PolarPainter extends CustomPainter {
       );
     }
     const colors = [
-      AnalyticsColors.purple,
-      AnalyticsColors.blue,
-      AnalyticsColors.pink,
-      AnalyticsColors.gold,
+      AppColors.analyticsPurple,
+      AppColors.analyticsBlue,
+      AppColors.analyticsPink,
+      AppColors.analyticsGold,
     ];
     final maxValue = math.max(1.0, values.fold<double>(0, math.max));
     for (var i = 0; i < 4; i++) {

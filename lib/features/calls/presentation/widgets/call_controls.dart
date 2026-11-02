@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/calls/domain/models/call_session.dart';
 import 'package:nini/features/calls/presentation/widgets/call_action_button.dart';
 
@@ -64,8 +65,8 @@ class CallControls extends StatelessWidget {
             rotation: math.pi * .75,
             onPressed: onEnd,
             size: incoming ? 54 : 56,
-            color: const Color(0xFFFF454D),
-            foreground: Colors.white,
+            color: AppColors.callEnd,
+            foreground: AppColors.white,
           ),
           if (incoming) ...[
             CallActionButton(
@@ -73,16 +74,16 @@ class CallControls extends StatelessWidget {
               icon: AppIcons.phone,
               onPressed: busy ? null : onAccept,
               size: 54,
-              color: const Color(0xFF31EF73),
-              foreground: Colors.white,
+              color: AppColors.callAccept,
+              foreground: AppColors.white,
             ),
             CallActionButton(
               label: AppStrings.returnToChat,
               icon: AppIcons.chat,
               onPressed: onMessage,
               size: 54,
-              color: const Color(0xFFFFD447),
-              foreground: Colors.white,
+              color: AppColors.callMessage,
+              foreground: AppColors.white,
             ),
           ] else ...[
             if (video)

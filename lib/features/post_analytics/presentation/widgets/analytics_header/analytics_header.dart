@@ -4,6 +4,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/post_media/post_media_view.dart';
 
@@ -64,7 +65,10 @@ class AnalyticsPostHeader extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFF00C83C), width: 1.5),
+                border: Border.all(
+                  color: AppColors.analyticsOnline,
+                  width: 1.5,
+                ),
               ),
               child: ClipOval(
                 child: Image.asset('assets/Mask group.png', fit: BoxFit.cover),

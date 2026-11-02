@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
@@ -115,8 +116,8 @@ class _AverageTimeViewedSectionState extends State<AverageTimeViewedSection> {
                                   ),
                         ],
                         colors: [
-                          if (_first) AnalyticsColors.purple,
-                          if (_second) AnalyticsColors.gold,
+                          if (_first) AppColors.analyticsPurple,
+                          if (_second) AppColors.analyticsGold,
                         ],
                       ),
                     ),
@@ -136,7 +137,7 @@ class _AverageTimeViewedSectionState extends State<AverageTimeViewedSection> {
                 label: report.isSample
                     ? AppStrings.sampleProducts[0]
                     : AppStrings.thisPeriod,
-                color: AnalyticsColors.purple,
+                color: AppColors.analyticsPurple,
                 selected: _first,
                 onTap: () => setState(() => _first = !_first),
               ),
@@ -144,7 +145,7 @@ class _AverageTimeViewedSectionState extends State<AverageTimeViewedSection> {
                 label: report.isSample
                     ? AppStrings.sampleProducts[1]
                     : AppStrings.previousPeriod,
-                color: AnalyticsColors.gold,
+                color: AppColors.analyticsGold,
                 selected: _second,
                 onTap: () => setState(() => _second = !_second),
               ),
