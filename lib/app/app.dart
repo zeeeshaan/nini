@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,11 +10,10 @@ import 'package:nini/core/responsiveness/responsive_config/config.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
-import 'package:nini/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
+import 'package:nini/features/splash/presentation/page/splash_screen/splash_screen.dart';
 
 import 'app_providers.dart';
 
@@ -61,6 +61,7 @@ class _ThemedApp extends StatelessWidget {
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
+          CountryLocalizations.delegate,
         ],
         navigatorObservers: [entranceRouteObserver],
         // Keep the original design order while Persian text reads right to left.
@@ -74,10 +75,7 @@ class _ThemedApp extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: mode,
-        home: const DashboardScreen(
-          initialTab: DashboardTab.home,
-          profileImage: AssetImage('assets/Mask group.png'),
-        ),
+        home: const SplashScreen(),
       ),
     );
   }

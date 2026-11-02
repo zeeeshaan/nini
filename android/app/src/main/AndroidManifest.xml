@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- HTTPS map tiles are needed in release builds as well as debug. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Location is requested after the user chooses an option on Home. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Requested separately, only for the explicit Always option. -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <!-- Gallery access on Android 12L (API 32) and earlier. -->
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
