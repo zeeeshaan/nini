@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
-import 'package:nini/features/search/presentation/widgets/search_content/search_content.dart';
-import 'package:nini/features/search/presentation/widgets/search_header/search_header.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_content/search_content.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_header/search_header.dart';
 
 /// Connects the header's buttons to search state. The lists live in SearchContent.
 class SearchView extends StatefulWidget {

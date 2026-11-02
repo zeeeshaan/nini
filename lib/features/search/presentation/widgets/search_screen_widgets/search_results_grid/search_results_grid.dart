@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
-import 'package:nini/features/search/presentation/widgets/search_result_card/search_result_card.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_result_card/search_result_card.dart';
 
 class SearchResultsGrid extends StatefulWidget {
   const SearchResultsGrid({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 
-import '../widgets/profile_settings_header/profile_settings_header.dart';
-import '../widgets/profile_settings_list/profile_settings_list.dart';
+import '../../widgets/profile_settings_screen_widgets/profile_settings_header/profile_settings_header.dart';
+import '../../widgets/profile_settings_screen_widgets/profile_settings_list/profile_settings_list.dart';
 
 class ProfileSettingsScreen extends StatelessWidget {
   const ProfileSettingsScreen({super.key});

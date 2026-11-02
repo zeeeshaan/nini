@@ -10,8 +10,8 @@ import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_
 import 'package:nini/features/dashboard/presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart';
 import 'package:nini/features/home/presentation/pages/home_screen.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
-import 'package:nini/features/profile/presentation/pages/profile_screen.dart';
-import 'package:nini/features/search/presentation/pages/search_screen.dart';
+import 'package:nini/features/profile/presentation/page/profile_screen/profile_screen.dart';
+import 'package:nini/features/search/presentation/page/search_screen/search_screen.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 // dart format width=100

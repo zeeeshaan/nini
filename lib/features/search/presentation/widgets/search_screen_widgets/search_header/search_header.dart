@@ -4,8 +4,8 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/search_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/features/search/presentation/widgets/search_city_button/search_city_button.dart';
-import 'package:nini/features/search/presentation/widgets/search_query_field/search_query_field.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_city_button/search_city_button.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_query_field/search_query_field.dart';
 
 class SearchHeader extends StatelessWidget {
   const SearchHeader({

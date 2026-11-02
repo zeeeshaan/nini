@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
-import 'package:nini/features/profile/presentation/widgets/category_chips/category_chips.dart';
-import 'package:nini/features/profile/presentation/widgets/post_grid/profile_post_grid.dart';
-import 'package:nini/features/profile/presentation/widgets/profile_avatar/profile_avatar.dart';
-import 'package:nini/features/profile/presentation/widgets/profile_header_actions/profile_header_actions.dart';
-import 'package:nini/features/profile/presentation/widgets/profile_identity/profile_identity.dart';
-import 'package:nini/features/profile/presentation/widgets/profile_stats/profile_stats.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/category_chips/category_chips.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/post_grid/profile_post_grid.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/profile_avatar/profile_avatar.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/profile_header_actions/profile_header_actions.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/profile_identity/profile_identity.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/profile_stats/profile_stats.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 class ProfileScreen extends StatelessWidget {

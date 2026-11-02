@@ -1,4 +1,4 @@
-import 'package:nini/features/profile/presentation/pages/profile_settings_screen.dart';
+import 'package:nini/features/profile/presentation/page/profile_settings_screen/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';

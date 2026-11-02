@@ -5,10 +5,10 @@ import 'package:nini/features/search/data/search_catalog.dart';
 import 'package:nini/features/search/presentation/cubit/search_state.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
-import 'package:nini/features/search/presentation/widgets/search_empty_state/search_empty_state.dart';
-import 'package:nini/features/search/presentation/widgets/search_city_list/search_city_list.dart';
-import 'package:nini/features/search/presentation/widgets/search_results_grid/search_results_grid.dart';
-import 'package:nini/features/search/presentation/widgets/search_suggestions/search_suggestions.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_empty_state/search_empty_state.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_city_list/search_city_list.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_results_grid/search_results_grid.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_suggestions/search_suggestions.dart';
 
 /// Shows results, the full city list, or suggestions below the fixed header.
 class SearchContent extends StatelessWidget {

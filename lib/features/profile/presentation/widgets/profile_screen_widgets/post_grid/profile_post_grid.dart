@@ -5,7 +5,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
-import 'package:nini/features/profile/presentation/widgets/profile_post_card/profile_post_card.dart';
+import 'package:nini/features/profile/presentation/widgets/profile_screen_widgets/profile_post_card/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 class ProfilePostGrid extends StatefulWidget {
