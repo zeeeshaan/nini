@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -29,23 +29,23 @@ QuillSimpleToolbarButtonOptions clientCaptionButtons(BuildContext context) {
     underLine: toggle(AppIcons.underline, labels.underline),
     strikeThrough: toggle(AppIcons.strikethrough, labels.strikeThrough),
     undoHistory: QuillToolbarHistoryButtonOptions(
-      tooltip: AppStrings.undo,
+      tooltip: CreatePostStrings.undo,
       childBuilder: (dynamic _, dynamic value) {
         final extra = value as QuillToolbarHistoryButtonExtraOptions;
         return _CaptionIconButton(
           asset: AppIcons.undo,
-          tooltip: AppStrings.undo,
+          tooltip: CreatePostStrings.undo,
           onPressed: extra.canPressed ? extra.onPressed : null,
         );
       },
     ),
     redoHistory: QuillToolbarHistoryButtonOptions(
-      tooltip: AppStrings.redo,
+      tooltip: CreatePostStrings.redo,
       childBuilder: (dynamic _, dynamic value) {
         final extra = value as QuillToolbarHistoryButtonExtraOptions;
         return _CaptionIconButton(
           asset: AppIcons.redo,
-          tooltip: AppStrings.redo,
+          tooltip: CreatePostStrings.redo,
           onPressed: extra.canPressed ? extra.onPressed : null,
         );
       },

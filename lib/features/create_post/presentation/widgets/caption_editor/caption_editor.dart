@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/presentation/widgets/caption_editor/client_caption_toolbar.dart';
 
 /// A real rich-text editor. Its controller stores Quill Delta, so formatting is
@@ -26,7 +26,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
   @override
   Widget build(BuildContext context) => Localizations.override(
     context: context,
-    locale: const Locale('fa', 'IR'),
+    locale: const Locale('en'),
     delegates: const [
       ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
@@ -72,7 +72,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
                   focusNode: _focusNode,
                   scrollController: _scrollController,
                   config: QuillEditorConfig(
-                    placeholder: AppStrings.writeCaption,
+                    placeholder: CreatePostStrings.writeCaption,
                     padding: const EdgeInsets.all(12),
                   ),
                 ),

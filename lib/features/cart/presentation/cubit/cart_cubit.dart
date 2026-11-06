@@ -3,8 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/demo_cart_items.dart';
 import '../../domain/models/cart_item.dart';
+import '../../domain/models/cart_order.dart';
+
+import 'package:nini/features/home/data/home_post_data.dart';
+
 import '../../domain/models/cart_order_status.dart';
-import '../../domain/models/payment_method.dart';
+import '../../../payment/domain/models/payment_method.dart';
 import '../../domain/repositories/cart_repository.dart';
 import 'cart_state.dart';
 
@@ -24,7 +28,7 @@ class CartCubit extends Cubit<CartState> {
       _readFailed = false;
       emit(
         state.copyWith(
-          items: saved?.items ?? demoCartItems,
+          items: (saved?.items ?? demoCartItems).map(_restoreKnownSeller).toList(),
           orders: saved?.orders ?? [],
           loading: false,
           storageError: false,
@@ -61,6 +65,18 @@ class CartCubit extends Cubit<CartState> {
   }
 
   bool get _editable => !state.loading && !_readFailed;
+
+  CartItem _restoreKnownSeller(CartItem item) {
+    if (item.seller != null) return item;
+    if (item.id == 'home-pixel9') {
+      return item.withQuantity(item.quantity, seller: homeSeller);
+    }
+    if (demoCartItems.any((sample) => sample.id == item.id)) {
+      return item.withQuantity(item.quantity, seller: demoCartSeller);
+    }
+    return item;
+  }
+
   bool add(CartItem item) {
     if (!_editable) return false;
     final index = state.items.indexWhere((entry) => entry.id == item.id);
@@ -70,8 +86,11 @@ class CartCubit extends Cubit<CartState> {
       items.add(item);
     } else {
       final old = items[index];
+      if (old.seller != null && item.seller != null && old.seller!.id != item.seller!.id) {
+        return false;
+      }
       if (!old.accepts(old.quantity + item.quantity)) return false;
-      items[index] = old.withQuantity(old.quantity + item.quantity);
+      items[index] = old.withQuantity(old.quantity + item.quantity, seller: item.seller);
     }
     emit(state.copyWith(items: items));
     _persist();
@@ -124,4 +143,102 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void back() => emit(state.copyWith(stage: CartStage.cart));
+
+  CartOrder? findOrder(String id) {
+    for (final order in state.orders) {
+      if (order.id == id) return order;
+    }
+    return null;
+  }
+
+  List<CartOrder> requestProducts({required String address, required String phone}) {
+    if (!_editable || state.checkoutItems.isEmpty) return [];
+    if (address.trim().isEmpty || !RegExp(r'^\+?\d{7,15}$').hasMatch(phone.trim())) return [];
+    final groups = <String, List<CartItem>>{};
+    for (final item in state.checkoutItems) {
+      final seller = item.seller;
+      if (seller == null || seller.id.isEmpty) return [];
+      groups.putIfAbsent(seller.id, () => []).add(item);
+    }
+    final now = DateTime.now();
+    final orders = <CartOrder>[];
+    var remainingCharges = state.charges;
+    final total = state.checkoutItems.fold(0, (sum, item) => sum + item.total);
+    for (final items in groups.values) {
+      final last = orders.length == groups.length - 1;
+      final groupTotal = items.fold(0, (sum, item) => sum + item.total);
+      final charges = last
+          ? remainingCharges
+          : (total == 0 ? 0 : state.charges * groupTotal ~/ total);
+      remainingCharges -= charges;
+      orders.add(
+        CartOrder(
+          id: 'PO-${now.microsecondsSinceEpoch}-${orders.length + 1}',
+          createdAt: now,
+          items: items,
+          method: state.method,
+          charges: charges,
+          status: CartOrderStatus.pendingApproval,
+          seller: items.first.seller,
+          customerId: 'local-customer',
+          address: address.trim(),
+          phone: phone.trim(),
+          timeline: {CartOrderStatus.pendingApproval: now},
+        ),
+      );
+    }
+    final remaining = state.items.where((item) => !state.checkoutIds.contains(item.id)).toList();
+    emit(
+      state.copyWith(
+        items: remaining,
+        orders: [...state.orders, ...orders],
+        stage: CartStage.cart,
+        tab: CartTab.cart,
+        checkoutIds: {},
+        charges: 0,
+        clearStatusFilter: true,
+      ),
+    );
+    _persist();
+    return orders;
+  }
+
+  void respondToProductRequest(String id, {required bool accept}) => _transitionOrder(
+    id,
+    CartOrderStatus.pendingApproval,
+    accept ? CartOrderStatus.pendingPay : CartOrderStatus.unsuccessful,
+  );
+
+  void cancelProductOrder(String id) {
+    final order = findOrder(id);
+    if (order?.status == CartOrderStatus.pendingApproval ||
+        order?.status == CartOrderStatus.pendingPay) {
+      _transitionOrder(id, order!.status!, CartOrderStatus.canceled);
+    }
+  }
+
+  // Called only by a verified payment result; the placeholder gateway never calls this.
+  void confirmProductPayment(String id) =>
+      _transitionOrder(id, CartOrderStatus.pendingPay, CartOrderStatus.accepted);
+  void prepareProductOrder(String id) =>
+      _transitionOrder(id, CartOrderStatus.accepted, CartOrderStatus.preparing);
+  void shipProductOrder(String id) =>
+      _transitionOrder(id, CartOrderStatus.preparing, CartOrderStatus.shipped);
+  void receiveProductOrder(String id) =>
+      _transitionOrder(id, CartOrderStatus.shipped, CartOrderStatus.completed);
+
+  void _transitionOrder(String id, CartOrderStatus from, CartOrderStatus to) {
+    if (!_editable) return;
+    final order = findOrder(id);
+    if (order == null || !order.isProductRequest || order.status != from) return;
+    emit(
+      state.copyWith(
+        orders: [
+          for (final saved in state.orders)
+            if (saved.id == id) saved.withStatus(to) else saved,
+        ],
+      ),
+    );
+    _persist();
+  }
 }

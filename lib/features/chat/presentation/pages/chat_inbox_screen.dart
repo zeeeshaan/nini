@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -85,7 +86,8 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
           foregroundColor: colors.onSurface,
           elevation: 0,
           scrolledUnderElevation: 0,
-          toolbarHeight: 72,
+          toolbarHeight: (MediaQuery.textScalerOf(context).scale(27) * 1.4 + 8)
+              .clamp(72, double.infinity),
           centerTitle: false,
           titleSpacing: 6,
           leadingWidth: 64,
@@ -96,11 +98,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
           ),
           title: Text(
             AppStrings.chat,
-            style: TextStyle(
-              fontSize: 27,
-              fontWeight: FontWeight.w700,
-              color: colors.onSurface,
-            ),
+            style: AppTextStyles.inboxTitle.copyWith(color: colors.onSurface),
           ),
           actions: [
             BlocBuilder<ChatInboxCubit, ChatInboxState>(
@@ -145,8 +143,8 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 18, 16, 15),
-              child: SizedBox(
-                height: 48,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 48),
                 child: TextField(
                   controller: _searchController,
                   textDirection: TextDirection.rtl,
@@ -155,12 +153,13 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                   onChanged: (value) {
                     context.read<ChatInboxCubit>().search(value);
                   },
-                  style: TextStyle(color: colors.onSurface, fontSize: 15),
+                  style: AppTextStyles.comfortableBody.copyWith(
+                    color: colors.onSurface,
+                  ),
                   decoration: InputDecoration(
                     hintText: AppStrings.search,
-                    hintStyle: TextStyle(
+                    hintStyle: AppTextStyles.comfortableBody.copyWith(
                       color: colors.onSurface.withValues(alpha: 0.38),
-                      fontSize: 15,
                     ),
                     suffixIcon: const Padding(
                       padding: EdgeInsets.only(right: 13),
@@ -195,7 +194,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
 
                   if (chats.isEmpty) {
                     return Center(
-                      child: Padding(
+                      child: SingleChildScrollView(
                         padding: const EdgeInsets.all(24),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -207,8 +206,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                                   ? AppStrings.noUnreadChats
                                   : AppStrings.noChatsFound,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15,
+                              style: AppTextStyles.comfortableBody.copyWith(
                                 color: colors.onSurface,
                               ),
                             ),

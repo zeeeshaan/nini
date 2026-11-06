@@ -1,13 +1,13 @@
 {
-    "name": "نینی",
-    "short_name": "نینی",
+    "name": "HYWORK",
+    "short_name": "HYWORK",
     "lang": "fa-IR",
     "dir": "ltr",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "نینی؛ فروشگاه و خدمات آنلاین",
+    "description": "HYWORK — products and services marketplace",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

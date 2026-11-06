@@ -1,21 +1,24 @@
+import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/post_media/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
 
 class PostImageCarousel extends StatefulWidget {
   const PostImageCarousel({
     super.key,
     this.images = const [],
     this.media = const [],
+    this.mediaFit = BoxFit.contain,
+    this.showIndicators = true,
   });
 
   final List<String> images;
   final List<PostMedia> media;
+  final BoxFit mediaFit;
+  final bool showIndicators;
 
   @override
   State<PostImageCarousel> createState() => _PostImageCarouselState();
@@ -57,28 +60,14 @@ class _PostImageCarouselState extends State<PostImageCarousel> {
                 if (widget.media.isNotEmpty) {
                   return PostMediaView(
                     media: widget.media[index],
-                    fit: BoxFit.contain,
+                    fit: widget.mediaFit,
                   );
                 }
-                return Image.asset(
-                  widget.images[index],
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.medium,
-                  errorBuilder: (context, error, stackTrace) {
-                    return ColoredBox(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .surfaceContainerHighest,
-                      child: const Center(
-                        child: AppIcon(AppIcons.imageUnavailable, size: 40),
-                      ),
-                    );
-                  },
-                );
+                return PostCarouselImage(path: widget.images[index]);
               },
             ),
           ),
-          if (count > 1)
+          if (widget.showIndicators && count > 1)
             Positioned(
               left: 28,
               bottom: 18,

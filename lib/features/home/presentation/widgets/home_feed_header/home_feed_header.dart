@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import '../home_notification_button/home_notification_button.dart';
 
@@ -21,11 +22,7 @@ class HomeFeedHeader extends StatelessWidget {
             'HYWORK',
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30,
-              height: 1.1,
-              fontWeight: FontWeight.w800,
-            ),
+            style: AppTextStyles.homeBrand,
           ),
         ),
         HomeNotificationButton(

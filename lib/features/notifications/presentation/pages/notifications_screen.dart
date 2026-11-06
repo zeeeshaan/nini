@@ -4,8 +4,8 @@ import 'package:nini/core/animation/screen_entrance.dart';
 
 import '../cubit/notifications_cubit.dart';
 import '../widgets/notification_header/notification_header.dart';
-import '../widgets/notification_list/notification_list.dart';
 import '../widgets/notification_search_field/notification_search_field.dart';
+import '../widgets/notification_list/notification_list.dart';
 
 /// Layout only. The Home screen supplies the shared notification Cubit.
 class NotificationsScreen extends StatelessWidget {

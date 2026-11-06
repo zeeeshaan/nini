@@ -13,7 +13,9 @@ enum CartOrderStatus {
   scheduled(CartStrings.scheduled),
   returned(CartStrings.returned),
   disputed(CartStrings.disputed),
-  completed(CartStrings.completed);
+  completed(CartStrings.completed),
+  preparing('Preparing order'),
+  shipped('On the way');
 
   const CartOrderStatus(this.label);
   final String label;

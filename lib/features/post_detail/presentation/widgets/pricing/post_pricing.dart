@@ -1,66 +1,70 @@
 import 'package:flutter/material.dart';
-
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 class PostPricing extends StatelessWidget {
-  const PostPricing({super.key, required this.post});
+  const PostPricing({
+    super.key,
+    required this.post,
+    this.color,
+    this.showCurrency = false,
+  });
 
   final PostItem post;
+  final Color? color;
+  final bool showCurrency;
 
   @override
   Widget build(BuildContext context) {
     final price = post.price.trim();
-    final originalPrice = post.originalPrice.trim();
-    final unit = post.details.unit;
-    if (price.isEmpty && unit == null) return const SizedBox.shrink();
+    final original = post.originalPrice.trim();
     final textTheme = Theme.of(context).textTheme;
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(22, 8, 22, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (price.isNotEmpty)
-            Wrap(
-              textDirection: TextDirection.rtl,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 4,
-              children: [
-                Text(
-                  '${AppStrings.price}:',
-                  textDirection: TextDirection.rtl,
-                  style: textTheme.bodyMedium,
-                ),
-                Text(
-                  AppStrings.persianDigits(price),
-                  textDirection: TextDirection.rtl,
-                  style: textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                if (originalPrice.isNotEmpty && originalPrice != price)
-                  Text(
-                    AppStrings.persianDigits(originalPrice),
-                    textDirection: TextDirection.rtl,
-                    style: textTheme.bodyMedium?.copyWith(
-                      decoration: TextDecoration.lineThrough,
-                    ),
-                  ),
-              ],
-            ),
-          if (unit != null) ...[
-            if (price.isNotEmpty) const SizedBox(height: 6),
-            Text(
-              '${AppStrings.unit}: ${unit.label}',
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.right,
-              style: textTheme.bodyMedium,
-            ),
-          ],
-        ],
+    final priceLabel = Text(
+      AppStrings.persianDigits(price),
+      textDirection: TextDirection.rtl,
+      style: textTheme.titleLarge?.copyWith(
+        color: color,
+        fontWeight: AppTextStyles.bold,
       ),
+    );
+    return Wrap(
+      spacing: 8,
+      runSpacing: 4,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        if (price.isNotEmpty)
+          if (showCurrency)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              textDirection: TextDirection.ltr,
+              children: [
+                RotatedBox(
+                  quarterTurns: 3,
+                  child: Text(
+                    AppStrings.toman,
+                    style: AppTextStyles.micro.copyWith(color: color),
+                  ),
+                ),
+                const SizedBox(width: 2),
+                Flexible(child: priceLabel),
+              ],
+            )
+          else
+            priceLabel,
+        if (post.details.unit case final unit?)
+          Text(unit.label, style: textTheme.bodyMedium?.copyWith(color: color)),
+        if (original.isNotEmpty && original != price)
+          Text(
+            AppStrings.persianDigits(original),
+            textDirection: TextDirection.rtl,
+            style: textTheme.bodySmall?.copyWith(
+              color: color,
+              decoration: TextDecoration.lineThrough,
+              decorationColor: color,
+            ),
+          ),
+      ],
     );
   }
 }

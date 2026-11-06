@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/localization/search_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class SearchSuggestions extends StatelessWidget {
@@ -46,8 +47,8 @@ class SearchSuggestions extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    suggestion,
-                    textDirection: TextDirection.rtl,
+                    SearchStrings.display(suggestion),
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),

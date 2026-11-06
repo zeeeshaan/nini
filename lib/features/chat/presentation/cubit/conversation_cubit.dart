@@ -12,11 +12,14 @@ class ConversationState {
     this.blocked = false,
     this.sendingMedia = false,
     this.selectionMode = false,
+    this.emojiVisible = false,
+    this.pickingAttachment = false,
     this.selected = const {},
     this.error,
   });
   final List<ChatMessage> messages;
   final bool blocked, sendingMedia, selectionMode;
+  final bool emojiVisible, pickingAttachment;
   final Set<String> selected;
   final String? error;
   ConversationState copyWith({
@@ -24,6 +27,8 @@ class ConversationState {
     bool? blocked,
     bool? sendingMedia,
     bool? selectionMode,
+    bool? emojiVisible,
+    bool? pickingAttachment,
     Set<String>? selected,
     String? error,
   }) => ConversationState(
@@ -31,6 +36,8 @@ class ConversationState {
     blocked: blocked ?? this.blocked,
     sendingMedia: sendingMedia ?? this.sendingMedia,
     selectionMode: selectionMode ?? this.selectionMode,
+    emojiVisible: emojiVisible ?? this.emojiVisible,
+    pickingAttachment: pickingAttachment ?? this.pickingAttachment,
     selected: selected ?? this.selected,
     error: error,
   );
@@ -59,6 +66,11 @@ class ConversationCubit extends Cubit<ConversationState> {
       !state.sendingMedia;
   ChatMessage? get latestMessage =>
       state.messages.isEmpty ? null : state.messages.last;
+
+  void showEmoji(bool visible) =>
+      emit(state.copyWith(emojiVisible: visible, error: state.error));
+  void pickingAttachment(bool busy) =>
+      emit(state.copyWith(pickingAttachment: busy, error: state.error));
 
   ChatMessage _message({
     String text = '',

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 enum AppToastType { success, error, warning, info }
@@ -71,10 +73,8 @@ class AppToast {
                           Flexible(
                             child: Text(
                               message,
-                              style: TextStyle(
+                              style: AppTextStyles.toast.copyWith(
                                 color: colors.onInverseSurface,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),

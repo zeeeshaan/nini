@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// Uses Persian Material labels and dates while preserving the app's established
-/// layout order. Text and individual form controls set their own RTL direction.
+/// Uses English development labels without changing the established layout
+/// order or right alignment. Kept here so the display language is easy to restore.
 class PersianFeature extends StatelessWidget {
   const PersianFeature({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) => Localizations.override(
     context: context,
-    locale: const Locale('fa', 'IR'),
+    locale: const Locale('en'),
     child: Directionality(
       textDirection: TextDirection.ltr,
       child: DefaultTextStyle.merge(textAlign: TextAlign.right, child: child),

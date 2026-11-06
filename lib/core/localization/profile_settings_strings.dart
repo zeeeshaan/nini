@@ -3,23 +3,23 @@ import 'package:nini/core/localization/notification_strings.dart';
 
 /// Labels for the profile settings list; detail screens will be added later.
 abstract final class ProfileSettingsStrings {
-  static const title = 'تنظیمات';
-  static const general = 'عمومی';
-  static const profile = 'تنظیمات پروفایل';
-  static const locations = 'موقعیت‌های مکانی';
-  static const wallet = 'کیف پول';
-  static const saved = 'ذخیره‌شده‌ها';
+  static const title = "Settings";
+  static const general = "General";
+  static const profile = "Profile settings";
+  static const locations = "Locations";
+  static const wallet = "Wallet";
+  static const saved = "Saved";
   static const notifications = NotificationStrings.title;
-  static const trending = 'پرطرفدارها';
-  static const insights = 'آمار و تحلیل‌ها';
-  static const scheduledContent = 'محتوای زمان‌بندی‌شده';
-  static const blocked = 'مسدودشده‌ها';
+  static const trending = "Trending";
+  static const insights = "Insights";
+  static const scheduledContent = "Scheduled content";
+  static const blocked = "Blocked";
   static const comments = AppStrings.comments;
-  static const language = 'زبان';
-  static const devicePermissions = 'مجوزهای دستگاه';
-  static const accessibility = 'دسترس‌پذیری';
+  static const language = "Language";
+  static const devicePermissions = "Device permissions";
+  static const accessibility = "Accessibility";
   static const posts = AppStrings.posts;
-  static const myMedia = 'رسانه‌های من';
+  static const myMedia = "My media";
   static const tags = AppStrings.tagsKeywords;
-  static const archive = 'بایگانی';
+  static const archive = "Archive";
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -114,9 +115,8 @@ class CallVideoHeader extends StatelessWidget {
                             : AppStrings.rearCamera)
                       : AppStrings.cameraOff,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: AppTextStyles.smallPrint.copyWith(
                     color: AppColors.white,
-                    fontSize: 10,
                     shadows: [Shadow(blurRadius: 4, color: AppColors.black)],
                   ),
                 ),

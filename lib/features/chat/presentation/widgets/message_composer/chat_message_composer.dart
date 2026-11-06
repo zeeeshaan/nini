@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -77,7 +78,7 @@ class ChatMessageComposer extends StatelessWidget {
                         focusNode: focusNode,
                         enabled: interactive,
                         textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.start,
+                        textAlign: TextAlign.right,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: 4,
@@ -85,12 +86,13 @@ class ChatMessageComposer extends StatelessWidget {
                         onSubmitted: (_) => onSend(),
                         onTap: onKeyboardRequested,
                         cursorColor: colors.onPrimary,
-                        style: TextStyle(fontSize: 14, color: colors.onPrimary),
+                        style: AppTextStyles.bodyText.copyWith(
+                          color: colors.onPrimary,
+                        ),
                         decoration: InputDecoration(
                           hintText: AppStrings.messageHint,
-                          hintStyle: TextStyle(
+                          hintStyle: AppTextStyles.bodyText.copyWith(
                             color: colors.onPrimary.withValues(alpha: .65),
-                            fontSize: 14,
                           ),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,

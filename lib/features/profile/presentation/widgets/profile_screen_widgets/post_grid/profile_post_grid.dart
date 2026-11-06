@@ -86,16 +86,18 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
 
               // Keep 3 columns as in Figma on normal phones.
               // Use 2 only on exceptionally narrow displays.
-              final columns = width < 330 ? 2 : 3;
+              final textScale =
+                  (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(
+                    1.0,
+                    double.infinity,
+                  );
+              final columns = (width / (110 * textScale)).floor().clamp(1, 3);
 
               const spacing = 2.0;
 
               final cardWidth = (width - spacing * (columns - 1)) / columns;
 
-              final textScale = MediaQuery.textScalerOf(context).scale(14) / 14;
-              final detailsHeight =
-                  (width < 400 ? 108.0 : 120.0) *
-                  (textScale < 1 ? 1 : textScale);
+              final detailsHeight = (width < 400 ? 108.0 : 120.0) * textScale;
 
               return GridView.builder(
                 shrinkWrap: true,

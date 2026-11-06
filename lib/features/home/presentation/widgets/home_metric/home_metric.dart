@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 
@@ -35,10 +36,7 @@ class HomeMetric extends StatelessWidget {
               children: [
                 Text(
                   AppStrings.persianDigits(count),
-                  style: const TextStyle(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: AppTextStyles.notificationBadge,
                 ),
                 const SizedBox(width: 3),
                 icon,

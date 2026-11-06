@@ -1,0 +1,60 @@
+// Android-only build adapter for rive_native 0.1.11 until it supports built-in
+// Kotlin upstream. projectDir remains the installed package, so its sources,
+// manifest and native libraries are used without copying the runtime.
+// Migration: https://github.com/rive-app/rive-flutter/issues/639
+
+apply plugin: 'com.android.library'
+
+group = 'app.rive.rive_native'
+version = '1.0'
+
+android {
+    namespace = 'app.rive.rive_native'
+    compileSdk = 35
+
+    defaultConfig {
+        minSdk = 21
+    }
+
+    // Match the runtime's existing Java/Kotlin bytecode target.
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+    }
+}
+
+def prepareRuntime = tasks.register('runRiveNativeSetup', Exec) {
+    description = 'Prepares the upstream Rive native libraries when missing.'
+    group = 'build'
+
+    onlyIf {
+        def skip = providers.gradleProperty('rive.native.skipSetup').orNull == 'true'
+        def libraries = fileTree('src/main/jniLibs') { include '**/*.so' }
+        !skip && libraries.isEmpty()
+    }
+
+    // Use this checkout's Flutter SDK, including when building from an IDE.
+    def properties = new Properties()
+    rootProject.file('local.properties').withInputStream { properties.load(it) }
+    def windows = System.getProperty('os.name').toLowerCase().contains('windows')
+    def dart = new File(properties.getProperty('flutter.sdk'),
+            "bin/cache/dart-sdk/bin/dart${windows ? '.exe' : ''}")
+    workingDir rootProject.projectDir.parentFile
+    commandLine dart.absolutePath, 'run', 'rive_native:setup', '--verbose', '-p', 'android'
+}
+
+tasks.matching {
+    it.name == 'preBuild' || it.name.startsWith('externalNativeBuild')
+}.configureEach {
+    dependsOn prepareRuntime
+}

@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
@@ -20,8 +21,8 @@ class CategorySheetActions extends StatelessWidget {
         Expanded(
           child: OutlinedButton(
             onPressed: saving ? null : () => Navigator.pop(context),
-            child: const Text(
-              ProfilePostStrings.cancel,
+            child: Text(
+              CategoryStrings.of(context).text(ProfilePostStrings.cancel),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
             ),
@@ -38,7 +39,8 @@ class CategorySheetActions extends StatelessWidget {
                 : null,
             onPressed: saving ? null : onSubmit,
             child: Text(
-              saving ? ProfilePostStrings.saving : submitLabel,
+              CategoryStrings.of(context)
+                  .text(saving ? ProfilePostStrings.saving : submitLabel),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
             ),

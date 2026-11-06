@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import '../../../domain/models/app_notification.dart';
 import '../notification_avatar/notification_avatar.dart';
@@ -24,9 +25,7 @@ class NotificationTile extends StatelessWidget {
             child: Text(
               notification.timeLabel,
               textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
+              style: AppTextStyles.smallPrintMedium.copyWith(
                 color: Theme.of(context).colorScheme.onSurface
                     .withValues(alpha: .6),
               ),
@@ -41,17 +40,14 @@ class NotificationTile extends StatelessWidget {
                   notification.title,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.right,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: AppTextStyles.bodyBold,
                 ),
                 const SizedBox(height: 3),
                 Text(
                   notification.message,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.right,
-                  style: const TextStyle(fontSize: 11, height: 1.5),
+                  style: AppTextStyles.notificationBody,
                 ),
               ],
             ),

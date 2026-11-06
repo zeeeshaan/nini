@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 
 class GalleryAccessNotice extends StatelessWidget {
@@ -17,9 +18,9 @@ class GalleryAccessNotice extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            AppStrings.limitedGalleryAccess,
+            CreatePostStrings.limitedGalleryAccess,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 11),
+            style: AppTextStyles.helper,
           ),
           Wrap(
             alignment: WrapAlignment.center,
@@ -29,15 +30,15 @@ class GalleryAccessNotice extends StatelessWidget {
                     ? null
                     : context.read<GalleryCubit>().manageAccess,
                 child: const Text(
-                  AppStrings.selectMoreMedia,
-                  style: TextStyle(fontSize: 11),
+                  CreatePostStrings.selectMoreMedia,
+                  style: AppTextStyles.helper,
                 ),
               ),
               TextButton(
                 onPressed: PhotoManager.openSetting,
                 child: const Text(
-                  AppStrings.fullGalleryAccess,
-                  style: TextStyle(fontSize: 11),
+                  CreatePostStrings.fullGalleryAccess,
+                  style: AppTextStyles.helper,
                 ),
               ),
             ],

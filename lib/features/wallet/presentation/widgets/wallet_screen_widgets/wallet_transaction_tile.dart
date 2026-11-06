@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/wallet_strings.dart';
@@ -22,11 +23,13 @@ class WalletTransactionTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Text(
-            AppStrings.persianDigits(transaction.amount),
-            style: TextStyle(color: amountColor, fontSize: 18),
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.ltr,
+          Flexible(
+            child: Text(
+              AppStrings.persianDigits(transaction.amount),
+              style: AppTextStyles.pageTitle.copyWith(color: amountColor),
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.ltr,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -35,19 +38,14 @@ class WalletTransactionTile extends StatelessWidget {
               children: [
                 Text(
                   WalletStrings.transactionTitle(transaction.title),
-                  style: const TextStyle(fontSize: 11),
+                  style: AppTextStyles.helper,
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  AppStrings.persianDigits(
-                    transaction.date
-                        .replaceAll('PM', 'ب.ظ')
-                        .replaceAll('AM', 'ق.ظ'),
-                  ),
-                  style: TextStyle(
-                    fontSize: 10,
+                  AppStrings.persianDigits(transaction.date),
+                  style: AppTextStyles.smallPrint.copyWith(
                     color: colors.onSurface.withValues(alpha: .35),
                   ),
                   textAlign: TextAlign.right,

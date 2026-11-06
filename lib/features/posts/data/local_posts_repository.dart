@@ -13,6 +13,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../domain/models/post_media_changes.dart';
+import 'demo_posts.dart';
 import 'local_post_media_store.dart';
 import 'profile_sample_posts.dart';
 
@@ -54,14 +55,15 @@ class LocalPostsRepository implements PostsRepository {
   ) async {
     final index = File(p.join(root.path, 'posts.json'));
     if (!await index.exists()) {
-      return (posts: createProfileSamplePosts(), needsMigration: true);
+      return (posts: <PostItem>[], needsMigration: false);
     }
     final json = jsonDecode(await index.readAsString()) as Map<String, dynamic>;
     final version = json['version'];
     if (version != 1 && version != 2) {
       throw const FormatException('Unsupported post storage version');
     }
-    final posts = (json['posts'] as List).map((entry) {
+    final storedPosts = json['posts'] as List;
+    final posts = storedPosts.map((entry) {
       final data = Map<String, dynamic>.from(entry as Map);
       data['media'] = (data['media'] as List? ?? []).map((item) {
         final media = Map<String, dynamic>.from(item as Map);
@@ -83,23 +85,27 @@ class LocalPostsRepository implements PostsRepository {
       }).toList();
       return PostItem.fromJson(data);
     }).toList();
-    if (version == 1) {
-      final existingIds = posts.map((item) => item.id).toSet();
-      posts.addAll(
-        createProfileSamplePosts().where(
-          (item) => !existingIds.contains(item.id),
-        ),
-      );
-    }
-    return (posts: posts, needsMigration: version == 1);
+    // Match complete historical records, not just IDs or publication dates.
+    // Edited samples and user-created posts must never be discarded here.
+    final sampleRecords = {
+      for (final sample in [...demoPosts, ...createProfileSamplePosts()])
+        jsonEncode(sample.toJson()),
+    };
+    final retained = [
+      for (var index = 0; index < posts.length; index++)
+        if (!sampleRecords.contains(jsonEncode(storedPosts[index])))
+          posts[index],
+    ];
+    return (
+      posts: retained,
+      needsMigration: version == 1 || retained.length != posts.length,
+    );
   }
 
   @override
   Future<List<PostItem>> load() => _serialize(() async {
     final root = await _root();
     final snapshot = await _read(root);
-    // Version 2 stores sample cards alongside user posts. Deleted samples are
-    // never appended again on subsequent loads; version 1 user data is retained.
     if (snapshot.needsMigration) await _write(root, snapshot.posts);
     return snapshot.posts;
   });

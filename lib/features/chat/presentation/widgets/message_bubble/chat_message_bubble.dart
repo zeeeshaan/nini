@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -72,9 +74,7 @@ class ChatMessageBubble extends StatelessWidget {
                         RegExp(r'[\u0600-\u06ff]').hasMatch(message.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                    style: TextStyle(
-                      fontSize: 14,
-                      height: 1.45,
+                    style: AppTextStyles.messageBody.copyWith(
                       color: foreground,
                     ),
                   ),
@@ -85,8 +85,7 @@ class ChatMessageBubble extends StatelessWidget {
                     Text(
                       AppStrings.persianDigits(hour),
                       textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        fontSize: 10,
+                      style: AppTextStyles.smallPrint.copyWith(
                         color: foreground.withValues(alpha: .75),
                       ),
                     ),

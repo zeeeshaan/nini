@@ -1,9 +1,12 @@
+import 'package:nini/core/state/map_tiles_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -28,8 +31,8 @@ class LocationMap extends StatefulWidget {
 
 class _LocationMapState extends State<LocationMap> {
   final _controller = MapController();
-  bool _ready = false, _failed = false;
-  int _retry = 0;
+  bool _ready = false;
+  final _tiles = MapTilesCubit();
   @override
   void didUpdateWidget(LocationMap oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -40,140 +43,143 @@ class _LocationMapState extends State<LocationMap> {
 
   @override
   void dispose() {
+    _tiles.close();
     _controller.dispose();
     super.dispose();
   }
 
   void _tileError() {
-    if (_failed) return;
+    if (_tiles.state.failed) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && !_failed) setState(() => _failed = true);
+      if (mounted && !_tiles.state.failed) _tiles.fail();
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final sign = dark ? -1.0 : 1.0, offset = dark ? 255.0 : 0.0;
-    return Stack(
-      children: [
-        FlutterMap(
-          mapController: _controller,
-          options: MapOptions(
-            initialCenter: widget.point ?? LocationMap.defaultCenter,
-            initialZoom: 13,
-            backgroundColor: colors.surfaceContainerHighest,
-            onMapReady: () => _ready = true,
-            onTap: (_, point) => widget.onPointSelected(point),
-          ),
-          children: [
-            ColorFiltered(
-              colorFilter: ColorFilter.matrix([
-                .2126 * sign,
-                .7152 * sign,
-                .0722 * sign,
-                0,
-                offset,
-                .2126 * sign,
-                .7152 * sign,
-                .0722 * sign,
-                0,
-                offset,
-                .2126 * sign,
-                .7152 * sign,
-                .0722 * sign,
-                0,
-                offset,
-                0,
-                0,
-                0,
-                1,
-                0,
-              ]),
-              child: TileLayer(
-                key: ValueKey(_retry),
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.nini.nini',
-                tileProvider: widget.tileProvider,
-                errorTileCallback: (_, error, stack) => _tileError(),
-              ),
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<MapTilesCubit, MapTilesState>(
+    bloc: _tiles,
+    builder: (context, state) {
+      final colors = Theme.of(context).colorScheme;
+      final dark = Theme.of(context).brightness == Brightness.dark;
+      final sign = dark ? -1.0 : 1.0, offset = dark ? 255.0 : 0.0;
+      return Stack(
+        children: [
+          FlutterMap(
+            mapController: _controller,
+            options: MapOptions(
+              initialCenter: widget.point ?? LocationMap.defaultCenter,
+              initialZoom: 13,
+              backgroundColor: colors.surfaceContainerHighest,
+              onMapReady: () => _ready = true,
+              onTap: (_, point) => widget.onPointSelected(point),
             ),
-            if (widget.point != null)
-              MarkerLayer(
-                markers: [
-                  Marker(
-                    point: widget.point!,
-                    width: 44,
-                    height: 44,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: colors.surface,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: colors.onSurface, width: 2),
-                      ),
-                      child: Center(
-                        child: AppIcon(
-                          AppIcons.location,
-                          size: 24,
-                          color: colors.onSurface,
+            children: [
+              ColorFiltered(
+                colorFilter: ColorFilter.matrix([
+                  .2126 * sign,
+                  .7152 * sign,
+                  .0722 * sign,
+                  0,
+                  offset,
+                  .2126 * sign,
+                  .7152 * sign,
+                  .0722 * sign,
+                  0,
+                  offset,
+                  .2126 * sign,
+                  .7152 * sign,
+                  .0722 * sign,
+                  0,
+                  offset,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                ]),
+                child: TileLayer(
+                  key: ValueKey(_tiles.state.attempt),
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.nini.nini',
+                  tileProvider: widget.tileProvider,
+                  errorTileCallback: (_, error, stack) => _tileError(),
+                ),
+              ),
+              if (widget.point != null)
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: widget.point!,
+                      width: 44,
+                      height: 44,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: colors.surface,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: colors.onSurface, width: 2),
+                        ),
+                        child: Center(
+                          child: AppIcon(
+                            AppIcons.location,
+                            size: 24,
+                            color: colors.onSurface,
+                          ),
                         ),
                       ),
                     ),
+                  ],
+                ),
+            ],
+          ),
+          Positioned(
+            bottom: widget.bottomOverlayHeight,
+            right: 0,
+            child: Material(
+              color: colors.surface,
+              child: InkWell(
+                onTap: () => launchUrl(
+                  Uri.parse('https://www.openstreetmap.org/copyright'),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Text(
+                    CreatePostStrings.mapAttribution,
+                    style: AppTextStyles.smallPrint,
                   ),
-                ],
-              ),
-          ],
-        ),
-        Positioned(
-          bottom: widget.bottomOverlayHeight,
-          right: 0,
-          child: Material(
-            color: colors.surface,
-            child: InkWell(
-              onTap: () => launchUrl(
-                Uri.parse('https://www.openstreetmap.org/copyright'),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(4),
-                child: Text(
-                  AppStrings.mapAttribution,
-                  style: TextStyle(fontSize: 10),
                 ),
               ),
             ),
           ),
-        ),
-        if (_failed)
-          Positioned(
-            top: 6,
-            left: 6,
-            right: 6,
-            child: Material(
-              color: colors.surface,
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        AppStrings.mapUnavailable,
-                        style: TextStyle(fontSize: 11),
+          if (_tiles.state.failed)
+            Positioned(
+              top: 6,
+              left: 6,
+              right: 6,
+              child: Material(
+                color: colors.surface,
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          CreatePostStrings.mapUnavailable,
+                          style: AppTextStyles.helper,
+                        ),
                       ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () => setState(() {
-                      _failed = false;
-                      _retry++;
-                    }),
-                    child: const Text(AppStrings.retry),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: () => _tiles.retry(),
+                      child: const Text(CreatePostStrings.retry),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-      ],
-    );
-  }
+        ],
+      );
+    },
+  );
 }

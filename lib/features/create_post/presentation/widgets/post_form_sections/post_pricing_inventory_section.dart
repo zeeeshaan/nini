@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_option_selection.dart';
@@ -28,8 +28,8 @@ class PostPricingInventorySection extends StatelessWidget {
       children: [
         AppTextField(
           controller: priceController,
-          label: AppStrings.price,
-          hint: AppStrings.enterPrice,
+          label: CreatePostStrings.price,
+          hint: CreatePostStrings.enterPrice,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textAlign: TextAlign.right,
           onChanged: draftCubit.updatePrice,
@@ -37,8 +37,8 @@ class PostPricingInventorySection extends StatelessWidget {
         const SizedBox(height: 10),
         AppTextField(
           controller: discountController,
-          label: AppStrings.discount,
-          hint: AppStrings.zeroPercent,
+          label: CreatePostStrings.discount,
+          hint: CreatePostStrings.zeroPercent,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textAlign: TextAlign.right,
           onChanged: draftCubit.updateDiscount,
@@ -47,14 +47,14 @@ class PostPricingInventorySection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, InventoryStatus>(
           selector: (state) => state.inventoryStatus,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.inventoryStatus,
-            value: value.label,
+            label: CreatePostStrings.inventoryStatus,
+            value: CreatePostStrings.optionLabel(value),
             onTap: () => choosePostOption<InventoryStatus>(
               context,
               PostChoiceDialog<InventoryStatus>(
-                title: AppStrings.inventoryStatus,
+                title: CreatePostStrings.inventoryStatus,
                 values: InventoryStatus.values,
-                label: (value) => value.label,
+                label: (value) => CreatePostStrings.optionLabel(value),
                 selected: draftCubit.state.inventoryStatus,
               ),
               draftCubit.selectInventoryStatus,
@@ -63,15 +63,15 @@ class PostPricingInventorySection extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          AppStrings.inventoryHelp,
+          CreatePostStrings.inventoryHelp,
           textAlign: TextAlign.right,
           style: theme.textTheme.bodySmall,
         ),
         const SizedBox(height: 8),
         AppTextField(
           controller: stockController,
-          label: AppStrings.warehouseStock,
-          hint: AppStrings.enterStock,
+          label: CreatePostStrings.warehouseStock,
+          hint: CreatePostStrings.enterStock,
           keyboardType: TextInputType.number,
           textAlign: TextAlign.right,
           onChanged: draftCubit.updateWarehouseStock,

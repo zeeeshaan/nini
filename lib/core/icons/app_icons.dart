@@ -9,11 +9,13 @@ abstract final class AppIcons {
   static const shoppingBag =
       'assets/icons/vectors/interface/shopping-bag-02.svg';
   static const add = 'assets/icons/vectors/edit/add-plus.svg';
+  static const minus = 'assets/icons/vectors/edit/remove-minus.svg';
   static const search =
       'assets/icons/vectors/interface/search-magnifying-glass.svg';
   static const profile = 'assets/icons/vectors/user/user-circle.svg';
   static const send = 'assets/icons/vectors/communication/paper-plane.svg';
   static const more = 'assets/icons/vectors/menu/more-vertical.svg';
+  static const grid = 'assets/icons/vectors/menu/more-grid-big.svg';
   static const notifications = 'assets/icons/vectors/communication/bell.svg';
   static const back = 'assets/icons/vectors/arrows/chevron-left-md.svg';
   static const bookmark = 'assets/icons/vectors/interface/bookmark.svg';
@@ -59,6 +61,8 @@ abstract final class AppIcons {
   static const speakerOff = 'assets/icons/vectors/media/volume-off.svg';
   static const addCircle = 'assets/icons/vectors/edit/add-plus-circle.svg';
   static const star = 'assets/icons/vectors/interface/star.svg';
+  static const radio = 'assets/icons/vectors/interface/radio-unchecked.svg';
+  static const radioSelected = 'assets/icons/vectors/interface/radio-fill.svg';
   static const copy = 'assets/icons/vectors/edit/copy.svg';
   static const bold = 'assets/icons/vectors/edit/bold.svg';
   static const italic = 'assets/icons/vectors/edit/italic.svg';

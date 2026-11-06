@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:nini/shared/models/post/post_unit.dart';
+import 'package:nini/shared/models/post/post_seller.dart';
 
 import 'cart_order_status.dart';
 
@@ -18,6 +19,7 @@ class CartItem {
     this.imageUrl,
     this.isPreOrder = false,
     this.status = CartOrderStatus.pendingPay,
+    this.seller,
   });
   final String id, title, category;
   final PostUnit unit;
@@ -25,6 +27,7 @@ class CartItem {
   final String? imageUrl;
   final bool isPreOrder;
   final CartOrderStatus? status;
+  final PostSeller? seller;
   bool get wholeUnits =>
       unit != PostUnit.kilogram &&
       unit != PostUnit.hour &&
@@ -36,7 +39,7 @@ class CartItem {
   int get total => subtotal - discount;
   bool accepts(int value) => value > 0 && value <= maxQuantity && (!wholeUnits || value % 100 == 0);
 
-  CartItem withQuantity(int value) => CartItem(
+  CartItem withQuantity(int value, {PostSeller? seller}) => CartItem(
     id: id,
     title: title,
     category: category,
@@ -48,6 +51,7 @@ class CartItem {
     imageUrl: imageUrl,
     isPreOrder: isPreOrder,
     status: status,
+    seller: seller ?? this.seller,
   );
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -61,6 +65,7 @@ class CartItem {
     'imageUrl': imageUrl,
     'isPreOrder': isPreOrder,
     'status': status?.name,
+    if (seller != null) 'seller': seller!.toJson(),
   };
   factory CartItem.fromJson(Map<String, dynamic> json) {
     final unit = PostUnit.fromName(json['unit'] as String?);
@@ -79,6 +84,9 @@ class CartItem {
       status: json.containsKey('status')
           ? CartOrderStatus.fromName(json['status'] as String?)
           : CartOrderStatus.pendingPay,
+      seller: json['seller'] == null
+          ? null
+          : PostSeller.fromJson(Map<String, dynamic>.from(json['seller'] as Map)),
     );
     if (!item.accepts(item.quantity) ||
         item.unitPrice < 0 ||

@@ -1,15 +1,15 @@
-/// Persian text for the notification preview and its accessibility labels.
+/// English development text for the notification preview and its accessibility labels.
 abstract final class NotificationStrings {
-  static const title = 'اعلان‌ها';
-  static const search = 'جستجو در اعلان‌ها';
-  static const clearSearch = 'پاک کردن جستجو';
-  static const noResults = 'اعلانی با این عبارت پیدا نشد.';
-  static const empty = 'هنوز اعلانی ندارید.';
-  static const now = 'اکنون';
-  static const minuteAgo = '۱ دقیقه پیش';
+  static const title = "Notifications";
+  static const search = "Search notifications";
+  static const clearSearch = "Clear search";
+  static const noResults = "No notifications match your search.";
+  static const empty = "No notifications yet.";
+  static const now = "Now";
+  static const minuteAgo = "1m ago";
   static const brand = 'HYWORK';
-  static const newOrder = 'یک سفارش جدید دارید.';
-  static const saleTitle = 'فروش ویژه شروع شد';
+  static const newOrder = "You have a new order.";
+  static const saleTitle = "SALE IS LIVE";
   static const saleMessage =
-      'فروش ویژه آغاز شده است. پیشنهادهای تازه را از دست ندهید.';
+      "The sale has started. Do not miss the latest offers.";
 }

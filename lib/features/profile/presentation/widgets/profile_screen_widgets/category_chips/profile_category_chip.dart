@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/theme/app_colors.dart';
 
 class ProfileCategoryChip extends StatelessWidget {
@@ -44,11 +45,7 @@ class ProfileCategoryChip extends StatelessWidget {
               maxLines: 1,
               softWrap: false,
               textScaler: MediaQuery.textScalerOf(context),
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                height: 1.4,
-              ),
+              style: AppTextStyles.body.copyWith(height: 1.4),
             ),
           ),
         ),

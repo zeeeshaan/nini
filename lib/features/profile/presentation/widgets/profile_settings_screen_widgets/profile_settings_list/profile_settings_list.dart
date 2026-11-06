@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/profile_settings_strings.dart';
 import 'package:nini/features/locations/presentation/pages/locations_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/accessibility_screen/accessibility_screen.dart';
 import 'package:nini/features/profile_settings/presentation/pages/profile_edit_screen.dart';
 import 'package:nini/features/wallet/presentation/page/wallet_screen/wallet_screen.dart';
 
@@ -37,7 +39,7 @@ class ProfileSettingsList extends StatelessWidget {
           ProfileSettingsStrings.general,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.right,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+          style: AppTextStyles.sectionTitle,
         ),
       ),
       ProfileSettingsTile(
@@ -52,7 +54,13 @@ class ProfileSettingsList extends StatelessWidget {
         label: ProfileSettingsStrings.wallet,
         onTap: () => _open(context, const WalletScreen()),
       ),
-      for (final label in _labels) ProfileSettingsTile(label: label),
+      for (final label in _labels)
+        ProfileSettingsTile(
+          label: label,
+          onTap: label == ProfileSettingsStrings.accessibility
+              ? () => _open(context, const AccessibilityScreen())
+              : null,
+        ),
     ],
   );
 }

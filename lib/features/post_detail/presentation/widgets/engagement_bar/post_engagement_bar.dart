@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -30,7 +31,6 @@ class PostEngagementBar extends StatelessWidget {
             final compact = constraints.maxWidth < 370;
 
             final iconSize = compact ? 25.0 : 29.0;
-            final textSize = compact ? 12.0 : 12.0;
             final itemSpacing = compact ? 9.0 : 12.0;
 
             return Padding(
@@ -49,12 +49,9 @@ class PostEngagementBar extends StatelessWidget {
                             AppIcon(AppIcons.star, size: 30),
                             SizedBox(width: 3),
                             Text(
-                              '۴٫۵',
+                              '4.5',
                               textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: AppTextStyles.labelEmphasis,
                             ),
                           ],
                         ),
@@ -88,7 +85,6 @@ class PostEngagementBar extends StatelessWidget {
                                   : state.isBookmarked
                                   ? '1'
                                   : '0',
-                              textSize: textSize,
                               onTap: () {
                                 context
                                     .read<PostDetailCubit>()
@@ -102,7 +98,6 @@ class PostEngagementBar extends StatelessWidget {
                               label: AppStrings.comments,
                               icon: AppIcon(AppIcons.chat, size: iconSize),
                               count: showSampleMetrics ? '886' : '0',
-                              textSize: textSize,
                               onTap: onCommentsPressed,
                             ),
 
@@ -112,7 +107,6 @@ class PostEngagementBar extends StatelessWidget {
                               label: AppStrings.share,
                               icon: AppIcon(AppIcons.share, size: iconSize),
                               count: showSampleMetrics ? '350' : '0',
-                              textSize: textSize,
                               onTap: onSharePressed,
                             ),
 
@@ -129,11 +123,10 @@ class PostEngagementBar extends StatelessWidget {
                               ),
                               isToggled: state.isLiked,
                               count: showSampleMetrics
-                                  ? '۴۵ هزار'
+                                  ? '45K'
                                   : state.isLiked
                                   ? '1'
                                   : '0',
-                              textSize: textSize,
                               onTap: () {
                                 context.read<PostDetailCubit>().toggleLike();
                               },
@@ -158,7 +151,6 @@ class _PostAction extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.count,
-    required this.textSize,
     this.onTap,
     this.isToggled,
   });
@@ -166,7 +158,6 @@ class _PostAction extends StatelessWidget {
   final String label;
   final Widget icon;
   final String count;
-  final double textSize;
   final VoidCallback? onTap;
   final bool? isToggled;
 
@@ -191,10 +182,7 @@ class _PostAction extends StatelessWidget {
                   AppStrings.persianDigits(count),
                   textDirection: TextDirection.rtl,
                   maxLines: 1,
-                  style: TextStyle(
-                    fontSize: textSize,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: AppTextStyles.labelEmphasis,
                 ),
               ],
             ),

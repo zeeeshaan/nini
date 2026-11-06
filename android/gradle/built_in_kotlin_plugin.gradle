@@ -1,0 +1,10 @@
+// Keep the upstream plugin's complete build configuration, including dependencies.
+// Flutter 3.47's text scanner misreads its unused legacy Kotlin fallback.
+// This entry point verifies the actual plugin state instead of suppressing warnings.
+apply from: new File(projectDir, 'build.gradle')
+
+if (project.findProperty('android.builtInKotlin') != 'true' ||
+        project.extensions.findByName('kotlin') == null ||
+        pluginManager.hasPlugin('org.jetbrains.kotlin.android')) {
+    throw new GradleException("${project.name} must use AGP's built-in Kotlin.")
+}

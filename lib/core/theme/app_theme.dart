@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app_colors.dart';
+import 'app_text_styles.dart';
 
 /// Shared monochrome theme. Feature widgets inherit foreground colors here.
 abstract final class AppTheme {
-  static final light = _build(Brightness.light);
-  static final dark = _build(Brightness.dark);
+  static ThemeData get light => _build(Brightness.light);
+  static ThemeData get dark => _build(Brightness.dark);
 
   static ThemeData _build(Brightness brightness) {
     final isDark = brightness == Brightness.dark;
@@ -50,7 +51,7 @@ abstract final class AppTheme {
     final base = ThemeData(
       useMaterial3: true,
       brightness: brightness,
-      fontFamily: 'YekanBakh',
+      fontFamily: AppTextStyles.fontFamily,
       colorScheme: scheme,
     );
     final primaryButtonStyle = ButtonStyle(
@@ -97,15 +98,16 @@ abstract final class AppTheme {
           horizontal: 12,
           vertical: 12,
         ),
-        labelStyle: TextStyle(color: foreground),
-        hintStyle: TextStyle(color: foreground.withValues(alpha: .55)),
+        labelStyle: AppTextStyles.inherit.copyWith(color: foreground),
+        hintStyle: AppTextStyles.inherit.copyWith(
+          color: foreground.withValues(alpha: .55),
+        ),
         prefixIconColor: foreground,
         suffixIconColor: foreground,
       ),
-      textTheme: base.textTheme.apply(
-        bodyColor: foreground,
-        displayColor: foreground,
-      ),
+      textTheme: base.textTheme
+          .merge(AppTextStyles.materialTextTheme)
+          .apply(bodyColor: foreground, displayColor: foreground),
       iconTheme: IconThemeData(color: foreground),
       primaryIconTheme: IconThemeData(color: foreground),
       appBarTheme: AppBarThemeData(
@@ -141,7 +143,10 @@ abstract final class AppTheme {
       popupMenuTheme: PopupMenuThemeData(
         color: background,
         surfaceTintColor: AppColors.transparent,
-        textStyle: TextStyle(color: foreground, fontFamily: 'YekanBakh'),
+        textStyle: AppTextStyles.inherit.copyWith(
+          color: foreground,
+          fontFamily: AppTextStyles.fontFamily,
+        ),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
@@ -149,7 +154,10 @@ abstract final class AppTheme {
           border: Border.all(color: border),
           borderRadius: BorderRadius.circular(6),
         ),
-        textStyle: TextStyle(color: foreground, fontFamily: 'YekanBakh'),
+        textStyle: AppTextStyles.inherit.copyWith(
+          color: foreground,
+          fontFamily: AppTextStyles.fontFamily,
+        ),
       ),
     );
   }

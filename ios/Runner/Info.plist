@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>نینی</string>
+	<string>HYWORK</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>نینی</string>
+	<string>HYWORK</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,15 +27,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>نینی برای گرفتن و ارسال عکس در گفتگو به دوربین نیاز دارد.</string>
+	<string>HYWORK needs camera access to take and send photos in chats.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>نینی برای دسترسی به موقعیت مکانی هنگام استفاده از برنامه به اجازه شما نیاز دارد.</string>
+	<string>HYWORK needs your permission to access your location while you use the app.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>نینی فقط با انتخاب اجازه دائمی شما می‌تواند هنگام بسته بودن برنامه نیز به موقعیت مکانی دسترسی داشته باشد.</string>
+	<string>HYWORK can access your location when the app is closed only if you choose to allow access all the time.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>نینی برای ضبط و ارسال پیام صوتی در گفتگو به میکروفون نیاز دارد.</string>
+	<string>HYWORK needs microphone access to record and send voice messages in chats.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>نینی برای انتخاب عکس‌ها و ویدیوها در پست‌ها و گفتگوهای شما به گالری دسترسی نیاز دارد.</string>
+	<string>HYWORK needs photo library access to select photos and videos for your posts and chats.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

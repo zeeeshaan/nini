@@ -1,3 +1,5 @@
+import 'package:nini/features/posts/presentation/widgets/seller_avatar/seller_avatar.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -12,12 +14,13 @@ class PostAuthorHeader extends StatelessWidget {
     this.location = AppStrings.authorLocation,
     this.avatarAsset = 'assets/images/profile_avatar.png',
     this.onMorePressed,
+    this.onProfilePressed,
   });
 
   final String name;
   final String location;
   final String avatarAsset;
-  final VoidCallback? onMorePressed;
+  final VoidCallback? onMorePressed, onProfilePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +30,12 @@ class PostAuthorHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         child: Row(
           children: [
-            IconButton(
-              onPressed: onMorePressed,
-              tooltip: AppStrings.morePostOptions,
-              icon: const AppIcon(AppIcons.more, size: 24),
-            ),
+            if (onMorePressed != null)
+              IconButton(
+                onPressed: onMorePressed,
+                tooltip: AppStrings.morePostOptions,
+                icon: const AppIcon(AppIcons.more, size: 24),
+              ),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -42,16 +46,13 @@ class PostAuthorHeader extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: AppTextStyles.authorName,
                   ),
                   const SizedBox(height: 3),
                   Text(
                     location,
                     textDirection: TextDirection.rtl,
-                    style: const TextStyle(fontSize: 12),
+                    style: AppTextStyles.label,
                   ),
                 ],
               ),
@@ -65,18 +66,10 @@ class PostAuthorHeader extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.authorOnline, width: 2),
               ),
-              child: ClipOval(
-                child: Image.asset(
-                  avatarAsset,
-                  semanticLabel: AppStrings.authorImage,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => ColoredBox(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .surfaceContainerHighest,
-                    child: const AppIcon(AppIcons.profile, size: 24),
-                  ),
-                ),
+              child: SellerAvatar(
+                asset: avatarAsset,
+                name: name,
+                onPressed: onProfilePressed,
               ),
             ),
           ],

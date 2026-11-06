@@ -1,15 +1,15 @@
-/// Persian copy and locations used by the Search feature.
+/// English display copy with stable local Search catalogue keys.
 abstract final class SearchStrings {
-  static const hint = 'جستجوی کالا و خدمات';
+  static const hint = "Search products and services";
   static const initialQuery = 'لوله‌کش';
-  static const chooseCity = 'انتخاب شهر';
-  static const closeSearch = 'بازگشت به نتایج';
-  static const clearQuery = 'پاک کردن جستجو';
-  static const noResults = 'نتیجه‌ای پیدا نشد';
-  static const tryAnotherQuery = 'عبارت دیگری جستجو کنید یا شهر را تغییر دهید.';
-  static const showAll = 'نمایش همه خدمات';
+  static const chooseCity = "Choose city";
+  static const closeSearch = "Back to results";
+  static const clearQuery = "Clear search";
+  static const noResults = "No results found";
+  static const tryAnotherQuery = "Try another search or change the city.";
+  static const showAll = "Show all services";
   static const service = 'خدمات لوله‌کشی';
-  static const currency = 'تومان';
+  static const currency = "toman";
   static const tehran = 'تهران';
   static const cities = [
     tehran,
@@ -83,4 +83,61 @@ abstract final class SearchStrings {
     waterHeaterRepair,
     gasPlumbing,
   ];
+
+  // Keep canonical values stable for existing search IDs and saved bookings.
+  static const _displayLabels = {
+    emergencyPlumbing: 'Emergency plumbing',
+    drainCleaning: 'Drain cleaning',
+    blockedDrain: 'Blocked drain repair',
+    toiletRepair: 'Toilet repair',
+    toiletInstallation: 'Toilet installation',
+    leakDetection: 'Leak detection',
+    waterLeakRepair: 'Water leak repair',
+    pipeRepair: 'Pipe repair',
+    burstPipeRepair: 'Burst pipe repair',
+    boilerRepair: 'Boiler repair',
+    radiatorRepair: 'Radiator repair',
+    tapRepair: 'Tap repair',
+    faucetRepair: 'Faucet repair',
+    showerRepair: 'Shower repair',
+    bathroomPlumbing: 'Bathroom plumbing',
+    kitchenPlumbing: 'Kitchen plumbing',
+    waterHeaterRepair: 'Water heater repair',
+    gasPlumbing: 'Gas plumbing',
+    service: 'Plumbing services',
+    tehran: "Tehran",
+    'مشهد': "Mashhad",
+    'اصفهان': "Isfahan",
+    'شیراز': "Shiraz",
+    'تبریز': "Tabriz",
+    'کرج': "Karaj",
+    'اهواز': "Ahvaz",
+    'قم': "Qom",
+    'کرمانشاه': "Kermanshah",
+    'رشت': "Rasht",
+    'ارومیه': "Urmia",
+    'بندرعباس': "Bandar Abbas",
+    'اراک': "Arak",
+    'یزد': "Yazd",
+    'زاهدان': "Zahedan",
+    'همدان': "Hamadan",
+    'کرمان': "Kerman",
+    'ساری': "Sari",
+    'قزوین': "Qazvin",
+    'سنندج': "Sanandaj",
+    'اردبیل': "Ardabil",
+    'بوشهر': "Bushehr",
+    'بیرجند': "Birjand",
+    'بجنورد': "Bojnord",
+    'ایلام': "Ilam",
+    'خرم\u200cآباد': "Khorramabad",
+    'زنجان': "Zanjan",
+    'سمنان': "Semnan",
+    'شهرکرد': "Shahrekord",
+    'گرگان': "Gorgan",
+    'یاسوج': "Yasuj",
+    initialQuery: 'Plumber',
+  };
+
+  static String display(String value) => _displayLabels[value] ?? value;
 }

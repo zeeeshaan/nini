@@ -1,3 +1,6 @@
+import 'package:nini/features/posts/presentation/cubit/post_editor_fields_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
@@ -25,6 +28,9 @@ class EditPostScreen extends StatelessWidget {
         create: (_) => CreatePostCubit(initial: postDraftFromPost(post)),
       ),
       BlocProvider(create: (_) => PostEditorMediaCubit(post.media)),
+      BlocProvider(
+        create: (_) => PostEditorFieldsCubit(postDraftFromPost(post)),
+      ),
     ],
     child: PersianFeature(child: _EditPostView(post: post)),
   );
@@ -41,8 +47,8 @@ class _EditPostViewState extends State<_EditPostView> {
   final _form = GlobalKey<FormState>();
   late final quill.QuillController _caption;
   late final PostCaptionSynchronizer _synchronizer;
-  bool _dirty = false, _saving = false, _allowPop = false, _confirming = false;
-  String? _error;
+  final _operation = PostOperationCubit();
+  bool _confirming = false;
   CreatePostCubit get _editor => context.read<CreatePostCubit>();
 
   @override
@@ -66,34 +72,36 @@ class _EditPostViewState extends State<_EditPostView> {
 
   @override
   void dispose() {
+    _operation.close();
     _synchronizer.dispose();
     _caption.dispose();
     super.dispose();
   }
 
   void _markDirty() {
-    if (!_dirty && mounted) setState(() => _dirty = true);
+    if (!_operation.state.dirty && mounted) _operation.markDirty();
   }
 
   Future<void> _close([PostItem? result]) async {
-    setState(() => _allowPop = true);
+    _operation.allowPop();
     await WidgetsBinding.instance.endOfFrame;
     if (mounted) Navigator.of(context).pop(result);
   }
 
   Future<void> _cancel() async {
-    if (_saving || _confirming) return;
+    if (_operation.state.saving || _confirming) return;
     _confirming = true;
-    final discard = !_dirty || await confirmDiscardPostChanges(context);
+    final discard =
+        !_operation.state.dirty || await confirmDiscardPostChanges(context);
     _confirming = false;
     if (mounted && discard) await _close();
   }
 
   Future<void> _save() async {
-    if (_saving) return;
+    if (_operation.state.saving) return;
     final categories = context.read<ProfileCategoriesCubit>();
     if (categories.state.loading || categories.state.loadFailed) {
-      setState(() => _error = ProfilePostStrings.loadFailed);
+      _operation.showError(ProfilePostStrings.loadFailed);
       return;
     }
     _synchronizer.flush();
@@ -103,10 +111,7 @@ class _EditPostViewState extends State<_EditPostView> {
       categories.state.find(_editor.state.profileCategoryId)?.id,
     );
     FocusScope.of(context).unfocus();
-    setState(() {
-      _saving = true;
-      _error = null;
-    });
+    _operation.beginSave();
     final posts = context.read<PostsCubit>();
     final updated = await posts.update(
       widget.post.id,
@@ -118,74 +123,80 @@ class _EditPostViewState extends State<_EditPostView> {
       categories.select(updated.profileCategoryId);
       await _close(updated);
     } else {
-      setState(() {
-        _saving = false;
-        _error = posts.state.publishError ?? ProfilePostStrings.saveFailed;
-      });
+      _operation.fail(
+        posts.state.publishError ?? ProfilePostStrings.saveFailed,
+      );
     }
   }
 
   @override
-  Widget build(BuildContext context) => PopScope(
-    canPop: _allowPop || (!_dirty && !_saving),
-    onPopInvokedWithResult: (didPop, _) {
-      if (!didPop) _cancel();
-    },
-    child: Scaffold(
-      appBar: AppBar(
-        title: const Align(
-          alignment: Alignment.centerRight,
-          child: Text(
-            ProfilePostStrings.editPost,
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
-          ),
-        ),
-        leading: IconButton(
-          tooltip: ProfilePostStrings.back,
-          onPressed: _saving ? null : _cancel,
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 720),
-            child: Column(
-              children: [
-                if (_saving) const LinearProgressIndicator(minHeight: 2),
-                if (_error != null)
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      _error!,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.error,
+  Widget build(BuildContext context) =>
+      BlocBuilder<PostOperationCubit, PostOperationState>(
+        bloc: _operation,
+        builder: (context, state) => PopScope(
+          canPop:
+              _operation.state.allowPop ||
+              (!_operation.state.dirty && !_operation.state.saving),
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop) _cancel();
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  ProfilePostStrings.editPost,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+              leading: IconButton(
+                tooltip: ProfilePostStrings.back,
+                onPressed: _operation.state.saving ? null : _cancel,
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            body: SafeArea(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 720),
+                  child: Column(
+                    children: [
+                      if (_operation.state.saving)
+                        const LinearProgressIndicator(minHeight: 2),
+                      if (_operation.state.error != null)
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            _operation.state.error!,
+                            style: AppTextStyles.inherit.copyWith(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                            textDirection: TextDirection.rtl,
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      Expanded(
+                        child: AbsorbPointer(
+                          absorbing: _operation.state.saving,
+                          child: EditPostForm(
+                            formKey: _form,
+                            captionController: _caption,
+                            onChanged: _markDirty,
+                          ),
+                        ),
                       ),
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                Expanded(
-                  child: AbsorbPointer(
-                    absorbing: _saving,
-                    child: EditPostForm(
-                      formKey: _form,
-                      captionController: _caption,
-                      onChanged: _markDirty,
-                    ),
+                    ],
                   ),
                 ),
-              ],
+              ),
+            ),
+            bottomNavigationBar: PostEditorActions(
+              saving: _operation.state.saving,
+              onCancel: _cancel,
+              onSave: _save,
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: PostEditorActions(
-        saving: _saving,
-        onCancel: _cancel,
-        onSave: _save,
-      ),
-    ),
-  );
+      );
 }

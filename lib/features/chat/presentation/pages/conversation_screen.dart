@@ -105,7 +105,7 @@ class _ConversationViewState extends State<_ConversationView>
   final _messageController = TextEditingController(),
       _messageFocusNode = FocusNode();
   final _scrollController = ScrollController();
-  bool _emojiVisible = false, _attachmentBusy = false;
+
   PageRoute<dynamic>? _route;
   ConversationCubit get _conversation => context.read<ConversationCubit>();
   VoiceRecordingCubit get _recording => context.read<VoiceRecordingCubit>();
@@ -173,17 +173,17 @@ class _ConversationViewState extends State<_ConversationView>
   }
 
   void _keyboard() {
-    if (_emojiVisible) setState(() => _emojiVisible = false);
+    if (_conversation.state.emojiVisible) _conversation.showEmoji(false);
   }
 
   Future<void> _toggleEmoji() async {
-    if (_emojiVisible) {
-      setState(() => _emojiVisible = false);
+    if (_conversation.state.emojiVisible) {
+      _conversation.showEmoji(false);
       _messageFocusNode.requestFocus();
     } else {
       _messageFocusNode.unfocus();
       await SystemChannels.textInput.invokeMethod<void>('TextInput.hide');
-      if (mounted) setState(() => _emojiVisible = true);
+      if (mounted) _conversation.showEmoji(true);
     }
   }
 
@@ -228,8 +228,12 @@ class _ConversationViewState extends State<_ConversationView>
   }
 
   Future<void> _openAttachments() async {
-    if (_attachmentBusy || !_conversation.canSend || _recording.active) return;
-    setState(() => _attachmentBusy = true);
+    if (_conversation.state.pickingAttachment ||
+        !_conversation.canSend ||
+        _recording.active) {
+      return;
+    }
+    _conversation.pickingAttachment(true);
     _messageFocusNode.unfocus();
     _keyboard();
     try {
@@ -247,7 +251,7 @@ class _ConversationViewState extends State<_ConversationView>
         await _conversation.sendAttachments(result.photos);
       }
     } finally {
-      if (mounted) setState(() => _attachmentBusy = false);
+      if (mounted) _conversation.pickingAttachment(false);
     }
   }
 
@@ -323,8 +327,8 @@ class _ConversationViewState extends State<_ConversationView>
   }
 
   void _back() {
-    if (_emojiVisible) {
-      setState(() => _emojiVisible = false);
+    if (_conversation.state.emojiVisible) {
+      _conversation.showEmoji(false);
     } else if (_conversation.state.selectionMode) {
       _conversation.cancelSelection();
     } else if (_recording.active) {
@@ -373,12 +377,12 @@ class _ConversationViewState extends State<_ConversationView>
                   recording.phase != VoiceRecordingPhase.idle;
               return PopScope(
                 canPop:
-                    !_emojiVisible &&
+                    !_conversation.state.emojiVisible &&
                     !conversation.selectionMode &&
                     !recordingActive,
                 onPopInvokedWithResult: (didPop, result) {
                   if (!didPop &&
-                      (_emojiVisible ||
+                      (_conversation.state.emojiVisible ||
                           conversation.selectionMode ||
                           recordingActive)) {
                     _back();
@@ -389,6 +393,12 @@ class _ConversationViewState extends State<_ConversationView>
                   child: Scaffold(
                     resizeToAvoidBottomInset: true,
                     appBar: ConversationHeader(
+                      toolbarHeight:
+                          (MediaQuery.textScalerOf(context).scale(15) * 1.4 +
+                                  MediaQuery.textScalerOf(context).scale(11) *
+                                      1.4 +
+                                  8)
+                              .clamp(70, double.infinity),
                       conversation: widget.conversation,
                       subtitle: widget.subtitle,
                       selectionMode: conversation.selectionMode,
@@ -398,7 +408,7 @@ class _ConversationViewState extends State<_ConversationView>
                       busy:
                           conversation.sendingMedia ||
                           recordingActive ||
-                          _attachmentBusy,
+                          _conversation.state.pickingAttachment,
                       canCopy:
                           selected.length == 1 &&
                           selected.single.text.isNotEmpty,
@@ -411,12 +421,12 @@ class _ConversationViewState extends State<_ConversationView>
                     ),
                     body: ConversationBody(
                       conversation: conversation,
-                      pickingAttachment: _attachmentBusy,
+                      pickingAttachment: _conversation.state.pickingAttachment,
                       recording: recording,
                       scrollController: _scrollController,
                       messageController: _messageController,
                       messageFocusNode: _messageFocusNode,
-                      emojiVisible: _emojiVisible,
+                      emojiVisible: _conversation.state.emojiVisible,
                       onUnblock: () => _conversation.setBlocked(false),
                       onStartSelection: (id) {
                         _messageFocusNode.unfocus();

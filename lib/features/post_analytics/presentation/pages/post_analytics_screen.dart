@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -48,7 +49,7 @@ class _PostAnalyticsView extends StatelessWidget {
       ),
       title: const Text(
         AppStrings.analytics,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+        style: AppTextStyles.analyticsTitle,
       ),
     ),
     body: SafeArea(
@@ -83,7 +84,7 @@ class _PostAnalyticsView extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 12),
                           child: Text(
                             AppStrings.analyticsSaveFailed,
-                            style: TextStyle(fontSize: 11),
+                            style: AppTextStyles.helper,
                           ),
                         ),
                       TotalViewsSection(reportForPeriod: report),

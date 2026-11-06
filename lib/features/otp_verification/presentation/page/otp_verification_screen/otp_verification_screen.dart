@@ -1,10 +1,12 @@
+import 'package:nini/features/otp_verification/presentation/cubit/otp_verification_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/assets/app_assets.dart';
 import 'package:nini/core/localization/auth_strings.dart';
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:nini/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:nini/features/locations/presentation/widgets/location_permission_gate/location_permission_gate.dart';
-import 'package:nini/shared/widgets/auth_screen_layout/auth_screen_layout.dart';
+import 'package:nini/features/login/presentation/widgets/auth_screen_layout/auth_screen_layout.dart';
 
 import '../../widgets/otp_verification_screen_widgets/otp_code_input/otp_code_input.dart';
 import '../../widgets/otp_verification_screen_widgets/otp_countdown/otp_countdown.dart';
@@ -20,12 +22,10 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  String _code = '';
-  bool _completed = false;
+  final _verification = OtpVerificationCubit();
 
   void _openHome() {
-    if (_completed || _code.length != 4) return;
-    _completed = true;
+    if (!_verification.complete()) return;
     FocusScope.of(context).unfocus();
     Navigator.of(context).pushAndRemoveUntil<void>(
       MaterialPageRoute<void>(
@@ -41,22 +41,35 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => AuthScreenLayout(
-    illustration: AppAssets.otpIllustration,
-    illustrationScale: .72,
-    title: AuthStrings.enterOtp,
-    buttonLabel: AuthStrings.continueLabel,
-    onContinue: _code.length == 4 ? _openHome : null,
-    content: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        OtpCodeInput(
-          phoneNumber: widget.phoneNumber,
-          onChanged: (code) => setState(() => _code = code),
+  void dispose() {
+    _verification.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<OtpVerificationCubit, String>(
+        bloc: _verification,
+        builder: (context, state) => AuthScreenLayout(
+          illustration: AppAssets.otpIllustration,
+          illustrationScale: .72,
+          title: AuthStrings.enterOtp,
+          buttonLabel: AuthStrings.continueLabel,
+          onContinue: _verification.state.length == 4 ? _openHome : null,
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OtpCodeInput(
+                phoneNumber: widget.phoneNumber,
+                onChanged: (code) => _verification.changeCode(code),
+              ),
+              const SizedBox(height: 24),
+              const Align(
+                alignment: Alignment.centerRight,
+                child: OtpCountdown(),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 24),
-        const Align(alignment: Alignment.centerRight, child: OtpCountdown()),
-      ],
-    ),
-  );
+      );
 }

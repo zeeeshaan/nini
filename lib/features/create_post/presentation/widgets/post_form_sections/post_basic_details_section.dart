@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
@@ -31,17 +31,17 @@ class PostBasicDetailsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const PostCategorySelector(),
+        const PostCategorySelector(english: true),
         const SizedBox(height: 16),
         BlocSelector<CreatePostCubit, PostDraft, CreatePostType?>(
           selector: (state) => state.postType,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.postType,
+            label: CreatePostStrings.postType,
             value: value == null
                 ? null
                 : value == CreatePostType.product
-                ? AppStrings.product
-                : AppStrings.services,
+                ? CreatePostStrings.product
+                : CreatePostStrings.services,
             onTap: () => choosePostOption<CreatePostType>(
               context,
               TypePostDialog(selected: draftCubit.state.postType),
@@ -52,15 +52,15 @@ class PostBasicDetailsSection extends StatelessWidget {
         const SizedBox(height: 16),
         AppTextField(
           controller: titleController,
-          label: AppStrings.productServiceTitle,
-          hint: AppStrings.enterPostTitle,
+          label: CreatePostStrings.productServiceTitle,
+          hint: CreatePostStrings.enterPostTitle,
           textAlign: TextAlign.right,
           textInputAction: TextInputAction.next,
           onChanged: draftCubit.updateTitle,
         ),
         const SizedBox(height: 16),
         Text(
-          AppStrings.postCaption,
+          CreatePostStrings.postCaption,
           textAlign: TextAlign.right,
           style: theme.textTheme.bodySmall,
         ),
@@ -71,8 +71,8 @@ class PostBasicDetailsSection extends StatelessWidget {
           selector: (state) =>
               state.altTexts.values.where((value) => value.isNotEmpty).length,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.altText,
-            value: AppStrings.descriptionCount(value),
+            label: CreatePostStrings.altText,
+            value: CreatePostStrings.descriptionCount(value),
             onTap: () => choosePostOption<Map<String, String>>(
               context,
               AltTextDialog(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
@@ -78,7 +79,7 @@ class PostEditorMediaSection extends StatelessWidget {
                     field.errorText!,
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
-                    style: TextStyle(
+                    style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,
                     ),
                   ),

@@ -5,6 +5,7 @@ class AppTextField extends StatelessWidget {
   const AppTextField({
     super.key,
     this.controller,
+    this.textStyle,
     this.focusNode,
     this.label,
     this.hint,
@@ -12,7 +13,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.keyboardType,
     this.textInputAction,
-    this.textAlign = TextAlign.start,
+    this.textAlign = TextAlign.right,
     this.textDirection = TextDirection.rtl,
     this.maxLines = 1,
     this.maxLength,
@@ -26,9 +27,11 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.onSubmitted,
+    this.onSaved,
   }) : assert(maxLines == null || maxLines > 0);
 
   final TextEditingController? controller;
+  final TextStyle? textStyle;
   final FocusNode? focusNode;
 
   final String? label;
@@ -57,6 +60,7 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final VoidCallback? onTap;
   final ValueChanged<String>? onSubmitted;
+  final FormFieldSetter<String>? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +87,8 @@ class AppTextField extends StatelessWidget {
         onChanged: onChanged,
         onTap: onTap,
         onFieldSubmitted: onSubmitted,
-        style: Theme.of(context).textTheme.bodyMedium,
+        onSaved: onSaved,
+        style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,

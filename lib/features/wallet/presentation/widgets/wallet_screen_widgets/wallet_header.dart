@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -21,7 +22,7 @@ class WalletHeader extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.centerRight,
       child: Text(
         title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        style: AppTextStyles.dialogTitle,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
       ),

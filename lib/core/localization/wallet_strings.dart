@@ -1,38 +1,38 @@
-/// Persian copy for the wallet UI. Bank identifiers and sample amounts stay
+/// English development copy for the wallet UI. Bank identifiers and sample amounts stay
 /// separate from the labels displayed to the user.
 abstract final class WalletStrings {
-  static const wallet = 'کیف پول';
-  static const withdraw = 'برداشت';
-  static const balance = 'موجودی';
-  static const topUp = 'افزایش موجودی';
+  static const wallet = "Wallet";
+  static const withdraw = "Withdraw";
+  static const balance = "Balance";
+  static const topUp = "Top Up";
   static const topUpTitle = topUp;
-  static const chargeAmount = 'مبلغ افزایش موجودی';
-  static const paymentMethod = 'روش پرداخت';
-  static const transfer = 'انتقال';
-  static const request = 'درخواست وجه';
-  static const payment = 'پرداخت';
-  static const transactions = 'تراکنش‌ها';
-  static const today = 'امروز';
-  static const yesterday = 'دیروز';
-  static const withdrawalAmount = 'مبلغ برداشت';
-  static const pendingAmount = 'مبلغ در انتظار برداشت';
-  static const accountNumber = 'شماره حساب';
+  static const chargeAmount = "Top-up amount";
+  static const paymentMethod = "Payment method";
+  static const transfer = "Transfer";
+  static const request = "Request";
+  static const payment = "Payment";
+  static const transactions = "Transactions";
+  static const today = "Today";
+  static const yesterday = "Yesterday";
+  static const withdrawalAmount = "Withdrawal amount";
+  static const pendingAmount = "Amount pending withdrawal";
+  static const accountNumber = "Account number";
   static const accountHint = '1234-5678-9012-3456';
-  static const password = 'رمز یک‌بارمصرف';
-  static const otp = 'رمز پویا';
+  static const password = "One-time password";
+  static const otp = "OTP";
   static const securityHelp =
-      'برای حفظ امنیت شما، لازم است این برداشت را تأیید کنیم.';
-  static const done = 'تأیید';
-  static const illustration = 'تصویر برداشت وجه';
+      "For your security, we need to verify this withdrawal.";
+  static const done = "Done";
+  static const illustration = "Withdrawal illustration";
 
   static String bankName(String bank) => switch (bank) {
-    'melli' => 'بانک ملی ایران',
-    'mellat' => 'بانک ملت',
-    'saman' => 'بانک سامان',
+    'melli' => 'Bank Melli',
+    'mellat' => 'Bank Mellat',
+    'saman' => 'Saman Bank',
     _ => bank,
   };
   static String transactionTitle(String title) =>
-      title == 'Home Cleaning' ? 'نظافت منزل' : title;
+      title == 'Home Cleaning' ? 'Home Cleaning' : title;
   static String ownerLabel(String owner) =>
-      owner == 'Mojtaba.z' ? 'مجتبی.ز' : owner;
+      owner == 'Mojtaba.z' ? 'Mojtaba.z' : owner;
 }

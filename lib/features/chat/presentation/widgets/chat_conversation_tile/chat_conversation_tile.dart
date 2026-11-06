@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -41,8 +42,7 @@ class ChatConversationTile extends StatelessWidget {
                   children: [
                     Text(
                       _formatTime(conversation.lastMessageAt),
-                      style: TextStyle(
-                        fontSize: 12,
+                      style: AppTextStyles.label.copyWith(
                         color: colors.onSurface.withValues(alpha: 0.42),
                       ),
                     ),
@@ -58,14 +58,12 @@ class ChatConversationTile extends StatelessWidget {
                         ),
                         child: Text(
                           conversation.unreadCount > 99
-                              ? '۹۹+'
+                              ? '99+'
                               : AppStrings.persianDigits(
                                   conversation.unreadCount,
                                 ),
-                          style: TextStyle(
-                            fontSize: 10,
+                          style: AppTextStyles.smallPrintMedium.copyWith(
                             color: colors.surface,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -85,9 +83,7 @@ class ChatConversationTile extends StatelessWidget {
                       textAlign: TextAlign.right,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      style: AppTextStyles.conversationName.copyWith(
                         color: colors.onSurface,
                       ),
                     ),
@@ -99,7 +95,9 @@ class ChatConversationTile extends StatelessWidget {
                       textAlign: TextAlign.right,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 13, color: colors.onSurface),
+                      style: AppTextStyles.compactBody.copyWith(
+                        color: colors.onSurface,
+                      ),
                     ),
                   ],
                 ),

@@ -5,7 +5,7 @@ import 'package:nini/features/cart/data/local_cart_repository.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/post_analytics/presentation/domain/cubit/post_analytics_cubit.dart';
+import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
 import 'package:nini/features/posts/data/local_posts_repository.dart';
 import 'package:nini/features/posts/data/local_profile_categories_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';

@@ -1,3 +1,6 @@
+import 'package:nini/features/wallet/presentation/cubit/wallet_amount_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -22,48 +25,44 @@ class _WalletAmountSectionState extends State<WalletAmountSection> {
   final _amount = TextEditingController(
     text: AppStrings.persianDigits(WalletSampleData.pendingAmount),
   );
-  String? _selected = WalletSampleData.presets.last;
+  final _presets = WalletAmountCubit();
   @override
   void dispose() {
+    _presets.close();
     _amount.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Text(
-        widget.label,
-        textAlign: TextAlign.right,
-        style: const TextStyle(fontSize: 11),
-        textDirection: TextDirection.rtl,
-      ),
-      const SizedBox(height: 8),
-      WalletTextField(
-        controller: _amount,
-        suffixIcon: const Padding(
-          padding: EdgeInsets.all(11),
-          child: AppIcon(AppIcons.bankNote, size: 18),
+  Widget build(BuildContext context) => BlocBuilder<WalletAmountCubit, String?>(
+    bloc: _presets,
+    builder: (context, state) => Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          widget.label,
+          textAlign: TextAlign.right,
+          style: AppTextStyles.helper,
+          textDirection: TextDirection.rtl,
         ),
-        onChanged: (value) => setState(
-          () => _selected = WalletSampleData.presets
-              .where(
-                (amount) =>
-                    amount == value ||
-                    AppStrings.persianDigits(amount) == value,
-              )
-              .firstOrNull,
+        const SizedBox(height: 8),
+        WalletTextField(
+          controller: _amount,
+          suffixIcon: const Padding(
+            padding: EdgeInsets.all(11),
+            child: AppIcon(AppIcons.bankNote, size: 18),
+          ),
+          onChanged: _presets.edit,
         ),
-      ),
-      const SizedBox(height: 6),
-      WalletAmountPresets(
-        selected: _selected,
-        onSelected: (amount) {
-          _amount.text = AppStrings.persianDigits(amount);
-          setState(() => _selected = amount);
-        },
-      ),
-    ],
+        const SizedBox(height: 6),
+        WalletAmountPresets(
+          selected: _presets.state,
+          onSelected: (amount) {
+            _amount.text = AppStrings.persianDigits(amount);
+            _presets.select(amount);
+          },
+        ),
+      ],
+    ),
   );
 }

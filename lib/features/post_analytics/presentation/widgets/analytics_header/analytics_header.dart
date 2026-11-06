@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -6,7 +7,7 @@ import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/post_media/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
 
 class AnalyticsPostHeader extends StatelessWidget {
   const AnalyticsPostHeader({super.key, required this.post});
@@ -24,8 +25,7 @@ class AnalyticsPostHeader extends StatelessWidget {
               post.isPublished
                   ? AppStrings.onThisDevice
                   : AppStrings.sampleData,
-              style: TextStyle(
-                fontSize: 9,
+              style: AppTextStyles.metadata.copyWith(
                 color: Theme.of(context).colorScheme.onSurface
                     .withValues(alpha: .5),
               ),
@@ -39,18 +39,14 @@ class AnalyticsPostHeader extends StatelessWidget {
                     post.isPublished
                         ? AppStrings.sellerName
                         : AppStrings.authorName,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: AppTextStyles.labelEmphasis,
                   ),
                   if (location.isNotEmpty)
                     Text(
                       location,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 9,
+                      style: AppTextStyles.metadata.copyWith(
                         color: Theme.of(context).colorScheme.onSurface
                             .withValues(alpha: .38),
                       ),

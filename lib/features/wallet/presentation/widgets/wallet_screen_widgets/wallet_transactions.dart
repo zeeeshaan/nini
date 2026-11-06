@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/wallet_strings.dart';
 
 import '../../../data/wallet_sample_data.dart';
@@ -13,14 +14,14 @@ class WalletTransactions extends StatelessWidget {
       const Text(
         WalletStrings.transactions,
         textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        style: AppTextStyles.bodyEmphasis,
         textDirection: TextDirection.rtl,
       ),
       const SizedBox(height: 18),
       const Text(
         WalletStrings.today,
         textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 14),
+        style: AppTextStyles.bodyText,
         textDirection: TextDirection.rtl,
       ),
       const SizedBox(height: 6),
@@ -30,7 +31,7 @@ class WalletTransactions extends StatelessWidget {
       const Text(
         WalletStrings.yesterday,
         textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 14),
+        style: AppTextStyles.bodyText,
         textDirection: TextDirection.rtl,
       ),
       const SizedBox(height: 6),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 
 /// Shared outline and spacing for the withdrawal inputs.
@@ -33,12 +34,11 @@ class WalletTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.right,
-      style: const TextStyle(fontSize: 12),
+      style: AppTextStyles.label,
       decoration: InputDecoration(
         hintText: hint == null ? null : AppStrings.persianDigits(hint!),
         hintTextDirection: TextDirection.ltr,
-        hintStyle: TextStyle(
-          fontSize: 11,
+        hintStyle: AppTextStyles.helper.copyWith(
           color: colors.onSurface.withValues(alpha: .35),
         ),
         isDense: true,

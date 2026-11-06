@@ -1,3 +1,7 @@
+import 'package:nini/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -30,106 +34,114 @@ class AnalyticsLineChart extends StatefulWidget {
 }
 
 class _AnalyticsLineChartState extends State<AnalyticsLineChart> {
-  int? _selected;
+  final _chart = AnalyticsControlsCubit();
   @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) {
-      final width = constraints.maxWidth;
-      final selected = (_selected ?? widget.first.length ~/ 3).clamp(
-        0,
-        widget.first.length - 1,
-      );
-      final left = widget.area ? 0.0 : 40.0;
-      final pointX =
-          left +
-          (width - left) * selected / math.max(1, widget.first.length - 1);
-      void select(Offset offset) => setState(
-        () => _selected =
-            (((offset.dx - left) / (width - left)) * (widget.first.length - 1))
-                .round()
-                .clamp(0, widget.first.length - 1),
-      );
-      final first = widget.first[selected],
-          second = widget.second[selected.clamp(0, widget.second.length - 1)];
-      final preview = widget.isSample && _selected == null;
-      final date = preview
-          ? AppStrings.sampleDate
-          : analyticsDate(
-              widget.dates[(selected *
-                      widget.dates.length ~/
-                      widget.first.length)
-                  .clamp(0, widget.dates.length - 1)],
-            );
-      return Semantics(
-        label: AppStrings.chartHelp(widget.area),
-        child: MouseRegion(
-          onHover: (event) => select(event.localPosition),
-          child: GestureDetector(
-            onTapDown: (event) => select(event.localPosition),
-            onPanUpdate: (event) => select(event.localPosition),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned.fill(
-                  child: CustomPaint(
-                    painter: _LinePainter(
-                      first: widget.first,
-                      second: widget.second,
-                      labels: widget.labels,
-                      area: widget.area,
-                      sample: widget.isSample,
-                      selected: selected,
-                      showFirst: widget.showFirst,
-                      showSecond: widget.showSecond,
-                      foreground: Theme.of(context).colorScheme.onSurface,
-                      grid: Theme.of(context).dividerColor,
-                      fontFamily: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.fontFamily,
-                    ),
-                  ),
-                ),
-                if (widget.showFirst || widget.showSecond)
-                  Positioned(
-                    left: (pointX - 65).clamp(
-                      left,
-                      math.max(left, width - 178),
-                    ),
-                    top: widget.area ? constraints.maxHeight * .31 : -2,
-                    child: IgnorePointer(
-                      child: AnalyticsTooltip(
-                        date: date,
-                        total: preview
-                            ? AppStrings.sampleTotal
-                            : analyticsNumber(first + second),
-                        labels: [
-                          if (widget.showFirst) widget.firstName,
-                          if (widget.showSecond) widget.secondName,
-                        ],
-                        values: [
-                          if (widget.showFirst)
-                            preview
-                                ? AppStrings.sampleFirst
-                                : analyticsNumber(first),
-                          if (widget.showSecond)
-                            preview
-                                ? AppStrings.sampleSecond
-                                : analyticsNumber(second),
-                        ],
-                        colors: [
-                          if (widget.showFirst) AppColors.analyticsPurple,
-                          if (widget.showSecond) AppColors.analyticsGold,
-                        ],
+  void dispose() {
+    _chart.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<AnalyticsControlsCubit, AnalyticsControlsState>(
+    bloc: _chart,
+    builder: (context, state) => LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final selected = (_chart.state.selected ?? widget.first.length ~/ 3)
+            .clamp(0, widget.first.length - 1);
+        final left = widget.area ? 0.0 : 40.0;
+        final pointX =
+            left +
+            (width - left) * selected / math.max(1, widget.first.length - 1);
+        void select(Offset offset) => _chart.select(
+          (((offset.dx - left) / (width - left)) * (widget.first.length - 1))
+              .round()
+              .clamp(0, widget.first.length - 1),
+        );
+        final first = widget.first[selected],
+            second = widget.second[selected.clamp(0, widget.second.length - 1)];
+        final preview = widget.isSample && _chart.state.selected == null;
+        final date = preview
+            ? AppStrings.sampleDate
+            : analyticsDate(
+                widget.dates[(selected *
+                        widget.dates.length ~/
+                        widget.first.length)
+                    .clamp(0, widget.dates.length - 1)],
+              );
+        return Semantics(
+          label: AppStrings.chartHelp(widget.area),
+          child: MouseRegion(
+            onHover: (event) => select(event.localPosition),
+            child: GestureDetector(
+              onTapDown: (event) => select(event.localPosition),
+              onPanUpdate: (event) => select(event.localPosition),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: _LinePainter(
+                        first: widget.first,
+                        second: widget.second,
+                        labels: widget.labels,
+                        area: widget.area,
+                        sample: widget.isSample,
+                        selected: selected,
+                        showFirst: widget.showFirst,
+                        showSecond: widget.showSecond,
+                        foreground: Theme.of(context).colorScheme.onSurface,
+                        grid: Theme.of(context).dividerColor,
+                        fontFamily: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.fontFamily,
                       ),
                     ),
                   ),
-              ],
+                  if (widget.showFirst || widget.showSecond)
+                    Positioned(
+                      left: (pointX - 65).clamp(
+                        left,
+                        math.max(left, width - 178),
+                      ),
+                      top: widget.area ? constraints.maxHeight * .31 : -2,
+                      child: IgnorePointer(
+                        child: AnalyticsTooltip(
+                          date: date,
+                          total: preview
+                              ? AppStrings.sampleTotal
+                              : analyticsNumber(first + second),
+                          labels: [
+                            if (widget.showFirst) widget.firstName,
+                            if (widget.showSecond) widget.secondName,
+                          ],
+                          values: [
+                            if (widget.showFirst)
+                              preview
+                                  ? AppStrings.sampleFirst
+                                  : analyticsNumber(first),
+                            if (widget.showSecond)
+                              preview
+                                  ? AppStrings.sampleSecond
+                                  : analyticsNumber(second),
+                          ],
+                          colors: [
+                            if (widget.showFirst) AppColors.analyticsPurple,
+                            if (widget.showSecond) AppColors.analyticsGold,
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },
+        );
+      },
+    ),
   );
 }
 
@@ -173,7 +185,6 @@ class _LinePainter extends CustomPainter {
               ? AppStrings.persianDigits('${(maxY * step / 5000).round()},000')
               : analyticsNumber(maxY * step / 5),
           Offset(0, y - 6),
-          9,
         );
       }
     }
@@ -184,7 +195,6 @@ class _LinePainter extends CustomPainter {
         canvas,
         labels[step],
         Offset((x - 13).clamp(0, size.width - 28), rect.bottom + 8),
-        9,
       );
     }
     canvas.drawRect(
@@ -204,7 +214,8 @@ class _LinePainter extends CustomPainter {
     canvas.save();
     canvas.clipRect(rect);
     void draw(List<double> values, Color color, bool dashed) {
-      final positions = points(values), curve = _smooth(points(values));
+      final positions = points(values);
+      final curve = _smooth(positions);
       if (area) {
         final fill = Path.from(curve)
           ..lineTo(positions.last.dx, rect.bottom)
@@ -249,13 +260,12 @@ class _LinePainter extends CustomPainter {
     canvas.restore();
   }
 
-  void _text(Canvas canvas, String text, Offset offset, double fontSize) {
+  void _text(Canvas canvas, String text, Offset offset) {
     final painter = TextPainter(
       text: TextSpan(
         text: text,
-        style: TextStyle(
+        style: AppTextStyles.metadata.copyWith(
           color: foreground.withValues(alpha: .7),
-          fontSize: fontSize,
           fontFamily: fontFamily,
         ),
       ),

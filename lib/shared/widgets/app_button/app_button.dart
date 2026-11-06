@@ -50,9 +50,7 @@ class AppButton extends StatelessWidget {
         else
           ?icon,
         if (isLoading || icon != null) const SizedBox(width: 8),
-        Flexible(
-          child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
-        ),
+        Flexible(child: Text(label, textAlign: TextAlign.center)),
       ],
     );
 
@@ -69,10 +67,12 @@ class AppButton extends StatelessWidget {
         button = TextButton(onPressed: action, child: content);
     }
 
-    return SizedBox(
-      width: isExpanded ? double.infinity : null,
-      height: height,
-      child: button,
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: height),
+      child: SizedBox(
+        width: isExpanded ? double.infinity : null,
+        child: button,
+      ),
     );
   }
 }

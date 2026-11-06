@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nini/core/localization/search_strings.dart';
 
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
 import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_content/search_content.dart';
@@ -24,7 +25,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   void initState() {
     super.initState();
-    _controller.text = _search.state.query;
+    _controller.text = SearchStrings.display(_search.state.query);
   }
 
   @override
@@ -33,7 +34,8 @@ class _SearchViewState extends State<SearchView> {
     if (!widget.active) _focusNode.unfocus();
   }
 
-  void _updateField(String text) {
+  void _updateField(String query) {
+    final text = SearchStrings.display(query);
     _controller.value = TextEditingValue(
       text: text,
       selection: TextSelection.collapsed(offset: text.length),

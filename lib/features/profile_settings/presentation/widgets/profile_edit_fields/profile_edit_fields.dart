@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/profile_edit_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/features/profile_settings/domain/constants/profile_limits.dart';
 
 import '../profile_birth_field/profile_birth_field.dart';
 import '../profile_edit_field/profile_edit_field.dart';
@@ -12,13 +14,19 @@ class ProfileEditFields extends StatelessWidget {
       ProfileEditField(
         label: ProfileEditStrings.name,
         keyboardType: TextInputType.name,
+        maxLength: ProfileLimits.profileName,
+        textStyle: AppTextStyles.profileName,
       ),
       ProfileEditField(
         label: ProfileEditStrings.lastName,
         keyboardType: TextInputType.name,
       ),
       ProfileEditField(label: ProfileEditStrings.nationality),
-      ProfileEditField(label: ProfileEditStrings.username),
+      ProfileEditField(
+        label: ProfileEditStrings.username,
+        maxLength: ProfileLimits.username,
+        textStyle: AppTextStyles.username,
+      ),
       ProfileEditField(
         label: ProfileEditStrings.email,
         keyboardType: TextInputType.emailAddress,
@@ -29,6 +37,8 @@ class ProfileEditFields extends StatelessWidget {
         label: ProfileEditStrings.bio,
         maxLines: 5,
         keyboardType: TextInputType.multiline,
+        maxLength: ProfileLimits.bio,
+        textStyle: AppTextStyles.bio,
       ),
     ],
   );

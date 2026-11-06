@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -122,7 +124,7 @@ class ChatAttachmentView extends StatelessWidget {
                     attachment.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 12, color: foreground),
+                    style: AppTextStyles.label.copyWith(color: foreground),
                   ),
                 ),
               ],
@@ -132,8 +134,7 @@ class ChatAttachmentView extends StatelessWidget {
               child: Text(
                 AppStrings.chatFileSize(attachment.sizeBytes),
                 textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontSize: 10,
+                style: AppTextStyles.smallPrint.copyWith(
                   color: foreground.withValues(alpha: .7),
                 ),
               ),

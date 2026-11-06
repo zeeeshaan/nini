@@ -14,25 +14,28 @@ import '../cart_empty_state/cart_empty_state.dart';
 import '../cart_item_card/cart_item_card.dart';
 
 class CartItemsList extends StatelessWidget {
-  const CartItemsList({super.key, required this.state});
+  const CartItemsList({super.key, required this.state, this.leading = const []});
   final CartState state;
+  final List<Widget> leading;
   @override
   Widget build(BuildContext context) {
-    if (state.items.isEmpty) {
+    if (state.items.isEmpty && leading.isEmpty) {
       return const CartEmptyState(title: CartStrings.empty, message: CartStrings.emptyHelp);
     }
     final items = state.visibleItems;
-    if (items.isEmpty) {
+    if (items.isEmpty && leading.isEmpty) {
       return const CartEmptyState(title: CartStrings.noMatches, message: CartStrings.noMatchesHelp);
     }
     final cart = context.read<CartCubit>();
     return ListView.separated(
       key: const PageStorageKey('cart-items'),
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      itemCount: items.length + 1,
+      itemCount: leading.length + items.length + (items.isNotEmpty ? 1 : 0),
       separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
-        if (index == items.length) {
+        if (index < leading.length) return leading[index];
+        final itemIndex = index - leading.length;
+        if (itemIndex == items.length) {
           return Padding(
             padding: const EdgeInsets.only(top: 32, bottom: 12),
             child: Directionality(
@@ -46,7 +49,7 @@ class CartItemsList extends StatelessWidget {
             ),
           );
         }
-        final item = items[index];
+        final item = items[itemIndex];
         return Semantics(
           customSemanticsActions: {
             CustomSemanticsAction(label: CartStrings.remove): () => cart.remove(item.id),

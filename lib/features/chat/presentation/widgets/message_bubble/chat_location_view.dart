@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -57,21 +58,19 @@ class ChatLocationView extends StatelessWidget {
             Text(
               location.address,
               textDirection: TextDirection.rtl,
-              style: TextStyle(fontSize: 14, color: foreground),
+              style: AppTextStyles.bodyText.copyWith(color: foreground),
             ),
             const SizedBox(height: 4),
             Text(
               AppStrings.mapPin(location.latitude, location.longitude),
               textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontSize: 10,
+              style: AppTextStyles.smallPrint.copyWith(
                 color: foreground.withValues(alpha: .65),
               ),
             ),
             Text(
               AppStrings.openLocation,
-              style: TextStyle(
-                fontSize: 11,
+              style: AppTextStyles.helper.copyWith(
                 color: foreground,
                 decoration: TextDecoration.underline,
                 decorationColor: foreground,

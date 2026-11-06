@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/cart_strings.dart';
 
 import '../../cubit/cart_state.dart';
@@ -20,7 +21,7 @@ class CartPaymentSummary extends StatelessWidget {
               cartMoney(amount),
               textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
-              style: TextStyle(fontSize: bold ? 18 : 14, fontWeight: FontWeight.w700),
+              style: (bold ? AppTextStyles.pageTitleBold : AppTextStyles.bodyBold),
             ),
           ),
           const SizedBox(width: 12),
@@ -29,7 +30,7 @@ class CartPaymentSummary extends StatelessWidget {
               label,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
-              style: TextStyle(fontWeight: bold ? FontWeight.w700 : FontWeight.w400),
+              style: (bold ? AppTextStyles.boldText : AppTextStyles.regularText),
             ),
           ),
         ],

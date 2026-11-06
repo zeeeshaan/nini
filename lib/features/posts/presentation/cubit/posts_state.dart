@@ -1,10 +1,8 @@
 import 'package:nini/shared/models/post/post_item.dart';
 
-import '../../data/demo_posts.dart';
-
 class PostsState {
   const PostsState({
-    this.posts = demoPosts,
+    this.posts = const [],
     this.isLoading = false,
     this.isPublishing = false,
     this.loadFailed = false,
@@ -20,7 +18,7 @@ class PostsState {
   bool get isBusy => isPublishing || deletingPostId != null;
   PostItem? find(String id) => posts.where((item) => item.id == id).firstOrNull;
 
-  /// The local profile dataset includes user posts and editable sample records.
+  /// Records in the local profile dataset can be managed on this device.
   /// Publication time is not an ownership flag. A remote adapter must enforce
   /// owner identity when returning and mutating the profile's records.
   bool canManage(PostItem post) =>

@@ -1,4 +1,3 @@
-import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
@@ -8,13 +7,7 @@ PostDraft postDraftFromPost(PostItem post) {
   final data = post.metadata;
   final details = post.details;
   return PostDraft(
-    postType:
-        data['postType'] == CreatePostType.services.name ||
-            (data['postType'] == null &&
-                (post.category == AppStrings.services ||
-                    post.category == 'Services'))
-        ? CreatePostType.services
-        : CreatePostType.product,
+    postType: post.isService ? CreatePostType.services : CreatePostType.product,
     profileCategoryId: post.profileCategoryId,
     title: post.title,
     caption: post.caption,

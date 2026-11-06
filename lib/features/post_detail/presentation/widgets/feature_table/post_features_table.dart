@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 
@@ -18,7 +19,7 @@ class PostFeaturesTable extends StatelessWidget {
           const Text(
             AppStrings.featuresHeading,
             textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            style: AppTextStyles.specificationsHeading,
           ),
           const SizedBox(height: 24),
           for (final feature in features)
@@ -54,7 +55,7 @@ class _FeatureRow extends StatelessWidget {
               value,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, height: 1.6),
+              style: AppTextStyles.specificationValue,
             ),
           ),
           const SizedBox(width: 12),
@@ -64,7 +65,7 @@ class _FeatureRow extends StatelessWidget {
               label,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
-              style: const TextStyle(fontSize: 16, height: 1.6),
+              style: AppTextStyles.specificationValue,
             ),
           ),
         ],

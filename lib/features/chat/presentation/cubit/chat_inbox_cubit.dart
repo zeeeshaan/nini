@@ -64,7 +64,14 @@ class ChatInboxCubit extends Cubit<ChatInboxState> {
   }
   final ChatMessagesRepository repository;
   void refresh() {
-    final chats = state.conversations
+    final source = repository;
+    final existingIds = state.conversations.map((chat) => chat.id).toSet();
+    final conversations = [
+      if (source is InMemoryChatRepository)
+        ...source.conversations.where((chat) => !existingIds.contains(chat.id)),
+      ...state.conversations,
+    ];
+    final chats = conversations
         .map((conversation) {
           final messages = repository.existingMessages(conversation.id);
           return conversation.copyWith(

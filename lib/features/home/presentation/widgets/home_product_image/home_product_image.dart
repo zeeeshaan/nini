@@ -8,29 +8,27 @@ import 'package:nini/shared/widgets/app_loader/app_loader.dart';
 
 import 'package:nini/features/home/presentation/widgets/home_badge/home_badge.dart';
 
-class HomeProductImage extends StatefulWidget {
+class HomeProductImage extends StatelessWidget {
   const HomeProductImage({
     super.key,
     required this.imageUrl,
     required this.title,
+    required this.attempt,
+    required this.onRetry,
   });
 
   final String imageUrl;
   final String title;
 
-  @override
-  State<HomeProductImage> createState() => _HomeProductImageState();
-}
+  final int attempt;
+  final VoidCallback onRetry;
 
-class _HomeProductImageState extends State<HomeProductImage> {
-  int _attempt = 0;
-
-  Future<void> _retry() async {
+  Future<void> _retry(BuildContext context) async {
     await NetworkImage(
-      widget.imageUrl,
+      imageUrl,
       webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
     ).evict();
-    if (mounted) setState(() => _attempt++);
+    if (context.mounted) onRetry();
   }
 
   @override
@@ -38,46 +36,41 @@ class _HomeProductImageState extends State<HomeProductImage> {
     return ColoredBox(
       color: AppColors.white,
       child: AspectRatio(
-        aspectRatio: 1.15,
+        aspectRatio: 1,
         child: Stack(
           children: [
             Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(52, 32, 52, 20),
-                child: Image.network(
-                  widget.imageUrl,
-                  key: ValueKey(_attempt),
-                  fit: BoxFit.contain,
-                  webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
-                  semanticLabel: widget.title,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const Center(
-                      child: AppLoader(color: AppColors.black),
-                    );
-                  },
-                  errorBuilder: (context, error, stack) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const AppIcon(
-                            AppIcons.imageUnavailable,
-                            color: AppColors.black,
-                            size: 32,
+              child: Image.network(
+                imageUrl,
+                key: ValueKey(attempt),
+                fit: BoxFit.cover,
+                webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                semanticLabel: title,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return const Center(child: AppLoader(color: AppColors.black));
+                },
+                errorBuilder: (context, error, stack) {
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const AppIcon(
+                          AppIcons.imageUnavailable,
+                          color: AppColors.black,
+                          size: 32,
+                        ),
+                        TextButton(
+                          onPressed: () => _retry(context),
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppColors.black,
                           ),
-                          TextButton(
-                            onPressed: _retry,
-                            style: TextButton.styleFrom(
-                              foregroundColor: AppColors.black,
-                            ),
-                            child: const Text(AppStrings.retry),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                          child: const Text(AppStrings.retry),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
             const Positioned(
@@ -93,7 +86,7 @@ class _HomeProductImageState extends State<HomeProductImage> {
               right: 14,
               top: 8,
               child: HomeBadge(
-                label: '۳٪',
+                label: '3%',
                 background: AppColors.notificationBadge,
                 foreground: AppColors.white,
               ),

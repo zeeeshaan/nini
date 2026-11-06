@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
 import 'package:nini/features/search/data/search_catalog.dart';
 import 'package:nini/features/search/presentation/cubit/search_state.dart';
-import 'package:nini/shared/models/post/post_item.dart';
 
 import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_empty_state/search_empty_state.dart';
 import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_city_list/search_city_list.dart';
@@ -22,12 +20,6 @@ class SearchContent extends StatelessWidget {
   final SearchState state;
   final ValueChanged<String> onCitySelected;
   final ValueChanged<String> onQuerySelected;
-
-  void _openPost(BuildContext context, PostItem post) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => PostDetailScreen(post: post)),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +48,6 @@ class SearchContent extends StatelessWidget {
     return SearchResultsGrid(
       key: ValueKey('${state.city}:${state.submittedQuery}'),
       posts: posts,
-      onPostSelected: (post) => _openPost(context, post),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
@@ -10,6 +12,7 @@ import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.d
 import 'package:nini/features/post_detail/presentation/widgets/content/post_detail_body.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/helpers/manage_post_actions.dart';
+import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -18,13 +21,18 @@ class PostDetailScreen extends StatelessWidget {
     super.key,
     required this.post,
     this.galleryImages,
+    this.seller,
+    this.onSellerPressed,
     this.onCommentsPressed,
     this.onSharePressed,
     this.onMorePressed,
     this.onEditPressed,
+    this.allowOwnerActions = false,
   });
 
   final PostItem post;
+  final PostSeller? seller;
+  final VoidCallback? onSellerPressed;
   final List<String>? galleryImages;
 
   final VoidCallback? onCommentsPressed;
@@ -34,13 +42,19 @@ class PostDetailScreen extends StatelessWidget {
   /// Supplied only for editable posts on the current user's profile.
   final ValueChanged<PostItem>? onEditPressed;
 
+  /// Enabled only by the account Profile; ownership is checked separately.
+  final bool allowOwnerActions;
+
   @override
   Widget build(BuildContext context) {
     final posts = context.read<PostsCubit?>();
     if (posts == null) return _buildDetail(context, post);
     return BlocBuilder<PostsCubit, PostsState>(
       bloc: posts,
-      buildWhen: (previous, current) => previous.posts != current.posts,
+      buildWhen: (previous, current) =>
+          previous.posts != current.posts ||
+          previous.isLoading != current.isLoading ||
+          previous.loadFailed != current.loadFailed,
       builder: (context, state) {
         final current =
             state.posts.where((item) => item.id == post.id).firstOrNull ?? post;
@@ -50,6 +64,15 @@ class PostDetailScreen extends StatelessWidget {
   }
 
   Widget _buildDetail(BuildContext context, PostItem post) {
+    final posts = context.read<PostsCubit?>()?.state;
+    final isOwnPost = posts?.find(post.id) != null;
+    final canManage = allowOwnerActions && posts?.canManage(post) == true;
+    var openAuthorProfile = onSellerPressed;
+    if (isOwnPost && openAuthorProfile == null) {
+      openAuthorProfile = allowOwnerActions
+          ? () => Navigator.of(context).pop()
+          : () => openAccountProfile(context);
+    }
     final images = galleryImages != null && galleryImages!.isNotEmpty
         ? galleryImages!
         : <String>[post.imageAsset];
@@ -73,7 +96,7 @@ class PostDetailScreen extends StatelessWidget {
                   icon: const AppIcon(AppIcons.analytics, size: 17),
                   label: const Text(
                     AppStrings.viewAnalytics,
-                    style: TextStyle(fontSize: 12),
+                    style: AppTextStyles.label,
                   ),
                 ),
               ],
@@ -91,11 +114,13 @@ class PostDetailScreen extends StatelessWidget {
 
             body: PostDetailBody(
               post: post,
+              showPurchaseActions: !isOwnPost,
+              seller: seller,
+              onSellerPressed: openAuthorProfile,
               images: images,
               onCommentsPressed: onCommentsPressed,
               onSharePressed: onSharePressed,
-              onMorePressed:
-                  context.read<PostsCubit?>()?.state.canManage(post) == true
+              onMorePressed: canManage
                   ? () =>
                         managePostActions(context, post, onEdit: onEditPressed)
                   : onMorePressed,

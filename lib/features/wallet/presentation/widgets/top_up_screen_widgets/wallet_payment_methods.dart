@@ -1,3 +1,7 @@
+import 'package:nini/features/payment/domain/models/payment_method.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/features/payment/presentation/cubit/payment_selection_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/wallet_strings.dart';
 
@@ -10,24 +14,34 @@ class WalletPaymentMethods extends StatefulWidget {
 }
 
 class _WalletPaymentMethodsState extends State<WalletPaymentMethods> {
-  String _selected = 'mellat';
+  final _payment = PaymentSelectionCubit();
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      const Text(
-        WalletStrings.paymentMethod,
-        textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 11),
-        textDirection: TextDirection.rtl,
-      ),
-      const SizedBox(height: 14),
-      for (final bank in ['melli', 'mellat', 'saman'])
-        WalletBankTile(
-          bank: bank,
-          selected: _selected == bank,
-          onTap: () => setState(() => _selected = bank),
+  void dispose() {
+    _payment.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<PaymentSelectionCubit, PaymentMethod>(
+        bloc: _payment,
+        builder: (context, state) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              WalletStrings.paymentMethod,
+              textAlign: TextAlign.right,
+              style: AppTextStyles.helper,
+              textDirection: TextDirection.rtl,
+            ),
+            const SizedBox(height: 14),
+            for (final bank in ['melli', 'mellat', 'saman'])
+              WalletBankTile(
+                bank: bank,
+                selected: _payment.state.name == bank,
+                onTap: () => _payment.select(PaymentMethod.values.byName(bank)),
+              ),
+          ],
         ),
-    ],
-  );
+      );
 }

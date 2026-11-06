@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:nini/core/localization/profile_post_strings.dart';
@@ -82,7 +83,7 @@ class PostEditorBasicFields extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     field.errorText!,
-                    style: TextStyle(
+                    style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,
                     ),
                     textDirection: TextDirection.rtl,

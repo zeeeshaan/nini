@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class CallAvatar extends StatelessWidget {
   const CallAvatar({
@@ -18,7 +19,8 @@ class CallAvatar extends StatelessWidget {
     final fallback = Center(
       child: Text(
         name.trim().isEmpty ? '?' : name.trim().characters.first.toUpperCase(),
-        style: TextStyle(fontSize: radius * .7, color: colors.onSurface),
+        style: AppTextStyles.avatarInitial(radius)
+            .copyWith(color: colors.onSurface),
       ),
     );
     final avatar = Container(

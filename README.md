@@ -1,2280 +1,1172 @@
-# Nini / HYWORK
+# Nini / HYWORK — Flutter development handoff
 
-A Flutter frontend for a Persian marketplace app. The Dart package is `nini`,
-the app locale is `fa_IR`, and the current Home reference uses the **HYWORK** wordmark.
-The client repository is [mobile-hywork](https://github.com/mojtaba-zarabi/mobile-hywork).
+A Persian marketplace frontend where the intended product allows the **same account to act as a customer and a service provider/seller**. The Dart package is `nini`, the app label is `نینی`, and the current feed/entry artwork uses the HYWORK brand.
 
-This README describes the current working tree, reviewed on **2 November 2026**.
-The project currently focuses on UI. Posts, profile categories, analytics, cart
-items, and existing order snapshots save on the device. Profile editing,
-saved-location labels, notifications, and Wallet currently provide UI previews
-with temporary state.
-Authentication, remote product/search APIs, real payment gateways, synchronized
-chat, and real voice/video calling are not connected.
+**Reviewed: 3 November 2026.** This describes the current local working tree, with the flat feature structure restored and the existing gallery refactor preserved. It does not imply that local changes have been committed or pushed.
+
+Start with [CODING_RULES.md](CODING_RULES.md). It governs changes: preserve working functionality, UI, navigation, Cubit behavior, persistence, Persian text, and existing design conventions. This README is a source-code map; provide the actual repository or relevant source files to another developer/ChatGPT as well.
+
+### Customer booking UI update — 5 November 2026
+
+Customer screens use English for development. The local flow is Search → Provider Profile → Booking Form → Pending request sheet → Provider response → Approved/payment-pending sheet → Checkout → Payment method → Payment Gateway. The gateway page matches the supplied empty handoff design; it has no fake bank form or outcome chooser. Returning from it does not mark a booking paid. Real gateway integration and verified payment results are still pending.
+
+`CustomerBookingsCubit` under `service_booking/presentation/cubit/` retains booking information and customer workflow state during the app session. Provider request responses and overtime now update that same state locally through the provider screens. Customer screens cannot generate service-start or completion events; real payment/provider synchronization remains pending. Session bookings reset after restarting the app. Existing Posts, product Cart, and analytics storage remain unchanged.
+
+- Submitting the form creates `awaitingProvider`, stays on the booking route, and opens the pending-request sheet. Notifications are derived from that shared record in the background; submission never navigates to Notifications. Tapping **New service request** opens the black provider sheet. Dismissing it keeps the request pending; **Reject** records rejection; **Accept** changes it to `awaitingPayment` and opens Sale Information. The previous automatic confirmation timer and its unused review widgets were removed.
+- `provider_bookings/presentation/pages/provider_sale_screen/` is the provider Sale Information page. Its widgets are grouped under `provider_sale_screen_widgets/`; request-sheet cards are under `provider_request_sheet_widgets/`. It reuses the existing summary/header, specifications, customer information card, and decimal amount sheet.
+- In Sale Information, **Overtime** accepts a manual decimal quantity and computes the additional quote using the existing service unit price and integer hundredths. It creates a customer overtime notification without marking either amount paid. The accepted-but-unpaid stage supports this UI preview; final payment/service policies still belong to backend integration.
+- The dummy Notifications feed labels **Provider** and **Customer** entries on the same phone. Provider entries reopen Sale Information; the customer acceptance entry reopens the approved request sheet with its Checkout action, and an overtime update opens the customer booking with its Accept/Reject sheet. Request/provider association comes from the existing stable provider/service IDs in the booking snapshot. This is not account-based notification delivery or cross-device synchronization.
+- One booking ID is kept across the submitted service page, status sheet, notifications, and Cart card. `booking_navigation.dart` resumes the latest record for the selected provider/service; it does not open a blank form or silently submit again. Duplicate open submissions return the existing request. Rejected/cancelled bookings reopen in that state.
+- The submitted page renders the saved form snapshot read-only. Status sheets listen to the shared Cubit, so provider acceptance/rejection/cancellation updates the visible UI. Closing a sheet or returning from the unconnected gateway never marks payment complete. Checkout checks the latest status before allowing payment.
+- The Cart tab includes `cart_service_bookings/` cards for service requests, with pending, accepted/unpaid, rejected, and cancelled statuses. Cards open their own saved request by ID. Service bookings are not converted to product `CartItem`s and never enter product checkout sums or product persistence. Existing Cart filters also filter these service cards.
+- `service_booking/presentation/pages/booking_order_details_screen/` displays booking information and status. Home → Notifications → Service bookings reopens these records.
+- Incoming overtime uses the provider/quantity/unit/amount sheet. Reject preserves the original charge; Accept opens `booking_overtime_checkout_screen/` and the shared Payment UI for the additional charge only.
+- After a provider completion update, the customer can confirm completion and rate the specialist or open Dispute. Rating remains black in both themes, with inline validation. Dispute and rating results are session-only. Voice/photo/file attachments are still coming-soon UI.
+- Screens and their named widgets remain in separate screen-specific folders under `service_booking/presentation/`. The shared gateway page belongs to `payment/presentation/pages/payment_gateway_screen/`.
+- Product Cart now uses the seller-approval flow described below. No real gateway, push, refund, payout, or provider app is connected. Provider earnings/Wallet integration belongs to the later provider implementation.
+
+There are no payment-success/failure choosers or provider-event demo controls in the customer UI. Provider actions are exposed on the actual request/sale screens. `test/features/service_booking/` covers state transitions using supplied events, navigation, overtime charges, feedback forms, and responsive layouts. Run `flutter analyze --no-pub` and `flutter test --no-pub` after changes; physical-device verification remains necessary.
+
+### Product order approval and tracking — 5 November 2026
+
+Product shopping now follows Home → Post Details → Cart → Checkout summary → Request Order → seller approval → existing Payment UI. Add to Cart and the existing hundredths-based arithmetic remain unchanged. One account can buy products, sell products, or offer services; the prototype shows both recipients on the same device without authentication or cross-device delivery.
+
+- `product_orders/presentation/pages/` contains separate `product_order_request_screen/`, `product_order_details_screen/`, and `product_order_tracking_screen/` folders. Screen-specific widgets are grouped under the matching `*_screen_widgets/` folders, with reusable order cards and notification tiles alongside them.
+- The existing `CartCubit` owns product requests in `CartState.orders` and saves them through `LocalCartRepository`. No new Cubit or repository is introduced. `CartItem.seller` carries the seller identity from Home/Post Details. Old JSON remains readable; only known Home/demo IDs recover a missing seller. Unknown sellers block submission instead of being guessed.
+- Submitting captures immutable items, quantities, prices, delivery address, and phone under stable order IDs. A multi-seller checkout creates one order per seller, allocating the existing charges exactly once. Submitted items leave the shopping basket; editing or adding basket items does not change submitted orders.
+- Pending requests appear in Cart, Order History, Sales, and Notifications. Seller notification taps open the black Accept/Reject sheet. Acceptance enables customer payment; rejection/cancellation keeps payment unavailable. Closing a sheet or returning from Payment does not mark anything paid.
+- `product_order_navigation.dart` reuses `PaymentScreen` and the existing placeholder gateway. `confirmProductPayment` is an integration hook for a verified payment event, never called by the customer UI. After that event the seller can prepare/dispatch and the customer can confirm delivery. There is no fake payment-success control.
+- Order Status uses the supplied delivery illustration (`assets/orders/order_tracking.png`) and right-side dotted timeline in both themes. Only reached states show recorded timestamps; future steps say “Not yet”. Order details, decisions, and timestamps survive local restart. Service booking/overtime state remains separate and unchanged.
+- `test/features/cart/product_order_flow_test.dart` covers grouping, persistence, legacy JSON, seller identity, approval/payment guards, tracking, and light/dark navigation. Real push notifications, authenticated recipients, inventory reservations, and payment verification still need a backend.
 
 ## Contents
 
+- [Quick start](#quick-start)
 - [Current implementation](#current-implementation)
-- [Setup and run](#setup-and-run)
-- [Project structure](#project-structure)
-- [Important file locations](#important-file-locations)
-- [Startup and shared providers](#startup-and-shared-providers)
-- [Dashboard and navigation](#dashboard-and-navigation)
-- [Home screen](#home-screen)
-- [Cart and local checkout](#cart-and-local-checkout)
-- [Search screen and city selection](#search-screen-and-city-selection)
-- [Profile screen](#profile-screen)
-- [Settings list, profile edit, and locations](#settings-list-profile-edit-and-locations)
-- [Notifications](#notifications)
-- [Wallet](#wallet)
-- [Folder, import, and coding conventions](#folder-import-and-coding-conventions)
-- [Shared colors and reusable widgets](#shared-colors-and-reusable-widgets)
-- [Light and dark mode](#light-and-dark-mode)
-- [Gallery packages and permissions](#gallery-packages-and-permissions)
-- [Create-post details, dialogs, and caption editor](#create-post-details-dialogs-and-caption-editor)
-- [Publishing and the shared post feed](#publishing-and-the-shared-post-feed)
-- [Profile categories and post edit/delete](#profile-categories-and-post-editdelete)
-- [Local storage and backend handoff](#local-storage-and-backend-handoff)
-- [Client icons](#client-icons)
-- [How icons are used](#how-icons-are-used)
-- [How to add another icon](#how-to-add-another-icon)
-- [Re-extract or verify the original collection](#re-extract-or-verify-the-original-collection)
-- [Post analytics](#post-analytics)
-- [Persian text on the new screens](#persian-text-on-the-new-screens)
-- [Chat, voice notes, and attachments](#chat-voice-notes-and-attachments)
-- [Voice and video call UI previews](#voice-and-video-call-ui-previews)
-- [Packages and platform configuration](#packages-and-platform-configuration)
-- [Verification](#verification)
-- [Common changes and troubleshooting](#common-changes-and-troubleshooting)
+- [Roles and folder ownership](#roles-and-folder-ownership)
+- [Navigation and screen connections](#navigation-and-screen-connections)
+- [State ownership and data flow](#state-ownership-and-data-flow)
+- [Feature guide and widget connections](#feature-guide-and-widget-connections)
+- [Storage, models, and backend handoff](#storage-models-and-backend-handoff)
+- [Themes, Persian text, responsiveness, and assets](#themes-persian-text-responsiveness-and-assets)
+- [Native configuration and builds](#native-configuration-and-builds)
+- [Tests and verification](#tests-and-verification)
+- [Where to make common changes](#where-to-make-common-changes)
+- [Complete source file catalog](#complete-source-file-catalog)
+- [Supporting files](#supporting-files)
 - [Repository workflow](#repository-workflow)
+- [Copyable ChatGPT handoff prompt](#copyable-chatgpt-handoff-prompt)
 
-## Current implementation
+## Quick start
 
-| Area | Current behavior and scope |
-| --- | --- |
-| Startup | `main.dart` starts `ResponsiveConfig` and `MyApp`; app configuration and shared providers are in `lib/app/`. |
-| Dashboard | Native `PageView` with Home, Cart, Create, Search, and Profile. Startup opens Home. |
-| Home | HYWORK header, notification bell with unread count, and six sample phone cards with image, badges, engagement, pricing, stock, and add-to-cart. This is a fixed sample feed. |
-| Cart | Quantities, stock limits, status filters, swipe removal, checkout details/totals, bank selection, existing order history, navigation badge, and Home add-to-cart. No payment-submit action. |
-| Search | Suggestions, inline city selection, city/query filtering of bundled samples, empty states, and post-detail navigation. |
-| Profile | Identity, statistics, category filters, shared locally saved post grid, chat, theme menu, and three-dot settings entry. |
-| Profile categories | Create, rename, select, and delete persisted tabs; choose a tab when creating/editing a post. Removing a tab preserves its posts in All. |
-| Post creation | Photo/video/file selection, rich caption, title, category, pricing, stock, type, unit, preparation time, schedule, address, features, tags, and alt text. |
-| Post edit/delete | Owner menu in post details; prefilled full editor, attachment add/remove/replace, discard confirmation, and red delete confirmation. Existing Profile samples can be managed too. |
-| Settings list | Seventeen rows. Profile setting, Locations, and Wallet open detail screens; the remaining rows are placeholders. |
-| Profile edit | Photo picker, personal fields, birth picker, gender, and bio. Screen-local form; Done closes without updating an account or Profile. |
-| Locations | Map preview, label entry, add/select labels. Temporary state with no account persistence or GPS. |
-| Notifications | Home bell opens searchable sample notifications; tapping a row clears its unread count for the lifetime of Home. No push service or durable read state. |
-| Wallet | Balance/transactions, Top Up, Withdraw, and withdrawal summary. Amount controls, bank radios, and a local OTP countdown are UI previews only. |
-| Colors and localization | Central `AppColors`, light/dark/system themes, Persian string catalogs, right-aligned text, and Persian display digits. |
-| Analytics | Five chart sections and device-local view/impression/watch/interaction tracking for published posts. Sample analytics remain distinct. |
-| Chat | Demo inbox, text/voice/media/location messages, emoji, delete/clear/block actions, and local attachment copies. Conversation history is session-only. |
-| Calls | Interactive voice/video previews with timers and controls; no live calling service. |
-| Assets | Central icon paths, client SVG/PNG collections, bank logos, YekanBakh font, bundled sample photos, and a withdrawal illustration. |
-| Verification scope | The `test/` directory was removed at the project's current UI-only stage. This README update does not run tests, builds, or device checks. |
-
-## Setup and run
-
-### Requirements
-
-- Flutter with a bundled Dart SDK satisfying **`^3.13.3`**, as declared in
-  [pubspec.yaml](pubspec.yaml).
-- The Flutter version is not separately pinned; check `flutter --version` in your
-  checkout before choosing a compatible SDK.
-- Android/iOS development tooling for native gallery, microphone, camera,
-  playback, and external-file flows.
-- Internet for Home's network product photo and OpenStreetMap tiles.
-
-From the repository root:
+The reviewed environment uses **Flutter 3.47.4 / Dart 3.13.3**. `pubspec.yaml` requires Dart `^3.13.3`; the Android configuration uses AGP 9 built-in Kotlin and requires the compatible Flutter toolchain described below. No separate Flutter version-manager pin is present in the documented setup. Check your installed version before building.
 
 ```sh
+flutter --version
 flutter pub get
 flutter devices
-flutter run
-```
-
-For a fresh client checkout:
-
-```sh
-git clone https://github.com/mojtaba-zarabi/mobile-hywork.git
-cd mobile-hywork
-flutter pub get
-flutter run
-```
-
-Choose a device explicitly when needed:
-
-```sh
 flutter run -d <device-id>
 ```
 
-After native plugin, permission, entitlement, or asset-manifest changes, stop and
-rebuild the app. Hot reload alone does not install those changes. Platform folders
-are present for Android, iOS, macOS, web, Linux, and Windows; native media features
-still need checks on the platform being shipped.
+Native gallery, camera, microphone, file-opening, and permission flows require supported device/platform plugins. Home's sample product photo and map tiles need internet. Browser/desktop folders exist, but their presence is not evidence that all native flows work on those platforms.
 
-## Project structure
+## Current implementation
 
-| Path | Responsibility |
-| --- | --- |
-| [`lib/main.dart`](lib/main.dart) | Flutter initialization and application entry point. |
-| [`lib/app/`](lib/app/) | `MyApp`, app configuration, dependency injection, and shared Cubit ownership. |
-| [`lib/core/`](lib/core/) | Theme/colors, localization, icon paths, responsiveness, and animation helpers. |
-| [`lib/features/`](lib/features/) | Feature-owned pages, widgets, state, data adapters, models, and contracts. |
-| [`lib/shared/`](lib/shared/) | Cross-feature post models and reusable UI components. |
-| [`assets/`](assets/) | Bundled pictures, fonts, bank logos, wallet artwork, and icon collections/reference sheets. |
-| [`tool/`](tool/) | Icon manifests, extraction scripts, and the SVG importer. |
-| `android/`, `ios/`, `macos/`, `web/`, `linux/`, `windows/` | Flutter runners and platform configuration. Native feature support still needs target-device verification. |
-| [`pubspec.yaml`](pubspec.yaml) / [`pubspec.lock`](pubspec.lock) | Dependency/asset declarations and resolved dependency versions. |
-| [`analysis_options.yaml`](analysis_options.yaml) | Lints and analysis exclusions. |
-| [`.gitignore`](.gitignore) / [`.metadata`](.metadata) | Git exclusions and Flutter project metadata. |
-| `build/`, `.dart_tool/`, `.flutter-plugins-dependencies` | Generated output/plugin metadata; not feature source. |
+| Area | Implemented now | Boundary |
+| --- | --- | --- |
+| Entry | Animated splash, phone/country input, four-digit OTP input, Home entry and optional location prompt | Authentication is a UI preview; no SMS, token, account session, or server verification. |
+| Customer dashboard | Home, Cart, Create action, Search, Profile; tap/swipe navigation | This is the only implemented dashboard. |
+| Home | Fixed six-card phone feed, notification bell, local like/bookmark toggles, sample add-to-cart | It is not a backend feed and does not automatically display newly published profile posts. |
+| Search | Persian query normalization, suggestions, city selection, demo filtering and post details | Uses `demo_search_posts.dart`, not saved profile posts or a remote search API. |
+| Cart | Stock/quantity checks, filters, swipe removal, local history snapshots, checkout totals/bank selection | No payment-submit/gateway call or server-created order. |
+| Posts/categories | Local publish/edit/delete, attachment copies, category create/rename/delete/filtering | Device-local JSON/files; no upload, synchronization, or authenticated ownership. |
+| Post details/analytics | Media/content display, preview engagement, sample charts and local event tracking | Sample and published-post analytics are distinct; no server analytics. |
+| Profile/settings | Profile preview, settings list, personal-data form/photo preview | Personal changes are screen-local; Done does not update an account or the main profile. |
+| Locations | Map preview and temporary location labels; manual address/pin selection in post/chat dialogs | No GPS lookup, saved-location API, or ongoing tracking. |
+| Notifications | Searchable samples and mark-read state owned by Home | No push registration, notification backend, or durable read state. |
+| Wallet | Sample balance/transactions, top-up, withdrawal form/summary and OTP countdown | No real balance, bank OTP, payment, withdrawal, or funds movement. |
+| Chat | Demo inbox, session text/history/actions, real local recording/playback and attachment selection/copying | No remote delivery, websocket, durable message database, or cross-device chat sync. |
+| Calls | Voice/video preview routes with interactive controls/timers | The default service captures no call media and connects no remote participant. |
 
-The inventory below includes **all 305 Dart files currently under `lib/`**.
-It reflects the actual mixed `page/` and `pages/` paths; use these paths when
-importing. Individual icon assets and generated build/cache files are not expanded.
-There is currently no `test/` directory.
-
-<details>
-<summary>Expand the complete lib folder and file structure</summary>
+## Roles and folder ownership
 
 ```text
 lib/
-├── app/
-│   ├── app.dart
-│   └── app_providers.dart
-├── core/
-│   ├── animation/
-│   │   ├── animation.dart
-│   │   ├── rive_asset_animation.dart
-│   │   ├── screen_entrance.dart
-│   │   └── staggered_entrance.dart
-│   ├── icons/
-│   │   └── app_icons.dart
-│   ├── localization/
-│   │   ├── app_strings.dart
-│   │   ├── cart_strings.dart
-│   │   ├── location_strings.dart
-│   │   ├── notification_strings.dart
-│   │   ├── persian_feature.dart
-│   │   ├── profile_edit_strings.dart
-│   │   ├── profile_post_strings.dart
-│   │   ├── profile_settings_strings.dart
-│   │   ├── search_strings.dart
-│   │   └── wallet_strings.dart
-│   ├── responsiveness/
-│   │   ├── app_responsiveness/
-│   │   │   └── app_responsiveness.dart
-│   │   ├── fold_aware_layout/
-│   │   │   └── fold_aware_layout.dart
-│   │   └── responsive_config/
-│   │       └── config.dart
-│   └── theme/
-│       ├── app_colors.dart
-│       ├── app_theme.dart
-│       ├── theme_cubit.dart
-│       └── theme_mode_menu.dart
-├── features/
-│   ├── calls/
-│   │   ├── data/
-│   │   │   └── preview_call_service.dart
-│   │   ├── domain/
-│   │   │   ├── models/
-│   │   │   │   └── call_session.dart
-│   │   │   └── services/
-│   │   │       └── call_service.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   └── call_cubit.dart
-│   │       ├── pages/
-│   │       │   └── call_screen.dart
-│   │       └── widgets/
-│   │           ├── call_action_button.dart
-│   │           ├── call_avatar.dart
-│   │           ├── call_controls.dart
-│   │           └── call_video_stage.dart
-│   ├── cart/
-│   │   ├── data/
-│   │   │   ├── demo_cart_items.dart
-│   │   │   └── local_cart_repository.dart
-│   │   ├── domain/
-│   │   │   ├── models/
-│   │   │   │   ├── cart_item.dart
-│   │   │   │   ├── cart_order.dart
-│   │   │   │   ├── cart_order_status.dart
-│   │   │   │   ├── cart_snapshot.dart
-│   │   │   │   └── payment_method.dart
-│   │   │   └── repositories/
-│   │   │       └── cart_repository.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── cart_cubit.dart
-│   │       │   └── cart_state.dart
-│   │       ├── helpers/
-│   │       │   ├── cart_format.dart
-│   │       │   └── cart_labels.dart
-│   │       ├── pages/
-│   │       │   └── cart_screen.dart
-│   │       └── widgets/
-│   │           ├── cart_amount_dialog/
-│   │           │   └── cart_amount_dialog.dart
-│   │           ├── cart_checkout/
-│   │           │   └── cart_checkout.dart
-│   │           ├── cart_delete_background/
-│   │           │   └── cart_delete_background.dart
-│   │           ├── cart_dialog_actions/
-│   │           │   └── cart_dialog_actions.dart
-│   │           ├── cart_empty_state/
-│   │           │   └── cart_empty_state.dart
-│   │           ├── cart_header/
-│   │           │   └── cart_header.dart
-│   │           ├── cart_item_badge/
-│   │           │   └── cart_item_badge.dart
-│   │           ├── cart_item_card/
-│   │           │   └── cart_item_card.dart
-│   │           ├── cart_item_image/
-│   │           │   └── cart_item_image.dart
-│   │           ├── cart_items_list/
-│   │           │   └── cart_items_list.dart
-│   │           ├── cart_order_history/
-│   │           │   └── cart_order_history.dart
-│   │           ├── cart_payment_methods/
-│   │           │   └── cart_payment_methods.dart
-│   │           ├── cart_payment_summary/
-│   │           │   └── cart_payment_summary.dart
-│   │           ├── cart_quantity_button/
-│   │           │   └── cart_quantity_button.dart
-│   │           ├── cart_section/
-│   │           │   └── cart_section.dart
-│   │           ├── cart_status_filter/
-│   │           │   └── cart_status_filter.dart
-│   │           ├── cart_status_menu/
-│   │           │   └── cart_status_menu.dart
-│   │           ├── cart_storage_notice/
-│   │           │   └── cart_storage_notice.dart
-│   │           └── cart_tabs/
-│   │               └── cart_tabs.dart
-│   ├── chat/
-│   │   ├── data/
-│   │   │   ├── demo_chats.dart
-│   │   │   ├── device_chat_camera.dart
-│   │   │   ├── device_voice_recorder.dart
-│   │   │   ├── in_memory_chat_repository.dart
-│   │   │   ├── just_audio_chat_player.dart
-│   │   │   └── local_chat_media_store.dart
-│   │   ├── domain/
-│   │   │   ├── models/
-│   │   │   │   ├── chat_attachment.dart
-│   │   │   │   ├── chat_conversation.dart
-│   │   │   │   ├── chat_location.dart
-│   │   │   │   └── chat_message.dart
-│   │   │   ├── repositories/
-│   │   │   │   └── chat_messages_repository.dart
-│   │   │   └── services/
-│   │   │       ├── chat_audio_player.dart
-│   │   │       ├── chat_media_store.dart
-│   │   │       └── voice_recorder.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── chat_inbox_cubit.dart
-│   │       │   ├── conversation_cubit.dart
-│   │       │   ├── voice_playback_cubit.dart
-│   │       │   └── voice_recording_cubit.dart
-│   │       ├── helpers/
-│   │       │   ├── chat_attachment_flow.dart
-│   │       │   └── chat_message_labels.dart
-│   │       ├── pages/
-│   │       │   ├── chat_inbox_screen.dart
-│   │       │   └── conversation_screen.dart
-│   │       └── widgets/
-│   │           ├── attachment_sheet/
-│   │           │   └── chat_attachment_sheet.dart
-│   │           ├── chat_conversation_tile/
-│   │           │   └── chat_conversation_tile.dart
-│   │           ├── conversation_actions/
-│   │           │   └── chat_action_dialog.dart
-│   │           ├── conversation_body/
-│   │           │   └── conversation_body.dart
-│   │           ├── conversation_header/
-│   │           │   └── conversation_header.dart
-│   │           ├── emoji_panel/
-│   │           │   └── chat_emoji_panel.dart
-│   │           ├── message_bubble/
-│   │           │   ├── chat_attachment_view.dart
-│   │           │   ├── chat_location_view.dart
-│   │           │   └── chat_message_bubble.dart
-│   │           ├── message_composer/
-│   │           │   └── chat_message_composer.dart
-│   │           ├── voice_message/
-│   │           │   └── chat_voice_player.dart
-│   │           └── voice_recording/
-│   │               └── voice_recording_panel.dart
-│   ├── create_post/
-│   │   ├── data/
-│   │   │   └── gallery_library_changes.dart
-│   │   ├── domain/
-│   │   │   ├── models/
-│   │   │   │   ├── gallery_attachment.dart
-│   │   │   │   ├── post_draft.dart
-│   │   │   │   └── post_options.dart
-│   │   │   └── validation/
-│   │   │       └── post_draft_validator.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── create_post_cubit.dart
-│   │       │   └── gallery_cubit.dart
-│   │       ├── helpers/
-│   │       │   ├── post_caption_synchronizer.dart
-│   │       │   └── post_option_selection.dart
-│   │       ├── pages/
-│   │       │   ├── create_post_details_screen.dart
-│   │       │   └── create_post_gallery_screen.dart
-│   │       └── widgets/
-│   │           ├── address_dialog/
-│   │           │   ├── address_dialog.dart
-│   │           │   └── location_map.dart
-│   │           ├── alt_text_dialog/
-│   │           │   └── alt_text_dialog.dart
-│   │           ├── caption_editor/
-│   │           │   ├── caption_editor.dart
-│   │           │   └── client_caption_toolbar.dart
-│   │           ├── features_dialog/
-│   │           │   └── features_dialog.dart
-│   │           ├── gallery_grid/
-│   │           │   ├── gallery_access_notice.dart
-│   │           │   └── gallery_grid.dart
-│   │           ├── gallery_preview/
-│   │           │   └── gallery_preview.dart
-│   │           ├── post_dialog/
-│   │           │   └── post_dialog.dart
-│   │           ├── post_form_option_tile/
-│   │           │   └── post_form_option_tile.dart
-│   │           ├── post_form_sections/
-│   │           │   ├── post_basic_details_section.dart
-│   │           │   ├── post_options_section.dart
-│   │           │   ├── post_pricing_inventory_section.dart
-│   │           │   └── post_publish_actions.dart
-│   │           ├── post_type_dialog/
-│   │           │   └── post_type_dialog.dart
-│   │           ├── preparation_time_dialog/
-│   │           │   └── preparation_time_dialog.dart
-│   │           ├── schedule_post_dialog/
-│   │           │   └── schedule_post_dialog.dart
-│   │           ├── selected_media_grid/
-│   │           │   └── selected_media_grid.dart
-│   │           ├── tags_dialog/
-│   │           │   └── tags_dialog.dart
-│   │           └── unit_dialog/
-│   │               └── unit_dialog.dart
-│   ├── dashboard/
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   └── dashboard_navigation_cubit.dart
-│   │       ├── pages/
-│   │       │   └── dashboard_screen.dart
-│   │       └── widgets/
-│   │           └── bottom_navbar/
-│   │               ├── dashboard_bottom_nav.dart
-│   │               ├── dashboard_cart_icon.dart
-│   │               ├── dashboard_fold_layout.dart
-│   │               └── dashboard_nav_item.dart
-│   ├── home/
-│   │   └── presentation/
-│   │       ├── pages/
-│   │       │   └── home_screen.dart
-│   │       └── widgets/
-│   │           ├── home_badge/
-│   │           │   └── home_badge.dart
-│   │           ├── home_engagement_bar/
-│   │           │   └── home_engagement_bar.dart
-│   │           ├── home_feed_header/
-│   │           │   └── home_feed_header.dart
-│   │           ├── home_metric/
-│   │           │   └── home_metric.dart
-│   │           ├── home_notification_button/
-│   │           │   └── home_notification_button.dart
-│   │           ├── home_product_card/
-│   │           │   └── home_product_card.dart
-│   │           ├── home_product_details/
-│   │           │   └── home_product_details.dart
-│   │           ├── home_product_image/
-│   │           │   └── home_product_image.dart
-│   │           └── home_product_price/
-│   │               └── home_product_price.dart
-│   ├── locations/
-│   │   └── presentation/
-│   │       ├── pages/
-│   │       │   └── locations_screen.dart
-│   │       └── widgets/
-│   │           ├── location_label_card/
-│   │           │   └── location_label_card.dart
-│   │           ├── location_map_preview/
-│   │           │   └── location_map_preview.dart
-│   │           └── saved_location_list/
-│   │               └── saved_location_list.dart
-│   ├── notifications/
-│   │   ├── data/
-│   │   │   └── sample_notifications.dart
-│   │   ├── domain/
-│   │   │   └── models/
-│   │   │       └── app_notification.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── notifications_cubit.dart
-│   │       │   └── notifications_state.dart
-│   │       ├── pages/
-│   │       │   └── notifications_screen.dart
-│   │       └── widgets/
-│   │           ├── notification_avatar/
-│   │           │   └── notification_avatar.dart
-│   │           ├── notification_header/
-│   │           │   └── notification_header.dart
-│   │           ├── notification_list/
-│   │           │   └── notification_list.dart
-│   │           ├── notification_search_field/
-│   │           │   └── notification_search_field.dart
-│   │           └── notification_tile/
-│   │               └── notification_tile.dart
-│   ├── post_analytics/
-│   │   ├── data/
-│   │   │   └── post_analytics_repository.dart
-│   │   ├── domain/
-│   │   │   └── models/
-│   │   │       └── post_analytics.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   └── post_analytics_cubit.dart
-│   │       ├── domain/
-│   │       │   └── cubit/
-│   │       │       └── post_analytics_cubit.dart
-│   │       ├── pages/
-│   │       │   └── post_analytics_screen.dart
-│   │       └── widgets/
-│   │           ├── activity_tracking/
-│   │           │   └── post_activity_tracking.dart
-│   │           ├── analytics_chart/
-│   │           │   ├── analytics_charts.dart
-│   │           │   ├── analytics_line_chart.dart
-│   │           │   ├── analytics_orders_chart.dart
-│   │           │   ├── analytics_polar_chart.dart
-│   │           │   └── analytics_radar_chart.dart
-│   │           ├── analytics_controls/
-│   │           │   └── analytics_controls.dart
-│   │           ├── analytics_header/
-│   │           │   └── analytics_header.dart
-│   │           ├── average_time_viewed/
-│   │           │   └── average_time_viewed.dart
-│   │           ├── clicks_interactions/
-│   │           │   └── clicks_interactions.dart
-│   │           ├── impressions/
-│   │           │   └── impressions.dart
-│   │           ├── orders_bookings/
-│   │           │   └── orders_bookings.dart
-│   │           └── total_views/
-│   │               └── total_views.dart
-│   ├── post_detail/
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   └── post_detail_cubit.dart
-│   │       ├── pages/
-│   │       │   └── post_detail_screen.dart
-│   │       └── widgets/
-│   │           ├── author_header/
-│   │           │   └── post_author_header.dart
-│   │           ├── content/
-│   │           │   ├── post_content.dart
-│   │           │   └── post_detail_body.dart
-│   │           ├── engagement_bar/
-│   │           │   └── post_engagement_bar.dart
-│   │           ├── feature_table/
-│   │           │   └── post_features_table.dart
-│   │           ├── post_image_carousel/
-│   │           │   └── post_image_carousel.dart
-│   │           └── pricing/
-│   │               └── post_pricing.dart
-│   ├── posts/
-│   │   ├── data/
-│   │   │   ├── demo_posts.dart
-│   │   │   ├── local_post_media_store.dart
-│   │   │   ├── local_posts_repository.dart
-│   │   │   ├── local_profile_categories_repository.dart
-│   │   │   └── profile_sample_posts.dart
-│   │   ├── domain/
-│   │   │   ├── models/
-│   │   │   │   ├── post_media_changes.dart
-│   │   │   │   └── profile_category.dart
-│   │   │   ├── validation/
-│   │   │   │   └── profile_category_validator.dart
-│   │   │   ├── posts_repository.dart
-│   │   │   └── profile_categories_repository.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── post_editor_media_cubit.dart
-│   │       │   ├── post_editor_media_state.dart
-│   │       │   ├── posts_cubit.dart
-│   │       │   ├── posts_state.dart
-│   │       │   ├── profile_categories_cubit.dart
-│   │       │   └── profile_categories_state.dart
-│   │       ├── helpers/
-│   │       │   ├── confirm_discard_post_changes.dart
-│   │       │   ├── manage_post_actions.dart
-│   │       │   ├── post_draft_mapper.dart
-│   │       │   └── post_editor_validation.dart
-│   │       ├── pages/
-│   │       │   ├── edit_post_screen.dart
-│   │       │   └── profile_categories_screen.dart
-│   │       └── widgets/
-│   │           ├── category_delete_sheet/
-│   │           │   └── category_delete_sheet.dart
-│   │           ├── category_editor_sheet/
-│   │           │   └── category_editor_sheet.dart
-│   │           ├── category_sheet_actions/
-│   │           │   └── category_sheet_actions.dart
-│   │           ├── edit_post_form/
-│   │           │   └── edit_post_form.dart
-│   │           ├── post_category_selector/
-│   │           │   └── post_category_selector.dart
-│   │           ├── post_delete_actions/
-│   │           │   └── post_delete_actions.dart
-│   │           ├── post_delete_sheet/
-│   │           │   └── post_delete_sheet.dart
-│   │           ├── post_editor_actions/
-│   │           │   └── post_editor_actions.dart
-│   │           ├── post_editor_alt_text_fields/
-│   │           │   └── post_editor_alt_text_fields.dart
-│   │           ├── post_editor_basic_fields/
-│   │           │   └── post_editor_basic_fields.dart
-│   │           ├── post_editor_features_field/
-│   │           │   └── post_editor_features_field.dart
-│   │           ├── post_editor_location_fields/
-│   │           │   └── post_editor_location_fields.dart
-│   │           ├── post_editor_media_grid/
-│   │           │   └── post_editor_media_grid.dart
-│   │           ├── post_editor_media_section/
-│   │           │   └── post_editor_media_section.dart
-│   │           ├── post_editor_media_tile/
-│   │           │   └── post_editor_media_tile.dart
-│   │           ├── post_editor_options_fields/
-│   │           │   └── post_editor_options_fields.dart
-│   │           ├── post_editor_pricing_fields/
-│   │           │   └── post_editor_pricing_fields.dart
-│   │           ├── post_editor_schedule_field/
-│   │           │   └── post_editor_schedule_field.dart
-│   │           ├── post_feature_editor_row/
-│   │           │   └── post_feature_editor_row.dart
-│   │           ├── post_owner_action_tile/
-│   │           │   └── post_owner_action_tile.dart
-│   │           ├── post_owner_actions_sheet/
-│   │           │   └── post_owner_actions_sheet.dart
-│   │           ├── profile_categories_body/
-│   │           │   └── profile_categories_body.dart
-│   │           ├── profile_category_row/
-│   │           │   └── profile_category_row.dart
-│   │           └── published_post_content.dart
-│   ├── profile/
-│   │   └── presentation/
-│   │       ├── page/
-│   │       │   ├── profile_screen/
-│   │       │   │   └── profile_screen.dart
-│   │       │   └── profile_settings_screen/
-│   │       │       └── profile_settings_screen.dart
-│   │       └── widgets/
-│   │           ├── profile_screen_widgets/
-│   │           │   ├── category_chips/
-│   │           │   │   ├── category_chips.dart
-│   │           │   │   └── profile_category_chip.dart
-│   │           │   ├── post_grid/
-│   │           │   │   └── profile_post_grid.dart
-│   │           │   ├── profile_avatar/
-│   │           │   │   └── profile_avatar.dart
-│   │           │   ├── profile_header_actions/
-│   │           │   │   └── profile_header_actions.dart
-│   │           │   ├── profile_identity/
-│   │           │   │   └── profile_identity.dart
-│   │           │   ├── profile_post_card/
-│   │           │   │   └── profile_post_card.dart
-│   │           │   └── profile_stats/
-│   │           │       └── profile_stats.dart
-│   │           └── profile_settings_screen_widgets/
-│   │               ├── profile_settings_header/
-│   │               │   └── profile_settings_header.dart
-│   │               ├── profile_settings_list/
-│   │               │   └── profile_settings_list.dart
-│   │               └── profile_settings_tile/
-│   │                   └── profile_settings_tile.dart
-│   ├── profile_settings/
-│   │   └── presentation/
-│   │       ├── pages/
-│   │       │   └── profile_edit_screen.dart
-│   │       └── widgets/
-│   │           ├── profile_birth_field/
-│   │           │   └── profile_birth_field.dart
-│   │           ├── profile_edit_field/
-│   │           │   └── profile_edit_field.dart
-│   │           ├── profile_edit_fields/
-│   │           │   └── profile_edit_fields.dart
-│   │           └── profile_photo_picker/
-│   │               └── profile_photo_picker.dart
-│   ├── search/
-│   │   ├── data/
-│   │   │   ├── demo_search_posts.dart
-│   │   │   └── search_catalog.dart
-│   │   └── presentation/
-│   │       ├── cubit/
-│   │       │   ├── search_cubit.dart
-│   │       │   └── search_state.dart
-│   │       ├── page/
-│   │       │   └── search_screen/
-│   │       │       ├── search_screen.dart
-│   │       │       └── search_view.dart
-│   │       └── widgets/
-│   │           └── search_screen_widgets/
-│   │               ├── search_city_button/
-│   │               │   └── search_city_button.dart
-│   │               ├── search_city_list/
-│   │               │   └── search_city_list.dart
-│   │               ├── search_content/
-│   │               │   └── search_content.dart
-│   │               ├── search_empty_state/
-│   │               │   └── search_empty_state.dart
-│   │               ├── search_header/
-│   │               │   └── search_header.dart
-│   │               ├── search_query_field/
-│   │               │   └── search_query_field.dart
-│   │               ├── search_result_card/
-│   │               │   └── search_result_card.dart
-│   │               ├── search_results_grid/
-│   │               │   └── search_results_grid.dart
-│   │               └── search_suggestions/
-│   │                   └── search_suggestions.dart
-│   └── wallet/
-│       ├── data/
-│       │   └── wallet_sample_data.dart
-│       ├── domain/
-│       │   └── models/
-│       │       └── wallet_transaction.dart
-│       └── presentation/
-│           ├── page/
-│           │   ├── top_up_screen/
-│           │   │   └── top_up_screen.dart
-│           │   ├── wallet_screen/
-│           │   │   └── wallet_screen.dart
-│           │   ├── withdraw_screen/
-│           │   │   └── withdraw_screen.dart
-│           │   └── withdraw_summary_screen/
-│           │       └── withdraw_summary_screen.dart
-│           └── widgets/
-│               ├── top_up_screen_widgets/
-│               │   ├── wallet_bank_logo.dart
-│               │   ├── wallet_bank_tile.dart
-│               │   └── wallet_payment_methods.dart
-│               ├── wallet_screen_widgets/
-│               │   ├── wallet_action_tile.dart
-│               │   ├── wallet_actions_row.dart
-│               │   ├── wallet_balance_card.dart
-│               │   ├── wallet_bottom_button.dart
-│               │   ├── wallet_card_footer.dart
-│               │   ├── wallet_header.dart
-│               │   ├── wallet_transaction_tile.dart
-│               │   └── wallet_transactions.dart
-│               ├── withdraw_screen_widgets/
-│               │   ├── wallet_amount_presets.dart
-│               │   ├── wallet_amount_section.dart
-│               │   ├── wallet_text_field.dart
-│               │   ├── withdraw_account_section.dart
-│               │   └── withdraw_otp_fields.dart
-│               └── withdraw_summary_screen_widgets/
-│                   ├── withdraw_illustration.dart
-│                   ├── withdraw_summary_details.dart
-│                   └── withdraw_summary_row.dart
-├── shared/
-│   ├── models/
-│   │   └── post/
-│   │       ├── post_attributes.dart
-│   │       ├── post_details.dart
-│   │       ├── post_item.dart
-│   │       ├── post_media.dart
-│   │       └── post_unit.dart
-│   └── widgets/
-│       ├── app_button/
-│       │   └── app_button.dart
-│       ├── app_icons/
-│       │   └── app_icon.dart
-│       ├── app_loader/
-│       │   └── app_loader.dart
-│       ├── app_textfield/
-│       │   └── app_text_field.dart
-│       ├── app_toast/
-│       │   └── app_toast.dart
-│       ├── post_media/
-│       │   └── post_media_view.dart
-│       └── settings_detail_header/
-│           └── settings_detail_header.dart
-└── main.dart
+├── main.dart
+├── app/                         # App composition and providers
+├── core/                        # Theme, localization, responsive utilities and infrastructure
+├── shared/                      # App-wide primitive widgets and shared models
+└── features/
+    ├── calls/
+    ├── cart/
+    ├── chat/
+    ├── create_post/
+    ├── dashboard/
+    ├── home/
+    ├── locations/
+    ├── login/
+    ├── notifications/
+    ├── otp_verification/
+    ├── post_analytics/
+    ├── post_detail/
+    ├── posts/
+    ├── profile/
+    ├── profile_settings/
+    ├── search/
+    ├── splash/
+    └── wallet/
 ```
 
-</details>
+All features live directly under `lib/features/`. There are no customer/provider wrapper folders. `lib/shared` contains reusable primitive widgets and model types; feature-owned screens and widgets stay with their feature. No provider dashboard or role switch is implemented.
 
-### Assets and supporting files
+### Feature directory index
 
-| Location | Contents / entry point |
+Every feature below is a direct child of `lib/features/`. These are feature folders, not separate customer/provider modules.
+
+| Folder | Purpose |
 | --- | --- |
-| [`assets/Mask group.png`](assets/Mask%20group.png) | Default Profile avatar. |
-| `assets/img1.png`, `assets/img2.png`, `assets/img3.png` | Bundled sample photos used by Profile, Search, chat, and call previews. |
-| [`assets/fonts/YekanBakh-Regular.ttf`](assets/fonts/YekanBakh-Regular.ttf) | App font, registered in `pubspec.yaml`. |
-| [`assets/banks/`](assets/banks/) | Bank SVG logos reused in Cart and Wallet. |
-| [`assets/wallet/withdrawal.png`](assets/wallet/withdrawal.png) | Transparent withdrawal illustration used by `WithdrawIllustration`. |
-| [`assets/icons/`](assets/icons/) | Client PNG groups, source sheets, and SVG groups under `vectors/`. Runtime paths are centralized in `AppIcons`; detailed extraction notes are below. |
-| [`tool/client_icons.json`](tool/client_icons.json) | Original PNG crop manifest. |
-| [`tool/extract_client_icons.py`](tool/extract_client_icons.py) | Extract/check original PNG crops. |
-| [`tool/supplemental_icons.json`](tool/supplemental_icons.json) / [`tool/extract_supplemental_icons.py`](tool/extract_supplemental_icons.py) | Supplemental screenshot icon manifest and extraction. |
-| [`tool/supplemental_vectors.json`](tool/supplemental_vectors.json) / [`tool/import_supplemental_vectors.py`](tool/import_supplemental_vectors.py) | Supplemental SVG manifest and importer. |
+| [splash](lib/features/splash/) | Animated entry and timed transition to Login. |
+| [login](lib/features/login/) | Phone input, country picker, and the auth layout shared with OTP. |
+| [otp_verification](lib/features/otp_verification/) | OTP preview input and Continue navigation to the dashboard. |
+| [dashboard](lib/features/dashboard/) | Bottom navigation and composition of Home, Cart, Create, Search, and Profile. |
+| [home](lib/features/home/) | Sample feed and entry to notifications. |
+| [cart](lib/features/cart/) | Local cart, quantities, totals, checkout preview, and history. |
+| [search](lib/features/search/) | Demo search, city selection, suggestions, and result cards. |
+| [posts](lib/features/posts/) | Saved posts, category management, edit/delete flows, and reusable post media rendering. |
+| [create_post](lib/features/create_post/) | Device gallery, attachment selection, and new-post form. |
+| [post_detail](lib/features/post_detail/) | Post media/content display, engagement controls, and owner actions. |
+| [post_analytics](lib/features/post_analytics/) | Local post event tracking and analytics reports/charts. |
+| [profile](lib/features/profile/) | Main profile, categorized post grid, and settings-list screen. |
+| [profile_settings](lib/features/profile_settings/) | Personal profile edit form and settings detail header shared with Locations. |
+| [locations](lib/features/locations/) | Map preview and temporary saved-location labels. |
+| [notifications](lib/features/notifications/) | Notification samples, search, and read state. |
+| [wallet](lib/features/wallet/) | Balance/transactions, top-up, withdrawal form, and summary previews. |
+| [chat](lib/features/chat/) | Inbox, conversation, attachments, voice recording, and playback. |
+| [calls](lib/features/calls/) | Voice/video call previews and the CallService contract. |
 
-Asset folder registrations are in `pubspec.yaml`. Add a new folder there when
-needed; putting a file on disk alone does not make an unregistered folder available
-to Flutter.
+### After the folder restoration
 
-## Important file locations
+Imports now use `package:nini/features/<feature>/...`. The customer, common-feature, and services wrapper directories have been removed. Each feature retains its existing data/domain/presentation layers, screen folders, and widget subfolders. The reorganization changes paths only; it does not add account roles or change screen behavior. Keep new feature-specific widgets beside their owning feature rather than introducing role wrappers again.
 
-Start here when changing a screen or connecting a backend. Every source file is
-listed in the tree above; these are the main integration and composition points.
+### Feature layers and widget placement
 
-| Work | Primary location |
-| --- | --- |
-| App configuration, locale, initial tab | [`app.dart`](lib/app/app.dart) |
-| Root repositories and shared Cubits | [`app_providers.dart`](lib/app/app_providers.dart) |
-| Dashboard tab changes / publish result | [`dashboard_screen.dart`](lib/features/dashboard/presentation/pages/dashboard_screen.dart) |
-| Home data, bell, and notification state lifetime | [`home_screen.dart`](lib/features/home/presentation/pages/home_screen.dart) |
-| Search page and its controllers | [`search_screen/`](lib/features/search/presentation/page/search_screen/) |
-| Profile page and settings-list page | [`profile/presentation/page/`](lib/features/profile/presentation/page/) |
-| Profile edit form (separate module) | [`profile_edit_screen.dart`](lib/features/profile_settings/presentation/pages/profile_edit_screen.dart) |
-| Settings list destinations | [`profile_settings_list.dart`](lib/features/profile/presentation/widgets/profile_settings_screen_widgets/profile_settings_list/profile_settings_list.dart) |
-| Locations preview | [`locations_screen.dart`](lib/features/locations/presentation/pages/locations_screen.dart) |
-| Wallet's four screens | [`wallet/presentation/page/`](lib/features/wallet/presentation/page/) |
-| Wallet sample values | [`wallet_sample_data.dart`](lib/features/wallet/data/wallet_sample_data.dart) |
-| Notification samples / state | [`sample_notifications.dart`](lib/features/notifications/data/sample_notifications.dart), [`notifications_cubit.dart`](lib/features/notifications/presentation/cubit/notifications_cubit.dart) |
-| Create form / gallery selection | [`create_post_details_screen.dart`](lib/features/create_post/presentation/pages/create_post_details_screen.dart), [`create_post_gallery_screen.dart`](lib/features/create_post/presentation/pages/create_post_gallery_screen.dart) |
-| Draft fields and validation | [`post_draft.dart`](lib/features/create_post/domain/models/post_draft.dart), [`post_draft_validator.dart`](lib/features/create_post/domain/validation/post_draft_validator.dart) |
-| Category management / full post editor | [`profile_categories_screen.dart`](lib/features/posts/presentation/pages/profile_categories_screen.dart), [`edit_post_screen.dart`](lib/features/posts/presentation/pages/edit_post_screen.dart) |
-| Post owner-menu routing | [`manage_post_actions.dart`](lib/features/posts/presentation/helpers/manage_post_actions.dart) |
-| Post viewer / pricing | [`post_detail_screen.dart`](lib/features/post_detail/presentation/pages/post_detail_screen.dart), [`post_pricing.dart`](lib/features/post_detail/presentation/widgets/pricing/post_pricing.dart) |
-| Shared model and media serialization | [`shared/models/post/`](lib/shared/models/post/) |
-| Shared widgets | [`shared/widgets/`](lib/shared/widgets/) — individual responsibilities below. |
-| Fixed colors / theme roles | [`app_colors.dart`](lib/core/theme/app_colors.dart), [`app_theme.dart`](lib/core/theme/app_theme.dart) |
-| Persian labels and formatting | [`core/localization/`](lib/core/localization/) — per-feature catalog map below. |
-| Client icon paths | [`app_icons.dart`](lib/core/icons/app_icons.dart) |
-| Responsive setup / fold layout | [`config.dart`](lib/core/responsiveness/responsive_config/config.dart), [`fold_aware_layout.dart`](lib/core/responsiveness/fold_aware_layout/fold_aware_layout.dart) |
-| Screen entrance effects | [`core/animation/`](lib/core/animation/) |
-
-## Startup and shared providers
-
-The application is split into three clear responsibilities:
-
-| File | Responsibility |
-| --- | --- |
-| [`main.dart`](lib/main.dart) | Initializes Flutter and starts `ResponsiveConfig(child: MyApp())`. No feature UI or repository setup lives here. |
-| [`app.dart`](lib/app/app.dart) | Owns `MyApp`, `MaterialApp`, locale/delegates, theme switching, system bar styling, route observer, and the initial `DashboardScreen`. |
-| [`app_providers.dart`](lib/app/app_providers.dart) | Creates the shared `ThemeCubit`, `PostsCubit`, `ProfileCategoriesCubit`, `CartCubit`, and `PostAnalyticsCubit`, using local repositories by default. |
-
-```text
-main()
-  → ResponsiveConfig
-    → MyApp
-      → AppProviders
-        → MaterialApp
-          → DashboardScreen(initialTab: DashboardTab.home)
-```
-
-`MyApp` accepts `initialThemeMode`, `postsRepository`, `categoriesRepository`,
-`cartRepository`, and `analyticsRepository` overrides for previews or later
-integrations. `PostsCubit` starts its load when created, as do `CartCubit` and `ProfileCategoriesCubit`. `ThemeCubit` is
-session state. Posts, categories, Cart, and analytics use their local adapters.
-Notifications are scoped to Home, rather than registered in `AppProviders`.
-
-One legacy analytics **export only** remains at
-`features/post_analytics/presentation/domain/cubit/post_analytics_cubit.dart`.
-Its implementation is in the canonical `presentation/cubit/` path. Use the
-canonical path for new code. There is no dashboard compatibility page or second
-dashboard view.
-
-## Dashboard and navigation
-
-The only dashboard screen is
-[`pages/dashboard_screen.dart`](lib/features/dashboard/presentation/pages/dashboard_screen.dart).
-Its tab list and native `PageView` are directly inside that file. The removed
-`dashboard_pages.dart`, `dashboard_shell_view.dart`, and misspelled legacy
-`dahboard_screen.dart` must not be recreated or imported.
-
-| Tab index | Tab | Current destination |
-| ---: | --- | --- |
-| 0 | Home | `HomeScreen`: the new scrollable phone feed. |
-| 1 | Cart | `CartScreen`: Cart and Checkout stages inside the existing dashboard tab. |
-| 2 | Create (+) | Opens `CreatePostGalleryScreen` as a full-screen route. The PageView slot remains for stable swipe indexes. |
-| 3 | Search | `SearchScreen`: results, suggestions, and the inline city picker. |
-| 4 | Profile | `ProfileScreen`, or the optional `profilePage` supplied to the dashboard. |
-
-`app/app.dart` explicitly starts the app on **Home**. The dashboard's own optional
-constructor default is Profile; app startup does not rely on that default.
-
-`DashboardScreen` owns/disposes its `PageController` and navigation Cubit. Taps
-and swipes update the same selected tab. It retains entrance animations,
-reduced-motion handling, and the shared bottom navigation with fold-aware layout.
-Selecting Create opens its route without selecting a different dashboard tab.
-A successful local publish closes the create routes and returns to **Profile**.
-
-## Home screen
-
-[`HomeScreen`](lib/features/home/presentation/pages/home_screen.dart) is one main
-screen that imports UI widgets. It has no Home repository, Home Cubit, Home view
-proxy, or backend layer. A lazy `ListView.builder` shows the HYWORK header and six
-sample phone cards. The existing Home navigation icon opens this screen.
-
-### Home widgets
-
-| Widget / import target | Responsibility |
-| --- | --- |
-| [`home_notification_button.dart`](lib/features/home/presentation/widgets/home_notification_button/home_notification_button.dart) | Notification bell and unread count; opens the sample notification route. |
-| [`home_feed_header.dart`](lib/features/home/presentation/widgets/home_feed_header/home_feed_header.dart) | Centered HYWORK wordmark. |
-| [`home_product_card.dart`](lib/features/home/presentation/widgets/home_product_card/home_product_card.dart) | Composes image, engagement, details, price, and divider; owns local like/bookmark state. |
-| [`home_product_image.dart`](lib/features/home/presentation/widgets/home_product_image/home_product_image.dart) | Network image, fixed photo backdrop, pre-order/discount badges, loading indicator, and retry. |
-| [`home_engagement_bar.dart`](lib/features/home/presentation/widgets/home_engagement_bar/home_engagement_bar.dart) | Left-side rating, smaller client icons, and a right-aligned bookmark/comment/share/like/bag group; adapts for larger text. |
-| [`home_metric.dart`](lib/features/home/presentation/widgets/home_metric/home_metric.dart) | One consistently styled icon/count and optional toggle callback. |
-| [`home_product_details.dart`](lib/features/home/presentation/widgets/home_product_details/home_product_details.dart) | Right-aligned Persian phone title and mobile category. |
-| [`home_product_price.dart`](lib/features/home/presentation/widgets/home_product_price/home_product_price.dart) | Sample current/original prices, currency label, and stock pill. |
-| [`home_badge.dart`](lib/features/home/presentation/widgets/home_badge/home_badge.dart) | Shared pill shape used for pre-order, discount, and stock labels. |
-
-### Where the Home image and values come from
-
-The URL and title are explicitly declared in `HomeScreen.phoneImageUrl` and
-`HomeScreen.phoneTitle`. The image is the green Google Pixel 9 front/back product
-photo matching the supplied reference. It is fetched using `Image.network`, not
-copied into app assets or obtained from Search data.
-
-- Product image source: [Smarty product page](https://www.smarty.sk/google-pixel-9-12gb-128gb-wintergreen-4p159917).
-- Network image URL: `https://doc.smarty.sk/pic/0f1e8c73d99d417ea73a3db313bcd924-600-600.webp`.
-- Change that constant in `home_screen.dart` to replace the photo across this feed.
-- Home image loading has an error/retry UI; web uses the HTML-image fallback
-  strategy when normal image fetching is unavailable.
-- The prices, stock, badges, rating, and engagement totals are **sample UI values**
-  from the reference. They are not current market prices or server statistics.
-- Like and bookmark update the individual card's local UI state. Their state is
-  retained while scrolling that feed. The bag button adds the phone to the shared
-  cart, merges quantities for the same product, and enforces the sample stock of two.
-  Comments and share remain display elements. The engagement count is sample UI,
-  while the navigation badge shows the actual number of cart lines.
-- Local publishing updates the Profile grid, not these illustrative phone cards.
-
-The main Home screen and each extracted Home widget remain below 150 lines.
-
-## Cart and local checkout
-
-[`CartScreen`](lib/features/cart/presentation/pages/cart_screen.dart) composes the
-Cart and Checkout stages inside the dashboard tab; there is no separate payment
-page. Cart, Order history, and Sales are the three list tabs.
-
-### Actions and navigation
-
-- The dashboard badge counts cart lines and updates after additions/removals.
-- Tap a card to review that item in Checkout, or the bottom Checkout button to
-  review all currently visible items. An active status filter limits that selection.
-- Swipe a card left to remove it; the delete background and accessibility action
-  expose the same removal operation.
-- Tap the quantity pill to open the amount dialog. Cancel discards input; Done
-  validates and applies it. Whole-unit products require integers; other units
-  support two decimal places, with stock/positive quantity checks.
-- The header menu filters by order status. It is not a clear-cart menu.
-- Checkout shows selected cards, subtotal, discount, editable nonnegative charges,
-  bank radios, and escrow explanation. Melli, Mellat, and Saman logos are bundled;
-  Mellat is initially selected.
-- Checkout Back returns to Cart; the Cart header Back returns to Home.
-- Order history renders order snapshots if present in the loaded local data;
-  Sales currently shows an empty state.
-
-The current Checkout has **no payment-submit action or gateway route**. It does
-not create a receipt, remove purchased items, charge a bank, or transfer escrow.
-The order model/history widget can display existing saved snapshots, but the
-current Cubit has no order-creation/payment method. `CartCubit.clear()` exists as
-a controller action, without a visible clear-confirmation flow in this screen.
-
-### Named Cart widgets
-
-All paths below are under `features/cart/presentation/widgets/`, with one named
-component folder and matching Dart file per row.
-
-| Folder / widget | Responsibility |
-| --- | --- |
-| `cart_header` / `CartHeader` | Right-aligned stage title, Back, and optional trailing control. |
-| `cart_tabs` / `CartTabs` | Cart, Order history, and Sales tabs. |
-| `cart_status_menu` / `CartStatusMenu` | Header status filter menu. |
-| `cart_status_filter` / `CartStatusFilter` | Active filter label and reset control. |
-| `cart_items_list` / `CartItemsList` | Item list, swipe removal, amount editing, and Checkout entry. |
-| `cart_item_card` / `CartItemCard` | Item information, pricing, image, and quantity control. |
-| `cart_item_badge` / `CartItemBadge` | Item status badge. |
-| `cart_item_image` / `CartItemImage` | Sample placeholder or added-product image with failure fallback. |
-| `cart_quantity_button` / `CartQuantityButton` | Quantity/unit pill. |
-| `cart_delete_background` / `CartDeleteBackground` | Swipe-to-remove background. |
-| `cart_amount_dialog` / `CartAmountDialog` | Validated amount form, reusing the themed post-dialog shell and shared text field. |
-| `cart_dialog_actions` / `CartDialogActions` | Persian Cancel/Done actions for amount dialogs. |
-| `cart_checkout` / `CartCheckout` | Selected items, totals, bank choices, and escrow explanation. |
-| `cart_section` / `CartSection` | Right-aligned section title and spacing. |
-| `cart_payment_summary` / `CartPaymentSummary` | Exact totals and additional-charge entry. |
-| `cart_payment_methods` / `CartPaymentMethods` | Bank radios and original-color SVG logos. |
-| `cart_order_history` / `CartOrderHistory` | Expandable locally loaded order snapshots. |
-| `cart_empty_state` / `CartEmptyState` | Cart/History/Sales empty messages. |
-| `cart_storage_notice` / `CartStorageNotice` | Local storage failure/retry. |
-
-### Data, amounts, and persistence
-
-`CartCubit` is shared through `AppProviders`. `CartState` owns items, order
-snapshots, selected checkout IDs, stage/tab, method, charges, and status filter.
-Widgets call named actions; calculations and persistence stay outside layout.
-
-- `domain/models/` contains `CartItem`, `CartOrder`, `CartOrderStatus`,
-  `CartSnapshot`, and `PaymentMethod`.
-- `domain/repositories/cart_repository.dart` defines the storage contract and an
-  in-memory adapter. `data/local_cart_repository.dart` stores version 1
-  `cart.json` using a temporary write and rename; the Cubit queues writes.
-- `data/demo_cart_items.dart` supplies five first-launch fixtures with placeholder
-  images. Saved empty carts stay empty on relaunch; fixtures are not reinserted.
-- Home adds its sample phone title/network image and merges matching quantities,
-  subject to stock. Its 13,000 toman unit price minus 1,000 discount gives 12,000.
-- Quantities are integer hundredths (`1037` means `10.37` units). Unit prices are
-  whole toman; computed money uses integer hundredths of a toman. The formatter
-  accepts Latin/Persian/Arabic digits and displays Persian digits.
-- Read failures preserve the existing file and block editing until retry. Write
-  failures show a storage notice and allow retry.
-- `core/localization/cart_strings.dart` holds Persian Cart copy. Amount sheets
-  reuse the opposite-theme post-dialog shell. Regular surfaces/text use the app
-  theme and fixed colors come from `AppColors`.
-- `assets/banks/` contains the reusable bank SVGs and attribution/license files.
-  App action icons use `AppIcons` and `AppIcon`.
-
-The bottom navigation composes `DashboardNavItem`, `DashboardCartIcon`, and
-`DashboardFoldLayout` from `dashboard/presentation/widgets/bottom_navbar/`.
-
-## Search screen and city selection
-
-The Search bottom-navigation icon opens
-[`SearchScreen`](lib/features/search/presentation/page/search_screen/search_screen.dart).
-It keeps feature state alive across tab changes and provides `SearchCubit`.
-[`SearchView`](lib/features/search/presentation/page/search_screen/search_view.dart) owns the
-text/focus controllers and named button handlers. This is the existing Search
-composition; the Home feature does not add a matching view layer.
-
-### Search widgets
-
-| Widget / import target | Responsibility |
-| --- | --- |
-| [`search_header.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_header/search_header.dart) | Fixed query field, location button, and a visible Back control for open panels. |
-| [`search_query_field.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_query_field/search_query_field.dart) | Uses the shared AppTextField with search styling, submit, and clear actions. |
-| [`search_city_button.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_city_button/search_city_button.dart) | Location icon and selected city label; opens/closes the city-list panel. |
-| [`search_city_list.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_city_list/search_city_list.dart) | Full-width scrollable Iranian city list with right-side radio circles. |
-| [`search_content.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_content/search_content.dart) | Chooses the city list, suggestions, results grid, or empty state with ordinary if statements. |
-| [`search_suggestions.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_suggestions/search_suggestions.dart) | Right-aligned service suggestions with circled search icons. |
-| [`search_results_grid.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_results_grid/search_results_grid.dart) | Responsive service grid; new city/query results reset grid scroll position. |
-| [`search_result_card.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_result_card/search_result_card.dart) | Service image, title, sample price, discount/pre-order badge, and post-detail entry. |
-| [`search_empty_state.dart`](lib/features/search/presentation/widgets/search_screen_widgets/search_empty_state/search_empty_state.dart) | Localized empty message and a reset action. |
-
-### Search interaction flow
-
-1. Search starts with the sample query `لوله‌کش` and Tehran selected.
-2. Tapping the field shows suggestions; typing updates the editing query.
-3. Keyboard Search, the search icon, or a suggestion confirms a query and shows results.
-4. The location icon shows the **full city picker beneath the same fixed header**,
-   matching the supplied reference. It is not a dropdown, popup menu, or new route.
-5. Tapping a city filters available sample services, updates its label, returns to
-   the results grid, and starts the refreshed grid at the top. The Search tab stays selected.
-6. The visible Back control closes suggestions/cities and restores the last
-   confirmed query. System Back closes an active panel too.
-7. The × inside the field clears only the editing text. It does not mean Close.
-8. Tapping a result opens the existing `PostDetailScreen` with that service's title,
-   city, price, and image. Back returns to Search.
-
-`SearchState.query` is the editing text; `submittedQuery` is the last confirmed
-query. `city` and `SearchPanel` select the location and visible content. Closing a
-panel discards unsubmitted edits; it does not clear the confirmed results.
-
-### Search sample data and locations
-
-| File | Purpose |
-| --- | --- |
-| [`demo_search_posts.dart`](lib/features/search/data/demo_search_posts.dart) | Explicit sample entries: title, image path, price, optional badges, and available cities. |
-| [`search_catalog.dart`](lib/features/search/data/search_catalog.dart) | Local matching/filtering and conversion into shared PostItem values. |
-| [`search_strings.dart`](lib/core/localization/search_strings.dart) | Persian Search labels, 18 service suggestions, and 31 Iranian city names. |
-| [`search_cubit.dart`](lib/features/search/presentation/cubit/search_cubit.dart) | Named actions for editing, submitting, city selection, opening/closing panels. |
-| [`search_state.dart`](lib/features/search/presentation/cubit/search_state.dart) | Query, confirmed query, city, and visible panel. |
-
-Search images are the existing bundled **`assets/img1.png`, `assets/img2.png`, and
-`assets/img3.png`**. Each sample explicitly names its image; there is no image-path
-calculation and no Search image download.
-
-Filtering checks both the query and each sample's `cities` list. It does not
-relabel every result as available everywhere. A city without matching samples
-shows the empty state. The picker lists all 31 city names even where the demo has
-no services. Edit the sample entries' city lists to change preview availability.
-
-Persian/Arabic `ی`/`ي`, `ک`/`ك`, whitespace, and Persian half-spaces are normalized
-for matching. No geolocation permission, GPS lookup, reverse geocoding, external
-city API, or production service-search endpoint is used here.
-
-## Profile screen
-
-[`ProfileScreen`](lib/features/profile/presentation/page/profile_screen/profile_screen.dart)
-is the Profile tab. Its widgets are under
-[`profile_screen_widgets/`](lib/features/profile/presentation/widgets/profile_screen_widgets/),
-with a named subfolder for each component: avatar, identity, statistics, category
-chips, post grid/card, and header actions.
-
-The grid reads the shared `PostsCubit` and `ProfileCategoriesCubit`: newly saved
-posts appear first, and category chips filter by stable category ID. Publishing
-returns to Profile and selects the new post's category. Tap a card to open details;
-its three-dot menu can edit/delete posts present in this local Profile dataset,
-including the seeded sample cards.
-
-Header actions open chat, the theme menu, and the settings list. Profile settings
-list UI is kept separately in
-[`page/profile_settings_screen/`](lib/features/profile/presentation/page/profile_settings_screen/)
-and [`profile_settings_screen_widgets/`](lib/features/profile/presentation/widgets/profile_settings_screen_widgets/).
-The personal-information form is the separate `features/profile_settings` module,
-not this list page.
-
-## Settings list, profile edit, and locations
-
-Profile header three dots → `ProfileSettingsScreen` → settings rows. The list has
-seventeen entries under General. Labels currently render in Persian; the names
-below identify the design entries for developers.
-
-| Entry | Destination / status |
-| --- | --- |
-| Profile setting | [`ProfileEditScreen`](lib/features/profile_settings/presentation/pages/profile_edit_screen.dart) — separate personal-information form module. |
-| Locations | [`LocationsScreen`](lib/features/locations/presentation/pages/locations_screen.dart) — map and label preview. |
-| Wallet | [`WalletScreen`](lib/features/wallet/presentation/page/wallet_screen/wallet_screen.dart) — Wallet module. |
-| Saved, Notifications, Trending, Insights, Scheduled content, Blocked, Comments, Language, Device permissions, Accessibility, Posts, My media, Tags & Keywords, Archive | List rows only; no destination callbacks yet. The working Notifications entry is the Home bell. |
-
-The settings-list Back and check controls both close the route. The list does not
-save account settings.
-
-### Profile edit form
-
-[`features/profile_settings/`](lib/features/profile_settings/) contains the form
-screen and its own widgets: `ProfilePhotoPicker`, `ProfileEditFields`,
-`ProfileEditField`, and `ProfileBirthField`. Fields cover first/last name,
-nationality, username, email, birth date, gender, and bio. Gallery photo selection
-uses `image_picker`; the selected bytes are only retained by the widget.
-
-The birth picker uses Persian Material labels over `DateTime`; a Jalali calendar
-conversion is not implemented. Gender is currently a text field. The shared
-[`SettingsDetailHeader`](lib/shared/widgets/settings_detail_header/settings_detail_header.dart)
-provides Back/Done. Done dismisses the form; it does not persist a profile or
-change the Profile tab's sample identity/avatar.
-
-### Locations preview
-
-Widgets stay in [`locations/presentation/widgets/`](lib/features/locations/presentation/widgets/):
-`LocationMapPreview`, `LocationLabelCard`, and `SavedLocationList`. The map initially
-shows New Delhi to match the reference; the sample address text refers to London.
-These are independent sample values, with no address lookup or GPS connection.
-
-Users can add/select labels in this screen's state. Leaving the route discards
-those changes. There is no saved-address repository or shared address book;
-create-post/chat map selection are separate flows. OpenStreetMap tiles require
-internet and retain attribution. The base map artwork does not change to a dark
-tile style when switching app theme.
-
-## Notifications
-
-The Home header bell opens
-[`NotificationsScreen`](lib/features/notifications/presentation/pages/notifications_screen.dart).
-`HomeScreen` creates/disposes `NotificationsCubit` and passes the same instance to
-the route, so row read state and the header badge agree while Home remains alive.
-Opening the route clears its search query.
+Keep each feature's existing `data`, `domain`, and `presentation` responsibilities. Some UI-only features do not need all three layers. Existing features use both `page/` and `pages/`; follow the surrounding feature instead of renaming everything for consistency.
 
 | Location | Responsibility |
 | --- | --- |
-| [`data/sample_notifications.dart`](lib/features/notifications/data/sample_notifications.dart) | Sample order and sale entries. |
-| [`domain/models/app_notification.dart`](lib/features/notifications/domain/models/app_notification.dart) | Notification identity, title/body, time label, optional image URL, and unread count. |
-| [`presentation/cubit/`](lib/features/notifications/presentation/cubit/) | Title/body filtering and marking a row read; no network or persistence. |
-| [`presentation/widgets/`](lib/features/notifications/presentation/widgets/) | Named folders for header, search field, list, row tile, and avatar/unread badge. |
-| [`home_notification_button.dart`](lib/features/home/presentation/widgets/home_notification_button/home_notification_button.dart) | Bell button and Home unread badge. |
+| `data/` | Local/device adapters, sample datasets, serialization/storage implementations. |
+| `domain/models/` and domain interfaces | Models, validation, repository/service contracts. |
+| `presentation/cubit/` | State and operations visible to the UI. Some state classes live in the Cubit file; others have separate files. |
+| `presentation/page/` or `presentation/pages/` | Route entry, controller ownership, provider composition, navigation and screen composition. |
+| `presentation/widgets/` | Feature-owned view components; use the existing screen/widget subfolders. |
+| `presentation/helpers/` | Focused coordination/formatting/selection helpers that already belong to presentation. |
 
-Tapping an entry clears its unread count; it does not open an order/product.
-Read state resets when the owning Home state is recreated. Sale avatars use a
-network image with a fallback. Push delivery, notification permissions, OS
-notifications, and backend read synchronization are not implemented.
+Do not create new architecture layers, repositories, controllers, or generic wrappers just to populate folders.
 
-## Wallet
+## Navigation and screen connections
 
-Wallet is a UI-only module with sample data and a transaction model. Its folder
-structure follows the requested screen grouping:
+Navigation uses **native Navigator, MaterialPageRoute, PopScope, and a dashboard PageView**. There is no centralized named-route router to extend.
+
+```mermaid
+flowchart TD
+    Main[main.dart / ResponsiveConfig] --> App[MyApp / AppProviders / MaterialApp]
+    App --> Splash[SplashScreen]
+    Splash -->|replace after at least 3 seconds| Login[LoginScreen]
+    Login -->|nonempty phone / Done| OTP[OtpVerificationScreen]
+    OTP -->|four digits AND Continue; clear auth routes| Gate[LocationPermissionGate]
+    Gate --> Dashboard[DashboardScreen - Home selected]
+    Dashboard --> Home[Home]
+    Dashboard --> Cart[Cart]
+    Dashboard --> Search[Search]
+    Dashboard --> Profile[Profile]
+    Dashboard -->|Create action opens separate route| Gallery[CreatePostGalleryScreen]
+    Gallery --> Details[CreatePostDetailsScreen]
+    Details -->|saved PostItem returned through Gallery| Profile
+    Home --> Notifications[NotificationsScreen]
+    Search --> Post[PostDetailScreen]
+    Profile --> Post
+    Profile --> Settings[ProfileSettingsScreen - settings list]
+    Profile --> Inbox[ChatInboxScreen]
+    Inbox --> Conversation[ConversationScreen]
+    Conversation --> Call[CallScreen - preview]
+    Post --> Analytics[PostAnalyticsScreen]
+    Post --> Owner[Owner action sheet]
+    Owner --> Edit[EditPostScreen]
+    Owner --> Delete[Post delete confirmation]
+    Settings --> EditProfile[ProfileEditScreen - personal-data form]
+    Settings --> Locations[LocationsScreen]
+    Settings --> Wallet[WalletScreen]
+    Wallet --> TopUp[TopUpScreen]
+    Wallet --> Withdraw[WithdrawScreen]
+    Withdraw --> Summary[WithdrawSummaryScreen]
+```
+
+Important details that must remain intact:
+
+1. `SplashScreen` starts its timer after the first frame and disposes it on exit.
+2. OTP entry alone does not navigate. Continue is enabled at four digits; its guarded handler clears the auth stack and explicitly supplies `DashboardTab.home`.
+3. `DashboardScreen`'s constructor default is **Profile**; the actual OTP startup path overrides it to **Home**. Do not confuse the default with app startup.
+4. The dashboard index order is **Home, Cart, Create, Search, Profile**. Tapping Create opens the gallery route; the PageView keeps its Create slot for indexing/swipe behavior.
+5. Create Details returns a `PostItem` to Gallery; Gallery returns it to Dashboard. Dashboard selects its category and opens Profile. Preserve this typed result chain.
+6. Cart checkout is an internal `CartStage` change, not a separate route. Its Back behavior depends on stage.
+7. Search field clear, panel Back/close, city selection, and submit are separate actions. Preserve their different state transitions.
+8. Post edit/delete menus resolve the latest local record before acting. Delete success can pop the detail route; cancellation leaves it open.
+9. Settings has **17 rows**. Only Profile setting, Locations, and Wallet navigate today. The Notifications settings row is a placeholder; the functional notification entry is Home's bell.
+10. Top Up Payment closes its preview. Withdraw Done pushes Summary; Summary Done returns `true`, allowing Withdraw to close back to Wallet. Transfer/Request/Payment wallet action tiles currently have no destination.
+
+The catalog below gives the exact path of every screen. The fastest entry points are [dashboard](lib/features/dashboard/presentation/pages/dashboard_screen.dart), [profile](lib/features/profile/presentation/page/profile_screen/profile_screen.dart), [post details](lib/features/post_detail/presentation/pages/post_detail_screen.dart), and the [settings list](lib/features/profile/presentation/widgets/profile_settings_screen_widgets/profile_settings_list/profile_settings_list.dart).
+
+## State ownership and data flow
+
+### Application-scoped providers
+
+[AppProviders](lib/app/app_providers.dart) declares these providers. Their creation uses BlocProvider's normal lazy behavior; a `..load()` call runs when that provider is created, rather than proving every repository eagerly loads during splash.
+
+| Cubit | Default backing implementation | Consumers |
+| --- | --- | --- |
+| `PostsCubit` | `LocalPostsRepository` | Profile grid, create/save, edit/delete, detail record refresh. |
+| `ProfileCategoriesCubit` | `LocalProfileCategoriesRepository` | Profile filters, category manager, create/edit category dropdown. |
+| `CartCubit` | `LocalCartRepository` | Home add-to-cart, cart screen, bottom-nav badge. |
+| `PostAnalyticsCubit` | `LocalPostAnalyticsRepository` | Impression/detail trackers and analytics reports. |
+| `ThemeCubit` | In-memory ThemeMode | MaterialApp theme and Profile appearance menu. |
+
+`MyApp`/`AppProviders` accept repository overrides for posts, categories, cart, and analytics. Preserve those constructor contracts for tests and future backend adapters. The analytics provider currently imports a compatibility export under `post_analytics/presentation/domain/cubit/`; the real implementation is under `post_analytics/presentation/cubit/`.
+
+### Route and screen-local state
+
+| Owner | State/services it owns |
+| --- | --- |
+| Dashboard state | `PageController`, `DashboardNavigationCubit`, pending target-tab coordination. |
+| SearchScreen / SearchView | `SearchCubit`; query TextEditingController and FocusNode belong to SearchView. |
+| HomeScreen | `NotificationsCubit`, passed to the notification route with `BlocProvider.value`. Read changes last for Home's lifetime. |
+| Each HomeProductCard | Local like/bookmark preview booleans. |
+| CreatePostGalleryScreen | `GalleryCubit` and `CreatePostCubit`; the draft is passed by value to Details. |
+| CreatePostDetailsScreen | Field controllers, Quill controller, caption synchronizer, publishing guard. |
+| EditPostScreen | Prefilled `CreatePostCubit`, `PostEditorMediaCubit`, form state and save/discard guards. |
+| PostDetailScreen | `PostDetailCubit` for carousel and preview engagement state. |
+| Analytics sections | Selected period, selected chart point, and legend/filter toggles. |
+| Profile edit / Locations | Local controllers, selected photo/labels; no account persistence. |
+| Wallet previews | Amount/bank selections and a local countdown; no financial repository. |
+| ChatInboxScreen | `ChatInboxCubit` and search controller. |
+| ConversationScreen | `ConversationCubit`, `VoiceRecordingCubit`, `VoicePlaybackCubit`, controllers and lifecycle/route subscriptions. |
+| CallScreen | `CallCubit` and a per-call `CallService`, defaulting to PreviewCallService. |
+
+```mermaid
+flowchart LR
+    Input[Widget input / dialog result] --> State[Existing Cubit]
+    State --> Contract[Repository or service contract]
+    Contract --> Adapter[Current local/device adapter]
+    Adapter --> Stored[JSON / app-owned media / temporary cache]
+    Adapter --> State
+    State --> UI[BlocBuilder / BlocSelector / BlocListener consumers]
+```
+
+Some previews intentionally use only StatefulWidget state. Do not add Cubits or persistence to them unless the requested feature needs it.
+
+## Feature guide and widget connections
+
+### Splash, Login, and OTP
+
+`SplashScreen → SplashContent → SplashBrand + AppLoader`. Shared entrance/staggered animation utilities drive the brand sequence. Login and OTP both use `AuthScreenLayout`, now owned by Login at `login/presentation/widgets/auth_screen_layout/`.
+
+`LoginScreen → LoginPhoneField → LoginCountryPicker`. Phone input accepts the existing supported digit characters; nonempty input can continue. `OtpVerificationScreen → OtpCodeInput + OtpCountdown`. The four boxes use `pinput`; the country selector uses `country_code_picker`. No authentication repository or SMS request exists.
+
+Splash is black. The shared auth layout explicitly applies `AppTheme.dark`, so Login/OTP remain black even when the main app is light. Do not remove that nested Theme as a cleanup.
+
+### Customer dashboard
+
+`DashboardScreen → HomeScreen / CartScreen / SearchScreen / ProfileScreen`, plus the Create route action. `DashboardBottomNav → DashboardFoldLayout + DashboardNavItem`; the cart item uses `DashboardCartIcon` to read the shared count. `ScreenEntrance` and `StaggeredEntrance` wrap the existing content. The dashboard supplies Home's View Cart callback and Cart's Back callback.
+
+The physical hinge layout in `DashboardFoldLayout` is separate from ordinary width breakpoints. Keep native fold coordinates and established icon order intact.
+
+### Home
+
+`HomeScreen → HomeFeedHeader + six HomeProductCard widgets`. Header uses `HomeNotificationButton`. Each card composes `HomeProductImage`, `HomeEngagementBar`, `HomeProductDetails`, and `HomeProductPrice`; badges/metrics are smaller feature widgets.
+
+The image URL and fixed feed title are in `HomeScreen`; the sample cart record and add-to-cart operation are in `HomeProductCard`. Image retries handle network failure. Notifications are sample records from the common notification feature. This feed does not read `PostsCubit`.
+
+### Cart
+
+`CartScreen → CartHeader + CartTabs + optional CartStatusFilter/CartStorageNotice + stage content`.
+
+- Items: `CartItemsList → CartItemCard → CartItemImage / CartItemBadge / CartQuantityButton`. Quantity opens `CartAmountDialog`; swipe removal uses `CartDeleteBackground`.
+- Checkout: `CartCheckout → CartSection → item cards, CartPaymentSummary, CartPaymentMethods, escrow help`.
+- History: `CartOrderHistory` expands existing order snapshots using read-only item cards.
+- Empty/sales/filter states use `CartEmptyState`; Sales currently has no real sales feed.
+
+`CartCubit` validates edits and writes snapshots. `CartState` calculates totals. `cart_format.dart` is the numeric boundary: quantities and totals use integer hundredths. Do not introduce floating-point rounding or change a status filter into a mutation. There is no submit-payment handler to connect implicitly.
+
+### Search
+
+`SearchScreen → SearchView → SearchHeader + SearchContent`. Header contains `SearchQueryField` and `SearchCityButton`. Content chooses `SearchCityList`, `SearchSuggestions`, `SearchEmptyState`, or `SearchResultsGrid → SearchResultCard`.
+
+`SearchCubit` owns only query/submittedQuery/city/panel. `SearchCatalog` supplies normalized demo suggestions/results from `demo_search_posts.dart`. Result cards open `PostDetailScreen` and use the common `PostMediaView` when media is available. The city list is an inline panel, not a replacement dropdown or a navigation away from Search.
+
+### Create post and reusable gallery
+
+`CreatePostGalleryScreen → GalleryContent → GalleryPreview + GalleryGrid`.
 
 ```text
-wallet/
-├── data/wallet_sample_data.dart
-├── domain/models/wallet_transaction.dart
-└── presentation/
-    ├── page/
-    │   ├── wallet_screen/wallet_screen.dart
-    │   ├── top_up_screen/top_up_screen.dart
-    │   ├── withdraw_screen/withdraw_screen.dart
-    │   └── withdraw_summary_screen/withdraw_summary_screen.dart
-    └── widgets/
-        ├── wallet_screen_widgets/
-        ├── top_up_screen_widgets/
-        ├── withdraw_screen_widgets/
-        └── withdraw_summary_screen_widgets/
+GalleryGrid (lifecycle and native library observer)
+├── refresh control
+├── GalleryAccessNotice, when access is limited
+├── GalleryBody
+│   ├── loading / denied / failure / empty presentation
+│   ├── photo/video thumbnails, selection badges, pagination retry
+│   └── GalleryFilesGrid for the document tab
+└── GalleryTabSelector
 ```
 
-| Widget group | Components / reuse |
-| --- | --- |
-| `wallet_screen_widgets` | Header, layered balance card/footer, action row/tile, transaction list/tile, and bottom button. Other Wallet screens import these same components. |
-| `top_up_screen_widgets` | Payment methods, bank tile, and bank logo; logos reuse the shared `assets/banks/` assets. |
-| `withdraw_screen_widgets` | Amount section/presets, text field, account section, and OTP fields. Top Up also reuses the amount section. |
-| `withdraw_summary_screen_widgets` | Withdrawal illustration, summary details, and summary row. |
+`GalleryPreview` renders one selected asset or the multi-selection grid and also defines the reusable `GalleryFileTile`. `GalleryContent` switches to side-by-side panels in short landscape windows. `GalleryGrid(compact: true)` is also used by Chat, without the post refresh/tab controls.
 
-### Wallet navigation and behavior
+`GalleryCubit` owns native gallery permission, pagination, selected assets/files, and picker errors. Selecting File opens the native document picker; tapping already-selected File can reopen it. Already-selected Photo/Video callbacks are disabled. Resume refresh does not reopen the File picker. Preserve load-version checks, queued refresh behavior, and `GalleryLibraryChanges` reference counting.
 
-1. Settings → Wallet shows the balance card, five action tiles, and Today/Yesterday transactions.
-2. Top Up opens the amount/preset controls and bank radio options. Payment closes
-   the preview back to Wallet.
-3. Withdraw opens amount, account-number, and OTP UI. The OTP button starts a
-   local countdown; it sends or validates no code.
-4. Withdraw Done opens the summary preview. Summary Back returns to the form;
-   Summary Done closes both routes and returns to Wallet.
+Next pushes `CreatePostDetailsScreen` with the same draft Cubit and an immutable selection snapshot. The details page composes `SelectedMediaGrid`, `PostBasicDetailsSection`, `PostPricingInventorySection`, `PostOptionsSection`, and `PostPublishActions`.
 
-Transfer, Request, and Payment on the main Wallet action row are display-only.
-All monetary values, account examples, and transactions are samples from
-[`wallet_sample_data.dart`](lib/features/wallet/data/wallet_sample_data.dart).
-The summary still uses these samples rather than submitted form values. No wallet
-repository, gateway, SMS service, balance mutation, or withdrawal request exists.
+The caption uses real `flutter_quill` editing and stores both Delta and plain text through `PostCaptionSynchronizer`. Option rows open feature-owned dialogs for type, category, unit, preparation, inventory, features, tags, schedule, address, and alt text. `PostDialog` supplies the shared sheet chrome and intentionally uses the palette opposite to the underlying page.
 
-Persian Wallet copy and display-number formatting live in
-[`wallet_strings.dart`](lib/core/localization/wallet_strings.dart).
-[`WalletHeader`](lib/features/wallet/presentation/widgets/wallet_screen_widgets/wallet_header.dart)
-right-aligns titles with 16 pixels of title spacing. Amount/account values keep
-readable digit ordering. The artwork is
-[`assets/wallet/withdrawal.png`](assets/wallet/withdrawal.png), a transparent raster
-illustration; the same bank logos and icon system are used across the forms.
+Address dialogs use OpenStreetMap with a manually chosen pin, initially centered on Tehran. Schedule results distinguish dismissal from explicitly clearing a schedule. Publish requires media, post type, title, caption, and a future start when scheduled. The existing validators/caller messages remain the source of truth.
 
-## Folder, import, and coding conventions
+### Posts, categories, full edit, and delete
 
-### Feature ownership
+`posts` owns saved post/category operations; `create_post` owns the creation draft/gallery UI; `post_detail` owns viewing. They share `PostItem`, `PostDetails`, and media/unit models from `lib/shared/models/post/`.
 
-Keep code inside its existing feature and add only layers that are needed.
-`data/` holds adapters or explicit sample data, `domain/` holds models/contracts
-and validation, and `presentation/` holds pages, Cubits, helpers, and widgets.
-A UI-only screen does not need an empty repository or Cubit just to fit a pattern.
-Post categories and post editing belong to `features/posts`; there is no separate
-category feature. Personal-information editing belongs to `features/profile_settings`.
+`ProfileCategoriesScreen → ProfileCategoriesBody → ProfileCategoryRow`. Add/rename opens `category_editor_sheet`; Delete opens `category_delete_sheet`. `CategorySheetActions` supplies the normal or destructive action row. Category IDs remain stable when renamed. All is a virtual null filter. Deleting a category never deletes posts or media; those posts remain accessible under All.
 
-### Page and widget grouping
+`PostDetailScreen → managePostActions → PostOwnerActionsSheet → EditPostScreen or PostDeleteSheet`.
 
-Use the current screen grouping for Wallet, Search, and Profile:
+`EditPostScreen → EditPostForm → basic/pricing/options/location/features/schedule/alt-text sections + PostEditorMediaSection`. The media section composes its grid/tiles and can reopen the same gallery to add attachments. `PostEditorMediaCubit` keeps retained media and new additions separate until Save. Discard confirmation and busy/error states belong to the current editor flow.
+
+`post_draft_mapper.dart` rehydrates stored values, including the base price. Do not populate a price editor from an already-discounted display value and then apply the discount again. Create uses Quill; inspect the existing edit field widgets before changing how captions are edited or serialized.
+
+`PostMediaView` now lives under `posts/presentation/widgets/post_media_view/`. It is used by post edit, profile cards, search result cards, post detail, and analytics. Keep one reusable implementation rather than copying it into each screen.
+
+### Post details
+
+`PostDetailScreen → PostDetailBody → PostAuthorHeader + PostImageCarousel + PostEngagementBar + PostPricing + content + PostFeaturesTable`.
+
+The detail screen listens for updated records in `PostsCubit`, supplies the owner menu only when local state says the record can be managed, and opens analytics. Stored/published content uses `PublishedPostContent`, including read-only rich caption and metadata; fallback sample content uses `PostContent`. Comment/share callbacks may be supplied by callers; visible icons alone do not imply remote functionality.
+
+`PostDetailCubit` owns only route-local image index and like/bookmark state. `PostDetailActivityTracker` observes detail use; it is not the post storage owner.
+
+### Post analytics
+
+`PostAnalyticsScreen → AnalyticsPostHeader + TotalViewsSection + ClicksInteractionsSection + AverageTimeViewedSection + ImpressionsSection + OrdersBookingsSection`.
+
+Sections use `analytics_controls.dart` for headings, period menus, tooltips, legends, summaries, and formatting. Individual chart files own the line/area, radar, polar, and daily-order rendering.
+
+Published records use local analytics events. Samples use explicit sample reports. `PostImpressionTracker` is used on cards; `PostDetailActivityTracker` records opening/watch segments and positive like/save actions. Watch time excludes covered routes/background periods. Publication state is used to keep sample activity separate; it is not an ownership credential. No backend order/bookings source is connected.
+
+### Profile and settings list
+
+`ProfileScreen → ProfileHeaderActions + ProfileStats + ProfileAvatar + ProfileIdentity + ProfileCategoryChips + ProfilePostGrid`.
+
+Header connects to appearance, Chat Inbox, and the settings-list route. Category chips connect to app-scoped categories and the manager. The grid reads `PostsCubit`, filters by selected category, and opens post details. New local posts are focused by the grid after publication. Identity and statistics remain previews, not account API data.
+
+`ProfileSettingsScreen` in the **profile** feature is the menu/list page. `ProfileEditScreen` in **profile_settings** is the personal-data form. These are distinct screens; do not merge them based on similar naming.
+
+### Personal profile editing
+
+`ProfileEditScreen → ProfilePhotoPicker + ProfileEditFields → ProfileEditField / ProfileBirthField`.
+
+This form includes name, surname, nationality, username, email, birth, gender, and bio. Its state/photo preview is local to the route. `SettingsDetailHeader` closes the route after unfocusing; it does not save an account profile. The same header is reused by Locations.
+
+### Locations and permission entry
+
+`LocationsScreen → LocationMapPreview + LocationLabelCard + SavedLocationList`. This preview's map starts at the sample New Delhi coordinates. Adding/selecting a label updates only local route state; it is separate from the post/chat manual address picker.
+
+After OTP, `LocationPermissionGate → showLocationPermissionPrompt → LocationPermissionDialog → LocationPermissionActions → LocationPermissionService`. The helper skips unsupported platforms or already-granted foreground permission. The dialog deliberately uses a light theme.
+
+Foreground Once/While using choices defer the actual grant to the OS. Always first establishes foreground permission, then follows the platform-specific background-permission path. The service never reads or tracks location. The gate's once behavior is per widget entry, not a persisted onboarding preference.
+
+### Notifications
+
+`HomeScreen` owns `NotificationsCubit` and passes it to `NotificationsScreen`, which composes `NotificationHeader`, `NotificationSearchField`, and `NotificationList → NotificationTile → NotificationAvatar`.
+
+Search filters bundled samples. Tapping a row marks it read in that Home-owned state and updates the bell count. There is no push SDK, device-token registration, network delivery, or durable read-state adapter.
+
+### Wallet
+
+All four routes live under `wallet/presentation/page/`, each in its named screen folder. Widget groups stay under `presentation/widgets/<screen>_widgets/`.
 
 ```text
-presentation/
-├── page/
-│   └── screen_name/
-│       └── screen_name.dart
-└── widgets/
-    └── screen_name_widgets/
-        └── component_name/
-            └── component_name.dart
+WalletScreen
+├── WalletBalanceCard + WalletActionsRow + WalletTransactions
+├── TopUpScreen
+│   └── balance card + WalletAmountSection + WalletPaymentMethods
+└── WithdrawScreen
+    └── balance card + amount + account + WithdrawOtpFields
+        └── WithdrawSummaryScreen
+            └── WithdrawIllustration + WithdrawSummaryDetails
 ```
 
-Search uses `page/search_screen/` and
-`widgets/search_screen_widgets/<component_name>/`. Profile separates both pages
-and their widgets into `profile_screen` / `profile_settings_screen` groups.
-Wallet uses four screen widget groups with the Dart files directly inside each
-group, as shown in its section. Reused Wallet widgets stay in their owning group;
-do not copy them into every screen folder.
+Shared wallet components include `WalletHeader`, `WalletBottomButton`, `WalletCardFooter`, `WalletTextField`, amount presets, and bank artwork. Data comes from `WalletSampleData`. Selected amounts, bank selection, and OTP countdown are UI state; no repository or financial operation exists. Current Transfer/Request/Payment action tiles have no callback, and Top Up's Payment button simply closes that preview.
 
-Other existing modules still use `presentation/pages/` and named component
-folders directly below `widgets/`. Some older widgets, including the call preview
-and `published_post_content.dart`, are flat files. The full tree is the reference
-for actual paths; this documentation update does not move source files.
+### Chat, voice notes, and attachments
 
-### Imports and readability
+`ProfileHeaderActions → ChatInboxScreen → ChatConversationTile → ConversationScreen`.
 
-Use `package:nini/...` across features/project folders. Adjacent files can use
-relative imports. Keep filenames/folders in `snake_case` and widget classes in
-`UpperCamelCase`. For example:
+Search → Provider Profile also offers **Chat with provider**, using the same `ConversationScreen`, attachment/voice controls, and call routes. `provider_profile/presentation/widgets/provider_chat_button/` maps the provider's stable ID, name, and avatar to one session conversation. New provider chats start empty, retain local messages when reopened, and appear in the existing inbox. Remote messaging and live audio/video calls still require backend/RTC integration.
 
-```dart
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/features/search/presentation/page/search_screen/search_screen.dart';
-import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_header/search_header.dart';
-import 'package:nini/features/profile/presentation/page/profile_screen/profile_screen.dart';
-import 'package:nini/features/wallet/presentation/page/wallet_screen/wallet_screen.dart';
-```
+`ConversationScreen` composes `ConversationHeader` and `ConversationBody`. Body chooses message bubbles, blocked/selection notices, `ChatMessageComposer` or `VoiceRecordingPanel`, and the optional `ChatEmojiPanel`. Bubbles delegate to `ChatAttachmentView`, `ChatLocationView`, and `ChatVoicePlayer`.
 
-- Compose screens from clearly named widgets; keep new UI files short and focused
-  (aim for 150 lines or fewer). Some existing files are longer.
-- Keep state/actions in the existing Cubit or screen owner; storage belongs in adapters.
-- Reuse shared widgets and typed post models; add cross-feature UI to `shared/`
-  only when multiple features need it.
-- Add fixed colors to `AppColors` and brightness-dependent roles to `AppTheme`.
-- Add labels to the matching localization catalog; keep IDs/JSON keys untranslated.
-- Dispose controllers, focus nodes, timers, subscriptions, and owned Cubits.
-- Use native `Navigator` routes, following the existing flow and route results.
-- After moving files, update all imports and documentation; avoid duplicate screens
-  and unnecessary compatibility exports.
-- Keep the current UI-only workflow: do not recreate `test/` or add test files.
-  Run additional checks only within the scope of the requested work.
+The paperclip opens `ChatAttachmentSheet`: Document, Location, Camera, Gallery, plus `GalleryGrid(compact: true)`. `chat_attachment_flow.dart` coordinates these picker routes and returns selections. `ConversationCubit` retains send/blocked/busy guards and asks `ChatMediaStore` to copy owned media before adding local messages.
 
-## Shared colors and reusable widgets
+- `DeviceVoiceRecorder` records microphone audio through `record`; `JustAudioChatPlayer` handles real local playback.
+- `LocalChatMediaStore` copies selected media/voice into a temporary private cache. It must not delete picker originals.
+- `InMemoryChatRepository.instance` holds session messages and blocked IDs. Inbox data starts from demo contacts. Sending in this implementation changes local preview history, not another user's device.
+- Route/lifecycle handling pauses playback and stops/cancels recording appropriately. Do not remove mounted/closed guards or disposal logic to shorten the file.
 
-### One color palette
+The service contracts can be injected through `ConversationScreen`; replacing the synchronous message contract with a remote async design requires deliberate UI/Cubit changes, not just swapping an endpoint string.
 
-[`AppColors`](lib/core/theme/app_colors.dart) is the shared source of fixed colors.
-The color refactor preserved the existing shades and alpha values while replacing
-scattered color literals throughout the theme, Home, Profile, Search, chat, calls,
-post details, analytics, create-post widgets, and navigation.
+### Calls
 
-The palette contains common black/white/transparent colors, light/dark surfaces
-and outlines, notification/cart/stock/status indicators, analytics series, call
-action/video-overlay colors, and attachment badges. `stockBadgeBackground` is the
-pale stock pill added for the Home reference. `AppColors.red` is the explicit
-red used for post/category delete actions; destructive actions should not use a
-washed-out neutral button color. There is no separate AnalyticsColors palette.
+`ConversationHeader` voice/video actions open `CallScreen`, which provides `CallCubit`. `CallControls`, `CallActionButton`, `CallAvatar`, `CallVideoStage`, and `CallVideoHeader` render the preview.
 
-```dart
-import 'package:nini/core/theme/app_colors.dart';
+The default `PreviewCallService` simulates phases and flags. The voice preview starts as incoming/ringing; video uses sample images as connected preview content. Neither contacts a user nor captures live call audio/video. A real integration belongs behind `CallService` plus optional real video widgets and authenticated signaling/RTC. Preserve end/cancel/dispose behavior, including in-flight operations.
 
-// A fixed design color:
-const badgeColor = AppColors.notificationBadge;
+## Storage, models, and backend handoff
 
-// Inside build(), for colors that follow the active theme:
-final surface = Theme.of(context).colorScheme.surface;
-final foreground = Theme.of(context).colorScheme.onSurface;
-```
+### Storage currently in use
 
-Use fixed colors for intentionally fixed artwork/overlays, such as the white
-Home product-photo backdrop, red discount pill, and call action colors. Use
-`colorScheme` roles for page surfaces, regular text/icons, and borders. Do not
-scatter new `Color(0x...)` or `Colors.*` values through feature widgets.
+Paths below are relative to the application's resolved Documents or temporary directory, not repository files.
 
-### Shared UI entry points
+| Owner | Storage | Lifetime / important behavior |
+| --- | --- | --- |
+| LocalPostsRepository | `Documents/nini_posts/posts.json` and owned media below `nini_posts/` | Persistent local posts; version 1/2 migration, stable IDs, atomic index replacement. |
+| LocalProfileCategoriesRepository | `Documents/nini_profile_categories/categories.json` | Persistent category IDs/names; versioned, serialized writes. |
+| LocalPostAnalyticsRepository | `Documents/post_analytics.json` | Persistent local event history; versioned JSON. |
+| LocalCartRepository | `Documents/cart.json` | Persistent items and existing order snapshots. Missing file differs from a deliberately saved empty cart. |
+| LocalChatMediaStore | Temporary `nini_chat_media/<generated-folder>/` | Local copied media; not a durable chat database. |
+| DeviceVoiceRecorder | Temporary `nini_voice_drafts/` | Recording draft lifecycle; prepared voice media is copied separately. |
+| InMemoryChatRepository | Process memory | Messages and blocked state disappear on process restart. |
+| Theme/notifications/profile form/location labels/wallet controls | Widget/Cubit memory | Session/route-local previews; no current account sync. |
 
-| Widget/model | Import target and use |
+The local adapters include an iOS Documents-directory fallback based on the app sandbox's temporary directory. Preserve that platform handling when changing storage. Post media preparation uses pending/final owned folders and cleanup/rollback paths. A save failure must not destroy existing attachments or user-selected source files.
+
+Profile samples bootstrap into editable local records. Their IDs/images remain stable and their publication date stays null for sample analytics. Once the version-2 index exists, deleted sample cards are not blindly reinserted on every load.
+
+### Model contracts to preserve
+
+| Type / concept | Meaning |
 | --- | --- |
-| AppIcon | [`shared/widgets/app_icons/app_icon.dart`](lib/shared/widgets/app_icons/app_icon.dart): SVG/legacy PNG icons with inherited tint and optional selected background. |
-| AppButton | [`shared/widgets/app_button/app_button.dart`](lib/shared/widgets/app_button/app_button.dart): primary, outlined, and text variants; loading/disabled state. |
-| AppTextField | [`shared/widgets/app_textfield/app_text_field.dart`](lib/shared/widgets/app_textfield/app_text_field.dart): controllers, validation, icons, submit/tap callbacks, configurable direction. |
-| AppLoader | [`shared/widgets/app_loader/app_loader.dart`](lib/shared/widgets/app_loader/app_loader.dart): shared progress indicator and optional label. |
-| AppToast | [`shared/widgets/app_toast/app_toast.dart`](lib/shared/widgets/app_toast/app_toast.dart): localized success/error/info feedback. |
-| PostMediaView | [`shared/widgets/post_media/post_media_view.dart`](lib/shared/widgets/post_media/post_media_view.dart): bundled asset images, owned local media, thumbnails, and placeholders. |
-| SettingsDetailHeader | [`shared/widgets/settings_detail_header/settings_detail_header.dart`](lib/shared/widgets/settings_detail_header/settings_detail_header.dart): shared Back/Done header for Profile Edit and Locations. |
-| PostItem / PostDetails / PostUnit | [`shared/models/post/`](lib/shared/models/post/): typed shared post identity, content, attributes, media, and units. |
+| `PostItem` | Common record used by Profile, details, search-derived samples, media views, storage, and analytics keys. |
+| `PostDetails` | Typed caption/Delta/tags/address/schedule/features/stock/discount/unit/alt text with a lossless legacy JSON boundary. Preserve unknown serialized metadata. |
+| `PostMedia` | Type/source/path/name/thumbnail/alt-text metadata. Asset-backed and app-file-backed media have different handling. |
+| `PostDraft` | Session form model; preserves Delta plus searchable plain caption and explicitly clearable optional selections. |
+| `PostMediaChanges` | Existing media to retain plus new additions; null media changes retain current attachments. |
+| `ProfileCategory` | Stable ID and editable name. All is virtual (`null`); category deletion must not delete posts. |
+| `PostUnit` | Store enum `.name`; use `.label` for Persian display. Unknown legacy values stay absent rather than silently selecting another unit. |
+| `PostSchedule` | Serialize timestamps as UTC; presentation converts back to local time. |
+| Cart numbers | Unit prices/discounts are whole toman; quantities use hundredths. Totals/charges are integer hundredths of a toman. Example: quantity `250` means `2.5` units. Keep existing parsing/whole-unit rules. |
+| Post identity | Update preserves the post ID/publication identity. Analytics is keyed by post ID; replacing media must not create a different post. |
+| Local manageability | `PostsState.canManage` checks the local profile dataset/load state. It is not authenticated authorization. |
 
-`AppTextField` defaults to RTL and accepts explicit LTR fields. Photos are not
-icon-tinted. Home uses AppIcon for every engagement icon, including filled selected-state
-variants that retain the client heart/bookmark SVG path geometry.
+### Backend extension points
 
-## Light and dark mode
+| Contract / entry | Where a real integration belongs |
+| --- | --- |
+| `PostsRepository` | Load/publish/update/delete adapter, uploads, authenticated ownership, stable IDs and failure mapping. Inject via MyApp/AppProviders. |
+| `ProfileCategoriesRepository` | Account-scoped categories; preserve posts when a tab is removed. Inject via MyApp/AppProviders. |
+| `CartRepository` | Account/cart synchronization while preserving quantity units and exact totals. Checkout/payment requires a separate explicit product task. |
+| `PostAnalyticsRepository` | Event persistence/report integration. Do not mix local samples with real event totals. |
+| `ChatMessagesRepository` | Current session contract is synchronous; real remote delivery/history requires a reviewed async design and delivery/error semantics. |
+| `ChatMediaStore`, `VoiceRecorder`, `ChatAudioPlayer` | Keep device/media responsibilities separate from remote chat transport. |
+| `CallService` | Authenticated signaling, remote-join state, native audio/video, and cancellation/disposal. |
+| Login/OTP | Add real auth/session handling only when requested; currently there is no AuthRepository, token store, or authenticated role model. |
+| Wallet/profile/notifications/locations | Add real contracts/state only as required by a concrete feature; these are previews today. |
 
-The theme logic lives in `lib/core/theme/`:
+There is no API base URL, endpoint specification, network-client abstraction, or authenticated customer/provider access-control layer to reuse yet. Do not document a proposed endpoint as if it already exists.
+
+## Themes, Persian text, responsiveness, and assets
+
+### Shared infrastructure and the relocated widgets
+
+`lib/shared/widgets/` now contains only app-wide primitives: `AppButton`, `AppTextField`, `AppIcon`, `AppLoader`, `AppLogo`, and `AppToast`. Their exact paths and responsibilities appear in the catalog.
+
+| Widget | Owner now | Existing reuse |
+| --- | --- | --- |
+| `AuthScreenLayout` | [login/presentation/widgets/auth_screen_layout/auth_screen_layout.dart](lib/features/login/presentation/widgets/auth_screen_layout/auth_screen_layout.dart) | Login and OTP entry composition. |
+| `PostMediaView` | [posts/presentation/widgets/post_media_view/post_media_view.dart](lib/features/posts/presentation/widgets/post_media_view/post_media_view.dart) | Post edit, profile cards, search cards, detail carousel, analytics header. |
+| `SettingsDetailHeader` | [profile_settings/presentation/widgets/settings_detail_header/settings_detail_header.dart](lib/features/profile_settings/presentation/widgets/settings_detail_header/settings_detail_header.dart) | Personal profile editing and Locations. |
+
+Do not recreate these under `lib/shared` or duplicate their implementation just because another screen uses them.
+
+### Color and direction conventions
+
+- `AppColors` owns fixed semantic/client colors, including destructive red, badges, wallet statuses, charts, and preview-call colors.
+- `AppTheme.light/dark` owns theme-dependent surfaces, text, buttons, input borders and system bars. Normal feature widgets should use Theme colors.
+- `ThemeCubit` supplies light/dark/system mode to MaterialApp; the preference is session-only.
+- Intentional exceptions: Splash/Login/OTP remain black, the location permission prompt uses light theme, and post sheets use the opposite palette to the page.
+- Locale is `fa_IR`; Material/Quill/country localizations are configured in `app.dart`.
+- The app deliberately keeps its original **LTR layout order** while Persian text is explicitly RTL/right-aligned. Do not globally mirror the layout merely to localize labels.
+- String catalogs are under `core/localization/`; `AppStrings.persianDigits` formats displayed digits. Never translate IDs, enum keys, JSON keys, paths, or user content automatically.
+- User-entered English names remain user content. Known sample labels may be localized through the existing feature catalogs without changing stored IDs.
+
+### Responsive behavior and animation
+
+`ResponsiveConfig` wraps startup with a 390×844 design reference, ScreenUtil text adaptation, and FoldableProvider. `AppResponsive` uses compact `<600`, medium `600–839`, and expanded `>=840` widths. It exposes spacing/column helpers, but individual screens may apply narrower content widths or text-scale-aware columns.
+
+Use the local `LayoutBuilder` constraints as existing widgets do. Preserve scrollable forms/sheets, keyboard handling, safe areas, larger-text behavior, and physical fold layouts. Do not solve an overflow by disabling the user's text scaling globally.
+
+`ScreenEntrance` owns route-aware entrance behavior and the shared route observer; `StaggeredEntrance` consumes it. Reduced-motion handling belongs to those utilities. `RiveAssetAnimation` is an optional asset player; no `.riv` artwork is currently bundled. The auth illustrations are raster images, not authored Rive animations.
+
+### Assets and client icons
+
+| Path | Use |
+| --- | --- |
+| `assets/branding/` | HYWORK SVG logo. |
+| `assets/auth/` | Login illustration, OTP lock, location-permission artwork. |
+| `assets/wallet/` | Withdrawal summary artwork. |
+| `assets/banks/` | Melli/Mellat/Saman preview bank SVGs. |
+| `assets/fonts/YekanBakh-Regular.ttf` | Main UI font and gallery golden-test font. |
+| Root `assets/` sample images | Profile/gallery/search/chat/call preview artwork. |
+| `assets/icons/vectors/` | Client SVG icon collection used through AppIcons/AppIcon. |
+| `assets/icons/<category>/` | Legacy/client PNG categories. |
+| `assets/icons/source_sheets/` and supplemental assets | Source artwork used by extraction/import tooling. |
+| `tool/` | Icon manifests and reproduction/verification scripts. |
+
+`AppAssets` contains shared entry/branding paths. `AppIcons` contains icon paths; `AppIcon` applies theme color while preserving source transparency/proportions. Reuse the existing client artwork instead of replacing established controls with unrelated Material icons.
+
+For additional artwork, follow the explicit directory registrations in `pubspec.yaml`. The Python icon tooling uses its JSON source manifests and, for raster extraction, Pillow. Inspect the source paths/options before running an extraction script; it writes assets and is not a routine prerequisite to `flutter run`.
+
+## Native configuration and builds
+
+### Android
 
 | File | Responsibility |
 | --- | --- |
-| [`app_colors.dart`](lib/core/theme/app_colors.dart) | Central fixed palette used throughout the app. |
-| [`app_theme.dart`](lib/core/theme/app_theme.dart) | Builds `AppTheme.light` and `AppTheme.dark`: colors, typography, buttons, icons, menus, tooltips, app bars, and system bars. |
-| [`theme_cubit.dart`](lib/core/theme/theme_cubit.dart) | Stores the current `ThemeMode` and exposes methods to change it. Uses the existing `flutter_bloc` dependency. |
-| [`theme_mode_menu.dart`](lib/core/theme/theme_mode_menu.dart) | Sun/moon button in the profile header with Light, Dark, and System choices. Labels are Persian, matching the app. |
+| [android/app/build.gradle.kts](android/app/build.gradle.kts) | `com.nini.nini`, Flutter SDK/NDK values, Java/Kotlin 17 app target, release build configuration. |
+| [android/settings.gradle.kts](android/settings.gradle.kts) | Plugin loader, AGP 9.1.0, Kotlin compiler declaration with `apply false`, version-guarded plugin build entry adapters. |
+| [android/gradle.properties](android/gradle.properties) | Built-in Kotlin enabled; compatible Android DSL retained. |
+| [android/gradle/rive_native.gradle](android/gradle/rive_native.gradle) | Repository-owned Android build adapter for rive_native 0.1.11, keeping the installed package's source/native runtime. |
+| [android/gradle/built_in_kotlin_plugin.gradle](android/gradle/built_in_kotlin_plugin.gradle) | Runs upstream migrated photo/emoji build configuration and verifies that legacy Kotlin is not actually applied. |
+| [android/app/src/main/AndroidManifest.xml](android/app/src/main/AndroidManifest.xml) | Internet, foreground/background location, legacy/media/selected-gallery access, microphone permission and activity setup. |
 
-### Color rules
+The app plugin block does not apply legacy `org.jetbrains.kotlin.android`. The settings-level `apply false` declaration supplies the compiler version; it is not the same as applying legacy KGP to the app. Keep this distinction when maintaining Gradle.
 
-| Element | Light mode | Dark mode |
-| --- | --- | --- |
-| Main backgrounds | White (`#FFFFFF`) | Black (`#000000`) |
-| Primary surface text, prices, counts, and chip labels | Black (`#000000`) | White (`#FFFFFF`) |
-| Subdued labels and original prices | On-surface black with reduced alpha | On-surface white with reduced alpha |
-| Client icons and built-in icons on page surfaces | Black | White |
-| Primary elevated/filled button backgrounds | Black | White |
-| Primary button labels, icons, and loading spinners | White | Black |
-| Outlined/text/icon button labels and icons | Black | White |
-| Outlined button backgrounds | White with gray border | Black with gray border |
-| Placeholder and selected-chip surfaces | Light gray | Dark gray |
-| Dividers and borders | Light gray | Gray |
+The photo_manager/emoji adapters are guarded for the installed releases. Flutter's text scanner can flag unused legacy fallback statements inside otherwise migrated packages. The adapter checks actual plugin state. The Rive adapter is also version-specific. Review adapters when dependencies change; do not patch `.pub-cache`, generated plugin registration, or the Flutter SDK to fix the project.
 
-Create-post option sheets intentionally use the **opposite palette** to the
-page: a light app shows black sheets with white text/icons, and a dark app shows
-white sheets with black text/icons. This applies to post type, preparation time,
-unit, schedule, features, address, alt text, and tags. `showPostDialog` scopes
-`AppTheme.dark` or `AppTheme.light` to the sheet in `post_dialog.dart`; the page
-keeps its original theme. Shared buttons, fields, choice indicators, calendar,
-and Cupertino time picker inherit that local palette. An open sheet follows
-later app-theme changes while preserving its form values.
-
-Sheet icons use `AppIcons` / `AppIcon`, including the tag add/remove controls,
-address-map pin, and alt-text image fallback. No client icon artwork is changed.
-
-Primary actions (Publish/Done) use `colorScheme.primary` for the fill and
-`colorScheme.onPrimary` for their labels, icons, and loading spinners. Secondary
-outlined actions (Cancel) use `surface` with `onSurface` text/icons and an
-`outline` border. Elevated and filled buttons share the primary style with no
-elevation and 6-pixel rounded corners. Disabled/loading controls retain these
-contrast colors; loading still disables taps. `AppButton` in
-`lib/shared/widgets/app_button/app_button.dart` inherits these shared themes, including
-the Cancel/Publish pair on `CreatePostDetailsScreen`. Standalone icons and text
-buttons continue to use black in light mode and white in dark mode. Client icons are
-tinted **at runtime** using `BlendMode.srcIn`; only their opaque pixels change
-color, and their shapes/transparency are preserved. SVG paths remain vector at render time; legacy PNG files stay unchanged.
-Photos, red notification/discount badges, stock pills, and green avatar rings
-retain their designed colors. Fixed photo-overlay badges use their own contrasting
-foregrounds from AppColors.
-Gallery indicators remain white over photos so their visibility does not depend
-on the page background.
-
-Selected navigation, heart, and bookmark icons use a subtle foreground-colored
-background at 14% opacity. Their actual icon pixels stay black/white in both
-selected and unselected states. The profile tab uses border thickness to show
-selection; category chips use a filled surface and a stronger border. Existing
-selection and like/bookmark accessibility states remain available.
-
-### Mode selection and app wiring
-
-The app starts with `ThemeMode.system`. It follows the device's brightness and
-updates automatically when the OS switches between light and dark. The sun/moon
-button in the profile header lets users explicitly choose Light, Dark, or System.
-An explicit choice overrides device brightness until System is selected again.
-
-`AppProviders`, used by `MyApp`, provides one `ThemeCubit` above `MaterialApp`. A `BlocBuilder` connects its
-state to `MaterialApp.themeMode`, with `AppTheme.light` as `theme` and
-`AppTheme.dark` as `darkTheme`. This placement applies the same theme to the home
-screen, bottom navigation, dashboard tabs, menus, and pushed post-detail routes.
-Switching modes updates those screens without resetting navigation or post state.
-System status/navigation bar contrast is updated alongside the app theme.
-
-The selected mode is stored **in memory for the current app session**. A full
-restart returns to System; no persistent preference storage has been added.
-`MyApp(initialThemeMode: ThemeMode.dark)` can set a different startup mode for a
-preview/test. To update the app from a widget below `MyApp`:
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/theme/theme_cubit.dart';
-
-context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
-context.read<ThemeCubit>().setThemeMode(ThemeMode.dark);
-context.read<ThemeCubit>().useSystemTheme();
-
-// Toggle using the currently rendered brightness, including in System mode.
-context.read<ThemeCubit>().toggleTheme(Theme.of(context).brightness);
-```
-
-### Rules for future screens
-
-- Use `Scaffold` defaults or `Theme.of(context).colorScheme.surface` for page/card
-  backgrounds.
-- Let `Text`/`Icon` inherit their color. If a custom drawing needs an explicit
-  foreground, use `Theme.of(context).colorScheme.onSurface`.
-- Use `AppIcon` for client icons and leave `color` unset to inherit the current
-  `IconTheme`. Use `selected: true` for a selected background highlight.
-- Use `colorScheme.surfaceContainerHighest` for neutral placeholder surfaces and
-  `Theme.of(context).dividerColor` / `colorScheme.outline` for borders.
-- Use the standard button widgets so they inherit the centralized button themes.
-- Avoid hardcoded black/white/gray foreground colors in feature widgets. Add
-  fixed palette values in `AppColors`, theme roles in `AppTheme`, and Persian copy
-  in `AppStrings` or the existing feature string catalog.
-- Treat `ThemeCubit.state` as a preference: System is resolved by `MaterialApp`.
-  Use `Theme.of(context).brightness` when you need the actual rendered mode.
-
-The Home phone feed keeps its supplied photo/stock/discount treatment. Its active
-heart/bookmark use filled variants of the same client SVG shapes; the selected-background behavior above
-still describes AppIcon-based navigation and existing post controls.
-
-## Gallery packages and permissions
-
-Installed `photo_manager: ^3.12.0` and
-`photo_manager_image_provider: ^2.2.0` using:
+The prior missing `FilePickerPlugin` release failure was addressed with the built-in Kotlin configuration, refreshed outputs, and file_picker 13.3.1. Do not manually edit GeneratedPluginRegistrant to remove a plugin.
 
 ```sh
-flutter pub add photo_manager photo_manager_image_provider
+flutter build apk --release
 ```
 
-Native setup follows the [photo_manager documentation](https://pub.dev/packages/photo_manager#configure-native-platforms):
+Output: `build/app/outputs/flutter-apk/app-release.apk`. The current release configuration uses **debug signing for previews**; production signing still needs its own setup. Rebuild after code, native configuration, or feature changes; an existing APK file may represent an older source tree. MaterialIcons tree-shaking output is informational optimization, not a compilation failure.
 
-- `android/app/src/main/AndroidManifest.xml`: `READ_EXTERNAL_STORAGE` through
-  API 32, `READ_MEDIA_IMAGES` / `READ_MEDIA_VIDEO` for API 33+, and
-  `READ_MEDIA_VISUAL_USER_SELECTED` for selected-media access on API 34+.
-- `ios/Runner/Info.plist`: `NSPhotoLibraryUsageDescription` with a Persian
-  explanation for selecting post photos/videos.
+### iOS
 
-The create-post gallery requests permission for the active media tab:
-`RequestType.image` for Photo and `RequestType.video` for Video, using matching
-`AndroidPermission` options. This avoids blocking photos when Android video
-permission is denied (and vice versa). Both queries use the All album and paging;
-page continuation uses the album's total count so short pages do not hide later
-media. A failed page retains a Retry action.
+[Info.plist](ios/Runner/Info.plist) declares photo-library, camera, microphone, foreground-location, and always-location usage descriptions. The reviewed Xcode project uses Flutter's generated Swift Package integration and an iOS 15.0 deployment target. **There is no `ios/Podfile` in this checkout**; do not assume a CocoaPods setup from an older README.
 
-On iOS and Android 14+, limited permission exposes only the items the user has
-approved. A Persian notice offers Select more and Full access in Settings.
-The app cannot override that choice to show the entire library. `GalleryGrid`
-refreshes permission and assets after returning from Settings, without another
-permission prompt. Shared library-change notifications also reload changes to
-limited selections and newly added media, including the iOS 14 picker whose
-completion callback returns early. Refresh events during a query are queued.
+Keep Flutter-generated files under `ios/Flutter/ephemeral/` generated. After native plugin/permission changes, stop and rebuild rather than relying on hot reload. Permissions and device services need platform checks; a simulator pass does not verify all physical-device behavior.
 
-The File tab opens the native document browser and displays the files selected
-there. It does not enumerate every document on the phone. It needs no photo or
-video permission, and app resume never reopens the document picker. Selection
-persists when switching tabs or cancelling a later file selection.
+## Tests and verification
 
-`AssetEntityImage` / `AssetEntityImageProvider` display thumbnails. Native changes
-require a full rebuild. Denial and initial-query failures have Settings/Retry
-recovery; the create-post and compact chat galleries share the same behavior.
+The Flutter test folder exists and currently targets the reusable gallery:
 
-## Create-post details, dialogs, and caption editor
-
-The editable form is
-[`CreatePostDetailsScreen`](lib/features/create_post/presentation/pages/create_post_details_screen.dart).
-It is the second step of the create-post flow, after gallery selection. It shares
-one `CreatePostCubit` with the gallery; the existing published-post viewing screen
-is a separate feature.
-
-Each sheet is a separate reusable widget under
-`lib/features/create_post/presentation/widgets/`:
-
-| Folder/widget | Behavior |
+| File / directory | Purpose |
 | --- | --- |
-| `post_dialog/` | Common rounded sheet, drag handle, right-aligned heading, selection rows, and shared Cancel/Done buttons. Handles keyboard insets, scrolling, and tablet width. |
-| `post_type_dialog/TypePostDialog` | Product/Services single selection; commits on tapping a row. |
-| `preparation_time_dialog/PreparationTimeDialog` | No preparation, same day, or 1/2/3/5/7/10/14/30 days. |
-| `unit_dialog/UnitDialog` | Piece, Item, Hour, Day, Session, Project, Meter, Centimeter, Kilogram, Set. |
-| `schedule_post_dialog/SchedulePostDialog` | Calendar and Time tabs with 24-hour wheels, From/To selection, future-time validation, and removal of an existing schedule. Earlier end times mean the next day; equal times are rejected. |
-| `address_dialog/AddressDialog` | Interactive Flutter map above an overlapping address sheet. Tap a pin, enter an address, add/select saved addresses, and confirm. |
-| `features_dialog/FeaturesDialog` | Add feature/value pairs, tap a row to edit, remove rows, reject empty/duplicate names, and confirm. |
-| `alt_text_dialog/AltTextDialog` | Per-attachment descriptions and thumbnails; keyed by stable attachment ID. |
-| `tags_dialog/TagsDialog` | Add comma-separated tags, normalize/deduplicate them, and remove chips. |
-| `caption_editor/CaptionEditor` | Rich caption editing with bold, italic, underline, strike-through, lists, alignment, direction, links, indent, clear formatting, undo, and redo. Toolbar scrolls horizontally on smaller screens. |
+| [gallery_grid_test.dart](test/features/create_post/gallery_grid_test.dart) | 19 behavior checks including all nine tab combinations, enabled/disabled actions, refresh, empty/error/retry states, compact mode, selection, and pagination retry. |
+| [gallery_grid_golden_test.dart](test/features/create_post/gallery_grid_golden_test.dart) | Four visual checks: light/dark state matrices, compact chat gallery, landscape with larger text. |
+| [gallery_test_support.dart](test/features/create_post/gallery_test_support.dart) | Command-recording Cubit, native-channel stubs, test file/media fixtures, project font loading, deterministic image precaching, and app harness. |
+| [goldens/](test/features/create_post/goldens/) | Four PNG baselines captured from the pre-refactor gallery. |
 
-The inventory selector also uses the shared choice-sheet widget. All option rows
-open their sheet and show their saved value. Title, price, discount, and stock
-remain editable with `AppTextField`. Confirmation buttons reuse `AppButton` and
-inherit the contrasting primary/outlined themes. Save-based sheets edit a local
-copy: Cancel, back, or dismiss leaves the draft unchanged. Simple choice sheets
-commit immediately on selection.
-
-### Draft data and caption formatting
-
-`domain/models/post_options.dart` defines typed creation options and re-exports
-the shared address, feature, and schedule models. `PostDraft` stores these alongside plain
-caption text and a Quill `captionDelta`. The controller listens for document
-changes and stores both representations. Reopening the details screen restores
-the Delta, preserving formatting. Use the Delta for rich rendering; the plain
-`caption` is for validation/search. Do not rebuild a formatted document from the
-plain text. [`flutter_quill`](https://pub.dev/packages/flutter_quill) provides the
-editor; its localization delegate is installed in the app and the reusable editor.
-The editor owns/disposes its focus and scroll controllers.
-
-`PostDraft.toJson()` supplies the complete snapshot used by local
-publishing. Schedule dates are serialized as UTC ISO strings; the UI uses local
-device time. The editable draft and saved address choices are in memory for the
-create-post flow; a published post's snapshot is saved on disk. Selecting a
-schedule stores metadata; it does not create an OS background task or server job.
-Publish saves the post locally and makes it visible immediately. The extra Next
-button was removed from the details screen; the gallery's Next still advances to
-the form.
-
-### Map behavior
-
-[`flutter_map`](https://docs.fleaflet.dev/usage/basics) and `latlong2` provide map
-interaction. Map tiles come from OpenStreetMap over HTTPS, with visible attribution
-and an app user agent. `url_launcher` opens the attribution link. Release Android
-now declares `INTERNET`; iOS uses HTTPS without an ATS exception. The map follows
-the monochrome design with grayscale light tiles and inverted grayscale dark
-tiles. Failed tile loads show a retry action.
-
-The initial map view is Tehran, **not a detected user location**. The user taps
-the map for coordinates and types the address; address search, reverse geocoding,
-and GPS access are not implemented. No location permission is requested. Saved
-addresses are only those the user adds during this flow. Network tile display
-requires internet; pin/address data is saved privately with a locally published post. Map providers can be swapped via `LocationMap.tileProvider`.
-Review the [OpenStreetMap tile policy](https://operations.osmfoundation.org/policies/tiles/)
-when choosing the production tile service.
-
-## Publishing and the shared post feed
-
-Publish validates the form, shows the existing `AppButton` loading spinner, and
-disables duplicate submissions, editing, and back/cancel while the save is in
-progress. Failure keeps the draft and selected attachments intact, shows an
-error, and re-enables Publish. Success returns a typed `PostItem` through details
-→ gallery → dashboard, switches to Profile, and scrolls to the new first post.
-
-| Component | Responsibility |
-| --- | --- |
-| `features/posts/domain/posts_repository.dart` | Storage interface, separate from screens and navigation. |
-| `features/posts/data/local_posts_repository.dart` | Copies gallery/picked media to private app storage, writes the post snapshot, and reloads published posts. |
-| `features/posts/presentation/cubit/posts_cubit.dart` | One shared feed above `MaterialApp`, plus load/publish/update/delete state and duplicate-save protection. |
-| `features/posts/data/demo_posts.dart` / `profile_sample_posts.dart` | Sample definitions and conversion into editable Profile records, seeded once in local storage. |
-| `shared/models/post/post_item.dart` and `post_media.dart` | Post identity, media, compatibility accessors, and JSON serialization. |
-| `shared/models/post/post_details.dart` and `post_attributes.dart` | Typed caption, tags, address, schedule, features, stock/discount details, and legacy metadata compatibility. |
-| `shared/widgets/post_media/post_media_view.dart` | Displays app-owned image files, video thumbnails when available, and named file/video placeholders. |
-| `features/posts/presentation/widgets/published_post_content.dart` | Read-only rich caption, actual title/tags/address, and saved schedule metadata. |
-| `features/post_detail/presentation/widgets/pricing/post_pricing.dart` | Shared single-post pricing block: saved sale price, struck-through original price when discounted, and the selected unit. |
-
-The single-post page displays pricing below the engagement bar for both sample
-and published posts. Prices use Persian digits, unit names use the existing
-Persian labels, and the block follows the page's light/dark theme and RTL layout.
-`PostDetails.unit` reads the unit already saved in draft metadata; existing posts
-need no storage migration. `PostUnit` lives in `shared/models/post/post_unit.dart`
-and is re-exported by create-post options so existing form imports still work.
-Sample products explicitly use the piece unit. Missing prices and missing or
-unknown legacy units are omitted rather than assigning invented values.
-
-Published posts and media are stored under `nini_posts/` in the application
-Documents directory (`path_provider` on other platforms; the iOS sandbox directly
-on iOS, so an already-running app does not depend on new FFI assets to save). Media paths in `posts.json` are relative
-so they survive changes to the app's Documents path. Selected original files are
-copied, so temporary picker paths and later gallery permission changes do not
-remove the published copy. Metadata is replaced atomically after copying media;
-a failed save does not add a half-finished post. If a gallery preview-file export
-fails, publishing tries the original image export before reporting failure. A damaged existing index is not
-overwritten. The Profile post grid shows a retry action if saved posts fail to load.
-
-New posts appear before the samples and open in the existing post viewer, which
-uses their own media carousel, rich caption, feature rows, and alt text. New post
-engagement starts at zero and has no fabricated sample rating. Optional empty
-prices are hidden; discount percentages and stock are validated, including
-Persian/Arabic numerals. Videos retain their original file and optional gallery
-thumbnail; playback/document-opening controls are not implemented here.
-
-This is **publishing on this device**, with persistence across restarts. There is
-no account/server upload or cross-device sync. A future remote implementation can
-replace `PostsRepository` without putting networking into the UI. Do not report a
-server upload or scheduled background publication from the local save result.
-
-The new HYWORK Home and Search catalogs remain separate demo UI. They do not
-consume newly published posts; `ProfilePostGrid` is the current shared-post feed.
-
-## Profile categories and post edit/delete
-
-### Category selection and management
-
-Profile's + opens
-[`ProfileCategoriesScreen`](lib/features/posts/presentation/pages/profile_categories_screen.dart).
-Rows expose selection, rename, and delete; the + action opens the add sheet.
-Create/edit sheets share category action widgets and use the existing themed
-post-dialog shell. Delete asks for confirmation and uses `AppColors.red`.
-
-`ProfileCategoriesCubit` is shared above `MaterialApp`. The
-[`ProfileCategoriesRepository`](lib/features/posts/domain/profile_categories_repository.dart)
-contract provides `load`, `create`, `rename`, and `delete`; its current adapter is
-[`LocalProfileCategoriesRepository`](lib/features/posts/data/local_profile_categories_repository.dart).
-Stable IDs survive renames. Validation trims names, limits them to 50 characters,
-and rejects blank/duplicate names and the reserved All label.
-
-Create and Edit both compose
-[`PostCategorySelector`](lib/features/posts/presentation/widgets/post_category_selector/post_category_selector.dart).
-`PostDraft.profileCategoryId` / `PostItem.profileCategoryId` carry the selection.
-This is independent of the Product/Services post type. All is a virtual filter,
-and choosing no category leaves the post visible in All only.
-
-Deleting a category deletes only that category record. Its posts and media remain
-saved, with their missing category ID treated as unassigned. Those posts remain
-visible under All, and deleting the selected category resets that filter.
-Known default names are translated at display time; custom category text is not
-automatically translated or restricted to Persian keyboard input.
-
-### Owner menu and full editor
-
-Post details checks the shared dataset before enabling owner actions. The left
-three-dot menu is coordinated by
-[`manage_post_actions.dart`](lib/features/posts/presentation/helpers/manage_post_actions.dart):
-Edit pushes `EditPostScreen`; Delete opens a confirmation sheet and closes details
-after successful deletion. Current ownership means membership in this device's
-Profile dataset; there is no authenticated account check yet.
-
-| Location | Responsibility |
-| --- | --- |
-| [`post_draft_mapper.dart`](lib/features/posts/presentation/helpers/post_draft_mapper.dart) | Rehydrates stored fields and base price so an existing discount is not applied twice. |
-| [`edit_post_screen.dart`](lib/features/posts/presentation/pages/edit_post_screen.dart) | Owns form/controller lifecycle, save/cancel, rich-caption synchronization, and unsaved-change confirmation. |
-| [`edit_post_form/`](lib/features/posts/presentation/widgets/edit_post_form/) and `post_editor_*` widget folders | Compose category, title, rich caption, media/alt text, prices/stock, type/unit/preparation, inventory, schedule, location, features, and tags. |
-| [`post_editor_media_cubit.dart`](lib/features/posts/presentation/cubit/post_editor_media_cubit.dart) | Unsaved attachment retention, additions, removals, and replacements. |
-| [`post_media_changes.dart`](lib/features/posts/domain/models/post_media_changes.dart) | Explicit retained paths and new attachments passed to the repository. |
-| [`posts_cubit.dart`](lib/features/posts/presentation/cubit/posts_cubit.dart) | Shared load/save/delete state, busy protection, and error reporting. |
-| [`local_post_media_store.dart`](lib/features/posts/data/local_post_media_store.dart) | Stages/copies new media and cleans up unused local media after a successful index update. |
-| [`post_delete_sheet/`](lib/features/posts/presentation/widgets/post_delete_sheet/) / `post_delete_actions/` | Red delete confirmation; dismiss/duplicate actions are blocked while saving. |
-
-Saving preserves the post ID, list position, and publication time. Details and
-Profile rebuild from the updated record, including changed photos and caption.
-Failure keeps the editor draft available for retry. Back/Cancel confirms discard
-when changes are unsaved. Attachment changes do not delete bundled asset images.
-
-### Editable sample posts and storage migration
-
-`profile_sample_posts.dart` gives the existing Profile samples asset-backed
-`PostMedia` and editable fields. `LocalPostsRepository` seeds these records when
-creating the index and migrates version 1 indexes to version 2 while preserving
-existing user posts. Version 2 saves the complete dataset, including samples;
-samples are not appended on every load, so deleting a sample stays deleted.
-Sample `publishedAt` remains null, including after an edit, to keep sample records
-separate from real locally published analytics events.
-
-`PostMedia.source` distinguishes `asset` from `local`; old serialized media defaults
-to local. `PostMediaView` handles both sources. The repository writes the JSON
-index atomically, preserves unreadable indexes, and only removes unused owned
-files after a successful commit.
-
-## Local storage and backend handoff
-
-All paths below are relative to the app's Documents directory. iOS resolves the
-sandbox Documents sibling of its temporary directory; other targets use
-`path_provider`. These are device files, not repository source files.
-
-| Data | Current implementation | Persisted location / lifetime |
-| --- | --- | --- |
-| Profile posts and owned media | `PostsRepository` → `LocalPostsRepository` | `nini_posts/posts.json`, version 2; per-post media folders under `nini_posts/`. |
-| Profile categories | `ProfileCategoriesRepository` → `LocalProfileCategoriesRepository` | `nini_profile_categories/categories.json`, version 1. |
-| Cart and existing order snapshots | `CartRepository` → `LocalCartRepository` | `cart.json`, version 1. |
-| Post analytics events | `PostAnalyticsRepository` → `LocalPostAnalyticsRepository` | `post_analytics.json`, version 1. |
-| Chat messages/block flags | `ChatMessagesRepository` → `InMemoryChatRepository` | Current repository instance/session; attachment copies use temporary local cache. |
-| Theme | `ThemeCubit` | Session preference; system mode follows platform brightness. |
-| Notifications | Home-owned `NotificationsCubit` | Home state lifetime; sample read/search state only. |
-| Profile edit / Locations | Widget state/controllers | Route lifetime; no persistent account/profile/address store. |
-| Wallet | Sample constants and widget state | No persisted financial data or operations. |
-
-For a backend integration, inject post/category/cart/analytics adapters through
-`MyApp` and `AppProviders`; keep network and serialization logic out of widgets.
-`PostsRepository` explicitly exposes `load`, `publish`, `update`, and `delete`.
-An authenticated adapter must enforce ownership for update/delete and preserve
-stable post/category IDs. Category deletion must not cascade into post deletion.
-
-Notifications, profile/account edits, saved locations, and Wallet still need real
-data contracts and adapters. Their previews do not currently submit data. Chat
-has service/repository interfaces for later integration, and calls use
-`PreviewCallService` behind `CallService`; neither provides remote delivery.
-Scheduling currently saves metadata without a background publishing worker.
-
-## Client icons
-
-The original 13 supplied PNG sheets are preserved, unchanged, in
-[`assets/icons/source_sheets/`](assets/icons/source_sheets/). The collection contains
-**657 individual transparent PNG icons**, grouped under `assets/icons/`:
-
-| Folder | Original sheet | Icons |
-| --- | --- | ---: |
-| `arrows/` | Frame 10.png | 70 |
-| `general/` | Frame 11.png | 126 |
-| `finance/` | Frame 12.png | 64 |
-| `media/` | Frame 13.png | 68 |
-| `alerts/` | Frame 14.png | 17 |
-| `images/` | Frame 16.png | 22 |
-| `files/` | Frame 17.png | 53 |
-| `weather/` | Frame 18.png | 30 |
-| `travel_location/` | Frame 19.png | 34 |
-| `charts/` | Frame 20.png | 38 |
-| `development/` | Frame 25.png | 40 |
-| `editor/` | Frame 28.png | 78 |
-| `education/` | Frame 29.png | 17 |
-
-The individual files are exact RGBA crops of the supplied artwork, including its
-original colors, antialiasing, and transparency. No icons were redrawn, traced,
-recolored on disk, or enlarged on disk. Each crop is 26 × 26 pixels, covering the
-nominal 24-pixel icon slot with a small margin to preserve edge pixels. Sheet
-headings and text labels are excluded.
-
-Filenames follow the sheet labels, with spaces/case normalized and `attachment`
-spelled consistently. Repeated labels receive `-variant-2` (and so on) so distinct
-drawings are kept. [`tool/client_icons.json`](tool/client_icons.json) records every
-asset path, original sheet label, column, row, and exact crop rectangle.
-
-The original 13 PNG folders and 13 vector category folders are registered in [`pubspec.yaml`](pubspec.yaml).
-Original sheets and the extraction manifest are kept for reference and are not
-bundled into the app.
-
-### Supplemental screenshot icons (30 October 2026)
-
-The 13 new category screenshots are preserved under
-`assets/icons/supplemental/source_sheets/`. Their **421 icons** live in separate
-category folders under `assets/icons/supplemental/` as reference crops. They are
-**not bundled or used by the app**: these small bitmaps become pixelated when
-scaled, including at normal logical sizes on high-density phone displays.
-
-All 421 labels now map to original **Coolicons v4.1 SVGs** by Kryston Schwarze,
-copied unchanged into `assets/icons/vectors/<category>/`. These are real SVG paths,
-not embedded PNGs or automatically traced screenshots. `AppIcon` renders them
-using `flutter_svg` with its default vector picture rendering strategy. Theme
-tints, button actions, accessibility labels, and selection styles are preserved.
-The original imported collection contains **421 SVGs and 657 legacy PNGs**.
-Home additionally uses two filled SVG state variants, for **423 runtime SVGs**
-in total. The original 421 files and their manifest checksums remain unchanged.
-
-Source: [Coolicons v4.1](https://github.com/krystonschwarze/coolicons/tree/v4.1),
-commit `42d70477683a0c44cd1732b32a9def8a94469c5a`. This release uses
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); attribution is retained
-in [`assets/icons/vectors/NOTICE.md`](assets/icons/vectors/NOTICE.md).
-`tool/supplemental_vectors.json` records every mapping, upstream filename, commit,
-and SHA-256 checksum. Reimport from the pinned checkout with:
+These make **23 gallery checks**, not comprehensive coverage for every feature. They stub native data/picker boundaries and do not prove real SMS, payments, RTC, full device permission behavior, or platform-wide compatibility. `test/features/create_post/` keeps its existing test path even though production source now lives in `create_post/`.
 
 ```sh
-git clone --depth 1 --branch v4.1 https://github.com/krystonschwarze/coolicons.git /tmp/coolicons-v4.1
-python3 tool/import_supplemental_vectors.py /tmp/coolicons-v4.1
+flutter analyze --no-pub
+flutter test --no-pub test/features/create_post
 ```
 
-The importer handles five spelling differences in upstream filenames while
-retaining readable app filenames. It validates the complete mapping before
-writing assets. The category counts below apply to both the reference crops and
-the matching runtime SVGs.
+Run `flutter pub get` first on a fresh checkout. Run relevant checks after code changes and state exactly what was verified. For gallery rendering changes, inspect intentional diffs; do not regenerate golden baselines just to silence a failure. For documentation-only edits, validate links/path inventory instead of claiming a new device/build/test pass.
 
-| Category | Icons |
-| --- | ---: |
-| arrows | 72 |
-| files | 39 |
-| interface | 73 |
-| calendar | 14 |
-| navigation | 18 |
-| edit | 72 |
-| communication | 27 |
-| environment | 13 |
-| media | 22 |
-| system | 36 |
-| user | 13 |
-| shape | 6 |
-| menu | 16 |
+Useful manual checks after related UI changes: 320 dp phone width, landscape, tablet widths, enlarged text, keyboard-open forms/sheets, light/dark/system mode, reduced motion, gallery denial/limited access/picker cancellation, and reopening the gallery from both Create Post and Chat. Test additional native flows on their real target platforms when affected.
 
-These screenshots have a baked-in dark background. The extraction removes that
-background and recovers white-foreground alpha; it preserves the native pixel
-grid, outline, antialiasing, and proportions. No drawing, tracing, or upscaling is
-performed. The crops are 28–34 pixels square with transparent margins. Repainting
-a crop over its recorded source background differs by at most two RGB levels
-from the screenshot due to alpha quantization. Labels and category headings are
-excluded, including clipped text beside otherwise complete icons.
+## Where to make common changes
 
-`tool/supplemental_icons.json` records each source, label, category row/column,
-crop rectangle, background color, and reconstruction error. Recreate the assets
-with Pillow installed:
-
-```sh
-python3 tool/extract_supplemental_icons.py
-```
-
-Only the 13 **vector** leaf folders are registered in `pubspec.yaml`; supplemental
-PNG crops, source sheets, and extraction metadata are excluded from the app bundle. Fully restart/rebuild
-the app after adding the new asset folders.
-
-The call controls now use client handset/chat assets and retain their callbacks,
-selected/disabled states, and contrasting colors. The hang-up button rotates the
-same handset at render time. The caption toolbar uses client bold, italic,
-underline, strikethrough, undo, and redo artwork through Quill's existing action
-callbacks. Other editor formatting controls and stored Delta data are unchanged.
-
-## How icons are used
-
-[`AppIcons`](lib/core/icons/app_icons.dart) holds the paths currently used by the
-app. [`AppIcon`](lib/shared/widgets/app_icons/app_icon.dart) displays an asset with its
-transparency and aspect ratio preserved. SVGs use `SvgPicture.asset`; legacy PNGs
-use `Image.asset`. Do not convert screenshots to SVG wrappers: embedded bitmaps
-still pixelate.
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-
-// Inherits black in light mode and white in dark mode.
-const AppIcon(AppIcons.search, size: 28);
-
-// Give an interactive control its existing label and callback.
-IconButton(
-  tooltip: AppStrings.search,
-  onPressed: onSearch,
-  icon: const AppIcon(AppIcons.search, size: 28),
-);
-
-// For a meaningful standalone image, supply an accessibility label.
-const AppIcon(AppIcons.cart, size: 28, semanticLabel: AppStrings.cart);
-```
-
-The example uses the shared Persian labels from `AppStrings`. Existing controls
-retain their callbacks, counts, and layout sizes.
-
-| App location/action | Client asset (relative to `assets/icons/`) |
+| Requested change | Start here |
 | --- | --- |
-| Bottom navigation: home | `vectors/navigation/house-01.svg` |
-| Bottom navigation: cart | `vectors/interface/shopping-cart-01.svg` |
-| Create tab and add category | `vectors/edit/add-plus.svg` |
-| Search tab | `vectors/interface/search-magnifying-glass.svg` |
-| Profile/avatar fallback | `vectors/user/user-circle.svg` |
-| Profile header: theme menu | `vectors/environment/sun.svg` / `moon.svg` |
-| Profile header: messages and post comments | `vectors/communication/chat.svg` |
-| Menus and close | `vectors/menu/more-vertical.svg` / `close-md.svg` |
-| Back and refresh | `vectors/arrows/chevron-left-md.svg` / `arrows-reload-01.svg` |
-| Bookmark, heart, star, tag, trash | Matching `vectors/interface/` assets |
-| Call handset and chat send | `vectors/communication/phone.svg` / `paper-plane.svg` |
-| Gallery image/play/pause/volume | Matching `vectors/media/` assets |
-| Location and map | `vectors/navigation/map-pin.svg` / `map.svg` |
-| File, calendar, preparation time | `vectors/files/file-document.svg`, `calendar/calendar.svg`, `calendar/clock.svg` |
-| Camera and keyboard | `vectors/system/camera.svg` / `keyboard.svg` |
-| Attachment and rich caption formatting | Matching `vectors/edit/` assets |
-| Unavailable image, microphone, video camera | Original `images/` and `media/` assets, complementing the new collection |
+| App startup, locale, global providers | `lib/main.dart`, `lib/app/app.dart`, `lib/app/app_providers.dart`. |
+| Login/OTP wording, fields, black layout | Auth string catalog; Login/OTP feature widgets; Login-owned AuthScreenLayout. |
+| Customer tabs or Create return behavior | `dashboard/presentation/pages/dashboard_screen.dart`. |
+| Home sample feed/image/add-to-cart | HomeScreen, HomeProductCard, HomeProductImage. |
+| Search query/city/results | SearchView, SearchCubit, SearchCatalog, demo_search_posts.dart. |
+| Cart calculations/amount parsing | CartItem, CartState, CartCubit, cart_format.dart; preserve hundredths. |
+| Profile identity/grid/settings rows | ProfileScreen widgets and ProfileSettingsList. |
+| Personal profile fields | `profile_settings/`, not the profile settings-list screen. |
+| Location form versus permission prompt | LocationsScreen widgets versus LocationPermissionGate/helper/dialog/service. |
+| Notification samples/search/read behavior | sample_notifications.dart, NotificationsCubit, Home's route/provider wiring. |
+| Wallet sample values/routes/inputs | WalletSampleData, four wallet pages, their named widget groups. |
+| Gallery permission/selection | GalleryCubit/GalleryLibraryChanges; read full async guards first. |
+| Gallery layout or tabs | GalleryGrid, GalleryBody, GalleryTabSelector, GalleryFilesGrid, GalleryContent. |
+| New post field | PostDraft/CreatePostCubit, create section/dialog, validator, JSON conversion, stored model/adapter, and edit mapper/fields where applicable. |
+| Post update/delete/ownership | PostsRepository, PostsCubit, managePostActions, EditPostScreen/PostDeleteSheet. |
+| Category semantics | ProfileCategoriesRepository/Cubit/validator plus category manager/filter/selector consumers. |
+| Post media across multiple screens | Posts-owned PostMediaView and shared PostMedia model. |
+| Analytics definitions/tracking | PostAnalyticsReport/events, repository/Cubit, activity trackers, then presentation charts. |
+| Chat picker/recording/playback | ConversationScreen, chat_attachment_flow, conversation/recording/playback Cubits and device adapters. |
+| Real calls | CallService implementation and CallScreen injection; PreviewCallService is only a preview. |
 
-`AppIcon` inherits the current `IconTheme` color, falling back to
-`colorScheme.onSurface`: black in light mode and white in dark mode. Its optional
-`color` argument is an explicit override; normal app controls leave it unset.
-Use `selected: true` to add a subtle background highlight while keeping the same
-foreground. Like/bookmark toggles also expose their state to accessibility services.
-The supplemental collection now supplies the rating star and plain comment
-bubble. Controls without an equivalent in these screenshots retain a suitable
-original client asset or framework control, including native calendar/editor
-controls and the emoji glyph. Six active original icons still use PNGs:
-`imageUnavailable`, `target`, `microphone`, `microphoneOff`, `video`, and `videoOff`.
-Their artwork is absent from the supplied Coolicons screenshots. Matching original
-SVG exports are needed to make those six scalable without changing their design;
-enlarging PNGs or renaming their extension does not restore vector quality.
+All feature-relative paths in this table are under `lib/features/`. The full catalog below resolves every filename and lists its responsibility.
 
-Home additionally uses `AppIcons.shoppingBag` for the reference counter row.
-The network phone image remains a normal photo and is not rendered through AppIcon.
+## Complete source file catalog
 
-## How to add another icon
+This catalog covers all **327 current Dart files under `lib/`**. Each subsection declares a base directory; paths in its table are relative to that base. Public types are listed where present. Tiny private rendering helpers remain with their owning file. This is the complete Dart file inventory, not an instruction to split every class into another file.
 
-1. Export the original **SVG** from the design file and put it in a vector category
-   folder, for example `assets/icons/vectors/interface/new-icon.svg`. Keep genuine
-   vector paths and a valid `viewBox`. Do not crop screenshots for new UI icons.
-   PNG support remains for legacy artwork only.
-2. Existing category folders are already registered. If adding a new category,
-   add its directory under `flutter: assets:` in `pubspec.yaml`; Flutter does not
-   recursively include arbitrary subdirectories from the existing `assets/` entry.
-3. Add a descriptive constant in `lib/core/icons/app_icons.dart`:
+### Application entry
 
-   ```dart
-   static const newIcon = 'assets/icons/vectors/interface/new-icon.svg';
-   ```
+Base: `lib/` — 1 Dart file.
 
-4. Use `const AppIcon(AppIcons.newIcon, size: 24)` at the relevant control. Keep
-   the control's tooltip, accessibility label, and existing callback. Leave
-   `color` unset so the icon follows light/dark mode automatically.
-5. Run `flutter pub get` and fully restart the app after changing asset entries.
-
-Icons already in this collection can be used immediately by adding an `AppIcons`
-constant for their existing path. SVG rendering uses the `flutter_svg` dependency;
-an icon font is not required.
-
-## Re-extract or verify the original collection
-
-Pillow is needed only for this optional developer script, not for Flutter:
-
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install Pillow
-python3 tool/extract_client_icons.py
-python3 tool/extract_client_icons.py --check
-```
-
-The script reads `tool/client_icons.json` and the preserved source sheets. It
-recreates the listed crops; `--check` verifies their dimensions, RGBA format, and
-every pixel without writing files. Additional standalone icons need no manifest
-entry. To extract a new sheet, preserve it under `source_sheets/` and add manifest
-entries with `asset`, `source`, `label`, one-based `column`/`row`, and
-`rect: [left, top, width, height]`. Each rectangle must contain only its icon.
-
-## Post analytics
-
-Open any post, then tap **مشاهده آمار** (View analytics) in the post-detail app bar. Back returns
-with that post's current like/bookmark state preserved. The analytics header uses
-the selected post's own image, and the screen follows the shared light/dark theme.
-Purple, gold, pink, and blue identify chart series in both themes.
-
-The feature keeps domain models separate from presentation Cubits and widgets:
-
-```text
-lib/features/post_analytics/
-  data/post_analytics_repository.dart
-  domain/models/post_analytics.dart
-  presentation/
-    cubit/post_analytics_cubit.dart
-    pages/post_analytics_screen.dart
-    widgets/
-      activity_tracking/       # Post view, watch-time and card impression tracking
-      analytics_header/        # Owner, location and selected post image
-      analytics_controls/      # Period menus, tooltips, legends and summaries
-      analytics_chart/         # Native CustomPainter chart rendering
-      total_views/             # Overlapping smooth filled area charts
-      clicks_interactions/     # Solid purple and dashed gold lines
-      average_time_viewed/     # Overlapping radar plots
-      impressions/             # Four-color polar area chart
-      orders_bookings/         # Rounded blue seven-day bar chart
-```
-
-Each of the first four sections has an independent period selector (1, 3, 6,
-or 12 calendar months, including the current month). Tap/drag line charts to
-inspect a point. The line/radar legends toggle individual series. Tap the radar
-to inspect another month, the impressions plot to toggle its tooltip, and an
-orders bar to inspect that day. Charts are drawn as Flutter widgets and paths,
-rather than a flattened screenshot; no chart service or chart image is required.
-
-### What the numbers mean
-
-- Existing sample posts display **داده‌های نمونه** (Sample data), with the reference design's
-  illustrative product series, currency callouts, and `۸ ساعت` example.
-- Published posts display **در این دستگاه** (On this device). They use recorded local events,
-  without the sample currency totals. The view total counts post-detail openings.
-  A card impression is recorded when at least 50% of a published post's card
-  becomes visible. Scrolling below 10% and back into view can count another
-  impression; these are exposures, not unique people.
-- Positive like and bookmark actions count as interactions. The model also
-  supports `share` and `comment` sources for future integrations; those actions
-  currently require callbacks in the existing post-detail UI.
-- Viewing time counts time spent on post details. It pauses while another route
-  covers the post or the app is backgrounded. Segments share a session ID, so
-  a pause/resume does not incorrectly create another viewing session. Monthly
-  averages and the overall average are calculated from recorded sessions.
-- Orders/bookings show actual counts and their seven-day daily average for a
-  published post. They remain zero because no completed-order/booking flow is
-  connected yet. The pale bar backgrounds are chart tracks, not orders.
-
-These are device-local statistics, not cross-user/server analytics. `MyApp`
-provides one `PostAnalyticsCubit`; events are saved atomically to
-`post_analytics.json` in application Documents and restored after restart.
-Writes are serialized to preserve concurrent actions. An unreadable history is
-preserved, with a small status message; new events then remain in memory.
-
-To connect real server analytics, implement `PostAnalyticsRepository` and inject
-it through `MyApp(analyticsRepository: ...)`. A completed booking integration can
-record `AnalyticsEventType.order` for the relevant post; the event's value is
-its count, not its price. Keep revenue and order counts separate. Tests/previews
-can inject `MemoryPostAnalyticsRepository` without native storage.
-
-`visibility_detector` supplies card visibility callbacks.
-`PostImpressionTracker` accepts a source. Profile cards pass `profile`; Search
-result cards pass `search`. Recording applies to published posts, while current
-Search fixtures are sample posts. The new Home phone UI is not connected to that
-tracker. The report retains home/search/profile/other channels for existing data.
-
-## Persian text on the new screens
-
-### Localization file map
-
-| File in `lib/core/localization/` | Scope |
+| File relative to base | Responsibility and public declarations |
 | --- | --- |
-| [`app_strings.dart`](lib/core/localization/app_strings.dart) | Shared actions, create/gallery, post display, analytics, chat/calls, formatting, and legacy category display labels. |
-| [`cart_strings.dart`](lib/core/localization/cart_strings.dart) | Cart, local checkout, preview receipts, validation/status/payment labels. |
-| [`search_strings.dart`](lib/core/localization/search_strings.dart) | Search, service suggestions, and city names. |
-| [`profile_post_strings.dart`](lib/core/localization/profile_post_strings.dart) | Profile categories, post edit/delete, default-category/unit labels, and error copy. |
-| [`profile_settings_strings.dart`](lib/core/localization/profile_settings_strings.dart) | Settings-list section and entries. |
-| [`profile_edit_strings.dart`](lib/core/localization/profile_edit_strings.dart) | Personal-information form labels and photo feedback. |
-| [`location_strings.dart`](lib/core/localization/location_strings.dart) | Location preview, label/address samples, and map status. |
-| [`notification_strings.dart`](lib/core/localization/notification_strings.dart) | Notification title/search, relative times, sample messages, and semantics. |
-| [`wallet_strings.dart`](lib/core/localization/wallet_strings.dart) | Wallet titles, fields, banks, amount labels, Persian owner/sample formatting, and countdown text. |
-| [`persian_feature.dart`](lib/core/localization/persian_feature.dart) | Scoped Persian locale and default right text alignment while preserving physical layout order. |
+| `main.dart` | Initializes Flutter bindings and wraps MyApp in ResponsiveConfig. |
 
-Static UI labels and known samples use Persian. User input, original filenames,
-account/email values, internal IDs, and JSON keys keep their own content. Persian
-locale does not force the keyboard language or translate custom English names.
-Use explicit RTL text/right alignment for Persian, LTR where account/email digit
-ordering needs it, and `AppStrings.persianDigits` for display numbers. Never store
-translated display digits in IDs or serialized enum values.
+### App composition
 
-Gallery selection, the create-post form, its option dialogs, publishing messages,
-post analytics, chat, call previews, and attachment sheets use Persian copy from
-`lib/core/localization/app_strings.dart`; Search also uses
-`lib/core/localization/search_strings.dart`. New settings, Wallet, notifications,
-Cart, and post-management screens use the feature catalogs above.
-This includes buttons, hints, validation errors, tooltips, chart legends, period
-menus, month/weekday labels, and numeric summaries. Add future UI labels there
-and reference the matching string catalog in widgets instead of hard-coding English text.
-Bundled contact names, inbox previews, and demo conversation messages are Persian
-as well. Chat search uses right-to-left input. Attachment sizes use Persian
-kilobyte/megabyte labels, and file badges show Persian type names while preserving
-original filenames and extensions. The map attribution is displayed in Persian
-and retains its OpenStreetMap credit link.
+Base: `lib/app/` — 2 Dart files.
 
-The app locale remains `fa_IR`. Material date/time controls use its localized
-labels. The caption editor explicitly loads Persian Quill/Flutter localization;
-Undo/Redo have Persian tooltip overrides because the installed Quill Persian
-translations leave those two labels in English. Input text reads right to left.
-Create-post headings, form labels, hints, input text, and selected option values
-align to the right. `AppTextField` scopes `Directionality` to its configured
-text direction so floating labels follow RTL too; explicit LTR fields remain
-supported. Option labels and values are grouped on the right, while caption
-paragraphs start RTL and still respect explicit rich-text alignment choices.
-Page navigation, photo order and chart timelines keep the existing layout.
-
-Numbers in analytics are formatted with `AppStrings.persianDigits` for display.
-Chart month names are Persian names of Gregorian months; this change does not
-switch the stored calendar to Jalali. IDs, enum names, dates, JSON keys, event
-values and user-entered content retain their original values. Previously saved
-English Product/Services categories also display their Persian labels on Profile
-cards without rewriting saved records.
-
-The global layout intentionally preserves the client design order with LTR
-Directionality in `app.dart`. Persian text/fields and right-aligned components
-apply RTL explicitly; do not globally mirror every image, tab, or chart axis.
-The HYWORK wordmark and product model names may remain brand/model text.
-
-## Chat, voice notes, and attachments
-
-Open the Profile messages button, then choose a conversation. The feature lives in
-`lib/features/chat/`, using the same `domain`, `data`, and `presentation` folders
-as the other features. App startup remains separate in `main.dart` / `app/`. Shared client artwork is referenced
-through `AppIcons`, and chat controls use Persian labels and the current theme.
-
-### Conversation actions
-
-- Type a message and tap Send, or use the keyboard send action. Empty messages
-  are ignored.
-- When the text field is empty, the Send button becomes a microphone. Tap it to
-  request microphone permission and start recording. Tap Stop to review the
-  recording, then Send or Cancel. Very short recordings are discarded.
-- Sent voice notes have play/pause, duration, and a seek slider. Only one note can
-  play at a time. Loading/playback failures show a localized error and allow retry.
-- Recording stops into a reviewable draft when the app is interrupted or covered
-  by another route; playback pauses. Leaving the conversation cancels unsent
-  recordings and releases the recorder, player, subscriptions, and timers.
-- The photo button opens the existing gallery's Photo tab. The paperclip opens
-  the attachment bottom sheet: Document, Location, Camera, and Gallery, above a
-  four-column grid of recent photos. Select thumbnails and tap Send to send them
-  directly. Document opens the existing File tab; Gallery opens the full gallery,
-  which retains its Video tab. All photo browsing reuses `GalleryCubit` and
-  `GalleryGrid`; the full picker also retains `GalleryPreview`. No path enters
-  the post-details form.
-- Photo messages open a zoomable viewer. Documents and videos open through the
-  device's native file viewer. Original picker files are copied into a private
-  chat cache before a message is added; temporary picker paths are not retained.
-- The emoji button toggles an in-app picker using the device's emoji glyphs.
-  Emojis are inserted at the current text selection. The keyboard button returns
-  to text input; the operating system's own emoji key is also available. This
-  does not programmatically switch the system keyboard into its emoji tab.
-
-The three-dot menu offers **Delete messages**, **Clear conversation**, and
-**Block/Unblock**. Choosing Delete messages, or long-pressing a bubble, enters
-selection mode. Tap messages to select/deselect them, use Select all if needed,
-and tap the trash action to confirm deletion. One selected text message can also
-be copied from the menu. Delete and Clear affect this device's conversation only.
-
-Blocking disables text, voice, and attachment sends. It also cancels an active
-recording. Unblock restores the composer. Blocking while a media copy is in flight
-prevents that pending send and removes the unused cached copy. Deleting messages
-removes their owned media copies and refreshes the inbox preview. Missing cached
-files, denied permissions, and failed media exports show recoverable errors.
-
-### Chat components
-
-| Component | Responsibility |
+| File relative to base | Responsibility and public declarations |
 | --- | --- |
-| `domain/models/chat_message.dart`, `chat_attachment.dart`, and `chat_location.dart` | Text, media metadata, voice duration, and validated location coordinates/address. |
-| `domain/repositories/chat_messages_repository.dart` | Message reads/adds, selected deletion, clearing, and local block state. |
-| `data/in_memory_chat_repository.dart` | Existing demo conversations' messages and block flags for the current app session. |
-| `data/local_chat_media_store.dart` | Streaming file copies, gallery export fallback, optional video thumbnails, batch rollback, and owned-cache cleanup. |
-| `data/device_voice_recorder.dart` | Microphone permission and mono AAC/M4A capture; native recorder creation is deferred until needed. |
-| `data/just_audio_chat_player.dart` | One lazily created native audio player per conversation. |
-| `data/device_chat_camera.dart` | Native photo capture and a streaming file adapter for the existing gallery media pipeline. |
-| `presentation/helpers/chat_attachment_flow.dart` | Sheet choices, existing gallery navigation, camera cancellation/errors, and address-picker results. |
-| `presentation/cubit/` | Inbox previews, send guards, selection/block state, recording lifecycle, and playback/load cancellation. |
-| `presentation/widgets/` | Conversation header/body, confirmation dialog, composer, attachment/voice bubbles, recording panel, and emoji panel. |
+| `app.dart` | MaterialApp configuration, Persian locale, themes, route observer, and SplashScreen entry. Defines: `MyApp`. |
+| `app_providers.dart` | Declares the five app-scoped Cubits and injectable local repositories. Defines: `AppProviders`. |
 
-`ConversationScreen` accepts repository, media store, recorder, and audio-player
-interfaces for tests or future integrations. Its inbox callback updates previews
-for text, voice, files, deletion, and blocking. Returning to or reopening an inbox
-refreshes previews and block state from the session repository.
+### Core utilities
 
-### Packages and native setup
+Base: `lib/core/` — 25 Dart files.
 
-The chat additions use [record](https://pub.dev/packages/record),
-[just_audio](https://pub.dev/packages/just_audio),
-[emoji_picker_flutter](https://pub.dev/packages/emoji_picker_flutter), and
-[open_filex](https://pub.dev/packages/open_filex), plus
-[image_picker](https://pub.dev/packages/image_picker) for camera capture only.
-The existing photo-manager and file-picker packages still supply the gallery/file selection flow.
-
-- Android: `RECORD_AUDIO` is declared, with microphone hardware optional so the
-  app can still be installed on devices without a microphone. Runtime microphone
-  permission is requested when Record is tapped.
-- iOS: `NSMicrophoneUsageDescription` explains voice-note recording in Persian,
-  and `NSCameraUsageDescription` explains chat photo capture. The existing
-  photo-library description covers both posts and conversations.
-- Camera capture uses image_picker's native camera flow. Android requires no
-  additional camera permission declaration for this flow. Gallery browsing still
-  uses the existing photo-manager UI; image_picker does not replace it.
-- Gallery permissions remain the existing Android/iOS setup documented above.
-
-After pulling these native additions, fully stop the old app and rebuild it:
-
-```sh
-flutter pub get
-flutter run
-```
-
-Hot reload alone does not install the new native plugins or microphone permission
-configuration. Check recording, audible playback, gallery access, and external
-file viewing on a physical phone before release.
-
-### Current chat storage scope
-
-The chat repository is still **in memory**: there is no account connection,
-network delivery, server-side blocking, real read receipts, or durable conversation
-history. Sent attachments are copied into private temporary cache files, while
-message records and block flags last for the running app session. Reopening a
-conversation in that session retains them; restarting the app resets the demo
-chat state. The operating system may clear temporary media. Calling is an
-interactive UI preview, as described below; it does not connect devices.
-
-Call previews add no native plugins or permissions. Check native
-microphone/camera behavior on target devices before shipping those integrations.
-
-### Paperclip attachment flow
-
-`ChatAttachmentSheet` lives in
-`lib/features/chat/presentation/widgets/attachment_sheet/`. Its drag handle,
-four circular actions, and four-column recent-photo grid follow the supplied
-reference. It inherits the app theme and uses the original client `AppIcons`.
-`GalleryGrid(compact: true)` removes the post toolbar/tab selector only inside
-this sheet; the default post-gallery layout is unchanged. Selection reveals the
-shared `AppButton` with the selected count. Failed thumbnails show a fallback;
-denied gallery access retains Settings/Retry and the other attachment actions.
-
-- **Document / Gallery:** close the sheet and open the existing full picker on
-  File / Photo respectively. Send returns the selected attachments to chat;
-  cancellation sends nothing.
-- **Camera:** closes the sheet and opens the phone's native photo capture/review
-  flow. Confirming copies the photo into the same private chat media cache and
-  adds an image message. Cancel sends nothing; permission failures show a Persian
-  error and restore the composer. A full app rebuild installs the new plugin.
-- **Location:** reuses `AddressDialog` and `LocationMap`. Choose a pin and enter
-  an address, then tap Send location. The selected coordinates/address become a
-  typed `ChatLocation` message with an Open map action. Tapping it opens the pin
-  in the external map viewer. This is manual pin sharing and needs no GPS access.
-
-The conversation pauses voice playback before opening the sheet. Its picker
-busy state prevents overlapping actions without showing a background loading
-spinner. Dismissal retains the text draft. The conversation checks its existing
-send/block state after pickers return, and owns media copying and message state.
-Location messages use the same local/session repository as other messages.
-
-## Voice and video call UI previews
-
-The conversation header now routes its phone and video buttons to `CallScreen`
-in `lib/features/calls/`. As requested, this is **UI only**: no signaling,
-remote media, device microphone/camera capture, or incoming system notifications
-are implemented. No additional calling package or account setup is required.
-A small Persian preview label distinguishes these screens from real calls.
-
-- **Voice:** opens the incoming-call reference layout with concentric rings,
-  contact avatar/name, and red decline, green answer, and yellow message buttons.
-  Answer enters the active preview and starts the elapsed timer. Microphone and
-  speaker buttons toggle their displayed states.
-- **Video:** opens the active reference layout with a full-screen sample image,
-  small local-preview tile, name, timer, back arrow, and bottom call controls.
-  Camera-off replaces the small preview with a disabled-camera indicator.
-  Camera switch toggles the front/rear preview. The bottom chevron expands the
-  speaker option. White overlays remain readable over the image in either theme.
-- **Exit:** End, Decline, Message, and Back close the preview and return to the
-  conversation. Message returns to the existing composer; text drafts remain.
-  Closing the route cancels its timer and releases the preview session.
-- Blocked contacts and an active recording/attachment send disable call entry.
-
-`PreviewCallService` owns the simulated session and control states; `CallCubit`
-coordinates actions and elapsed time. The `CallService` interface is separate
-from the screen, so a later RTC implementation can replace the preview.
-`CallScreen` accepts optional local/remote video widgets for that later adapter.
-These extension points do not currently provide network calling.
-
-The preview reuses the app's bundled `assets/img1.png`, `img2.png`, and `img3.png`
-as sample pictures rather than adding remote image requests. A contact's existing
-avatar is used when available. Replace the preview pictures with client-provided
-high-resolution portraits if needed; they are static images, not video feeds.
-All new labels are in `AppStrings`. Voice surfaces inherit the app theme, and
-red/green/yellow call actions follow the supplied reference colors.
-
-## Packages and platform configuration
-
-Package constraints and asset registrations are authoritative in
-[pubspec.yaml](pubspec.yaml); resolved versions are in `pubspec.lock`.
-
-| Area | Packages used |
+| File relative to base | Responsibility and public declarations |
 | --- | --- |
-| State | `flutter_bloc` |
-| Responsive/foldable layout | `flutter_screenutil`, `responsive_framework`, `foldable` |
-| Vector icons / optional animation wrapper | `flutter_svg`, `rive` |
-| Gallery and files | `photo_manager`, `photo_manager_image_provider`, `file_picker` |
-| Rich text | `flutter_quill`, Flutter localization delegates |
-| Maps | `flutter_map`, `latlong2`, `url_launcher` |
-| Local storage and file paths | `path_provider`, `path` |
-| Card impressions | `visibility_detector` |
-| Voice and media | `record`, `just_audio`, `open_filex`, `image_picker` |
-| In-app emoji | `emoji_picker_flutter` |
-| Development declarations | `flutter_test` and `flutter_lints` remain in the manifest, although `test/` was removed. `shared_preferences` is currently a dev dependency. |
+| `animation/animation.dart` | Exports shared animation utilities. |
+| `animation/rive_asset_animation.dart` | Optional bundled Rive player with loading/error fallback and loader disposal. Defines: `RiveAssetAnimation`. |
+| `animation/screen_entrance.dart` | Route-aware entrance animation and the shared entranceRouteObserver. Defines: `ScreenEntrance`, `ScreenEntranceScope`. |
+| `animation/staggered_entrance.dart` | Staggers child animations using the surrounding screen entrance; honors reduced motion. Defines: `StaggeredEntrance`. |
+| `assets/app_assets.dart` | Central paths for brand, login, OTP, and location-prompt artwork. Defines: `AppAssets`. |
+| `icons/app_icons.dart` | Central client icon asset constants; prefer these over raw paths in screens. Defines: `AppIcons`. |
+| `localization/app_strings.dart` | Main Persian labels, sample text, display-digit conversion, and common formatting helpers. Defines: `AppStrings`. |
+| `localization/auth_strings.dart` | Persian login, phone, country-picker, OTP, and splash labels. Defines: `AuthStrings`. |
+| `localization/cart_strings.dart` | Persian cart, checkout, status, quantity, and order-history labels. Defines: `CartStrings`. |
+| `localization/location_strings.dart` | Persian location form, saved-label, and permission-dialog labels. Defines: `LocationStrings`. |
+| `localization/notification_strings.dart` | Persian notification screen, search, and empty-state labels. Defines: `NotificationStrings`. |
+| `localization/persian_feature.dart` | Applies Persian localization and the established feature direction convention. Defines: `PersianFeature`. |
+| `localization/profile_edit_strings.dart` | Persian personal-profile form and date labels. Defines: `ProfileEditStrings`. |
+| `localization/profile_post_strings.dart` | Persian category manager, post editor, owner actions, and delete/discard labels. Defines: `ProfilePostStrings`. |
+| `localization/profile_settings_strings.dart` | Persian settings-list labels and General heading. Defines: `ProfileSettingsStrings`. |
+| `localization/search_strings.dart` | Persian search labels, cities, suggestions, and sample service wording. Defines: `SearchStrings`. |
+| `localization/wallet_strings.dart` | Persian wallet, amount, bank, account, withdrawal, and OTP-preview labels. Defines: `WalletStrings`. |
+| `permissions/location_permission_service.dart` | Requests native foreground/background location permissions; never reads GPS coordinates. Defines: `LocationAccessChoice`, `LocationPermissionService`. |
+| `responsiveness/app_responsiveness/app_responsiveness.dart` | Compact/medium/expanded breakpoints, spacing helpers, and a local-constraint builder. Defines: `AppScreenType`, `AppResponsive`, `ResponsiveWidgetBuilder`, `AppResponsiveBuilder`. |
+| `responsiveness/fold_aware_layout/fold_aware_layout.dart` | Optional two-pane layout that respects a physical hinge or fold division. Defines: `FoldAwareLayout`. |
+| `responsiveness/responsive_config/config.dart` | ScreenUtil/FoldableProvider setup and MaterialApp responsive breakpoints. Defines: `ResponsiveConfig`. |
+| `theme/app_colors.dart` | Central fixed semantic and client-design colors. Defines: `AppColors`. |
+| `theme/app_theme.dart` | Builds light and dark ThemeData for surfaces, text, controls, and system bars. Defines: `AppTheme`. |
+| `theme/theme_cubit.dart` | Session-level light/dark/system selection; does not persist the preference. Defines: `ThemeCubit`. |
+| `theme/theme_mode_menu.dart` | Profile appearance menu connected to the app-scoped ThemeCubit. Defines: `ThemeModeMenu`. |
 
-No new dependency was needed for the Home network image or the Search city list.
-`Image.network` is part of Flutter; local Search images are bundled assets.
+### App-wide shared models and primitive widgets
 
-| Native file | Current configuration |
+Base: `lib/shared/` — 11 Dart files.
+
+| File relative to base | Responsibility and public declarations |
 | --- | --- |
-| [`AndroidManifest.xml`](android/app/src/main/AndroidManifest.xml) | Internet access, Android-version-specific media access, selected photos/videos, and microphone permission. |
-| [`ios/Runner/Info.plist`](ios/Runner/Info.plist) | Persian photo-library, microphone, and camera usage descriptions. HTTPS images/tiles do not require an ATS bypass. |
-| [`DebugProfile.entitlements`](macos/Runner/DebugProfile.entitlements) | Sandbox/JIT/debug-server entries plus outgoing network-client access for image/tile requests. |
-| [`Release.entitlements`](macos/Runner/Release.entitlements) | Sandbox and outgoing network-client access. |
+| `models/post/post_attributes.dart` | Shared feature name/value, address/coordinates, and UTC-serialized schedule models. Defines: `PostFeature`, `PostSchedule`, `PostAddress`. |
+| `models/post/post_details.dart` | Typed post metadata and lossless handling of legacy serialized fields. Defines: `PostDetails`. |
+| `models/post/post_item.dart` | Shared display/storage post record and its JSON boundary. Defines: `PostItem`. |
+| `models/post/post_media.dart` | Shared media type/source metadata, file/asset paths, thumbnails, and alt text. Defines: `PostMediaType`, `PostMediaSource`, `PostMedia`. |
+| `models/post/post_unit.dart` | Stable sale-unit enum keys, Persian labels, and nullable legacy lookup. Defines: `PostUnit`. |
+| `widgets/app_button/app_button.dart` | Common primary/outlined/text button with loading state, icon, and wrapping label. Defines: `AppButtonVariant`, `AppButton`. |
+| `widgets/app_icons/app_icon.dart` | Renders client SVG or legacy PNG icons using the current theme foreground. Defines: `AppIcon`. |
+| `widgets/app_loader/app_loader.dart` | Shared progress indicator with optional label, size, and color. Defines: `AppLoader`. |
+| `widgets/app_logo/app_logo.dart` | Reusable bundled HYWORK brand logo renderer. Defines: `AppLogo`. |
+| `widgets/app_textfield/app_text_field.dart` | Shared TextFormField decoration, validation callbacks, and explicit Persian text direction. Defines: `AppTextField`. |
+| `widgets/app_toast/app_toast.dart` | Shared success/warning/error feedback through the app's toast presentation. Defines: `AppToastType`, `AppToast`. |
 
-The Search city picker requests **no location permission**. Create-post and chat
-location sharing use a manually chosen map pin, not GPS detection. A selected
-city in Search is not the same feature as the address map.
+### Splash
 
-## Verification
+Base: `lib/features/splash/` — 3 Dart files.
 
-This README was refreshed against the current source tree on **2 November 2026**.
-The documentation check covers the complete `lib/` file inventory and local links.
-No tests, analyzer, build, or device run were performed for this README-only update.
-
-The `test/` directory and its preview helpers were removed at the user's request.
-Earlier passing-test counts and commands are not a verification record for this
-checkout. Do not recreate that folder as part of UI work.
-
-For a separately requested static check, use `dart analyze lib` (or
-`flutter analyze` for project-wide analysis). Static analysis does not establish
-rendered design fidelity or native plugin behavior. Device review remains needed
-for target platforms, including both themes, narrow widths, keyboards, media
-permissions, recording/playback, and map loading.
-
-## Common changes and troubleshooting
-
-| Change / symptom | Where to look or what to do |
+| File relative to base | Responsibility and public declarations |
 | --- | --- |
-| Change the initial app tab | `lib/app/app.dart`, `DashboardScreen(initialTab: ...)`. |
-| Change the Home phone image/title | Constants in `features/home/presentation/pages/home_screen.dart`. |
-| Change Home sample prices, stock, or discount appearance | `home_product_price/` and `home_product_image/` widgets; these are sample UI values. |
-| Change the Home brand | `home_feed_header/home_feed_header.dart`. |
-| Add a city or suggestion | `core/localization/search_strings.dart`; sample availability must also be added to the corresponding entries in `demo_search_posts.dart`. |
-| Change Search results/images/prices | `features/search/data/demo_search_posts.dart`; matching is in `search_catalog.dart`. |
-| Close Search without submitting edits | Use the visible Back control; the × only clears editing text. |
-| Location icon behavior | It shows the full radio-list panel beneath the Search header. Keep that design; city selection returns results in place. |
-| See saved/newly published posts | Use the Profile tab, not the illustrative Home phone feed. |
-| Open chat or change theme | Use the Profile header controls. |
-| Change colors | Add/edit `AppColors` for fixed palette values; edit `AppTheme` for semantic theme roles. |
-| Import fails after moving a widget | Use the actual screen/component group in the source tree and update every importing file. |
-| A Home photo does not load | Check internet and the configured URL, then Retry. Native configuration changes need a rebuild. |
-| Newly declared assets/plugins do not appear | Run `flutter pub get`, stop the app, and rebuild. |
-| Gallery shows only selected items | The OS granted limited access; use Select more or Settings rather than assuming full access. |
-| Local save fails | Keep the draft, retry, and inspect the local-storage error; saving locally does not upload to a server. |
-| Voice/video preview does not connect | Calling is UI-only; a real CallService/RTC integration is still pending. |
+| `presentation/page/splash_screen/splash_screen.dart` | Shows the black splash and replaces it with Login after at least three seconds. Defines: `SplashScreen`. |
+| `presentation/widgets/splash_screen_widgets/splash_brand/splash_brand.dart` | Composes the HYWORK artwork and wordmark for the splash. Defines: `SplashBrand`. |
+| `presentation/widgets/splash_screen_widgets/splash_content/splash_content.dart` | Responsive, scrollable splash composition with staggered brand and AppLoader. Defines: `SplashContent`. |
+
+### Login and the shared authentication layout
+
+Base: `lib/features/login/` — 4 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/page/login_screen/login_screen.dart` | Owns phone form/controller and pushes OTP for a valid nonempty input; UI-only authentication. Defines: `LoginScreen`. |
+| `presentation/widgets/auth_screen_layout/auth_screen_layout.dart` | Responsive black entry-screen scaffold, illustration, title, content, and action; reused by Login and OTP. Defines: `AuthScreenLayout`. |
+| `presentation/widgets/login_screen_widgets/login_country_picker/login_country_picker.dart` | Country-code selection using country_code_picker, localized labels, and app colors. Defines: `LoginCountryPicker`. |
+| `presentation/widgets/login_screen_widgets/login_phone_field/login_phone_field.dart` | Phone input, accepted digit characters, country-code prefix, and nonempty validation. Defines: `LoginPhoneField`. |
+
+### OTP verification
+
+Base: `lib/features/otp_verification/` — 3 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/page/otp_verification_screen/otp_verification_screen.dart` | Owns four-digit input state; Continue clears auth routes and opens the Home dashboard through the location gate. Defines: `OtpVerificationScreen`. |
+| `presentation/widgets/otp_verification_screen_widgets/otp_code_input/otp_code_input.dart` | Four Pinput boxes, supported digit filtering, sizing, and code-for-phone semantics. Defines: `OtpCodeInput`. |
+| `presentation/widgets/otp_verification_screen_widgets/otp_countdown/otp_countdown.dart` | Local resend countdown display; no SMS or resend API. Defines: `OtpCountdown`. |
+
+### Customer dashboard
+
+Base: `lib/features/dashboard/` — 6 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/cubit/dashboard_navigation_cubit.dart` | Selected dashboard tab and PageView index synchronization. Defines: `DashboardTab`, `DashboardNavigationCubit`. |
+| `presentation/pages/dashboard_screen.dart` | Owns PageController/navigation Cubit, composes five slots, and opens Create as a separate route. Defines: `DashboardScreen`. |
+| `presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart` | Themed bottom-navigation shell with centered content and fold-aware placement. Defines: `DashboardBottomNav`. |
+| `presentation/widgets/bottom_navbar/dashboard_cart_icon.dart` | Cart icon and badge derived from the app-scoped CartCubit unless explicitly overridden. Defines: `DashboardCartIcon`. |
+| `presentation/widgets/bottom_navbar/dashboard_fold_layout.dart` | Positions navigation items around physical hinge bounds while preserving reading/order conventions. Defines: `DashboardFoldLayout`. |
+| `presentation/widgets/bottom_navbar/dashboard_nav_item.dart` | Home/Cart/Create/Search/Profile icon, profile thumbnail, tooltip/semantics, and tap callback. Defines: `DashboardNavItem`. |
+
+### Customer Home
+
+Base: `lib/features/home/` — 10 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/pages/home_screen.dart` | Owns notification preview state and builds the fixed six-card HYWORK phone feed. Defines: `HomeScreen`. |
+| `presentation/widgets/home_badge/home_badge.dart` | Reusable feed badge for pre-order, discount, or stock text. Defines: `HomeBadge`. |
+| `presentation/widgets/home_engagement_bar/home_engagement_bar.dart` | Rating, bookmark, comment, share, like, and add-to-cart metrics for a feed card. Defines: `HomeEngagementBar`. |
+| `presentation/widgets/home_feed_header/home_feed_header.dart` | HYWORK wordmark and notification-bell entry. Defines: `HomeFeedHeader`. |
+| `presentation/widgets/home_metric/home_metric.dart` | Individual icon/count action with tooltip and toggle semantics. Defines: `HomeMetric`. |
+| `presentation/widgets/home_notification_button/home_notification_button.dart` | Bell button with unread notification badge. Defines: `HomeNotificationButton`. |
+| `presentation/widgets/home_product_card/home_product_card.dart` | Owns per-card like/bookmark preview state and adds the sample phone to CartCubit. Defines: `HomeProductCard`. |
+| `presentation/widgets/home_product_details/home_product_details.dart` | Right-aligned sample product title and category. Defines: `HomeProductDetails`. |
+| `presentation/widgets/home_product_image/home_product_image.dart` | Network product image, loading/retry fallback, and overlaid feed badges. Defines: `HomeProductImage`. |
+| `presentation/widgets/home_product_price/home_product_price.dart` | Responsive sample price, original price, currency, and stock badge. Defines: `HomeProductPrice`. |
+
+### Customer Cart
+
+Base: `lib/features/cart/` — 32 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/demo_cart_items.dart` | Initial sample cart content and preview order snapshots. |
+| `data/local_cart_repository.dart` | Loads/saves cart.json with temporary-file replacement in app Documents. Defines: `LocalCartRepository`. |
+| `domain/models/cart_item.dart` | Exact integer quantity/price model, stock rules, unit behavior, and JSON validation. Defines: `CartItem`. |
+| `domain/models/cart_order.dart` | Existing order snapshot model for local history; not proof of a gateway transaction. Defines: `CartOrder`. |
+| `domain/models/cart_order_status.dart` | Stable order-status enum names, labels, and legacy parsing. Defines: `CartOrderStatus`. |
+| `domain/models/cart_snapshot.dart` | Versioned serialized cart items and order-history container. Defines: `CartSnapshot`. |
+| `domain/models/payment_method.dart` | Supported preview bank/payment choices and their artwork/labels. Defines: `PaymentMethod`. |
+| `domain/repositories/cart_repository.dart` | Cart load/save interface plus a memory adapter for previews or tests. Defines: `CartRepository`, `MemoryCartRepository`. |
+| `presentation/cubit/cart_cubit.dart` | Owns cart mutations, stock limits, checkout stage, filters, totals inputs, and serialized local saves. Defines: `CartCubit`. |
+| `presentation/cubit/cart_state.dart` | Immutable cart/history/checkout selections and computed exact integer totals. Defines: `CartStage`, `CartTab`, `CartState`. |
+| `presentation/helpers/cart_format.dart` | Persian/Arabic/Latin amount parsing and hundredths-aware quantity/currency formatting. |
+| `presentation/helpers/cart_labels.dart` | Localized known demo labels and display helpers without rewriting stored identity. |
+| `presentation/pages/cart_screen.dart` | Composes the cart header, tabs, filters, content, and checkout stage; delegates dashboard Back. Defines: `CartScreen`. |
+| `presentation/widgets/cart_amount_dialog/cart_amount_dialog.dart` | Quantity/charges entry sheet with numeric validation and returned amount. Defines: `CartAmountDialog`. |
+| `presentation/widgets/cart_checkout/cart_checkout.dart` | Scrollable checkout composition: chosen items, totals, bank choices, and escrow explanation. Defines: `CartCheckout`. |
+| `presentation/widgets/cart_delete_background/cart_delete_background.dart` | Swipe-removal background behind a dismissible cart item. Defines: `CartDeleteBackground`. |
+| `presentation/widgets/cart_dialog_actions/cart_dialog_actions.dart` | Cancel/Done row for cart amount sheets. Defines: `CartDialogActions`. |
+| `presentation/widgets/cart_empty_state/cart_empty_state.dart` | Scrollable empty/no-orders/no-sales message with cart artwork. Defines: `CartEmptyState`. |
+| `presentation/widgets/cart_header/cart_header.dart` | Back, right-aligned cart/checkout title, and optional status menu. Defines: `CartHeader`. |
+| `presentation/widgets/cart_item_badge/cart_item_badge.dart` | Pre-order or order-status badge on an item. Defines: `CartItemBadge`. |
+| `presentation/widgets/cart_item_card/cart_item_card.dart` | Item image, title, category, quantity action, amount, and read-only variant for history. Defines: `CartItemCard`. |
+| `presentation/widgets/cart_item_image/cart_item_image.dart` | Product thumbnail with loading/error handling. Defines: `CartItemImage`. |
+| `presentation/widgets/cart_items_list/cart_items_list.dart` | Cart item list, swipe removal, quantity editor, and item checkout entry. Defines: `CartItemsList`. |
+| `presentation/widgets/cart_order_history/cart_order_history.dart` | Expandable persisted order snapshots and read-only item cards. Defines: `CartOrderHistory`. |
+| `presentation/widgets/cart_payment_methods/cart_payment_methods.dart` | Bank radio rows for the selected preview payment method. Defines: `CartPaymentMethods`. |
+| `presentation/widgets/cart_payment_summary/cart_payment_summary.dart` | Subtotal, discount, editable charges, and total display. Defines: `CartPaymentSummary`. |
+| `presentation/widgets/cart_quantity_button/cart_quantity_button.dart` | Quantity/unit chip that opens the amount editor. Defines: `CartQuantityButton`. |
+| `presentation/widgets/cart_section/cart_section.dart` | Named checkout section wrapper and heading. Defines: `CartSection`. |
+| `presentation/widgets/cart_status_filter/cart_status_filter.dart` | Active status chip with clear-filter action. Defines: `CartStatusFilter`. |
+| `presentation/widgets/cart_status_menu/cart_status_menu.dart` | Status filter popup; selection filters records and never rewrites order status. Defines: `CartStatusMenu`. |
+| `presentation/widgets/cart_storage_notice/cart_storage_notice.dart` | Recoverable local-save/load error notice and retry action. Defines: `CartStorageNotice`. |
+| `presentation/widgets/cart_tabs/cart_tabs.dart` | Cart/history/sales tab controls. Defines: `CartTabs`. |
+
+### Customer Search
+
+Base: `lib/features/search/` — 15 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/demo_search_posts.dart` | Explicit service samples, asset images, prices, discounts, and supported cities. Defines: `DemoSearchPost`. |
+| `data/search_catalog.dart` | Normalizes Persian/Arabic query variants and filters the fixed demo city/query catalog. Defines: `SearchCatalog`. |
+| `presentation/cubit/search_cubit.dart` | Owns query, submitted query, selected city, and results/cities/suggestions panel transitions. Defines: `SearchCubit`. |
+| `presentation/cubit/search_state.dart` | Immutable search-panel and query/city state. Defines: `SearchPanel`, `SearchState`. |
+| `presentation/page/search_screen/search_screen.dart` | Feature entry that provides SearchCubit and builds SearchView. Defines: `SearchScreen`. |
+| `presentation/page/search_screen/search_view.dart` | Owns text/focus controllers, submits queries, handles Back/clear, and connects header to content. Defines: `SearchView`. |
+| `presentation/widgets/search_screen_widgets/search_city_button/search_city_button.dart` | Location icon and selected-city label; opens the inline city list. Defines: `SearchCityButton`. |
+| `presentation/widgets/search_screen_widgets/search_city_list/search_city_list.dart` | Full selectable city rows for the current search panel. Defines: `SearchCityList`. |
+| `presentation/widgets/search_screen_widgets/search_content/search_content.dart` | Chooses city list, suggestions, empty state, or result grid and opens PostDetailScreen. Defines: `SearchContent`. |
+| `presentation/widgets/search_screen_widgets/search_empty_state/search_empty_state.dart` | Scrollable no-results content and reset/show-all action. Defines: `SearchEmptyState`. |
+| `presentation/widgets/search_screen_widgets/search_header/search_header.dart` | Search field, contextual Back/close control, and city selector composition. Defines: `SearchHeader`. |
+| `presentation/widgets/search_screen_widgets/search_query_field/search_query_field.dart` | Query entry, submit action, clear action, and field styling. Defines: `SearchQueryField`. |
+| `presentation/widgets/search_screen_widgets/search_result_card/search_result_card.dart` | Sample service thumbnail, badges, title, price, and impression tracking. Defines: `SearchResultCard`. |
+| `presentation/widgets/search_screen_widgets/search_results_grid/search_results_grid.dart` | Text-scale-aware grid and controller for search result cards. Defines: `SearchResultsGrid`. |
+| `presentation/widgets/search_screen_widgets/search_suggestions/search_suggestions.dart` | Filtered suggestion rows that submit the selected wording. Defines: `SearchSuggestions`. |
+
+### Common Create Post and gallery
+
+Base: `lib/features/create_post/` — 36 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/gallery_library_changes.dart` | Reference-counted native gallery-change subscriptions shared across overlapping gallery routes. Defines: `GalleryLibraryChanges`. |
+| `domain/models/gallery_attachment.dart` | Selection wrapper for a native AssetEntity or picked PlatformFile, with stable selection ID. Defines: `GalleryAttachment`. |
+| `domain/models/post_draft.dart` | Session form values, clearable optional fields, Quill Delta/plain caption, and publishing JSON. Defines: `CreatePostType`, `PostDraft`. |
+| `domain/models/post_options.dart` | Preparation/inventory choices plus address/schedule dialog-result wrappers. Defines: `PreparationTime`, `InventoryStatus`, `AddressSelection`, `ScheduleSelection`. |
+| `domain/validation/post_draft_validator.dart` | Shared required media/type/title/caption and future-schedule rules. Defines: `PostDraftIssue`, `PostDraftValidator`. |
+| `presentation/cubit/create_post_cubit.dart` | Updates the shared session PostDraft as form fields and dialogs return values. Defines: `CreatePostCubit`. |
+| `presentation/cubit/gallery_cubit.dart` | Media tab, native permission, asset pagination, refresh, selection, and document-picker state. Defines: `GalleryTab`, `GalleryStatus`, `GalleryState`, `GalleryCubit`. |
+| `presentation/helpers/post_caption_synchronizer.dart` | Keeps Quill Delta/plain text synchronized with the draft without owning controllers. Defines: `PostCaptionSynchronizer`. |
+| `presentation/helpers/post_option_selection.dart` | Applies returned optional dialog selections without treating cancellation as a clear action. |
+| `presentation/pages/create_post_details_screen.dart` | Owns form/caption controllers, validates publishing, calls PostsCubit, and returns the saved PostItem. Defines: `CreatePostDetailsScreen`. |
+| `presentation/pages/create_post_gallery_screen.dart` | Creates gallery/draft Cubits, handles Close/Next, and forwards published results back to Dashboard. Defines: `CreatePostGalleryScreen`. |
+| `presentation/widgets/address_dialog/address_dialog.dart` | Map, saved address choices, coordinates, validation, and returned address selection. Defines: `AddressDialog`. |
+| `presentation/widgets/address_dialog/location_map.dart` | Interactive OpenStreetMap pin selector with manual point placement and tile error feedback. Defines: `LocationMap`. |
+| `presentation/widgets/alt_text_dialog/alt_text_dialog.dart` | Per-attachment text descriptions with media previews and returned alt-text map. Defines: `AltTextDialog`. |
+| `presentation/widgets/caption_editor/caption_editor.dart` | Real Quill rich-text editor and toolbar bound to the route-owned controller. Defines: `CaptionEditor`. |
+| `presentation/widgets/caption_editor/client_caption_toolbar.dart` | Client-artwork toolbar actions connected to existing Quill formatting, undo, and redo callbacks. |
+| `presentation/widgets/features_dialog/features_dialog.dart` | Add/edit/remove product/service name-value pairs in the draft. Defines: `FeaturesDialog`. |
+| `presentation/widgets/gallery_content/gallery_content.dart` | Composes selected preview and gallery, using side-by-side panels in short landscape windows. Defines: `GalleryContent`. |
+| `presentation/widgets/gallery_grid/gallery_access_notice.dart` | Limited-access explanation plus Select more and system Settings actions. Defines: `GalleryAccessNotice`. |
+| `presentation/widgets/gallery_grid/gallery_body.dart` | Loading/denied/error/empty/media branches, thumbnail tiles, selection badges, and pagination retry. Defines: `GalleryBody`. |
+| `presentation/widgets/gallery_grid/gallery_files_grid.dart` | Scrollable file-picker help, Add files tile, selected document tiles, and removal callbacks. Defines: `GalleryFilesGrid`. |
+| `presentation/widgets/gallery_grid/gallery_grid.dart` | Owns lifecycle/library observers and composes refresh, permission notice, GalleryBody, and tab selector. Defines: `GalleryGrid`. |
+| `presentation/widgets/gallery_grid/gallery_tab_selector.dart` | Photo/video/file controls; selected media tabs are disabled and selected File can reopen the picker. Defines: `GalleryTabSelector`. |
+| `presentation/widgets/gallery_preview/gallery_preview.dart` | Selected single-asset preview or multi-selection grid; also defines GalleryFileTile used by editors and file lists. Defines: `GalleryPreview`, `GalleryFileTile`. |
+| `presentation/widgets/post_dialog/post_dialog.dart` | Shared post-sheet surface, opposite theme palette, scrollable shell, choice rows, and Cancel/Done actions. Defines: `PostDialog`, `PostDialogActions`, `PostChoiceTile`, `PostChoiceDialog`. |
+| `presentation/widgets/post_form_option_tile/post_form_option_tile.dart` | Label/value/action row that opens a post option dialog. Defines: `PostFormOptionTile`. |
+| `presentation/widgets/post_form_sections/post_basic_details_section.dart` | Post type, title, caption, and profile-category selector for the create form. Defines: `PostBasicDetailsSection`. |
+| `presentation/widgets/post_form_sections/post_options_section.dart` | Address, schedule, features, tags, and other optional create-form dialog entries. Defines: `PostOptionsSection`. |
+| `presentation/widgets/post_form_sections/post_pricing_inventory_section.dart` | Price/discount/stock controls and unit/preparation/inventory choices. Defines: `PostPricingInventorySection`. |
+| `presentation/widgets/post_form_sections/post_publish_actions.dart` | Bottom Cancel/Publish actions with busy state and tap guards. Defines: `PostPublishActions`. |
+| `presentation/widgets/post_type_dialog/post_type_dialog.dart` | Product/service type choices for a new draft. Defines: `TypePostDialog`. |
+| `presentation/widgets/preparation_time_dialog/preparation_time_dialog.dart` | Preparation-time choices returned to the draft. Defines: `PreparationTimeDialog`. |
+| `presentation/widgets/schedule_post_dialog/schedule_post_dialog.dart` | Calendar and time-range UI, validation, and explicit clear/cancel/save selection. Defines: `SchedulePostDialog`. |
+| `presentation/widgets/selected_media_grid/selected_media_grid.dart` | Selected attachment grid shown above create-post details. Defines: `SelectedMediaGrid`. |
+| `presentation/widgets/tags_dialog/tags_dialog.dart` | Add, deduplicate, and remove draft tags/keywords. Defines: `TagsDialog`. |
+| `presentation/widgets/unit_dialog/unit_dialog.dart` | Sale-unit selection using the shared PostUnit enum. Defines: `UnitDialog`. |
+
+### Common Posts, categories, editing and media
+
+Base: `lib/features/posts/` — 47 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/demo_posts.dart` | Original bundled profile post samples used for local preview/bootstrap behavior. |
+| `data/local_post_media_store.dart` | Copies picker files into private pending/final post folders; prepares previews and cleans only owned copies. Defines: `StoredPostMedia`, `LocalPostMediaStore`. |
+| `data/local_posts_repository.dart` | Versioned local post CRUD, sample migration, atomic index writes, and media commit/rollback coordination. Defines: `LocalPostsRepository`. |
+| `data/local_profile_categories_repository.dart` | Versioned category CRUD with initial tabs, stable IDs, serialized writes, and atomic replacement. Defines: `LocalProfileCategoriesRepository`. |
+| `data/profile_sample_posts.dart` | Converts original profile cards into editable local records with stable IDs and asset-backed media. |
+| `domain/models/post_media_changes.dart` | Explicit retained media paths and new additions for one post update. Defines: `PostMediaChanges`. |
+| `domain/models/profile_category.dart` | Stable user-managed category ID/name; All is represented separately as a null filter. Defines: `ProfileCategory`. |
+| `domain/posts_repository.dart` | Publish/load/update/delete interface and domain failure type; backend ownership enforcement belongs in an adapter. Defines: `PostsRepository`, `PostPublishException`. |
+| `domain/profile_categories_repository.dart` | Load/create/rename/delete interface; category deletion must preserve posts and their media. Defines: `ProfileCategoriesRepository`, `ProfileCategoryException`. |
+| `domain/validation/profile_category_validator.dart` | Category-name rules shared by editor UI and local repository. Defines: `ProfileCategoryValidator`. |
+| `presentation/cubit/post_editor_media_cubit.dart` | Unsaved retained/new attachment selection independent of committed post storage. Defines: `PostEditorMediaCubit`. |
+| `presentation/cubit/post_editor_media_state.dart` | Immutable retained media/additions state and combined attachment count. Defines: `PostEditorMediaState`. |
+| `presentation/cubit/posts_cubit.dart` | Coordinates local post loading/publishing/updating/deleting and exposes busy/error/results state. Defines: `PostsCubit`. |
+| `presentation/cubit/posts_state.dart` | Post list, load/write errors, last-published result, delete state, and local manageability check. Defines: `PostsState`. |
+| `presentation/cubit/profile_categories_cubit.dart` | App-scoped categories, selected filter, errors, and serialized create/rename/delete coordination. Defines: `ProfileCategoriesCubit`. |
+| `presentation/cubit/profile_categories_state.dart` | Category list, selected ID, loading/saving flags, and error state. Defines: `ProfileCategoriesState`. |
+| `presentation/helpers/confirm_discard_post_changes.dart` | Discard confirmation used when leaving an edited post. |
+| `presentation/helpers/manage_post_actions.dart` | Owner-menu coordination, latest local record lookup, edit routing, and confirmed delete/pop behavior. |
+| `presentation/helpers/post_draft_mapper.dart` | Rehydrates every editable field from a stored post, using its base price to avoid applying discounts twice. |
+| `presentation/helpers/post_editor_validation.dart` | Editor number parsing/validation accepting Persian, Arabic, and Latin digits. Defines: `PostEditorValidation`. |
+| `presentation/pages/edit_post_screen.dart` | Owns a prefilled draft/media editor, validation, save/discard handling, and PostsCubit update. Defines: `EditPostScreen`. |
+| `presentation/pages/profile_categories_screen.dart` | Category manager entry, add action, and shared category state wiring. Defines: `ProfileCategoriesScreen`. |
+| `presentation/widgets/category_delete_sheet/category_delete_sheet.dart` | Confirm category deletion and explain that posts remain available under All. |
+| `presentation/widgets/category_editor_sheet/category_editor_sheet.dart` | Add/rename category form connected to ProfileCategoriesCubit validation/save state. |
+| `presentation/widgets/category_sheet_actions/category_sheet_actions.dart` | Cancel/Done or red Delete controls for category sheets. Defines: `CategorySheetActions`. |
+| `presentation/widgets/edit_post_form/edit_post_form.dart` | Composes the separate post-edit field sections in a scrollable form. Defines: `EditPostForm`. |
+| `presentation/widgets/post_category_selector/post_category_selector.dart` | Dropdown linked to stable category IDs; missing/deleted categories display as All only. Defines: `PostCategorySelector`. |
+| `presentation/widgets/post_delete_actions/post_delete_actions.dart` | Cancel/Delete buttons for post deletion with busy-state handling. Defines: `PostDeleteActions`. |
+| `presentation/widgets/post_delete_sheet/post_delete_sheet.dart` | Post delete confirmation, repository-backed action, errors, and successful result. Defines: `PostDeleteSheet`. |
+| `presentation/widgets/post_editor_actions/post_editor_actions.dart` | Bottom Cancel/Save Changes actions for the full editor. Defines: `PostEditorActions`. |
+| `presentation/widgets/post_editor_alt_text_fields/post_editor_alt_text_fields.dart` | Editable descriptions for retained/new media. Defines: `PostEditorAltTextFields`. |
+| `presentation/widgets/post_editor_basic_fields/post_editor_basic_fields.dart` | Post type, title, caption, and category fields in the full editor. Defines: `PostEditorBasicFields`. |
+| `presentation/widgets/post_editor_features_field/post_editor_features_field.dart` | Form field managing editable name-value feature rows. Defines: `PostEditorFeaturesField`. |
+| `presentation/widgets/post_editor_location_fields/post_editor_location_fields.dart` | Address text and coordinate editor connected to the draft. Defines: `PostEditorLocationFields`. |
+| `presentation/widgets/post_editor_media_grid/post_editor_media_grid.dart` | Grid of retained and newly selected media with remove callbacks. Defines: `PostEditorMediaGrid`. |
+| `presentation/widgets/post_editor_media_section/post_editor_media_section.dart` | Attachment section and gallery route for adding new media to an existing post. Defines: `PostEditorMediaSection`. |
+| `presentation/widgets/post_editor_media_tile/post_editor_media_tile.dart` | Existing or newly selected attachment preview with its remove control. Defines: `PostEditorMediaTile`. |
+| `presentation/widgets/post_editor_options_fields/post_editor_options_fields.dart` | Preparation, stock status, tags, and other editable option controls. Defines: `PostEditorOptionsFields`. |
+| `presentation/widgets/post_editor_pricing_fields/post_editor_pricing_fields.dart` | Price, discount, stock, and unit form controls with editor validation. Defines: `PostEditorPricingFields`. |
+| `presentation/widgets/post_editor_schedule_field/post_editor_schedule_field.dart` | Schedule editing dialog and optional schedule value handling. Defines: `PostEditorScheduleField`. |
+| `presentation/widgets/post_feature_editor_row/post_feature_editor_row.dart` | Editable feature name/value row and removal action. Defines: `PostFeatureEditorRow`. |
+| `presentation/widgets/post_media_view/post_media_view.dart` | Feature-owned post media renderer: asset/file image, video thumbnail badge, and file/video fallback. Defines: `PostMediaView`. |
+| `presentation/widgets/post_owner_action_tile/post_owner_action_tile.dart` | One Edit/Delete row inside the post owner menu. Defines: `PostOwnerActionTile`. |
+| `presentation/widgets/post_owner_actions_sheet/post_owner_actions_sheet.dart` | Returns the selected owner action without performing repository mutations itself. Defines: `PostOwnerAction`, `PostOwnerActionsSheet`. |
+| `presentation/widgets/profile_categories_body/profile_categories_body.dart` | Category list loading/error/empty/content states. Defines: `ProfileCategoriesBody`. |
+| `presentation/widgets/profile_category_row/profile_category_row.dart` | Category selection, rename, and delete controls for one tab. Defines: `ProfileCategoryRow`. |
+| `presentation/widgets/published_post_content.dart` | Read-only rich caption, title, tags, address, schedule, and stored content display. Defines: `PublishedPostContent`. |
+
+### Common Post Detail
+
+Base: `lib/features/post_detail/` — 9 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/cubit/post_detail_cubit.dart` | Route-local carousel image index and like/bookmark preview toggles. Defines: `PostDetailState`, `PostDetailCubit`. |
+| `presentation/pages/post_detail_screen.dart` | Resolves the latest stored post, provides detail state, opens analytics, and connects manageable owner actions. Defines: `PostDetailScreen`. |
+| `presentation/widgets/author_header/post_author_header.dart` | More menu, author identity, location, and avatar above a post. Defines: `PostAuthorHeader`. |
+| `presentation/widgets/content/post_content.dart` | Bundled fallback/sample post description content. Defines: `PostContent`. |
+| `presentation/widgets/content/post_detail_body.dart` | Scrollable composition of author, carousel, engagement, pricing, stored/sample content, and features. Defines: `PostDetailBody`. |
+| `presentation/widgets/engagement_bar/post_engagement_bar.dart` | Rating/actions and counts connected to detail like/bookmark state and optional comment/share callbacks. Defines: `PostEngagementBar`. |
+| `presentation/widgets/feature_table/post_features_table.dart` | Feature name/value table for sample or stored post data. Defines: `PostFeaturesTable`. |
+| `presentation/widgets/post_image_carousel/post_image_carousel.dart` | Asset/published-media paging, page changes, and media previews. Defines: `PostImageCarousel`. |
+| `presentation/widgets/pricing/post_pricing.dart` | Stored post price, original price, and sale unit presentation. Defines: `PostPricing`. |
+
+### Common Post Analytics
+
+Base: `lib/features/post_analytics/` — 18 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/post_analytics_repository.dart` | Analytics event load/save contract plus atomic JSON and memory implementations. Defines: `PostAnalyticsRepository`, `LocalPostAnalyticsRepository`, `MemoryPostAnalyticsRepository`. |
+| `domain/models/post_analytics.dart` | Periods, events, reports, sample reports, and local aggregation models. Defines: `AnalyticsPeriod`, `AnalyticsEventType`, `PostAnalyticsEvent`, `PostAnalyticsReport`. |
+| `presentation/cubit/post_analytics_cubit.dart` | App-scoped analytics load/record state and queued event persistence. Defines: `PostAnalyticsState`, `PostAnalyticsCubit`. |
+| `presentation/domain/cubit/post_analytics_cubit.dart` | Compatibility export for existing imports; the actual implementation is at presentation/cubit/post_analytics_cubit.dart. |
+| `presentation/pages/post_analytics_screen.dart` | Chooses sample or event-based report data and composes five chart sections. Defines: `PostAnalyticsScreen`. |
+| `presentation/widgets/activity_tracking/post_activity_tracking.dart` | Route/lifecycle watch-time tracking, positive like/save actions, and visibility-based impressions for published posts. Defines: `PostDetailActivityTracker`, `PostImpressionTracker`. |
+| `presentation/widgets/analytics_chart/analytics_charts.dart` | Exports the individual chart widget implementations. |
+| `presentation/widgets/analytics_chart/analytics_line_chart.dart` | Interactive line/area chart painter, selected-point handling, and tooltip composition. Defines: `AnalyticsLineChart`. |
+| `presentation/widgets/analytics_chart/analytics_orders_chart.dart` | Painter for the small daily orders/bookings chart. Defines: `AnalyticsOrdersChart`. |
+| `presentation/widgets/analytics_chart/analytics_polar_chart.dart` | Polar/channel impressions chart rendering. Defines: `AnalyticsPolarChart`. |
+| `presentation/widgets/analytics_chart/analytics_radar_chart.dart` | Comparison radar chart rendering. Defines: `AnalyticsRadarChart`. |
+| `presentation/widgets/analytics_controls/analytics_controls.dart` | Shared chart headings, period menus, tooltip, legend, summary, and number/date formatting helpers. Defines: `AnalyticsSectionHeading`, `AnalyticsTooltip`, `AnalyticsLegend`, `AnalyticsSummary`, `AnalyticsReportBuilder`. |
+| `presentation/widgets/analytics_header/analytics_header.dart` | Sample/current-device author metadata and post media preview above the charts. Defines: `AnalyticsPostHeader`. |
+| `presentation/widgets/average_time_viewed/average_time_viewed.dart` | Period/filter state and radar view for average watch time. Defines: `AverageTimeViewedSection`. |
+| `presentation/widgets/clicks_interactions/clicks_interactions.dart` | Period state and chart/summary for recorded interactions. Defines: `ClicksInteractionsSection`. |
+| `presentation/widgets/impressions/impressions.dart` | Channel visibility choices and polar impressions view. Defines: `ImpressionsSection`. |
+| `presentation/widgets/orders_bookings/orders_bookings.dart` | Daily orders/bookings sample or local report display and selected-day feedback. Defines: `OrdersBookingsSection`. |
+| `presentation/widgets/total_views/total_views.dart` | Period selection and total-views/exposure area chart. Defines: `TotalViewsSection`. |
+
+### Common Profile and settings list
+
+Base: `lib/features/profile/` — 13 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/page/profile_screen/profile_screen.dart` | Scrollable profile identity/statistics, category chips, and PostsCubit-backed grid. Defines: `ProfileScreen`. |
+| `presentation/page/profile_settings_screen/profile_settings_screen.dart` | Settings-list route; distinct from the personal-data editing screen in profile_settings. Defines: `ProfileSettingsScreen`. |
+| `presentation/widgets/profile_screen_widgets/category_chips/category_chips.dart` | Horizontally scrollable All/category filters and category-manager entry. Defines: `ProfileCategoryChips`. |
+| `presentation/widgets/profile_screen_widgets/category_chips/profile_category_chip.dart` | Selected/unselected Persian category pill. Defines: `ProfileCategoryChip`. |
+| `presentation/widgets/profile_screen_widgets/post_grid/profile_post_grid.dart` | Filters stored posts by selected category, adapts columns, and focuses a newly published post. Defines: `ProfilePostGrid`. |
+| `presentation/widgets/profile_screen_widgets/profile_avatar/profile_avatar.dart` | Profile image with the established avatar treatment. Defines: `ProfileAvatar`. |
+| `presentation/widgets/profile_screen_widgets/profile_header_actions/profile_header_actions.dart` | Theme menu, ChatInboxScreen entry, and three-dot ProfileSettingsScreen entry. Defines: `ProfileHeaderActions`. |
+| `presentation/widgets/profile_screen_widgets/profile_identity/profile_identity.dart` | Right-aligned seller name, account type, and bio preview. Defines: `ProfileIdentity`. |
+| `presentation/widgets/profile_screen_widgets/profile_post_card/profile_post_card.dart` | Post image/media, title/category/stock/pricing, and impression tracking in the profile grid. Defines: `ProfilePostCard`. |
+| `presentation/widgets/profile_screen_widgets/profile_stats/profile_stats.dart` | Responsive sample post/sale/customer statistics. Defines: `ProfileStats`. |
+| `presentation/widgets/profile_settings_screen_widgets/profile_settings_header/profile_settings_header.dart` | Back/title/Done header for the settings-list page. Defines: `ProfileSettingsHeader`. |
+| `presentation/widgets/profile_settings_screen_widgets/profile_settings_list/profile_settings_list.dart` | Seventeen settings rows; only profile edit, locations, and wallet currently navigate. Defines: `ProfileSettingsList`. |
+| `presentation/widgets/profile_settings_screen_widgets/profile_settings_tile/profile_settings_tile.dart` | One right-aligned settings row with optional navigation callback. Defines: `ProfileSettingsTile`. |
+
+### Common Personal Profile Settings
+
+Base: `lib/features/profile_settings/` — 6 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/pages/profile_edit_screen.dart` | Screen-local personal-data form and photo preview; Done closes without updating an account. Defines: `ProfileEditScreen`. |
+| `presentation/widgets/profile_birth_field/profile_birth_field.dart` | Birth-date form control and picker interaction. Defines: `ProfileBirthField`. |
+| `presentation/widgets/profile_edit_field/profile_edit_field.dart` | Reusable outlined profile-edit text input. Defines: `ProfileEditField`. |
+| `presentation/widgets/profile_edit_fields/profile_edit_fields.dart` | Name, surname, nationality, username, email, birth, gender, and bio composition. Defines: `ProfileEditFields`. |
+| `presentation/widgets/profile_photo_picker/profile_photo_picker.dart` | Screen-local profile photo selection/preview and camera badge UI. Defines: `ProfilePhotoPicker`. |
+| `presentation/widgets/settings_detail_header/settings_detail_header.dart` | Feature-owned Back/Done app bar reused by personal-profile editing and LocationsScreen. Defines: `SettingsDetailHeader`. |
+
+### Common Locations and permission prompt
+
+Base: `lib/features/locations/` — 8 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `presentation/helpers/show_location_permission_prompt.dart` | Checks support/existing permission and opens the forced-light custom location dialog when needed. |
+| `presentation/pages/locations_screen.dart` | Screen-local map preview and add/select location labels; no remote save or GPS lookup. Defines: `LocationsScreen`. |
+| `presentation/widgets/location_label_card/location_label_card.dart` | Label entry, sample address, and add-label action. Defines: `LocationLabelCard`. |
+| `presentation/widgets/location_map_preview/location_map_preview.dart` | OpenStreetMap preview centered on the design's sample location. Defines: `LocationMapPreview`. |
+| `presentation/widgets/location_permission_actions/location_permission_actions.dart` | Once/while-in-use/always/deny options, disabled while a request is running. Defines: `LocationPermissionActions`. |
+| `presentation/widgets/location_permission_dialog/location_permission_dialog.dart` | Custom permission prompt artwork, service calls, busy/error state, and close handling. Defines: `LocationPermissionDialog`. |
+| `presentation/widgets/location_permission_gate/location_permission_gate.dart` | One-time-per-gate entry hook after OTP; displays its Dashboard child immediately. Defines: `LocationPermissionGate`. |
+| `presentation/widgets/saved_location_list/saved_location_list.dart` | Local selectable saved-label buttons, sized to allow growing text. Defines: `SavedLocationList`. |
+
+### Common Notifications
+
+Base: `lib/features/notifications/` — 10 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/sample_notifications.dart` | Bundled notification preview records and their artwork/message data. |
+| `domain/models/app_notification.dart` | Notification title/message/time/image/unread-count model and copy behavior. Defines: `AppNotification`. |
+| `presentation/cubit/notifications_cubit.dart` | Search and mark-read behavior for the Home-owned notification preview state. Defines: `NotificationsCubit`. |
+| `presentation/cubit/notifications_state.dart` | Query, unread total, and filtered visible notification list. Defines: `NotificationsState`. |
+| `presentation/pages/notifications_screen.dart` | Consumes the Cubit supplied by Home and composes header, query field, and list. Defines: `NotificationsScreen`. |
+| `presentation/widgets/notification_avatar/notification_avatar.dart` | Brand/product avatar and unread-count badge. Defines: `NotificationAvatar`. |
+| `presentation/widgets/notification_header/notification_header.dart` | Back and right-aligned notification title. Defines: `NotificationHeader`. |
+| `presentation/widgets/notification_list/notification_list.dart` | Search/empty/content states and scrollable tappable notification rows. Defines: `NotificationList`. |
+| `presentation/widgets/notification_search_field/notification_search_field.dart` | Query controller, search decoration, and clear callback. Defines: `NotificationSearchField`. |
+| `presentation/widgets/notification_tile/notification_tile.dart` | Time, title/message, avatar, and mark-read tap target. Defines: `NotificationTile`. |
+
+### Common Wallet
+
+Base: `lib/features/wallet/` — 25 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/wallet_sample_data.dart` | Fixed preview balances, owner, presets, and today/yesterday transactions. Defines: `WalletSampleData`. |
+| `domain/models/wallet_transaction.dart` | Wallet transaction record and credit/debit/pending type. Defines: `WalletTransactionType`, `WalletTransaction`. |
+| `presentation/page/top_up_screen/top_up_screen.dart` | Amount and bank-choice preview; Payment only closes the screen. Defines: `TopUpScreen`. |
+| `presentation/page/wallet_screen/wallet_screen.dart` | Balance, action tiles, transaction list, and Top Up/Withdraw routing. Defines: `WalletScreen`. |
+| `presentation/page/withdraw_screen/withdraw_screen.dart` | Amount/account/OTP preview form; Done opens the withdrawal summary. Defines: `WithdrawScreen`. |
+| `presentation/page/withdraw_summary_screen/withdraw_summary_screen.dart` | Read-only sample withdrawal summary; Done returns true to close the withdrawal flow. Defines: `WithdrawSummaryScreen`. |
+| `presentation/widgets/top_up_screen_widgets/wallet_bank_logo.dart` | Bundled bank SVG renderer used throughout wallet previews. Defines: `WalletBankLogo`. |
+| `presentation/widgets/top_up_screen_widgets/wallet_bank_tile.dart` | Bank artwork and selected/unselected radio row. Defines: `WalletBankTile`. |
+| `presentation/widgets/top_up_screen_widgets/wallet_payment_methods.dart` | Screen-local selected bank for the Top Up preview. Defines: `WalletPaymentMethods`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_action_tile.dart` | Icon/label wallet action surface with optional callback. Defines: `WalletActionTile`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_actions_row.dart` | Responsive Top Up/Transfer/Request/Withdraw/Payment tiles; only Top Up/Withdraw currently navigate. Defines: `WalletActionsRow`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_balance_card.dart` | Layered balance card whose content grows; optional withdrawal footer. Defines: `WalletBalanceCard`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_bottom_button.dart` | Centered safe-area bottom action reused across wallet routes. Defines: `WalletBottomButton`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_card_footer.dart` | Owner label and optional withdrawal amount/details inside the balance card. Defines: `WalletCardFooter`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_header.dart` | Padded Back and Persian title app bar for wallet routes. Defines: `WalletHeader`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_transaction_tile.dart` | Signed amount, description/date, avatar, and transaction-status color. Defines: `WalletTransactionTile`. |
+| `presentation/widgets/wallet_screen_widgets/wallet_transactions.dart` | Today/yesterday grouped sample transaction list. Defines: `WalletTransactions`. |
+| `presentation/widgets/withdraw_screen_widgets/wallet_amount_presets.dart` | Selectable amount shortcuts that update the amount field. Defines: `WalletAmountPresets`. |
+| `presentation/widgets/withdraw_screen_widgets/wallet_amount_section.dart` | Amount controller, label, input, and linked preset selection. Defines: `WalletAmountSection`. |
+| `presentation/widgets/withdraw_screen_widgets/wallet_text_field.dart` | Reusable outlined wallet amount/account/OTP text input. Defines: `WalletTextField`. |
+| `presentation/widgets/withdraw_screen_widgets/withdraw_account_section.dart` | Sample account-number field and bank artwork. Defines: `WithdrawAccountSection`. |
+| `presentation/widgets/withdraw_screen_widgets/withdraw_otp_fields.dart` | Local OTP button/countdown fields and security explanation; no bank verification. Defines: `WithdrawOtpFields`. |
+| `presentation/widgets/withdraw_summary_screen_widgets/withdraw_illustration.dart` | Bundled withdrawal image used in the summary preview. Defines: `WithdrawIllustration`. |
+| `presentation/widgets/withdraw_summary_screen_widgets/withdraw_summary_details.dart` | Four summary rows populated from sample balances and account information. Defines: `WithdrawSummaryDetails`. |
+| `presentation/widgets/withdraw_summary_screen_widgets/withdraw_summary_row.dart` | Responsive label/value row with optional bank logo. Defines: `WithdrawSummaryRow`. |
+
+### Common Chat
+
+Base: `lib/features/chat/` — 34 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/demo_chats.dart` | Bundled inbox contacts, avatars, times, and preview messages. |
+| `data/device_chat_camera.dart` | image_picker camera bridge and streaming PlatformFile adapter for captured photos. Defines: `DeviceChatCamera`, `CameraPhotoFile`. |
+| `data/device_voice_recorder.dart` | record-backed microphone capture and temporary voice-draft file lifecycle. Defines: `DeviceVoiceRecorder`. |
+| `data/in_memory_chat_repository.dart` | Session-only seeded message history, deletes/clear, and blocked conversation IDs. Defines: `InMemoryChatRepository`. |
+| `data/just_audio_chat_player.dart` | just_audio adapter with one lazily initialized player per conversation. Defines: `JustAudioChatPlayer`. |
+| `data/local_chat_media_store.dart` | Copies selected media/voice into a private temporary chat cache and cleans only owned files. Defines: `LocalChatMediaStore`. |
+| `domain/models/chat_attachment.dart` | Message attachment type, local path, preview, and metadata. Defines: `ChatAttachmentType`, `ChatAttachment`. |
+| `domain/models/chat_conversation.dart` | Inbox contact/conversation preview record. Defines: `ChatConversation`. |
+| `domain/models/chat_location.dart` | Address/coordinates and external map URI for a location message. Defines: `ChatLocation`. |
+| `domain/models/chat_message.dart` | Text/media/location/voice message record and delivery-status metadata. Defines: `ChatDeliveryStatus`, `ChatMessage`. |
+| `domain/repositories/chat_messages_repository.dart` | Synchronous conversation-history and blocked-state contract for the current preview. Defines: `ChatMessagesRepository`. |
+| `domain/services/chat_audio_player.dart` | Playback snapshot and load/play/pause/seek/dispose service contract. Defines: `ChatPlayback`, `ChatAudioPlayer`. |
+| `domain/services/chat_media_store.dart` | Attachment/voice preparation and discard contract. Defines: `ChatMediaStore`. |
+| `domain/services/voice_recorder.dart` | Permission/start/stop/cancel/discard/dispose recording service contract. Defines: `VoiceRecorder`. |
+| `presentation/cubit/chat_inbox_cubit.dart` | Demo conversation previews, search, unread filtering, read state, and preview refresh. Defines: `ChatInboxState`, `ChatInboxCubit`. |
+| `presentation/cubit/conversation_cubit.dart` | Message actions, attachment preparation, send guards, selection/delete/clear/block, and error state. Defines: `ConversationState`, `ConversationCubit`. |
+| `presentation/cubit/voice_playback_cubit.dart` | Single active voice-note playback, position, duration, and recoverable errors. Defines: `VoicePlaybackState`, `VoicePlaybackCubit`. |
+| `presentation/cubit/voice_recording_cubit.dart` | Recording state machine, timer, cancellation, processing, preview, and cleanup. Defines: `VoiceRecordingPhase`, `VoiceRecordingState`, `VoiceRecordingCubit`. |
+| `presentation/helpers/chat_attachment_flow.dart` | Picker/camera/address route helpers that return selections to ConversationScreen. Defines: `ChatAttachmentSelection`. |
+| `presentation/helpers/chat_message_labels.dart` | Localized previews for text, attachment, voice, and location messages. |
+| `presentation/pages/chat_inbox_screen.dart` | Creates inbox state, composes search/list, and opens conversations with preview-update callbacks. Defines: `ChatInboxScreen`. |
+| `presentation/pages/conversation_screen.dart` | Owns conversation/recording/playback providers, controllers, lifecycle guards, picker/call routing, and actions. Defines: `ConversationScreen`. |
+| `presentation/widgets/attachment_sheet/chat_attachment_sheet.dart` | Document/location/camera/gallery chooser plus compact GalleryGrid; returns an action or selected photos. Defines: `ChatAttachmentAction`, `ChatAttachmentSheetResult`, `ChatAttachmentSheet`. |
+| `presentation/widgets/chat_conversation_tile/chat_conversation_tile.dart` | Inbox time/unread count, contact name/preview, and avatar row. Defines: `ChatConversationTile`. |
+| `presentation/widgets/conversation_actions/chat_action_dialog.dart` | Confirm destructive conversation actions and return the user's choice. |
+| `presentation/widgets/conversation_body/conversation_body.dart` | Messages, selection/blocked notices, composer/recording panel, and optional emoji panel. Defines: `ConversationBody`. |
+| `presentation/widgets/conversation_header/conversation_header.dart` | Back, contact/subtitle/avatar, call actions, selection controls, and options menu. Defines: `ConversationAction`, `ConversationHeader`. |
+| `presentation/widgets/emoji_panel/chat_emoji_panel.dart` | Emoji picker tied to the same message controller; OS keyboard remains available. Defines: `ChatEmojiPanel`. |
+| `presentation/widgets/message_bubble/chat_attachment_view.dart` | Image/file/video message attachment preview and external open action. Defines: `ChatAttachmentView`. |
+| `presentation/widgets/message_bubble/chat_location_view.dart` | Location message preview with external map-opening action and error feedback. Defines: `ChatLocationView`. |
+| `presentation/widgets/message_bubble/chat_message_bubble.dart` | Outgoing/incoming content, time/delivery markers, and selection/long-press behavior. Defines: `ChatMessageBubble`. |
+| `presentation/widgets/message_composer/chat_message_composer.dart` | Text entry, emoji, attachment/photo actions, and send-or-record button. Defines: `ChatMessageComposer`. |
+| `presentation/widgets/voice_message/chat_voice_player.dart` | Inline voice-note playback UI connected to VoicePlaybackCubit. Defines: `ChatVoicePlayer`. |
+| `presentation/widgets/voice_recording/voice_recording_panel.dart` | Recording/preview controls, elapsed time, Cancel, Stop, and Send actions. Defines: `VoiceRecordingPanel`. |
+
+### Common Calls
+
+Base: `lib/features/calls/` — 9 Dart files.
+
+| File relative to base | Responsibility and public declarations |
+| --- | --- |
+| `data/preview_call_service.dart` | Interactive fake call state; captures no media and contacts no remote user. Defines: `PreviewCallService`. |
+| `domain/models/call_session.dart` | Call type, phase/failure, timestamps, and microphone/speaker/camera flags. Defines: `CallType`, `CallPhase`, `CallFailure`, `CallSession`. |
+| `domain/services/call_service.dart` | Replaceable per-call signaling/media control contract for a future authenticated RTC adapter. Defines: `CallService`. |
+| `presentation/cubit/call_cubit.dart` | Coordinates CallService state, elapsed time, controls, errors, and ending/disposal guards. Defines: `CallState`, `CallCubit`. |
+| `presentation/pages/call_screen.dart` | Voice/video preview route provided with CallCubit and optional real service/video overrides. Defines: `CallScreen`. |
+| `presentation/widgets/call_action_button.dart` | Themed circular call action with icon, tooltip, selection, and disabled state. Defines: `CallActionButton`. |
+| `presentation/widgets/call_avatar.dart` | Caller image and decorative rings for the voice preview. Defines: `CallAvatar`. |
+| `presentation/widgets/call_controls.dart` | Incoming/active call controls and their Cubit callbacks. Defines: `CallControls`. |
+| `presentation/widgets/call_video_stage.dart` | Sample/overridden remote video backdrop and local video/header camera controls. Defines: `CallVideoStage`, `CallVideoHeader`. |
+
+
+## Supporting files
+
+| Path | Purpose |
+| --- | --- |
+| [CODING_RULES.md](CODING_RULES.md) | Required coding/refactoring/communication rules. Read before changes. |
+| [pubspec.yaml](pubspec.yaml) | Package name/version, Dart constraint, dependencies, font and explicit asset registrations. |
+| [pubspec.lock](pubspec.lock) | Resolved dependency versions for reproducible application installs. |
+| [analysis_options.yaml](analysis_options.yaml) | Flutter lints and generated/native directory exclusions. |
+| [android/](android/) | Android runner, permissions, Gradle/toolchain and native build adapters. |
+| [ios/](ios/) | iOS runner, usage descriptions, Xcode project and generated Swift Package integration references. |
+| [test/features/create_post/](test/features/create_post/) | Gallery behavior/visual tests and fixtures described above. |
+| [tool/client_icons.json](tool/client_icons.json) | Original client sheet crop manifest. |
+| [tool/extract_client_icons.py](tool/extract_client_icons.py) | Pillow-based extraction/verification of the original PNG collection. |
+| [tool/supplemental_icons.json](tool/supplemental_icons.json) | Supplemental raster artwork manifest. |
+| [tool/extract_supplemental_icons.py](tool/extract_supplemental_icons.py) | Supplemental raster extraction/checking tool. |
+| [tool/supplemental_vectors.json](tool/supplemental_vectors.json) | Supplemental vector import manifest. |
+| [tool/import_supplemental_vectors.py](tool/import_supplemental_vectors.py) | Imports/verifies the supplemental SVG artwork described by that manifest. |
+| `macos/`, `windows/`, `linux/`, `web/` | Platform runner projects; not evidence that every native feature is implemented/tested there. |
+| `build/`, `.dart_tool/`, `ios/Flutter/ephemeral/` | Generated outputs/cache, not source feature locations or places to patch application code. |
+
+Notable package responsibilities are visible in `pubspec.yaml`: `flutter_bloc` for state; gallery/file/image-picker packages for device media; `flutter_quill` for captions; `flutter_map`/`latlong2` for maps; `record`/`just_audio` for voice notes; `emoji_picker_flutter` for emoji; `open_filex`/`url_launcher` for external viewers; country-code/pinput packages for auth previews; SVG/Rive/responsive packages for UI infrastructure. `shared_preferences` is declared under dev dependencies, but the documented persistence adapters use JSON files rather than a preferences-backed account store.
 
 ## Repository workflow
 
-The reviewed local checkout uses branch `main`, with upstream `client/main`.
-Its configured remotes are:
+This reviewed checkout uses branch `main`. Its configured repositories are:
 
-| Remote | URL / purpose |
-| --- | --- |
-| `client` | `https://github.com/mojtaba-zarabi/mobile-hywork.git` — client repository. |
-| `origin` | `https://github.com/zeeeshaan/nini.git` — existing personal repository. |
+- `client`: `https://github.com/mojtaba-zarabi/mobile-hywork.git`
+- `origin`: `https://github.com/zeeeshaan/nini.git`
 
-These aliases belong to this checkout. A fresh clone of the client repository
-normally calls that repository `origin`. Check before pushing:
+A fresh clone may use different aliases. Inspect before committing/pushing:
 
 ```sh
 git status --short --branch
 git remote -v
 ```
 
-After reviewing and committing the intended changes, this checkout can explicitly
-send its current commit to the client main branch with:
+Do not reset, discard, stage, commit, or push existing work as a side effect of a feature task. Folder moves and a README update do not publish code. Use the repository/branch explicitly requested by the user when a push is authorized.
 
-```sh
-git push client HEAD:main
+## Copyable ChatGPT handoff prompt
+
+Use this with repository access or attach the relevant source files together with README.md and CODING_RULES.md:
+
+```text
+You are working on the Flutter project Nini / HYWORK (package: nini).
+Read CODING_RULES.md first, then README.md, then the actual relevant source.
+
+Current structure:
+- All features live directly under lib/features, including splash, login,
+  otp_verification, dashboard, home, cart, search, profile, profile_settings,
+  posts, create_post, post_detail, post_analytics, wallet, locations,
+  notifications, chat and calls. No provider dashboard or role switch exists.
+- lib/shared contains app-wide primitive widgets and shared post models.
+
+Use existing Cubits and native Navigator. Preserve public APIs, state transitions,
+async guards, JSON/model contracts, persistence, routes, animations, spacing,
+themes, responsive behavior, Persian labels and the established layout order.
+Do not assume the UI previews are connected to an API. Login/OTP, wallet,
+notifications and call previews have no real remote integration. Posts, categories,
+cart and analytics have local persistence; chat history is session-only.
+
+Read the complete implementation and callers before changing it. Make the smallest
+safe change in the relevant feature. Do not duplicate existing features or move
+feature-owned widgets into lib/shared merely to shorten imports. Do not add
+packages, replace architecture, or rewrite working features without a concrete need.
+For a refactor, propose a scoped plan first and wait for approval. Leave changes
+out if their behavior equivalence cannot be verified. Preserve unrelated local work.
+
+After approved code edits, format changed Dart files, run relevant analysis/tests,
+review the diff, and report exactly what was checked and what remains unverified.
+Do not update golden baselines, commit, push or deploy merely to make checks pass.
+
+My requested task is:
+[Describe the exact feature/change here.]
 ```
-
-This README describes the working tree. It does not mean uncommitted UI changes
-have been uploaded, deployed, or merged. Documentation updates do not stage,
-commit, or push source changes automatically.

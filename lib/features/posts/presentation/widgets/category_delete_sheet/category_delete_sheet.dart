@@ -1,3 +1,5 @@
+import 'package:nini/core/localization/category_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/persian_feature.dart';
@@ -17,7 +19,9 @@ Future<void> showCategoryDelete(
     context,
     BlocProvider.value(
       value: categories,
-      child: PersianFeature(child: _CategoryDeleteSheet(category: category)),
+      child: CategoryStrings.of(context).english
+          ? _CategoryDeleteSheet(category: category)
+          : PersianFeature(child: _CategoryDeleteSheet(category: category)),
     ),
   );
 }
@@ -31,12 +35,14 @@ class _CategoryDeleteSheet extends StatelessWidget {
         builder: (context, state) => PopScope(
           canPop: !state.saving,
           child: PostDialog(
-            title: ProfilePostStrings.deleteTab,
+            title: CategoryStrings.of(context)
+                .text(ProfilePostStrings.deleteTab),
             textDirection: TextDirection.rtl,
             actions: CategorySheetActions(
               saving: state.saving,
               destructive: true,
-              submitLabel: ProfilePostStrings.delete,
+              submitLabel: CategoryStrings.of(context)
+                  .text(ProfilePostStrings.delete),
               onSubmit: () async {
                 final deleted = await context
                     .read<ProfileCategoriesCubit>()
@@ -49,15 +55,17 @@ class _CategoryDeleteSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  ProfilePostStrings.deleteQuestion(
-                    ProfilePostStrings.categoryName(category.id, category.name),
+                  CategoryStrings.of(context).deleteQuestion(
+                    CategoryStrings.of(context)
+                        .name(category.id, category.name),
                   ),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  ProfilePostStrings.deleteHelp,
+                Text(
+                  CategoryStrings.of(context)
+                      .text(ProfilePostStrings.deleteHelp),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                 ),
@@ -65,8 +73,8 @@ class _CategoryDeleteSheet extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 12),
                     child: Text(
-                      state.error!,
-                      style: TextStyle(
+                      CategoryStrings.of(context).text(state.error!),
+                      style: AppTextStyles.inherit.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),
                       textDirection: TextDirection.rtl,

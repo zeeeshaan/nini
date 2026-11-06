@@ -1,313 +1,318 @@
-/// Persian copy shared by screens, tooltips, and accessibility labels.
+/// English development copy shared by screens, tooltips, and accessibility labels.
 abstract final class AppStrings {
-  static const appName = 'نینی';
-  static const appearance = 'ظاهر برنامه';
-  static const systemTheme = 'پیروی از تنظیمات دستگاه';
-  static const lightTheme = 'حالت روشن';
-  static const darkTheme = 'حالت تیره';
-  static const home = 'خانه';
-  static const cart = 'سبد خرید';
-  static const cartAdded = 'به سبد خرید اضافه شد';
-  static const viewCart = 'مشاهده سبد خرید';
+  static const appName = 'HYWORK';
+  static const appearance = "Appearance";
+  static const systemTheme = "Use device theme";
+  static const lightTheme = "Light";
+  static const darkTheme = "Dark";
+  static const home = "Home";
+  static const cart = "Cart";
+  static const addToCart = "Add to Cart";
+  static const cartAdded = "Added to Cart";
+  static const viewCart = "View Cart";
   static const cartStorageError =
-      'ذخیره‌سازی در دسترس نیست. تغییرات هنوز ذخیره نشده‌اند.';
-  static const cartStockExceeded = 'این مقدار از موجودی بیشتر است.';
-  static const create = 'ایجاد پست';
-  static const search = 'جستجو';
-  static const profile = 'پروفایل';
-  static const all = 'همه';
-  static const webDevelopment = 'توسعه وب';
-  static const electricalWiring = 'سیم‌کشی برق';
-  static const products = 'محصولات';
-  static const photography = 'عکاسی';
-  static const addCategory = 'افزودن دسته‌بندی';
-  static const messages = 'پیام‌ها';
-  static const moreOptions = 'گزینه‌های بیشتر';
-  static const morePostOptions = 'گزینه‌های بیشتر پست';
-  static const back = 'بازگشت';
-  static const sellerName = 'موجی';
-  static const shopAndStore = 'فروشگاه';
+      "Storage is unavailable. Your changes have not been saved yet.";
+  static const cartStockExceeded = "This quantity exceeds the available stock.";
+  static const create = "Create Post";
+  static const search = "Search";
+  static const profile = "Profile";
+  static const all = "All";
+  static const webDevelopment = "Web Development";
+  static const electricalWiring = "Electrical Wiring";
+  static const products = "Products";
+  static const photography = "Photography";
+  static const addCategory = "Add category";
+  static const messages = "Messages";
+  static const message = 'Message';
+  static const followers = 'Followers';
+  static const follow = 'Follow';
+  static const following = 'Following';
+  static const noSellerPosts = 'No posts yet';
+  static const moreOptions = "More options";
+  static const morePostOptions = "More post options";
+  static const back = "Back";
+  static const toman = "toman";
+  static const sellerProfile = "Seller profile";
+  static String viewSellerProfile(String name) => 'View $name profile';
+  static const sellerName = "Moji";
+  static const shopAndStore = "Shop & Store";
   static const sellerBio =
-      'طراحی خلاق، علاقه‌مند به تبدیل ایده‌ها\nبه داستان‌های تصویری.';
-  static const profileImage = 'تصویر پروفایل موجی';
-  static const posts = 'پست‌ها';
-  static const sales = 'فروش‌ها';
-  static const customers = 'مشتریان';
-  static const headphoneTitle = 'هدفون بی‌سیم\nبلوتوثی';
-  static const mobile = 'موبایل';
-  static const from = 'از';
-  static const authorName = 'پایپ‌مستر';
-  static const authorLocation = 'تهران، ایران';
-  static const authorImage = 'تصویر پروفایل نویسنده';
-  static const like = 'پسندیدن';
-  static const unlike = 'لغو پسندیدن';
-  static const bookmark = 'ذخیره پست';
-  static const removeBookmark = 'حذف از ذخیره‌ها';
-  static const comments = 'دیدگاه‌ها';
-  static const share = 'اشتراک‌گذاری';
-  static const rating = 'امتیاز';
+      "Creative designer passionate about turning ideas\ninto visual stories.";
+  static const profileImage = "Moji profile picture";
+  static const posts = "Posts";
+  static const sales = "Sales";
+  static const customers = "Customers";
+  static const headphoneTitle = "Wireless\nBluetooth headphones";
+  static const mobile = "Mobile";
+  static const from = "From";
+  static const authorName = "PipeMaster";
+  static const authorLocation = "Tehran, Iran";
+  static const authorImage = "Author profile picture";
+  static const like = "Like";
+  static const unlike = "Unlike";
+  static const bookmark = "Save post";
+  static const removeBookmark = "Unsave post";
+  static const comments = "Comments";
+  static const share = "Share";
+  static const rating = "Rating";
 
-  static const postTitle = 'عنوان: «تعمیر حرفه‌ای شیرآلات چکه‌کننده!»';
+  static const postTitle = "Title: Fixing Leaky Faucets Like a Pro!";
   static const visualSuggestion =
-      'پیشنهاد تصویر: تصویری از یک شیر آب چکه‌کننده و لوله‌کش حرفه‌ای '
-      'با ابزار، یا تصاویر قبل و بعد از تعمیر.';
-  static const captionHeading = 'متن / توضیحات:';
+      "Image suggestion: a leaking faucet and a professional plumber with tools, or before-and-after repair photos.";
+  static const captionHeading = "Caption / description:";
   static const caption =
-      '«از چکه مداوم شیر آب خسته شده‌اید؟ 💧 نگذارید نشتی‌های کوچک '
-      'به مشکلات بزرگ تبدیل شوند! لوله‌کش‌های متخصص ما خدمات تعمیر '
-      'شیرآلات را سریع، مطمئن و با قیمت مناسب برای خانه‌ها و کسب‌وکارها '
-      'ارائه می‌دهند. با ابزار و روش‌های حرفه‌ای، از عملکرد درست '
-      'سیستم لوله‌کشی شما مطمئن می‌شویم.';
+      "Tired of a constantly dripping faucet? 💧 Do not let small leaks become big problems. Our experienced plumbers provide fast, reliable and affordable faucet repairs for homes and businesses, using professional tools and techniques.";
   static const serviceBenefits =
-      '✅ خدمات سریع و کارآمد\n'
-      '✅ قیمت مناسب\n'
-      '✅ لوله‌کش‌های باتجربه و دارای مجوز';
+      "✅ Fast and efficient service\n✅ Affordable pricing\n✅ Experienced, licensed plumbers";
   static const booking =
-      'همین امروز خدمات خود را رزرو کنید و با نشتی خداحافظی کنید! '
-      'با [شماره تماس] تماس بگیرید یا به [نشانی وب‌سایت] مراجعه کنید.»';
-  static const hashtagsHeading = 'هشتگ‌ها / کلیدواژه‌ها:';
+      "Book your service today and say goodbye to leaks! Call [phone number] or visit [website].";
+  static const hashtagsHeading = "Hashtags / keywords:";
   static const hashtags =
-      '#لوله‌کشی #تعمیر_شیرآلات #رفع_نشتی #لوله‌کش_فوری '
-      '#تعمیر_لوله #نگهداری_خانه #لوله‌کش_محلی';
-  static const callToActionHeading = 'دعوت به اقدام:';
+      "#Plumbing #FaucetRepair #LeakRepair #EmergencyPlumber #PipeRepair #HomeMaintenance #LocalPlumber";
+  static const callToActionHeading = "Call to action:";
   static const callToAction =
-      '«همین حالا برای تعیین زمان تعمیر شیرآلات تماس بگیرید '
-      'و از خانه‌ای بدون نشتی لذت ببرید!»';
-  static const featuresHeading = 'ویژگی‌ها';
+      "Call now to arrange your faucet repair and enjoy a leak-free home!";
+  static const featuresHeading = "Specifications";
   static const features = <(String, String)>[
-    ('برند', 'اپل، سامسونگ، شیائومی'),
-    ('مدل', 'آیفون ۱۵ پرو'),
-    ('سال عرضه', '۲۰۲۴'),
-    ('وضعیت', 'نو، کارکرده'),
-    ('رنگ', 'مشکی، نقره‌ای، آبی'),
-    ('جنس بدنه', 'آلومینیوم، شیشه، پلاستیک'),
-    ('وزن', '۱۸۷ گرم'),
-    ('ابعاد', '۱۴۶٫۶ × ۷۰٫۶ × ۷٫۸ میلی‌متر'),
+    ('Brand', 'Apple, Samsung, Xiaomi'),
+    ('Model', 'iPhone 15 Pro'),
+    ('Release year', '2024'),
+    ('Condition', 'New, used'),
+    ('Colour', 'Black, silver, blue'),
+    ('Body material', 'Aluminium, glass, plastic'),
+    ('Weight', '187 g'),
+    ('Dimensions', '146.6 × 70.6 × 7.8 mm'),
   ];
 
   // Creation flow, dialogs and post analytics.
-  static const cancel = 'انصراف';
-  static const done = 'تأیید';
-  static const add = 'افزودن';
-  static const close = 'بستن';
-  static const next = 'بعدی';
-  static const retry = 'تلاش دوباره';
-  static const tryAgain = 'تلاش دوباره';
-  static const createPost = 'ایجاد پست';
-  static const backToGallery = 'بازگشت به گالری';
-  static const publish = 'انتشار';
-  static const publishing = 'در حال انتشار…';
-  static const postType = 'نوع پست';
-  static const product = 'محصول';
-  static const services = 'خدمات';
-  static const productServiceTitle = 'عنوان محصول یا خدمت';
-  static const enterPostTitle = 'عنوان پست را وارد کنید';
-  static const postCaption = 'توضیحات';
-  static const undo = 'واگرد';
-  static const redo = 'انجام دوباره';
-  static const writeCaption = 'توضیحات پست را بنویسید…';
-  static const altText = 'متن جایگزین';
+  static const cancel = "Cancel";
+  static const done = "Done";
+  static const add = "Add";
+  static const close = "Close";
+  static const next = "Next";
+  static const retry = "Retry";
+  static const tryAgain = "Try again";
+  static const createPost = "Create Post";
+  static const backToGallery = "Back to gallery";
+  static const publish = "Publish";
+  static const publishing = "Publishing…";
+  static const postType = "Post type";
+  static const product = "Product";
+  static const services = "Services";
+  static const productServiceTitle = "Product or service title";
+  static const enterPostTitle = "Enter the post title";
+  static const postCaption = "Caption";
+  static const undo = "Undo";
+  static const redo = "Redo";
+  static const writeCaption = "Write a caption…";
+  static const altText = "Alt text";
   static const altTextHelp =
-      'برای هر پیوست توضیحی بنویسید تا کاربران صفحه‌خوان بتوانند محتوای آن را درک کنند.';
-  static const noAttachments = 'هیچ پیوستی انتخاب نشده است.';
-  static const describeAttachment = 'این پیوست را توصیف کنید…';
-  static const price = 'قیمت';
-  static const enterPrice = 'قیمت را وارد کنید';
-  static const discount = 'تخفیف';
-  static const zeroPercent = '۰٪';
-  static const inventoryStatus = 'وضعیت موجودی';
-  static const inventoryHelp = 'وضعیت فعلی موجودی را انتخاب کنید.';
-  static const warehouseStock = 'موجودی انبار';
-  static const enterStock = 'تعداد موجودی را وارد کنید';
-  static const stockAvailable = 'موجود';
-  static const stockUnavailable = 'ناموجود';
-  static const preOrder = 'پیش‌سفارش';
-  static const preparationTime = 'زمان آماده‌سازی';
-  static const unit = 'واحد';
-  static const unitPiece = 'قطعه';
-  static const unitItem = 'عدد';
-  static const unitHour = 'ساعت';
-  static const unitDay = 'روز';
-  static const unitSession = 'جلسه';
-  static const unitProject = 'پروژه';
-  static const unitMeter = 'متر';
-  static const unitCentimeter = 'سانتی‌متر';
-  static const unitKilogram = 'کیلوگرم';
-  static const unitSet = 'مجموعه';
-  static const scheduledPosts = 'زمان‌بندی انتشار';
-  static const time = 'زمان';
-  static const calendar = 'تقویم';
-  static const timeFrom = 'از';
-  static const timeTo = 'تا';
-  static const removeSchedule = 'حذف زمان‌بندی';
+      "Describe each attachment so screen reader users can understand its content.";
+  static const noAttachments = "No attachments selected.";
+  static const describeAttachment = "Describe this attachment…";
+  static const price = "Price";
+  static const enterPrice = "Enter the price";
+  static const discount = "Discount";
+  static const zeroPercent = "0%";
+  static const inventoryStatus = "Inventory status";
+  static const inventoryHelp = "Select the current inventory status.";
+  static const warehouseStock = "Warehouse stock";
+  static const enterStock = "Enter the stock quantity";
+  static const stockAvailable = "In stock";
+  static const stockUnavailable = "Out of stock";
+  static const preOrder = "Pre-order";
+  static const preparationTime = "Preparation time";
+  static const unit = "Unit";
+  static const unitPiece = "Piece";
+  static const unitItem = "Item";
+  static const unitHour = "Hour";
+  static const unitDay = "Day";
+  static const unitSession = "Session";
+  static const unitProject = "Project";
+  static const unitMeter = "Meter";
+  static const unitCentimeter = "Centimeter";
+  static const unitKilogram = "Kilogram";
+  static const unitSet = "Set";
+  static const scheduledPosts = "Schedule post";
+  static const time = "Time";
+  static const calendar = "Calendar";
+  static const timeFrom = "From";
+  static const timeTo = "To";
+  static const removeSchedule = "Remove schedule";
   static const scheduleHelp =
-      'زمان بر اساس ساعت دستگاه است. اگر ساعت پایان زودتر باشد، پایان در روز بعد خواهد بود.';
-  static const differentTimesRequired = 'ساعت شروع و پایان باید متفاوت باشند.';
-  static const futureTimeRequired = 'تاریخ و ساعت شروعی در آینده انتخاب کنید.';
+      "Times use the device clock. If the end time is earlier, it ends the following day.";
+  static const differentTimesRequired =
+      "Start and end times must be different.";
+  static const futureTimeRequired = "Choose a future start date and time.";
   static const schedulePassed =
-      'زمان تعیین‌شده گذشته است. زمانی در آینده انتخاب کنید.';
-  static const location = 'موقعیت مکانی';
-  static const address = 'نشانی';
-  static const enterFullAddress = 'نشانی کامل را وارد کنید';
-  static const addAddress = 'افزودن نشانی';
+      "The scheduled time has passed. Choose a future time.";
+  static const location = "Location";
+  static const address = "Address";
+  static const enterFullAddress = "Enter the full address";
+  static const addAddress = "Add address";
   static const addressPinRequired =
-      'نشانی را وارد کنید و برای تعیین موقعیت آن، روی نقشه بزنید.';
+      "Enter an address and tap the map to choose its location.";
   static const chooseMapLocation =
-      'برای انتخاب موقعیت دقیق روی نقشه بزنید. نمای اولیه نقشه، تهران است.';
+      "Tap the map to select an exact location. The initial map is centered on Tehran.";
   static const mapUnavailable =
-      'نقشه در دسترس نیست. اتصال اینترنت را بررسی کنید.';
-  static const mapAttribution = '© مشارکت‌کنندگان اوپن‌استریت‌مپ';
-  static const feature = 'ویژگی';
-  static const featureValue = 'مقدار';
-  static const addFeature = 'افزودن ویژگی';
-  static const saveFeature = 'ذخیره ویژگی';
-  static const featureAndValueRequired = 'نام ویژگی و مقدار آن را وارد کنید.';
-  static const featureExists =
-      'این ویژگی قبلاً اضافه شده است. برای ویرایش روی آن بزنید.';
-  static const firstFeatureHelp = 'نخستین ویژگی را از قسمت بالا اضافه کنید.';
-  static const tagsKeywords = 'برچسب‌ها و کلیدواژه‌ها';
-  static const keywords = 'کلیدواژه‌ها';
-  static const separateTags = 'برچسب‌ها را با ویرگول جدا کنید';
-  static const addTags = 'افزودن برچسب';
-  static const galleryAccessRequired = 'اجازه دسترسی به گالری تصاویر را بدهید.';
+      "Map unavailable. Check your internet connection.";
+  static const mapAttribution = "© OpenStreetMap contributors";
+  static const feature = "Feature";
+  static const featureValue = "Value";
+  static const addFeature = "Add feature";
+  static const saveFeature = "Save feature";
+  static const featureAndValueRequired = "Enter a feature name and value.";
+  static const featureExists = "This feature already exists. Tap it to edit.";
+  static const firstFeatureHelp = "Add your first feature above.";
+  static const tagsKeywords = "Tags & keywords";
+  static const keywords = "Keywords";
+  static const separateTags = "Separate tags with commas";
+  static const addTags = "Add tags";
+  static const galleryAccessRequired = "Allow access to your photo library.";
   static const limitedGalleryAccess =
-      'فقط عکس‌ها و ویدیوهای مجاز نمایش داده می‌شوند.';
-  static const selectMoreMedia = 'انتخاب موارد بیشتر';
-  static const fullGalleryAccess = 'دسترسی کامل در تنظیمات';
-  static const refreshGallery = 'تازه‌سازی گالری';
+      "Only permitted photos and videos are shown.";
+  static const selectMoreMedia = "Select more media";
+  static const fullGalleryAccess = "Full access in Settings";
+  static const refreshGallery = "Refresh gallery";
   static const filesPickerHelp =
-      'برای دیدن فایل‌های گوشی و انتخاب آن‌ها، روی افزودن فایل بزنید.';
-  static const openSettings = 'باز کردن تنظیمات';
-  static const galleryLoadFailed = 'بارگذاری گالری انجام نشد.';
-  static const yourGalleryLoadFailed = 'بارگذاری گالری شما انجام نشد.';
-  static const filesSelectionFailed = 'انتخاب فایل‌ها انجام نشد.';
-  static const noVideos = 'ویدیویی یافت نشد.';
-  static const noPhotos = 'عکسی یافت نشد.';
-  static const addFiles = 'افزودن فایل';
-  static const photo = 'عکس';
-  static const video = 'ویدیو';
-  static const file = 'فایل';
-  static const genericFile = 'فایل';
-  static const selectItemRequired = 'لطفاً حداقل یک مورد را انتخاب کنید.';
-  static const selectAttachmentRequired =
-      'لطفاً حداقل یک پیوست را انتخاب کنید.';
-  static const selectPostTypeRequired = 'لطفاً نوع پست را انتخاب کنید.';
-  static const titleRequired = 'لطفاً عنوان را وارد کنید.';
-  static const captionRequired = 'لطفاً توضیحات را وارد کنید.';
-  static const publishFailed = 'انتشار انجام نشد. لطفاً دوباره تلاش کنید.';
+      "Tap Add files to browse and select files on your device.";
+  static const openSettings = "Open Settings";
+  static const galleryLoadFailed = "Could not load the gallery.";
+  static const yourGalleryLoadFailed = "Could not load your gallery.";
+  static const filesSelectionFailed = "Could not select files.";
+  static const noVideos = "No videos found.";
+  static const noPhotos = "No photos found.";
+  static const addFiles = "Add files";
+  static const photo = "Photo";
+  static const video = "Video";
+  static const file = "File";
+  static const genericFile = "File";
+  static const selectItemRequired = "Select at least one item.";
+  static const selectAttachmentRequired = "Select at least one attachment.";
+  static const selectPostTypeRequired = "Select a post type.";
+  static const titleRequired = "Enter a title.";
+  static const captionRequired = "Enter a caption.";
+  static const publishFailed = "Could not publish. Please try again.";
   static const publishDetailsRequired =
-      'پیش از انتشار، رسانه، نوع پست، عنوان و توضیحات را وارد کنید.';
-  static const invalidPrice = 'قیمت معتبری وارد کنید.';
-  static const invalidDiscount = 'تخفیف باید بین ۰ تا ۱۰۰ باشد.';
+      "Add media, post type, title, and caption before publishing.";
+  static const invalidPrice = "Enter a valid price.";
+  static const invalidDiscount = "Discount must be between 0 and 100.";
   static const invalidStock =
-      'موجودی باید عدد صحیح و برابر یا بزرگ‌تر از صفر باشد.';
+      "Stock must be a whole number greater than or equal to zero.";
   static const mediaUnavailable =
-      'یکی از عکس‌ها یا ویدیوهای انتخاب‌شده در دسترس نیست. لطفاً آن را دوباره انتخاب کنید.';
+      "A selected photo or video is unavailable. Select it again.";
   static const storagePluginUnavailable =
-      'بخش ذخیره‌سازی یا گالری آماده نیست. برنامه را کاملاً ببندید و دوباره اجرا کنید؛ در صورت نیاز آن را دوباره بسازید. پیش‌نویس شما محفوظ است.';
+      "Storage or gallery is not ready. Restart the app; rebuild if needed. Your draft is preserved.";
   static const mediaExportFailed =
-      'رسانه انتخاب‌شده دریافت نشد. آن را در برنامه عکس‌ها باز کنید تا دانلود شود، سپس دوباره تلاش کنید. پیش‌نویس شما محفوظ است.';
-  static const savedPostsLoadFailed = 'بارگذاری پست‌های ذخیره‌شده انجام نشد.';
+      "Could not retrieve the selected media. Open it in Photos to download it, then try again. Your draft is preserved.";
+  static const savedPostsLoadFailed = "Could not load saved posts.";
   static const savePostFailed =
-      'ذخیره پست انجام نشد. پیش‌نویس شما محفوظ است. لطفاً دوباره تلاش کنید.';
-  static const analytics = 'آمار پست';
-  static const viewAnalytics = 'مشاهده آمار';
-  static const onThisDevice = 'در این دستگاه';
-  static const sampleData = 'داده‌های نمونه';
+      "Could not save the post. Your draft is preserved. Please try again.";
+  static const analytics = "Post analytics";
+  static const viewAnalytics = "View analytics";
+  static const onThisDevice = "On this device";
+  static const sampleData = "Sample data";
   static const analyticsSaveFailed =
-      'آمار این نشست در دسترس است، اما ذخیره آن انجام نشد.';
-  static const totalViews = 'مجموع بازدیدها';
-  static const interactions = 'تعامل‌ها';
-  static const clicksInteractions = 'کلیک‌ها و تعامل‌ها';
-  static const averageTimeViewed = 'میانگین زمان مشاهده';
-  static const impressions = 'دفعات نمایش';
-  static const views = 'بازدیدها';
-  static const totalOrdersBookings = 'مجموع سفارش‌ها و رزروها';
-  static const dailyAverage = 'میانگین روزانه';
-  static const sampleHours = '۸ ساعت';
-  static const thisPeriod = 'این دوره';
-  static const previousPeriod = 'دوره قبل';
-  static const likesShares = 'پسندها / اشتراک‌ها';
-  static const savesComments = 'ذخیره‌ها / دیدگاه‌ها';
-  static const other = 'سایر';
-  static const oneMonth = '۱ ماه';
-  static const threeMonths = '۳ ماه';
-  static const sixMonths = '۶ ماه';
-  static const twelveMonths = '۱۲ ماه';
-  static const january = 'ژانویه';
-  static const february = 'فوریه';
-  static const march = 'مارس';
-  static const april = 'آوریل';
-  static const may = 'مه';
-  static const june = 'ژوئن';
-  static const july = 'ژوئیه';
-  static const august = 'اوت';
-  static const september = 'سپتامبر';
-  static const october = 'اکتبر';
-  static const november = 'نوامبر';
-  static const december = 'دسامبر';
+      "Session analytics are available, but could not be saved.";
+  static const totalViews = "Total views";
+  static const interactions = "Interactions";
+  static const clicksInteractions = "Clicks and interactions";
+  static const averageTimeViewed = "Average viewing time";
+  static const impressions = "Impressions";
+  static const views = "Views";
+  static const totalOrdersBookings = "Total orders and bookings";
+  static const dailyAverage = "Daily average";
+  static const sampleHours = "8 hours";
+  static const thisPeriod = "This period";
+  static const previousPeriod = "Previous period";
+  static const likesShares = "Likes / shares";
+  static const savesComments = "Saves / comments";
+  static const other = "Other";
+  static const oneMonth = "1 month";
+  static const threeMonths = "3 months";
+  static const sixMonths = "6 months";
+  static const twelveMonths = "12 months";
+  static const january = "January";
+  static const february = "February";
+  static const march = "March";
+  static const april = "April";
+  static const may = "May";
+  static const june = "June";
+  static const july = "July";
+  static const august = "August";
+  static const september = "September";
+  static const october = "October";
+  static const november = "November";
+  static const december = "December";
 
-  static const sampleProducts = ['محصول ۱', 'محصول ۲', 'محصول ۳', 'محصول ۴'];
-  static const sampleDate = '۰۶/۰۵/۲۰۲۳';
-  static const sampleTotal = '۴٬۵۰۰٫۰۰ دلار';
-  static const sampleFirst = '۲٬۵۰۰٫۰۰ دلار';
-  static const sampleSecond = '۱٬۴۰۰٫۰۰ دلار';
-  static const sampleThird = '۴۵۰٫۰۰ دلار';
-  static const sampleFourth = '۴۰۰٫۰۰ دلار';
-  static const sampleRevenue = '۲۰٬۶۷۸٫۸۹ دلار';
-  static const sampleChange = '−۱٫۵٪';
-  static const weekdayLetters = ['د', 'س', 'چ', 'پ', 'ج', 'ش', 'ی'];
-  static const sampleWeekdays = ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش'];
-  static const hours = 'ساعت';
-  static const ordersBookings = 'سفارش / رزرو';
-  static String descriptionCount(int count) => '${persianDigits(count)} توضیح';
-  static String featureCount(int count) => '${persianDigits(count)} ویژگی';
-  static String removeFeature(String name) => 'حذف $name';
+  static const sampleProducts = [
+    'Product 1',
+    'Product 2',
+    'Product 3',
+    'Product 4',
+  ];
+  static const sampleDate = "06/05/2023";
+  static const sampleTotal = "4,500.00 USD";
+  static const sampleFirst = "2,500.00 USD";
+  static const sampleSecond = "1,400.00 USD";
+  static const sampleThird = "450.00 USD";
+  static const sampleFourth = "400.00 USD";
+  static const sampleRevenue = "20,678.89 USD";
+  static const sampleChange = "−1.5%";
+  static const weekdayLetters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  static const sampleWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  static const hours = "hours";
+  static const ordersBookings = "Order / booking";
+  static String descriptionCount(int count) =>
+      '${persianDigits(count)} descriptions';
+  static String featureCount(int count) =>
+      '${persianDigits(count)} specifications';
+  static String removeFeature(String name) => 'Remove $name';
   static String mapPin(double latitude, double longitude) =>
-      'مختصات: ${persianDigits(latitude.toStringAsFixed(5))}، ${persianDigits(longitude.toStringAsFixed(5))}';
-  static String scheduledFor(String date) => 'زمان‌بندی‌شده: $date';
-  static String analyticsPeriod(String title) => 'بازه زمانی $title';
-  static String viewCount(String value) => '$value بازدید';
-  static String impressionCount(String value) => '$value نمایش';
-  static String interactionCount(String value) => '$value تعامل';
-  static String averageMinutes(String value) => 'میانگین $value دقیقه';
-  static String averageSeconds(String value) => 'میانگین $value ثانیه';
-  static String seconds(String value) => '$value ثانیه';
+      'Coordinates: ${persianDigits(latitude.toStringAsFixed(5))}, ${persianDigits(longitude.toStringAsFixed(5))}';
+  static String scheduledFor(String date) => 'Scheduled for: $date';
+  static String analyticsPeriod(String title) => '$title period';
+  static String viewCount(String value) => '$value views';
+  static String impressionCount(String value) => '$value impressions';
+  static String interactionCount(String value) => '$value interactions';
+  static String averageMinutes(String value) => 'Average $value minutes';
+  static String averageSeconds(String value) => 'Average $value seconds';
+  static String seconds(String value) => '$value seconds';
   static String chartHelp(bool area) =>
-      'نمودار ${area ? totalViews : interactions}؛ برای مشاهده مقادیر روی نمودار بزنید یا انگشت خود را بکشید.';
+      '${area ? totalViews : interactions} chart. Tap or drag to view values.';
 
   /// Old locally saved posts can still contain the original English category.
   static String postCategory(String category) => switch (category) {
-    'Product' => product,
-    'Services' => services,
+    'Product' || 'محصول' => product,
+    'Services' || 'خدمات' => services,
     _ => category,
   };
 
   // Bundled demo contacts and messages, also used by the call preview headers.
-  static const chatSupportName = 'پشتیبانی';
-  static const demoObidName = 'عبید اماتی';
-  static const demoSarahName = 'سارا احمد';
-  static const demoAlexName = 'الکس مورگان';
-  static const demoDavidName = 'دیوید ویلسون';
-  static const demoNinaName = 'نینا پارکر';
-  static const demoJamesName = 'جیمز کارتر';
-  static const demoSupportPreview = 'امروز چطور می‌توانیم کمکتان کنیم؟';
-  static const demoThanksPreview = 'از پیامتان ممنونم.';
-  static const demoDetailsPreview = 'جزئیات را برایتان می‌فرستم.';
-  static const demoAvailabilityPreview = 'این محصول هنوز موجود است؟';
-  static const demoPricePreview = 'می‌توانیم درباره قیمت صحبت کنیم؟';
-  static const demoSoundsGoodPreview = 'خیلی خوب است، ممنون!';
-  static const demoSoonPreview = 'به‌زودی به شما پاسخ می‌دهم.';
-  static const demoMoreInfoPreview = 'لطفاً اطلاعات بیشتری بفرستید.';
-  static const demoAskAvailability = 'سلام! این کالا هنوز موجود است؟';
-  static const demoConfirmAvailability = 'سلام! بله، موجود است.';
-  static const demoAskDetails = 'می‌توانید اطلاعات بیشتری درباره آن بدهید؟';
-  static const demoShareDetails = 'حتماً! همه جزئیات را برایتان می‌فرستم.';
-  static const demoThankYou = 'عالی می‌شود. ممنون!';
+  static const chatSupportName = "Support";
+  static const demoObidName = "Obid Amati";
+  static const demoSarahName = "Sarah Ahmed";
+  static const demoAlexName = "Alex Morgan";
+  static const demoDavidName = "David Wilson";
+  static const demoNinaName = "Nina Parker";
+  static const demoJamesName = "James Carter";
+  static const demoSupportPreview = "How can we help you today?";
+  static const demoThanksPreview = "Thanks for your message.";
+  static const demoDetailsPreview = "I will send you the details.";
+  static const demoAvailabilityPreview = "Is this product still available?";
+  static const demoPricePreview = "Can we discuss the price?";
+  static const demoSoundsGoodPreview = "Sounds good, thank you!";
+  static const demoSoonPreview = "I will reply soon.";
+  static const demoMoreInfoPreview = "Please send more information.";
+  static const demoAskAvailability = "Hello! Is this item still available?";
+  static const demoConfirmAvailability = "Hello! Yes, it is available.";
+  static const demoAskDetails = "Could you share more details?";
+  static const demoShareDetails = "Of course! I will send all the details.";
+  static const demoThankYou = "That would be great. Thank you!";
 
   static String chatFileSize(int bytes) => bytes >= 1048576
-      ? '${persianDigits((bytes / 1048576).toStringAsFixed(1))} مگابایت'
-      : '${persianDigits((bytes / 1024).ceil())} کیلوبایت';
+      ? '${persianDigits((bytes / 1048576).toStringAsFixed(1))} MB'
+      : '${persianDigits((bytes / 1024).ceil())} KB';
 
   /// Display-only file labels; extensions and original filenames stay intact.
   static String fileTypeLabel(String extension) =>
@@ -323,133 +328,133 @@ abstract final class AppStrings {
         'BMP' ||
         'SVG' => photo,
         'MP4' || 'MKV' || 'MOV' || 'AVI' || 'WEBM' || 'M4V' => video,
-        'M4A' || 'AAC' || 'MP3' || 'WAV' || 'OGG' || 'FLAC' => 'صوت',
-        'ZIP' || 'RAR' || '7Z' || 'TAR' || 'GZ' => 'فشرده',
-        'XLS' || 'XLSX' || 'CSV' || 'ODS' => 'جدول',
-        'PPT' || 'PPTX' || 'ODP' => 'اسلاید',
+        'M4A' || 'AAC' || 'MP3' || 'WAV' || 'OGG' || 'FLAC' => 'Audio',
+        'ZIP' || 'RAR' || '7Z' || 'TAR' || 'GZ' => 'Archive',
+        'XLS' || 'XLSX' || 'CSV' || 'ODS' => 'Spreadsheet',
+        'PPT' || 'PPTX' || 'ODP' => 'Presentation',
         _ => genericFile,
       };
 
   // Chat controls and messages.
-  static const chat = 'گفتگوها';
-  static const chatOptions = 'گزینه‌های گفتگو';
-  static const showAllChats = 'نمایش همه گفتگوها';
-  static const unreadChats = 'گفتگوهای خوانده‌نشده';
-  static const markAllRead = 'علامت‌گذاری همه به‌عنوان خوانده‌شده';
-  static const noUnreadChats = 'گفتگوی خوانده‌نشده‌ای وجود ندارد';
-  static const noChatsFound = 'گفتگویی یافت نشد';
-  static const noMessages = 'هنوز پیامی وجود ندارد';
-  static const startChatting = 'برای شروع گفتگو پیامی بفرستید';
-  static const messageHint = 'پیام';
-  static const sendMessage = 'ارسال پیام';
-  static const emoji = 'شکلک‌ها';
-  static const keyboard = 'صفحه‌کلید';
-  static const noRecentEmoji = 'هنوز شکلکی انتخاب نکرده‌اید';
-  static const attachments = 'پیوست‌ها';
-  static const document = 'سند';
-  static const camera = 'دوربین';
-  static const gallery = 'گالری';
+  static const chat = "Chats";
+  static const chatOptions = "Chat options";
+  static const showAllChats = "Show all chats";
+  static const unreadChats = "Unread chats";
+  static const markAllRead = "Mark all as read";
+  static const noUnreadChats = "No unread chats";
+  static const noChatsFound = "No chats found";
+  static const noMessages = "No messages yet";
+  static const startChatting = "Send a message to start chatting";
+  static const messageHint = "Message";
+  static const sendMessage = "Send message";
+  static const emoji = "Emoji";
+  static const keyboard = "Keyboard";
+  static const noRecentEmoji = "No recent emoji";
+  static const attachments = "Attachments";
+  static const document = "Document";
+  static const camera = "Camera";
+  static const gallery = "Gallery";
   static const cameraAccessDenied =
-      'دسترسی به دوربین را در تنظیمات دستگاه فعال کنید.';
-  static const cameraCaptureFailed = 'عکس گرفته نشد. دوباره تلاش کنید.';
-  static const sendLocation = 'ارسال موقعیت مکانی';
-  static const openLocation = 'نمایش در نقشه';
-  static const locationOpenFailed =
-      'باز کردن نقشه انجام نشد. دوباره تلاش کنید.';
+      "Allow camera access in your device settings.";
+  static const cameraCaptureFailed = "Could not take the photo. Try again.";
+  static const sendLocation = "Send location";
+  static const openLocation = "Open in Maps";
+  static const locationOpenFailed = "Could not open Maps. Try again.";
   static String sendSelectedAttachments(int count) =>
-      'ارسال (${persianDigits(count)})';
-  static const attachFile = 'پیوست فایل';
-  static const photosVideos = 'عکس‌ها و ویدیوها';
-  static const voiceMessage = 'پیام صوتی';
-  static const recordVoice = 'ضبط پیام صوتی';
-  static const stopRecording = 'پایان ضبط';
-  static const recording = 'در حال ضبط';
-  static const recordingPreview = 'بازبینی پیام صوتی';
+      'Send (${persianDigits(count)})';
+  static const attachFile = "Attach file";
+  static const photosVideos = "Photos and videos";
+  static const voiceMessage = "Voice message";
+  static const recordVoice = "Record voice message";
+  static const stopRecording = "Stop recording";
+  static const recording = "Recording";
+  static const recordingPreview = "Recording preview";
   static const microphoneDenied =
-      'برای ضبط پیام صوتی، دسترسی به میکروفون را در تنظیمات دستگاه فعال کنید.';
-  static const recordingFailed = 'ضبط پیام صوتی انجام نشد. دوباره تلاش کنید.';
+      "Allow microphone access in your device settings to record a voice message.";
+  static const recordingFailed =
+      "Could not record your voice message. Try again.";
   static const recordingTooShort =
-      'پیام صوتی خیلی کوتاه است. کمی بیشتر ضبط کنید.';
-  static const mediaSendFailed =
-      'ارسال پیوست انجام نشد. لطفاً دوباره تلاش کنید.';
-  static const audioPlaybackFailed =
-      'پخش پیام صوتی انجام نشد. دوباره تلاش کنید.';
+      "The voice message is too short. Record for a little longer.";
+  static const mediaSendFailed = "Could not send the attachment. Try again.";
+  static const audioPlaybackFailed = "Could not play the audio. Try again.";
   static const fileOpenFailed =
-      'این فایل باز نشد. برنامه مناسب برای باز کردن آن را بررسی کنید.';
-  static const playVoice = 'پخش پیام صوتی';
-  static const pauseVoice = 'توقف پخش';
-  static const sendingAttachment = 'در حال آماده‌سازی پیوست…';
-  static const selectMessages = 'انتخاب پیام‌ها';
-  static const deleteMessages = 'حذف پیام‌ها';
-  static const deleteSelectedMessages = 'حذف پیام‌های انتخاب‌شده';
-  static const selectMessagesHelp = 'برای انتخاب روی پیام‌ها بزنید';
-  static const selectAllMessages = 'انتخاب همه پیام‌ها';
-  static const delete = 'حذف';
-  static const clearConversation = 'پاک کردن گفتگو';
-  static const clearConversationQuestion = 'همه پیام‌های این گفتگو پاک شوند؟';
+      "Could not open this file. Check that a suitable app is installed.";
+  static const playVoice = "Play voice message";
+  static const pauseVoice = "Pause voice message";
+  static const sendingAttachment = "Preparing attachment…";
+  static const selectMessages = "Select messages";
+  static const deleteMessages = "Delete messages";
+  static const deleteSelectedMessages = "Delete selected messages";
+  static const selectMessagesHelp = "Tap messages to select them";
+  static const selectAllMessages = "Select all messages";
+  static const delete = "Delete";
+  static const clearConversation = "Clear conversation";
+  static const clearConversationQuestion =
+      "Clear all messages in this conversation?";
   static const localDeleteHelp =
-      'پیام‌ها فقط از گفتگوی این دستگاه حذف می‌شوند.';
-  static const blockPerson = 'مسدود کردن کاربر';
-  static const unblockPerson = 'رفع مسدودیت کاربر';
-  static const blockQuestion = 'این کاربر مسدود شود؟';
+      "Messages will only be removed from this device.";
+  static const blockPerson = "Block user";
+  static const unblockPerson = "Unblock user";
+  static const blockQuestion = "Block this user?";
   static const blockHelp =
-      'تا زمانی که مسدودیت را بردارید، نمی‌توانید در این گفتگو پیام یا پیوست بفرستید.';
-  static const personBlocked = 'این کاربر را مسدود کرده‌اید.';
-  static const blocked = 'مسدودشده';
-  static const copiedMessage = 'پیام کپی شد';
-  static const copyMessage = 'کپی پیام';
-  static const audioCall = 'تماس صوتی';
-  static const videoCall = 'تماس تصویری';
+      "You cannot send messages or attachments until you unblock this user.";
+  static const personBlocked = "You have blocked this user.";
+  static const blocked = "Blocked";
+  static const copiedMessage = "Message copied";
+  static const copyMessage = "Copy message";
+  static const audioCall = "Audio call";
+  static const videoCall = "Video call";
   // Call screen previews; no media is captured or transmitted.
-  static const callPreview = 'پیش‌نمایش تماس';
-  static const incomingCall = 'تماس ورودی…';
-  static const outgoingCall = 'در حال تماس…';
-  static const callConnecting = 'در حال اتصال…';
-  static const callEnded = 'تماس پایان یافت';
-  static const callFailed = 'برقراری تماس انجام نشد';
+  static const callPreview = "Call preview";
+  static const incomingCall = "Incoming call…";
+  static const outgoingCall = "Calling…";
+  static const callConnecting = "Connecting…";
+  static const callEnded = "Call ended";
+  static const callFailed = "Could not connect the call";
   static const callControlFailed =
-      'تغییر تنظیمات تماس انجام نشد. دوباره تلاش کنید.';
-  static const answerCall = 'پاسخ به تماس';
-  static const declineCall = 'رد تماس';
-  static const endCall = 'پایان تماس';
-  static const returnToChat = 'بازگشت به گفتگو';
-  static const muteCall = 'قطع میکروفون';
-  static const unmuteCall = 'وصل میکروفون';
-  static const speakerOn = 'روشن کردن بلندگو';
-  static const speakerOff = 'خاموش کردن بلندگو';
-  static const turnCameraOff = 'خاموش کردن دوربین';
-  static const turnCameraOn = 'روشن کردن دوربین';
-  static const switchCamera = 'تعویض دوربین';
-  static const frontCamera = 'دوربین جلو';
-  static const rearCamera = 'دوربین پشت';
-  static const cameraOff = 'دوربین خاموش است';
-  static const you = 'شما';
-  static const showCallOptions = 'نمایش تنظیمات تماس';
-  static const hideCallOptions = 'بستن تنظیمات تماس';
+      "Could not change the call setting. Try again.";
+  static const answerCall = "Answer";
+  static const declineCall = "Decline";
+  static const endCall = "End call";
+  static const returnToChat = "Back to chat";
+  static const muteCall = "Mute microphone";
+  static const unmuteCall = "Unmute microphone";
+  static const speakerOn = "Turn speaker on";
+  static const speakerOff = "Turn speaker off";
+  static const turnCameraOff = "Turn camera off";
+  static const turnCameraOn = "Turn camera on";
+  static const switchCamera = "Switch camera";
+  static const frontCamera = "Front camera";
+  static const rearCamera = "Rear camera";
+  static const cameraOff = "Camera is off";
+  static const you = "You";
+  static const showCallOptions = "Show call options";
+  static const hideCallOptions = "Hide call options";
   static String selectedMessages(int count) =>
-      '${persianDigits(count)} پیام انتخاب‌شده';
+      '${persianDigits(count)} messages selected';
   static String deleteMessageQuestion(int count) =>
-      '${persianDigits(count)} پیام حذف شود؟';
+      'Delete ${persianDigits(count)} messages?';
   static String unreadMessageCount(int count) =>
-      '${persianDigits(count)} پیام خوانده‌نشده';
+      '${persianDigits(count)} unread messages';
   static String chatTime(Duration value) => persianDigits(
     '${value.inMinutes.toString().padLeft(2, '0')}:${(value.inSeconds % 60).toString().padLeft(2, '0')}',
   );
 
-  static String inStock(int count) => '${persianDigits(count)} عدد موجود';
+  static String inStock(int count) => '${persianDigits(count)} in stock';
 
-  /// Localizes displayed numbers; model IDs and other internal values stay intact.
+  /// English display digits for development; keep the existing helper API.
   static String persianDigits(Object value) {
-    const western = '0123456789';
     const persian = '۰۱۲۳۴۵۶۷۸۹';
-    return value.toString().split('').map((character) {
-      final index = western.indexOf(character);
-      if (index >= 0) return persian[index];
-      return switch (character) {
-        ',' => '٬',
-        '.' => '٫',
-        _ => character,
-      };
-    }).join();
+    const arabic = '٠١٢٣٤٥٦٧٨٩';
+    var result = value.toString();
+    for (var digit = 0; digit < 10; digit++) {
+      result = result
+          .replaceAll(persian[digit], '$digit')
+          .replaceAll(arabic[digit], '$digit');
+    }
+    return result
+        .replaceAll('٬', ',')
+        .replaceAll('٫', '.')
+        .replaceAll('٪', '%');
   }
 }

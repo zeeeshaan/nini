@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -21,20 +22,13 @@ class AnalyticsSectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: EdgeInsets.only(left: leftInset, bottom: 14),
-    child: Row(
+    child: Wrap(
+      alignment: WrapAlignment.spaceBetween,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              title,
-              maxLines: 1,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
-            ),
-          ),
-        ),
-        const SizedBox(width: 8),
+        Text(title, style: AppTextStyles.sectionTitle),
         PopupMenuButton<AnalyticsPeriod>(
           tooltip: AppStrings.analyticsPeriod(title),
           initialValue: period,
@@ -60,7 +54,9 @@ class AnalyticsSectionHeading extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(period.label, style: const TextStyle(fontSize: 11)),
+                Flexible(
+                  child: Text(period.label, style: AppTextStyles.helper),
+                ),
                 const SizedBox(width: 7),
                 const AppIcon(AppIcons.chevronDown, size: 10),
               ],
@@ -119,8 +115,7 @@ class AnalyticsTooltip extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     date,
-                    style: TextStyle(
-                      fontSize: 10,
+                    style: AppTextStyles.smallPrint.copyWith(
                       color: Theme.of(context).colorScheme.onSurface
                           .withValues(alpha: .55),
                     ),
@@ -132,13 +127,7 @@ class AnalyticsTooltip extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    total,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  child: Text(total, style: AppTextStyles.smallPrintEmphasis),
                 ),
               ),
             ],
@@ -161,7 +150,7 @@ class AnalyticsTooltip extends StatelessWidget {
                   Expanded(
                     child: Text(
                       labels[i],
-                      style: const TextStyle(fontSize: 10),
+                      style: AppTextStyles.smallPrint,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -173,10 +162,7 @@ class AnalyticsTooltip extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: Text(
                         values[i],
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTextStyles.smallPrintEmphasis,
                       ),
                     ),
                   ),
@@ -231,7 +217,7 @@ class AnalyticsLegend extends StatelessWidget {
                   : null,
             ),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(fontSize: 8)),
+            Text(label, style: AppTextStyles.micro),
           ],
         ),
       ),
@@ -262,21 +248,14 @@ class AnalyticsSummary extends StatelessWidget {
             child: FittedBox(
               fit: BoxFit.scaleDown,
               alignment: Alignment.centerLeft,
-              child: Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              child: Text(value, style: AppTextStyles.bodyBold),
             ),
           ),
           if (sample) ...[
             const SizedBox(width: 8),
             Text(
               AppStrings.sampleChange,
-              style: TextStyle(
-                fontSize: 9,
+              style: AppTextStyles.metadata.copyWith(
                 color: Theme.of(context).colorScheme.onSurface
                     .withValues(alpha: .55),
               ),

@@ -4,7 +4,7 @@ import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/widgets/gallery_preview/gallery_preview.dart';
 import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/shared/widgets/post_media/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 

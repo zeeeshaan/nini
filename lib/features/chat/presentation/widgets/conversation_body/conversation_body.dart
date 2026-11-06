@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
@@ -67,7 +69,7 @@ class ConversationBody extends StatelessWidget {
                     child: Text(
                       AppStrings.personBlocked,
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
+                      style: AppTextStyles.label,
                     ),
                   ),
                   TextButton(
@@ -114,7 +116,7 @@ class ConversationBody extends StatelessWidget {
           ),
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: math.max(60, constraints.maxHeight - 60),
+              maxHeight: math.max(0, constraints.maxHeight - 60),
             ),
             child: SingleChildScrollView(
               child: recordingActive

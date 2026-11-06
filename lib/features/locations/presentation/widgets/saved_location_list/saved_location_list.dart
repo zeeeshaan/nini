@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class SavedLocationList extends StatelessWidget {
   const SavedLocationList({
@@ -16,8 +17,8 @@ class SavedLocationList extends StatelessWidget {
       for (final label in labels)
         Padding(
           padding: const EdgeInsets.only(bottom: 4),
-          child: SizedBox(
-            height: 42,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 42),
             child: OutlinedButton(
               onPressed: () => onSelected(label),
               style: OutlinedButton.styleFrom(
@@ -34,7 +35,7 @@ class SavedLocationList extends StatelessWidget {
               child: Text(
                 label,
                 textAlign: TextAlign.right,
-                style: const TextStyle(fontSize: 12),
+                style: AppTextStyles.label,
                 textDirection: TextDirection.rtl,
               ),
             ),

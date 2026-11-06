@@ -2,6 +2,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/search_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
+
 import 'demo_search_posts.dart';
 
 /// Local preview content. A backend can supply listings later.
@@ -27,7 +28,9 @@ abstract final class SearchCatalog {
     final words = normalize(query).split(' ');
     final matches = <String>[];
     for (final title in SearchStrings.suggestions) {
-      final normalizedTitle = normalize(title);
+      final normalizedTitle = normalize(
+        '$title ${SearchStrings.display(title)}',
+      );
       if (words.every((word) => normalizedTitle.contains(word))) {
         matches.add(title);
       }

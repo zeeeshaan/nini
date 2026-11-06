@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
@@ -19,26 +20,23 @@ class HomeProductPrice extends StatelessWidget {
         spacing: 12,
         runSpacing: 10,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 4,
             children: [
               const RotatedBox(
                 quarterTurns: 3,
-                child: Text('تومان', style: TextStyle(fontSize: 8)),
+                child: Text(AppStrings.toman, style: AppTextStyles.micro),
               ),
               const SizedBox(width: 2),
               Text(
                 AppStrings.persianDigits('12,000'),
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: AppTextStyles.productPrice,
               ),
               const SizedBox(width: 12),
               Text(
                 AppStrings.persianDigits('13,000'),
-                style: TextStyle(
-                  fontSize: 14,
+                style: AppTextStyles.bodyText.copyWith(
                   color: foreground.withValues(alpha: .3),
                   decoration: TextDecoration.lineThrough,
                 ),

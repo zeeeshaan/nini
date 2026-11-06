@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,58 +61,63 @@ class ChatAttachmentSheet extends StatelessWidget {
         height: math.min(460, height * .62),
         child: SafeArea(
           top: false,
-          child: Column(
-            children: [
-              const SizedBox(height: 14),
-              Container(
-                width: 34,
-                height: 2,
-                color: colors.onSurface.withValues(alpha: .8),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  _AttachmentOption(
-                    label: AppStrings.document,
-                    icon: AppIcons.document,
-                    onTap: () => choose(ChatAttachmentAction.document),
-                  ),
-                  _AttachmentOption(
-                    label: AppStrings.location,
-                    icon: AppIcons.location,
-                    onTap: () => choose(ChatAttachmentAction.location),
-                  ),
-                  _AttachmentOption(
-                    label: AppStrings.camera,
-                    icon: AppIcons.camera,
-                    onTap: () => choose(ChatAttachmentAction.camera),
-                  ),
-                  _AttachmentOption(
-                    label: AppStrings.gallery,
-                    icon: AppIcons.image,
-                    onTap: () => choose(ChatAttachmentAction.gallery),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              const Expanded(child: GalleryGrid(compact: true)),
-              BlocBuilder<GalleryCubit, GalleryState>(
-                builder: (context, state) {
-                  if (state.selected.isEmpty) return const SizedBox.shrink();
-                  return Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: AppButton(
-                      label: AppStrings.sendSelectedAttachments(
-                        state.selected.length,
-                      ),
-                      onPressed: () => Navigator.of(
-                        context,
-                      ).pop(ChatAttachmentSheetResult.photos(state.selected)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 14),
+                Container(
+                  width: 34,
+                  height: 2,
+                  color: colors.onSurface.withValues(alpha: .8),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    _AttachmentOption(
+                      label: AppStrings.document,
+                      icon: AppIcons.document,
+                      onTap: () => choose(ChatAttachmentAction.document),
                     ),
-                  );
-                },
-              ),
-            ],
+                    _AttachmentOption(
+                      label: AppStrings.location,
+                      icon: AppIcons.location,
+                      onTap: () => choose(ChatAttachmentAction.location),
+                    ),
+                    _AttachmentOption(
+                      label: AppStrings.camera,
+                      icon: AppIcons.camera,
+                      onTap: () => choose(ChatAttachmentAction.camera),
+                    ),
+                    _AttachmentOption(
+                      label: AppStrings.gallery,
+                      icon: AppIcons.image,
+                      onTap: () => choose(ChatAttachmentAction.gallery),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  height: math.max(120, math.min(300, height * .62 - 130)),
+                  child: const GalleryGrid(compact: true),
+                ),
+                BlocBuilder<GalleryCubit, GalleryState>(
+                  builder: (context, state) {
+                    if (state.selected.isEmpty) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: AppButton(
+                        label: AppStrings.sendSelectedAttachments(
+                          state.selected.length,
+                        ),
+                        onPressed: () => Navigator.of(
+                          context,
+                        ).pop(ChatAttachmentSheetResult.photos(state.selected)),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -158,7 +165,7 @@ class _AttachmentOption extends StatelessWidget {
               label,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: colors.onSurface),
+              style: AppTextStyles.label.copyWith(color: colors.onSurface),
             ),
           ),
         ],

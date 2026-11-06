@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/localization/auth_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
@@ -25,12 +26,8 @@ class SplashBrand extends StatelessWidget {
           child: Text(
             AuthStrings.brand,
             textDirection: TextDirection.ltr,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 40 * scale,
-              height: 1,
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextStyles.scaledSplashBrand(scale)
+                .copyWith(color: AppColors.white),
           ),
         ),
       ),

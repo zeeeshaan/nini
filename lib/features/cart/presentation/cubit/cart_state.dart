@@ -3,7 +3,7 @@ import '../../domain/models/cart_item.dart';
 import '../../domain/models/cart_order_status.dart';
 import '../../domain/models/cart_order.dart';
 import '../../domain/models/cart_snapshot.dart';
-import '../../domain/models/payment_method.dart';
+import '../../../payment/domain/models/payment_method.dart';
 
 enum CartStage { cart, checkout }
 

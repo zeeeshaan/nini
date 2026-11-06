@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class ProfileEditField extends StatelessWidget {
   const ProfileEditField({
@@ -6,26 +8,32 @@ class ProfileEditField extends StatelessWidget {
     required this.label,
     this.keyboardType,
     this.maxLines = 1,
+    this.maxLength,
+    this.textStyle = AppTextStyles.caption,
   });
   final String label;
   final TextInputType? keyboardType;
   final int maxLines;
+  final int? maxLength;
+  final TextStyle textStyle;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 4),
     child: TextFormField(
       keyboardType: keyboardType,
       maxLines: maxLines,
+      inputFormatters: [
+        if (maxLength != null) LengthLimitingTextInputFormatter(maxLength),
+      ],
       textDirection: keyboardType == TextInputType.emailAddress
           ? TextDirection.ltr
           : TextDirection.rtl,
       textAlign: TextAlign.right,
-      style: const TextStyle(fontSize: 12),
+      style: textStyle,
       decoration: InputDecoration(
         hintText: label,
         hintTextDirection: TextDirection.rtl,
-        hintStyle: TextStyle(
-          fontSize: 12,
+        hintStyle: AppTextStyles.caption.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),
         isDense: true,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
@@ -31,7 +32,11 @@ Future<T?> showPostDialog<T>(
         padding: EdgeInsets.only(
           bottom: MediaQuery.viewInsetsOf(context).bottom,
         ),
-        child: dialog,
+        child: Localizations.override(
+          context: context,
+          locale: const Locale('en'),
+          child: dialog,
+        ),
       ),
     ),
   );
@@ -59,7 +64,7 @@ class _PostDialogSurface extends StatelessWidget {
 }
 
 /// Shared layout for the reference sheets: handle, right-aligned heading,
-/// bounded scrollable content, and optional Cancel/Done actions.
+/// scrollable content, and optional Cancel/Done actions.
 class PostDialog extends StatelessWidget {
   const PostDialog({
     super.key,
@@ -83,9 +88,9 @@ class PostDialog extends StatelessWidget {
         MediaQuery.paddingOf(context).top;
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: (available * .94).clamp(120, double.infinity),
+        maxHeight: (available * .94).clamp(0, double.infinity),
       ),
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -105,7 +110,7 @@ class PostDialog extends StatelessWidget {
                     textDirection: textDirection,
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.w600),
+                        ?.copyWith(fontWeight: AppTextStyles.semiBold),
                   ),
                 ),
                 if (icon != null) ...[
@@ -115,7 +120,7 @@ class PostDialog extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            Flexible(fit: FlexFit.loose, child: child),
+            child,
             if (actions != null) ...[const SizedBox(height: 24), actions!],
           ],
         ),
@@ -128,7 +133,7 @@ class PostDialogActions extends StatelessWidget {
   const PostDialogActions({
     super.key,
     required this.onDone,
-    this.doneLabel = AppStrings.done,
+    this.doneLabel = CreatePostStrings.done,
   });
   final VoidCallback? onDone;
   final String doneLabel;
@@ -137,7 +142,7 @@ class PostDialogActions extends StatelessWidget {
     children: [
       Expanded(
         child: AppButton(
-          label: AppStrings.cancel,
+          label: CreatePostStrings.cancel,
           variant: AppButtonVariant.outlined,
           height: 44,
           onPressed: () => Navigator.of(context).pop(),

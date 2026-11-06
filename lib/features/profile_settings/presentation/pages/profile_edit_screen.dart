@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/persian_feature.dart';
 import 'package:nini/core/localization/profile_edit_strings.dart';
-import 'package:nini/shared/widgets/settings_detail_header/settings_detail_header.dart';
+import 'package:nini/features/profile_settings/presentation/widgets/settings_detail_header/settings_detail_header.dart';
 
 import '../widgets/profile_edit_fields/profile_edit_fields.dart';
 import '../widgets/profile_photo_picker/profile_photo_picker.dart';

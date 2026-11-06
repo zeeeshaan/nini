@@ -1,4 +1,5 @@
 // dart format width=100
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/cart_strings.dart';
@@ -7,7 +8,6 @@ import '../../cubit/cart_cubit.dart';
 import '../../cubit/cart_state.dart';
 import '../cart_amount_dialog/cart_amount_dialog.dart';
 import '../cart_item_card/cart_item_card.dart';
-import '../cart_payment_methods/cart_payment_methods.dart';
 import '../cart_payment_summary/cart_payment_summary.dart';
 import '../cart_section/cart_section.dart';
 
@@ -37,7 +37,9 @@ class CartCheckout extends StatelessWidget {
                         wholeUnits: item.wholeUnits,
                         maximum: item.maxQuantity,
                       );
-                      if (amount != null && context.mounted) cart.updateQuantity(item.id, amount);
+                      if (amount != null && context.mounted) {
+                        cart.updateQuantity(item.id, amount);
+                      }
                     },
                   ),
                 ),
@@ -59,17 +61,14 @@ class CartCheckout extends StatelessWidget {
             },
           ),
         ),
-        CartSection(
-          title: CartStrings.method,
-          child: CartPaymentMethods(selected: state.method, onSelected: cart.setMethod),
-        ),
+        const SizedBox(height: 16),
         const CartSection(
           title: CartStrings.escrow,
           child: Text(
             CartStrings.escrowHelp,
             textAlign: TextAlign.right,
             textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 12, height: 1.7),
+            style: AppTextStyles.checkoutHelp,
           ),
         ),
       ],

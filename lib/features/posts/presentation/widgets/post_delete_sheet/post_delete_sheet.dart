@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/persian_feature.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
@@ -68,7 +69,7 @@ class PostDeleteSheet extends StatelessWidget {
                     state.deleteError!,
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
-                    style: TextStyle(
+                    style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,
                     ),
                   ),

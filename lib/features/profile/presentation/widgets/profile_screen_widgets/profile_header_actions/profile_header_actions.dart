@@ -1,9 +1,9 @@
 import 'package:nini/features/profile/presentation/page/profile_settings_screen/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/theme/theme_mode_menu.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/chat/presentation/pages/chat_inbox_screen.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -36,11 +36,6 @@ class ProfileHeaderActions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        // Theme mode button
-        const ThemeModeMenu(),
-
-        const SizedBox(width: 4),
-
         // Messages button with notification badge
         Stack(
           clipBehavior: Clip.none,
@@ -48,7 +43,7 @@ class ProfileHeaderActions extends StatelessWidget {
             IconButton(
               onPressed: onMessagesPressed ?? () => _openChatScreen(context),
               tooltip: AppStrings.messages,
-              icon: const AppIcon(AppIcons.chat, size: 27),
+              icon: const AppIcon(AppIcons.send, size: 27),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 42, minHeight: 42),
             ),
@@ -67,10 +62,8 @@ class ProfileHeaderActions extends StatelessWidget {
                   ),
                   child: Text(
                     notificationCount > 9 ? '9+' : notificationCount.toString(),
-                    style: TextStyle(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.onSurface,
+                    style: AppTextStyles.notificationBadge.copyWith(
+                      color: AppColors.white,
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 
@@ -18,19 +19,14 @@ class HomeProductDetails extends StatelessWidget {
             title,
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.right,
-            style: const TextStyle(
-              fontSize: 23,
-              height: 1.2,
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextStyles.productTitle,
           ),
           const SizedBox(height: 8),
           Text(
             AppStrings.mobile,
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.right,
-            style: TextStyle(
-              fontSize: 17,
+            style: AppTextStyles.subtitle.copyWith(
               color: Theme.of(context).colorScheme.onSurface
                   .withValues(alpha: .3),
             ),

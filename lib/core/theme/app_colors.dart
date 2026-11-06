@@ -27,6 +27,7 @@ abstract final class AppColors {
   static const cartBadge = Color(0xFFFF2020);
   static const stockBadgeBackground = Color(0xFFFFEEEE);
   static const authorOnline = Color(0xFF00CB28);
+  static const profileFollow = Color(0xFF4C5BFF);
   static const analyticsOnline = Color(0xFF00C83C);
 
   // Analytics chart series.

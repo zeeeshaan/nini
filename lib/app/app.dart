@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,8 @@ import 'package:nini/core/responsiveness/responsive_config/config.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
+import 'package:nini/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
@@ -56,26 +57,28 @@ class _ThemedApp extends StatelessWidget {
       builder: (context, mode) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
-        locale: const Locale('fa', 'IR'),
-        supportedLocales: const [Locale('fa', 'IR')],
+        locale: const Locale('en'),
+        supportedLocales: const [Locale('en'), Locale('fa', 'IR')],
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
-          CountryLocalizations.delegate,
         ],
         navigatorObservers: [entranceRouteObserver],
-        // Keep the original design order while Persian text reads right to left.
+        // Keep the established layout order and right-aligned development copy.
         builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
           value: Theme.of(context).appBarTheme.systemOverlayStyle!,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: ResponsiveConfig.materialAppBuilder(context, child),
+            child: DefaultTextStyle.merge(
+              textAlign: TextAlign.right,
+              child: ResponsiveConfig.materialAppBuilder(context, child),
+            ),
           ),
         ),
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: mode,
-        home: const SplashScreen(),
+        home: const DashboardScreen(initialTab: DashboardTab.home),
       ),
     );
   }

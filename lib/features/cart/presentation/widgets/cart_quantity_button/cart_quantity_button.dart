@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/cart_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -43,7 +44,7 @@ class CartQuantityButton extends StatelessWidget {
                       '${cartQuantity(item.quantity)} ${cartUnit(item.unit, item.quantity)}',
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 10, color: colors.surface),
+                      style: AppTextStyles.smallPrint.copyWith(color: colors.surface),
                     ),
                   ),
                 ],

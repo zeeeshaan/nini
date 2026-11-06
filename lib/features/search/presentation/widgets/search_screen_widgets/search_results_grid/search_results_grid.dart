@@ -9,11 +9,11 @@ class SearchResultsGrid extends StatefulWidget {
   const SearchResultsGrid({
     super.key,
     required this.posts,
-    required this.onPostSelected,
+    this.onPostSelected,
   });
 
   final List<PostItem> posts;
-  final ValueChanged<PostItem> onPostSelected;
+  final ValueChanged<PostItem>? onPostSelected;
 
   @override
   State<SearchResultsGrid> createState() => _SearchResultsGridState();
@@ -32,8 +32,14 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) {
       final responsive = AppResponsive.fromWidth(constraints.maxWidth);
-      final columns = responsive.gridColumns;
-      final textScale = MediaQuery.textScalerOf(context).scale(10) / 10;
+      final textScale = (MediaQuery.textScalerOf(context).scale(10) / 10).clamp(
+        1.0,
+        double.infinity,
+      );
+      final columns = (constraints.maxWidth / (110 * textScale)).floor().clamp(
+        1,
+        responsive.gridColumns,
+      );
       return Directionality(
         textDirection: TextDirection.rtl,
         child: GridView.builder(
@@ -45,13 +51,15 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
             crossAxisSpacing: 1,
             mainAxisSpacing: 0,
             mainAxisExtent:
-                (constraints.maxWidth - columns + 1) / columns + 64 * textScale,
+                (constraints.maxWidth - columns + 1) / columns + 80 * textScale,
           ),
           itemCount: widget.posts.length,
           itemBuilder: (context, index) => SearchResultCard(
             key: ValueKey(widget.posts[index].id),
             post: widget.posts[index],
-            onTap: () => widget.onPostSelected(widget.posts[index]),
+            onTap: widget.onPostSelected == null
+                ? null
+                : () => widget.onPostSelected!(widget.posts[index]),
           ),
         ),
       );

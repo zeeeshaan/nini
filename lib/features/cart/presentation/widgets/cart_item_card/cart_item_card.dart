@@ -1,6 +1,8 @@
 // dart format width=100
 import 'dart:math' as math;
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../domain/models/cart_item.dart';
@@ -59,7 +61,7 @@ class CartItemCard extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.right,
                                   textDirection: TextDirection.rtl,
-                                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                                  style: AppTextStyles.compactBodyBold,
                                 ),
                               ),
                             ],
@@ -68,8 +70,7 @@ class CartItemCard extends StatelessWidget {
                             cartItemCategory(item),
                             textAlign: TextAlign.right,
                             textDirection: TextDirection.rtl,
-                            style: TextStyle(
-                              fontSize: 12,
+                            style: AppTextStyles.label.copyWith(
                               color: colors.onSurface.withValues(alpha: .25),
                             ),
                           ),
@@ -82,7 +83,7 @@ class CartItemCard extends StatelessWidget {
                                         '${cartMoney(item.quantity)} ${cartUnit(item.unit, item.quantity)}',
                                         textDirection: TextDirection.rtl,
                                         textAlign: TextAlign.right,
-                                        style: const TextStyle(fontSize: 11),
+                                        style: AppTextStyles.helper,
                                       )
                                     : CartQuantityButton(item: item, onTap: onQuantity),
                               ),
@@ -92,7 +93,7 @@ class CartItemCard extends StatelessWidget {
                                   cartMoney(item.total),
                                   textDirection: TextDirection.rtl,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                                  style: AppTextStyles.pageTitleBold,
                                 ),
                               ),
                             ],

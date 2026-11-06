@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 
 import '../top_up_screen_widgets/wallet_bank_logo.dart';
@@ -13,8 +14,9 @@ class WithdrawSummaryRow extends StatelessWidget {
   final String label, value;
   final bool showBank;
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: 48,
+  Widget build(BuildContext context) => Container(
+    constraints: const BoxConstraints(minHeight: 48),
+    padding: const EdgeInsets.symmetric(vertical: 8),
     child: Row(
       children: [
         if (showBank) ...[
@@ -24,19 +26,19 @@ class WithdrawSummaryRow extends StatelessWidget {
         Expanded(
           child: Text(
             AppStrings.persianDigits(value),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 11),
+            style: AppTextStyles.helper,
             textAlign: TextAlign.right,
             textDirection: TextDirection.ltr,
           ),
         ),
         const SizedBox(width: 12),
-        Text(
-          label,
-          textAlign: TextAlign.right,
-          style: const TextStyle(fontSize: 11),
-          textDirection: TextDirection.rtl,
+        Flexible(
+          child: Text(
+            label,
+            textAlign: TextAlign.right,
+            style: AppTextStyles.helper,
+            textDirection: TextDirection.rtl,
+          ),
         ),
       ],
     ),

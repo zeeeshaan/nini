@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 class PostPublishActions extends StatelessWidget {
@@ -31,7 +31,7 @@ class PostPublishActions extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton(
-                    label: AppStrings.cancel,
+                    label: CreatePostStrings.cancel,
                     variant: AppButtonVariant.outlined,
                     onPressed: publishing ? null : onCancel,
                   ),
@@ -40,8 +40,8 @@ class PostPublishActions extends StatelessWidget {
                 Expanded(
                   child: AppButton(
                     label: publishing
-                        ? AppStrings.publishing
-                        : AppStrings.publish,
+                        ? CreatePostStrings.publishing
+                        : CreatePostStrings.publish,
                     isLoading: publishing,
                     onPressed: onPublish,
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/profile_edit_strings.dart';
@@ -22,7 +23,7 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
   Future<void> _chooseDate() async {
     final date = await showDatePicker(
       context: context,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en'),
       initialDate: _date ?? DateTime(2000),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
@@ -44,12 +45,11 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
       onTap: _chooseDate,
       textAlign: TextAlign.right,
       textDirection: TextDirection.rtl,
-      style: const TextStyle(fontSize: 12),
+      style: AppTextStyles.caption,
       decoration: InputDecoration(
         hintText: ProfileEditStrings.birth,
         hintTextDirection: TextDirection.rtl,
-        hintStyle: TextStyle(
-          fontSize: 12,
+        hintStyle: AppTextStyles.caption.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),
         isDense: true,

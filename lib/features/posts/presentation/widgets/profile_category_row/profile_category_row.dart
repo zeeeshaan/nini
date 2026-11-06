@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
@@ -21,13 +22,14 @@ class ProfileCategoryRow extends StatelessWidget {
     child: Row(
       children: [
         IconButton(
-          tooltip: ProfilePostStrings.deleteTab,
+          tooltip: CategoryStrings.of(context)
+              .text(ProfilePostStrings.deleteTab),
           color: Theme.of(context).colorScheme.error,
           onPressed: enabled ? onDelete : null,
           icon: const Icon(Icons.delete_outline),
         ),
         IconButton(
-          tooltip: ProfilePostStrings.editTab,
+          tooltip: CategoryStrings.of(context).text(ProfilePostStrings.editTab),
           onPressed: enabled ? onEdit : null,
           icon: const Icon(Icons.edit_outlined),
         ),
@@ -37,7 +39,7 @@ class ProfileCategoryRow extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               child: Text(
-                ProfilePostStrings.categoryName(category.id, category.name),
+                CategoryStrings.of(context).name(category.id, category.name),
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               ),
@@ -45,7 +47,7 @@ class ProfileCategoryRow extends StatelessWidget {
           ),
         ),
         IconButton(
-          tooltip: ProfilePostStrings.categoryName(category.id, category.name),
+          tooltip: CategoryStrings.of(context).name(category.id, category.name),
           isSelected: selected,
           onPressed: enabled ? onSelect : null,
           icon: Icon(

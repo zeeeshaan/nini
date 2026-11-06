@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
@@ -25,15 +26,15 @@ class ProfileCategoriesBody extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              ProfilePostStrings.loadFailed,
+            Text(
+              CategoryStrings.of(context).text(ProfilePostStrings.loadFailed),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
             ),
             TextButton(
               onPressed: onRetry,
-              child: const Text(
-                ProfilePostStrings.retry,
+              child: Text(
+                CategoryStrings.of(context).text(ProfilePostStrings.retry),
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
               ),
@@ -43,10 +44,10 @@ class ProfileCategoriesBody extends StatelessWidget {
       );
     }
     if (state.categories.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.all(24),
+      return Padding(
+        padding: const EdgeInsets.all(24),
         child: Text(
-          ProfilePostStrings.noTabs,
+          CategoryStrings.of(context).text(ProfilePostStrings.noTabs),
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.right,
         ),

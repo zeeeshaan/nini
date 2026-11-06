@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/location_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -24,15 +25,14 @@ class LocationLabelCard extends StatelessWidget {
           controller: controller,
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
-          style: const TextStyle(fontSize: 12),
+          style: AppTextStyles.label,
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => onAdd(),
           decoration: InputDecoration(
             hintText: LocationStrings.label,
             hintTextDirection: TextDirection.rtl,
-            hintStyle: TextStyle(
+            hintStyle: AppTextStyles.label.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
-              fontSize: 12,
             ),
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
@@ -62,7 +62,7 @@ class LocationLabelCard extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 10),
+                style: AppTextStyles.smallPrint,
                 textDirection: TextDirection.rtl,
               ),
             ),

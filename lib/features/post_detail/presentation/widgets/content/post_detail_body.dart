@@ -1,8 +1,10 @@
+import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/post_detail/presentation/widgets/author_header/post_author_header.dart';
+import 'package:nini/features/post_detail/presentation/widgets/bottom_bar/post_detail_bottom_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
 import 'package:nini/features/post_detail/presentation/widgets/engagement_bar/post_engagement_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/feature_table/post_features_table.dart';
@@ -16,18 +18,25 @@ class PostDetailBody extends StatelessWidget {
     super.key,
     required this.post,
     required this.images,
+    this.seller,
+    this.onSellerPressed,
     this.onCommentsPressed,
     this.onSharePressed,
     this.onMorePressed,
+    this.showPurchaseActions = true,
   });
 
   final PostItem post;
+  final PostSeller? seller;
+  final VoidCallback? onSellerPressed;
   final List<String> images;
   final VoidCallback? onCommentsPressed, onSharePressed, onMorePressed;
+  final bool showPurchaseActions;
 
   @override
   Widget build(BuildContext context) {
-    final hasPostContent = post.isPublished || post.caption.isNotEmpty;
+    final hasPostContent =
+        seller != null || post.isPublished || post.caption.isNotEmpty;
     return SafeArea(
       top: false,
       child: AppResponsiveBuilder(
@@ -50,15 +59,22 @@ class PostDetailBody extends StatelessWidget {
                     StaggeredEntrance(
                       child: PostAuthorHeader(
                         onMorePressed: onMorePressed,
-                        name: hasPostContent
-                            ? AppStrings.sellerName
-                            : AppStrings.authorName,
-                        location: hasPostContent
-                            ? (post.details.address?.address ?? '')
-                            : AppStrings.authorLocation,
-                        avatarAsset: hasPostContent
-                            ? 'assets/Mask group.png'
-                            : 'assets/images/profile_avatar.png',
+                        onProfilePressed: onSellerPressed,
+                        name:
+                            seller?.name ??
+                            (hasPostContent
+                                ? AppStrings.sellerName
+                                : AppStrings.authorName),
+                        location:
+                            seller?.location ??
+                            (hasPostContent
+                                ? (post.details.address?.address ?? '')
+                                : AppStrings.authorLocation),
+                        avatarAsset:
+                            seller?.avatarAsset ??
+                            (hasPostContent
+                                ? 'assets/Mask group.png'
+                                : 'assets/images/profile_avatar.png'),
                       ),
                     ),
 
@@ -82,8 +98,6 @@ class PostDetailBody extends StatelessWidget {
                       ),
                     ),
 
-                    StaggeredEntrance(index: 3, child: PostPricing(post: post)),
-
                     StaggeredEntrance(
                       index: 4,
                       child: hasPostContent
@@ -105,6 +119,13 @@ class PostDetailBody extends StatelessWidget {
                       ),
 
                     const SizedBox(height: 40),
+                    if (showPurchaseActions)
+                      PostDetailBottomBar(post: post, seller: seller)
+                    else if (post.price.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 22),
+                        child: PostPricing(post: post),
+                      ),
                   ],
                 ),
               ),

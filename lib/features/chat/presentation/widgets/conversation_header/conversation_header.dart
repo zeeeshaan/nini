@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -25,15 +26,17 @@ class ConversationHeader extends StatelessWidget
     required this.onVoiceCall,
     required this.onVideoCall,
     this.canCopy = false,
+    this.toolbarHeight = 70,
   });
   final ChatConversation conversation;
   final String? subtitle;
   final bool selectionMode, blocked, hasMessages, busy, canCopy;
   final int selectedCount;
+  final double toolbarHeight;
   final VoidCallback onBack, onDelete, onSelectAll, onVoiceCall, onVideoCall;
   final ValueChanged<ConversationAction> onAction;
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -41,7 +44,7 @@ class ConversationHeader extends StatelessWidget
       automaticallyImplyLeading: false,
       elevation: 0,
       scrolledUnderElevation: 0,
-      toolbarHeight: 70,
+      toolbarHeight: toolbarHeight,
       centerTitle: false,
       titleSpacing: 0,
       leadingWidth: 48,
@@ -55,7 +58,7 @@ class ConversationHeader extends StatelessWidget
               AppStrings.selectedMessages(selectedCount),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 15),
+              style: AppTextStyles.comfortableBody,
             )
           : Row(
               mainAxisSize: MainAxisSize.min,
@@ -69,18 +72,14 @@ class ConversationHeader extends StatelessWidget
                         conversation.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: AppTextStyles.comfortableBodyBold,
                       ),
                       if (subtitle?.isNotEmpty == true)
                         Text(
                           subtitle!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 11,
+                          style: AppTextStyles.helper.copyWith(
                             color: colors.onSurface.withValues(alpha: .45),
                           ),
                         ),

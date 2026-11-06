@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nini/core/localization/auth_strings.dart';
@@ -22,8 +24,8 @@ class OtpCodeInput extends StatelessWidget {
       final width = math.min(64.0, (constraints.maxWidth - 36) / 4);
       final pinTheme = PinTheme(
         width: width,
-        height: 64,
-        textStyle: TextStyle(fontSize: 26, color: colors.onSurface),
+        height: math.max(64, MediaQuery.textScalerOf(context).scale(26) + 24),
+        textStyle: AppTextStyles.otpCode.copyWith(color: colors.onSurface),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: colors.onSurface, width: 1),

@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class CartItemBadge extends StatelessWidget {
   const CartItemBadge({super.key, required this.label});
@@ -15,7 +16,7 @@ class CartItemBadge extends StatelessWidget {
         label,
         textDirection: TextDirection.rtl,
         textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 8, color: colors.surface),
+        style: AppTextStyles.micro.copyWith(color: colors.surface),
       ),
     );
   }

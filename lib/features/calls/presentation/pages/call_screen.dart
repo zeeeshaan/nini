@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:nini/core/theme/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,7 +67,7 @@ class _CallView extends StatefulWidget {
 }
 
 class _CallViewState extends State<_CallView> {
-  bool _optionsVisible = false, _leaving = false;
+  bool _leaving = false;
   CallCubit get _call => context.read<CallCubit>();
   void _leave() {
     if (_leaving) return;
@@ -133,22 +135,20 @@ class _CallViewState extends State<_CallView> {
                         child: IntrinsicHeight(
                           child: Column(
                             children: [
-                              SizedBox(height: video ? 18 : 56),
+                              SizedBox(height: video ? 156 : 56),
                               if (widget.preview)
                                 Text(
                                   AppStrings.callPreview,
-                                  style: TextStyle(
+                                  style: AppTextStyles.helper.copyWith(
                                     color: foreground.withValues(alpha: .55),
-                                    fontSize: 11,
                                   ),
                                 ),
                               if (!video) ...[
                                 const SizedBox(height: 12),
                                 Text(
                                   _status(state),
-                                  style: TextStyle(
+                                  style: AppTextStyles.largeBody.copyWith(
                                     color: foreground,
-                                    fontSize: 16,
                                   ),
                                 ),
                                 Expanded(
@@ -157,7 +157,8 @@ class _CallViewState extends State<_CallView> {
                                       vertical: 16,
                                     ),
                                     child: SizedBox(
-                                      height: 340,
+                                      height: (constraints.maxHeight * .42)
+                                          .clamp(100, 340),
                                       child: CallAvatar(
                                         name: widget.conversation.name,
                                         asset:
@@ -177,10 +178,8 @@ class _CallViewState extends State<_CallView> {
                                 child: Text(
                                   widget.conversation.name,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: AppTextStyles.callName.copyWith(
                                     color: foreground,
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ),
@@ -188,9 +187,8 @@ class _CallViewState extends State<_CallView> {
                                 const SizedBox(height: 4),
                                 Text(
                                   _status(state),
-                                  style: TextStyle(
+                                  style: AppTextStyles.comfortableBody.copyWith(
                                     color: foreground,
-                                    fontSize: 15,
                                   ),
                                 ),
                               ],
@@ -202,20 +200,18 @@ class _CallViewState extends State<_CallView> {
                               if (video) ...[
                                 const SizedBox(height: 12),
                                 IconButton(
-                                  tooltip: _optionsVisible
+                                  tooltip: state.optionsVisible
                                       ? AppStrings.hideCallOptions
                                       : AppStrings.showCallOptions,
-                                  onPressed: () => setState(
-                                    () => _optionsVisible = !_optionsVisible,
-                                  ),
+                                  onPressed: () => _call.toggleOptions(),
                                   icon: AppIcon(
-                                    _optionsVisible
+                                    state.optionsVisible
                                         ? AppIcons.chevronDown
                                         : AppIcons.chevronUp,
                                     color: AppColors.white,
                                   ),
                                 ),
-                                if (_optionsVisible)
+                                if (state.optionsVisible)
                                   Theme(
                                     data: AppTheme.dark,
                                     child: Padding(

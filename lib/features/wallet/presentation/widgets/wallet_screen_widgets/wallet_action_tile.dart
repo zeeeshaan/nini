@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class WalletActionTile extends StatelessWidget {
@@ -25,8 +26,7 @@ class WalletActionTile extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               label,
-              maxLines: 1,
-              style: const TextStyle(fontSize: 9),
+              style: AppTextStyles.metadata,
               textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
             ),

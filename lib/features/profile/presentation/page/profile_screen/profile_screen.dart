@@ -18,7 +18,9 @@ class ProfileScreen extends StatelessWidget {
 
   void _openPost(BuildContext context, PostItem post) {
     Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => PostDetailScreen(post: post)),
+      MaterialPageRoute<void>(
+        builder: (_) => PostDetailScreen(post: post, allowOwnerActions: true),
+      ),
     );
   }
 
@@ -74,9 +76,7 @@ class ProfileScreen extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Expanded(
-                                  child: ProfileStats(responsive: responsive),
-                                ),
+                                const Expanded(child: ProfileStats()),
                                 const SizedBox(width: 8),
                                 ProfileAvatar(size: avatarSize),
                               ],
@@ -86,9 +86,9 @@ class ProfileScreen extends StatelessWidget {
                           const SizedBox(height: 8),
 
                           // Profile name, title and description
-                          StaggeredEntrance(
+                          const StaggeredEntrance(
                             index: 2,
-                            child: ProfileIdentity(responsive: responsive),
+                            child: ProfileIdentity(),
                           ),
 
                           const SizedBox(height: 16),

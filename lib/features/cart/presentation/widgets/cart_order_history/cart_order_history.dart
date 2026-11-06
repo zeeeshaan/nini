@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/cart_strings.dart';
 
@@ -10,7 +11,11 @@ import '../cart_item_card/cart_item_card.dart';
 import '../cart_item_badge/cart_item_badge.dart';
 
 class CartOrderHistory extends StatelessWidget {
-  const CartOrderHistory({super.key, required this.orders, this.filtered = false});
+  const CartOrderHistory({
+    super.key,
+    required this.orders,
+    this.filtered = false,
+  });
   final List<CartOrder> orders;
   final bool filtered;
   @override
@@ -65,7 +70,7 @@ class CartOrderHistory extends StatelessWidget {
               '${CartStrings.receipt}: ${order.id}',
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
-              style: const TextStyle(fontSize: 11),
+              style: AppTextStyles.helper,
             ),
             const SizedBox(height: 8),
             Align(

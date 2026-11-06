@@ -1,5 +1,6 @@
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
+import 'package:nini/features/chat/domain/models/chat_conversation.dart';
 import 'package:nini/features/chat/domain/repositories/chat_messages_repository.dart';
 
 class InMemoryChatRepository implements ChatMessagesRepository {
@@ -11,6 +12,16 @@ class InMemoryChatRepository implements ChatMessagesRepository {
 
   final Map<String, List<ChatMessage>> _messages = {};
   final Set<String> _blocked = {};
+  final Map<String, ChatConversation> _conversations = {};
+
+  List<ChatConversation> get conversations =>
+      List.unmodifiable(_conversations.values);
+
+  ChatConversation openConversation(ChatConversation conversation) {
+    // A new contact starts empty; sample replies belong only to demo chats.
+    _messages.putIfAbsent(conversation.id, () => []);
+    return _conversations.putIfAbsent(conversation.id, () => conversation);
+  }
 
   @override
   List<ChatMessage> getMessages(String conversationId) {

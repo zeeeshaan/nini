@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class CartSection extends StatelessWidget {
   const CartSection({super.key, required this.title, required this.child});
@@ -17,7 +18,7 @@ class CartSection extends StatelessWidget {
             title,
             textAlign: TextAlign.right,
             textDirection: TextDirection.rtl,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            style: AppTextStyles.bodyBold,
           ),
         ),
         child,

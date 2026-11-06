@@ -1,7 +1,9 @@
+import 'package:nini/features/locations/presentation/cubit/locations_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/location_strings.dart';
 import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/shared/widgets/settings_detail_header/settings_detail_header.dart';
+import 'package:nini/features/profile_settings/presentation/widgets/settings_detail_header/settings_detail_header.dart';
 
 import '../widgets/location_label_card/location_label_card.dart';
 import '../widgets/location_map_preview/location_map_preview.dart';
@@ -16,10 +18,10 @@ class LocationsScreen extends StatefulWidget {
 
 class _LocationsScreenState extends State<LocationsScreen> {
   final _label = TextEditingController();
-  final _labels = List<String>.of(LocationStrings.initialLabels);
-  String? _selected;
+  final _locations = LocationsCubit();
   @override
   void dispose() {
+    _locations.close();
     _label.dispose();
     super.dispose();
   }
@@ -27,46 +29,48 @@ class _LocationsScreenState extends State<LocationsScreen> {
   void _addLabel() {
     final name = _label.text.trim();
     if (name.isEmpty) return;
-    setState(() {
-      if (!_labels.contains(name)) _labels.add(name);
-      _selected = name;
-    });
+    _locations.add(name);
     _label.clear();
     FocusScope.of(context).unfocus();
   }
 
   @override
-  Widget build(BuildContext context) => PersianFeature(
-    child: Scaffold(
-      appBar: const SettingsDetailHeader(title: LocationStrings.title),
-      body: SafeArea(
-        top: false,
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.fromLTRB(12, 2, 12, 24),
-              child: Column(
-                children: [
-                  const LocationMapPreview(),
-                  const SizedBox(height: 8),
-                  LocationLabelCard(controller: _label, onAdd: _addLabel),
-                  const SizedBox(height: 48),
-                  SavedLocationList(
-                    labels: _labels,
-                    selected: _selected,
-                    onSelected: (label) {
-                      setState(() => _selected = label);
-                      _label.text = label;
-                    },
+  Widget build(BuildContext context) =>
+      BlocBuilder<LocationsCubit, LocationsState>(
+        bloc: _locations,
+        builder: (context, state) => PersianFeature(
+          child: Scaffold(
+            appBar: const SettingsDetailHeader(title: LocationStrings.title),
+            body: SafeArea(
+              top: false,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 560),
+                  child: SingleChildScrollView(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: const EdgeInsets.fromLTRB(12, 2, 12, 24),
+                    child: Column(
+                      children: [
+                        const LocationMapPreview(),
+                        const SizedBox(height: 8),
+                        LocationLabelCard(controller: _label, onAdd: _addLabel),
+                        const SizedBox(height: 48),
+                        SavedLocationList(
+                          labels: _locations.state.labels,
+                          selected: _locations.state.selected,
+                          onSelected: (label) {
+                            _locations.select(label);
+                            _label.text = label;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    ),
-  );
+      );
 }

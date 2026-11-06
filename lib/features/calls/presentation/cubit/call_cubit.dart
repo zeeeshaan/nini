@@ -12,11 +12,26 @@ class CallState {
     this.elapsed = Duration.zero,
     this.busy = false,
     this.controlError,
+    this.optionsVisible = false,
   });
   final CallSession session;
   final Duration elapsed;
   final bool busy;
+  final bool optionsVisible;
   final String? controlError;
+  CallState copyWith({
+    CallSession? session,
+    Duration? elapsed,
+    bool? busy,
+    String? controlError,
+    bool? optionsVisible,
+  }) => CallState(
+    session: session ?? this.session,
+    elapsed: elapsed ?? this.elapsed,
+    busy: busy ?? this.busy,
+    controlError: controlError,
+    optionsVisible: optionsVisible ?? this.optionsVisible,
+  );
 }
 
 class CallCubit extends Cubit<CallState> {
@@ -48,7 +63,7 @@ class CallCubit extends Cubit<CallState> {
     if (isClosed || _ending || state.session.finished) return;
     _timer?.cancel();
     emit(
-      CallState(
+      state.copyWith(
         session: session,
         elapsed: _elapsed(session),
         busy: _controlPending,
@@ -58,7 +73,7 @@ class CallCubit extends Cubit<CallState> {
       _timer = Timer.periodic(const Duration(seconds: 1), (_) {
         if (!isClosed) {
           emit(
-            CallState(
+            state.copyWith(
               session: state.session,
               busy: state.busy,
               elapsed: _elapsed(state.session),
@@ -74,6 +89,13 @@ class CallCubit extends Cubit<CallState> {
     final elapsed = _clock().difference(session.connectedAt!);
     return elapsed.isNegative ? Duration.zero : elapsed;
   }
+
+  void toggleOptions() => emit(
+    state.copyWith(
+      optionsVisible: !state.optionsVisible,
+      controlError: state.controlError,
+    ),
+  );
 
   Future<void> start(String contactId, CallType type) async {
     if (_ending || state.session.finished || state.session.incoming) return;
@@ -103,7 +125,13 @@ class CallCubit extends Cubit<CallState> {
       return;
     }
     _controlPending = true;
-    emit(CallState(session: state.session, elapsed: state.elapsed, busy: true));
+    emit(
+      state.copyWith(
+        session: state.session,
+        elapsed: state.elapsed,
+        busy: true,
+      ),
+    );
     String? error;
     try {
       await action();
@@ -113,10 +141,11 @@ class CallCubit extends Cubit<CallState> {
     _controlPending = false;
     if (!isClosed && !_ending) {
       emit(
-        CallState(
+        state.copyWith(
           session: state.session,
           elapsed: state.elapsed,
           controlError: error,
+          busy: false,
         ),
       );
     }
@@ -128,8 +157,9 @@ class CallCubit extends Cubit<CallState> {
     _timer?.cancel();
     if (!isClosed) {
       emit(
-        CallState(
+        state.copyWith(
           session: state.session.copyWith(phase: CallPhase.ended),
+          busy: false,
           elapsed: state.elapsed,
         ),
       );

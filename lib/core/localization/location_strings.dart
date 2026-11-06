@@ -1,20 +1,25 @@
 import 'package:nini/core/localization/app_strings.dart';
 
-/// Persian labels for location settings and the Home permission prompt.
+/// English development labels for location settings and the Home permission prompt.
 abstract final class LocationStrings {
-  static const title = 'موقعیت‌های مکانی';
-  static const label = 'عنوان';
-  static const address = '…خیابان، لندن، NW1 6XE، بریتانیا';
-  static const add = 'افزودن موقعیت';
-  static const mapUnavailable = 'برای نمایش نقشه به اینترنت متصل شوید.';
-  static const initialLabels = ['خانه', 'محل کار', 'موقعیت ۳', 'موقعیت ۴'];
+  static const title = "Locations";
+  static const label = "Label";
+  static const address = "…Street, London, NW1 6XE, United Kingdom";
+  static const add = "Add location";
+  static const mapUnavailable = "Connect to the internet to view the map.";
+  static const initialLabels = [
+    'Home',
+    'Workplace',
+    'Location 3',
+    'Location 4',
+  ];
   static const permissionQuestion =
-      'آیا به «${AppStrings.appName}» اجازه می‌دهید به موقعیت مکانی این دستگاه دسترسی داشته باشد؟';
-  static const permissionHint = 'مجوز نهایی در پنجره دستگاه شما تأیید می‌شود.';
-  static const allowOnce = 'فقط این بار';
-  static const allowWhileUsing = 'هنگام استفاده از برنامه';
-  static const allowAlways = 'همیشه اجازه بده';
-  static const doNotAllow = 'اجازه نده';
+      "Allow ${AppStrings.appName} to access this device location?";
+  static const permissionHint = "Confirm permission in the device dialog.";
+  static const allowOnce = "Allow once";
+  static const allowWhileUsing = "Allow while using the app";
+  static const allowAlways = "Allow all the time";
+  static const doNotAllow = "Do not allow";
   static const permissionUnavailable =
-      'درخواست دسترسی انجام نشد. دوباره تلاش کنید.';
+      "Could not request location access. Try again.";
 }

@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nini/core/localization/auth_strings.dart';
 
-import '../login_country_picker/login_country_picker.dart';
-
 class LoginPhoneField extends StatelessWidget {
   const LoginPhoneField({
     super.key,
     required this.controller,
-    required this.onCountryChanged,
     required this.onSubmitted,
   });
 
   final TextEditingController controller;
-  final ValueChanged<String> onCountryChanged;
   final VoidCallback onSubmitted;
 
   @override
@@ -43,7 +39,10 @@ class LoginPhoneField extends StatelessWidget {
           minWidth: 100,
           maxWidth: 120,
         ),
-        prefixIcon: LoginCountryPicker(onChanged: onCountryChanged),
+        prefixIcon: const Center(
+          widthFactor: 1,
+          child: Text('+98', textDirection: TextDirection.ltr),
+        ),
       ),
     ),
   );

@@ -1,4 +1,6 @@
-import 'dart:async';
+import 'package:nini/core/state/countdown_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -13,56 +15,44 @@ class OtpCountdown extends StatefulWidget {
 }
 
 class _OtpCountdownState extends State<OtpCountdown> {
-  Timer? _timer;
-  int _seconds = 120;
-
-  @override
-  void initState() {
-    super.initState();
-    _start();
-  }
-
-  void _start() {
-    _timer?.cancel();
-    _seconds = 120;
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) return;
-      setState(() => _seconds--);
-      if (_seconds == 0) timer.cancel();
-    });
-  }
-
+  final _countdown = CountdownCubit(120, startImmediately: true);
   @override
   void dispose() {
-    _timer?.cancel();
+    _countdown.close();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (_seconds == 0) {
-      return TextButton(
-        onPressed: () => setState(_start),
-        child: const Text(AuthStrings.resendCode),
+  Widget build(BuildContext context) =>
+      BlocBuilder<CountdownCubit, CountdownState>(
+        bloc: _countdown,
+        builder: (context, state) {
+          if (_countdown.state.seconds == 0) {
+            return TextButton(
+              onPressed: _countdown.start,
+              child: const Text(AuthStrings.resendCode),
+            );
+          }
+          final time =
+              '${_countdown.state.seconds ~/ 60}:'
+              '${(_countdown.state.seconds % 60).toString().padLeft(2, '0')}';
+          return Semantics(
+            label: AuthStrings.resendCountdown,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                AppStrings.persianDigits(time),
+                textDirection: TextDirection.ltr,
+                style: AppTextStyles.label,
+              ),
+            ),
+          );
+        },
       );
-    }
-    final time =
-        '${_seconds ~/ 60}:'
-        '${(_seconds % 60).toString().padLeft(2, '0')}';
-    return Semantics(
-      label: AuthStrings.resendCountdown,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-        decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.onSurface),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text(
-          AppStrings.persianDigits(time),
-          textDirection: TextDirection.ltr,
-          style: const TextStyle(fontSize: 12),
-        ),
-      ),
-    );
-  }
 }

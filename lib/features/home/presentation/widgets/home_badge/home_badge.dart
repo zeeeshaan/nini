@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class HomeBadge extends StatelessWidget {
   const HomeBadge({
@@ -24,7 +25,7 @@ class HomeBadge extends StatelessWidget {
         child: Text(
           label,
           textDirection: TextDirection.rtl,
-          style: TextStyle(color: foreground, fontSize: 11, height: 1.2),
+          style: AppTextStyles.badgeLabel.copyWith(color: foreground),
         ),
       ),
     );

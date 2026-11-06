@@ -1,52 +1,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 class ProfileStats extends StatelessWidget {
-  const ProfileStats({super.key, required this.responsive});
-
-  final AppResponsive responsive;
+  const ProfileStats({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final valueSize = responsive.adaptive<double>(
-      compact: 23,
-      medium: 28,
-      expanded: 32,
-    );
-
-    final labelSize = responsive.adaptive<double>(
-      compact: 13,
-      medium: 16,
-      expanded: 18,
-    );
-
     return Row(
       children: [
         Expanded(
-          child: _StatisticItem(
-            value: '۳۸۵',
-            label: AppStrings.posts,
-            valueSize: valueSize,
-            labelSize: labelSize,
-          ),
+          child: _StatisticItem(value: '385', label: AppStrings.posts),
         ),
         Expanded(
-          child: _StatisticItem(
-            value: '۱٬۰۵۱',
-            label: AppStrings.sales,
-            valueSize: valueSize,
-            labelSize: labelSize,
-          ),
+          child: _StatisticItem(value: '1,051', label: AppStrings.sales),
         ),
         Expanded(
-          child: _StatisticItem(
-            value: '۱٫۵ هزار',
-            label: AppStrings.customers,
-            valueSize: valueSize,
-            labelSize: labelSize,
-          ),
+          child: _StatisticItem(value: '1.5K', label: AppStrings.customers),
         ),
       ],
     );
@@ -54,17 +25,10 @@ class ProfileStats extends StatelessWidget {
 }
 
 class _StatisticItem extends StatelessWidget {
-  const _StatisticItem({
-    required this.value,
-    required this.label,
-    required this.valueSize,
-    required this.labelSize,
-  });
+  const _StatisticItem({required this.value, required this.label});
 
   final String value;
   final String label;
-  final double valueSize;
-  final double labelSize;
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +43,7 @@ class _StatisticItem extends StatelessWidget {
               value,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: valueSize,
-                fontWeight: FontWeight.w400,
-
-                height: 1.2,
-              ),
+              style: AppTextStyles.statNumber.copyWith(height: 1.2),
             ),
           ),
         ),
@@ -97,10 +56,7 @@ class _StatisticItem extends StatelessWidget {
               label,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: labelSize,
-                fontWeight: FontWeight.w400,
-              ),
+              style: AppTextStyles.statLabel,
             ),
           ),
         ),

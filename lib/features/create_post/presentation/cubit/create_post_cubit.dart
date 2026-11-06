@@ -33,6 +33,23 @@ class CreatePostCubit extends Cubit<PostDraft> {
   void setFeatures(List<PostFeature> value) =>
       emit(state.copyWith(features: value));
   void setTags(List<String> value) => emit(state.copyWith(tags: value));
+  void addTags(String text) {
+    final tags = [...state.tags];
+    for (final candidate in text.split(RegExp(r'[,،\n]'))) {
+      final tag = candidate.trim().replaceFirst(RegExp(r'^#+'), '');
+      if (tag.isNotEmpty &&
+          !tags.any((value) => value.toLowerCase() == tag.toLowerCase())) {
+        tags.add(tag);
+      }
+    }
+    setTags(List.unmodifiable(tags));
+  }
+
+  void removeTag(String tag) {
+    final tags = [...state.tags]..remove(tag);
+    setTags(List.unmodifiable(tags));
+  }
+
   void setAltTexts(Map<String, String> value) =>
       emit(state.copyWith(altTexts: value));
 }

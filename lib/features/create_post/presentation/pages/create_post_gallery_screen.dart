@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery_grid/gallery_grid.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery_preview/gallery_preview.dart';
+import 'package:nini/features/create_post/presentation/widgets/gallery_content/gallery_content.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
@@ -20,7 +20,7 @@ class CreatePostGalleryScreen extends StatelessWidget {
     this.onClose,
     this.onNext,
     this.initialTab = GalleryTab.photo,
-    this.nextLabel = AppStrings.next,
+    this.nextLabel = CreatePostStrings.next,
   });
   final GalleryTab initialTab;
   final String nextLabel;
@@ -54,7 +54,7 @@ class _CreatePostGalleryView extends StatelessWidget {
   const _CreatePostGalleryView({
     this.onClose,
     this.onNext,
-    this.nextLabel = AppStrings.next,
+    this.nextLabel = CreatePostStrings.next,
   });
   final String nextLabel;
 
@@ -75,7 +75,7 @@ class _CreatePostGalleryView extends StatelessWidget {
     List<GalleryAttachment> selected,
   ) async {
     if (selected.isEmpty) {
-      AppToast.warning(context, AppStrings.selectItemRequired);
+      AppToast.warning(context, CreatePostStrings.selectItemRequired);
       return;
     }
 
@@ -107,98 +107,80 @@ class _CreatePostGalleryView extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return BlocListener<GalleryCubit, GalleryState>(
-      listenWhen: (previous, current) =>
-          current.errorMessage != null &&
-          previous.errorMessage != current.errorMessage,
-      listener: (context, state) {
-        AppToast.error(context, state.errorMessage!);
-      },
-      child: Scaffold(
-        backgroundColor: colors.surface,
-        body: SafeArea(
-          child: Column(
-            children: [
-              // Close and Next header
-              SizedBox(
-                height: 68,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        tooltip: AppStrings.close,
-                        onPressed: () => _close(context),
-                        icon: AppIcon(
-                          AppIcons.close,
-                          size: 26,
-                          color: colors.onSurface,
+    return Localizations.override(
+      context: context,
+      locale: const Locale('en'),
+      child: BlocListener<GalleryCubit, GalleryState>(
+        listenWhen: (previous, current) =>
+            current.errorMessage != null &&
+            previous.errorMessage != current.errorMessage,
+        listener: (context, state) {
+          AppToast.error(
+            context,
+            CreatePostStrings.errorMessage(state.errorMessage!),
+          );
+        },
+        child: Scaffold(
+          backgroundColor: colors.surface,
+          body: SafeArea(
+            child: Column(
+              children: [
+                // Close and Next header
+                ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 68),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          tooltip: CreatePostStrings.close,
+                          onPressed: () => _close(context),
+                          icon: AppIcon(
+                            AppIcons.close,
+                            size: 26,
+                            color: colors.onSurface,
+                          ),
                         ),
-                      ),
 
-                      const Spacer(),
-
-                      BlocSelector<
-                        GalleryCubit,
-                        GalleryState,
-                        List<GalleryAttachment>
-                      >(
-                        selector: (state) => state.selected,
-                        builder: (context, selected) {
-                          return TextButton(
-                            onPressed: () {
-                              _openPostDetails(context, selected);
-                            },
-                            child: Text(
-                              nextLabel,
-                              style: TextStyle(
-                                color: colors.onSurface,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child:
+                                BlocSelector<
+                                  GalleryCubit,
+                                  GalleryState,
+                                  List<GalleryAttachment>
+                                >(
+                                  selector: (state) => state.selected,
+                                  builder: (context, selected) {
+                                    return TextButton(
+                                      onPressed: () {
+                                        _openPostDetails(context, selected);
+                                      },
+                                      child: Text(
+                                        nextLabel,
+                                        style: AppTextStyles.galleryTitle
+                                            .copyWith(color: colors.onSurface),
+                                      ),
+                                    );
+                                  },
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              Divider(
-                height: 1,
-                thickness: 0.5,
-                color: Theme.of(context).dividerColor,
-              ),
+                Divider(
+                  height: 1,
+                  thickness: 0.5,
+                  color: Theme.of(context).dividerColor,
+                ),
 
-              // Large preview for one item.
-              // Three-column grid for multiple items.
-              Expanded(
-                flex: 6,
-                child:
-                    BlocSelector<
-                      GalleryCubit,
-                      GalleryState,
-                      List<GalleryAttachment>
-                    >(
-                      selector: (state) => state.selected,
-                      builder: (context, selected) {
-                        return GalleryPreview(selected: selected);
-                      },
-                    ),
-              ),
-
-              const SizedBox(height: 24),
-
-              Divider(
-                height: 1,
-                thickness: 0.5,
-                color: Theme.of(context).dividerColor,
-              ),
-
-              // Device gallery and native file picker
-              const Expanded(flex: 5, child: GalleryGrid()),
-            ],
+                const Expanded(child: GalleryContent()),
+              ],
+            ),
           ),
         ),
       ),

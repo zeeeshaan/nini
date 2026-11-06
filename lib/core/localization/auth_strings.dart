@@ -1,18 +1,18 @@
 /// Entry-screen copy. Phone and OTP flows are local UI previews only.
 abstract final class AuthStrings {
   static const brand = 'HYWORK';
-  static const logo = 'نشان های‌ورک';
-  static const loading = 'در حال بارگذاری';
-  static const login = 'ورود';
-  static const mobile = 'شماره موبایل';
-  static const phoneRequired = 'شماره موبایل را وارد کنید.';
-  static const done = 'تأیید';
-  static const enterOtp = 'کد تأیید را وارد کنید';
-  static const continueLabel = 'ادامه';
-  static const selectCountry = 'انتخاب کشور';
-  static const searchCountry = 'جستجوی کشور';
-  static const noCountries = 'کشوری پیدا نشد.';
-  static const resendCode = 'ارسال مجدد';
-  static const resendCountdown = 'زمان باقی‌مانده برای ارسال مجدد';
-  static String codeFor(String phone) => 'کد تأیید برای $phone';
+  static const logo = "HYWORK logo";
+  static const loading = "Loading";
+  static const login = "Login";
+  static const mobile = "Mobile number";
+  static const phoneRequired = "Enter your mobile number.";
+  static const done = "Done";
+  static const enterOtp = "Enter your OTP";
+  static const continueLabel = "Continue";
+  static const selectCountry = "Select country";
+  static const searchCountry = "Search countries";
+  static const noCountries = "No countries found.";
+  static const resendCode = "Resend code";
+  static const resendCountdown = "Time until resend";
+  static String codeFor(String phone) => 'Verification code for $phone';
 }

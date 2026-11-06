@@ -1,7 +1,9 @@
 // dart format width=100
 import 'cart_item.dart';
 import 'cart_order_status.dart';
-import 'payment_method.dart';
+import '../../../payment/domain/models/payment_method.dart';
+
+import 'package:nini/shared/models/post/post_seller.dart';
 
 /// A local preview receipt, never evidence of a real bank transaction.
 class CartOrder {
@@ -12,14 +14,38 @@ class CartOrder {
     required this.method,
     required this.charges,
     this.status = CartOrderStatus.completed,
-  }) : items = List.unmodifiable(items);
+    this.seller,
+    this.customerId,
+    this.address,
+    this.phone,
+    Map<CartOrderStatus, DateTime> timeline = const {},
+  }) : items = List.unmodifiable(items),
+       timeline = Map.unmodifiable(timeline);
   final String id;
   final DateTime createdAt;
   final List<CartItem> items;
   final PaymentMethod method;
   final int charges;
   final CartOrderStatus? status;
+  final PostSeller? seller;
+  final String? customerId, address, phone;
+  final Map<CartOrderStatus, DateTime> timeline;
+  bool get isProductRequest => seller != null && customerId != null;
   int get total => items.fold(charges, (sum, item) => sum + item.total);
+
+  CartOrder withStatus(CartOrderStatus status) => CartOrder(
+    id: id,
+    createdAt: createdAt,
+    items: items,
+    method: method,
+    charges: charges,
+    status: status,
+    seller: seller,
+    customerId: customerId,
+    address: address,
+    phone: phone,
+    timeline: {...timeline, status: DateTime.now()},
+  );
   Map<String, dynamic> toJson() => {
     'id': id,
     'createdAt': createdAt.toIso8601String(),
@@ -27,6 +53,15 @@ class CartOrder {
     'method': method.name,
     'charges': charges,
     'status': status?.name,
+    if (isProductRequest) ...{
+      'seller': seller!.toJson(),
+      'customerId': customerId,
+      'address': address,
+      'phone': phone,
+      'timeline': {
+        for (final event in timeline.entries) event.key.name: event.value.toIso8601String(),
+      },
+    },
   };
   factory CartOrder.fromJson(Map<String, dynamic> json) => CartOrder(
     id: json['id'] as String,
@@ -39,5 +74,15 @@ class CartOrder {
     status: json.containsKey('status')
         ? CartOrderStatus.fromName(json['status'] as String?)
         : CartOrderStatus.completed,
+    seller: json['seller'] == null
+        ? null
+        : PostSeller.fromJson(Map<String, dynamic>.from(json['seller'] as Map)),
+    customerId: json['customerId'] as String?,
+    address: json['address'] as String?,
+    phone: json['phone'] as String?,
+    timeline: {
+      for (final event in (json['timeline'] as Map? ?? {}).entries)
+        ?CartOrderStatus.fromName(event.key as String): DateTime.parse(event.value as String),
+    },
   );
 }

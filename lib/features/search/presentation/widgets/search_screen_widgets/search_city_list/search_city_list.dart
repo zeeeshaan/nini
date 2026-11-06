@@ -51,7 +51,10 @@ class SearchCityList extends StatelessWidget {
                         : null,
                   ),
                   const SizedBox(width: 20),
-                  Text(city, textDirection: TextDirection.rtl),
+                  Text(
+                    SearchStrings.display(city),
+                    textDirection: TextDirection.ltr,
+                  ),
                 ],
               ),
             ),

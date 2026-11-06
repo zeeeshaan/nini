@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/activity_tracking/post_activity_tracking.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/post_media/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
 
 class ProfilePostCard extends StatelessWidget {
   const ProfilePostCard({
@@ -70,18 +71,13 @@ class ProfilePostCard extends StatelessWidget {
                               textAlign: TextAlign.right,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                height: 1.4,
-
-                                fontWeight: FontWeight.w400,
-                              ),
+                              style: AppTextStyles.postTitle,
                             ),
                             Text(
                               AppStrings.postCategory(post.category),
                               textDirection: TextDirection.rtl,
                               maxLines: 1,
-                              style: const TextStyle(fontSize: 9),
+                              style: AppTextStyles.postMetadata,
                             ),
                             const SizedBox(height: 4),
                             if (!post.isPublished ||
@@ -89,15 +85,14 @@ class ProfilePostCard extends StatelessWidget {
                               Text(
                                 AppStrings.inStock(post.stockCount),
                                 textDirection: TextDirection.rtl,
-                                style: const TextStyle(fontSize: 9),
+                                style: AppTextStyles.postMetadata,
                               ),
                             const Spacer(),
                             if (post.originalPrice.isNotEmpty)
                               Text(
                                 AppStrings.persianDigits(post.originalPrice),
                                 textDirection: TextDirection.rtl,
-                                style: const TextStyle(
-                                  fontSize: 10,
+                                style: AppTextStyles.originalPrice.copyWith(
                                   decoration: TextDecoration.lineThrough,
                                 ),
                               ),
@@ -113,11 +108,7 @@ class ProfilePostCard extends StatelessWidget {
                                       child: Text(
                                         AppStrings.persianDigits(post.price),
                                         textDirection: TextDirection.rtl,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-
-                                          height: 1,
-                                        ),
+                                        style: AppTextStyles.postPrice,
                                       ),
                                     ),
                                   ),
@@ -125,7 +116,7 @@ class ProfilePostCard extends StatelessWidget {
                                   const Text(
                                     AppStrings.from,
                                     textDirection: TextDirection.rtl,
-                                    style: TextStyle(fontSize: 8, height: 1.3),
+                                    style: AppTextStyles.pricePrefix,
                                   ),
                                 ],
                               ),
@@ -145,9 +136,9 @@ class ProfilePostCard extends StatelessWidget {
                                     ? AppStrings.persianDigits(
                                         post.details.discount,
                                       )
-                                    : '۵',
+                                    : '5',
                                 textDirection: TextDirection.rtl,
-                                style: TextStyle(fontSize: 7),
+                                style: AppTextStyles.discountBadge,
                               ),
                             ],
                           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_option_selection.dart';
@@ -27,8 +27,8 @@ class PostOptionsSection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, PreparationTime>(
           selector: (state) => state.preparationTime,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.preparationTime,
-            value: value.label,
+            label: CreatePostStrings.preparationTime,
+            value: CreatePostStrings.optionLabel(value),
             trailing: const AppIcon(AppIcons.clock, size: 18),
             onTap: () => choosePostOption<PreparationTime>(
               context,
@@ -41,8 +41,8 @@ class PostOptionsSection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, PostUnit>(
           selector: (state) => state.unit,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.unit,
-            value: value.label,
+            label: CreatePostStrings.unit,
+            value: CreatePostStrings.optionLabel(value),
             onTap: () => choosePostOption<PostUnit>(
               context,
               UnitDialog(selected: draftCubit.state.unit),
@@ -58,7 +58,7 @@ class PostOptionsSection extends StatelessWidget {
                 ? null
                 : '${MaterialLocalizations.of(context).formatMediumDate(schedule.startsAt)} · ${TimeOfDay.fromDateTime(schedule.startsAt).format(context)} – ${TimeOfDay.fromDateTime(schedule.endsAt).format(context)}';
             return PostFormOptionTile(
-              label: AppStrings.scheduledPosts,
+              label: CreatePostStrings.scheduledPosts,
               value: scheduleLabel,
               trailing: const AppIcon(AppIcons.calendar, size: 18),
               onTap: () => choosePostOption<ScheduleSelection>(
@@ -73,7 +73,7 @@ class PostOptionsSection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, PostAddress?>(
           selector: (state) => state.address,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.location,
+            label: CreatePostStrings.location,
             value: value?.address,
             trailing: const AppIcon(AppIcons.location, size: 18),
             onTap: () => choosePostOption<AddressSelection>(
@@ -90,8 +90,10 @@ class PostOptionsSection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, List<PostFeature>>(
           selector: (state) => state.features,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.featuresHeading,
-            value: value.isEmpty ? null : AppStrings.featureCount(value.length),
+            label: CreatePostStrings.featuresHeading,
+            value: value.isEmpty
+                ? null
+                : CreatePostStrings.featureCount(value.length),
             trailing: const AppIcon(AppIcons.features, size: 18),
             onTap: () => choosePostOption<List<PostFeature>>(
               context,
@@ -104,7 +106,7 @@ class PostOptionsSection extends StatelessWidget {
         BlocSelector<CreatePostCubit, PostDraft, List<String>>(
           selector: (state) => state.tags,
           builder: (context, value) => PostFormOptionTile(
-            label: AppStrings.tagsKeywords,
+            label: CreatePostStrings.tagsKeywords,
             value: value.isEmpty ? null : value.map((tag) => '#$tag').join(' '),
             onTap: () => choosePostOption<List<String>>(
               context,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/wallet_strings.dart';
 
 class WalletBottomButton extends StatelessWidget {
@@ -18,14 +19,14 @@ class WalletBottomButton extends StatelessWidget {
         heightFactor: 1,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 406),
-          child: SizedBox(
+          child: Container(
             width: double.infinity,
-            height: 48,
+            constraints: const BoxConstraints(minHeight: 48),
             child: FilledButton(
               onPressed: onPressed,
               child: Text(
                 label,
-                style: const TextStyle(fontSize: 18),
+                style: AppTextStyles.pageTitle,
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               ),

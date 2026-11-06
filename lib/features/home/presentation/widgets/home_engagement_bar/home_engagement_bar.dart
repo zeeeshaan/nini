@@ -14,6 +14,7 @@ class HomeEngagementBar extends StatelessWidget {
     required this.onLike,
     required this.onBookmark,
     this.onAddToCart,
+    this.showSampleMetrics = true,
   });
 
   final bool isLiked;
@@ -21,18 +22,23 @@ class HomeEngagementBar extends StatelessWidget {
   final VoidCallback onLike;
   final VoidCallback onBookmark;
   final VoidCallback? onAddToCart;
+  final bool showSampleMetrics;
 
   @override
   Widget build(BuildContext context) {
-    const rating = HomeMetric(
+    final bookmarkCount = isBookmarked ? '1' : '0';
+    final sampleBookmarkCount = isBookmarked ? '783' : '782';
+    final likeCount = isLiked ? '1' : '0';
+    final sampleLikeCount = isLiked ? '45K' : '44,999';
+    final rating = HomeMetric(
       label: AppStrings.rating,
-      count: '4.5',
-      icon: AppIcon(AppIcons.star, size: 24),
+      count: showSampleMetrics ? '4.5' : '',
+      icon: const AppIcon(AppIcons.star, size: 24),
     );
     final actions = [
       HomeMetric(
         label: isBookmarked ? AppStrings.removeBookmark : AppStrings.bookmark,
-        count: isBookmarked ? '783' : '782',
+        count: showSampleMetrics ? sampleBookmarkCount : bookmarkCount,
         selected: isBookmarked,
         onTap: onBookmark,
         icon: AppIcon(
@@ -40,19 +46,19 @@ class HomeEngagementBar extends StatelessWidget {
           size: 22,
         ),
       ),
-      const HomeMetric(
+      HomeMetric(
         label: AppStrings.comments,
-        count: '886',
-        icon: AppIcon(AppIcons.chat, size: 22),
+        count: showSampleMetrics ? '886' : '0',
+        icon: const AppIcon(AppIcons.chat, size: 22),
       ),
-      const HomeMetric(
+      HomeMetric(
         label: AppStrings.share,
-        count: '350',
-        icon: AppIcon(AppIcons.send, size: 22),
+        count: showSampleMetrics ? '350' : '0',
+        icon: const AppIcon(AppIcons.send, size: 22),
       ),
       HomeMetric(
         label: isLiked ? AppStrings.unlike : AppStrings.like,
-        count: isLiked ? '۴۵ هزار' : '44,999',
+        count: showSampleMetrics ? sampleLikeCount : likeCount,
         selected: isLiked,
         onTap: onLike,
         icon: AppIcon(
@@ -60,12 +66,13 @@ class HomeEngagementBar extends StatelessWidget {
           size: 22,
         ),
       ),
-      HomeMetric(
-        onTap: onAddToCart,
-        label: AppStrings.cart,
-        count: '786',
-        icon: const AppIcon(AppIcons.shoppingBag, size: 22),
-      ),
+      if (onAddToCart != null)
+        HomeMetric(
+          onTap: onAddToCart,
+          label: AppStrings.cart,
+          count: showSampleMetrics ? '786' : '',
+          icon: const AppIcon(AppIcons.shoppingBag, size: 22),
+        ),
     ];
 
     Widget content;

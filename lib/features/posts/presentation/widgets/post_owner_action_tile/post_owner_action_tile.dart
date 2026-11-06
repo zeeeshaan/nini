@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/theme/app_colors.dart';
 
 class PostOwnerActionTile extends StatelessWidget {
@@ -20,7 +21,9 @@ class PostOwnerActionTile extends StatelessWidget {
       label,
       textDirection: TextDirection.rtl,
       textAlign: TextAlign.right,
-      style: destructive ? const TextStyle(color: AppColors.red) : null,
+      style: destructive
+          ? AppTextStyles.inherit.copyWith(color: AppColors.red)
+          : null,
     ),
     onTap: onTap,
   );

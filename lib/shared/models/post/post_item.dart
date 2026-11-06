@@ -33,6 +33,10 @@ class PostItem {
   final PostDetails? _details;
   final DateTime? publishedAt;
   bool get isPublished => publishedAt != null;
+  bool get isService =>
+      metadata['postType'] == 'services' ||
+      (metadata['postType'] == null &&
+          (category == 'خدمات' || category == 'Services'));
   PostDetails get details => _details ?? PostDetails.fromJson(_metadata);
 
   /// Compatibility for existing JSON clients; UI code uses [details].

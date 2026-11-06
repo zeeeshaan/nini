@@ -39,8 +39,11 @@ class CallControls extends StatelessWidget {
     final connected = session.phase == CallPhase.connected && !busy;
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Wrap(
+        alignment: WrapAlignment.spaceEvenly,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 12,
         children: [
           if (!incoming)
             CallActionButton(

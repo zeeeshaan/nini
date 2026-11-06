@@ -1,3 +1,6 @@
+import 'package:nini/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
@@ -16,107 +19,113 @@ class OrdersBookingsSection extends StatefulWidget {
 }
 
 class _OrdersBookingsSectionState extends State<OrdersBookingsSection> {
-  int? _selected;
+  final _chart = AnalyticsControlsCubit();
   @override
-  Widget build(BuildContext context) {
-    final report = widget.report;
-    final today = DateTime.now();
-    final labels = report.isSample
-        ? AppStrings.sampleWeekdays
-        : List.generate(
-            7,
-            (index) =>
-                AppStrings.weekdayLetters[today
-                        .subtract(Duration(days: 6 - index))
-                        .weekday -
-                    1],
-          );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 8),
-          child: Text(
-            AppStrings.totalOrdersBookings,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+  void dispose() {
+    _chart.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<AnalyticsControlsCubit, AnalyticsControlsState>(
+    bloc: _chart,
+    builder: (context, state) {
+      final report = widget.report;
+      final today = DateTime.now();
+      final labels = report.isSample
+          ? AppStrings.sampleWeekdays
+          : List.generate(
+              7,
+              (index) =>
+                  AppStrings.weekdayLetters[today
+                          .subtract(Duration(days: 6 - index))
+                          .weekday -
+                      1],
+            );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 8),
+            child: Text(
+              AppStrings.totalOrdersBookings,
+              style: AppTextStyles.pageTitleBold,
+            ),
           ),
-        ),
-        const SizedBox(height: 24),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 38),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 4),
-                child: AppIcon(
-                  AppIcons.phone,
-                  size: 21,
-                  color: AppColors.analyticsOrders,
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 38),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 4),
+                  child: AppIcon(
+                    AppIcons.phone,
+                    size: 21,
+                    color: AppColors.analyticsOrders,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    report.isSample
-                        ? AppStrings.sampleHours
-                        : analyticsNumber(report.averageOrders),
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
+                const SizedBox(width: 4),
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      report.isSample
+                          ? AppStrings.sampleHours
+                          : analyticsNumber(report.averageOrders),
+                      style: AppTextStyles.analyticsTotal,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 5),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  AppStrings.dailyAverage,
-                  style: TextStyle(
-                    fontSize: 9,
-                    color: Theme.of(context).colorScheme.onSurface
-                        .withValues(alpha: .6),
+                const SizedBox(width: 5),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    AppStrings.dailyAverage,
+                    style: AppTextStyles.metadata.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface
+                          .withValues(alpha: .6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 38),
+            child: LayoutBuilder(
+              builder: (context, constraints) => GestureDetector(
+                onTapDown: (event) => _chart.select(
+                  (event.localPosition.dx / constraints.maxWidth * 7)
+                      .floor()
+                      .clamp(0, 6),
+                ),
+                child: SizedBox(
+                  height: 88,
+                  child: AnalyticsOrdersChart(
+                    values: report.dailyOrders,
+                    labels: labels,
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 5),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 38),
-          child: LayoutBuilder(
-            builder: (context, constraints) => GestureDetector(
-              onTapDown: (event) => setState(
-                () => _selected =
-                    (event.localPosition.dx / constraints.maxWidth * 7)
-                        .floor()
-                        .clamp(0, 6),
-              ),
-              child: SizedBox(
-                height: 88,
-                child: AnalyticsOrdersChart(
-                  values: report.dailyOrders,
-                  labels: labels,
-                ),
-              ),
             ),
           ),
-        ),
-        if (_selected != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              '${labels[_selected!]}: ${analyticsNumber(report.dailyOrders[_selected!])} ${report.isSample ? AppStrings.hours : AppStrings.ordersBookings}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 11),
+          if (_chart.state.selected != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                '${labels[_chart.state.selected!]}: ${analyticsNumber(report.dailyOrders[_chart.state.selected!])} ${report.isSample ? AppStrings.hours : AppStrings.ordersBookings}',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.helper,
+              ),
             ),
-          ),
-      ],
-    );
-  }
+        ],
+      );
+    },
+  );
 }

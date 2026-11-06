@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
@@ -57,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         context.read<ProfileCategoriesCubit>().select(
           published.profileCategoryId,
         );
-        await _onTabSelected(DashboardTab.profile);
+        await _onTabSelected(DashboardTab.home);
       }
       return;
     }
@@ -98,7 +99,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           // Create opens a separate route; retain its slot for swipe indexes.
           const Center(
-            child: Text(AppStrings.create, style: TextStyle(fontSize: 22)),
+            child: Text(
+              AppStrings.create,
+              style: AppTextStyles.createPlaceholder,
+            ),
           ),
           SearchScreen(active: selectedTab == DashboardTab.search),
           widget.profilePage ?? const ProfileScreen(),

@@ -1,3 +1,5 @@
+import 'package:nini/core/localization/category_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/persian_feature.dart';
@@ -18,7 +20,9 @@ Future<void> showCategoryEditor(
     context,
     BlocProvider.value(
       value: categories,
-      child: PersianFeature(child: _CategoryEditorSheet(category: category)),
+      child: CategoryStrings.of(context).english
+          ? _CategoryEditorSheet(category: category)
+          : PersianFeature(child: _CategoryEditorSheet(category: category)),
     ),
   );
 }
@@ -35,10 +39,8 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
   late final _name = TextEditingController(
     text: widget.category == null
         ? ''
-        : ProfilePostStrings.categoryName(
-            widget.category!.id,
-            widget.category!.name,
-          ),
+        : CategoryStrings.of(context)
+              .name(widget.category!.id, widget.category!.name),
   );
   @override
   void dispose() {
@@ -62,8 +64,8 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
           canPop: !state.saving,
           child: PostDialog(
             title: widget.category == null
-                ? ProfilePostStrings.addTab
-                : ProfilePostStrings.editTab,
+                ? CategoryStrings.of(context).text(ProfilePostStrings.addTab)
+                : CategoryStrings.of(context).text(ProfilePostStrings.editTab),
             textDirection: TextDirection.rtl,
             actions: CategorySheetActions(
               saving: state.saving,
@@ -83,17 +85,22 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                         enabled: !state.saving,
                         maxLength: 50,
                         textAlign: TextAlign.right,
-                        decoration: const InputDecoration(
-                          labelText: ProfilePostStrings.tabName,
+                        decoration: InputDecoration(
+                          labelText: CategoryStrings.of(context)
+                              .text(ProfilePostStrings.tabName),
                         ),
                         textInputAction: TextInputAction.done,
                         onFieldSubmitted: (_) => _save(),
-                        validator: (value) =>
-                            ProfileCategoryValidator.validateName(
-                              value ?? '',
-                              state.categories,
-                              excludingId: widget.category?.id,
-                            ),
+                        validator: (value) {
+                          final error = ProfileCategoryValidator.validateName(
+                            value ?? '',
+                            state.categories,
+                            excludingId: widget.category?.id,
+                          );
+                          return error == null
+                              ? null
+                              : CategoryStrings.of(context).text(error);
+                        },
                         textDirection: TextDirection.rtl,
                       ),
                     ),
@@ -101,8 +108,8 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                       Padding(
                         padding: const EdgeInsets.only(top: 12),
                         child: Text(
-                          state.error!,
-                          style: TextStyle(
+                          CategoryStrings.of(context).text(state.error!),
+                          style: AppTextStyles.inherit.copyWith(
                             color: Theme.of(context).colorScheme.error,
                           ),
                           textDirection: TextDirection.rtl,

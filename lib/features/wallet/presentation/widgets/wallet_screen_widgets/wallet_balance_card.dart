@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/wallet_strings.dart';
 
@@ -12,74 +13,73 @@ class WalletBalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return SizedBox(
-      height: 200,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 22,
-            right: 22,
-            bottom: 24,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: colors.onSurface.withValues(alpha: .12),
-                borderRadius: BorderRadius.circular(22),
-              ),
+    return Stack(
+      children: [
+        Positioned(
+          top: 0,
+          left: 22,
+          right: 22,
+          bottom: 24,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colors.onSurface.withValues(alpha: .12),
+              borderRadius: BorderRadius.circular(22),
             ),
           ),
-          Positioned(
-            top: 9,
-            left: 10,
-            right: 10,
-            bottom: 12,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: colors.onSurface.withValues(alpha: .35),
-                borderRadius: BorderRadius.circular(22),
-              ),
+        ),
+        Positioned(
+          top: 9,
+          left: 10,
+          right: 10,
+          bottom: 12,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: colors.onSurface.withValues(alpha: .35),
+              borderRadius: BorderRadius.circular(22),
             ),
           ),
-          Positioned(
-            top: 20,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: colors.onSurface,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.fromLTRB(40, 32, 16, 24),
-              child: DefaultTextStyle.merge(
-                style: TextStyle(color: colors.surface),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Text(
-                      WalletStrings.balance,
-                      style: TextStyle(fontSize: 12),
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      AppStrings.persianDigits(WalletSampleData.balance),
-                      style: const TextStyle(
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Container(
+            constraints: const BoxConstraints(minHeight: 180),
+            decoration: BoxDecoration(
+              color: colors.onSurface,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.fromLTRB(40, 32, 16, 24),
+            child: DefaultTextStyle.merge(
+              style: AppTextStyles.inherit.copyWith(color: colors.surface),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        WalletStrings.balance,
+                        style: AppTextStyles.label,
+                        textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                       ),
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
-                    ),
-                    const Spacer(),
-                    WalletCardFooter(showWithdrawal: showWithdrawal),
-                  ],
-                ),
+                      Text(
+                        AppStrings.persianDigits(WalletSampleData.balance),
+                        style: AppTextStyles.walletBalance,
+                        textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  WalletCardFooter(showWithdrawal: showWithdrawal),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

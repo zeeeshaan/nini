@@ -1,3 +1,8 @@
+import 'package:nini/features/home/data/home_post_data.dart';
+import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:nini/features/home/presentation/widgets/home_seller_header/home_seller_header.dart';
+import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/features/home/presentation/cubit/home_card_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -16,10 +21,12 @@ class HomeProductCard extends StatefulWidget {
     required this.imageUrl,
     required this.title,
     this.onViewCart,
+    this.seller = homeSeller,
   });
 
   final String imageUrl;
   final String title;
+  final PostSeller seller;
   final VoidCallback? onViewCart;
 
   @override
@@ -28,8 +35,7 @@ class HomeProductCard extends StatefulWidget {
 
 class _HomeProductCardState extends State<HomeProductCard>
     with AutomaticKeepAliveClientMixin {
-  bool _isLiked = true;
-  bool _isBookmarked = false;
+  final _card = HomeCardCubit();
 
   @override
   bool get wantKeepAlive => true;
@@ -47,6 +53,7 @@ class _HomeProductCardState extends State<HomeProductCard>
         maxQuantity: 200,
         imageUrl: widget.imageUrl,
         isPreOrder: true,
+        seller: widget.seller,
       ),
     );
     ScaffoldMessenger.of(context)
@@ -72,23 +79,58 @@ class _HomeProductCardState extends State<HomeProductCard>
   }
 
   @override
+  void dispose() {
+    _card.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        HomeProductImage(imageUrl: widget.imageUrl, title: widget.title),
-        HomeEngagementBar(
-          isLiked: _isLiked,
-          onAddToCart: _addToCart,
-          isBookmarked: _isBookmarked,
-          onLike: () => setState(() => _isLiked = !_isLiked),
-          onBookmark: () => setState(() => _isBookmarked = !_isBookmarked),
-        ),
-        HomeProductDetails(title: widget.title),
-        const HomeProductPrice(),
-        const Divider(height: 1, thickness: .5),
-      ],
+    return BlocBuilder<HomeCardCubit, HomeCardState>(
+      bloc: _card,
+      builder: (context, state) {
+        final post = homeProductPost(
+          title: widget.title,
+          imageUrl: widget.imageUrl,
+        );
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            HomeSellerHeader(
+              seller: widget.seller,
+              onPressed: () => openHomeSeller(context, post, widget.seller),
+            ),
+            Material(
+              color: Theme.of(context).colorScheme.surface,
+              child: InkWell(
+                onTap: () => openHomePost(context, post, widget.seller),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    HomeProductImage(
+                      imageUrl: widget.imageUrl,
+                      title: widget.title,
+                      attempt: _card.state.imageAttempt,
+                      onRetry: _card.retryImage,
+                    ),
+                    HomeEngagementBar(
+                      isLiked: _card.state.liked,
+                      onAddToCart: _addToCart,
+                      isBookmarked: _card.state.bookmarked,
+                      onLike: () => _card.toggleLike(),
+                      onBookmark: () => _card.toggleBookmark(),
+                    ),
+                    HomeProductDetails(title: widget.title),
+                    const HomeProductPrice(),
+                  ],
+                ),
+              ),
+            ),
+            const Divider(height: 1, thickness: .5),
+          ],
+        );
+      },
     );
   }
 }

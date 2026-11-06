@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/search_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/activity_tracking/post_activity_tracking.dart';
 import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/post_media/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
 
 class SearchResultCard extends StatelessWidget {
-  const SearchResultCard({super.key, required this.post, required this.onTap});
+  const SearchResultCard({super.key, required this.post, this.onTap});
 
   final PostItem post;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String _price(String value) => AppStrings.persianDigits(
     value.replaceAllMapped(
@@ -53,11 +54,9 @@ class SearchResultCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            '${AppStrings.persianDigits(post.details.discount)}٪',
-                            style: const TextStyle(
+                            '${AppStrings.persianDigits(post.details.discount)}%',
+                            style: AppTextStyles.metadataBold.copyWith(
                               color: AppColors.white,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
@@ -72,14 +71,11 @@ class SearchResultCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        post.title,
+                        SearchStrings.display(post.title),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.right,
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: AppTextStyles.smallPrintBold,
                       ),
                       if (post.details.tags.contains(AppStrings.preOrder))
                         Align(
@@ -92,8 +88,7 @@ class SearchResultCard extends StatelessWidget {
                             ),
                             child: Text(
                               AppStrings.preOrder,
-                              style: TextStyle(
-                                fontSize: 7,
+                              style: AppTextStyles.badgeSmall.copyWith(
                                 color: Theme.of(context).colorScheme.surface,
                               ),
                             ),
@@ -103,8 +98,7 @@ class SearchResultCard extends StatelessWidget {
                       if (post.originalPrice.isNotEmpty)
                         Text(
                           _price(post.originalPrice),
-                          style: TextStyle(
-                            fontSize: 8,
+                          style: AppTextStyles.micro.copyWith(
                             color: secondary,
                             decoration: TextDecoration.lineThrough,
                           ),
@@ -113,7 +107,7 @@ class SearchResultCard extends StatelessWidget {
                         '${_price(post.price)} ${SearchStrings.currency}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 10),
+                        style: AppTextStyles.smallPrint,
                       ),
                     ],
                   ),
