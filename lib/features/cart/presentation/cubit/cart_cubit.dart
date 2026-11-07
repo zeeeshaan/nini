@@ -4,6 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/demo_cart_items.dart';
 import '../../domain/models/cart_item.dart';
 import '../../domain/models/cart_order.dart';
+import '../../domain/models/cart_snapshot.dart';
+import '../../domain/policies/order_access.dart';
+import '../../domain/services/checkout_order_builder.dart';
+
+import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/features/order_cancellation/domain/models/order_cancellation.dart';
+
+import 'package:nini/features/payment/domain/models/payment_details.dart';
+import 'package:nini/features/payment/domain/models/order_dispute.dart';
+import 'package:nini/features/payment/domain/models/dispute_attachment.dart';
 
 import 'package:nini/features/home/data/home_post_data.dart';
 
@@ -13,11 +23,14 @@ import '../../domain/repositories/cart_repository.dart';
 import 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit(this.repository) : super(CartState());
+  CartCubit(this.repository, {this.localUser = localPostSeller})
+    : super(CartState(currentUserId: localUser.id));
+  final PostSeller localUser;
   final CartRepository repository;
   Future<void> _writes = Future.value();
   bool _loaded = false;
   bool _readFailed = false;
+  bool _committingReceipt = false;
 
   Future<void> load() async {
     if (_loaded) return;
@@ -43,6 +56,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> retryStorage() async {
+    if (_committingReceipt) return;
     if (_readFailed) {
       _loaded = false;
       await load();
@@ -51,20 +65,175 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> _persist() {
-    final snapshot = state.snapshot;
+  Future<void> _persist() async {
+    await _saveSnapshot(state.snapshot);
+  }
+
+  Future<bool> _saveSnapshot(CartSnapshot snapshot) {
+    var saved = false;
     _writes = _writes.then((_) async {
       try {
         await repository.save(snapshot);
+        saved = true;
         if (!isClosed) emit(state.copyWith(storageError: false));
       } catch (_) {
         if (!isClosed) emit(state.copyWith(storageError: true));
       }
     });
-    return _writes;
+    return _writes.then((_) => saved);
   }
 
-  bool get _editable => !state.loading && !_readFailed;
+  bool get _editable => !state.loading && !_readFailed && !_committingReceipt;
+
+  Future<bool> _commitReceiptState(CartState next) async {
+    if (!_editable) return false;
+    _committingReceipt = true;
+    try {
+      final saved = await _saveSnapshot(next.snapshot);
+      if (!saved || isClosed) return false;
+      emit(next.copyWith(storageError: false));
+      return true;
+    } finally {
+      _committingReceipt = false;
+    }
+  }
+
+  /// Explicit local demo completion, separate from verified bank callbacks.
+  Future<CartOrder?> completeDemoPayment(PaymentDetails details, PaymentMethod method) async {
+    final checkoutId = details.checkoutId;
+    if (checkoutId == null || details.customer == null) return null;
+    for (final order in state.orders) {
+      if (order.isPaidReceipt && order.checkoutId == checkoutId) return order;
+    }
+    if (!_editable ||
+        state.stage != CartStage.checkout ||
+        details.items.isEmpty ||
+        state.total != details.total ||
+        state.checkoutItems.length != details.items.length ||
+        !details.items.every(
+          (item) => state.checkoutItems.any((entry) => identical(entry, item)),
+        )) {
+      return null;
+    }
+    final orders = buildDemoCheckoutOrders(
+      details: details,
+      method: method,
+      buyer: localUser,
+      charges: state.charges,
+      now: DateTime.now(),
+    );
+    if (orders.isEmpty) return null;
+    final selectedIds = details.items.map((item) => item.id).toSet();
+    final next = state.copyWith(
+      items: state.items.where((item) => !selectedIds.contains(item.id)).toList(),
+      orders: [...orders, ...state.orders],
+      stage: CartStage.cart,
+      tab: CartTab.cart,
+      checkoutIds: {},
+      charges: 0,
+      clearStatusFilter: true,
+    );
+    return await _commitReceiptState(next) ? orders.first : null;
+  }
+
+  Future<bool> confirmPaidOrder(String id) async {
+    final order = findOrder(id);
+    if (!_editable || order == null || !OrderAccess.canComplete(order, localUser.id)) {
+      return false;
+    }
+    return _commitReceiptState(
+      state.copyWith(
+        orders: [
+          for (final saved in state.orders)
+            if (saved.id == id) saved.withStatus(CartOrderStatus.completed) else saved,
+        ],
+      ),
+    );
+  }
+
+  Future<bool> submitOrderDispute(
+    String id,
+    String description,
+    List<DisputeAttachment> attachments,
+  ) async {
+    final order = findOrder(id);
+    if (!_editable ||
+        order == null ||
+        !OrderAccess.canDispute(order, localUser.id) ||
+        description.trim().isEmpty) {
+      return false;
+    }
+    final dispute = OrderDispute(
+      id: 'DSP-${DateTime.now().microsecondsSinceEpoch}',
+      description: description.trim(),
+      createdAt: DateTime.now(),
+      attachments: attachments,
+    );
+    return _commitReceiptState(
+      state.copyWith(
+        orders: [
+          for (final saved in state.orders)
+            if (saved.id == id) saved.withDispute(dispute).markRead(asProvider: false) else saved,
+        ],
+      ),
+    );
+  }
+
+  Future<bool> acceptProviderOrder(String id) async {
+    final order = findOrder(id);
+    if (order == null || !OrderAccess.canAccept(order, localUser.id)) return false;
+    final status = order.isPaidReceipt ? CartOrderStatus.accepted : CartOrderStatus.pendingPay;
+    return _saveOrder(order.withStatus(status).markRead(asProvider: true));
+  }
+
+  Future<bool> advanceProviderOrder(String id) async {
+    final order = findOrder(id);
+    if (order == null) return false;
+    final next = OrderAccess.nextProviderStatus(order, localUser.id);
+    if (next == null) return false;
+    return _saveOrder(order.withStatus(next).markRead(asProvider: true));
+  }
+
+  Future<bool> cancelProviderOrder(
+    String id,
+    String reason,
+    List<DisputeAttachment> attachments,
+  ) async {
+    final order = findOrder(id);
+    if (order == null || !OrderAccess.canCancel(order, localUser.id) || reason.trim().isEmpty) {
+      return false;
+    }
+    final cancellation = OrderCancellation(
+      providerId: localUser.id,
+      reason: reason.trim(),
+      createdAt: DateTime.now(),
+      attachments: attachments,
+    );
+    return _saveOrder(order.withCancellation(cancellation));
+  }
+
+  Future<bool> markOrderRead(String id, {required bool asProvider}) async {
+    final order = findOrder(id);
+    if (order == null ||
+        !(asProvider
+            ? OrderAccess.isProvider(order, localUser.id)
+            : OrderAccess.isBuyer(order, localUser.id))) {
+      return false;
+    }
+    final readAt = asProvider ? order.providerReadAt : order.customerReadAt;
+    final eventAt = order.timeline[order.status] ?? order.createdAt;
+    if (readAt != null && !readAt.isBefore(eventAt)) return true;
+    return _saveOrder(order.markRead(asProvider: asProvider));
+  }
+
+  Future<bool> _saveOrder(CartOrder order) => _commitReceiptState(
+    state.copyWith(
+      orders: [
+        for (final saved in state.orders)
+          if (saved.id == order.id) order else saved,
+      ],
+    ),
+  );
 
   CartItem _restoreKnownSeller(CartItem item) {
     if (item.seller != null) return item;
@@ -83,14 +252,16 @@ class CartCubit extends Cubit<CartState> {
     final items = [...state.items];
     if (index < 0) {
       if (!item.accepts(item.quantity)) return false;
-      items.add(item);
+      items.insert(0, item);
     } else {
       final old = items[index];
       if (old.seller != null && item.seller != null && old.seller!.id != item.seller!.id) {
         return false;
       }
       if (!old.accepts(old.quantity + item.quantity)) return false;
-      items[index] = old.withQuantity(old.quantity + item.quantity, seller: item.seller);
+      final updated = old.withQuantity(old.quantity + item.quantity, seller: item.seller);
+      items.removeAt(index);
+      items.insert(0, updated);
     }
     emit(state.copyWith(items: items));
     _persist();
@@ -180,7 +351,8 @@ class CartCubit extends Cubit<CartState> {
           charges: charges,
           status: CartOrderStatus.pendingApproval,
           seller: items.first.seller,
-          customerId: 'local-customer',
+          customerId: localUser.id,
+          buyer: localUser,
           address: address.trim(),
           phone: phone.trim(),
           timeline: {CartOrderStatus.pendingApproval: now},
@@ -217,7 +389,7 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  // Called only by a verified payment result; the placeholder gateway never calls this.
+  // Called only by a verified payment result; demo completion never calls this.
   void confirmProductPayment(String id) =>
       _transitionOrder(id, CartOrderStatus.pendingPay, CartOrderStatus.accepted);
   void prepareProductOrder(String id) =>

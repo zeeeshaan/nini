@@ -61,6 +61,7 @@ abstract final class AppIcons {
   static const speakerOff = 'assets/icons/vectors/media/volume-off.svg';
   static const addCircle = 'assets/icons/vectors/edit/add-plus-circle.svg';
   static const star = 'assets/icons/vectors/interface/star.svg';
+  static const starFilled = 'assets/icons/vectors/interface/star-filled.svg';
   static const radio = 'assets/icons/vectors/interface/radio-unchecked.svg';
   static const radioSelected = 'assets/icons/vectors/interface/radio-fill.svg';
   static const copy = 'assets/icons/vectors/edit/copy.svg';

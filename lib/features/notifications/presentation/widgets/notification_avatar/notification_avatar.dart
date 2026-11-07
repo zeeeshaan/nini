@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/assets/app_assets.dart';
+import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
@@ -37,8 +39,8 @@ class NotificationAvatar extends StatelessWidget {
               ),
               child: ClipOval(
                 child: notification.imageUrl == null
-                    ? const Icon(
-                        Icons.waving_hand_outlined,
+                    ? const AppIcon(
+                        AppAssets.hyworkLogo,
                         color: AppColors.white,
                         size: 31,
                       )

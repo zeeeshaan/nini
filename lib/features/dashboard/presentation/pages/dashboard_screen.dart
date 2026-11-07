@@ -37,6 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late final PageController _pageController;
   late final DashboardNavigationCubit _navigation;
   DashboardTab? _targetTab;
+  String? _publishedServiceId;
 
   @override
   void initState() {
@@ -58,7 +59,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         context.read<ProfileCategoriesCubit>().select(
           published.profileCategoryId,
         );
-        await _onTabSelected(DashboardTab.home);
+        if (published.isService) {
+          setState(() => _publishedServiceId = published.id);
+        }
+        await _onTabSelected(
+          published.isService ? DashboardTab.search : DashboardTab.home,
+        );
       }
       return;
     }
@@ -104,7 +110,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               style: AppTextStyles.createPlaceholder,
             ),
           ),
-          SearchScreen(active: selectedTab == DashboardTab.search),
+          SearchScreen(
+            active: selectedTab == DashboardTab.search,
+            publishedServiceId: _publishedServiceId,
+          ),
           widget.profilePage ?? const ProfileScreen(),
         ];
         return AppResponsiveBuilder(

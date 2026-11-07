@@ -3,6 +3,8 @@ import 'package:nini/core/localization/app_strings.dart';
 
 /// English development copy for Cart, Checkout, and their accessibility labels.
 abstract final class CartStrings {
+  static const clearAmount = 'Clear amount';
+  static const paid = 'Paid';
   static const cart = AppStrings.cart;
   static const home = AppStrings.home;
   static const create = AppStrings.create;
@@ -35,7 +37,7 @@ abstract final class CartStrings {
   static const emptyHelp = "Tap the shopping bag on Home to add a product.";
   static const noOrders = "No orders yet";
   static const noSales = "No sales yet";
-  static const salesHelp = "Your sales will appear here when seller information is connected.";
+  static const salesHelp = "Orders for your posts will appear here.";
   static const remove = "Remove from Cart";
   static const viewCart = AppStrings.viewCart;
   static const storageError = AppStrings.cartStorageError;

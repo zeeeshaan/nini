@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/search_strings.dart';
 
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
+import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_all_services_filter/search_all_services_filter.dart';
 import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_content/search_content.dart';
 import 'package:nini/features/search/presentation/widgets/search_screen_widgets/search_header/search_header.dart';
 
 /// Connects the header's buttons to search state. The lists live in SearchContent.
 class SearchView extends StatefulWidget {
-  const SearchView({super.key, required this.active});
+  const SearchView({super.key, required this.active, this.publishedServiceId});
 
   final bool active;
+  final String? publishedServiceId;
 
   @override
   State<SearchView> createState() => _SearchViewState();
@@ -25,12 +27,17 @@ class _SearchViewState extends State<SearchView> {
   @override
   void initState() {
     super.initState();
+    if (widget.publishedServiceId != null) _search.submit('');
     _controller.text = SearchStrings.display(_search.state.query);
   }
 
   @override
   void didUpdateWidget(covariant SearchView oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.publishedServiceId != null &&
+        widget.publishedServiceId != oldWidget.publishedServiceId) {
+      _submit('');
+    }
     if (!widget.active) _focusNode.unfocus();
   }
 
@@ -118,8 +125,17 @@ class _SearchViewState extends State<SearchView> {
                       onClear: _clearQuery,
                       onCityPressed: _toggleCities,
                     ),
+                    if (state.panel != SearchPanel.cities)
+                      SearchAllServicesFilter(
+                        selected:
+                            state.submittedQuery.isEmpty &&
+                            state.query.isEmpty &&
+                            state.panel == SearchPanel.results,
+                        onSelected: () => _submit(''),
+                      ),
                     Expanded(
                       child: SearchContent(
+                        key: ValueKey(widget.publishedServiceId),
                         state: state,
                         onCitySelected: _selectCity,
                         onQuerySelected: _submit,

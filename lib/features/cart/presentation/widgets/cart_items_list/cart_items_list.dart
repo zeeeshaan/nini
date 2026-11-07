@@ -8,6 +8,7 @@ import 'package:nini/shared/widgets/app_button/app_button.dart';
 import '../../cubit/cart_cubit.dart';
 import '../../cubit/cart_state.dart';
 import '../../helpers/cart_format.dart';
+import '../../helpers/cart_checkout_navigation.dart';
 import '../cart_amount_dialog/cart_amount_dialog.dart';
 import '../cart_delete_background/cart_delete_background.dart';
 import '../cart_empty_state/cart_empty_state.dart';
@@ -44,7 +45,7 @@ class CartItemsList extends StatelessWidget {
                 key: const ValueKey('cart-checkout'),
                 label:
                     '${CartStrings.checkout} · ${cartMoney(state.visibleTotal)} ${CartStrings.toman}',
-                onPressed: () => cart.checkout(),
+                onPressed: () => openCartCheckout(context),
               ),
             ),
           );
@@ -62,7 +63,7 @@ class CartItemsList extends StatelessWidget {
             background: const CartDeleteBackground(),
             child: CartItemCard(
               item: item,
-              onTap: () => cart.checkout(itemId: item.id),
+              onTap: () => openCartCheckout(context, itemId: item.id),
               onQuantity: () async {
                 final amount = await showCartAmountDialog(
                   context,

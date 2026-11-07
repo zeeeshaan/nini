@@ -8,7 +8,7 @@ abstract final class AppTextStyles {
   static const heading = TextStyle(fontSize: 22, fontWeight: regular);
   static const body = TextStyle(fontSize: 14, fontWeight: regular);
   static const button = TextStyle(fontSize: 14, fontWeight: medium);
-  static const caption = TextStyle(fontSize: 12, fontWeight: regular);
+  static const caption = TextStyle(fontSize: 14, fontWeight: regular);
 
   static const username = TextStyle(fontSize: 16, fontWeight: semiBold);
   static const profileName = TextStyle(fontSize: 14, fontWeight: bold);
@@ -16,20 +16,38 @@ abstract final class AppTextStyles {
   static const website = TextStyle(fontSize: 14, fontWeight: regular);
   static const statNumber = TextStyle(fontSize: 14, fontWeight: bold);
   static const statLabel = TextStyle(fontSize: 14, fontWeight: regular);
-  static const category = TextStyle(fontSize: 12, fontWeight: regular);
+  static const category = TextStyle(fontSize: 14, fontWeight: regular);
 
-  // Preserve the current post-grid and settings typography.
+  // Readable profile-card roles. Keep these sizes independent of card width.
   static const postTitle = TextStyle(
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: bold,
-    height: 1.4,
+    height: 1.25,
   );
   static const listingTitle = TextStyle(fontWeight: bold);
-  static const postMetadata = TextStyle(fontSize: 9);
-  static const originalPrice = TextStyle(fontSize: 10);
-  static const postPrice = TextStyle(fontSize: 14, height: 1);
-  static const pricePrefix = TextStyle(fontSize: 8, height: 1.3);
-  static const discountBadge = TextStyle(fontSize: 7);
+  static const postMetadata = TextStyle(fontSize: 12, height: 1.25);
+  static const postStock = TextStyle(
+    fontSize: 12,
+    fontWeight: bold,
+    height: 1.25,
+  );
+  static const originalPrice = TextStyle(fontSize: 12, height: 1.1);
+  static const postPrice = TextStyle(
+    fontSize: 18,
+    fontWeight: heavy,
+    height: 1.1,
+  );
+  static const postCardHeading = postPrice;
+  static const pricePrefix = TextStyle(
+    fontSize: 12,
+    fontWeight: medium,
+    height: 1.2,
+  );
+  static const discountBadge = TextStyle(
+    fontSize: 11,
+    fontWeight: bold,
+    height: 1,
+  );
   static const notificationBadge = TextStyle(fontSize: 9, fontWeight: semiBold);
   static const screenTitle = TextStyle(fontSize: 24, fontWeight: medium);
   static const sectionTitle = TextStyle(fontSize: 17, fontWeight: bold);
@@ -87,6 +105,11 @@ abstract final class AppTextStyles {
   static const dialogTitle = TextStyle(fontSize: 18, fontWeight: medium);
   static const pageTitleBold = TextStyle(fontSize: 18, fontWeight: bold);
   static const amount = TextStyle(fontSize: 20);
+  static const orderPayable = TextStyle(
+    fontSize: 48,
+    fontWeight: heavy,
+    height: 1.1,
+  );
   static const analyticsTitle = TextStyle(fontSize: 20, fontWeight: regular);
   static const specificationsHeading = TextStyle(
     fontSize: 20,
@@ -133,6 +156,7 @@ abstract final class AppTextStyles {
   static const semiBold = FontWeight.w600;
   static const bold = FontWeight.w700;
   static const extraBold = FontWeight.w800;
+  static const heavy = FontWeight.w900;
 
   static const materialTextTheme = TextTheme(
     displayLarge: TextStyle(fontSize: 57, fontWeight: regular),

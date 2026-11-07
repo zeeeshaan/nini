@@ -4,8 +4,8 @@ enum SearchPanel { results, cities, suggestions }
 
 class SearchState {
   const SearchState({
-    this.query = SearchStrings.initialQuery,
-    this.submittedQuery = SearchStrings.initialQuery,
+    this.query = '',
+    this.submittedQuery = '',
     this.city = SearchStrings.tehran,
     this.panel = SearchPanel.results,
   });

@@ -13,6 +13,9 @@ import 'package:nini/features/post_detail/presentation/widgets/content/post_deta
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/helpers/manage_post_actions.dart';
 import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
+import 'package:nini/features/home/data/home_post_data.dart';
+import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -66,12 +69,16 @@ class PostDetailScreen extends StatelessWidget {
   Widget _buildDetail(BuildContext context, PostItem post) {
     final posts = context.read<PostsCubit?>()?.state;
     final isOwnPost = posts?.find(post.id) != null;
+    final isOwnSeller = isOwnPost || seller?.id == localPostSeller.id;
     final canManage = allowOwnerActions && posts?.canManage(post) == true;
+    final canViewAnalytics = posts?.canViewAnalytics(post) == true;
     var openAuthorProfile = onSellerPressed;
-    if (isOwnPost && openAuthorProfile == null) {
+    if (isOwnSeller && openAuthorProfile == null) {
       openAuthorProfile = allowOwnerActions
           ? () => Navigator.of(context).pop()
           : () => openAccountProfile(context);
+    } else if (openAuthorProfile == null && seller != null) {
+      openAuthorProfile = () => openHomeSeller(context, post, seller!);
     }
     final images = galleryImages != null && galleryImages!.isNotEmpty
         ? galleryImages!
@@ -87,18 +94,27 @@ class PostDetailScreen extends StatelessWidget {
               elevation: 0,
               toolbarHeight: 44,
               actions: [
-                TextButton.icon(
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => PostAnalyticsScreen(post: post),
+                if (canViewAnalytics)
+                  TextButton.icon(
+                    onPressed: () {
+                      if (context.read<PostsCubit?>()?.state.canViewAnalytics(
+                            post,
+                          ) !=
+                          true) {
+                        return;
+                      }
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => PostAnalyticsScreen(post: post),
+                        ),
+                      );
+                    },
+                    icon: const AppIcon(AppIcons.analytics, size: 17),
+                    label: const Text(
+                      AppStrings.viewAnalytics,
+                      style: AppTextStyles.label,
                     ),
                   ),
-                  icon: const AppIcon(AppIcons.analytics, size: 17),
-                  label: const Text(
-                    AppStrings.viewAnalytics,
-                    style: AppTextStyles.label,
-                  ),
-                ),
               ],
               automaticallyImplyLeading: false,
               leadingWidth: 48,
@@ -117,6 +133,9 @@ class PostDetailScreen extends StatelessWidget {
               showPurchaseActions: !isOwnPost,
               seller: seller,
               onSellerPressed: openAuthorProfile,
+              onMessagePressed: !isOwnSeller && seller != null
+                  ? () => openSellerConversation(context, seller!)
+                  : null,
               images: images,
               onCommentsPressed: onCommentsPressed,
               onSharePressed: onSharePressed,

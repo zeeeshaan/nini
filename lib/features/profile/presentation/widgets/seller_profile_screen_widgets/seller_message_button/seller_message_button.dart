@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/features/chat/data/in_memory_chat_repository.dart';
-import 'package:nini/features/chat/domain/models/chat_conversation.dart';
-import 'package:nini/features/chat/presentation/pages/conversation_screen.dart';
+import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
@@ -10,26 +8,6 @@ class SellerMessageButton extends StatelessWidget {
   const SellerMessageButton({super.key, required this.seller});
 
   final PostSeller seller;
-
-  void _openChat(BuildContext context) {
-    final conversation = InMemoryChatRepository.instance.openConversation(
-      ChatConversation(
-        id: 'seller-${seller.id}',
-        name: seller.name,
-        avatarAsset: seller.avatarAsset,
-        lastMessage: '',
-        lastMessageAt: DateTime.now(),
-      ),
-    );
-    Navigator.of(context).push<void>(
-      MaterialPageRoute(
-        builder: (_) => ConversationScreen(
-          conversation: conversation,
-          subtitle: seller.location.isEmpty ? null : seller.location,
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +28,7 @@ class SellerMessageButton extends StatelessWidget {
         label: AppStrings.message,
         height: 44,
         variant: AppButtonVariant.outlined,
-        onPressed: () => _openChat(context),
+        onPressed: () => openSellerConversation(context, seller),
       ),
     );
   }

@@ -11,6 +11,7 @@ import '../../helpers/cart_labels.dart';
 import '../cart_item_image/cart_item_image.dart';
 import '../cart_item_badge/cart_item_badge.dart';
 import '../cart_quantity_button/cart_quantity_button.dart';
+import '../cart_service_item_card/cart_service_item_card.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
@@ -26,6 +27,7 @@ class CartItemCard extends StatelessWidget {
   final bool readOnly;
   @override
   Widget build(BuildContext context) {
+    if (item.isService) return CartServiceItemCard(item: item, onTap: onTap);
     final colors = Theme.of(context).colorScheme;
     final badge = cartItemBadgeLabel(item);
     return Material(

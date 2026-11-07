@@ -1,5 +1,9 @@
 // dart format width=100
 import '../../domain/models/cart_item.dart';
+import '../../domain/policies/order_access.dart';
+
+import 'package:nini/shared/models/local_identity.dart';
+
 import '../../domain/models/cart_order_status.dart';
 import '../../domain/models/cart_order.dart';
 import '../../domain/models/cart_snapshot.dart';
@@ -21,9 +25,11 @@ class CartState {
     this.loading = true,
     this.storageError = false,
     this.statusFilter,
+    this.currentUserId = localProfileId,
   }) : items = List.unmodifiable(items),
        orders = List.unmodifiable(orders),
        checkoutIds = Set.unmodifiable(checkoutIds);
+  final String currentUserId;
   final List<CartItem> items;
   final List<CartOrder> orders;
   final Set<String> checkoutIds;
@@ -37,6 +43,10 @@ class CartState {
       items.where((item) => statusFilter == null || item.status == statusFilter).toList();
   List<CartOrder> get visibleOrders =>
       orders.where((order) => statusFilter == null || order.status == statusFilter).toList();
+  List<CartOrder> get purchases =>
+      visibleOrders.where((order) => OrderAccess.isBuyer(order, currentUserId)).toList();
+  List<CartOrder> get sales =>
+      visibleOrders.where((order) => OrderAccess.isProvider(order, currentUserId)).toList();
   List<CartItem> get checkoutItems => items.where((item) => checkoutIds.contains(item.id)).toList();
   int get subtotal => checkoutItems.fold(0, (sum, item) => sum + item.subtotal);
   int get discount => checkoutItems.fold(0, (sum, item) => sum + item.discount);
@@ -58,6 +68,7 @@ class CartState {
     CartOrderStatus? statusFilter,
     bool clearStatusFilter = false,
   }) => CartState(
+    currentUserId: currentUserId,
     items: items ?? this.items,
     orders: orders ?? this.orders,
     stage: stage ?? this.stage,

@@ -1,82 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/localization/order_information_strings.dart';
+import 'package:nini/core/localization/payment_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/features/payment/domain/models/payment_details.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
+/// Read-only buyer table populated from the preceding information form.
 class PaymentDelivery extends StatelessWidget {
   const PaymentDelivery({super.key, required this.details});
   final PaymentDetails details;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final date = details.scheduledAt;
-    final dateTime = date == null
-        ? 'Not provided'
-        : '${date.year}-${date.month.toString().padLeft(2, '0')}-'
-              '${date.day.toString().padLeft(2, '0')}  |  '
-              '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    final colors = Theme.of(context).colorScheme;
+    final customer = details.customer;
     final rows = [
-      ('Date & Time', dateTime, AppIcons.calendar),
-      ('Location', details.address ?? 'Not provided', AppIcons.location),
-      ('Phone number', details.phone ?? 'Not provided', AppIcons.phone),
+      (OrderInformationStrings.name, customer?.name ?? ''),
+      (OrderInformationStrings.surname, customer?.surname ?? ''),
+      (OrderInformationStrings.mobile, customer?.mobile ?? details.phone ?? ''),
+      (OrderInformationStrings.city, customer?.city ?? ''),
+      (OrderInformationStrings.province, customer?.province ?? ''),
+      (
+        OrderInformationStrings.address,
+        customer?.address ?? details.address ?? '',
+      ),
+      (OrderInformationStrings.postalCode, customer?.postalCode ?? ''),
     ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            'Delivery Address',
-            textAlign: TextAlign.right,
-            style: theme.textTheme.titleLarge,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          PaymentStrings.buyerInformation,
+          textAlign: TextAlign.right,
+          style: AppTextStyles.labelBold,
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).dividerColor),
+            borderRadius: BorderRadius.circular(8),
           ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              border: Border.all(color: theme.colorScheme.outline),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: [
-                for (final row in rows)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            row.$2,
-                            textAlign: TextAlign.right,
-                            textDirection: TextDirection.ltr,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              fontFamily: AppTextStyles.numberFontFamily,
-                              fontFamilyFallback: const ['Arial'],
-                              color: theme.colorScheme.onSurface.withValues(
-                                alpha: .65,
-                              ),
-                            ),
+          child: Column(
+            children: [
+              for (var index = 0; index < rows.length; index++) ...[
+                if (index > 0) const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 14,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          rows[index].$2,
+                          textAlign: TextAlign.left,
+                          style: AppTextStyles.compactBody,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          rows[index].$1,
+                          textAlign: TextAlign.right,
+                          style: AppTextStyles.label.copyWith(
+                            color: colors.onSurface.withValues(alpha: .4),
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 2,
-                          child: Text(row.$1, textAlign: TextAlign.right),
-                        ),
-                        const SizedBox(width: 10),
-                        AppIcon(row.$3, size: 18),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
               ],
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

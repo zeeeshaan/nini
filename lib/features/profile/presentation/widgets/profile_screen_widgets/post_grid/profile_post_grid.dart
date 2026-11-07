@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/localization/app_strings.dart';
@@ -97,7 +98,22 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
 
               final cardWidth = (width - spacing * (columns - 1)) / columns;
 
-              final detailsHeight = (width < 400 ? 108.0 : 120.0) * textScale;
+              // Reserve space for readable app typography, including a
+              // two-line title and a unit that may wrap below a long price.
+              final textScaler = MediaQuery.textScalerOf(context);
+              double lineHeight(TextStyle style) =>
+                  textScaler.scale(style.fontSize!) * (style.height ?? 1.2);
+              final detailsHeight =
+                  12 +
+                  lineHeight(AppTextStyles.postCardHeading) * 2 +
+                  lineHeight(AppTextStyles.postMetadata) +
+                  4 +
+                  lineHeight(AppTextStyles.postStock) +
+                  8 +
+                  lineHeight(AppTextStyles.originalPrice) +
+                  lineHeight(AppTextStyles.postPrice) +
+                  2 +
+                  lineHeight(AppTextStyles.pricePrefix);
 
               return GridView.builder(
                 shrinkWrap: true,

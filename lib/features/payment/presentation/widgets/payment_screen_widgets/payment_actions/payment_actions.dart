@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:nini/core/localization/payment_strings.dart';
 
 class PaymentActions extends StatelessWidget {
-  const PaymentActions({super.key, this.onConfirm});
+  const PaymentActions({super.key, this.onConfirm, this.isProcessing = false});
   final VoidCallback? onConfirm;
+  final bool isProcessing;
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.all(16),
@@ -13,13 +15,14 @@ class PaymentActions extends StatelessWidget {
           child: AppButton(
             label: 'Cancel',
             variant: AppButtonVariant.outlined,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: isProcessing ? null : () => Navigator.of(context).pop(),
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: AppButton(
-            label: 'Confirm Pay',
+            label: PaymentStrings.payment,
+            isLoading: isProcessing,
             onPressed:
                 onConfirm ??
                 () {

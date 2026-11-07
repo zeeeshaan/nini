@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/features/home/presentation/widgets/home_metric/home_metric.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
@@ -12,183 +12,126 @@ class PostEngagementBar extends StatelessWidget {
     super.key,
     this.onCommentsPressed,
     this.onSharePressed,
+    this.onCartPressed,
+    this.cartCount = '0',
+    this.rating,
     this.showSampleMetrics = true,
   });
 
   final VoidCallback? onCommentsPressed;
   final VoidCallback? onSharePressed;
+  final VoidCallback? onCartPressed;
+  final String cartCount;
+  final String? rating;
   final bool showSampleMetrics;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PostDetailCubit, PostDetailState>(
-      buildWhen: (previous, current) =>
-          previous.isLiked != current.isLiked ||
-          previous.isBookmarked != current.isBookmarked,
-      builder: (context, state) {
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            final compact = constraints.maxWidth < 370;
-
-            final iconSize = compact ? 25.0 : 29.0;
-            final itemSpacing = compact ? 9.0 : 12.0;
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: SizedBox(
-                height: 48,
-                child: Row(
-                  children: [
-                    // Keep the rating on the left, as in the original design.
-                    if (showSampleMetrics)
-                      Semantics(
-                        label: AppStrings.rating,
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AppIcon(AppIcons.star, size: 30),
-                            SizedBox(width: 3),
-                            Text(
-                              '4.5',
-                              textDirection: TextDirection.rtl,
-                              style: AppTextStyles.labelEmphasis,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                    // Critical: creates the large empty
-                    // space shown in the Figma design.
-                    const Spacer(),
-
-                    // Actions stay grouped at the trailing edge.
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _PostAction(
-                              label: state.isBookmarked
-                                  ? AppStrings.removeBookmark
-                                  : AppStrings.bookmark,
-                              icon: AppIcon(
-                                AppIcons.bookmark,
-                                size: iconSize,
-                                selected: state.isBookmarked,
-                              ),
-                              isToggled: state.isBookmarked,
-                              count: showSampleMetrics
-                                  ? '782'
-                                  : state.isBookmarked
-                                  ? '1'
-                                  : '0',
-                              onTap: () {
-                                context
-                                    .read<PostDetailCubit>()
-                                    .toggleBookmark();
-                              },
-                            ),
-
-                            SizedBox(width: itemSpacing),
-
-                            _PostAction(
-                              label: AppStrings.comments,
-                              icon: AppIcon(AppIcons.chat, size: iconSize),
-                              count: showSampleMetrics ? '886' : '0',
-                              onTap: onCommentsPressed,
-                            ),
-
-                            SizedBox(width: itemSpacing),
-
-                            _PostAction(
-                              label: AppStrings.share,
-                              icon: AppIcon(AppIcons.share, size: iconSize),
-                              count: showSampleMetrics ? '350' : '0',
-                              onTap: onSharePressed,
-                            ),
-
-                            SizedBox(width: itemSpacing),
-
-                            _PostAction(
-                              label: state.isLiked
-                                  ? AppStrings.unlike
-                                  : AppStrings.like,
-                              icon: AppIcon(
-                                AppIcons.heart,
-                                size: iconSize,
-                                selected: state.isLiked,
-                              ),
-                              isToggled: state.isLiked,
-                              count: showSampleMetrics
-                                  ? '45K'
-                                  : state.isLiked
-                                  ? '1'
-                                  : '0',
-                              onTap: () {
-                                context.read<PostDetailCubit>().toggleLike();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+  Widget build(BuildContext context) =>
+      BlocBuilder<PostDetailCubit, PostDetailState>(
+        buildWhen: (previous, current) =>
+            previous.isLiked != current.isLiked ||
+            previous.isBookmarked != current.isBookmarked,
+        builder: (context, state) {
+          final displayedRating = rating ?? (showSampleMetrics ? '4.5' : '');
+          final ratingMetric = HomeMetric(
+            label: displayedRating.isEmpty
+                ? AppStrings.postUnrated
+                : AppStrings.postRating(displayedRating),
+            count: displayedRating,
+            icon: const AppIcon(AppIcons.star, size: 26),
+          );
+          final actions = [
+            HomeMetric(
+              label: state.isBookmarked
+                  ? AppStrings.removeBookmark
+                  : AppStrings.bookmark,
+              icon: AppIcon(
+                state.isBookmarked
+                    ? AppIcons.bookmarkFilled
+                    : AppIcons.bookmark,
+                size: 22,
               ),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class _PostAction extends StatelessWidget {
-  const _PostAction({
-    required this.label,
-    required this.icon,
-    required this.count,
-    this.onTap,
-    this.isToggled,
-  });
-
-  final String label;
-  final Widget icon;
-  final String count;
-  final VoidCallback? onTap;
-  final bool? isToggled;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      toggled: isToggled,
-      child: Tooltip(
-        message: label,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(6),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                icon,
-                const SizedBox(width: 4),
-                Text(
-                  AppStrings.persianDigits(count),
-                  textDirection: TextDirection.rtl,
-                  maxLines: 1,
-                  style: AppTextStyles.labelEmphasis,
-                ),
-              ],
+              selected: state.isBookmarked,
+              count: showSampleMetrics
+                  ? '782'
+                  : state.isBookmarked
+                  ? '1'
+                  : '0',
+              onTap: context.read<PostDetailCubit>().toggleBookmark,
             ),
-          ),
-        ),
-      ),
-    );
-  }
+            HomeMetric(
+              label: AppStrings.comments,
+              icon: const AppIcon(AppIcons.chat, size: 22),
+              count: showSampleMetrics ? '886' : '0',
+              onTap: onCommentsPressed,
+            ),
+            HomeMetric(
+              label: AppStrings.share,
+              icon: const AppIcon(AppIcons.send, size: 22),
+              count: showSampleMetrics ? '350' : '0',
+              onTap: onSharePressed,
+            ),
+            HomeMetric(
+              label: state.isLiked ? AppStrings.unlike : AppStrings.like,
+              icon: AppIcon(
+                state.isLiked ? AppIcons.heartFilled : AppIcons.heart,
+                size: 22,
+              ),
+              selected: state.isLiked,
+              count: showSampleMetrics
+                  ? '45K'
+                  : state.isLiked
+                  ? '1'
+                  : '0',
+              onTap: context.read<PostDetailCubit>().toggleLike,
+            ),
+            HomeMetric(
+              label: AppStrings.cart,
+              icon: const AppIcon(AppIcons.shoppingBag, size: 22),
+              count: showSampleMetrics ? '786' : cartCount,
+              onTap: onCartPressed,
+            ),
+          ];
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 48),
+              child: MediaQuery.textScalerOf(context).scale(10) > 13
+                  ? Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      spacing: 8,
+                      children: [ratingMetric, ...actions],
+                    )
+                  : Row(
+                      children: [
+                        ratingMetric,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerRight,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  for (
+                                    var index = 0;
+                                    index < actions.length;
+                                    index++
+                                  ) ...[
+                                    if (index > 0) const SizedBox(width: 6),
+                                    actions[index],
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          );
+        },
+      );
 }

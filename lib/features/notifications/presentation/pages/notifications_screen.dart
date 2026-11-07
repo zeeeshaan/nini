@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/features/payment/presentation/helpers/receipt_navigation.dart';
+import 'package:nini/features/provider_invoice/presentation/helpers/open_provider_invoice.dart';
 
 import '../cubit/notifications_cubit.dart';
 import '../widgets/notification_header/notification_header.dart';
 import '../widgets/notification_search_field/notification_search_field.dart';
 import '../widgets/notification_list/notification_list.dart';
 
-/// Layout only. The Home screen supplies the shared notification Cubit.
+/// Shared notifications for purchases and provider sales on the same profile.
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
   @override
@@ -31,7 +33,18 @@ class NotificationsScreen extends StatelessWidget {
                       child: NotificationList(
                         items: state.visibleItems,
                         searching: state.query.trim().isNotEmpty,
-                        onRead: notifications.markRead,
+                        onRead: (id) async {
+                          final item = state.items.firstWhere(
+                            (item) => item.id == id,
+                          );
+                          await notifications.markRead(id);
+                          if (!context.mounted || item.orderId == null) return;
+                          if (item.asProvider) {
+                            await openProviderInvoice(context, item.orderId!);
+                          } else {
+                            await openSavedInvoice(context, item.orderId!);
+                          }
+                        },
                       ),
                     ),
                   ],

@@ -24,6 +24,11 @@ class PostsState {
   bool canManage(PostItem post) =>
       !isLoading && !loadFailed && find(post.id) != null;
 
+  /// Analytics belong to uploaded records in the current local profile.
+  /// Bundled examples and another seller's feed records do not qualify.
+  bool canViewAnalytics(PostItem post) =>
+      canManage(post) && find(post.id)?.isPublished == true;
+
   PostsState copyWith({
     List<PostItem>? posts,
     bool? isLoading,

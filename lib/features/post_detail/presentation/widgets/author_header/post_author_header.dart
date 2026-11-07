@@ -15,12 +15,14 @@ class PostAuthorHeader extends StatelessWidget {
     this.avatarAsset = 'assets/images/profile_avatar.png',
     this.onMorePressed,
     this.onProfilePressed,
+    this.onMessagePressed,
   });
 
   final String name;
   final String location;
   final String avatarAsset;
   final VoidCallback? onMorePressed, onProfilePressed;
+  final VoidCallback? onMessagePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,12 @@ class PostAuthorHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         child: Row(
           children: [
+            if (onMessagePressed != null)
+              IconButton(
+                onPressed: onMessagePressed,
+                tooltip: AppStrings.message,
+                icon: const AppIcon(AppIcons.chat, size: 22),
+              ),
             if (onMorePressed != null)
               IconButton(
                 onPressed: onMorePressed,
@@ -41,12 +49,21 @@ class PostAuthorHeader extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    name,
-                    textDirection: TextDirection.rtl,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.authorName,
+                  Semantics(
+                    button: onProfilePressed != null,
+                    label: onProfilePressed == null
+                        ? null
+                        : AppStrings.viewSellerProfile(name),
+                    child: InkWell(
+                      onTap: onProfilePressed,
+                      child: Text(
+                        name,
+                        textDirection: TextDirection.rtl,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.authorName,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 3),
                   Text(

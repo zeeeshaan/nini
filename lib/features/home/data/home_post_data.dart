@@ -1,4 +1,5 @@
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/shared/models/local_identity.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 
@@ -12,7 +13,7 @@ const homeSeller = PostSeller(
 );
 
 const localPostSeller = PostSeller(
-  id: 'local-profile',
+  id: localProfileId,
   name: AppStrings.sellerName,
   avatarAsset: 'assets/Mask group.png',
   bio: AppStrings.sellerBio,

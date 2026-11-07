@@ -18,6 +18,7 @@ class CartItem {
     this.maxQuantity = 999900,
     this.imageUrl,
     this.isPreOrder = false,
+    this.isService = false,
     this.status = CartOrderStatus.pendingPay,
     this.seller,
   });
@@ -26,6 +27,7 @@ class CartItem {
   final int unitPrice, quantity, discountPerUnit, maxQuantity;
   final String? imageUrl;
   final bool isPreOrder;
+  final bool isService;
   final CartOrderStatus? status;
   final PostSeller? seller;
   bool get wholeUnits =>
@@ -50,6 +52,7 @@ class CartItem {
     maxQuantity: maxQuantity,
     imageUrl: imageUrl,
     isPreOrder: isPreOrder,
+    isService: isService,
     status: status,
     seller: seller ?? this.seller,
   );
@@ -64,6 +67,7 @@ class CartItem {
     'maxQuantity': maxQuantity,
     'imageUrl': imageUrl,
     'isPreOrder': isPreOrder,
+    'isService': isService,
     'status': status?.name,
     if (seller != null) 'seller': seller!.toJson(),
   };
@@ -81,6 +85,17 @@ class CartItem {
       maxQuantity: json['maxQuantity'] as int,
       imageUrl: json['imageUrl'] as String?,
       isPreOrder: json['isPreOrder'] as bool,
+      // Older local carts predate the explicit type flag. Only known service
+      // categories are migrated; unit labels alone never imply a service.
+      isService:
+          json['isService'] as bool? ??
+          const {
+            'services',
+            'service',
+            'خدمات',
+            'خدمات لوله‌کشی',
+            'plumbing services',
+          }.contains((json['category'] as String).trim().toLowerCase()),
       status: json.containsKey('status')
           ? CartOrderStatus.fromName(json['status'] as String?)
           : CartOrderStatus.pendingPay,

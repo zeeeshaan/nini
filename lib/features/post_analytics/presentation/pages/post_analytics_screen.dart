@@ -15,22 +15,59 @@ import 'package:nini/features/post_analytics/presentation/widgets/orders_booking
 import 'package:nini/features/post_analytics/presentation/widgets/total_views/total_views.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:nini/shared/widgets/app_loader/app_loader.dart';
+import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 
 class PostAnalyticsScreen extends StatelessWidget {
   const PostAnalyticsScreen({super.key, required this.post});
   final PostItem post;
   @override
   Widget build(BuildContext context) {
+    final posts = context.watch<PostsCubit?>()?.state;
+    final ownedPost = posts?.find(post.id);
+    if (ownedPost == null || posts?.canViewAnalytics(ownedPost) != true) {
+      return _AnalyticsAccessNotice(loading: posts?.isLoading == true);
+    }
     final existing = context.read<PostAnalyticsCubit?>();
     if (existing != null) {
       existing.load();
-      return _PostAnalyticsView(post: post);
+      return _PostAnalyticsView(post: ownedPost);
     }
     return BlocProvider(
       create: (_) => PostAnalyticsCubit(LocalPostAnalyticsRepository())..load(),
-      child: _PostAnalyticsView(post: post),
+      child: _PostAnalyticsView(post: ownedPost),
     );
   }
+}
+
+class _AnalyticsAccessNotice extends StatelessWidget {
+  const _AnalyticsAccessNotice({required this.loading});
+  final bool loading;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
+        tooltip: AppStrings.back,
+        icon: const AppIcon(AppIcons.back, size: 19),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+    ),
+    body: SafeArea(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: loading
+              ? const AppLoader()
+              : const Text(
+                  AppStrings.analyticsOwnerOnly,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.body,
+                ),
+        ),
+      ),
+    ),
+  );
 }
 
 class _PostAnalyticsView extends StatelessWidget {

@@ -2,7 +2,9 @@ import 'package:nini/features/create_post/presentation/cubit/post_address_cubit.
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/create_post_strings.dart';
@@ -30,17 +32,58 @@ class AddressDialog extends StatefulWidget {
 
 class _AddressDialogState extends State<AddressDialog> {
   late final _text = TextEditingController(text: widget.initial?.address ?? '');
+  final _addressFocus = FocusNode();
   late final _draft = PostAddressCubit(widget.initial, widget.saved);
+  String? _autoFilledAddress;
   @override
   void dispose() {
     _draft.close();
+    _addressFocus.dispose();
     _text.dispose();
     super.dispose();
   }
 
-  PostAddress? _add() => _draft.save(_text.text);
+  PostAddress? _add() {
+    final address = _draft.save(_text.text);
+    if (_text.text.trim().isEmpty) {
+      _addressFocus.requestFocus();
+    } else {
+      // Reveal the map if the remaining step is choosing the pin.
+      _addressFocus.unfocus();
+    }
+    return address;
+  }
+
+  void _showKeyboard() {
+    _addressFocus.requestFocus();
+    // Reopen the input connection even when the field already has focus.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _addressFocus.hasFocus) {
+        SystemChannels.textInput.invokeMethod<void>('TextInput.show');
+      }
+    });
+  }
+
+  Future<void> _selectPoint(LatLng point) async {
+    _addressFocus.unfocus();
+    if (_autoFilledAddress != null && _text.text == _autoFilledAddress) {
+      _text.clear();
+    }
+    _autoFilledAddress = null;
+    final address = await _draft.resolvePin(
+      point,
+      languageCode: Localizations.localeOf(context).languageCode,
+    );
+    if (!mounted || address == null) return;
+    _autoFilledAddress = address;
+    _text.value = TextEditingValue(
+      text: address,
+      selection: TextSelection.collapsed(offset: address.length),
+    );
+  }
 
   void _done() {
+    if (_draft.state.resolvingAddress) return;
     // Editing the text or pin must never silently save the previous selection.
     final selected = _draft.state.selected;
     if (selected == null ||
@@ -83,7 +126,7 @@ class _AddressDialogState extends State<AddressDialog> {
                     point: _draft.state.point,
                     tileProvider: widget.tileProvider,
                     bottomOverlayHeight: 24,
-                    onPointSelected: _draft.pin,
+                    onPointSelected: _selectPoint,
                   ),
                 ),
                 Positioned(
@@ -101,25 +144,48 @@ class _AddressDialogState extends State<AddressDialog> {
                       title: CreatePostStrings.address,
                       icon: AppIcons.map,
                       actions: PostDialogActions(
-                        onDone: _done,
+                        onDone: state.resolvingAddress ? null : _done,
                         doneLabel: widget.doneLabel,
                       ),
-                      child: ListView(
-                        shrinkWrap: true,
+                      // PostDialog already scrolls. One scrollable lets the
+                      // text field reveal itself when the keyboard opens.
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           AppTextField(
                             controller: _text,
+                            focusNode: _addressFocus,
                             label: CreatePostStrings.address,
                             hint: CreatePostStrings.enterFullAddress,
                             maxLines: 2,
+                            keyboardType: TextInputType.streetAddress,
+                            textInputAction: TextInputAction.done,
+                            onSubmitted: (_) => _addressFocus.unfocus(),
+                            onTap: _showKeyboard,
+                            onChanged: (_) {
+                              _autoFilledAddress = null;
+                              _draft.clearError();
+                            },
                             textAlign: TextAlign.right,
                             prefixIcon: IconButton(
                               tooltip: CreatePostStrings.addAddress,
-                              onPressed: _add,
+                              onPressed: state.resolvingAddress ? null : _add,
                               icon: const AppIcon(AppIcons.add, size: 22),
                             ),
                           ),
                           const SizedBox(height: 8),
+                          if (state.resolvingAddress)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Semantics(
+                                liveRegion: true,
+                                child: const Text(
+                                  CreatePostStrings.findingAddress,
+                                  style: AppTextStyles.helper,
+                                ),
+                              ),
+                            ),
                           Text(
                             _draft.state.point == null
                                 ? CreatePostStrings.chooseMapLocation
@@ -132,7 +198,10 @@ class _AddressDialogState extends State<AddressDialog> {
                           if (_draft.state.error != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 8),
-                              child: Text(_draft.state.error!),
+                              child: Semantics(
+                                liveRegion: true,
+                                child: Text(_draft.state.error!),
+                              ),
                             ),
                           const SizedBox(height: 20),
                           for (final address in _draft.state.saved)
@@ -145,6 +214,7 @@ class _AddressDialogState extends State<AddressDialog> {
                                     address,
                                   ),
                                   onTap: () {
+                                    _addressFocus.unfocus();
                                     _draft.select(address);
                                     _text.text = address.address;
                                   },

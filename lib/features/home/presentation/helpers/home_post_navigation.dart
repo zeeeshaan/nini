@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nini/features/home/data/home_post_data.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
@@ -20,7 +21,8 @@ void openHomePost(BuildContext context, PostItem post, PostSeller seller) {
 }
 
 void openHomeSeller(BuildContext context, PostItem post, PostSeller seller) {
-  if (context.read<PostsCubit?>()?.state.find(post.id) != null) {
+  if (seller.id == localPostSeller.id ||
+      context.read<PostsCubit?>()?.state.find(post.id) != null) {
     openAccountProfile(context);
     return;
   }

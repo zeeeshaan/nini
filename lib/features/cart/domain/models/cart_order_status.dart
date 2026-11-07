@@ -3,6 +3,7 @@ import 'package:nini/core/localization/cart_strings.dart';
 
 /// Stable stored names; the menu filters these values without changing orders.
 enum CartOrderStatus {
+  paid(CartStrings.paid),
   pendingApproval(CartStrings.pendingApproval),
   canceled(CartStrings.canceled),
   unsuccessful(CartStrings.unsuccessful),
@@ -15,7 +16,8 @@ enum CartOrderStatus {
   disputed(CartStrings.disputed),
   completed(CartStrings.completed),
   preparing('Preparing order'),
-  shipped('On the way');
+  shipped('On the way'),
+  inProgress('In progress');
 
   const CartOrderStatus(this.label);
   final String label;

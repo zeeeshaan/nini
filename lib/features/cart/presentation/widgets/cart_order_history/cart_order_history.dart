@@ -1,5 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
+import 'package:nini/features/provider_invoice/presentation/helpers/open_provider_invoice.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/cart_strings.dart';
@@ -9,15 +10,17 @@ import '../../helpers/cart_format.dart';
 import '../cart_empty_state/cart_empty_state.dart';
 import '../cart_item_card/cart_item_card.dart';
 import '../cart_item_badge/cart_item_badge.dart';
+import '../cart_paid_order_card/cart_paid_order_card.dart';
 
 class CartOrderHistory extends StatelessWidget {
   const CartOrderHistory({
     super.key,
     required this.orders,
     this.filtered = false,
+    this.asProvider = false,
   });
   final List<CartOrder> orders;
-  final bool filtered;
+  final bool filtered, asProvider;
   @override
   Widget build(BuildContext context) {
     if (orders.isEmpty) {
@@ -27,12 +30,18 @@ class CartOrderHistory extends StatelessWidget {
       );
     }
     return ListView.separated(
-      key: const PageStorageKey('cart-order-history'),
+      key: PageStorageKey(asProvider ? 'cart-sales' : 'cart-order-history'),
       padding: const EdgeInsets.all(16),
       itemCount: orders.length,
       separatorBuilder: (_, _) => const SizedBox(height: 14),
       itemBuilder: (context, index) {
         final order = orders[index];
+        if (order.isPaidReceipt || asProvider) {
+          return CartPaidOrderCard(
+            order: order,
+            onOpen: asProvider ? () => openProviderInvoice(context, order.id) : null,
+          );
+        }
         final date = AppStrings.persianDigits(
           MaterialLocalizations.of(context).formatShortDate(order.createdAt),
         );

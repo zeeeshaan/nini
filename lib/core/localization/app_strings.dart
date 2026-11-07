@@ -28,6 +28,8 @@ abstract final class AppStrings {
   static const follow = 'Follow';
   static const following = 'Following';
   static const noSellerPosts = 'No posts yet';
+  static const postUnrated = 'Not rated yet';
+  static String postRating(String value) => 'Rated $value out of 5';
   static const moreOptions = "More options";
   static const morePostOptions = "More post options";
   static const back = "Back";
@@ -73,6 +75,11 @@ abstract final class AppStrings {
   static const callToAction =
       "Call now to arrange your faucet repair and enjoy a leak-free home!";
   static const featuresHeading = "Specifications";
+  static const serviceDescription = 'Description';
+  static const serviceType = 'Service Type';
+  static const serviceUnit = 'Service Unit';
+  static const serviceMinimumOrder = 'Minimum Order';
+  static const serviceArea = 'Service Area';
   static const features = <(String, String)>[
     ('Brand', 'Apple, Samsung, Xiaomi'),
     ('Model', 'iPhone 15 Pro'),
@@ -210,6 +217,8 @@ abstract final class AppStrings {
       "Could not save the post. Your draft is preserved. Please try again.";
   static const analytics = "Post analytics";
   static const viewAnalytics = "View analytics";
+  static const analyticsOwnerOnly =
+      'Analytics are only available for posts you uploaded.';
   static const onThisDevice = "On this device";
   static const sampleData = "Sample data";
   static const analyticsSaveFailed =

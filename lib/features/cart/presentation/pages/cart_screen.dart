@@ -11,6 +11,7 @@ import '../widgets/cart_empty_state/cart_empty_state.dart';
 import '../widgets/cart_header/cart_header.dart';
 import '../widgets/cart_items_list/cart_items_list.dart';
 import '../widgets/cart_order_history/cart_order_history.dart';
+import '../widgets/cart_paid_order_card/cart_paid_order_card.dart';
 import '../widgets/cart_storage_notice/cart_storage_notice.dart';
 import '../widgets/cart_tabs/cart_tabs.dart';
 import '../widgets/cart_status_filter/cart_status_filter.dart';
@@ -32,14 +33,20 @@ class CartScreen extends StatelessWidget {
     if (state.loading) return const Center(child: AppLoader());
     if (state.stage == CartStage.checkout) return CartCheckout(state: state);
     if (state.tab == CartTab.history) {
-      return CartOrderHistory(orders: state.visibleOrders, filtered: state.statusFilter != null);
+      return CartOrderHistory(orders: state.purchases, filtered: state.statusFilter != null);
     }
     if (state.tab == CartTab.sales) {
-      final sales = state.visibleOrders.where((order) => order.isProductRequest).toList();
-      if (sales.isNotEmpty) return CartOrderHistory(orders: sales);
+      final sales = state.sales;
+      if (sales.isNotEmpty) return CartOrderHistory(orders: sales, asProvider: true);
       return const CartEmptyState(title: CartStrings.noSales, message: CartStrings.salesHelp);
     }
-    return CartItemsList(state: state);
+    return CartItemsList(
+      state: state,
+      leading: [
+        for (final order in state.purchases.where((order) => order.isPaidReceipt))
+          CartPaidOrderCard(key: ValueKey(order.id), order: order),
+      ],
+    );
   }
 
   @override

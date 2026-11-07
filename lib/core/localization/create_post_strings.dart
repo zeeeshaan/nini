@@ -57,10 +57,14 @@ abstract final class CreatePostStrings {
   static const address = "Address";
   static const enterFullAddress = "Enter the full address";
   static const addAddress = "Add address";
+  static const addressRequired = "Enter the full address.";
+  static const findingAddress = "Finding the address for this location…";
+  static const addressLookupFailed =
+      "Could not find an address for this pin. Type the address manually or select another location.";
   static const addressPinRequired =
-      "Enter an address and tap the map to choose its location.";
+      "Your address is entered. Tap the map above to place its location pin, then tap Done.";
   static const chooseMapLocation =
-      "Tap the map to select an exact location. The initial map is centered on Tehran.";
+      "Tap the map to fill the address automatically. You can also type or edit the address. The initial map is centered on Tehran.";
   static const mapUnavailable =
       "Map unavailable. Check your internet connection.";
   static const mapAttribution = "© OpenStreetMap contributors";

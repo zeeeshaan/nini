@@ -8,6 +8,7 @@ import 'package:nini/features/cart/presentation/widgets/cart_amount_dialog/cart_
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
 import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/post_purchase_actions.dart';
+import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/post_service_purchase_actions.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
@@ -69,8 +70,13 @@ class PostDetailBottomBar extends StatelessWidget {
         .firstOrNull;
     final available = (item?.maxQuantity ?? 0) - (inCart?.quantity ?? 0);
     final maximum = cart != null && available > 0 ? available : 0;
+    final amountToAdd = post.isService ? 100 : quantity;
     final canAdd =
-        item != null && item.accepts(quantity) && quantity <= maximum;
+        cart != null &&
+        !cart.state.loading &&
+        item != null &&
+        item.accepts(amountToAdd) &&
+        amountToAdd <= maximum;
     return Theme(
       data: Theme.of(context).brightness == Brightness.dark
           ? AppTheme.light
@@ -88,20 +94,32 @@ class PostDetailBottomBar extends StatelessWidget {
                   horizontal: 22,
                   vertical: 12,
                 ),
-                child: PostPurchaseActions(
-                  post: post,
-                  quantity: quantity,
-                  maximum: maximum,
-                  onQuantityChanged: context
-                      .read<PostDetailCubit>()
-                      .selectQuantity,
-                  onEditQuantity: item != null && maximum > 0
-                      ? () => _chooseQuantity(context, item, quantity, maximum)
-                      : null,
-                  onAddToCart: canAdd
-                      ? () => _addToCart(context, cart!, quantity)
-                      : null,
-                ),
+                child: post.isService
+                    ? PostServicePurchaseActions(
+                        post: post,
+                        onAddToCart: canAdd
+                            ? () => _addToCart(context, cart, amountToAdd)
+                            : null,
+                      )
+                    : PostPurchaseActions(
+                        post: post,
+                        quantity: quantity,
+                        maximum: maximum,
+                        onQuantityChanged: context
+                            .read<PostDetailCubit>()
+                            .selectQuantity,
+                        onEditQuantity: item != null && maximum > 0
+                            ? () => _chooseQuantity(
+                                context,
+                                item,
+                                quantity,
+                                maximum,
+                              )
+                            : null,
+                        onAddToCart: canAdd
+                            ? () => _addToCart(context, cart, quantity)
+                            : null,
+                      ),
               ),
             ),
           ),

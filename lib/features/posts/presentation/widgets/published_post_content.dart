@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 class PublishedPostContent extends StatefulWidget {
-  const PublishedPostContent({super.key, required this.post});
+  const PublishedPostContent({
+    super.key,
+    required this.post,
+    this.serviceLayout = false,
+  });
   final PostItem post;
+  final bool serviceLayout;
   @override
   State<PublishedPostContent> createState() => _PublishedPostContentState();
 }
@@ -48,10 +54,22 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
           Text(
             post.title,
             textAlign: TextAlign.right,
-            style: theme.textTheme.titleLarge,
+            style: widget.serviceLayout
+                ? AppTextStyles.postHeading.copyWith(
+                    fontWeight: AppTextStyles.bold,
+                  )
+                : theme.textTheme.titleLarge,
             textDirection: TextDirection.rtl,
           ),
           const SizedBox(height: 12),
+          if (widget.serviceLayout) ...[
+            const Text(
+              AppStrings.serviceDescription,
+              textAlign: TextAlign.right,
+              style: AppTextStyles.sectionTitle,
+            ),
+            const SizedBox(height: 20),
+          ],
           Localizations.override(
             context: context,
             delegates: const [quill.FlutterQuillLocalizations.delegate],
@@ -69,7 +87,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
               ),
             ),
           ),
-          if (tags.isNotEmpty) ...[
+          if (!widget.serviceLayout && tags.isNotEmpty) ...[
             const SizedBox(height: 16),
             Wrap(
               spacing: 8,
@@ -86,7 +104,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
               ],
             ),
           ],
-          if (address != null) ...[
+          if (!widget.serviceLayout && address != null) ...[
             const SizedBox(height: 16),
             Text(
               address.address,

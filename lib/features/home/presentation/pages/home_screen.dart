@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/home/presentation/widgets/home_feed_header/home_feed_header.dart';
 import 'package:nini/features/home/presentation/widgets/home_product_card/home_product_card.dart';
 import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
-import 'package:nini/features/notifications/presentation/pages/notifications_screen.dart';
+import 'package:nini/features/notifications/presentation/helpers/open_notifications.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
 import '../widgets/home_published_post_card/home_published_post_card.dart';
 
-/// Published local posts followed by the existing sample feed.
-class HomeScreen extends StatefulWidget {
+/// Published local products followed by the existing sample feed.
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, this.onViewCart});
 
   final VoidCallback? onViewCart;
@@ -22,38 +22,17 @@ class HomeScreen extends StatefulWidget {
   static const phoneTitle = 'Google Pixel 9\nWintergreen';
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final _notifications = NotificationsCubit();
-  @override
-  void dispose() {
-    _notifications.close();
-    super.dispose();
-  }
-
-  void _openNotifications() {
-    _notifications.search('');
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => BlocProvider.value(
-          value: _notifications,
-          child: const NotificationsScreen(),
-        ),
-      ),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final posts = context.read<PostsCubit?>();
     if (posts == null) return _feed(const []);
     return BlocBuilder<PostsCubit, PostsState>(
       bloc: posts,
       buildWhen: (previous, current) => previous.posts != current.posts,
-      builder: (_, state) =>
-          _feed(state.posts.where((post) => post.isPublished).toList()),
+      builder: (_, state) => _feed(
+        state.posts
+            .where((post) => post.isPublished && !post.isService)
+            .toList(),
+      ),
     );
   }
 
@@ -76,10 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             if (index == 0) {
               return BlocBuilder<NotificationsCubit, NotificationsState>(
-                bloc: _notifications,
                 builder: (_, state) => HomeFeedHeader(
                   unreadCount: state.unreadCount,
-                  onNotificationsPressed: _openNotifications,
+                  onNotificationsPressed: () => openNotifications(context),
                 ),
               );
             }
@@ -94,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               key: ValueKey('home_phone_${index - posts.length}'),
               imageUrl: HomeScreen.phoneImageUrl,
               title: HomeScreen.phoneTitle,
-              onViewCart: widget.onViewCart,
+              onViewCart: onViewCart,
             );
           },
         ),

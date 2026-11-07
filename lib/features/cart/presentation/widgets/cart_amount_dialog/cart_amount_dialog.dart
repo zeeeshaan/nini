@@ -47,9 +47,25 @@ class CartAmountDialog extends StatefulWidget {
 
 class _CartAmountDialogState extends State<CartAmountDialog> {
   final _form = GlobalKey<FormState>();
-  late final _controller = TextEditingController(text: cartQuantity(widget.value));
+  late final _controller = TextEditingController(text: cartAmountInput(widget.value));
+  final _focus = FocusNode();
+  bool _selectInitialValue = true;
+
+  void _selectValue() {
+    if (!_selectInitialValue) return;
+    _selectInitialValue = false;
+    _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+  }
+
+  void _clear() {
+    _selectInitialValue = false;
+    _controller.clear();
+    _focus.requestFocus();
+  }
+
   @override
   void dispose() {
+    _focus.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -89,15 +105,18 @@ class _CartAmountDialogState extends State<CartAmountDialog> {
             AppTextField(
               key: const ValueKey('cart-amount-input'),
               controller: _controller,
+              focusNode: _focus,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               keyboardType: TextInputType.numberWithOptions(decimal: !widget.wholeUnits),
               textInputAction: TextInputAction.done,
               validator: _validate,
-              suffixIcon: const Padding(
-                padding: EdgeInsets.all(14),
-                child: AppIcon(AppIcons.addCircle, size: 22),
+              suffixIcon: IconButton(
+                tooltip: CartStrings.clearAmount,
+                onPressed: _clear,
+                icon: const AppIcon(AppIcons.close, size: 22),
               ),
+              onTap: _selectValue,
               onSubmitted: (_) => _done(),
             ),
             const SizedBox(height: 18),

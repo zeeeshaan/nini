@@ -1,16 +1,22 @@
-import 'package:nini/features/payment/presentation/cubit/payment_selection_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/features/payment/domain/models/payment_method.dart';
-import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_methods/payment_methods.dart';
+import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/payment_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/payment/domain/models/payment_details.dart';
+import 'package:nini/features/payment/domain/models/payment_method.dart';
+import 'package:nini/features/payment/presentation/cubit/payment_selection_cubit.dart';
 import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_actions/payment_actions.dart';
 import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_delivery/payment_delivery.dart';
+import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_escrow/payment_escrow.dart';
+import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_methods/payment_methods.dart';
+import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_order_details/payment_order_details.dart';
 import 'package:nini/features/payment/presentation/widgets/payment_screen_widgets/payment_summary/payment_summary.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
+/// Checkout review between customer information and the payment gateway.
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({
     super.key,
@@ -22,7 +28,7 @@ class PaymentScreen extends StatefulWidget {
   final PaymentDetails details;
   final PaymentMethod initialMethod;
   final ValueChanged<PaymentMethod>? onMethodChanged;
-  final VoidCallback? onConfirm;
+  final Future<String?> Function()? onConfirm;
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -30,6 +36,18 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   late final _payment = PaymentSelectionCubit(widget.initialMethod);
+  bool _paying = false;
+
+  Future<void> _pay() async {
+    if (_paying || widget.onConfirm == null) return;
+    setState(() => _paying = true);
+    try {
+      final orderId = await widget.onConfirm!();
+      if (mounted && orderId != null) Navigator.of(context).pop(orderId);
+    } finally {
+      if (mounted) setState(() => _paying = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -41,7 +59,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) =>
       BlocBuilder<PaymentSelectionCubit, PaymentMethod>(
         bloc: _payment,
-        builder: (context, state) => Localizations.override(
+        builder: (context, method) => Localizations.override(
           context: context,
           locale: const Locale('en'),
           child: Directionality(
@@ -50,14 +68,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
-                    tooltip: 'Back',
+                    tooltip: AppStrings.back,
                     icon: const AppIcon(AppIcons.back, size: 20),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
-                  title: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Payment method'),
+                  title: const Text(
+                    PaymentStrings.checkout,
+                    style: AppTextStyles.pageTitle,
                   ),
+                  centerTitle: false,
+                  actions: [
+                    PopupMenuButton<String>(
+                      tooltip: AppStrings.moreOptions,
+                      icon: const AppIcon(AppIcons.more, size: 20),
+                      onSelected: (_) => Navigator.of(context).pop(),
+                      itemBuilder: (_) => [
+                        const PopupMenuItem(
+                          value: 'edit',
+                          child: Text(PaymentStrings.editInformation),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 body: SafeArea(
                   top: false,
@@ -65,34 +97,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 720),
+                      constraints: const BoxConstraints(maxWidth: 600),
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: PaymentMethods(
-                                selected: _payment.state,
-                                labelBuilder: (method) => switch (method) {
-                                  PaymentMethod.melli => 'Bank Melli',
-                                  PaymentMethod.mellat => 'Bank Mellat',
-                                  PaymentMethod.saman => 'Saman Bank',
-                                },
-                                onSelected: (method) {
-                                  _payment.select(method);
-                                  widget.onMethodChanged?.call(method);
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 24),
+                            if (widget.details.items.isNotEmpty) ...[
+                              PaymentOrderDetails(details: widget.details),
+                              const SizedBox(height: 12),
+                            ],
                             PaymentDelivery(details: widget.details),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 18),
                             PaymentSummary(details: widget.details),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 20),
+                            const Text(
+                              PaymentStrings.paymentMethod,
+                              textAlign: TextAlign.right,
+                              style: AppTextStyles.labelBold,
+                            ),
+                            const SizedBox(height: 10),
+                            PaymentMethods(
+                              selected: method,
+                              labelBuilder: (method) => method.label,
+                              onSelected: (selected) {
+                                _payment.select(selected);
+                                widget.onMethodChanged?.call(selected);
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            const PaymentEscrow(),
                           ],
                         ),
                       ),
@@ -104,8 +138,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   child: Center(
                     heightFactor: 1,
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 720),
-                      child: PaymentActions(onConfirm: widget.onConfirm),
+                      constraints: const BoxConstraints(maxWidth: 600),
+                      child: PaymentActions(
+                        onConfirm: widget.onConfirm == null ? null : _pay,
+                        isProcessing: _paying,
+                      ),
                     ),
                   ),
                 ),

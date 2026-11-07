@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
+import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:nini/features/cart/data/local_cart_repository.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
@@ -44,6 +45,9 @@ class AppProviders extends StatelessWidget {
         BlocProvider(
           create: (_) =>
               CartCubit(cartRepository ?? LocalCartRepository())..load(),
+        ),
+        BlocProvider(
+          create: (context) => NotificationsCubit(context.read<CartCubit>()),
         ),
         BlocProvider(
           create: (_) => PostAnalyticsCubit(

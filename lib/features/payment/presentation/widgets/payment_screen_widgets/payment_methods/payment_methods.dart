@@ -26,13 +26,13 @@ class PaymentMethods extends StatelessWidget {
             label: labelBuilder?.call(method) ?? method.label,
             child: InkWell(
               key: ValueKey('payment-${method.name}'),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
               onTap: () => onSelected(method),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-                constraints: const BoxConstraints(minHeight: 72),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                constraints: const BoxConstraints(minHeight: 60),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Theme.of(context).dividerColor),
                 ),
                 child: Row(
@@ -60,8 +60,8 @@ class PaymentMethods extends StatelessWidget {
                     const Spacer(),
                     SvgPicture.asset(
                       method.asset,
-                      width: 48,
-                      height: 48,
+                      width: 42,
+                      height: 42,
                       semanticsLabel: labelBuilder?.call(method) ?? method.label,
                     ),
                   ],

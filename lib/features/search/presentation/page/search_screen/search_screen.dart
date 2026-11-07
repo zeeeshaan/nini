@@ -6,9 +6,10 @@ import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
 import 'search_view.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key, this.active = true});
+  const SearchScreen({super.key, this.active = true, this.publishedServiceId});
 
   final bool active;
+  final String? publishedServiceId;
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -24,7 +25,10 @@ class _SearchScreenState extends State<SearchScreen>
     super.build(context);
     return BlocProvider(
       create: (_) => SearchCubit(),
-      child: SearchView(active: widget.active),
+      child: SearchView(
+        active: widget.active,
+        publishedServiceId: widget.publishedServiceId,
+      ),
     );
   }
 }

@@ -58,27 +58,6 @@ class CartTabs extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 12),
-          Center(
-            child: Container(
-              width: 40,
-              height: 3,
-              decoration: BoxDecoration(
-                color: Theme.of(context).dividerColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Center(
-                child: Container(
-                  width: 16,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: colors.onSurface,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
