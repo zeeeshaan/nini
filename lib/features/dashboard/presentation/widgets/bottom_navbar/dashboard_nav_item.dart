@@ -1,12 +1,15 @@
-// dart format width=100
 import 'package:flutter/material.dart';
+
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'dashboard_cart_icon.dart';
+
+// dart format width=100
 
 class DashboardNavItem extends StatelessWidget {
   const DashboardNavItem({
@@ -17,10 +20,13 @@ class DashboardNavItem extends StatelessWidget {
     this.cartCount,
     this.profileImage,
   });
-  final DashboardTab tab, selectedTab;
+
+  final DashboardTab tab;
+  final DashboardTab selectedTab;
   final ValueChanged<DashboardTab> onTabSelected;
   final int? cartCount;
   final ImageProvider? profileImage;
+
   @override
   Widget build(BuildContext context) {
     final isSelected = selectedTab == tab;
@@ -29,11 +35,29 @@ class DashboardNavItem extends StatelessWidget {
       button: true,
       selected: isSelected,
       label: _labelFor(tab),
-      child: InkWell(
-        onTap: () => onTabSelected(tab),
-        child: SizedBox(
-          height: 68,
-          child: Center(child: ExcludeSemantics(child: _iconFor(context, tab, isSelected))),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+        child: Material(
+          color: isSelected
+              ? AppColors.bottomNavHighlight
+              : AppColors.transparent,
+          shape: const StadiumBorder(),
+          child: InkWell(
+            customBorder: const StadiumBorder(),
+            hoverColor: AppColors.bottomNavHighlight,
+            focusColor: AppColors.bottomNavHighlight,
+            highlightColor: AppColors.bottomNavHighlight,
+            splashColor: AppColors.white.withValues(alpha: .12),
+            onTap: () => onTabSelected(tab),
+            child: SizedBox(
+              height: 52,
+              child: Center(
+                child: ExcludeSemantics(
+                  child: _iconFor(context, tab, isSelected),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -49,6 +73,7 @@ class DashboardNavItem extends StatelessWidget {
         DashboardTab.profile => CartStrings.profile,
       };
     }
+
     return switch (tab) {
       DashboardTab.home => AppStrings.home,
       DashboardTab.cart => AppStrings.cart,
@@ -61,16 +86,16 @@ class DashboardNavItem extends StatelessWidget {
   Widget _iconFor(BuildContext context, DashboardTab tab, bool isSelected) {
     switch (tab) {
       case DashboardTab.home:
-        return AppIcon(AppIcons.home, size: 32, selected: isSelected);
+        return const AppIcon(AppIcons.home, size: 32);
 
       case DashboardTab.cart:
         return DashboardCartIcon(selected: isSelected, count: cartCount);
 
       case DashboardTab.create:
-        return AppIcon(AppIcons.add, size: 42, selected: isSelected);
+        return const AppIcon(AppIcons.add, size: 42);
 
       case DashboardTab.search:
-        return AppIcon(AppIcons.search, size: 35, selected: isSelected);
+        return const AppIcon(AppIcons.search, size: 35);
 
       case DashboardTab.profile:
         return Container(
@@ -80,15 +105,25 @@ class DashboardNavItem extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Theme.of(context).colorScheme.onSurface,
+              color: AppColors.white,
               width: isSelected ? 2 : 1,
             ),
           ),
           child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-            foregroundColor: Theme.of(context).colorScheme.onSurface,
-            backgroundImage: profileImage,
-            child: profileImage == null ? const AppIcon(AppIcons.profile, size: 22) : null,
+            backgroundColor: AppColors.darkSurfaceContainer,
+            foregroundColor: AppColors.white,
+            child: profileImage == null
+                ? const AppIcon(AppIcons.profile, size: 22)
+                : ClipOval(
+                    child: Image(
+                      image: profileImage!,
+                      width: 31,
+                      height: 31,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) =>
+                          const AppIcon(AppIcons.profile, size: 22),
+                    ),
+                  ),
           ),
         );
     }

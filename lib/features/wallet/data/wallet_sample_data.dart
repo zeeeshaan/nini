@@ -1,4 +1,4 @@
-import '../domain/models/wallet_transaction.dart';
+import '../domain/wallet_transaction.dart';
 
 /// Static preview values matching the reference; no financial operations.
 abstract final class WalletSampleData {

@@ -1,10 +1,10 @@
 import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/features/home/presentation/widgets/published/home_post_media_indicator.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/features/posts/presentation/widgets/post_media_view/post_media_view.dart';
+import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
 
 class PostImageCarousel extends StatefulWidget {
   const PostImageCarousel({
@@ -71,29 +71,7 @@ class _PostImageCarouselState extends State<PostImageCarousel> {
             Positioned(
               left: 28,
               bottom: 18,
-              child: BlocBuilder<PostDetailCubit, PostDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.imageIndex != current.imageIndex,
-                builder: (context, state) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(count, (index) {
-                      final isActive = index == state.imageIndex;
-
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        margin: const EdgeInsets.only(right: 5),
-                        width: isActive ? 22 : 9,
-                        height: 9,
-                        decoration: BoxDecoration(
-                          color: isActive ? AppColors.white : AppColors.white70,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      );
-                    }),
-                  );
-                },
-              ),
+              child: IgnorePointer(child: HomePostMediaIndicator(count: count)),
             ),
         ],
       ),

@@ -9,7 +9,7 @@ import '../../domain/policies/order_access.dart';
 import '../../domain/services/checkout_order_builder.dart';
 
 import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/order_cancellation/domain/models/order_cancellation.dart';
+import 'package:nini/features/order_cancellation/domain/order_cancellation.dart';
 
 import 'package:nini/features/payment/domain/models/payment_details.dart';
 import 'package:nini/features/payment/domain/models/order_dispute.dart';
@@ -244,6 +244,13 @@ class CartCubit extends Cubit<CartState> {
       return item.withQuantity(item.quantity, seller: demoCartSeller);
     }
     return item;
+  }
+
+  bool toggleItem(CartItem item) {
+    if (!_editable) return false;
+    if (!state.items.any((entry) => entry.id == item.id)) return add(item);
+    remove(item.id);
+    return true;
   }
 
   bool add(CartItem item) {

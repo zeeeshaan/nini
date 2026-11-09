@@ -7,7 +7,7 @@ import 'package:nini/shared/models/post/post_seller.dart';
 const homeSeller = PostSeller(
   id: 'home-seller',
   name: AppStrings.sellerName,
-  avatarAsset: 'assets/Mask group.png',
+  avatarAsset: '',
   location: AppStrings.authorLocation,
   bio: AppStrings.sellerBio,
 );
@@ -15,7 +15,7 @@ const homeSeller = PostSeller(
 const localPostSeller = PostSeller(
   id: localProfileId,
   name: AppStrings.sellerName,
-  avatarAsset: 'assets/Mask group.png',
+  avatarAsset: '',
   bio: AppStrings.sellerBio,
 );
 

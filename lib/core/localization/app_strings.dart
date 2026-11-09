@@ -9,6 +9,7 @@ abstract final class AppStrings {
   static const cart = "Cart";
   static const addToCart = "Add to Cart";
   static const cartAdded = "Added to Cart";
+  static const cartRemoved = "Removed from Cart";
   static const viewCart = "View Cart";
   static const cartStorageError =
       "Storage is unavailable. Your changes have not been saved yet.";
@@ -34,13 +35,14 @@ abstract final class AppStrings {
   static const morePostOptions = "More post options";
   static const back = "Back";
   static const toman = "toman";
+  static const tomanPersian = 'تومان';
   static const sellerProfile = "Seller profile";
   static String viewSellerProfile(String name) => 'View $name profile';
   static const sellerName = "Moji";
   static const shopAndStore = "Shop & Store";
   static const sellerBio =
       "Creative designer passionate about turning ideas\ninto visual stories.";
-  static const profileImage = "Moji profile picture";
+  static const profileImage = "Profile picture";
   static const posts = "Posts";
   static const sales = "Sales";
   static const customers = "Customers";

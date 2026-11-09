@@ -1,10 +1,12 @@
-// dart format width=100
 import 'dart:ui' show DisplayFeatureState, DisplayFeatureType;
 
 import 'package:flutter/material.dart';
+
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 
-/// Retains the existing physical hinge layout for foldable devices.
+// dart format width=100
+
+/// Preserves the physical hinge layout on foldable devices.
 class DashboardFoldLayout extends StatelessWidget {
   const DashboardFoldLayout({
     super.key,
@@ -13,14 +15,20 @@ class DashboardFoldLayout extends StatelessWidget {
     required this.child,
     required this.itemBuilder,
   });
+
   final Rect? divider;
   final BoxConstraints constraints;
   final Widget child;
   final Widget Function(BuildContext, DashboardTab) itemBuilder;
+
   @override
   Widget build(BuildContext context) {
     final bounds = divider ?? _findAndroidDivider(context);
-    if (bounds == null || !constraints.hasBoundedWidth) return child;
+
+    if (bounds == null || !constraints.hasBoundedWidth) {
+      return child;
+    }
+
     return _split(
           context,
           bounds,
@@ -48,23 +56,30 @@ class DashboardFoldLayout extends StatelessWidget {
 
     const clearance = 8.0;
 
-    final leftWidth = (divider.left - clearance).clamp(0.0, availableWidth).toDouble();
+    final leftWidth = (divider.left - clearance)
+        .clamp(0.0, availableWidth)
+        .toDouble();
 
-    final rightStart = (divider.right + clearance).clamp(0.0, availableWidth).toDouble();
+    final rightStart = (divider.right + clearance)
+        .clamp(0.0, availableWidth)
+        .toDouble();
 
     final rightWidth = availableWidth - rightStart;
     final gapWidth = availableWidth - leftWidth - rightWidth;
 
     final isRtl = textDirection == TextDirection.rtl;
+
     final leftTabs = isRtl
         ? [DashboardTab.profile, DashboardTab.search, DashboardTab.create]
         : [DashboardTab.home, DashboardTab.cart];
+
     final rightTabs = isRtl
         ? [DashboardTab.cart, DashboardTab.home]
         : [DashboardTab.create, DashboardTab.search, DashboardTab.profile];
 
-    // The hinge bounds describe physical left/right panes, even in RTL.
-    if (leftWidth < leftTabs.length * 56 || rightWidth < rightTabs.length * 56) {
+    // Hinge bounds represent physical left and right panes.
+    if (leftWidth < leftTabs.length * 56 ||
+        rightWidth < rightTabs.length * 56) {
       return null;
     }
 
@@ -93,7 +108,9 @@ class DashboardFoldLayout extends StatelessWidget {
   Rect? _findAndroidDivider(BuildContext context) {
     final renderObject = context.findRenderObject();
 
-    if (renderObject is! RenderBox || !renderObject.attached || !renderObject.hasSize) {
+    if (renderObject is! RenderBox ||
+        !renderObject.attached ||
+        !renderObject.hasSize) {
       return null;
     }
 

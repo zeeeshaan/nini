@@ -7,11 +7,7 @@ import '../domain/models/cart_item.dart';
 import '../domain/models/cart_order_status.dart';
 
 /// Frontend fixtures matching the reference. No remote orders are implied.
-const demoCartSeller = PostSeller(
-  id: 'demo-cart-seller',
-  name: 'HYWORK Store',
-  avatarAsset: 'assets/Mask group.png',
-);
+const demoCartSeller = PostSeller(id: 'demo-cart-seller', name: 'HYWORK Store', avatarAsset: '');
 
 const demoCartItems = [
   CartItem(

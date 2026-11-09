@@ -5,18 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
+import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_header/analytics_header.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/average_time_viewed/average_time_viewed.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/clicks_interactions/clicks_interactions.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/impressions/impressions.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/orders_bookings/orders_bookings.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/total_views/total_views.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_header.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/metrics/average_time_viewed.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/metrics/clicks_interactions.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/metrics/impressions.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/metrics/orders_bookings.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/metrics/total_views.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_loader/app_loader.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
 
 class PostAnalyticsScreen extends StatelessWidget {
   const PostAnalyticsScreen({super.key, required this.post});
@@ -61,7 +62,7 @@ class _AnalyticsAccessNotice extends StatelessWidget {
               ? const AppLoader()
               : const Text(
                   AppStrings.analyticsOwnerOnly,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.right,
                   style: AppTextStyles.body,
                 ),
         ),
@@ -84,9 +85,13 @@ class _PostAnalyticsView extends StatelessWidget {
         icon: const AppIcon(AppIcons.back, size: 19),
         onPressed: () => Navigator.of(context).pop(),
       ),
-      title: const Text(
-        AppStrings.analytics,
-        style: AppTextStyles.analyticsTitle,
+      title: Align(
+        alignment: Alignment.centerRight,
+        child: const Text(
+          AppStrings.analytics,
+          style: AppTextStyles.analyticsTitle,
+          textAlign: TextAlign.right,
+        ),
       ),
     ),
     body: SafeArea(
@@ -97,6 +102,14 @@ class _PostAnalyticsView extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 520),
           child: BlocBuilder<PostAnalyticsCubit, PostAnalyticsState>(
             builder: (context, state) {
+              if (state.loading && state.events.isEmpty) {
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  itemCount: 6,
+                  itemBuilder: (_, index) =>
+                      const ListTileSkeleton(showAvatar: false),
+                );
+              }
               PostAnalyticsReport report(AnalyticsPeriod period) =>
                   post.isPublished
                   ? PostAnalyticsReport.fromEvents(
@@ -122,6 +135,7 @@ class _PostAnalyticsView extends StatelessWidget {
                           child: Text(
                             AppStrings.analyticsSaveFailed,
                             style: AppTextStyles.helper,
+                            textAlign: TextAlign.right,
                           ),
                         ),
                       TotalViewsSection(reportForPeriod: report),

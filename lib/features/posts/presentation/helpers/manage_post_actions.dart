@@ -4,8 +4,8 @@ import 'package:nini/shared/models/post/post_item.dart';
 
 import '../cubit/posts_cubit.dart';
 import '../pages/edit_post_screen.dart';
-import '../widgets/post_delete_sheet/post_delete_sheet.dart';
-import '../widgets/post_owner_actions_sheet/post_owner_actions_sheet.dart';
+import '../widgets/actions/post_delete_sheet.dart';
+import '../widgets/actions/post_owner_actions_sheet.dart';
 
 /// Coordinates menu routes. Widgets display state; repositories own mutations.
 Future<void> managePostActions(

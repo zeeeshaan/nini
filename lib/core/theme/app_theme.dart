@@ -111,6 +111,7 @@ abstract final class AppTheme {
       iconTheme: IconThemeData(color: foreground),
       primaryIconTheme: IconThemeData(color: foreground),
       appBarTheme: AppBarThemeData(
+        centerTitle: false,
         backgroundColor: background,
         foregroundColor: foreground,
         surfaceTintColor: AppColors.transparent,

@@ -7,7 +7,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/domain/models/chat_conversation.dart';
 import 'package:nini/features/chat/presentation/cubit/chat_inbox_cubit.dart';
 import 'package:nini/features/chat/presentation/pages/conversation_screen.dart';
-import 'package:nini/features/chat/presentation/widgets/chat_conversation_tile/chat_conversation_tile.dart';
+import 'package:nini/features/chat/presentation/widgets/inbox/chat_conversation_tile.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 enum _InboxMenuAction { toggleUnread, markAllRead }
@@ -96,9 +96,13 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
             onPressed: () => Navigator.of(context).maybePop(),
             icon: const AppIcon(AppIcons.back, size: 26),
           ),
-          title: Text(
-            AppStrings.chat,
-            style: AppTextStyles.inboxTitle.copyWith(color: colors.onSurface),
+          title: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              AppStrings.chat,
+              style: AppTextStyles.inboxTitle.copyWith(color: colors.onSurface),
+              textAlign: TextAlign.right,
+            ),
           ),
           actions: [
             BlocBuilder<ChatInboxCubit, ChatInboxState>(
@@ -125,12 +129,16 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                         state.unreadOnly
                             ? AppStrings.showAllChats
                             : AppStrings.unreadChats,
+                        textAlign: TextAlign.right,
                       ),
                     ),
                     PopupMenuItem(
                       value: _InboxMenuAction.markAllRead,
                       enabled: state.hasUnread,
-                      child: const Text(AppStrings.markAllRead),
+                      child: const Text(
+                        AppStrings.markAllRead,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                   ],
                 );
@@ -201,13 +209,16 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                           children: [
                             const AppIcon(AppIcons.search, size: 32),
                             const SizedBox(height: 14),
-                            Text(
-                              state.unreadOnly
-                                  ? AppStrings.noUnreadChats
-                                  : AppStrings.noChatsFound,
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.comfortableBody.copyWith(
-                                color: colors.onSurface,
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                state.unreadOnly
+                                    ? AppStrings.noUnreadChats
+                                    : AppStrings.noChatsFound,
+                                textAlign: TextAlign.right,
+                                style: AppTextStyles.comfortableBody.copyWith(
+                                  color: colors.onSurface,
+                                ),
                               ),
                             ),
                           ],

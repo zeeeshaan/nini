@@ -4,7 +4,7 @@ import 'package:nini/features/home/data/home_post_data.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
-import 'package:nini/features/profile/presentation/page/seller_profile_screen/seller_profile_screen.dart';
+import 'package:nini/features/profile/presentation/pages/seller_profile_screen.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 

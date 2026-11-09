@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/models/post_analytics.dart';
+import '../../domain/post_analytics.dart';
 
 class AnalyticsControlsState {
   const AnalyticsControlsState({

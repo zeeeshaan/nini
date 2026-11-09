@@ -6,7 +6,7 @@ import 'package:nini/core/localization/provider_order_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/domain/policies/order_access.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/payment/presentation/widgets/order_problem_form/order_problem_form.dart';
+import 'package:nini/features/payment/presentation/widgets/dispute/order_problem_form.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class OrderCancellationScreen extends StatelessWidget {
@@ -21,9 +21,13 @@ class OrderCancellationScreen extends StatelessWidget {
     final cancellation = allowed ? order.cancellation : null;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          ProviderOrderStrings.cancellation,
-          style: AppTextStyles.pageTitle,
+        title: Align(
+          alignment: Alignment.centerRight,
+          child: const Text(
+            ProviderOrderStrings.cancellation,
+            style: AppTextStyles.pageTitle,
+            textAlign: TextAlign.right,
+          ),
         ),
         centerTitle: false,
         leading: IconButton(
@@ -33,7 +37,15 @@ class OrderCancellationScreen extends StatelessWidget {
         ),
       ),
       body: !allowed
-          ? const Center(child: Text(ProviderOrderStrings.unavailable))
+          ? const Center(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  ProviderOrderStrings.unavailable,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            )
           : OrderProblemForm(
               heading: ProviderOrderStrings.cancellationHeading,
               hint: ProviderOrderStrings.cancellationHint,

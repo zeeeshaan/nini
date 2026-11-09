@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/create_post/presentation/widgets/post_dialog/post_dialog.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 
 Future<void> choosePostOption<T>(
   BuildContext context,

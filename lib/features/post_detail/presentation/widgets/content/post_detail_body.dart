@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
+import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/post_detail/presentation/widgets/author_header/post_author_header.dart';
-import 'package:nini/features/post_detail/presentation/widgets/bottom_bar/post_detail_bottom_bar.dart';
+import 'package:nini/features/home/presentation/widgets/common/home_badge.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_detail_bottom_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
-import 'package:nini/features/post_detail/presentation/widgets/engagement_bar/post_engagement_bar.dart';
-import 'package:nini/features/post_detail/presentation/widgets/feature_table/post_features_table.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_engagement_bar.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_features_table.dart';
 import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
-import 'package:nini/features/post_detail/presentation/widgets/pricing/post_pricing.dart';
-import 'package:nini/features/posts/presentation/widgets/published_post_content.dart';
+import 'package:nini/features/posts/presentation/widgets/common/published_post_content.dart';
 import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 class PostDetailBody extends StatefulWidget {
   const PostDetailBody({
@@ -43,18 +47,33 @@ class PostDetailBody extends StatefulWidget {
 }
 
 class _PostDetailBodyState extends State<PostDetailBody> {
-  final _purchaseKey = GlobalKey();
-
-  void _revealPurchase() {
-    final target = _purchaseKey.currentContext;
-    if (target == null) return;
-    Scrollable.ensureVisible(
-      target,
-      alignment: 1,
-      duration: MediaQuery.disableAnimationsOf(context)
-          ? Duration.zero
-          : const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
+  void _toggleCart() {
+    if (!widget.showPurchaseActions) return;
+    final cart = context.read<CartCubit?>();
+    final existing = cart?.state.items
+        .where((item) => item.id == widget.post.id)
+        .firstOrNull;
+    final item = existing ?? postCartItem(widget.post, seller: widget.seller);
+    if (cart == null || item == null) return;
+    final quantity = context.read<PostDetailCubit>().state.quantity;
+    if (existing == null && !item.accepts(quantity)) return;
+    if (!cart.toggleItem(item.withQuantity(quantity))) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            cart.state.storageError
+                ? AppStrings.cartStorageError
+                : AppStrings.cartStockExceeded,
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
+          ),
+        ),
+      );
+      return;
+    }
+    AppToast.success(
+      context,
+      existing == null ? AppStrings.cartAdded : AppStrings.cartRemoved,
     );
   }
 
@@ -64,12 +83,20 @@ class _PostDetailBodyState extends State<PostDetailBody> {
     final seller = widget.seller;
     final images = widget.images;
     final showPurchaseActions = widget.showPurchaseActions;
-    final cartItem = context
-        .watch<CartCubit?>()
-        ?.state
-        .items
+    final quantity = context.select(
+      (PostDetailCubit cubit) => cubit.state.quantity,
+    );
+    final cart = context.watch<CartCubit?>();
+    final cartItem = cart?.state.items
         .where((item) => item.id == post.id)
         .firstOrNull;
+    final itemToAdd = postCartItem(post, seller: seller);
+    final canToggle =
+        showPurchaseActions &&
+        cart != null &&
+        !cart.state.loading &&
+        (cartItem != null ||
+            (itemToAdd != null && itemToAdd.accepts(quantity)));
     final savedRating = double.tryParse(
       AppStrings.persianDigits(post.metadata['rating'] ?? ''),
     );
@@ -131,11 +158,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                             (hasPostContent
                                 ? (post.details.address?.address ?? '')
                                 : AppStrings.authorLocation),
-                        avatarAsset:
-                            seller?.avatarAsset ??
-                            (hasPostContent
-                                ? 'assets/Mask group.png'
-                                : 'assets/images/profile_avatar.png'),
+                        avatarAsset: seller?.avatarAsset ?? '',
                       ),
                     ),
 
@@ -147,20 +170,24 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                         ),
                         images: images,
                         media: post.media,
+                        mediaFit: BoxFit.cover,
                       ),
                     ),
 
                     StaggeredEntrance(
                       index: 2,
                       child: PostEngagementBar(
+                        post: post,
+                        seller: seller,
                         onCommentsPressed: widget.onCommentsPressed,
                         showSampleMetrics: !hasPostContent,
                         rating: rating,
                         cartCount: cartItem == null
                             ? '0'
                             : cartQuantity(cartItem.quantity),
-                        onCartPressed: showPurchaseActions
-                            ? _revealPurchase
+                        isInCart: cartItem != null,
+                        onCartPressed: canToggle
+                            ? _toggleCart
                             : null,
                         onSharePressed: widget.onSharePressed,
                       ),
@@ -177,6 +204,21 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                           : const PostContent(),
                     ),
 
+                    if (!post.isService)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(22, 12, 22, 0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: HomeBadge(
+                            label: post.stockCount > 0
+                                ? AppStrings.inStock(post.stockCount)
+                                : AppStrings.stockUnavailable,
+                            background: AppColors.stockBadgeBackground,
+                            foreground: AppColors.notificationBadge,
+                          ),
+                        ),
+                      ),
+
                     if (!hasPostContent || features.isNotEmpty)
                       StaggeredEntrance(
                         index: 5,
@@ -188,17 +230,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                       ),
 
                     const SizedBox(height: 40),
-                    if (showPurchaseActions)
-                      PostDetailBottomBar(
-                        key: _purchaseKey,
-                        post: post,
-                        seller: seller,
-                      )
-                    else if (!showPurchaseActions && post.price.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 22),
-                        child: PostPricing(post: post),
-                      ),
+                    PostDetailBottomBar(post: post, seller: seller),
                   ],
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:nini/core/localization/notification_strings.dart';
 
-import '../domain/models/app_notification.dart';
+import '../domain/app_notification.dart';
 
 /// UI preview data; replace this list when the notification API is connected.
 final sampleNotifications = <AppNotification>[

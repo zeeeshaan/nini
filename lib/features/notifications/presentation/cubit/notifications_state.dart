@@ -1,4 +1,4 @@
-import '../../domain/models/app_notification.dart';
+import '../../domain/app_notification.dart';
 
 class NotificationsState {
   const NotificationsState({required this.items, this.query = ''});

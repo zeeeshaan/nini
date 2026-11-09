@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_controls/analytics_controls.dart';
+import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
 
 class AnalyticsLineChart extends StatefulWidget {
   const AnalyticsLineChart({

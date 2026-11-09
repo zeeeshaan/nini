@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:nini/features/calls/domain/models/call_session.dart';
-import 'package:nini/features/calls/domain/services/call_service.dart';
+import 'package:nini/features/calls/domain/call_session.dart';
+import 'package:nini/features/calls/domain/call_service.dart';
 
 /// Interactive UI preview only. Does not capture media or contact another user.
 class PreviewCallService implements CallService {

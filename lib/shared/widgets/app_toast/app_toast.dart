@@ -76,6 +76,7 @@ class AppToast {
                               style: AppTextStyles.toast.copyWith(
                                 color: colors.onInverseSurface,
                               ),
+                              textAlign: TextAlign.right,
                             ),
                           ),
                         ],

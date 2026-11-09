@@ -10,7 +10,7 @@ import 'package:nini/features/create_post/domain/models/gallery_attachment.dart'
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery_content/gallery_content.dart';
+import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_content.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 

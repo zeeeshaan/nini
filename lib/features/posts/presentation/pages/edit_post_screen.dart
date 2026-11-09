@@ -15,8 +15,8 @@ import '../cubit/posts_cubit.dart';
 import '../cubit/profile_categories_cubit.dart';
 import '../helpers/confirm_discard_post_changes.dart';
 import '../helpers/post_draft_mapper.dart';
-import '../widgets/edit_post_form/edit_post_form.dart';
-import '../widgets/post_editor_actions/post_editor_actions.dart';
+import '../widgets/editor/edit_post_form.dart';
+import '../widgets/editor/post_editor_actions.dart';
 
 class EditPostScreen extends StatelessWidget {
   const EditPostScreen({super.key, required this.post});

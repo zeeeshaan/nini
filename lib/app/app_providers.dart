@@ -12,7 +12,14 @@ import 'package:nini/features/posts/data/local_profile_categories_repository.dar
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:nini/features/saved_posts/data/local_saved_posts_repository.dart';
+import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
+import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:nini/features/profile_settings/data/local_user_profile_repository.dart';
+import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
+import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 
 /// Creates and owns the Cubits shared across the app.
 class AppProviders extends StatelessWidget {
@@ -24,6 +31,8 @@ class AppProviders extends StatelessWidget {
     this.analyticsRepository,
     this.cartRepository,
     this.categoriesRepository,
+    this.savedPostsRepository,
+    this.userProfileRepository,
   });
 
   final Widget child;
@@ -32,11 +41,20 @@ class AppProviders extends StatelessWidget {
   final PostAnalyticsRepository? analyticsRepository;
   final CartRepository? cartRepository;
   final ProfileCategoriesRepository? categoriesRepository;
+  final SavedPostsRepository? savedPostsRepository;
+  final UserProfileRepository? userProfileRepository;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          lazy: false,
+          create: (_) => UserProfileCubit(
+            userProfileRepository ?? LocalUserProfileRepository(),
+          )..load(),
+        ),
+        BlocProvider(create: (_) => PostLikesCubit()),
         BlocProvider(
           create: (_) => ProfileCategoriesCubit(
             categoriesRepository ?? LocalProfileCategoriesRepository(),
@@ -58,6 +76,12 @@ class AppProviders extends StatelessWidget {
         BlocProvider(
           create: (_) =>
               PostsCubit(postsRepository ?? LocalPostsRepository())..load(),
+        ),
+        BlocProvider(
+          create: (context) => SavedPostsCubit(
+            savedPostsRepository ?? LocalSavedPostsRepository(),
+            posts: context.read<PostsCubit>(),
+          )..load(),
         ),
       ],
       child: child,

@@ -60,6 +60,7 @@ dependencies:
   flutter_svg: ^2.3.2
   pinput: ^6.0.2
   permission_handler: ^12.0.3
+  share_plus: ^13.3.1
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,14 @@ flutter:
       fonts:
         - asset: assets/fonts/YekanBakh-Regular.ttf
           weight: 400
+    - family: ProfileCard
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Black.ttf
+          weight: 900
 
   # To add assets to your application, add an assets section, like this:
   assets:

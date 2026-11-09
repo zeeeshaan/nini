@@ -11,12 +11,12 @@ import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/calls/data/preview_call_service.dart';
-import 'package:nini/features/calls/domain/models/call_session.dart';
-import 'package:nini/features/calls/domain/services/call_service.dart';
+import 'package:nini/features/calls/domain/call_session.dart';
+import 'package:nini/features/calls/domain/call_service.dart';
 import 'package:nini/features/calls/presentation/cubit/call_cubit.dart';
-import 'package:nini/features/calls/presentation/widgets/call_avatar.dart';
-import 'package:nini/features/calls/presentation/widgets/call_controls.dart';
-import 'package:nini/features/calls/presentation/widgets/call_video_stage.dart';
+import 'package:nini/features/calls/presentation/widgets/display/call_avatar.dart';
+import 'package:nini/features/calls/presentation/widgets/controls/call_controls.dart';
+import 'package:nini/features/calls/presentation/widgets/display/call_video_stage.dart';
 import 'package:nini/features/chat/domain/models/chat_conversation.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
@@ -137,18 +137,26 @@ class _CallViewState extends State<_CallView> {
                             children: [
                               SizedBox(height: video ? 156 : 56),
                               if (widget.preview)
-                                Text(
-                                  AppStrings.callPreview,
-                                  style: AppTextStyles.helper.copyWith(
-                                    color: foreground.withValues(alpha: .55),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    AppStrings.callPreview,
+                                    style: AppTextStyles.helper.copyWith(
+                                      color: foreground.withValues(alpha: .55),
+                                    ),
+                                    textAlign: TextAlign.right,
                                   ),
                                 ),
                               if (!video) ...[
                                 const SizedBox(height: 12),
-                                Text(
-                                  _status(state),
-                                  style: AppTextStyles.largeBody.copyWith(
-                                    color: foreground,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    _status(state),
+                                    style: AppTextStyles.largeBody.copyWith(
+                                      color: foreground,
+                                    ),
+                                    textAlign: TextAlign.right,
                                   ),
                                 ),
                                 Expanded(
@@ -175,20 +183,26 @@ class _CallViewState extends State<_CallView> {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 24,
                                 ),
-                                child: Text(
-                                  widget.conversation.name,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.callName.copyWith(
-                                    color: foreground,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    widget.conversation.name,
+                                    textAlign: TextAlign.right,
+                                    style: AppTextStyles.callName.copyWith(
+                                      color: foreground,
+                                    ),
                                   ),
                                 ),
                               ),
                               if (video) ...[
                                 const SizedBox(height: 4),
-                                Text(
-                                  _status(state),
-                                  style: AppTextStyles.comfortableBody.copyWith(
-                                    color: foreground,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    _status(state),
+                                    style: AppTextStyles.comfortableBody
+                                        .copyWith(color: foreground),
+                                    textAlign: TextAlign.right,
                                   ),
                                 ),
                               ],
@@ -219,7 +233,10 @@ class _CallViewState extends State<_CallView> {
                                         horizontal: 36,
                                       ),
                                       child: SwitchListTile(
-                                        title: const Text(AppStrings.speakerOn),
+                                        title: const Text(
+                                          AppStrings.speakerOn,
+                                          textAlign: TextAlign.right,
+                                        ),
                                         value: state.session.speakerEnabled,
                                         onChanged: state.busy
                                             ? null

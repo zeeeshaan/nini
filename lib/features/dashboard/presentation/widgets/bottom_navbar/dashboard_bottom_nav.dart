@@ -1,11 +1,14 @@
-// dart format width=100
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:foldable/foldable.dart';
 
+import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 
-import 'dashboard_nav_item.dart';
 import 'dashboard_fold_layout.dart';
+import 'dashboard_nav_item.dart';
+
+// dart format width=100
 
 class DashboardBottomNav extends StatelessWidget {
   const DashboardBottomNav({
@@ -27,30 +30,44 @@ class DashboardBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).colorScheme.surface,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Theme.of(context).dividerColor, width: 0.8)),
-        ),
-        child: SafeArea(
-          top: false,
-          child: SizedBox(
-            height: _barHeight,
-            child: FoldAwareBuilder(
-              builder: (context, constraints, fold) {
-                return DashboardFoldLayout(
-                  divider: fold.spansDivision ? fold.divisionRect : null,
-                  constraints: constraints,
-                  itemBuilder: _buildNavigationItem,
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: maxContentWidth),
-                      child: _buildNormalNavigation(context),
+    final theme = Theme.of(context);
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value:
+          (theme.appBarTheme.systemOverlayStyle ?? SystemUiOverlayStyle.light)
+              .copyWith(
+                systemNavigationBarColor: AppColors.black,
+                systemNavigationBarIconBrightness: Brightness.light,
+                systemNavigationBarContrastEnforced: false,
+              ),
+      child: Material(
+        color: AppColors.black,
+        child: IconTheme.merge(
+          data: const IconThemeData(color: AppColors.white),
+          child: SafeArea(
+            top: false,
+            child: SizedBox(
+              height: _barHeight,
+              child: FoldAwareBuilder(
+                builder: (context, constraints, fold) {
+                  return DashboardFoldLayout(
+                    divider: fold.spansDivision ? fold.divisionRect : null,
+                    constraints: constraints,
+                    itemBuilder: _buildNavigationItem,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: maxContentWidth),
+                        child: Row(
+                          children: [
+                            for (final tab in DashboardTab.values)
+                              _buildNavigationItem(context, tab),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -58,19 +75,15 @@ class DashboardBottomNav extends StatelessWidget {
     );
   }
 
-  Widget _buildNormalNavigation(BuildContext context) {
-    return Row(
-      children: [for (final tab in DashboardTab.values) _buildNavigationItem(context, tab)],
+  Widget _buildNavigationItem(BuildContext context, DashboardTab tab) {
+    return Expanded(
+      child: DashboardNavItem(
+        tab: tab,
+        selectedTab: selectedTab,
+        onTabSelected: onTabSelected,
+        cartCount: cartCount,
+        profileImage: profileImage,
+      ),
     );
   }
-
-  Widget _buildNavigationItem(BuildContext context, DashboardTab tab) => Expanded(
-    child: DashboardNavItem(
-      tab: tab,
-      selectedTab: selectedTab,
-      onTabSelected: onTabSelected,
-      cartCount: cartCount,
-      profileImage: profileImage,
-    ),
-  );
 }

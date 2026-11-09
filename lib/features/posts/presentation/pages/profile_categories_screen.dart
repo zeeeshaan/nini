@@ -5,9 +5,9 @@ import 'package:nini/core/localization/persian_feature.dart';
 import 'package:nini/core/localization/profile_post_strings.dart';
 
 import '../cubit/profile_categories_cubit.dart';
-import '../widgets/category_delete_sheet/category_delete_sheet.dart';
-import '../widgets/category_editor_sheet/category_editor_sheet.dart';
-import '../widgets/profile_categories_body/profile_categories_body.dart';
+import '../widgets/categories/category_delete_sheet.dart';
+import '../widgets/categories/category_editor_sheet.dart';
+import '../widgets/categories/profile_categories_body.dart';
 
 class ProfileCategoriesScreen extends StatelessWidget {
   const ProfileCategoriesScreen({super.key, this.english = false});

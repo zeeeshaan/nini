@@ -1,7 +1,7 @@
 // dart format width=100
 import 'cart_item.dart';
 
-import 'package:nini/features/order_cancellation/domain/models/order_cancellation.dart';
+import 'package:nini/features/order_cancellation/domain/order_cancellation.dart';
 
 import 'cart_order_status.dart';
 import '../../../payment/domain/models/payment_method.dart';

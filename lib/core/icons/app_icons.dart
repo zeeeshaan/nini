@@ -5,9 +5,8 @@ abstract final class AppIcons {
   static const sun = 'assets/icons/vectors/environment/sun.svg';
   static const moon = 'assets/icons/vectors/environment/moon.svg';
   static const home = 'assets/icons/vectors/navigation/house-01.svg';
-  static const cart = 'assets/icons/vectors/interface/shopping-cart-01.svg';
-  static const shoppingBag =
-      'assets/icons/vectors/interface/shopping-bag-02.svg';
+  static const cart = 'assets/icons/finance/bag-03.png';
+  static const shoppingBag = cart;
   static const add = 'assets/icons/vectors/edit/add-plus.svg';
   static const minus = 'assets/icons/vectors/edit/remove-minus.svg';
   static const search =

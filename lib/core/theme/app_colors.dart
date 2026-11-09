@@ -17,6 +17,13 @@ abstract final class AppColors {
   static const darkSurfaceContainer = Color(0xFF202020);
   static const lightOutline = Color(0xFFDADADA);
   static const darkOutline = Color(0xFF666666);
+  static const bottomNavHighlight = Color(0xFF26292E);
+
+  // Loading placeholders and their shimmer highlights.
+  static const skeletonLightBase = Color(0xFFE5E5E5);
+  static const skeletonLightHighlight = Color(0xFFF8F8F8);
+  static const skeletonDarkBase = Color(0xFF2B2B2B);
+  static const skeletonDarkHighlight = Color(0xFF454545);
 
   static const cartThumbnail = Color(0xFFEFF3F4);
   static const walletCredit = Color(0xFF00D600);
@@ -28,6 +35,7 @@ abstract final class AppColors {
   static const stockBadgeBackground = Color(0xFFFFEEEE);
   static const authorOnline = Color(0xFF00CB28);
   static const profileFollow = Color(0xFF4C5BFF);
+  static const profileMessageBackground = Color(0xFFE7E7E7);
   static const analyticsOnline = Color(0xFF00C83C);
 
   // Analytics chart series.

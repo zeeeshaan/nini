@@ -4,13 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/data/device_chat_camera.dart';
 import 'package:nini/features/chat/domain/models/chat_location.dart';
-import 'package:nini/features/chat/presentation/widgets/attachment_sheet/chat_attachment_sheet.dart';
+import 'package:nini/features/chat/presentation/widgets/media/chat_attachment_sheet.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_gallery_screen.dart';
-import 'package:nini/features/create_post/presentation/widgets/address_dialog/address_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/post_dialog/post_dialog.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 class ChatAttachmentSelection {

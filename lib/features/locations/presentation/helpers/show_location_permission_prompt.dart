@@ -5,7 +5,7 @@ import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
-import '../widgets/location_permission_dialog/location_permission_dialog.dart';
+import '../widgets/permissions/location_permission_dialog.dart';
 
 /// Called once by the Home entry gate, after the dashboard's first frame.
 Future<void> showLocationPermissionPrompt(BuildContext context) async {

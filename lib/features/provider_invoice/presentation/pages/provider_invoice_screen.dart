@@ -9,12 +9,12 @@ import 'package:nini/features/cart/domain/policies/order_access.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/chat/presentation/helpers/open_order_conversation.dart';
 import 'package:nini/features/order_cancellation/presentation/pages/order_cancellation_screen.dart';
-import 'package:nini/features/payment/presentation/widgets/invoice_screen_widgets/order_invoice_content.dart';
+import 'package:nini/features/payment/presentation/widgets/invoice/order_invoice_content.dart';
 import 'package:nini/features/payment/presentation/helpers/receipt_navigation.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
-import '../widgets/provider_invoice_actions/provider_invoice_actions.dart';
+import '../widgets/common/provider_invoice_actions.dart';
 
 class ProviderInvoiceScreen extends StatefulWidget {
   const ProviderInvoiceScreen({super.key, required this.orderId});
@@ -60,9 +60,13 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
             onPressed: _saving ? null : () => Navigator.of(context).maybePop(),
             icon: const AppIcon(AppIcons.back, size: 20),
           ),
-          title: const Text(
-            ReceiptStrings.invoice,
-            style: AppTextStyles.pageTitle,
+          title: Align(
+            alignment: Alignment.centerRight,
+            child: const Text(
+              ReceiptStrings.invoice,
+              style: AppTextStyles.pageTitle,
+              textAlign: TextAlign.right,
+            ),
           ),
           centerTitle: false,
           actions: [
@@ -85,7 +89,15 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
         ),
         body: allowed
             ? OrderInvoiceContent(order: order)
-            : const Center(child: Text(ProviderOrderStrings.unavailable)),
+            : const Center(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    ProviderOrderStrings.unavailable,
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
         bottomNavigationBar: !allowed
             ? null
             : ProviderInvoiceActions(

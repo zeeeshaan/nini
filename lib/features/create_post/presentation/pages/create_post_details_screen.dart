@@ -12,11 +12,11 @@ import 'package:nini/features/create_post/domain/models/gallery_attachment.dart'
 import 'package:nini/features/create_post/domain/validation/post_draft_validator.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
-import 'package:nini/features/create_post/presentation/widgets/post_form_sections/post_basic_details_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/post_form_sections/post_options_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/post_form_sections/post_pricing_inventory_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/post_form_sections/post_publish_actions.dart';
-import 'package:nini/features/create_post/presentation/widgets/selected_media_grid/selected_media_grid.dart';
+import 'package:nini/features/create_post/presentation/widgets/form/post_basic_details_section.dart';
+import 'package:nini/features/create_post/presentation/widgets/form/post_options_section.dart';
+import 'package:nini/features/create_post/presentation/widgets/form/post_pricing_inventory_section.dart';
+import 'package:nini/features/create_post/presentation/widgets/form/post_publish_actions.dart';
+import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -145,15 +145,18 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                 onPressed: _operation.state.saving ? null : _goBack,
                 icon: const AppIcon(AppIcons.back, size: 22),
               ),
-              title: Padding(
-                padding: const EdgeInsets.only(right: 14),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    CreatePostStrings.createPost,
-                    textDirection: TextDirection.rtl,
-                    textAlign: TextAlign.right,
-                    style: theme.textTheme.titleMedium,
+              title: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 14),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      CreatePostStrings.createPost,
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: theme.textTheme.titleMedium,
+                    ),
                   ),
                 ),
               ),

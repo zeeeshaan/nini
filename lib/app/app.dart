@@ -14,7 +14,9 @@ import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
-import 'package:nini/features/splash/presentation/page/splash_screen/splash_screen.dart';
+import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
+import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
+import 'package:nini/features/splash/presentation/pages/splash_screen.dart';
 
 import 'app_providers.dart';
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
     this.analyticsRepository,
     this.cartRepository,
     this.categoriesRepository,
+    this.savedPostsRepository,
+    this.userProfileRepository,
   });
 
   final ThemeMode initialThemeMode;
@@ -34,6 +38,8 @@ class MyApp extends StatelessWidget {
   final PostAnalyticsRepository? analyticsRepository;
   final CartRepository? cartRepository;
   final ProfileCategoriesRepository? categoriesRepository;
+  final SavedPostsRepository? savedPostsRepository;
+  final UserProfileRepository? userProfileRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,8 @@ class MyApp extends StatelessWidget {
       analyticsRepository: analyticsRepository,
       cartRepository: cartRepository,
       categoriesRepository: categoriesRepository,
+      savedPostsRepository: savedPostsRepository,
+      userProfileRepository: userProfileRepository,
       child: const _ThemedApp(),
     );
   }

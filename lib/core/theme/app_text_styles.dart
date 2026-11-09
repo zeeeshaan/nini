@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 abstract final class AppTextStyles {
   static const fontFamily = 'YekanBakh';
 
-  // Match the existing Material text theme for general-purpose app text.
+  // Regular text is 2 logical pixels larger; heading sizes stay independent.
   static const heading = TextStyle(fontSize: 22, fontWeight: regular);
-  static const body = TextStyle(fontSize: 14, fontWeight: regular);
-  static const button = TextStyle(fontSize: 14, fontWeight: medium);
-  static const caption = TextStyle(fontSize: 14, fontWeight: regular);
+  static const body = TextStyle(fontSize: 16, fontWeight: regular);
+  static const button = TextStyle(fontSize: 16, fontWeight: medium);
+  static const caption = TextStyle(fontSize: 16, fontWeight: regular);
 
   static const username = TextStyle(fontSize: 16, fontWeight: semiBold);
   static const profileName = TextStyle(fontSize: 14, fontWeight: bold);
-  static const bio = TextStyle(fontSize: 14, fontWeight: regular);
-  static const website = TextStyle(fontSize: 14, fontWeight: regular);
+  static const bio = TextStyle(fontSize: 16, fontWeight: regular);
+  static const website = TextStyle(fontSize: 16, fontWeight: regular);
   static const statNumber = TextStyle(fontSize: 14, fontWeight: bold);
-  static const statLabel = TextStyle(fontSize: 14, fontWeight: regular);
-  static const category = TextStyle(fontSize: 14, fontWeight: regular);
+  static const statLabel = TextStyle(fontSize: 16, fontWeight: regular);
+  static const category = TextStyle(fontSize: 16, fontWeight: regular);
 
   // Readable profile-card roles. Keep these sizes independent of card width.
   static const postTitle = TextStyle(
@@ -25,21 +25,41 @@ abstract final class AppTextStyles {
     height: 1.25,
   );
   static const listingTitle = TextStyle(fontWeight: bold);
-  static const postMetadata = TextStyle(fontSize: 12, height: 1.25);
+  static const postMetadata = TextStyle(fontSize: 14, height: 1.25);
   static const postStock = TextStyle(
     fontSize: 12,
     fontWeight: bold,
     height: 1.25,
   );
-  static const originalPrice = TextStyle(fontSize: 12, height: 1.1);
+  static const originalPrice = TextStyle(fontSize: 14, height: 1.1);
   static const postPrice = TextStyle(
     fontSize: 18,
     fontWeight: heavy,
     height: 1.1,
   );
-  static const postCardHeading = postPrice;
+  // Profile-grid typography uses the compact proportions of the reference.
+  // The rest of the app keeps its existing font family and text sizes.
+  static const profileCardText = TextStyle(
+    fontFamily: 'ProfileCard',
+    fontFamilyFallback: [fontFamily],
+  );
+  static const postCardHeading = TextStyle(
+    fontSize: 18,
+    fontWeight: bold,
+    height: 1.15,
+  );
+  static const profileCardMetadata = TextStyle(fontSize: 14, height: 1.2);
+  static const profileCardStock = TextStyle(fontSize: 10, height: 1.2);
+  static const profileCardOriginalPrice = TextStyle(fontSize: 10, height: 1.05);
+  static const profileCardPrice = TextStyle(
+    fontSize: 20,
+    fontWeight: heavy,
+    height: 1.1,
+  );
+  static const profileCardUnit = TextStyle(fontSize: 8, height: 1.2);
+  static const profileCardRating = TextStyle(fontSize: 5, height: 1);
   static const pricePrefix = TextStyle(
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: medium,
     height: 1.2,
   );
@@ -51,54 +71,54 @@ abstract final class AppTextStyles {
   static const notificationBadge = TextStyle(fontSize: 9, fontWeight: semiBold);
   static const screenTitle = TextStyle(fontSize: 24, fontWeight: medium);
   static const sectionTitle = TextStyle(fontSize: 17, fontWeight: bold);
-  static const settingsLabel = TextStyle(fontSize: 15);
+  static const settingsLabel = TextStyle(fontSize: 17);
   static const settingsDetailTitle = TextStyle(
     fontSize: 18,
     fontWeight: medium,
   );
 
-  // App-wide roles preserving the existing screen designs.
+  // App-wide text roles. Emphasis, headings, and display sizes stay independent.
   static const inherit = TextStyle();
-  static const badgeSmall = TextStyle(fontSize: 7);
-  static const micro = TextStyle(fontSize: 8);
-  static const metadata = TextStyle(fontSize: 9);
+  static const badgeSmall = TextStyle(fontSize: 9);
+  static const micro = TextStyle(fontSize: 10);
+  static const metadata = TextStyle(fontSize: 11);
   static const metadataBold = TextStyle(fontSize: 9, fontWeight: bold);
-  static const smallPrint = TextStyle(fontSize: 10);
-  static const smallPrintMedium = TextStyle(fontSize: 10, fontWeight: medium);
+  static const smallPrint = TextStyle(fontSize: 12);
+  static const smallPrintMedium = TextStyle(fontSize: 12, fontWeight: medium);
   static const smallPrintEmphasis = TextStyle(
     fontSize: 10,
     fontWeight: semiBold,
   );
   static const smallPrintBold = TextStyle(fontSize: 10, fontWeight: bold);
-  static const helper = TextStyle(fontSize: 11);
+  static const helper = TextStyle(fontSize: 13);
   static const helperBold = TextStyle(fontSize: 11, fontWeight: bold);
-  static const badgeLabel = TextStyle(fontSize: 11, height: 1.2);
-  static const notificationBody = TextStyle(fontSize: 11, height: 1.5);
-  static const label = TextStyle(fontSize: 12);
-  static const labelMedium = TextStyle(fontSize: 12, fontWeight: medium);
+  static const badgeLabel = TextStyle(fontSize: 13, height: 1.2);
+  static const notificationBody = TextStyle(fontSize: 13, height: 1.5);
+  static const label = TextStyle(fontSize: 14);
+  static const labelMedium = TextStyle(fontSize: 14, fontWeight: medium);
   static const labelEmphasis = TextStyle(fontSize: 12, fontWeight: semiBold);
   static const labelBold = TextStyle(fontSize: 12, fontWeight: bold);
-  static const checkoutHelp = TextStyle(fontSize: 12, height: 1.7);
-  static const compactBody = TextStyle(fontSize: 13);
-  static const toast = TextStyle(fontSize: 13, fontWeight: medium);
+  static const checkoutHelp = TextStyle(fontSize: 14, height: 1.7);
+  static const compactBody = TextStyle(fontSize: 15);
+  static const toast = TextStyle(fontSize: 15, fontWeight: medium);
   static const compactBodyBold = TextStyle(fontSize: 13, fontWeight: bold);
-  static const bodyText = TextStyle(fontSize: 14);
+  static const bodyText = TextStyle(fontSize: 16);
   static const bodyBold = TextStyle(fontSize: 14, fontWeight: bold);
   static const bodyEmphasis = TextStyle(fontSize: 14, fontWeight: semiBold);
   static const postBody = TextStyle(
-    fontSize: 14,
+    fontSize: 16,
     height: 1.75,
     fontWeight: regular,
   );
-  static const messageBody = TextStyle(fontSize: 14, height: 1.45);
-  static const comfortableBody = TextStyle(fontSize: 15);
+  static const messageBody = TextStyle(fontSize: 16, height: 1.45);
+  static const comfortableBody = TextStyle(fontSize: 17);
   static const authorName = TextStyle(fontSize: 15, fontWeight: semiBold);
   static const comfortableBodyBold = TextStyle(fontSize: 15, fontWeight: bold);
-  static const permissionPrompt = TextStyle(fontSize: 15, height: 1.4);
-  static const largeBody = TextStyle(fontSize: 16);
+  static const permissionPrompt = TextStyle(fontSize: 17, height: 1.4);
+  static const largeBody = TextStyle(fontSize: 18);
   static const conversationName = TextStyle(fontSize: 16, fontWeight: semiBold);
   static const sellerName = TextStyle(fontSize: 16, fontWeight: bold);
-  static const specificationValue = TextStyle(fontSize: 16, height: 1.6);
+  static const specificationValue = TextStyle(fontSize: 18, height: 1.6);
   static const subtitle = TextStyle(fontSize: 17);
   static const galleryTitle = TextStyle(fontSize: 17, fontWeight: regular);
   static const pageTitle = TextStyle(fontSize: 18);
@@ -131,6 +151,26 @@ abstract final class AppTextStyles {
   );
   static const authTitle = TextStyle(fontSize: 24, fontWeight: semiBold);
   static const productPrice = TextStyle(fontSize: 24, fontWeight: bold);
+  // Home feed uses the bundled bold faces for the reference card typography.
+  static const homePostTitle = TextStyle(
+    fontFamily: 'ProfileCard',
+    fontFamilyFallback: [fontFamily],
+    fontSize: 23,
+    fontWeight: bold,
+    height: 1.2,
+  );
+  static const homePostPrice = TextStyle(
+    fontFamily: 'ProfileCard',
+    fontFamilyFallback: [fontFamily],
+    fontSize: 26,
+    fontWeight: heavy,
+  );
+  static const homeOriginalPrice = TextStyle(
+    fontFamily: 'ProfileCard',
+    fontFamilyFallback: [fontFamily],
+    fontSize: 16,
+    fontWeight: bold,
+  );
   static const otpCode = TextStyle(fontSize: 26);
   static const inboxTitle = TextStyle(fontSize: 27, fontWeight: bold);
   static const analyticsTotal = TextStyle(fontSize: 28, fontWeight: semiBold);
@@ -168,12 +208,12 @@ abstract final class AppTextStyles {
     titleLarge: heading,
     titleMedium: TextStyle(fontSize: 16, fontWeight: medium),
     titleSmall: TextStyle(fontSize: 14, fontWeight: medium),
-    bodyLarge: TextStyle(fontSize: 16, fontWeight: regular),
+    bodyLarge: TextStyle(fontSize: 18, fontWeight: regular),
     bodyMedium: body,
     bodySmall: caption,
     labelLarge: button,
     labelMedium: labelMedium,
-    labelSmall: TextStyle(fontSize: 11, fontWeight: medium),
+    labelSmall: TextStyle(fontSize: 13, fontWeight: medium),
   );
 
   static TextStyle scaledSplashBrand(double scale) =>

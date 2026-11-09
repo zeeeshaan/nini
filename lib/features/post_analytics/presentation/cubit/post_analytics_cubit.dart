@@ -1,12 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/post_analytics/domain/models/post_analytics.dart';
+import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 
 class PostAnalyticsState {
-  const PostAnalyticsState({this.events = const [], this.storageError = false});
+  const PostAnalyticsState({
+    this.events = const [],
+    this.storageError = false,
+    this.loading = false,
+  });
   final List<PostAnalyticsEvent> events;
   final bool storageError;
+  final bool loading;
 }
 
 class PostAnalyticsCubit extends Cubit<PostAnalyticsState> {
@@ -21,6 +26,13 @@ class PostAnalyticsCubit extends Cubit<PostAnalyticsState> {
   bool _historyReadable = true;
   Future<void> load() => _ready ??= _load();
   Future<void> _load() async {
+    emit(
+      PostAnalyticsState(
+        events: state.events,
+        storageError: state.storageError,
+        loading: true,
+      ),
+    );
     try {
       final saved = await repository.load();
       if (!isClosed) emit(PostAnalyticsState(events: List.unmodifiable(saved)));

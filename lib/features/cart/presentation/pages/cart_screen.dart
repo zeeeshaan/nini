@@ -2,19 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/cart_strings.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
+import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
 
 import '../cubit/cart_cubit.dart';
 import '../cubit/cart_state.dart';
-import '../widgets/cart_checkout/cart_checkout.dart';
-import '../widgets/cart_empty_state/cart_empty_state.dart';
-import '../widgets/cart_header/cart_header.dart';
-import '../widgets/cart_items_list/cart_items_list.dart';
-import '../widgets/cart_order_history/cart_order_history.dart';
-import '../widgets/cart_paid_order_card/cart_paid_order_card.dart';
-import '../widgets/cart_storage_notice/cart_storage_notice.dart';
-import '../widgets/cart_tabs/cart_tabs.dart';
-import '../widgets/cart_status_filter/cart_status_filter.dart';
+import '../widgets/checkout/cart_checkout.dart';
+import '../widgets/common/cart_empty_state.dart';
+import '../widgets/common/cart_header.dart';
+import '../widgets/items/cart_items_list.dart';
+import '../widgets/orders/cart_order_history.dart';
+import '../widgets/orders/cart_paid_order_card.dart';
+import '../widgets/common/cart_storage_notice.dart';
+import '../widgets/common/cart_tabs.dart';
+import '../widgets/orders/cart_status_filter.dart';
 
 /// One screen composes named widgets; checkout retains the dashboard navigation.
 class CartScreen extends StatelessWidget {
@@ -30,7 +30,13 @@ class CartScreen extends StatelessWidget {
   }
 
   Widget _content(CartState state) {
-    if (state.loading) return const Center(child: AppLoader());
+    if (state.loading && state.items.isEmpty && state.orders.isEmpty) {
+      return ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        itemCount: 5,
+        itemBuilder: (_, index) => const ListTileSkeleton(),
+      );
+    }
     if (state.stage == CartStage.checkout) return CartCheckout(state: state);
     if (state.tab == CartTab.history) {
       return CartOrderHistory(orders: state.purchases, filtered: state.statusFilter != null);

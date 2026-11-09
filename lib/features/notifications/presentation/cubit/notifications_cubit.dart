@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 
-import '../../domain/services/order_notifications.dart';
+import '../../domain/order_notifications.dart';
 import 'notifications_state.dart';
 export 'notifications_state.dart';
 

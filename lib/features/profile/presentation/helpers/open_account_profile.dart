@@ -3,7 +3,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/icons/app_icons.dart';
 
-import '../page/profile_screen/profile_screen.dart';
+import '../pages/profile_screen.dart';
 
 void openAccountProfile(BuildContext context) {
   Navigator.of(context).push<void>(

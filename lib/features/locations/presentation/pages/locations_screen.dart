@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/location_strings.dart';
 import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/settings_detail_header/settings_detail_header.dart';
+import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
 
-import '../widgets/location_label_card/location_label_card.dart';
-import '../widgets/location_map_preview/location_map_preview.dart';
-import '../widgets/saved_location_list/saved_location_list.dart';
+import '../widgets/common/location_label_card.dart';
+import '../widgets/common/location_map_preview.dart';
+import '../widgets/common/saved_location_list.dart';
 
 /// Local UI preview. Labels can be added/selected without saving to an account.
 class LocationsScreen extends StatefulWidget {
