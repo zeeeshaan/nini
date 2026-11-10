@@ -57,6 +57,15 @@ abstract final class CreatePostStrings {
   static const address = "Address";
   static const enterFullAddress = "Enter the full address";
   static const addAddress = "Add address";
+  static const enterAddressManually = "Enter address manually";
+  static const city = "City";
+  static const province = "Province";
+  static const postalCode = "Postal code";
+  static const addressFieldRequired = "This field is required.";
+  static const buildingNumber = "Number";
+  static const searchCities = "Search cities";
+  static const searchProvinces = "Search provinces";
+  static const noLocationsFound = "No locations found.";
   static const addressRequired = "Enter the full address.";
   static const findingAddress = "Finding the address for this location…";
   static const addressLookupFailed =

@@ -25,20 +25,36 @@ class PostSchedule {
 class PostAddress {
   const PostAddress({
     required this.address,
-    required this.latitude,
-    required this.longitude,
+    this.latitude,
+    this.longitude,
+    this.city = '',
+    this.province = '',
+    this.postalCode = '',
+    this.buildingNumber = '',
+    this.unitNumber = '',
   });
-  final String address;
-  final double latitude;
-  final double longitude;
+  final String address, city, province, postalCode, buildingNumber, unitNumber;
+  final double? latitude;
+  final double? longitude;
+  bool get hasCoordinates => latitude != null && longitude != null;
   factory PostAddress.fromJson(Map<String, dynamic> json) => PostAddress(
     address: json['address'] as String,
-    latitude: (json['latitude'] as num? ?? 0).toDouble(),
-    longitude: (json['longitude'] as num? ?? 0).toDouble(),
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
+    city: json['city'] as String? ?? '',
+    province: json['province'] as String? ?? '',
+    postalCode: json['postalCode'] as String? ?? '',
+    buildingNumber: json['buildingNumber'] as String? ?? '',
+    unitNumber: json['unitNumber'] as String? ?? '',
   );
   Map<String, dynamic> toJson() => {
     'address': address,
-    'latitude': latitude,
-    'longitude': longitude,
+    if (latitude != null) 'latitude': latitude,
+    if (longitude != null) 'longitude': longitude,
+    if (city.isNotEmpty) 'city': city,
+    if (province.isNotEmpty) 'province': province,
+    if (postalCode.isNotEmpty) 'postalCode': postalCode,
+    if (buildingNumber.isNotEmpty) 'buildingNumber': buildingNumber,
+    if (unitNumber.isNotEmpty) 'unitNumber': unitNumber,
   };
 }

@@ -10,6 +10,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/location_map.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/manual_address_dialog.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
@@ -21,11 +22,13 @@ class AddressDialog extends StatefulWidget {
     this.saved = const [],
     this.tileProvider,
     this.doneLabel = CreatePostStrings.done,
+    this.allowManualEntry = false,
   });
   final PostAddress? initial;
   final List<PostAddress> saved;
   final TileProvider? tileProvider;
   final String doneLabel;
+  final bool allowManualEntry;
   @override
   State<AddressDialog> createState() => _AddressDialogState();
 }
@@ -44,7 +47,10 @@ class _AddressDialogState extends State<AddressDialog> {
   }
 
   PostAddress? _add() {
-    final address = _draft.save(_text.text);
+    final address = _draft.save(
+      _text.text,
+      allowWithoutPin: widget.allowManualEntry,
+    );
     if (_text.text.trim().isEmpty) {
       _addressFocus.requestFocus();
     } else {
@@ -62,6 +68,38 @@ class _AddressDialogState extends State<AddressDialog> {
         SystemChannels.textInput.invokeMethod<void>('TextInput.show');
       }
     });
+  }
+
+  Future<void> _enterManually() async {
+    _draft.clearError();
+    final selected = _draft.state.selected;
+    final point = _draft.state.point;
+    final samePoint =
+        selected?.latitude == point?.latitude &&
+        selected?.longitude == point?.longitude;
+    final address = await showPostDialog<PostAddress>(
+      context,
+      ManualAddressDialog(
+        initial: PostAddress(
+          address: _text.text,
+          latitude: point?.latitude,
+          longitude: point?.longitude,
+          city: samePoint ? selected?.city ?? '' : '',
+          province: samePoint ? selected?.province ?? '' : '',
+          postalCode: samePoint ? selected?.postalCode ?? '' : '',
+          buildingNumber: samePoint ? selected?.buildingNumber ?? '' : '',
+          unitNumber: samePoint ? selected?.unitNumber ?? '' : '',
+        ),
+      ),
+    );
+    if (!mounted || address == null) return;
+    _autoFilledAddress = null;
+    _draft.select(address);
+    _draft.save(address.address, allowWithoutPin: true);
+    _text.value = TextEditingValue(
+      text: address.address,
+      selection: TextSelection.collapsed(offset: address.address.length),
+    );
   }
 
   Future<void> _selectPoint(LatLng point) async {
@@ -159,10 +197,13 @@ class _AddressDialogState extends State<AddressDialog> {
                             label: CreatePostStrings.address,
                             hint: CreatePostStrings.enterFullAddress,
                             maxLines: 2,
+                            readOnly: widget.allowManualEntry,
                             keyboardType: TextInputType.streetAddress,
                             textInputAction: TextInputAction.done,
                             onSubmitted: (_) => _addressFocus.unfocus(),
-                            onTap: _showKeyboard,
+                            onTap: widget.allowManualEntry
+                                ? _enterManually
+                                : _showKeyboard,
                             onChanged: (_) {
                               _autoFilledAddress = null;
                               _draft.clearError();

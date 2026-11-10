@@ -144,7 +144,9 @@ class _HomeProductCardState extends State<HomeProductCard>
                       isLiked: _card.state.liked,
                       onAddToCart: cart.state.loading ? null : _toggleCart,
                       isInCart: inCart != null,
-                      cartCount: inCart == null ? '0' : cartQuantity(inCart.quantity),
+                      cartCount: inCart == null
+                          ? '0'
+                          : cartQuantity(inCart.quantity),
                       isBookmarked: _card.state.bookmarked,
                       onLike: () => _card.toggleLike(),
                       onBookmark: () async {

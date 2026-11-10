@@ -70,11 +70,12 @@ Future<ChatAttachmentSelection?> pickChatAttachment(
         );
         if (selection == null) return null;
         final address = selection.selected;
+        if (!address.hasCoordinates) return null;
         return ChatAttachmentSelection.location(
           ChatLocation(
             address: address.address,
-            latitude: address.latitude,
-            longitude: address.longitude,
+            latitude: address.latitude!,
+            longitude: address.longitude!,
           ),
         );
       case null:

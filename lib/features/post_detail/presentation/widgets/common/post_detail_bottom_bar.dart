@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/post_detail_strings.dart';
+import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/features/cart/domain/models/cart_item.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
@@ -11,12 +12,34 @@ import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/
 import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/post_service_purchase_actions.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 class PostDetailBottomBar extends StatelessWidget {
-  const PostDetailBottomBar({super.key, required this.post, this.seller});
+  const PostDetailBottomBar({
+    super.key,
+    required this.post,
+    this.seller,
+    this.trailing,
+  });
 
   final PostItem post;
   final PostSeller? seller;
+  final Widget? trailing;
+
+  void _changeQuantity(BuildContext context, int value) {
+    final cart = context.read<CartCubit?>();
+    final inCart = cart?.state.items.any((item) => item.id == post.id) == true;
+    if (inCart && !cart!.updateQuantity(post.id, value)) {
+      AppToast.error(
+        context,
+        cart.state.storageError
+            ? AppStrings.cartStorageError
+            : AppStrings.cartStockExceeded,
+      );
+      return;
+    }
+    context.read<PostDetailCubit>().selectQuantity(value);
+  }
 
   Future<void> _chooseQuantity(
     BuildContext context,
@@ -29,18 +52,17 @@ class PostDetailBottomBar extends StatelessWidget {
       value: quantity,
       maximum: maximum,
       wholeUnits: item.wholeUnits,
-      allowZero: true,
       title: PostDetailStrings.quantity,
     );
     if (value != null && context.mounted) {
-      context.read<PostDetailCubit>().selectQuantity(value);
+      _changeQuantity(context, value);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final quantity = context.select(
+    final selectedQuantity = context.select(
       (PostDetailCubit cubit) => cubit.state.quantity,
     );
     final cart = context.watch<CartCubit?>();
@@ -48,8 +70,10 @@ class PostDetailBottomBar extends StatelessWidget {
     final inCart = cart?.state.items
         .where((entry) => entry.id == post.id)
         .firstOrNull;
-    final available = (item?.maxQuantity ?? 0) - (inCart?.quantity ?? 0);
-    final maximum = cart != null && available > 0 ? available : 0;
+    final quantity = inCart?.quantity ?? selectedQuantity;
+    final maximum = cart != null && !cart.state.loading
+        ? (inCart ?? item)?.maxQuantity ?? 0
+        : 0;
     return Theme(
       data: Theme.of(context).brightness == Brightness.dark
           ? AppTheme.light
@@ -65,16 +89,16 @@ class PostDetailBottomBar extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 22,
-                  vertical: 12,
+                  vertical: 6,
                 ),
                 child: post.isService
                     ? PostServicePurchaseActions(
                         post: post,
+                        trailing: trailing,
                         quantity: quantity,
                         maximum: maximum,
-                        onQuantityChanged: context
-                            .read<PostDetailCubit>()
-                            .selectQuantity,
+                        onQuantityChanged: (value) =>
+                            _changeQuantity(context, value),
                         onEditQuantity: item != null && maximum > 0
                             ? () => _chooseQuantity(
                                 context,
@@ -88,9 +112,8 @@ class PostDetailBottomBar extends StatelessWidget {
                         post: post,
                         quantity: quantity,
                         maximum: maximum,
-                        onQuantityChanged: context
-                            .read<PostDetailCubit>()
-                            .selectQuantity,
+                        onQuantityChanged: (value) =>
+                            _changeQuantity(context, value),
                         onEditQuantity: item != null && maximum > 0
                             ? () => _chooseQuantity(
                                 context,

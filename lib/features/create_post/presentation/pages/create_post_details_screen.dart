@@ -98,6 +98,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     if (_operation.state.saving) return;
     _captionSynchronizer.flush();
     if (!_validateBasicDetails()) return;
+    ContextMenuController.removeAny();
     FocusScope.of(context).unfocus();
     final posts = context.read<PostsCubit>();
     final draft = _draft.state;

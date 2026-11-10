@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/shared/models/post/post_seller.dart';
 
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
 import 'package:nini/features/search/presentation/widgets/results/search_all_services_filter.dart';
@@ -9,10 +11,16 @@ import 'package:nini/features/search/presentation/widgets/header/search_header.d
 
 /// Connects the header's buttons to search state. The lists live in SearchContent.
 class SearchView extends StatefulWidget {
-  const SearchView({super.key, required this.active, this.publishedServiceId});
+  const SearchView({
+    super.key,
+    required this.active,
+    this.publishedServiceId,
+    this.onPostSelected,
+  });
 
   final bool active;
   final String? publishedServiceId;
+  final void Function(PostItem post, PostSeller seller)? onPostSelected;
 
   @override
   State<SearchView> createState() => _SearchViewState();
@@ -139,6 +147,7 @@ class _SearchViewState extends State<SearchView> {
                         state: state,
                         onCitySelected: _selectCity,
                         onQuerySelected: _submit,
+                        onPostSelected: widget.onPostSelected,
                       ),
                     ),
                   ],

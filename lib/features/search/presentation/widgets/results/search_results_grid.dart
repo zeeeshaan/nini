@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
 
@@ -43,6 +45,21 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
         1,
         responsive.gridColumns,
       );
+      final cardWidth = (constraints.maxWidth - columns + 1) / columns;
+      final contentScale = cardWidth / ProfilePostCard.referenceWidth;
+      final headingHeight = ProfilePostCard.lineHeightFor(
+        context,
+        AppTextStyles.postCardHeading.copyWith(
+          fontSize: AppTextStyles.postCardHeading.fontSize! * contentScale,
+        ),
+      );
+      final previousHeadingHeight = ProfilePostCard.lineHeightFor(
+        context,
+        AppTextStyles.smallPrintBold,
+      );
+      // Keep the existing details space and allow two lines of the larger title.
+      final extraHeadingHeight = ((headingHeight - previousHeadingHeight) * 2)
+          .clamp(0.0, double.infinity);
       return Directionality(
         textDirection: TextDirection.rtl,
         child: GridView.builder(
@@ -53,8 +70,7 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
             crossAxisCount: columns,
             crossAxisSpacing: 1,
             mainAxisSpacing: 0,
-            mainAxisExtent:
-                (constraints.maxWidth - columns + 1) / columns + 80 * textScale,
+            mainAxisExtent: cardWidth + 80 * textScale + extraHeadingHeight,
           ),
           itemCount: widget.isLoading ? columns * 2 : widget.posts.length,
           itemBuilder: (context, index) => widget.isLoading
@@ -62,6 +78,7 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
               : SearchResultCard(
                   key: ValueKey(widget.posts[index].id),
                   post: widget.posts[index],
+                  contentScale: contentScale,
                   onTap: widget.onPostSelected == null
                       ? null
                       : () => widget.onPostSelected!(widget.posts[index]),

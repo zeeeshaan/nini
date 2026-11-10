@@ -12,8 +12,11 @@ abstract final class AppIcons {
   static const search =
       'assets/icons/vectors/interface/search-magnifying-glass.svg';
   static const profile = 'assets/icons/vectors/user/user-circle.svg';
+  static const team = 'assets/icons/vectors/user/users-group.svg';
+  static const addPerson = 'assets/icons/vectors/user/user-add.svg';
   static const send = 'assets/icons/vectors/communication/paper-plane.svg';
   static const more = 'assets/icons/vectors/menu/more-vertical.svg';
+  static const menu = 'assets/icons/vectors/menu/menu-duo-lg.svg';
   static const grid = 'assets/icons/vectors/menu/more-grid-big.svg';
   static const notifications = 'assets/icons/vectors/communication/bell.svg';
   static const back = 'assets/icons/vectors/arrows/chevron-left-md.svg';

@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/profile_settings_strings.dart';
 import 'package:nini/features/locations/presentation/pages/locations_screen.dart';
 import 'package:nini/features/profile_settings/presentation/pages/accessibility_screen.dart';
 import 'package:nini/features/profile_settings/presentation/pages/profile_edit_screen.dart';
 import 'package:nini/features/wallet/presentation/pages/wallet_screen.dart';
 import 'package:nini/features/saved_posts/presentation/pages/saved_posts_screen.dart';
+import 'package:nini/features/team/presentation/pages/my_team.dart';
 import 'package:nini/shimmer%20previe.dart';
 
 import 'profile_settings_tile.dart';
@@ -37,14 +37,10 @@ class ProfileSettingsList extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
     padding: const EdgeInsets.only(top: 12, bottom: 24),
     children: [
-      const Padding(
-        padding: EdgeInsets.fromLTRB(22, 4, 22, 12),
-        child: Text(
-          ProfileSettingsStrings.general,
-          textDirection: TextDirection.rtl,
-          textAlign: TextAlign.right,
-          style: AppTextStyles.sectionTitle,
-        ),
+      ProfileSettingsTile(
+        label: ProfileSettingsStrings.myTeam,
+        trailingIcon: AppIcons.team,
+        onTap: () => _open(context, const MyTeamsScreen()),
       ),
       ProfileSettingsTile(
         label: ProfileSettingsStrings.profile,

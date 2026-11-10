@@ -5,6 +5,7 @@ import 'package:nini/core/localization/notification_strings.dart';
 abstract final class ProfileSettingsStrings {
   static const title = "Settings";
   static const general = "General";
+  static const myTeam = "My Team";
   static const profile = "Profile settings";
   static const locations = "Locations";
   static const wallet = "Wallet";

@@ -30,9 +30,9 @@ class PostAddressCubit extends Cubit<PostAddressState> {
          PostAddressState(
            saved: List.unmodifiable(saved),
            selected: initial,
-           point: initial == null
+           point: initial?.hasCoordinates != true
                ? null
-               : LatLng(initial.latitude, initial.longitude),
+               : LatLng(initial!.latitude!, initial.longitude!),
          ),
        );
   final AddressGeocoder _geocoder;
@@ -104,7 +104,9 @@ class PostAddressCubit extends Cubit<PostAddressState> {
       PostAddressState(
         saved: state.saved,
         selected: address,
-        point: LatLng(address.latitude, address.longitude),
+        point: address.hasCoordinates
+            ? LatLng(address.latitude!, address.longitude!)
+            : null,
       ),
     );
   }
@@ -122,9 +124,9 @@ class PostAddressCubit extends Cubit<PostAddressState> {
     );
   }
 
-  PostAddress? save(String text) {
+  PostAddress? save(String text, {bool allowWithoutPin = false}) {
     if (state.resolvingAddress) return null;
-    if (text.trim().isEmpty || state.point == null) {
+    if (text.trim().isEmpty || (state.point == null && !allowWithoutPin)) {
       emit(
         PostAddressState(
           saved: state.saved,
@@ -137,14 +139,29 @@ class PostAddressCubit extends Cubit<PostAddressState> {
       );
       return null;
     }
+    final selected = state.selected;
+    final samePoint =
+        selected?.latitude == state.point?.latitude &&
+        selected?.longitude == state.point?.longitude;
     final address = PostAddress(
       address: text.trim(),
-      latitude: state.point!.latitude,
-      longitude: state.point!.longitude,
+      latitude: state.point?.latitude,
+      longitude: state.point?.longitude,
+      city: samePoint ? selected?.city ?? '' : '',
+      province: samePoint ? selected?.province ?? '' : '',
+      postalCode: samePoint ? selected?.postalCode ?? '' : '',
+      buildingNumber: samePoint ? selected?.buildingNumber ?? '' : '',
+      unitNumber: samePoint ? selected?.unitNumber ?? '' : '',
     );
     final saved = [...state.saved];
     final index = saved.indexWhere(
-      (entry) => entry.address.toLowerCase() == address.address.toLowerCase(),
+      (entry) =>
+          entry.address.toLowerCase() == address.address.toLowerCase() &&
+          entry.city.toLowerCase() == address.city.toLowerCase() &&
+          entry.province.toLowerCase() == address.province.toLowerCase() &&
+          entry.postalCode == address.postalCode &&
+          entry.buildingNumber == address.buildingNumber &&
+          entry.unitNumber == address.unitNumber,
     );
     if (index < 0) {
       saved.add(address);

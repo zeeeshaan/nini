@@ -51,7 +51,7 @@ class ProfileHeaderActions extends StatelessWidget {
         IconButton(
           onPressed: onMenuPressed ?? () => _openSettings(context),
           tooltip: AppStrings.moreOptions,
-          icon: const AppIcon(AppIcons.more, size: 30),
+          icon: const AppIcon(AppIcons.menu, size: 30),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(minWidth: 40, minHeight: 42),
         ),

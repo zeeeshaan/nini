@@ -11,7 +11,6 @@ import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/home/presentation/widgets/common/home_badge.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_detail_bottom_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_engagement_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_features_table.dart';
@@ -126,6 +125,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
         : post.features;
     return SafeArea(
       top: false,
+      bottom: false,
       child: AppResponsiveBuilder(
         builder: (context, responsive) {
           final maxWidth = responsive.adaptive<double>(
@@ -140,6 +140,9 @@ class _PostDetailBodyState extends State<PostDetailBody> {
               constraints: BoxConstraints(maxWidth: maxWidth),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.paddingOf(context).bottom,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -186,9 +189,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                             ? '0'
                             : cartQuantity(cartItem.quantity),
                         isInCart: cartItem != null,
-                        onCartPressed: canToggle
-                            ? _toggleCart
-                            : null,
+                        onCartPressed: canToggle ? _toggleCart : null,
                         onSharePressed: widget.onSharePressed,
                       ),
                     ),
@@ -230,7 +231,6 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                       ),
 
                     const SizedBox(height: 40),
-                    PostDetailBottomBar(post: post, seller: seller),
                   ],
                 ),
               ),

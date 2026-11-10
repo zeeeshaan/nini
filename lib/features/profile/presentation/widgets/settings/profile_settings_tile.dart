@@ -10,16 +10,19 @@ class ProfileSettingsTile extends StatelessWidget {
     required this.label,
     this.onTap,
     this.icon = AppIcons.back,
+    this.trailingIcon,
   });
   final String label;
   final VoidCallback? onTap;
   final String icon;
+  final String? trailingIcon;
   @override
   Widget build(BuildContext context) => ListTile(
     onTap: onTap,
     contentPadding: const EdgeInsets.symmetric(horizontal: 22),
     minTileHeight: 52,
     leading: AppIcon(icon, size: 16),
+    trailing: trailingIcon != null ? AppIcon(trailingIcon!, size: 28) : null,
     title: Text(
       label,
       textDirection: TextDirection.rtl,

@@ -13,6 +13,7 @@ class PostQuantitySelector extends StatelessWidget {
     required this.onChanged,
     required this.unitLabel,
     this.onEdit,
+    this.compact = false,
   });
 
   final int quantity;
@@ -20,6 +21,7 @@ class PostQuantitySelector extends StatelessWidget {
   final ValueChanged<int> onChanged;
   final String unitLabel;
   final VoidCallback? onEdit;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,8 @@ class PostQuantitySelector extends StatelessWidget {
                 disabledForegroundColor: colors.onSurface.withValues(
                   alpha: .45,
                 ),
-                minimumSize: const Size(64, 48),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                minimumSize: compact ? const Size(40, 44) : const Size(64, 48),
+                padding: EdgeInsets.symmetric(horizontal: compact ? 8 : 16),
               ),
               child: Semantics(
                 label: PostDetailStrings.quantity,
@@ -53,7 +55,13 @@ class PostQuantitySelector extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.bodyText,
+                  style: compact
+                      ? AppTextStyles.label.copyWith(
+                          color: colors.onSurface.withValues(
+                            alpha: onEdit != null ? 1 : .45,
+                          ),
+                        )
+                      : AppTextStyles.bodyText,
                 ),
               ),
             ),
@@ -61,11 +69,14 @@ class PostQuantitySelector extends StatelessWidget {
           IconButton(
             tooltip: PostDetailStrings.increaseQuantity,
             onPressed: canIncrease ? () => onChanged(quantity + 100) : null,
-            padding: const EdgeInsets.all(10),
-            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            padding: EdgeInsets.all(compact ? 8 : 10),
+            constraints: BoxConstraints(
+              minWidth: compact ? 44 : 48,
+              minHeight: compact ? 44 : 48,
+            ),
             icon: AppIcon(
               AppIcons.add,
-              size: 28,
+              size: compact ? 22 : 28,
               color: colors.onSurface.withValues(alpha: canIncrease ? 1 : .35),
             ),
           ),

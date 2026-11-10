@@ -45,36 +45,43 @@ class _PostImageCarouselState extends State<PostImageCarousel> {
     final count = widget.media.isNotEmpty
         ? widget.media.length
         : widget.images.length;
-    return AspectRatio(
+    final images = AspectRatio(
       aspectRatio: 1,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: count,
-              onPageChanged: (index) {
-                context.read<PostDetailCubit>().changeImage(index);
-              },
-              itemBuilder: (context, index) {
-                if (widget.media.isNotEmpty) {
-                  return PostMediaView(
-                    media: widget.media[index],
-                    fit: widget.mediaFit,
-                  );
-                }
-                return PostCarouselImage(path: widget.images[index]);
-              },
+      child: PageView.builder(
+        controller: _pageController,
+        itemCount: count,
+        onPageChanged: (index) {
+          context.read<PostDetailCubit>().changeImage(index);
+        },
+        itemBuilder: (context, index) {
+          if (widget.media.isNotEmpty) {
+            return PostMediaView(
+              media: widget.media[index],
+              fit: widget.mediaFit,
+            );
+          }
+          return PostCarouselImage(path: widget.images[index]);
+        },
+      ),
+    );
+    if (!widget.showIndicators || count < 2) return images;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        images,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Center(
+            child: IgnorePointer(
+              child: HomePostMediaIndicator(
+                count: count,
+                controller: _pageController,
+              ),
             ),
           ),
-          if (widget.showIndicators && count > 1)
-            Positioned(
-              left: 28,
-              bottom: 18,
-              child: IgnorePointer(child: HomePostMediaIndicator(count: count)),
-            ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

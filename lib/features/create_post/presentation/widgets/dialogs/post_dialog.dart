@@ -14,6 +14,7 @@ Future<T?> showPostDialog<T>(
   bool isDismissible = true,
   bool enableDrag = true,
 }) {
+  ContextMenuController.removeAny();
   FocusScope.of(context).unfocus();
   return showModalBottomSheet<T>(
     context: context,

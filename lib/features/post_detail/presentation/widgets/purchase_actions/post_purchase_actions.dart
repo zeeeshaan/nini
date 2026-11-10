@@ -21,32 +21,40 @@ class PostPurchaseActions extends StatelessWidget {
   final VoidCallback? onEditQuantity;
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      LayoutBuilder(
-        builder: (context, constraints) => Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 16,
-          runSpacing: 12,
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      final prices = FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: PostPricing(post: post),
+      );
+      final selector = PostQuantitySelector(
+        compact: true,
+        quantity: quantity,
+        maximum: maximum,
+        unitLabel: PostDetailStrings.unit(post.details.unit ?? PostUnit.piece),
+        onChanged: onQuantityChanged,
+        onEdit: onEditQuantity,
+      );
+      if (constraints.maxWidth < 220 ||
+          MediaQuery.textScalerOf(context).scale(14) > 21) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: constraints.maxWidth),
-              child: PostPricing(post: post),
-            ),
-            PostQuantitySelector(
-              quantity: quantity,
-              maximum: maximum,
-              unitLabel: PostDetailStrings.unit(
-                post.details.unit ?? PostUnit.piece,
-              ),
-              onChanged: onQuantityChanged,
-              onEdit: onEditQuantity,
-            ),
+            Align(alignment: Alignment.centerLeft, child: prices),
+            const SizedBox(height: 8),
+            Align(alignment: Alignment.centerRight, child: selector),
           ],
-        ),
-      ),
-    ],
+        );
+      }
+      return Row(
+        textDirection: TextDirection.ltr,
+        children: [
+          Expanded(child: prices),
+          const SizedBox(width: 16),
+          selector,
+        ],
+      );
+    },
   );
 }

@@ -41,6 +41,11 @@ class _PostEditorLocationFieldsState extends State<PostEditorLocationFields> {
 
   String? _validate(String? _) {
     if (_empty) return null;
+    if (_address.text.trim().isNotEmpty &&
+        _latitude.text.trim().isEmpty &&
+        _longitude.text.trim().isEmpty) {
+      return null;
+    }
     final latitude = PostEditorValidation.number(_latitude.text);
     final longitude = PostEditorValidation.number(_longitude.text);
     return _address.text.trim().isEmpty ||
@@ -61,8 +66,18 @@ class _PostEditorLocationFieldsState extends State<PostEditorLocationFields> {
         ? null
         : PostAddress(
             address: _address.text.trim(),
-            latitude: PostEditorValidation.number(_latitude.text)!,
-            longitude: PostEditorValidation.number(_longitude.text)!,
+            latitude: PostEditorValidation.number(_latitude.text),
+            longitude: PostEditorValidation.number(_longitude.text),
+            city: context.read<CreatePostCubit>().state.address?.city ?? '',
+            province:
+                context.read<CreatePostCubit>().state.address?.province ?? '',
+            postalCode:
+                context.read<CreatePostCubit>().state.address?.postalCode ?? '',
+            buildingNumber:
+                context.read<CreatePostCubit>().state.address?.buildingNumber ??
+                '',
+            unitNumber:
+                context.read<CreatePostCubit>().state.address?.unitNumber ?? '',
           ),
   );
   @override

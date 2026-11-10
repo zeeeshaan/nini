@@ -69,6 +69,11 @@ class AppTextField extends StatelessWidget {
     return Directionality(
       textDirection: textDirection,
       child: TextFormField(
+        // Keep selection menus inside Flutter so iOS native menus cannot overlap.
+        contextMenuBuilder: (context, editableTextState) =>
+            AdaptiveTextSelectionToolbar.editableText(
+              editableTextState: editableTextState,
+            ),
         controller: controller,
         focusNode: focusNode,
         keyboardType: keyboardType,

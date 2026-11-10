@@ -79,6 +79,7 @@ class PostOptionsSection extends StatelessWidget {
             onTap: () => choosePostOption<AddressSelection>(
               context,
               AddressDialog(
+                allowManualEntry: true,
                 initial: draftCubit.state.address,
                 saved: draftCubit.state.savedAddresses,
               ),

@@ -9,6 +9,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/post_analytics/presentation/pages/post_analytics_screen.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_detail_bottom_bar.dart';
 import 'package:nini/features/post_detail/presentation/widgets/content/post_detail_body.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
@@ -36,6 +37,7 @@ class PostDetailScreen extends StatelessWidget {
     this.onMorePressed,
     this.onEditPressed,
     this.allowOwnerActions = false,
+    this.purchaseTrailing,
   });
 
   final PostItem post;
@@ -52,6 +54,7 @@ class PostDetailScreen extends StatelessWidget {
 
   /// Enabled only by the account Profile; ownership is checked separately.
   final bool allowOwnerActions;
+  final Widget? purchaseTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,7 @@ class PostDetailScreen extends StatelessWidget {
         post: post,
         child: ScreenEntrance(
           child: Scaffold(
+            extendBody: true,
             appBar: AppBar(
               elevation: 0,
               toolbarHeight: 44,
@@ -140,6 +144,11 @@ class PostDetailScreen extends StatelessWidget {
               ),
             ),
 
+            bottomNavigationBar: PostDetailBottomBar(
+              post: post,
+              seller: author,
+              trailing: post.isService ? purchaseTrailing : null,
+            ),
             body: PostDetailBody(
               post: post,
               seller: author,

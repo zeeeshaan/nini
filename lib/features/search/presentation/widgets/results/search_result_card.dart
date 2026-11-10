@@ -9,10 +9,16 @@ import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
 
 class SearchResultCard extends StatelessWidget {
-  const SearchResultCard({super.key, required this.post, this.onTap});
+  const SearchResultCard({
+    super.key,
+    required this.post,
+    this.onTap,
+    this.contentScale = 1,
+  });
 
   final PostItem post;
   final VoidCallback? onTap;
+  final double contentScale;
 
   String _price(String value) => AppStrings.persianDigits(
     value.replaceAllMapped(
@@ -75,7 +81,13 @@ class SearchResultCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.right,
-                        style: AppTextStyles.smallPrintBold,
+                        style: AppTextStyles.profileCardText
+                            .merge(AppTextStyles.postCardHeading)
+                            .copyWith(
+                              fontSize:
+                                  AppTextStyles.postCardHeading.fontSize! *
+                                  contentScale,
+                            ),
                       ),
                       if (post.details.tags.contains(AppStrings.preOrder))
                         Align(

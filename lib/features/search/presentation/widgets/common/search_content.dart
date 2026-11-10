@@ -8,6 +8,9 @@ import 'package:nini/features/home/presentation/helpers/published_home_navigatio
 import 'package:nini/core/localization/search_strings.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/features/home/data/home_post_data.dart';
+import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/features/search/presentation/cubit/search_state.dart';
 
 import 'package:nini/features/search/presentation/widgets/results/search_empty_state.dart';
@@ -22,13 +25,28 @@ class SearchContent extends StatelessWidget {
     required this.state,
     required this.onCitySelected,
     required this.onQuerySelected,
+    this.onPostSelected,
   });
 
   final SearchState state;
   final ValueChanged<String> onCitySelected;
   final ValueChanged<String> onQuerySelected;
+  final void Function(PostItem post, PostSeller seller)? onPostSelected;
 
   void _openPost(BuildContext context, PostItem post) {
+    if (onPostSelected != null) {
+      final isLocalPost =
+          context.read<PostsCubit?>()?.state.find(post.id) != null;
+      final seller = isLocalPost
+          ? context.read<UserProfileCubit?>()?.seller ?? localPostSeller
+          : SearchCatalog.sellerFor(post);
+      if (seller == null) {
+        AppToast.warning(context, SearchStrings.providerUnavailable);
+        return;
+      }
+      onPostSelected!(post, seller);
+      return;
+    }
     if (context.read<PostsCubit?>()?.state.find(post.id) != null) {
       openPublishedHomePost(context, post);
       return;
