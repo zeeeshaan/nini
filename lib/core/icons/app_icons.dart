@@ -14,6 +14,7 @@ abstract final class AppIcons {
   static const profile = 'assets/icons/vectors/user/user-circle.svg';
   static const team = 'assets/icons/vectors/user/users-group.svg';
   static const addPerson = 'assets/icons/vectors/user/user-add.svg';
+  static const edit = 'assets/icons/vectors/edit/edit-pencil-01.svg';
   static const send = 'assets/icons/vectors/communication/paper-plane.svg';
   static const more = 'assets/icons/vectors/menu/more-vertical.svg';
   static const menu = 'assets/icons/vectors/menu/menu-duo-lg.svg';

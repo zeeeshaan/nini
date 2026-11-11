@@ -17,9 +17,15 @@ import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 /// Explicit demo handoff. This never calls a bank or confirms a real payment.
 class PaymentGatewayScreen extends StatefulWidget {
-  const PaymentGatewayScreen({super.key, this.details, this.method});
+  const PaymentGatewayScreen({
+    super.key,
+    this.details,
+    this.method,
+    this.successReturnLabel,
+  });
   final PaymentDetails? details;
   final PaymentMethod? method;
+  final String? successReturnLabel;
 
   @override
   State<PaymentGatewayScreen> createState() => _PaymentGatewayScreenState();
@@ -45,7 +51,10 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
     }
     await Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (_) => PaymentSuccessScreen(orderId: order.id),
+        builder: (_) => PaymentSuccessScreen(
+          orderId: order.id,
+          returnLabel: widget.successReturnLabel ?? ReceiptStrings.backToCart,
+        ),
       ),
     );
     if (!mounted) return;

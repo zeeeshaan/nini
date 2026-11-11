@@ -22,7 +22,8 @@ import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 /// Shared customer information step for selected product and service Cart items.
 class OrderInformationScreen extends StatefulWidget {
-  const OrderInformationScreen({super.key});
+  const OrderInformationScreen({super.key, this.successReturnLabel});
+  final String? successReturnLabel;
 
   @override
   State<OrderInformationScreen> createState() => _OrderInformationScreenState();
@@ -108,6 +109,7 @@ class _OrderInformationScreenState extends State<OrderInformationScreen> {
           builder: (_) => PaymentGatewayScreen(
             details: details,
             method: context.read<CartCubit>().state.method,
+            successReturnLabel: widget.successReturnLabel,
           ),
         ),
       );

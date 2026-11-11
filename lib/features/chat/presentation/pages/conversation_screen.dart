@@ -42,6 +42,9 @@ class ConversationScreen extends StatelessWidget {
     this.recordingClock,
     this.galleryFactory,
     this.capturePhoto,
+    this.headerTitle,
+    this.headerBottom,
+    this.allowBlocking = true,
   });
   final ChatConversation conversation;
   final String? subtitle;
@@ -53,6 +56,9 @@ class ConversationScreen extends StatelessWidget {
   final DateTime Function()? recordingClock;
   final GalleryCubit Function()? galleryFactory;
   final Future<GalleryAttachment?> Function()? capturePhoto;
+  final Widget? headerTitle;
+  final PreferredSizeWidget? headerBottom;
+  final bool allowBlocking;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
@@ -79,6 +85,9 @@ class ConversationScreen extends StatelessWidget {
       onLatestMessageChanged: onLatestMessageChanged,
       galleryFactory: galleryFactory,
       capturePhoto: capturePhoto,
+      headerTitle: headerTitle,
+      headerBottom: headerBottom,
+      allowBlocking: allowBlocking,
     ),
   );
 }
@@ -90,12 +99,18 @@ class _ConversationView extends StatefulWidget {
     required this.onLatestMessageChanged,
     this.galleryFactory,
     this.capturePhoto,
+    this.headerTitle,
+    this.headerBottom,
+    this.allowBlocking = true,
   });
   final ChatConversation conversation;
   final String? subtitle;
   final ValueChanged<ChatMessage?>? onLatestMessageChanged;
   final GalleryCubit Function()? galleryFactory;
   final Future<GalleryAttachment?> Function()? capturePhoto;
+  final Widget? headerTitle;
+  final PreferredSizeWidget? headerBottom;
+  final bool allowBlocking;
   @override
   State<_ConversationView> createState() => _ConversationViewState();
 }
@@ -401,6 +416,9 @@ class _ConversationViewState extends State<_ConversationView>
                               .clamp(70, double.infinity),
                       conversation: widget.conversation,
                       subtitle: widget.subtitle,
+                      titleContent: widget.headerTitle,
+                      bottom: widget.headerBottom,
+                      allowBlocking: widget.allowBlocking,
                       selectionMode: conversation.selectionMode,
                       selectedCount: conversation.selected.length,
                       blocked: conversation.blocked,

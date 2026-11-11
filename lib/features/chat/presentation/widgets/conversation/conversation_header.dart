@@ -28,16 +28,24 @@ class ConversationHeader extends StatelessWidget
     required this.onVideoCall,
     this.canCopy = false,
     this.toolbarHeight = 70,
+    this.titleContent,
+    this.bottom,
+    this.allowBlocking = true,
   });
   final ChatConversation conversation;
   final String? subtitle;
+  final Widget? titleContent;
+  final PreferredSizeWidget? bottom;
+  final bool allowBlocking;
   final bool selectionMode, blocked, hasMessages, busy, canCopy;
   final int selectedCount;
   final double toolbarHeight;
   final VoidCallback onBack, onDelete, onSelectAll, onVoiceCall, onVideoCall;
   final ValueChanged<ConversationAction> onAction;
   @override
-  Size get preferredSize => Size.fromHeight(toolbarHeight);
+  Size get preferredSize => Size.fromHeight(
+    toolbarHeight + (selectionMode ? 0 : bottom?.preferredSize.height ?? 0),
+  );
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -47,6 +55,7 @@ class ConversationHeader extends StatelessWidget
       elevation: 0,
       scrolledUnderElevation: 0,
       toolbarHeight: toolbarHeight,
+      bottom: selectionMode ? null : bottom,
       centerTitle: false,
       titleSpacing: 0,
       leadingWidth: 48,
@@ -65,53 +74,56 @@ class ConversationHeader extends StatelessWidget
                 style: AppTextStyles.comfortableBody,
                 textAlign: TextAlign.right,
               )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          conversation.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyles.comfortableBodyBold,
-                          textAlign: TextAlign.right,
+            : titleContent ??
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              conversation.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyles.comfortableBodyBold,
+                              textAlign: TextAlign.right,
+                            ),
+                            if (subtitle?.isNotEmpty == true)
+                              Text(
+                                subtitle!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyles.helper.copyWith(
+                                  color: colors.onSurface.withValues(
+                                    alpha: .45,
+                                  ),
+                                ),
+                                textAlign: TextAlign.right,
+                              ),
+                          ],
                         ),
-                        if (subtitle?.isNotEmpty == true)
-                          Text(
-                            subtitle!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.helper.copyWith(
-                              color: colors.onSurface.withValues(alpha: .45),
-                            ),
-                            textAlign: TextAlign.right,
-                          ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 8),
+                      CircleAvatar(
+                        radius: 19,
+                        backgroundColor: colors.surfaceContainerHighest,
+                        child: avatar == null
+                            ? const AppIcon(AppIcons.profile, size: 23)
+                            : ClipOval(
+                                child: Image(
+                                  image: avatar,
+                                  width: 38,
+                                  height: 38,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, error, stack) =>
+                                      const AppIcon(AppIcons.profile, size: 23),
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  CircleAvatar(
-                    radius: 19,
-                    backgroundColor: colors.surfaceContainerHighest,
-                    child: avatar == null
-                        ? const AppIcon(AppIcons.profile, size: 23)
-                        : ClipOval(
-                            child: Image(
-                              image: avatar,
-                              width: 38,
-                              height: 38,
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, error, stack) =>
-                                  const AppIcon(AppIcons.profile, size: 23),
-                            ),
-                          ),
-                  ),
-                ],
-              ),
       ),
       actions: [
         if (selectionMode) ...[
@@ -164,13 +176,14 @@ class ConversationHeader extends StatelessWidget
                 textAlign: TextAlign.right,
               ),
             ),
-            PopupMenuItem(
-              value: ConversationAction.block,
-              child: Text(
-                blocked ? AppStrings.unblockPerson : AppStrings.blockPerson,
-                textAlign: TextAlign.right,
+            if (allowBlocking)
+              PopupMenuItem(
+                value: ConversationAction.block,
+                child: Text(
+                  blocked ? AppStrings.unblockPerson : AppStrings.blockPerson,
+                  textAlign: TextAlign.right,
+                ),
               ),
-            ),
           ],
         ),
       ],

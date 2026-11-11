@@ -7,6 +7,7 @@ abstract final class ReceiptStrings {
   static const paymentNotSaved =
       'Could not save this payment. Your Cart has been kept. Please try again.';
   static const backToCart = 'Back to Cart';
+  static const backToMyTeam = 'Back to My Team';
   static const viewInvoice = 'View invoice';
   static const invoice = 'Invoice';
   static const invoiceDate = 'Invoice Date';

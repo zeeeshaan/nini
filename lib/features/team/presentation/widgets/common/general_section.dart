@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -26,18 +25,14 @@ class TeamGeneralSection extends StatelessWidget {
         Text(
           'General',
           textAlign: TextAlign.right,
-          style: AppTextStyles.caption.copyWith(
-            color: foreground,
-          ),
+          style: AppTextStyles.caption.copyWith(color: foreground),
         ),
         SizedBox(height: spacing),
         AppTextField(
           hint: 'Team name',
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
-          textStyle: AppTextStyles.bodyText.copyWith(
-            color: foreground,
-          ),
+          textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
           onChanged: onNameChanged,
         ),
         SizedBox(height: spacing),
@@ -46,9 +41,7 @@ class TeamGeneralSection extends StatelessWidget {
           maxLines: 5,
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
-          textStyle: AppTextStyles.bodyText.copyWith(
-            color: foreground,
-          ),
+          textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
           onChanged: onDescriptionChanged,
         ),
       ],

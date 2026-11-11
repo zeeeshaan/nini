@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_gallery_screen.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
-
 
 import 'file_list.dart';
 
@@ -27,8 +25,7 @@ class TeamAttachmentsSection extends StatelessWidget {
   final double spacing;
 
   Future<void> _openGallery(BuildContext context) async {
-    final selected = await Navigator.of(context)
-        .push<List<GalleryAttachment>>(
+    final selected = await Navigator.of(context).push<List<GalleryAttachment>>(
       MaterialPageRoute(
         builder: (galleryContext) {
           return CreatePostGalleryScreen(
@@ -54,16 +51,12 @@ class TeamAttachmentsSection extends StatelessWidget {
         .where((attachment) => !attachment.isFile)
         .toList();
 
-    final files = attachments
-        .where((attachment) => attachment.isFile)
-        .toList();
+    final files = attachments.where((attachment) => attachment.isFile).toList();
 
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: PostFormOptionTile(
             label: 'Upload File & Picture',
             trailing: const Icon(Icons.cloud_upload_outlined),
@@ -80,13 +73,8 @@ class TeamAttachmentsSection extends StatelessWidget {
           SizedBox(height: spacing),
 
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalPadding,
-            ),
-            child: TeamFileList(
-              files: files,
-              onRemove: onRemoveAttachment,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: TeamFileList(files: files, onRemove: onRemoveAttachment),
           ),
         ],
       ],

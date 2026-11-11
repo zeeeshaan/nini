@@ -8,6 +8,7 @@ import 'package:nini/core/localization/app_strings.dart';
 import 'package:nini/features/chat/presentation/cubit/conversation_cubit.dart';
 import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
 import 'package:nini/features/chat/presentation/widgets/conversation/chat_emoji_panel.dart';
+import 'package:nini/features/chat/presentation/widgets/conversation/conversation_empty_state.dart';
 import 'package:nini/features/chat/presentation/widgets/messages/chat_message_bubble.dart';
 import 'package:nini/features/chat/presentation/widgets/conversation/chat_message_composer.dart';
 import 'package:nini/features/chat/presentation/widgets/media/voice_recording_panel.dart';
@@ -93,15 +94,7 @@ class ConversationBody extends StatelessWidget {
             ),
           Expanded(
             child: conversation.messages.isEmpty
-                ? const Center(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        AppStrings.noMessages,
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                  )
+                ? const ConversationEmptyState()
                 : ListView.builder(
                     controller: scrollController,
                     reverse: true,

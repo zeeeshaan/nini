@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_colors.dart';
@@ -6,11 +5,7 @@ import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 
 class TeamFileList extends StatelessWidget {
-  const TeamFileList({
-    super.key,
-    required this.files,
-    required this.onRemove,
-  });
+  const TeamFileList({super.key, required this.files, required this.onRemove});
 
   final List<GalleryAttachment> files;
   final ValueChanged<String> onRemove;
@@ -68,9 +63,7 @@ class TeamFileList extends StatelessWidget {
                           const SizedBox(height: 4),
 
                           Text(
-                            _formatFileSize(
-                              attachment.file!.lengthSync(),
-                            ),
+                            _formatFileSize(attachment.file!.lengthSync()),
                             textAlign: TextAlign.right,
                             style: AppTextStyles.caption.copyWith(
                               color: colors.onSurfaceVariant,
@@ -84,9 +77,7 @@ class TeamFileList extends StatelessWidget {
 
                     Icon(
                       Icons.picture_as_pdf_outlined,
-                      color: attachment.file!.extension
-                          ?.toLowerCase() ==
-                          'pdf'
+                      color: attachment.file!.extension?.toLowerCase() == 'pdf'
                           ? AppColors.pdfBadge
                           : colors.onSurfaceVariant,
                       size: 30,

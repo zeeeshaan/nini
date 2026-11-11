@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -48,9 +47,7 @@ class TeamPickerCard extends StatelessWidget {
               Text(
                 'Team',
                 textAlign: TextAlign.right,
-                style: AppTextStyles.bodyText.copyWith(
-                  color: colors.onSurface,
-                ),
+                style: AppTextStyles.bodyText.copyWith(color: colors.onSurface),
               ),
 
               const SizedBox(height: 10),
@@ -68,17 +65,12 @@ class TeamPickerCard extends StatelessWidget {
 
               Row(
                 children: [
-                  Icon(
-                    Icons.chevron_left,
-                    color: colors.onSurface,
-                  ),
+                  Icon(Icons.chevron_left, color: colors.onSurface),
 
                   const Spacer(),
 
                   Text(
-                    memberCount == 0
-                        ? 'Add members'
-                        : '$memberCount',
+                    memberCount == 0 ? 'Add members' : '$memberCount',
                     textAlign: TextAlign.right,
                     style: AppTextStyles.bodyText.copyWith(
                       color: colors.onSurface,
@@ -94,9 +86,7 @@ class TeamPickerCard extends StatelessWidget {
                       height: 32,
                       child: Stack(
                         children: [
-                          for (var index = 0;
-                          index < avatarCount;
-                          index++)
+                          for (var index = 0; index < avatarCount; index++)
                             Positioned(
                               right: index * 18.0,
                               child: CircleAvatar(

@@ -1,9 +1,14 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:nini/features/team/data/in_memory_teams_repository.dart';
+import 'package:nini/features/team/presentation/cubit/teams_cubit.dart';
+import 'package:nini/features/team/presentation/helpers/manage_team.dart';
+import 'package:nini/features/team/presentation/pages/team_chat_screen.dart';
+import 'package:nini/features/team/presentation/widgets/common/team_search_field.dart';
+import 'package:nini/features/team/presentation/widgets/my_teams/my_teams_header.dart';
+import 'package:nini/features/team/presentation/widgets/my_teams/team_card.dart';
+import 'package:nini/features/team/presentation/widgets/my_teams/team_empty_state.dart';
 
 import 'create_team.dart';
 
@@ -13,129 +18,109 @@ class MyTeamsScreen extends StatelessWidget {
     this.onCreateTeam,
     this.onSearchChanged,
     this.emptyImageAsset = 'assets/teamimg.png',
+    this.repository,
   });
-
   final VoidCallback? onCreateTeam;
   final ValueChanged<String>? onSearchChanged;
   final String emptyImageAsset;
+  final InMemoryTeamsRepository? repository;
 
-  void _openCreateTeam(BuildContext context) {
+  void _openCreateTeam(
+    BuildContext context,
+    InMemoryTeamsRepository repository,
+  ) {
     if (onCreateTeam != null) {
       onCreateTeam!();
       return;
     }
-
-    Navigator.of(context).push(
+    Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (_) => const CreateTeamScreen(),
+        builder: (_) => CreateTeamScreen(teamsRepository: repository),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: theme.scaffoldBackgroundColor,
-        elevation: 0,
-        centerTitle: false,
-        leading: IconButton(
-          tooltip: 'Create team',
-          onPressed: () => _openCreateTeam(context),
-          icon: const Icon(Icons.add, size: 28),
-        ),
-        title: Align(
-          alignment: Alignment.centerRight,
-          child: Text(
-            'MyTeam',
-            textAlign: TextAlign.right,
-            style: AppTextStyles.bodyText.copyWith(
-              color: theme.colorScheme.onSurface,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            tooltip: 'Back',
-            onPressed: () => Navigator.of(context).maybePop(),
-            icon: const Icon(Icons.chevron_right),
-          ),
-        ],
-      ),
-      body: AppResponsiveBuilder(
-        builder: (context, responsive) {
-          final imageWidth = responsive.adaptive(
-            compact: 210.0,
-            medium: 250.0,
-            expanded: 280.0,
-          );
-
-          return SafeArea(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: responsive.isCompact
-                      ? double.infinity
-                      : 720,
-                ),
-                child: ListView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: responsive.horizontalPadding,
-                  ),
-                  children: [
-                    const SizedBox(height: 16),
-
-                    // Search field.
-                    AppTextField(
-                      hint: 'Search',
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
-                      textStyle: AppTextStyles.bodyText.copyWith(
-                        color: theme.colorScheme.onSurface,
+    final teams = repository ?? InMemoryTeamsRepository.instance;
+    return BlocProvider(
+      create: (_) => TeamsCubit(teams),
+      child: Scaffold(
+        appBar: MyTeamsHeader(onCreate: () => _openCreateTeam(context, teams)),
+        body: AppResponsiveBuilder(
+          builder: (context, responsive) => BlocBuilder<TeamsCubit, TeamsState>(
+            builder: (context, state) {
+              final visible = state.visibleTeams;
+              return SafeArea(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 720),
+                    child: ListView(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: responsive.horizontalPadding,
                       ),
-                      onChanged: onSearchChanged,
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    ),
-
-                    const SizedBox(height: 48),
-
-                    // Empty team illustration.
-                    Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            emptyImageAsset,
-                            width: imageWidth,
-                            fit: BoxFit.contain,
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          Text(
-                            "You don't have a team yet",
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.bodyText.copyWith(
-                              color: theme.colorScheme.onSurface,
+                      children: [
+                        const SizedBox(height: 16),
+                        TeamSearchField(
+                          onChanged: (value) {
+                            context.read<TeamsCubit>().search(value);
+                            onSearchChanged?.call(value);
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        if (visible.isEmpty)
+                          TeamEmptyState(
+                            imageAsset: emptyImageAsset,
+                            imageWidth: responsive.adaptive(
+                              compact: 210.0,
+                              medium: 250.0,
+                              expanded: 280.0,
                             ),
-                          ),
-                        ],
-                      ),
+                            searching: state.query.trim().isNotEmpty,
+                          )
+                        else
+                          for (final team in visible)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: TeamCard(
+                                team: team,
+                                messageCount:
+                                    teams.chats
+                                        .existingMessages(team.conversationId)
+                                        ?.length ??
+                                    0,
+                                onTap: () => Navigator.of(context).push<void>(
+                                  MaterialPageRoute(
+                                    builder: (_) => TeamChatScreen(
+                                      teamId: team.id,
+                                      repository: teams,
+                                    ),
+                                  ),
+                                ),
+                                onMore: () => manageTeam(
+                                  context,
+                                  team,
+                                  teams,
+                                  onChat: () =>
+                                      Navigator.of(context).push<void>(
+                                        MaterialPageRoute(
+                                          builder: (_) => TeamChatScreen(
+                                            teamId: team.id,
+                                            repository: teams,
+                                          ),
+                                        ),
+                                      ),
+                                ),
+                              ),
+                            ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ),
       ),
     );
   }

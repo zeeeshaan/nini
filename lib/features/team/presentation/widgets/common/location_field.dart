@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/features/create_post/domain/models/post_options.dart';
@@ -32,8 +31,8 @@ class TeamLocationField extends StatelessWidget {
     final selected = result.selected;
 
     final alreadyExists = updatedLocations.any(
-          (location) =>
-      location.address == selected.address &&
+      (location) =>
+          location.address == selected.address &&
           location.latitude == selected.latitude &&
           location.longitude == selected.longitude,
     );
