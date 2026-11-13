@@ -4,6 +4,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:nini/shared/models/local_identity.dart';
+import 'package:nini/core/media/media_compressor.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -77,15 +78,16 @@ class LocalUserProfileRepository implements UserProfileRepository {
     try {
       if (photo != null) {
         if (photo.isEmpty) throw const FormatException('Empty profile photo');
+        final image = await MediaCompressor().compressProfilePhoto(photo);
         final extension =
-            photo.length > 3 && photo[0] == 0x89 && photo[1] == 0x50
+            image.length > 3 && image[0] == 0x89 && image[1] == 0x50
             ? 'png'
             : 'jpg';
         newPhoto = p.join(
           folder.path,
           'avatar_${DateTime.now().microsecondsSinceEpoch}_${Random.secure().nextInt(1 << 32)}.$extension',
         );
-        await File(newPhoto).writeAsBytes(photo, flush: true);
+        await File(newPhoto).writeAsBytes(image, flush: true);
         saved = saved.withAvatar(newPhoto);
       }
       await temporary.writeAsString(

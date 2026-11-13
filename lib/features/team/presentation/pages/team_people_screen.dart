@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/icons/app_icons.dart';
@@ -27,7 +28,11 @@ class TeamPeopleScreen extends StatelessWidget {
         final team = state.teams.where((team) => team.id == teamId).firstOrNull;
         if (team == null) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              actions: [const AppBackButton()],
+
+              automaticallyImplyLeading: false,
+            ),
             body: const Center(child: Text('Team unavailable')),
           );
         }

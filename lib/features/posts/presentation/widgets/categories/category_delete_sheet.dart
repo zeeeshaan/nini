@@ -1,9 +1,9 @@
-import 'package:nini/core/localization/category_strings.dart';
+import 'package:nini/core/localization/strings/category_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
 

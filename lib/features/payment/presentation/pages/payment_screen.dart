@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/payment_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/payment_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/payment/domain/models/payment_details.dart';
 import 'package:nini/features/payment/domain/models/payment_method.dart';
@@ -67,16 +67,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
             child: ScreenEntrance(
               child: Scaffold(
                 appBar: AppBar(
-                  leading: IconButton(
-                    tooltip: AppStrings.back,
-                    icon: const AppIcon(AppIcons.back, size: 20),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
+                  automaticallyImplyLeading: false,
                   title: Align(
                     alignment: Alignment.centerRight,
                     child: const Text(
                       PaymentStrings.checkout,
-                      style: AppTextStyles.pageTitle,
+                      style: AppTextStyles.screenTitle,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -95,6 +91,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           ),
                         ),
                       ],
+                    ),
+
+                    IconButton(
+                      tooltip: AppStrings.back,
+                      icon: const AppIcon(AppIcons.backRight, size: 20),
+                      onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
                 ),
@@ -121,7 +123,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             const Text(
                               PaymentStrings.paymentMethod,
                               textAlign: TextAlign.right,
-                              style: AppTextStyles.labelBold,
+                              style: AppTextStyles.sectionTitle,
                             ),
                             const SizedBox(height: 10),
                             PaymentMethods(

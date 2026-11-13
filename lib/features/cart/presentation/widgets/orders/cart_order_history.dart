@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:nini/features/provider_invoice/presentation/helpers/open_provider_invoice.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 
 import '../../../domain/models/cart_order.dart';
 import '../../helpers/cart_format.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/client_caption_toolbar.dart';
 
 /// A real rich-text editor. Its controller stores Quill Delta, so formatting is

@@ -4,7 +4,7 @@ import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/presentation/cubit/conversation_cubit.dart';
 import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
 import 'package:nini/features/chat/presentation/widgets/conversation/chat_emoji_panel.dart';

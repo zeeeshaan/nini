@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 class OrderInformationActions extends StatelessWidget {

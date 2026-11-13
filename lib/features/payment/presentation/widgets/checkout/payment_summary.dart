@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
-import 'package:nini/core/localization/payment_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
+import 'package:nini/core/localization/strings/payment_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/payment/domain/models/payment_details.dart';
 import 'package:nini/features/payment/presentation/helpers/payment_money.dart';
@@ -17,7 +17,7 @@ class PaymentSummary extends StatelessWidget {
       const Text(
         PaymentStrings.paymentDetails,
         textAlign: TextAlign.right,
-        style: AppTextStyles.labelBold,
+        style: AppTextStyles.sectionTitle,
       ),
       const SizedBox(height: 10),
       Container(
@@ -39,7 +39,7 @@ class PaymentSummary extends StatelessWidget {
                       child: Text(
                         row.$2,
                         textAlign: TextAlign.right,
-                        style: AppTextStyles.labelBold,
+                        style: AppTextStyles.bodyEmphasis,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -65,7 +65,7 @@ class PaymentSummary extends StatelessWidget {
                   Flexible(
                     child: Text(
                       paymentMoney(details.total),
-                      style: AppTextStyles.pageTitleBold,
+                      style: AppTextStyles.productPrice,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -74,7 +74,7 @@ class PaymentSummary extends StatelessWidget {
                     child: Text(
                       '${PaymentStrings.totalAmountDue} (${AppStrings.toman})',
                       textAlign: TextAlign.right,
-                      style: AppTextStyles.labelBold,
+                      style: AppTextStyles.bodyBold,
                     ),
                   ),
                 ],

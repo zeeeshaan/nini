@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:nini/features/home/presentation/widgets/common/home_metric.dart';
+
+import 'home_engagement_layout.dart';
 
 class HomeEngagementBar extends StatelessWidget {
   const HomeEngagementBar({
@@ -58,13 +60,19 @@ class HomeEngagementBar extends StatelessWidget {
         label: AppStrings.comments,
         count: showSampleMetrics ? '886' : '0',
         onTap: onCommentsPressed,
-        icon: const AppIcon(AppIcons.chat, size: 22),
+        icon: const AppIcon(
+          AppIcons.postComment,
+          size: HomeEngagementLayout.actionIconSize,
+        ),
       ),
       HomeMetric(
         label: AppStrings.share,
         count: showSampleMetrics ? '350' : '0',
         onTap: onSharePressed,
-        icon: const AppIcon(AppIcons.send, size: 22),
+        icon: const AppIcon(
+          AppIcons.postShare,
+          size: HomeEngagementLayout.actionIconSize,
+        ),
       ),
       HomeMetric(
         label: isLiked ? AppStrings.unlike : AppStrings.like,
@@ -72,8 +80,8 @@ class HomeEngagementBar extends StatelessWidget {
         selected: isLiked,
         onTap: onLike,
         icon: AppIcon(
-          isLiked ? AppIcons.heartFilled : AppIcons.heart,
-          size: 22,
+          isLiked ? AppIcons.postLikeFilled : AppIcons.postLike,
+          size: HomeEngagementLayout.actionIconSize,
           color: isLiked ? AppColors.red : null,
         ),
       ),
@@ -86,54 +94,9 @@ class HomeEngagementBar extends StatelessWidget {
       ),
     ];
 
-    Widget content;
-    if (MediaQuery.textScalerOf(context).scale(10) > 13) {
-      content = Row(
-        textDirection: TextDirection.ltr,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          rating,
-          const SizedBox(width: 12),
-          Expanded(
-            child: Wrap(
-              textDirection: TextDirection.rtl,
-              spacing: 8,
-              children: actions.reversed.toList(),
-            ),
-          ),
-        ],
-      );
-    } else {
-      content = Row(
-        textDirection: TextDirection.ltr,
-        children: [
-          rating,
-          const SizedBox(width: 12),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerRight,
-                child: Row(
-                  textDirection: TextDirection.ltr,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (var index = 0; index < actions.length; index++) ...[
-                      if (index > 0) const SizedBox(width: 6),
-                      actions[index],
-                    ],
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 6),
-      child: content,
+      child: HomeEngagementLayout(rating: rating, actions: actions),
     );
   }
 }

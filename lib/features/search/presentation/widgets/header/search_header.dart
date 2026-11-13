@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:nini/features/search/presentation/widgets/header/search_city_button.dart';
@@ -39,12 +39,6 @@ class SearchHeader extends StatelessWidget {
       child: Row(
         textDirection: TextDirection.ltr,
         children: [
-          if (showClose)
-            IconButton(
-              tooltip: SearchStrings.closeSearch,
-              onPressed: onClose,
-              icon: const AppIcon(AppIcons.back, size: 20),
-            ),
           Expanded(
             child: SearchQueryField(
               controller: controller,
@@ -58,6 +52,12 @@ class SearchHeader extends StatelessWidget {
           ),
           const SizedBox(width: 7),
           SearchCityButton(city: city, onPressed: onCityPressed),
+          if (showClose)
+            IconButton(
+              tooltip: SearchStrings.closeSearch,
+              onPressed: onClose,
+              icon: const AppIcon(AppIcons.backRight, size: 20),
+            ),
         ],
       ),
     );

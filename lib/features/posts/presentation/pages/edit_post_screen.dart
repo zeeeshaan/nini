@@ -4,8 +4,8 @@ import 'package:nini/features/create_post/presentation/cubit/post_operation_cubi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
 import 'package:nini/shared/models/post/post_item.dart';
@@ -142,6 +142,7 @@ class _EditPostViewState extends State<_EditPostView> {
           },
           child: Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: const Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -150,11 +151,14 @@ class _EditPostViewState extends State<_EditPostView> {
                   textAlign: TextAlign.right,
                 ),
               ),
-              leading: IconButton(
-                tooltip: ProfilePostStrings.back,
-                onPressed: _operation.state.saving ? null : _cancel,
-                icon: const Icon(Icons.arrow_back),
-              ),
+
+              actions: [
+                IconButton(
+                  tooltip: ProfilePostStrings.back,
+                  onPressed: _operation.state.saving ? null : _cancel,
+                  icon: const Icon(Icons.arrow_forward),
+                ),
+              ],
             ),
             body: SafeArea(
               child: Center(

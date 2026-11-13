@@ -2,7 +2,7 @@ import 'package:nini/features/post_analytics/presentation/cubit/analytics_contro
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';

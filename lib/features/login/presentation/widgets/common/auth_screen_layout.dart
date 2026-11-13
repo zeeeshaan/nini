@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/localization/persian_feature.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
@@ -20,12 +20,16 @@ class AuthScreenLayout extends StatelessWidget {
     required this.buttonLabel,
     required this.onContinue,
     this.illustrationScale = 1,
+    this.actions,
+    this.actionsBelowContent = false,
   });
 
   final String illustration, title, buttonLabel;
   final Widget content;
   final VoidCallback? onContinue;
   final double illustrationScale;
+  final Widget? actions;
+  final bool actionsBelowContent;
 
   @override
   Widget build(BuildContext context) => Theme(
@@ -60,7 +64,9 @@ class AuthScreenLayout extends StatelessWidget {
                             minHeight: math.max(0, constraints.maxHeight - 36),
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: actionsBelowContent
+                                ? MainAxisAlignment.start
+                                : MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Column(
@@ -95,14 +101,18 @@ class AuthScreenLayout extends StatelessWidget {
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: short ? 16 : 24),
+                                padding: EdgeInsets.only(
+                                  top: actionsBelowContent || short ? 16 : 24,
+                                ),
                                 child: StaggeredEntrance(
                                   index: 3,
-                                  child: AppButton(
-                                    label: buttonLabel,
-                                    onPressed: onContinue,
-                                    height: 56,
-                                  ),
+                                  child:
+                                      actions ??
+                                      AppButton(
+                                        label: buttonLabel,
+                                        onPressed: onContinue,
+                                        height: 56,
+                                      ),
                                 ),
                               ),
                             ],

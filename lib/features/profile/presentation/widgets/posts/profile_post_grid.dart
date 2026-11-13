@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'profile_posts_empty_state.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
 
@@ -79,7 +80,9 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                 ],
               ),
             ),
-          if (!state.isLoading && posts.isEmpty)
+          if (!state.isLoading && !state.loadFailed && state.posts.isEmpty)
+            const ProfilePostsEmptyState()
+          else if (!state.isLoading && !state.loadFailed && posts.isEmpty)
             const Padding(
               padding: EdgeInsets.all(24),
               child: Text(

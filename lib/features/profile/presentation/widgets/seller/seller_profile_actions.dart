@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/profile/presentation/cubit/seller_profile_cubit.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';

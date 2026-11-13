@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
-import 'package:nini/core/localization/order_information_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
+import 'package:nini/core/localization/strings/order_information_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -24,6 +24,7 @@ class OrderInformationHeader extends StatelessWidget
 
   @override
   Widget build(BuildContext context) => AppBar(
+    automaticallyImplyLeading: false,
     backgroundColor: AppColors.black,
     foregroundColor: AppColors.white,
     surfaceTintColor: AppColors.transparent,
@@ -33,11 +34,6 @@ class OrderInformationHeader extends StatelessWidget
       borderRadius: BorderRadius.vertical(bottom: Radius.circular(32)),
     ),
     clipBehavior: Clip.antiAlias,
-    leading: IconButton(
-      tooltip: AppStrings.back,
-      onPressed: onBack,
-      icon: const AppIcon(AppIcons.back, size: 20, color: AppColors.white),
-    ),
     title: Align(
       alignment: Alignment.centerRight,
       child: const Text(
@@ -52,6 +48,16 @@ class OrderInformationHeader extends StatelessWidget
         tooltip: CartStrings.charges,
         onPressed: onCharges,
         icon: const AppIcon(AppIcons.more, size: 22, color: AppColors.white),
+      ),
+
+      IconButton(
+        tooltip: AppStrings.back,
+        onPressed: onBack,
+        icon: const AppIcon(
+          AppIcons.backRight,
+          size: 20,
+          color: AppColors.white,
+        ),
       ),
     ],
     bottom: PreferredSize(

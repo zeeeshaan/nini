@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/services/chat_audio_player.dart';
 
 class VoicePlaybackState {

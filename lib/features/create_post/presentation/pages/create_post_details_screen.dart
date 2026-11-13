@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/validation/post_draft_validator.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
@@ -140,12 +140,6 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
               centerTitle: false,
               automaticallyImplyLeading: false,
               titleSpacing: 0,
-              leadingWidth: 48,
-              leading: IconButton(
-                tooltip: CreatePostStrings.backToGallery,
-                onPressed: _operation.state.saving ? null : _goBack,
-                icon: const AppIcon(AppIcons.back, size: 22),
-              ),
               title: Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
@@ -169,6 +163,14 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                   color: theme.dividerColor,
                 ),
               ),
+
+              actions: [
+                IconButton(
+                  tooltip: CreatePostStrings.backToGallery,
+                  onPressed: _operation.state.saving ? null : _goBack,
+                  icon: const AppIcon(AppIcons.backRight, size: 22),
+                ),
+              ],
             ),
             body: AbsorbPointer(
               absorbing: _operation.state.saving,

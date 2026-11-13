@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/data/device_address_geocoder.dart';
 import 'package:nini/features/create_post/domain/services/address_geocoder.dart';
 

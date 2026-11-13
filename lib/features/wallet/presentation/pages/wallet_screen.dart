@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/wallet_strings.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 import '../widgets/overview/wallet_actions_row.dart';
 import '../widgets/overview/wallet_balance_card.dart';

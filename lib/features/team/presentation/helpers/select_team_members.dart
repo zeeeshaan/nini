@@ -1,6 +1,7 @@
+import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/team_strings.dart';
+import 'package:nini/core/localization/strings/team_strings.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
 import 'package:nini/features/search/presentation/pages/search_screen.dart';
 import 'package:nini/features/team/presentation/cubit/team_form_cubit.dart';
@@ -14,6 +15,7 @@ Future<bool?> selectTeamMembers(
     MaterialPageRoute(
       builder: (searchContext) => Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text(
             TeamStrings.selectMembers,
             textAlign: TextAlign.right,
@@ -32,6 +34,8 @@ Future<bool?> selectTeamMembers(
                 ),
               ),
             ),
+
+            const AppBackButton(),
           ],
         ),
         body: SafeArea(

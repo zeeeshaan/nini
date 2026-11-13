@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import 'package:nini/features/chat/domain/models/chat_attachment.dart';
+import 'package:nini/core/media/media_compressor.dart';
 import 'package:nini/features/chat/domain/services/chat_media_store.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 
@@ -31,10 +32,13 @@ class LocalChatMediaStore implements ChatMediaStore {
     final result = <ChatAttachment>[];
     try {
       for (final (index, attachment) in selected.indexed) {
-        final asset = attachment.asset, file = attachment.file;
-        File? source;
+        final asset = attachment.asset;
+        final file = attachment.preparedFile ?? attachment.file;
+        File? source = attachment.preparedFile?.path == null
+            ? null
+            : File(attachment.preparedFile!.path!);
         List<int>? bytes;
-        if (asset != null) {
+        if (asset != null && attachment.preparedFile == null) {
           try {
             source = await asset.file;
             if (source != null && !await source.exists()) source = null;
@@ -48,7 +52,11 @@ class LocalChatMediaStore implements ChatMediaStore {
             throw const FileSystemException('Media unavailable');
           }
         }
-        final name = asset?.title ?? file?.name ?? p.basename(source!.path);
+        final name =
+            attachment.preparedFile?.name ??
+            asset?.title ??
+            file?.name ??
+            p.basename(source!.path);
         var extension = p
             .extension(source?.path ?? name)
             .toLowerCase()
@@ -56,7 +64,7 @@ class LocalChatMediaStore implements ChatMediaStore {
         if (extension.isEmpty && asset?.type == AssetType.image) {
           extension = '.jpg';
         }
-        final target = File(
+        var target = File(
           p.join(
             folder.path,
             '$index${extension.length <= 12 ? extension : ''}',
@@ -102,6 +110,16 @@ class LocalChatMediaStore implements ChatMediaStore {
                   ].contains(extension)
             ? ChatAttachmentType.image
             : ChatAttachmentType.file;
+        if (attachment.preparedFile == null) {
+          target = await MediaCompressor().compressOwnedFile(
+            target,
+            kind: switch (type) {
+              ChatAttachmentType.image => MediaCompressionKind.image,
+              ChatAttachmentType.video => MediaCompressionKind.video,
+              _ => MediaCompressionKind.document,
+            },
+          );
+        }
         String? thumbnail;
         if (asset?.type == AssetType.video) {
           try {
@@ -120,7 +138,9 @@ class LocalChatMediaStore implements ChatMediaStore {
         result.add(
           ChatAttachment(
             path: target.path,
-            name: name,
+            name: p.extension(target.path) == extension
+                ? name
+                : p.setExtension(name, p.extension(target.path)),
             type: type,
             sizeBytes: await target.length(),
             thumbnailPath: thumbnail,

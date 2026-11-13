@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 import '../../cubit/cart_cubit.dart';
@@ -10,6 +10,7 @@ import '../../cubit/cart_state.dart';
 import '../../helpers/cart_format.dart';
 import '../../helpers/cart_checkout_navigation.dart';
 import '../dialogs/cart_amount_dialog.dart';
+import '../dialogs/cart_remove_dialog.dart';
 import 'cart_delete_background.dart';
 import '../common/cart_empty_state.dart';
 import 'cart_item_card.dart';
@@ -53,13 +54,20 @@ class CartItemsList extends StatelessWidget {
         final item = items[itemIndex];
         return Semantics(
           customSemanticsActions: {
-            CustomSemanticsAction(label: CartStrings.remove): () => cart.remove(item.id),
+            CustomSemanticsAction(label: CartStrings.remove): () async {
+              final confirmed = await showCartRemoveDialog(context, itemTitle: item.title);
+              if (confirmed && context.mounted) cart.removeWithUndo(item.id);
+            },
           },
           child: Dismissible(
             key: ValueKey('cart-item-${item.id}'),
             // CartScreen keeps LTR geometry: this is a physical right-to-left swipe.
             direction: DismissDirection.endToStart,
-            onDismissed: (_) => cart.remove(item.id),
+            confirmDismiss: (_) async {
+              final confirmed = await showCartRemoveDialog(context, itemTitle: item.title);
+              return confirmed && context.mounted;
+            },
+            onDismissed: (_) => cart.removeWithUndo(item.id),
             background: const CartDeleteBackground(),
             child: CartItemCard(
               item: item,

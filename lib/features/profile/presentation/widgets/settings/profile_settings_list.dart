@@ -1,14 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/profile_settings_strings.dart';
+import 'package:nini/core/localization/strings/profile_settings_strings.dart';
 import 'package:nini/features/locations/presentation/pages/locations_screen.dart';
+import 'package:nini/features/notifications/presentation/helpers/open_notifications.dart';
 import 'package:nini/features/profile_settings/presentation/pages/accessibility_screen.dart';
 import 'package:nini/features/profile_settings/presentation/pages/profile_edit_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/trending_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/insights_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/scheduled_content_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/blocked_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/comments_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/language_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/device_permissions_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/posts_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/my_media_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/tags_keywords_screen.dart';
+import 'package:nini/features/profile_settings/presentation/pages/archive_screen.dart';
 import 'package:nini/features/wallet/presentation/pages/wallet_screen.dart';
 import 'package:nini/features/saved_posts/presentation/pages/saved_posts_screen.dart';
 import 'package:nini/features/team/presentation/pages/my_team.dart';
-import 'package:nini/shimmer%20previe.dart';
 
 import 'profile_settings_tile.dart';
 
@@ -54,16 +64,13 @@ class ProfileSettingsList extends StatelessWidget {
         label: ProfileSettingsStrings.wallet,
         onTap: () => _open(context, const WalletScreen()),
       ),
-      if (kDebugMode)
-        ProfileSettingsTile(
-          label: 'Shimmer Preview',
-          icon: AppIcons.playCircle,
-          onTap: () => _open(context, const ShimmerPreviewScreen()),
-        ),
       for (final label in _labels)
         ProfileSettingsTile(
           label: label,
           onTap: switch (label) {
+            ProfileSettingsStrings.notifications => () => openNotifications(
+              context,
+            ),
             ProfileSettingsStrings.saved => () => _open(
               context,
               const SavedPostsScreen(),
@@ -71,6 +78,50 @@ class ProfileSettingsList extends StatelessWidget {
             ProfileSettingsStrings.accessibility => () => _open(
               context,
               const AccessibilityScreen(),
+            ),
+            ProfileSettingsStrings.trending => () => _open(
+              context,
+              const TrendingScreen(),
+            ),
+            ProfileSettingsStrings.insights => () => _open(
+              context,
+              const InsightsScreen(),
+            ),
+            ProfileSettingsStrings.scheduledContent => () => _open(
+              context,
+              const ScheduledContentScreen(),
+            ),
+            ProfileSettingsStrings.blocked => () => _open(
+              context,
+              const BlockedScreen(),
+            ),
+            ProfileSettingsStrings.comments => () => _open(
+              context,
+              const CommentsScreen(),
+            ),
+            ProfileSettingsStrings.language => () => _open(
+              context,
+              const LanguageScreen(),
+            ),
+            ProfileSettingsStrings.devicePermissions => () => _open(
+              context,
+              const DevicePermissionsScreen(),
+            ),
+            ProfileSettingsStrings.posts => () => _open(
+              context,
+              const PostsScreen(),
+            ),
+            ProfileSettingsStrings.myMedia => () => _open(
+              context,
+              const MyMediaScreen(),
+            ),
+            ProfileSettingsStrings.tags => () => _open(
+              context,
+              const TagsKeywordsScreen(),
+            ),
+            ProfileSettingsStrings.archive => () => _open(
+              context,
+              const ArchiveScreen(),
             ),
             _ => null,
           },

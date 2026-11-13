@@ -1,8 +1,11 @@
 // dart format width=100
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/demo_cart_items.dart';
 import '../../domain/models/cart_item.dart';
+import '../../domain/models/cart_removal.dart';
 import '../../domain/models/cart_order.dart';
 import '../../domain/models/cart_snapshot.dart';
 import '../../domain/policies/order_access.dart';
@@ -27,6 +30,8 @@ class CartCubit extends Cubit<CartState> {
     : super(CartState(currentUserId: localUser.id));
   final PostSeller localUser;
   final CartRepository repository;
+  static const undoDuration = Duration(seconds: 15);
+  final Map<String, Timer> _removalTimers = {};
   Future<void> _writes = Future.value();
   bool _loaded = false;
   bool _readFailed = false;
@@ -91,7 +96,7 @@ class CartCubit extends Cubit<CartState> {
     try {
       final saved = await _saveSnapshot(next.snapshot);
       if (!saved || isClosed) return false;
-      emit(next.copyWith(storageError: false));
+      emit(next.copyWith(storageError: false, removals: state.removals));
       return true;
     } finally {
       _committingReceipt = false;
@@ -270,7 +275,13 @@ class CartCubit extends Cubit<CartState> {
       items.removeAt(index);
       items.insert(0, updated);
     }
-    emit(state.copyWith(items: items));
+    _removalTimers.remove(item.id)?.cancel();
+    emit(
+      state.copyWith(
+        items: items,
+        removals: state.removals.where((removal) => removal.item.id != item.id).toList(),
+      ),
+    );
     _persist();
     return true;
   }
@@ -292,9 +303,88 @@ class CartCubit extends Cubit<CartState> {
     _persist();
   }
 
+  /// Cart-list deletion offers undo; Home and Details bag toggles stay unchanged.
+  void removeWithUndo(String id) {
+    if (!_editable) return;
+    final index = state.items.indexWhere((item) => item.id == id);
+    if (index < 0) return;
+    final originalItems = [...state.items];
+    // Include earlier deletions so undoing several items preserves their order.
+    for (final removal in state.removals.reversed) {
+      _insertRestoredItem(originalItems, removal);
+    }
+    final removal = CartRemoval(
+      item: state.items[index],
+      expiresAt: DateTime.now().add(undoDuration),
+      itemOrder: originalItems.map((item) => item.id).toList(),
+    );
+    _removalTimers.remove(id)?.cancel();
+    _removalTimers[id] = Timer(undoDuration, () => _forgetRemoval(id));
+    emit(
+      state.copyWith(
+        items: state.items.where((item) => item.id != id).toList(),
+        removals: [...state.removals, removal],
+      ),
+    );
+    _persist();
+  }
+
+  bool undoRemove(String id) {
+    if (!_editable) return false;
+    final index = state.removals.indexWhere((removal) => removal.item.id == id);
+    if (index < 0) return false;
+    final removal = state.removals[index];
+    if (!DateTime.now().isBefore(removal.expiresAt) || state.items.any((item) => item.id == id)) {
+      _forgetRemoval(id);
+      return false;
+    }
+    final items = [...state.items];
+    _insertRestoredItem(items, removal);
+    _removalTimers.remove(id)?.cancel();
+    emit(
+      state.copyWith(
+        items: items,
+        removals: state.removals.where((removal) => removal.item.id != id).toList(),
+      ),
+    );
+    _persist();
+    return true;
+  }
+
+  void _insertRestoredItem(List<CartItem> items, CartRemoval removal) {
+    if (items.any((item) => item.id == removal.item.id)) return;
+    final order = removal.itemOrder;
+    final originalIndex = order.indexOf(removal.item.id);
+    for (final id in order.skip(originalIndex + 1)) {
+      final nextIndex = items.indexWhere((item) => item.id == id);
+      if (nextIndex >= 0) {
+        items.insert(nextIndex, removal.item);
+        return;
+      }
+    }
+    for (final id in order.take(originalIndex).toList().reversed) {
+      final previousIndex = items.indexWhere((item) => item.id == id);
+      if (previousIndex >= 0) {
+        items.insert(previousIndex + 1, removal.item);
+        return;
+      }
+    }
+    items.add(removal.item);
+  }
+
+  void _forgetRemoval(String id) {
+    _removalTimers.remove(id)?.cancel();
+    if (isClosed) return;
+    emit(state.copyWith(removals: state.removals.where((entry) => entry.item.id != id).toList()));
+  }
+
   void clear() {
     if (!_editable) return;
-    emit(state.copyWith(items: [], charges: 0));
+    for (final timer in _removalTimers.values) {
+      timer.cancel();
+    }
+    _removalTimers.clear();
+    emit(state.copyWith(items: [], removals: [], charges: 0));
     _persist();
   }
 
@@ -419,5 +509,14 @@ class CartCubit extends Cubit<CartState> {
       ),
     );
     _persist();
+  }
+
+  @override
+  Future<void> close() {
+    for (final timer in _removalTimers.values) {
+      timer.cancel();
+    }
+    _removalTimers.clear();
+    return super.close();
   }
 }

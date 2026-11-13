@@ -1,8 +1,9 @@
-import 'package:nini/core/localization/category_strings.dart';
+import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:nini/core/localization/strings/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 
 import '../cubit/profile_categories_cubit.dart';
 import '../widgets/categories/category_delete_sheet.dart';
@@ -23,6 +24,7 @@ class ProfileCategoriesScreen extends StatelessWidget {
           final strings = CategoryStrings.of(context);
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -39,6 +41,8 @@ class ProfileCategoriesScreen extends StatelessWidget {
                       : () => showCategoryEditor(context),
                   icon: const Icon(Icons.add_circle_outline),
                 ),
+
+                const AppBackButton(),
               ],
             ),
             body: Center(

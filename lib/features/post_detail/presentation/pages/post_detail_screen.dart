@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/post_analytics/presentation/pages/post_analytics_screen.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
@@ -131,17 +131,17 @@ class PostDetailScreen extends StatelessWidget {
                       style: AppTextStyles.label,
                     ),
                   ),
+
+                StaggeredEntrance(
+                  distance: 8,
+                  child: IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const AppIcon(AppIcons.backRight, size: 18),
+                    tooltip: AppStrings.back,
+                  ),
+                ),
               ],
               automaticallyImplyLeading: false,
-              leadingWidth: 48,
-              leading: StaggeredEntrance(
-                distance: 8,
-                child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const AppIcon(AppIcons.back, size: 18),
-                  tooltip: AppStrings.back,
-                ),
-              ),
             ),
 
             bottomNavigationBar: PostDetailBottomBar(

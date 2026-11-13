@@ -21,16 +21,24 @@ abstract final class AppIcons {
   static const grid = 'assets/icons/vectors/menu/more-grid-big.svg';
   static const notifications = 'assets/icons/vectors/communication/bell.svg';
   static const back = 'assets/icons/vectors/arrows/chevron-left-md.svg';
+  static const backRight = 'assets/icons/vectors/arrows/chevron-right-md.svg';
   static const bookmark = 'assets/icons/vectors/interface/bookmark.svg';
   static const bookmarkFilled =
       'assets/icons/vectors/interface/bookmark-filled.svg';
   static const heart = 'assets/icons/vectors/interface/heart-01.svg';
   static const heartFilled = 'assets/icons/vectors/interface/heart-filled.svg';
+  static const postLike = 'assets/icons/vectors/interface/post-heart.svg';
+  static const postLikeFilled =
+      'assets/icons/vectors/interface/post-heart-filled.svg';
+  static const postComment =
+      'assets/icons/vectors/communication/post-comment.svg';
+  static const postShare = 'assets/icons/vectors/communication/post-share.svg';
   static const share = 'assets/icons/vectors/communication/share-android.svg';
   static const imageUnavailable = 'assets/icons/images/image-x.png';
   static const tag = 'assets/icons/vectors/interface/tag.svg';
   static const chevronDown = 'assets/icons/vectors/arrows/chevron-down.svg';
   static const phone = 'assets/icons/vectors/communication/phone.svg';
+  static const email = 'assets/icons/vectors/communication/mail.svg';
   static const map = 'assets/icons/vectors/navigation/map.svg';
   static const check = 'assets/icons/vectors/interface/check.svg';
   static const close = 'assets/icons/vectors/menu/close-md.svg';

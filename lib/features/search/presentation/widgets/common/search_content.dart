@@ -5,7 +5,7 @@ import 'package:nini/features/search/data/search_catalog.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
 import 'package:nini/features/home/presentation/helpers/published_home_navigation.dart';
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';

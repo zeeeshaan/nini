@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 

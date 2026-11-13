@@ -6,7 +6,7 @@ import 'package:nini/features/notifications/presentation/helpers/open_notificati
 import 'package:nini/features/notifications/presentation/widgets/common/notifications_button.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/presentation/widgets/inbox/chat_inbox_button.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 

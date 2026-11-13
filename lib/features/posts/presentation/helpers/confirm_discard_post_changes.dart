@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 
 Future<bool> confirmDiscardPostChanges(BuildContext context) async =>
     await showDialog<bool>(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
@@ -11,7 +11,7 @@ import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.da
 import 'package:nini/features/posts/presentation/widgets/interactions/comments_sheet.dart';
 import 'package:nini/features/posts/presentation/widgets/interactions/share_sheet.dart';
 import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/core/localization/saved_posts_strings.dart';
+import 'package:nini/core/localization/strings/saved_posts_strings.dart';
 import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
@@ -146,15 +146,6 @@ class HomePublishedPostCard extends StatelessWidget {
                         .withValues(alpha: .3),
                   ),
                 ),
-                if (post.caption.isNotEmpty) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    post.caption,
-                    textAlign: TextAlign.right,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
                 if (post.price.isNotEmpty || !post.isService) ...[
                   const SizedBox(height: 28),
                   HomePostPricing(post: post),

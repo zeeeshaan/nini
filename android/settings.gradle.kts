@@ -37,7 +37,11 @@ findProject(":rive_native")?.let { rive ->
 
 // These releases already support built-in Kotlin. Flutter's source scanner
 // incorrectly flags their conditional fallback for older Android builds.
-mapOf("emoji_picker_flutter" to "4.5.4", "photo_manager" to "3.12.0")
+mapOf(
+    "emoji_picker_flutter" to "4.5.4",
+    "photo_manager" to "3.12.0",
+    "flutter_image_compress_common" to "1.1.1"
+)
     .forEach { (name, version) ->
         findProject(":$name")?.let { plugin ->
             val packageInfo = plugin.projectDir.parentFile.resolve("pubspec.yaml").readText()

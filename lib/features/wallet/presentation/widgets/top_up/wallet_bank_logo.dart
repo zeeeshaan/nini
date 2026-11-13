@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nini/core/localization/wallet_strings.dart';
+import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 /// Reuses the same bundled bank artwork throughout the wallet flow.
 class WalletBankLogo extends StatelessWidget {

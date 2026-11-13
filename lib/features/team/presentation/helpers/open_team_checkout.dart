@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/receipt_strings.dart';
+import 'package:nini/core/localization/strings/receipt_strings.dart';
 import 'package:nini/features/cart/domain/models/cart_snapshot.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';

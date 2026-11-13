@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 
 enum AnalyticsPeriod {
   month(1, AppStrings.oneMonth),

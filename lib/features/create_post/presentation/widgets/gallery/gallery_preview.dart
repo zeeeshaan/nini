@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';

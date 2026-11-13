@@ -7,7 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/location_map.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/manual_address_dialog.dart';

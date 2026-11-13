@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
 

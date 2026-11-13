@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/order_information_strings.dart';
-import 'package:nini/core/localization/payment_strings.dart';
+import 'package:nini/core/localization/strings/order_information_strings.dart';
+import 'package:nini/core/localization/strings/payment_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/payment/domain/models/payment_details.dart';
 
@@ -31,7 +31,7 @@ class PaymentDelivery extends StatelessWidget {
         const Text(
           PaymentStrings.buyerInformation,
           textAlign: TextAlign.right,
-          style: AppTextStyles.labelBold,
+          style: AppTextStyles.sectionTitle,
         ),
         const SizedBox(height: 16),
         Container(
@@ -57,7 +57,9 @@ class PaymentDelivery extends StatelessWidget {
                         child: Text(
                           rows[index].$2,
                           textAlign: TextAlign.right,
-                          style: AppTextStyles.compactBody,
+                          style: AppTextStyles.body.copyWith(
+                            fontWeight: AppTextStyles.medium,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -67,7 +69,7 @@ class PaymentDelivery extends StatelessWidget {
                           rows[index].$1,
                           textAlign: TextAlign.right,
                           style: AppTextStyles.label.copyWith(
-                            color: colors.onSurface.withValues(alpha: .4),
+                            color: colors.onSurface.withValues(alpha: .7),
                           ),
                         ),
                       ),

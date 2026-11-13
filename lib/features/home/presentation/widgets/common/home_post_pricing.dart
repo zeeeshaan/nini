@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/post_detail_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/post_detail_strings.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/models/post/post_item.dart';

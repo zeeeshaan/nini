@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/data/device_chat_camera.dart';
 import 'package:nini/features/chat/domain/models/chat_location.dart';
 import 'package:nini/features/chat/presentation/widgets/media/chat_attachment_sheet.dart';

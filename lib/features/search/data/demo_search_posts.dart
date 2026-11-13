@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 
 /// One local example card. Every image path and price is written out below.

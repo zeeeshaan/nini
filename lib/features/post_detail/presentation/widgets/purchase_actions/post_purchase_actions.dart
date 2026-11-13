@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/post_detail_strings.dart';
+import 'package:nini/core/localization/strings/post_detail_strings.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_pricing.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_quantity_selector.dart';
 import 'package:nini/shared/models/post/post_item.dart';

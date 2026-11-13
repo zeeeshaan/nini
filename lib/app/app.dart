@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/responsiveness/responsive_config/config.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
@@ -16,7 +16,7 @@ import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
 import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
 import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
-import 'package:nini/features/splash/presentation/pages/splash_screen.dart';
+import 'package:nini/features/otp_verification/presentation/pages/otp_verification_screen.dart';
 
 import 'app_providers.dart';
 

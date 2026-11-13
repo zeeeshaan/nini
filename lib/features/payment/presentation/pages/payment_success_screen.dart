@@ -1,6 +1,7 @@
+import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/receipt_strings.dart';
+import 'package:nini/core/localization/strings/receipt_strings.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/cart/domain/models/cart_order.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
@@ -31,6 +32,7 @@ class PaymentSuccessScreen extends StatelessWidget {
               .toList();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Align(
           alignment: Alignment.centerRight,
           child: const Text(
@@ -38,6 +40,8 @@ class PaymentSuccessScreen extends StatelessWidget {
             textAlign: TextAlign.right,
           ),
         ),
+
+        actions: [const AppBackButton()],
       ),
       body: Center(
         child: SingleChildScrollView(

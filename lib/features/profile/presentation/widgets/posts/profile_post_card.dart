@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -15,12 +15,21 @@ class ProfilePostCard extends StatelessWidget {
     required this.onTap,
     required this.detailsHeight,
     this.contentScale = 1,
+    this.titleOverride,
+    this.categoryLabel,
+    this.showStock = true,
+    this.statusLabel,
+    this.impressionSource = 'profile',
   });
 
   final PostItem post;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final double detailsHeight;
   final double contentScale;
+  final String? titleOverride, categoryLabel;
+  final bool showStock;
+  final Widget? statusLabel;
+  final String impressionSource;
 
   // A reference card is 200 units wide with a square image and ~100 of details.
   static const referenceWidth = 200.0;
@@ -111,7 +120,7 @@ class ProfilePostCard extends StatelessWidget {
     double lineHeight(TextStyle style) => lineHeightFor(context, style);
     return PostImpressionTracker(
       post: post,
-      source: 'profile',
+      source: impressionSource,
       child: Material(
         color: colors.surface,
         child: DefaultTextStyle.merge(
@@ -183,7 +192,7 @@ class ProfilePostCard extends StatelessWidget {
                         SizedBox(
                           height: lineHeight(headingStyle) * 2,
                           child: Text(
-                            post.title,
+                            titleOverride ?? post.title,
                             textAlign: TextAlign.right,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -193,7 +202,8 @@ class ProfilePostCard extends StatelessWidget {
                         SizedBox(
                           height: lineHeight(metadataStyle),
                           child: Text(
-                            AppStrings.postCategory(post.category),
+                            categoryLabel ??
+                                AppStrings.postCategory(post.category),
                             textAlign: TextAlign.right,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -205,22 +215,27 @@ class ProfilePostCard extends StatelessWidget {
                         SizedBox(height: 4 * contentScale),
                         SizedBox(
                           height: lineHeight(stockStyle),
-                          child: Visibility(
-                            visible:
-                                !post.isPublished ||
-                                post.details.warehouseStock.isNotEmpty,
-                            maintainState: true,
-                            maintainAnimation: true,
-                            maintainSize: true,
-                            child: Text(
-                              AppStrings.inStock(post.stockCount),
-                              textDirection: Directionality.of(context),
-                              textAlign: TextAlign.right,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: stockStyle.copyWith(color: AppColors.red),
-                            ),
-                          ),
+                          child:
+                              statusLabel ??
+                              Visibility(
+                                visible:
+                                    showStock &&
+                                    (!post.isPublished ||
+                                        post.details.warehouseStock.isNotEmpty),
+                                maintainState: true,
+                                maintainAnimation: true,
+                                maintainSize: true,
+                                child: Text(
+                                  AppStrings.inStock(post.stockCount),
+                                  textDirection: Directionality.of(context),
+                                  textAlign: TextAlign.right,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: stockStyle.copyWith(
+                                    color: AppColors.red,
+                                  ),
+                                ),
+                              ),
                         ),
                         SizedBox(height: 6 * contentScale),
                         SizedBox(
@@ -233,11 +248,11 @@ class ProfilePostCard extends StatelessWidget {
                                   textAlign: TextAlign.left,
                                   style: originalPriceStyle.copyWith(
                                     color: colors.onSurface.withValues(
-                                      alpha: .25,
+                                      alpha: .65,
                                     ),
                                     decoration: TextDecoration.lineThrough,
                                     decorationColor: colors.onSurface
-                                        .withValues(alpha: .25),
+                                        .withValues(alpha: .65),
                                   ),
                                 )
                               : null,

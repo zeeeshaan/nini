@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 /// Shared Persian actions for Cart amount dialogs.

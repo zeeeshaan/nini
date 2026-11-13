@@ -1,5 +1,5 @@
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/models/post/post_unit.dart';
 
 import '../../domain/models/cart_item.dart';

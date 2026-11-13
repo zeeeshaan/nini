@@ -1,7 +1,7 @@
 // dart format width=100
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
 
 import '../cubit/cart_cubit.dart';
@@ -10,6 +10,7 @@ import '../widgets/checkout/cart_checkout.dart';
 import '../widgets/common/cart_empty_state.dart';
 import '../widgets/common/cart_header.dart';
 import '../widgets/items/cart_items_list.dart';
+import '../widgets/items/cart_undo_notice.dart';
 import '../widgets/orders/cart_order_history.dart';
 import '../widgets/orders/cart_paid_order_card.dart';
 import '../widgets/common/cart_storage_notice.dart';
@@ -91,6 +92,34 @@ class CartScreen extends StatelessWidget {
                       ),
                     if (state.storageError) CartStorageNotice(onRetry: cart.retryStorage),
                     Expanded(child: _content(state)),
+                    if (state.stage == CartStage.cart && state.tab == CartTab.cart)
+                      AnimatedSize(
+                        duration: MediaQuery.disableAnimationsOf(context)
+                            ? Duration.zero
+                            : const Duration(milliseconds: 200),
+                        alignment: Alignment.bottomCenter,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight: MediaQuery.sizeOf(context).height * .25,
+                          ),
+                          child: SingleChildScrollView(
+                            padding: state.removals.isEmpty
+                                ? EdgeInsets.zero
+                                : const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                for (final removal in state.removals)
+                                  Padding(
+                                    key: ValueKey(removal),
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: CartUndoNotice(removal: removal),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),

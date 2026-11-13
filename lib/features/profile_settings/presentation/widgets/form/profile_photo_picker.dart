@@ -1,11 +1,12 @@
 import 'package:nini/features/profile_settings/presentation/cubit/profile_photo_cubit.dart';
+import 'package:nini/features/profile_settings/presentation/helpers/crop_profile_photo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/profile_edit_strings.dart';
+import 'package:nini/core/localization/strings/profile_edit_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';
 
@@ -34,9 +35,15 @@ class _ProfilePhotoPickerState extends State<ProfilePhotoPicker> {
     setState(() => _picking = true);
     widget.onPickingChanged?.call(true);
     final bool succeeded;
+    final previous = _photo.state;
     try {
-      succeeded = await _photo.pick();
-      if (mounted && succeeded && _photo.state != null) {
+      succeeded = await _photo.pick(
+        cropPhoto: (path) => cropProfilePhoto(context, path),
+      );
+      if (mounted &&
+          succeeded &&
+          _photo.state != null &&
+          _photo.state != previous) {
         widget.onChanged?.call(_photo.state!);
       }
     } finally {

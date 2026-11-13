@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/features/home/presentation/widgets/common/home_feed_header.dart';
 import 'package:nini/features/home/presentation/widgets/published/home_published_post_card.dart';
-import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
-import 'package:nini/features/notifications/presentation/helpers/open_notifications.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/post_card_skeleton.dart';
@@ -57,14 +55,7 @@ class HomeScreen extends StatelessWidget {
           findChildIndexCallback: (key) => itemIndexes[key],
           itemBuilder: (context, index) {
             if (index == 0) {
-              return BlocBuilder<NotificationsCubit, NotificationsState>(
-                builder: (context, state) {
-                  return HomeFeedHeader(
-                    unreadCount: state.unreadCount,
-                    onNotificationsPressed: () => openNotifications(context),
-                  );
-                },
-              );
+              return const HomeFeedHeader();
             }
 
             if (isLoading) return const PostCardSkeleton();

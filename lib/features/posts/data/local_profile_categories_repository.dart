@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
 import 'package:path/path.dart' as p;

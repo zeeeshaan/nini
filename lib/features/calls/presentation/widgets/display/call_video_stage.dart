@@ -4,7 +4,7 @@ import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/calls/domain/call_session.dart';
 import 'package:nini/features/calls/presentation/widgets/controls/call_action_button.dart';
@@ -67,15 +67,9 @@ class CallVideoHeader extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(12, 12, 16, 0),
     child: Row(
+      textDirection: TextDirection.ltr,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CallActionButton(
-          label: AppStrings.back,
-          icon: AppIcons.back,
-          onPressed: onBack,
-          color: AppColors.videoBackButton,
-          foreground: AppColors.white,
-        ),
         const Spacer(),
         Container(
           width: 90,
@@ -135,6 +129,14 @@ class CallVideoHeader extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        const SizedBox(width: 12),
+        CallActionButton(
+          label: AppStrings.back,
+          icon: AppIcons.backRight,
+          onPressed: onBack,
+          color: AppColors.videoBackButton,
+          foreground: AppColors.white,
         ),
       ],
     ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
 import 'package:nini/features/chat/presentation/widgets/media/chat_voice_player.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';

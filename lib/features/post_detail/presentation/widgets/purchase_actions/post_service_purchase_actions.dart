@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/post_detail_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/post_detail_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_quantity_selector.dart';
@@ -34,32 +34,54 @@ class PostServicePurchaseActions extends StatelessWidget {
     final price = amount == null
         ? AppStrings.persianDigits(post.price)
         : cartMoney(amount);
+    final original = post.originalPrice.trim();
+    final hasDiscount = original.isNotEmpty && original != post.price.trim();
     return LayoutBuilder(
       builder: (context, constraints) {
         final prices = FittedBox(
           fit: BoxFit.scaleDown,
           alignment: Alignment.centerLeft,
-          child: Row(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             textDirection: TextDirection.ltr,
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
             children: [
-              if (post.price.trim().isNotEmpty)
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                textDirection: TextDirection.ltr,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  if (post.price.trim().isNotEmpty)
+                    Text(
+                      price,
+                      textDirection: TextDirection.ltr,
+                      style: AppTextStyles.homePostPrice.copyWith(
+                        fontSize: hasDiscount
+                            ? AppTextStyles.body.fontSize
+                            : AppTextStyles.heading.fontSize,
+                        color: foreground,
+                      ),
+                    ),
+                  const SizedBox(width: 8),
+                  Text(
+                    post.details.unit?.label ?? AppStrings.unitSession,
+                    style: AppTextStyles.body.copyWith(color: foreground),
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
+              if (hasDiscount)
                 Text(
-                  price,
+                  AppStrings.persianDigits(original),
                   textDirection: TextDirection.ltr,
                   style: AppTextStyles.homePostPrice.copyWith(
                     fontSize: AppTextStyles.heading.fontSize,
                     color: foreground,
+                    decoration: TextDecoration.lineThrough,
+                    decorationColor: foreground,
                   ),
                 ),
-              const SizedBox(width: 8),
-              Text(
-                post.details.unit?.label ?? AppStrings.unitSession,
-                style: AppTextStyles.body.copyWith(color: foreground),
-                textAlign: TextAlign.right,
-              ),
             ],
           ),
         );

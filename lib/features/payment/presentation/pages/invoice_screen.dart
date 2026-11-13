@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/provider_order_strings.dart';
-import 'package:nini/core/localization/receipt_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/provider_order_strings.dart';
+import 'package:nini/core/localization/strings/receipt_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/domain/policies/order_access.dart';
 import 'package:nini/features/cart/domain/models/cart_order_status.dart';
@@ -96,16 +96,12 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
       canPop: !_saving,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            tooltip: AppStrings.back,
-            onPressed: _saving ? null : () => Navigator.of(context).maybePop(),
-            icon: const AppIcon(AppIcons.back, size: 20),
-          ),
+          automaticallyImplyLeading: false,
           title: Align(
             alignment: Alignment.centerRight,
             child: const Text(
               ReceiptStrings.invoice,
-              style: AppTextStyles.pageTitle,
+              style: AppTextStyles.screenTitle,
               textAlign: TextAlign.right,
             ),
           ),
@@ -132,6 +128,14 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                 icon: const AppIcon(AppIcons.more, size: 20),
                 onPressed: _saving ? null : _problem,
               ),
+
+            IconButton(
+              tooltip: AppStrings.back,
+              onPressed: _saving
+                  ? null
+                  : () => Navigator.of(context).maybePop(),
+              icon: const AppIcon(AppIcons.backRight, size: 20),
+            ),
           ],
         ),
         body: allowed

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/saved_posts_strings.dart';
+import 'package:nini/core/localization/strings/saved_posts_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';

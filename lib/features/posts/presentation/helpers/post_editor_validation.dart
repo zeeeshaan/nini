@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 
 /// Accept the same Persian, Arabic, and Latin digits as the existing form.
 abstract final class PostEditorValidation {

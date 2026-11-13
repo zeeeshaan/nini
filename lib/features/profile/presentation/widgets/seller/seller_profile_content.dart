@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';

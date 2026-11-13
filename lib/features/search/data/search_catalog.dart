@@ -1,5 +1,5 @@
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 

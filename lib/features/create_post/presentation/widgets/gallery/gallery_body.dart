@@ -5,7 +5,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 class PostPublishActions extends StatelessWidget {

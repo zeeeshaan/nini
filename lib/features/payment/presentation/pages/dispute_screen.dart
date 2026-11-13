@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/receipt_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/receipt_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/domain/policies/order_access.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
@@ -21,6 +21,7 @@ class DisputeScreen extends StatelessWidget {
     final dispute = allowed ? order.dispute : null;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Align(
           alignment: Alignment.centerRight,
           child: const Text(
@@ -30,11 +31,14 @@ class DisputeScreen extends StatelessWidget {
           ),
         ),
         centerTitle: false,
-        leading: IconButton(
-          tooltip: AppStrings.back,
-          icon: const AppIcon(AppIcons.back, size: 20),
-          onPressed: () => Navigator.of(context).maybePop(),
-        ),
+
+        actions: [
+          IconButton(
+            tooltip: AppStrings.back,
+            icon: const AppIcon(AppIcons.backRight, size: 20),
+            onPressed: () => Navigator.of(context).maybePop(),
+          ),
+        ],
       ),
       body: !allowed
           ? const Center(

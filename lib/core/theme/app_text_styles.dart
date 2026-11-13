@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 abstract final class AppTextStyles {
   static const fontFamily = 'YekanBakh';
 
-  // Regular text is 2 logical pixels larger; heading sizes stay independent.
+  // Body text uses 16 logical pixels; supporting text uses at least 14.
+  // Compact badges and reference-card typography keep separate roles.
   static const heading = TextStyle(fontSize: 22, fontWeight: regular);
   static const body = TextStyle(fontSize: 16, fontWeight: regular);
   static const button = TextStyle(fontSize: 16, fontWeight: medium);
   static const caption = TextStyle(fontSize: 16, fontWeight: regular);
 
   static const username = TextStyle(fontSize: 16, fontWeight: semiBold);
-  static const profileName = TextStyle(fontSize: 14, fontWeight: bold);
+  static const profileName = TextStyle(fontSize: 16, fontWeight: bold);
   static const bio = TextStyle(fontSize: 16, fontWeight: regular);
   static const website = TextStyle(fontSize: 16, fontWeight: regular);
-  static const statNumber = TextStyle(fontSize: 14, fontWeight: bold);
+  static const statNumber = TextStyle(fontSize: 16, fontWeight: bold);
   static const statLabel = TextStyle(fontSize: 16, fontWeight: regular);
   static const category = TextStyle(fontSize: 16, fontWeight: regular);
 
@@ -70,7 +71,7 @@ abstract final class AppTextStyles {
   );
   static const notificationBadge = TextStyle(fontSize: 9, fontWeight: semiBold);
   static const screenTitle = TextStyle(fontSize: 24, fontWeight: medium);
-  static const sectionTitle = TextStyle(fontSize: 17, fontWeight: bold);
+  static const sectionTitle = TextStyle(fontSize: 18, fontWeight: bold);
   static const settingsLabel = TextStyle(fontSize: 17);
   static const settingsDetailTitle = TextStyle(
     fontSize: 18,
@@ -81,30 +82,30 @@ abstract final class AppTextStyles {
   static const inherit = TextStyle();
   static const badgeSmall = TextStyle(fontSize: 9);
   static const micro = TextStyle(fontSize: 10);
-  static const metadata = TextStyle(fontSize: 11);
+  static const metadata = TextStyle(fontSize: 14);
   static const metadataBold = TextStyle(fontSize: 9, fontWeight: bold);
-  static const smallPrint = TextStyle(fontSize: 12);
-  static const smallPrintMedium = TextStyle(fontSize: 12, fontWeight: medium);
+  static const smallPrint = TextStyle(fontSize: 14);
+  static const smallPrintMedium = TextStyle(fontSize: 14, fontWeight: medium);
   static const smallPrintEmphasis = TextStyle(
-    fontSize: 10,
+    fontSize: 14,
     fontWeight: semiBold,
   );
   static const smallPrintBold = TextStyle(fontSize: 10, fontWeight: bold);
-  static const helper = TextStyle(fontSize: 13);
-  static const helperBold = TextStyle(fontSize: 11, fontWeight: bold);
+  static const helper = TextStyle(fontSize: 14);
+  static const helperBold = TextStyle(fontSize: 14, fontWeight: bold);
   static const badgeLabel = TextStyle(fontSize: 13, height: 1.2);
-  static const notificationBody = TextStyle(fontSize: 13, height: 1.5);
+  static const notificationBody = TextStyle(fontSize: 14, height: 1.5);
   static const label = TextStyle(fontSize: 14);
   static const labelMedium = TextStyle(fontSize: 14, fontWeight: medium);
-  static const labelEmphasis = TextStyle(fontSize: 12, fontWeight: semiBold);
-  static const labelBold = TextStyle(fontSize: 12, fontWeight: bold);
+  static const labelEmphasis = TextStyle(fontSize: 14, fontWeight: semiBold);
+  static const labelBold = TextStyle(fontSize: 14, fontWeight: bold);
   static const checkoutHelp = TextStyle(fontSize: 14, height: 1.7);
-  static const compactBody = TextStyle(fontSize: 15);
+  static const compactBody = TextStyle(fontSize: 16);
   static const toast = TextStyle(fontSize: 15, fontWeight: medium);
-  static const compactBodyBold = TextStyle(fontSize: 13, fontWeight: bold);
+  static const compactBodyBold = TextStyle(fontSize: 16, fontWeight: bold);
   static const bodyText = TextStyle(fontSize: 16);
-  static const bodyBold = TextStyle(fontSize: 14, fontWeight: bold);
-  static const bodyEmphasis = TextStyle(fontSize: 14, fontWeight: semiBold);
+  static const bodyBold = TextStyle(fontSize: 16, fontWeight: bold);
+  static const bodyEmphasis = TextStyle(fontSize: 16, fontWeight: semiBold);
   static const postBody = TextStyle(
     fontSize: 16,
     height: 1.75,
@@ -112,8 +113,8 @@ abstract final class AppTextStyles {
   );
   static const messageBody = TextStyle(fontSize: 16, height: 1.45);
   static const comfortableBody = TextStyle(fontSize: 17);
-  static const authorName = TextStyle(fontSize: 15, fontWeight: semiBold);
-  static const comfortableBodyBold = TextStyle(fontSize: 15, fontWeight: bold);
+  static const authorName = TextStyle(fontSize: 16, fontWeight: semiBold);
+  static const comfortableBodyBold = TextStyle(fontSize: 17, fontWeight: bold);
   static const permissionPrompt = TextStyle(fontSize: 17, height: 1.4);
   static const largeBody = TextStyle(fontSize: 18);
   static const conversationName = TextStyle(fontSize: 16, fontWeight: semiBold);

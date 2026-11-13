@@ -5,7 +5,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
@@ -79,7 +79,8 @@ class _CreatePostGalleryView extends StatelessWidget {
       return;
     }
 
-    final attachments = List<GalleryAttachment>.unmodifiable(selected);
+    final attachments = await context.read<GalleryCubit>().prepareSelection();
+    if (!context.mounted || attachments == null) return;
 
     // Preserve the existing optional callback.
     if (onNext != null) {
@@ -120,66 +121,96 @@ class _CreatePostGalleryView extends StatelessWidget {
             CreatePostStrings.errorMessage(state.errorMessage!),
           );
         },
-        child: Scaffold(
-          backgroundColor: colors.surface,
-          body: SafeArea(
-            child: Column(
-              children: [
-                // Close and Next header
-                ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 68),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          tooltip: CreatePostStrings.close,
-                          onPressed: () => _close(context),
-                          icon: AppIcon(
-                            AppIcons.close,
-                            size: 26,
-                            color: colors.onSurface,
-                          ),
-                        ),
+        child: BlocBuilder<GalleryCubit, GalleryState>(
+          buildWhen: (previous, current) =>
+              previous.isPreparing != current.isPreparing,
+          builder: (context, preparation) => PopScope(
+            canPop: !preparation.isPreparing,
+            child: Scaffold(
+              backgroundColor: colors.surface,
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    // Close and Next header
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 68),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              tooltip: CreatePostStrings.close,
+                              onPressed: preparation.isPreparing
+                                  ? null
+                                  : () => _close(context),
+                              icon: AppIcon(
+                                AppIcons.close,
+                                size: 26,
+                                color: colors.onSurface,
+                              ),
+                            ),
 
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child:
-                                BlocSelector<
-                                  GalleryCubit,
-                                  GalleryState,
-                                  List<GalleryAttachment>
-                                >(
-                                  selector: (state) => state.selected,
-                                  builder: (context, selected) {
-                                    return TextButton(
-                                      onPressed: () {
-                                        _openPostDetails(context, selected);
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child:
+                                    BlocSelector<
+                                      GalleryCubit,
+                                      GalleryState,
+                                      List<GalleryAttachment>
+                                    >(
+                                      selector: (state) => state.selected,
+                                      builder: (context, selected) {
+                                        return TextButton(
+                                          onPressed: preparation.isPreparing
+                                              ? null
+                                              : () {
+                                                  _openPostDetails(
+                                                    context,
+                                                    selected,
+                                                  );
+                                                },
+                                          child: preparation.isPreparing
+                                              ? const SizedBox.square(
+                                                  dimension: 20,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                      ),
+                                                )
+                                              : Text(
+                                                  nextLabel,
+                                                  style: AppTextStyles
+                                                      .galleryTitle
+                                                      .copyWith(
+                                                        color: colors.onSurface,
+                                                      ),
+                                                ),
+                                        );
                                       },
-                                      child: Text(
-                                        nextLabel,
-                                        style: AppTextStyles.galleryTitle
-                                            .copyWith(color: colors.onSurface),
-                                      ),
-                                    );
-                                  },
-                                ),
-                          ),
+                                    ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
 
-                Divider(
-                  height: 1,
-                  thickness: 0.5,
-                  color: Theme.of(context).dividerColor,
-                ),
+                    Divider(
+                      height: 1,
+                      thickness: 0.5,
+                      color: Theme.of(context).dividerColor,
+                    ),
 
-                const Expanded(child: GalleryContent()),
-              ],
+                    Expanded(
+                      child: AbsorbPointer(
+                        absorbing: preparation.isPreparing,
+                        child: const GalleryContent(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

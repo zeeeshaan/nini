@@ -2,6 +2,8 @@
 abstract final class AppAssets {
   static const hyworkLogo = 'assets/branding/hywork_logo.svg';
   static const loginIllustration = 'assets/auth/login_illustration.png';
+  static const googleLogo = 'assets/auth/google_logo.svg';
   static const otpIllustration = 'assets/auth/otp_lock.png';
   static const locationPermission = 'assets/auth/location_permission.png';
+  static const profileNoPosts = 'assets/profile_no_posts.png';
 }

@@ -2,7 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/features/create_post/data/gallery_media_preparer.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 
 enum GalleryTab { photo, video, file }
@@ -18,6 +19,7 @@ class GalleryState {
     this.loadingMore = false,
     this.hasMore = false,
     this.isPickingFiles = false,
+    this.isPreparing = false,
     this.errorMessage,
     this.permission,
     this.loadMoreFailed = false,
@@ -31,6 +33,7 @@ class GalleryState {
   final bool loadingMore;
   final bool hasMore;
   final bool isPickingFiles;
+  final bool isPreparing;
   final String? errorMessage;
   final PermissionState? permission;
   final bool loadMoreFailed;
@@ -45,6 +48,7 @@ class GalleryState {
     bool? loadingMore,
     bool? hasMore,
     bool? isPickingFiles,
+    bool? isPreparing,
     String? errorMessage,
     PermissionState? permission,
     bool? loadMoreFailed,
@@ -57,6 +61,7 @@ class GalleryState {
       loadingMore: loadingMore ?? this.loadingMore,
       hasMore: hasMore ?? this.hasMore,
       isPickingFiles: isPickingFiles ?? this.isPickingFiles,
+      isPreparing: isPreparing ?? this.isPreparing,
       errorMessage: errorMessage,
       permission: permission ?? this.permission,
       loadMoreFailed: loadMoreFailed ?? this.loadMoreFailed,
@@ -66,12 +71,39 @@ class GalleryState {
 
 class GalleryCubit extends Cubit<GalleryState> {
   GalleryCubit({
+    GalleryMediaPreparer? mediaPreparer,
     Future<List<PlatformFile>> Function()? filePicker,
     Future<void> Function(RequestType)? limitedPicker,
-  }) : _filePicker = filePicker ?? _pickDeviceFiles,
+  }) : _mediaPreparer = mediaPreparer ?? GalleryMediaPreparer(),
+       _filePicker = filePicker ?? _pickDeviceFiles,
        _limitedPicker = limitedPicker ?? _presentLimited,
        super(const GalleryState());
   final Future<List<PlatformFile>> Function() _filePicker;
+  final GalleryMediaPreparer _mediaPreparer;
+
+  Future<List<GalleryAttachment>?> prepareSelection() async {
+    if (state.isPreparing || state.isPickingFiles || state.selected.isEmpty) {
+      return null;
+    }
+    emit(state.copyWith(isPreparing: true));
+    try {
+      final prepared = await _mediaPreparer.prepare(state.selected);
+      if (isClosed) return null;
+      emit(state.copyWith(selected: prepared, isPreparing: false));
+      return prepared;
+    } catch (_) {
+      if (!isClosed) {
+        emit(
+          state.copyWith(
+            isPreparing: false,
+            errorMessage: AppStrings.mediaUnavailable,
+          ),
+        );
+      }
+      return null;
+    }
+  }
+
   final Future<void> Function(RequestType) _limitedPicker;
   static Future<void> _presentLimited(RequestType type) =>
       PhotoManager.presentLimited(type: type);
@@ -289,6 +321,7 @@ class GalleryCubit extends Cubit<GalleryState> {
   }
 
   void toggleSelection(AssetEntity asset) {
+    if (state.isPreparing) return;
     final attachment = GalleryAttachment.fromAsset(asset);
 
     final updated = List<GalleryAttachment>.of(state.selected);
@@ -305,6 +338,7 @@ class GalleryCubit extends Cubit<GalleryState> {
   }
 
   void removeAttachment(GalleryAttachment attachment) {
+    if (state.isPreparing) return;
     final updated = state.selected
         .where((item) => item.id != attachment.id)
         .toList();
@@ -313,7 +347,7 @@ class GalleryCubit extends Cubit<GalleryState> {
   }
 
   Future<void> pickFiles() async {
-    if (state.isPickingFiles) return;
+    if (state.isPickingFiles || state.isPreparing) return;
 
     emit(state.copyWith(isPickingFiles: true));
 

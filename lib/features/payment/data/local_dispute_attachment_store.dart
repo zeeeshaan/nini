@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:nini/features/payment/domain/models/dispute_attachment.dart';
+import 'package:nini/core/media/media_compressor.dart';
 
 /// Owns copies of selected evidence, never the user's picker originals.
 class LocalDisputeAttachmentStore {
@@ -21,13 +22,21 @@ class LocalDisputeAttachmentStore {
   }) async {
     final root = await _root();
     final safeName = p.basename(name).replaceAll(RegExp(r'[^\w. -]'), '_');
-    final target = p.join(
+    var target = p.join(
       root.path,
       '${DateTime.now().microsecondsSinceEpoch}-$safeName',
     );
     try {
       await File(path).copy(target);
-      return DisputeAttachment(path: target, name: name, isImage: isImage);
+      final optimized = await MediaCompressor().compressOwnedFile(File(target));
+      target = optimized.path;
+      return DisputeAttachment(
+        path: target,
+        name: p.extension(target) == p.extension(path)
+            ? name
+            : p.setExtension(name, p.extension(target)),
+        isImage: isImage,
+      );
     } catch (_) {
       final file = File(target);
       if (await file.exists()) await file.delete();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';

@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/media/media_compressor.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/shared/models/post/post_media.dart';
@@ -34,10 +35,12 @@ class LocalPostMediaStore {
       final media = <PostMedia>[];
       for (final (index, attachment) in attachments.indexed) {
         final asset = attachment.asset;
-        final pickedFile = attachment.file;
-        File? source;
+        final pickedFile = attachment.preparedFile ?? attachment.file;
+        File? source = attachment.preparedFile?.path == null
+            ? null
+            : File(attachment.preparedFile!.path!);
         List<int>? originalBytes;
-        if (asset != null) {
+        if (asset != null && attachment.preparedFile == null) {
           try {
             source = await asset.file;
             if (source != null && !await source.exists()) source = null;
@@ -53,6 +56,7 @@ class LocalPostMediaStore {
           throw const PostPublishException(AppStrings.mediaUnavailable);
         }
         final name =
+            attachment.preparedFile?.name ??
             asset?.title ??
             (source == null
                 ? pickedFile?.name ?? 'photo.jpg'
@@ -61,8 +65,8 @@ class LocalPostMediaStore {
             .extension(source?.path ?? name)
             .toLowerCase()
             .replaceAll(RegExp(r'[^.a-z0-9]'), '');
-        final fileName = '$index${extension.length <= 12 ? extension : ''}';
-        final target = File(p.join(folder.path, fileName));
+        var fileName = '$index${extension.length <= 12 ? extension : ''}';
+        var target = File(p.join(folder.path, fileName));
         if (source != null) {
           await source.copy(target.path);
         } else if (originalBytes != null) {
@@ -100,6 +104,20 @@ class LocalPostMediaStore {
                   ].contains(extension)
             ? PostMediaType.image
             : PostMediaType.document;
+        if (attachment.preparedFile == null) {
+          target = await MediaCompressor().compressOwnedFile(
+            target,
+            kind: switch (type) {
+              PostMediaType.image => MediaCompressionKind.image,
+              PostMediaType.video => MediaCompressionKind.video,
+              PostMediaType.document => MediaCompressionKind.document,
+            },
+          );
+          fileName = p.basename(target.path);
+        }
+        final storedName = p.extension(target.path) == extension
+            ? name
+            : p.setExtension(name, p.extension(target.path));
         String? thumbnailName;
         if (asset != null && type == PostMediaType.video) {
           try {
@@ -118,7 +136,7 @@ class LocalPostMediaStore {
         media.add(
           PostMedia(
             path: p.join(finalFolder.path, fileName),
-            name: name,
+            name: storedName,
             type: type,
             thumbnailPath: thumbnailName == null
                 ? null

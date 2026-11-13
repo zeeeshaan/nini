@@ -2,7 +2,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 
 /// The picker uses the device's emoji glyphs; the OS keyboard remains available.
 class ChatEmojiPanel extends StatelessWidget {

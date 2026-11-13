@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/wallet_strings.dart';
+import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 import '../../../data/wallet_sample_data.dart';
 import 'withdraw_summary_row.dart';

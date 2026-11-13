@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
 import 'dart:io';
 
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -8,7 +9,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:open_filex/open_filex.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/models/chat_attachment.dart';
 import 'package:nini/features/chat/presentation/widgets/media/chat_voice_player.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
@@ -32,6 +33,7 @@ class ChatAttachmentView extends StatelessWidget {
         MaterialPageRoute<void>(
           builder: (_) => Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -41,6 +43,8 @@ class ChatAttachmentView extends StatelessWidget {
                   textAlign: TextAlign.right,
                 ),
               ),
+
+              actions: [const AppBackButton()],
             ),
             body: Center(
               child: InteractiveViewer(

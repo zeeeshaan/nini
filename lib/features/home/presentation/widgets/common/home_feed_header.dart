@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/features/chat/presentation/widgets/inbox/chat_inbox_button.dart';
-
-import 'home_notification_button.dart';
 
 class HomeFeedHeader extends StatelessWidget {
-  const HomeFeedHeader({
-    super.key,
-    required this.onNotificationsPressed,
-    this.unreadCount = 0,
-  });
-  final VoidCallback onNotificationsPressed;
-  final int unreadCount;
+  const HomeFeedHeader({super.key});
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
@@ -30,10 +21,7 @@ class HomeFeedHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        HomeNotificationButton(
-          unreadCount: unreadCount,
-          onPressed: onNotificationsPressed,
-        ),
+        const SizedBox(width: 48, height: 48),
       ],
     ),
   );

@@ -51,7 +51,7 @@ class TeamFileList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            attachment.file!.name,
+                            (attachment.preparedFile ?? attachment.file!).name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.right,
@@ -63,7 +63,10 @@ class TeamFileList extends StatelessWidget {
                           const SizedBox(height: 4),
 
                           Text(
-                            _formatFileSize(attachment.file!.lengthSync()),
+                            _formatFileSize(
+                              (attachment.preparedFile ?? attachment.file!)
+                                  .lengthSync(),
+                            ),
                             textAlign: TextAlign.right,
                             style: AppTextStyles.caption.copyWith(
                               color: colors.onSurfaceVariant,

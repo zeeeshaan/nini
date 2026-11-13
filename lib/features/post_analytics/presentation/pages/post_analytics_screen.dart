@@ -3,7 +3,7 @@ import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
@@ -48,11 +48,15 @@ class _AnalyticsAccessNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-        tooltip: AppStrings.back,
-        icon: const AppIcon(AppIcons.back, size: 19),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      automaticallyImplyLeading: false,
+
+      actions: [
+        IconButton(
+          tooltip: AppStrings.back,
+          icon: const AppIcon(AppIcons.backRight, size: 19),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
     ),
     body: SafeArea(
       child: Center(
@@ -80,11 +84,6 @@ class _PostAnalyticsView extends StatelessWidget {
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       toolbarHeight: 48,
-      leading: IconButton(
-        tooltip: AppStrings.back,
-        icon: const AppIcon(AppIcons.back, size: 19),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
       title: Align(
         alignment: Alignment.centerRight,
         child: const Text(
@@ -93,6 +92,14 @@ class _PostAnalyticsView extends StatelessWidget {
           textAlign: TextAlign.right,
         ),
       ),
+
+      actions: [
+        IconButton(
+          tooltip: AppStrings.back,
+          icon: const AppIcon(AppIcons.backRight, size: 19),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
     ),
     body: SafeArea(
       top: false,

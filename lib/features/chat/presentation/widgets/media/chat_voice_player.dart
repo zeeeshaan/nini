@@ -4,7 +4,7 @@ import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/presentation/cubit/voice_playback_cubit.dart';
 
 class ChatVoicePlayer extends StatelessWidget {

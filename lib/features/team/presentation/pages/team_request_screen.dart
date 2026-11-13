@@ -86,11 +86,7 @@ class TeamRequestScreen extends StatelessWidget {
                   },
                   child: Scaffold(
                     appBar: AppBar(
-                      leading: IconButton(
-                        onPressed: close,
-                        tooltip: 'Back',
-                        icon: const AppIcon(AppIcons.back, size: 20),
-                      ),
+                      automaticallyImplyLeading: false,
                       title: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
@@ -101,6 +97,14 @@ class TeamRequestScreen extends StatelessWidget {
                           style: AppTextStyles.pageTitle,
                         ),
                       ),
+
+                      actions: [
+                        IconButton(
+                          onPressed: close,
+                          tooltip: 'Back',
+                          icon: const AppIcon(AppIcons.backRight, size: 20),
+                        ),
+                      ],
                     ),
                     body: SafeArea(
                       top: false,

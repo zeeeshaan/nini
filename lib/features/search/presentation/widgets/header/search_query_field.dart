@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 

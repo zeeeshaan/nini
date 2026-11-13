@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/persian_feature.dart';
-import 'package:nini/core/localization/profile_edit_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/persian_feature/persian_feature.dart';
+import 'package:nini/core/localization/strings/profile_edit_strings.dart';
 import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';

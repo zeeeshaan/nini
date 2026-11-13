@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/calls/domain/call_session.dart';
 import 'package:nini/features/calls/presentation/pages/call_screen.dart';
 import 'package:nini/features/chat/data/device_voice_recorder.dart';

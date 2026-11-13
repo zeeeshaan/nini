@@ -6,7 +6,7 @@ import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/home/presentation/widgets/common/home_badge.dart';

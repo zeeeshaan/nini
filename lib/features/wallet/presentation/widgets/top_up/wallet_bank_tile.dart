@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/wallet_strings.dart';
+import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 import 'wallet_bank_logo.dart';
 

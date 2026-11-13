@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/models/chat_conversation.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';

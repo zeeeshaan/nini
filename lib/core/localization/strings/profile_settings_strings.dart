@@ -1,0 +1,100 @@
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/notification_strings.dart';
+
+/// Labels shared by Profile Settings and its detail screens.
+abstract final class ProfileSettingsStrings {
+  static const title = "Settings";
+  static const general = "General";
+  static const myTeam = "My Team";
+  static const profile = "Profile settings";
+  static const locations = "Locations";
+  static const wallet = "Wallet";
+  static const saved = "Saved";
+  static const notifications = NotificationStrings.title;
+  static const trending = "Trending";
+  static const insights = "Insights";
+  static const scheduledContent = "Scheduled content";
+  static const blocked = "Blocked";
+  static const comments = AppStrings.comments;
+  static const language = "Language";
+  static const devicePermissions = "Device permissions";
+  static const accessibility = "Accessibility";
+  static const posts = AppStrings.posts;
+  static const myMedia = "My media";
+  static const tags = AppStrings.tagsKeywords;
+  static const archive = "Archive";
+  static const searchHint = 'Search';
+  static const noResults = 'No results found';
+  static const tryAnotherSearch = 'Try another search.';
+  static const localActivity = 'Activity recorded on this device';
+  static const noTrending = 'No trending posts yet';
+  static const trendingHelp =
+      'Your published posts appear here when they have recorded views or interactions. This is not a global ranking.';
+  static const noScheduled = 'No scheduled content';
+  static const scheduledHelp =
+      'Add a schedule in the post editor to see it here.';
+  static const scheduleNotice =
+      'These are saved post schedules. Automatic publishing is not connected.';
+  static const viewPost = 'View post';
+  static const editPost = 'Edit post';
+  static const noBlocked = 'No blocked conversations';
+  static const blockedHelp = 'Conversations you block in Chat appear here.';
+  static const blockedConversation = 'Blocked conversation';
+  static const unblock = 'Unblock';
+  static const sessionBlocks =
+      'Chat blocking is currently stored for this app session.';
+  static const noCommentHistory = 'No saved comment history';
+  static const commentsHelp =
+      'The current post comment sheet is a temporary preview. A comment-history data source is not connected yet.';
+  static const english = 'English';
+  static const persian = 'فارسی';
+  static const languageHelp =
+      'English is the current display language. Full Persian translations are not installed yet; text alignment stays unchanged.';
+  static const notAvailable = 'Not available yet';
+  static const photoLibrary = 'Photos and videos';
+  static const location = 'Location';
+  static const microphone = 'Microphone';
+  static const permissionHelp =
+      'Manage access in your device settings. Return here to refresh the current status.';
+  static const openDeviceSettings = 'Open device settings';
+  static const permissionFailed =
+      'Could not read device permissions. Try again.';
+  static const settingsFailed = 'Could not open device settings.';
+  static const granted = 'Allowed';
+  static const denied = 'Not granted';
+  static const restricted = 'Restricted by the device';
+  static const limited = 'Limited access';
+  static const unknown = 'Status unavailable';
+  static const noMedia = 'No uploaded media yet';
+  static const mediaHelp =
+      'Photos, videos and files attached to your posts appear here.';
+  static const mediaNotice =
+      'Manage attachments in the existing post editor. Shared media files are not deleted from this screen.';
+  static const noTags = 'No tags or keywords yet';
+  static const tagsHelp = 'Add tags in Create Post or edit an existing post.';
+  static const tagsNotice =
+      'Tap a keyword to view its posts and edit their tags.';
+  static const noArchive = 'No archive is connected';
+  static const archiveHelp =
+      'Posts cannot be archived in the current app. An archive data source and archive/restore operations are required before items can appear here.';
+  static const postStatistics = 'Posts and services statistics';
+  static const customerStatistics = 'Statistics of users and customers';
+  static const alerts = 'Alerts and reminders';
+  static const totalPosts = 'Total posts';
+  static const views = 'Views';
+  static const interactions = 'Interactions';
+  static const bookings = 'Bookings';
+  static const sales = 'Sales';
+  static const trendingServices = 'Trending services';
+  static const newFollowers = 'New followers';
+  static const topCustomers = 'Top customers';
+  static const feedback = 'Feedback';
+  static const usageReminder = 'Usage limit reminder';
+  static const unansweredMessages = 'Unanswered messages';
+  static const backendRequired = 'Requires a connected backend';
+  static const analyticsFailed = 'Could not load the local analytics history.';
+  static const analyticsHelp =
+      'Counts use your published posts, recorded local events and non-demo provider orders. They are not server-wide statistics.';
+  static String tagPosts(int count) =>
+      '$count ${count == 1 ? 'post' : 'posts'}';
+}

@@ -4,14 +4,22 @@ import 'package:photo_manager/photo_manager.dart';
 class GalleryAttachment {
   const GalleryAttachment.fromAsset(AssetEntity value)
     : asset = value,
-      file = null;
+      file = null,
+      preparedFile = null;
 
   const GalleryAttachment.fromFile(PlatformFile value)
     : asset = null,
-      file = value;
+      file = value,
+      preparedFile = null;
+
+  const GalleryAttachment._(this.asset, this.file, this.preparedFile);
 
   final AssetEntity? asset;
   final PlatformFile? file;
+  final PlatformFile? preparedFile;
+
+  GalleryAttachment withPreparedFile(PlatformFile value) =>
+      GalleryAttachment._(asset, file, value);
 
   String get id {
     if (asset != null) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/profile_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/posts/presentation/pages/profile_categories_screen.dart';
 

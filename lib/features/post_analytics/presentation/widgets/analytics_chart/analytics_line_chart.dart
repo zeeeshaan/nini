@@ -6,7 +6,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
 

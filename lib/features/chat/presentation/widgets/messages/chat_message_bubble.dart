@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/presentation/widgets/messages/chat_attachment_view.dart';

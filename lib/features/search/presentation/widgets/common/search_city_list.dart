@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 
 /// The reference design's full-width city picker, inside the Search screen.
 class SearchCityList extends StatelessWidget {

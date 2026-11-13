@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/domain/models/chat_conversation.dart';
 import 'package:nini/features/chat/domain/repositories/chat_messages_repository.dart';
@@ -16,6 +16,7 @@ class InMemoryChatRepository implements ChatMessagesRepository {
 
   List<ChatConversation> get conversations =>
       List.unmodifiable(_conversations.values);
+  Set<String> get blockedConversationIds => Set.unmodifiable(_blocked);
 
   ChatConversation openConversation(ChatConversation conversation) {
     // A new contact starts empty; sample replies belong only to demo chats.

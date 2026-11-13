@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/domain/models/cart_item.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
@@ -48,14 +48,14 @@ class OrderInformationItem extends StatelessWidget {
                               seller.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.helperBold,
+                              style: AppTextStyles.username,
                               textAlign: TextAlign.right,
                             ),
                             if (seller.location.isNotEmpty)
                               Text(
                                 seller.location,
                                 style: AppTextStyles.metadata.copyWith(
-                                  color: colors.onSurface.withValues(alpha: .5),
+                                  color: colors.onSurface.withValues(alpha: .7),
                                 ),
                                 textAlign: TextAlign.right,
                               ),
@@ -86,7 +86,7 @@ class OrderInformationItem extends StatelessWidget {
                   child: readOnly
                       ? Text(
                           '${cartQuantity(item.quantity)} ${item.unit.label}',
-                          style: AppTextStyles.helperBold,
+                          style: AppTextStyles.labelMedium,
                           textAlign: TextAlign.right,
                         )
                       : Tooltip(

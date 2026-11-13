@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 import 'package:nini/features/chat/domain/repositories/chat_messages_repository.dart';
 import 'package:nini/features/chat/domain/services/chat_media_store.dart';

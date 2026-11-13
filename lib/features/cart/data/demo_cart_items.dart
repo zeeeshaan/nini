@@ -1,5 +1,5 @@
 // dart format width=100
-import 'package:nini/core/localization/cart_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/shared/models/post/post_unit.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 

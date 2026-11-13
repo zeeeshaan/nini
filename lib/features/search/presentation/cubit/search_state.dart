@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/search_strings.dart';
+import 'package:nini/core/localization/strings/search_strings.dart';
 
 enum SearchPanel { results, cities, suggestions }
 

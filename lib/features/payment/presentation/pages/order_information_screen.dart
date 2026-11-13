@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/cart_strings.dart';
-import 'package:nini/core/localization/order_information_strings.dart';
+import 'package:nini/core/localization/strings/cart_strings.dart';
+import 'package:nini/core/localization/strings/order_information_strings.dart';
 import 'package:nini/features/cart/domain/models/cart_item.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_state.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/assets/app_assets.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/theme/app_colors.dart';
 
 import '../../../domain/app_notification.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_strings.dart';
-import 'package:nini/core/localization/order_information_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/order_information_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/payment/domain/models/order_customer_details.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';

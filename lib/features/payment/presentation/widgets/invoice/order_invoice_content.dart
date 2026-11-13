@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/provider_order_strings.dart';
-import 'package:nini/core/localization/receipt_strings.dart';
+import 'package:nini/core/localization/strings/provider_order_strings.dart';
+import 'package:nini/core/localization/strings/receipt_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/cart/domain/models/cart_order.dart';
 import 'package:nini/features/payment/presentation/helpers/receipt_details.dart';
@@ -53,7 +53,7 @@ class OrderInvoiceContent extends StatelessWidget {
                 Text(
                   statusHint!,
                   textAlign: TextAlign.right,
-                  style: AppTextStyles.label,
+                  style: AppTextStyles.bodyText,
                 ),
                 const SizedBox(height: 12),
               ],
@@ -61,7 +61,7 @@ class OrderInvoiceContent extends StatelessWidget {
                 const Text(
                   ProviderOrderStrings.cancellationReason,
                   textAlign: TextAlign.right,
-                  style: AppTextStyles.labelBold,
+                  style: AppTextStyles.sectionTitle,
                 ),
                 Text(order.cancellation!.reason, textAlign: TextAlign.right),
                 for (final attachment in order.cancellation!.attachments)
@@ -69,7 +69,7 @@ class OrderInvoiceContent extends StatelessWidget {
                 const Text(
                   ProviderOrderStrings.localNotice,
                   textAlign: TextAlign.right,
-                  style: AppTextStyles.label,
+                  style: AppTextStyles.bodyText,
                 ),
                 const SizedBox(height: 16),
               ],
@@ -77,7 +77,7 @@ class OrderInvoiceContent extends StatelessWidget {
                 const Text(
                   ReceiptStrings.dispute,
                   textAlign: TextAlign.right,
-                  style: AppTextStyles.labelBold,
+                  style: AppTextStyles.sectionTitle,
                 ),
                 Text(order.dispute!.description, textAlign: TextAlign.right),
                 for (final attachment in order.dispute!.attachments)

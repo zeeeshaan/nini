@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/create_post_strings.dart';
+import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 
 class GalleryTabSelector extends StatelessWidget {

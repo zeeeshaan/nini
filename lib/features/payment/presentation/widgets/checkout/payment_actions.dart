@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
-import 'package:nini/core/localization/payment_strings.dart';
+import 'package:nini/core/localization/strings/payment_strings.dart';
 
 class PaymentActions extends StatelessWidget {
   const PaymentActions({super.key, this.onConfirm, this.isProcessing = false});

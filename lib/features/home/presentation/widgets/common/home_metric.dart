@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/post_detail_strings.dart';
 
 class HomeMetric extends StatelessWidget {
   const HomeMetric({
@@ -21,6 +22,11 @@ class HomeMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The legacy AppStrings helper normalizes inputs to English digits.
+    // Convert only post metrics back to Persian, leaving other app numbers alone.
+    final displayedCount = PostDetailStrings.persianDigits(
+      AppStrings.persianDigits(count),
+    ).replaceAll(',', '٬');
     return Semantics(
       button: onTap != null,
       toggled: selected,
@@ -28,19 +34,29 @@ class HomeMetric extends StatelessWidget {
         message: label,
         child: InkWell(
           onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              textDirection: TextDirection.ltr,
-              children: [
-                Text(
-                  AppStrings.persianDigits(count),
-                  style: AppTextStyles.notificationBadge,
-                ),
-                const SizedBox(width: 3),
-                icon,
-              ],
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 44,
+              minWidth: onTap == null ? 0 : 44,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Flexible(
+                    child: Text(
+                      displayedCount,
+                      textDirection: TextDirection.ltr,
+                      style: AppTextStyles.labelEmphasis,
+                    ),
+                  ),
+                  const SizedBox(width: 3),
+                  icon,
+                ],
+              ),
             ),
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
 import 'package:nini/features/profile/presentation/cubit/seller_profile_cubit.dart';
@@ -28,11 +28,7 @@ class SellerProfileScreen extends StatelessWidget {
     child: ScreenEntrance(
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            tooltip: AppStrings.back,
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const AppIcon(AppIcons.back),
-          ),
+          automaticallyImplyLeading: false,
           actions: [
             IconButton(
               tooltip: AppStrings.message,
@@ -40,6 +36,12 @@ class SellerProfileScreen extends StatelessWidget {
               icon: const AppIcon(AppIcons.send, size: 30),
             ),
             const SizedBox(width: 8),
+
+            IconButton(
+              tooltip: AppStrings.back,
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const AppIcon(AppIcons.backRight),
+            ),
           ],
           centerTitle: false,
         ),

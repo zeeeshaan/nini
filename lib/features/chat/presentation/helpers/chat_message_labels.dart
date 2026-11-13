@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/chat/domain/models/chat_message.dart';
 
 String chatMessagePreview(ChatMessage? message) {

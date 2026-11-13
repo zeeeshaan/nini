@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/assets/app_assets.dart';
-import 'package:nini/core/localization/auth_strings.dart';
+import 'package:nini/core/localization/strings/auth_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 /// Shared vector brand mark; inherits the theme unless a color is supplied.
