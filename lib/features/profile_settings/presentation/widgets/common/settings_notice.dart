@@ -7,6 +7,11 @@ class SettingsNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-    child: Text(text, textAlign: TextAlign.right, style: AppTextStyles.helper),
+    child: Text(
+      text,
+      textAlign: TextAlign.right,
+      style: AppTextStyles.helper,
+      textDirection: TextDirection.rtl,
+    ),
   );
 }

@@ -1,3 +1,5 @@
+import 'package:nini/core/localization/strings/team_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -21,9 +23,7 @@ class TeamCard extends StatelessWidget {
     final schedule = team.request.schedule;
     if (schedule == null) return '';
     final duration = schedule.endsAt.difference(schedule.startsAt);
-    return duration.inDays > 0
-        ? '${duration.inDays} day'
-        : '${duration.inHours} h';
+    return TeamStrings.duration(duration);
   }
 
   @override
@@ -47,7 +47,7 @@ class TeamCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(
-                    tooltip: 'Team options',
+                    tooltip: "گزینه‌های تیم",
                     onPressed: onMore,
                     icon: const AppIcon(AppIcons.more, size: 18),
                   ),
@@ -58,6 +58,7 @@ class TeamCard extends StatelessWidget {
                         team.name,
                         textAlign: TextAlign.right,
                         style: AppTextStyles.bodyBold,
+                        textDirection: TextDirection.rtl,
                       ),
                     ),
                   ),
@@ -70,6 +71,7 @@ class TeamCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.smallPrint,
+                textDirection: TextDirection.rtl,
               ),
               const SizedBox(height: 28),
               Row(
@@ -80,15 +82,24 @@ class TeamCard extends StatelessWidget {
                       runSpacing: 8,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        Text(_duration, style: AppTextStyles.smallPrint),
+                        Text(
+                          _duration,
+                          style: AppTextStyles.smallPrint,
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const AppIcon(AppIcons.document, size: 18),
                             const SizedBox(width: 4),
                             Text(
-                              '${team.request.attachments.length}',
+                              AppStrings.persianDigits(
+                                team.request.attachments.length,
+                              ),
                               style: AppTextStyles.smallPrint,
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
                             ),
                           ],
                         ),
@@ -98,8 +109,10 @@ class TeamCard extends StatelessWidget {
                             const AppIcon(AppIcons.chat, size: 18),
                             const SizedBox(width: 4),
                             Text(
-                              '$messageCount',
+                              AppStrings.persianDigits(messageCount),
                               style: AppTextStyles.smallPrint,
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
                             ),
                           ],
                         ),

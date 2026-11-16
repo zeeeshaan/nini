@@ -63,6 +63,7 @@ class PostBasicDetailsSection extends StatelessWidget {
           CreatePostStrings.postCaption,
           textAlign: TextAlign.right,
           style: theme.textTheme.bodySmall,
+          textDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 8),
         CaptionEditor(controller: captionController),

@@ -56,11 +56,19 @@ class ScheduledPostsList extends StatelessWidget {
                   itemBuilder: (_) => const [
                     PopupMenuItem(
                       value: false,
-                      child: Text(ProfileSettingsStrings.viewPost),
+                      child: Text(
+                        ProfileSettingsStrings.viewPost,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                     PopupMenuItem(
                       value: true,
-                      child: Text(ProfileSettingsStrings.editPost),
+                      child: Text(
+                        ProfileSettingsStrings.editPost,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                   ],
                 ),
@@ -77,6 +85,7 @@ class ScheduledPostsList extends StatelessWidget {
                   '${locale.formatCompactDate(date)}\n${locale.formatTimeOfDay(TimeOfDay.fromDateTime(date))}',
                   textAlign: TextAlign.right,
                   style: AppTextStyles.body,
+                  textDirection: TextDirection.rtl,
                 ),
                 subtitle: Text(
                   post.title,
@@ -84,6 +93,7 @@ class ScheduledPostsList extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.helper,
+                  textDirection: TextDirection.rtl,
                 ),
                 onTap: () => openSettingsPost(context, post),
               );

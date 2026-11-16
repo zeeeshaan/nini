@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
+import 'package:nini/core/network/api_client.dart';
+import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/core/security/account_storage.dart';
+import 'package:nini/features/login/data/auth_repo.dart';
+import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
+import 'package:nini/features/otp_verification/data/otp_verification_repo.dart';
+import 'package:nini/features/chat/data/in_memory_chat_repository.dart';
+import 'package:nini/features/team/data/in_memory_teams_repository.dart';
 import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:nini/features/cart/data/local_cart_repository.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
@@ -33,6 +41,8 @@ class AppProviders extends StatelessWidget {
     this.categoriesRepository,
     this.savedPostsRepository,
     this.userProfileRepository,
+    this.apiClient,
+    this.tokenStore,
   });
 
   final Widget child;
@@ -43,48 +53,113 @@ class AppProviders extends StatelessWidget {
   final ProfileCategoriesRepository? categoriesRepository;
   final SavedPostsRepository? savedPostsRepository;
   final UserProfileRepository? userProfileRepository;
+  final ApiClient? apiClient;
+  final SecureTokenStore? tokenStore;
+
+  AccountStorage _storage(BuildContext context) {
+    final session = context.read<SessionCubit>().state;
+    if (session.status != SessionStatus.authenticated ||
+        session.userId == null) {
+      throw StateError('A validated session is required for account data.');
+    }
+    return AccountStorage(session.userId!);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          lazy: false,
-          create: (_) => UserProfileCubit(
-            userProfileRepository ?? LocalUserProfileRepository(),
-          )..load(),
+        RepositoryProvider<ApiClient>(create: (_) => apiClient ?? ApiClient()),
+        RepositoryProvider<SecureTokenStore>(
+          create: (_) => tokenStore ?? SecureTokenStore(),
         ),
-        BlocProvider(create: (_) => PostLikesCubit()),
-        BlocProvider(
-          create: (_) => ProfileCategoriesCubit(
-            categoriesRepository ?? LocalProfileCategoriesRepository(),
-          )..load(),
-        ),
-        BlocProvider(
-          create: (_) =>
-              CartCubit(cartRepository ?? LocalCartRepository())..load(),
-        ),
-        BlocProvider(
-          create: (context) => NotificationsCubit(context.read<CartCubit>()),
-        ),
-        BlocProvider(
-          create: (_) => PostAnalyticsCubit(
-            analyticsRepository ?? LocalPostAnalyticsRepository(),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => AuthRepository(
+            context.read<ApiClient>(),
+            tokenStore: context.read<SecureTokenStore>(),
           ),
         ),
-        BlocProvider(create: (_) => ThemeCubit(initialMode: initialThemeMode)),
-        BlocProvider(
-          create: (_) =>
-              PostsCubit(postsRepository ?? LocalPostsRepository())..load(),
-        ),
-        BlocProvider(
-          create: (context) => SavedPostsCubit(
-            savedPostsRepository ?? LocalSavedPostsRepository(),
-            posts: context.read<PostsCubit>(),
-          )..load(),
+        RepositoryProvider<OtpVerificationRepository>(
+          create: (context) => OtpVerificationRepository(
+            context.read<ApiClient>(),
+            context.read<SecureTokenStore>(),
+          ),
         ),
       ],
-      child: child,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SessionCubit(context.read<AuthRepository>()),
+          ),
+          // Account data stays lazy until session validation opens Dashboard.
+          BlocProvider(
+            create: (context) => UserProfileCubit(
+              userProfileRepository ??
+                  LocalUserProfileRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+            )..load(),
+          ),
+          BlocProvider(create: (_) => PostLikesCubit()),
+          BlocProvider(
+            create: (context) => ProfileCategoriesCubit(
+              categoriesRepository ??
+                  LocalProfileCategoriesRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+            )..load(),
+          ),
+          BlocProvider(
+            create: (context) => CartCubit(
+              cartRepository ??
+                  LocalCartRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+            )..load(),
+          ),
+          BlocProvider(
+            create: (context) => NotificationsCubit(context.read<CartCubit>()),
+          ),
+          BlocProvider(
+            create: (context) => PostAnalyticsCubit(
+              analyticsRepository ??
+                  LocalPostAnalyticsRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+            ),
+          ),
+          BlocProvider(
+            create: (_) => ThemeCubit(initialMode: initialThemeMode),
+          ),
+          BlocProvider(
+            create: (context) => PostsCubit(
+              postsRepository ??
+                  LocalPostsRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+            )..load(),
+          ),
+          BlocProvider(
+            create: (context) => SavedPostsCubit(
+              savedPostsRepository ??
+                  LocalSavedPostsRepository(
+                    directoryProvider: _storage(context).directory,
+                  ),
+              posts: context.read<PostsCubit>(),
+            )..load(),
+          ),
+        ],
+        child: BlocListener<SessionCubit, SessionState>(
+          listenWhen: (previous, current) =>
+              current.status == SessionStatus.authenticated &&
+              current.userId != previous.userId,
+          listener: (context, session) {
+            InMemoryChatRepository.instance.useAccount(session.userId!);
+            InMemoryTeamsRepository.instance.useAccount(session.userId!);
+          },
+          child: child,
+        ),
+      ),
     );
   }
 }

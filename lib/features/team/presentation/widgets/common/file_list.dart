@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/strings/team_strings.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_colors.dart';
@@ -9,15 +10,6 @@ class TeamFileList extends StatelessWidget {
 
   final List<GalleryAttachment> files;
   final ValueChanged<String> onRemove;
-
-  String _formatFileSize(int? bytes) {
-    if (bytes == null) {
-      return 'Selected';
-    }
-
-    final sizeInKB = bytes / 1024;
-    return 'Selected · ${sizeInKB.toStringAsFixed(1)} KB';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class TeamFileList extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      tooltip: 'Remove file',
+                      tooltip: "حذف فایل",
                       onPressed: () => onRemove(attachment.id),
                       icon: const Icon(Icons.delete_outline),
                     ),
@@ -58,12 +50,13 @@ class TeamFileList extends StatelessWidget {
                             style: AppTextStyles.bodyText.copyWith(
                               color: colors.onSurface,
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
 
                           const SizedBox(height: 4),
 
                           Text(
-                            _formatFileSize(
+                            TeamStrings.selectedFileSize(
                               (attachment.preparedFile ?? attachment.file!)
                                   .lengthSync(),
                             ),
@@ -71,6 +64,7 @@ class TeamFileList extends StatelessWidget {
                             style: AppTextStyles.caption.copyWith(
                               color: colors.onSurfaceVariant,
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
                         ],
                       ),

@@ -71,6 +71,7 @@ class GalleryFilesGrid extends StatelessWidget {
                                   color: colors.onSurface,
                                 ),
                                 textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
                               ),
                             ],
                           ),

@@ -29,19 +29,32 @@ Future<void> manageTeam(
       final confirmed = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Delete team?', textAlign: TextAlign.right),
-          content: const Text(
-            'Remove this team from your current session?',
+          title: const Text(
+            "حذف تیم؟",
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
+          ),
+          content: const Text(
+            "این تیم از نشست فعلی حذف شود؟",
+            textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: const Text(
+                "انصراف",
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+              ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Delete'),
+              child: const Text(
+                "حذف",
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),

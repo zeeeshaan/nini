@@ -13,7 +13,7 @@ class HomePostPricing extends StatelessWidget {
   final PostItem post;
 
   String _amount(String value) {
-    final normalized = AppStrings.persianDigits(value)
+    final normalized = AppStrings.latinDigits(value)
         .trim()
         .replaceAll(RegExp(r'[,٬\s]'), '')
         .replaceAll('٫', '.');
@@ -23,7 +23,7 @@ class HomePostPricing extends StatelessWidget {
       RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
       (match) => '${match[1]},',
     );
-    return parts.join('.');
+    return AppStrings.persianDigits(parts.join('.'));
   }
 
   @override

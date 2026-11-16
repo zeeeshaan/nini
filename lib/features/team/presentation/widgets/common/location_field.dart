@@ -52,7 +52,7 @@ class TeamLocationField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         PostFormOptionTile(
-          label: 'Project location',
+          label: "موقعیت پروژه",
           value: locations.isEmpty ? null : locations.first.address,
           trailing: const Icon(Icons.location_on_outlined),
           onTap: () => _selectLocation(context),
@@ -81,6 +81,7 @@ class TeamLocationField extends StatelessWidget {
                               color: colors.onSurfaceVariant,
                               fontSize: 13,
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                         const SizedBox(width: 6),

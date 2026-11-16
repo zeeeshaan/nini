@@ -1,3 +1,5 @@
+import 'package:nini/core/localization/app_string/app_string.dart';
+
 String paymentMoney(int hundredths) {
   final fraction = (hundredths % 100)
       .toString()
@@ -7,5 +9,7 @@ String paymentMoney(int hundredths) {
     RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
     (match) => '${match[1]},',
   );
-  return '$whole${fraction.isEmpty ? '' : '.$fraction'}';
+  return AppStrings.persianDigits(
+    '$whole${fraction.isEmpty ? '' : '.$fraction'}',
+  );
 }

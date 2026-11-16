@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/posts/presentation/widgets/common/seller_avatar.dart';
@@ -40,10 +41,12 @@ class TeamMemberAvatars extends StatelessWidget {
                     : CircleAvatar(
                         backgroundColor: colors.primary,
                         child: Text(
-                          '$remaining+',
+                          AppStrings.persianDigits('$remaining+'),
                           style: AppTextStyles.smallPrint.copyWith(
                             color: colors.onPrimary,
                           ),
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
                         ),
                       ),
               ),

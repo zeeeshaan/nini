@@ -16,14 +16,14 @@ class TeamRequestActions extends StatelessWidget {
     children: [
       Expanded(
         child: AppButton(
-          label: 'Cancel',
+          label: "انصراف",
           variant: AppButtonVariant.outlined,
           onPressed: onCancel,
         ),
       ),
       const SizedBox(width: 16),
       Expanded(
-        child: AppButton(label: 'Request', onPressed: onRequest),
+        child: AppButton(label: "درخواست", onPressed: onRequest),
       ),
     ],
   );

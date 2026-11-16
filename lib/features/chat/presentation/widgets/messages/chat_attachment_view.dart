@@ -1,4 +1,5 @@
 import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+
 import 'dart:io';
 
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -41,6 +42,7 @@ class ChatAttachmentView extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
 
@@ -134,6 +136,7 @@ class ChatAttachmentView extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.label.copyWith(color: foreground),
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
               ],

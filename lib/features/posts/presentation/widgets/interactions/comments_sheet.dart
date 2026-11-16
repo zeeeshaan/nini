@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_colors.dart';
@@ -6,9 +5,9 @@ import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 
 Future<void> openPostCommentsSheet(
-    BuildContext context, {
-      required String postId,
-    }) {
+  BuildContext context, {
+  required String postId,
+}) {
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
@@ -24,9 +23,7 @@ Future<void> openPostCommentsSheet(
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 560),
-              child: SizedBox.expand(
-                child: CommentsSheet(postId: postId),
-              ),
+              child: SizedBox.expand(child: CommentsSheet(postId: postId)),
             ),
           ),
         ),
@@ -36,10 +33,7 @@ Future<void> openPostCommentsSheet(
 }
 
 class CommentsSheet extends StatefulWidget {
-  const CommentsSheet({
-    super.key,
-    required this.postId,
-  });
+  const CommentsSheet({super.key, required this.postId});
 
   final String postId;
 
@@ -48,56 +42,31 @@ class CommentsSheet extends StatefulWidget {
 }
 
 class _CommentsSheetState extends State<CommentsSheet> {
-  final TextEditingController _commentController =
-  TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
 
   final ValueNotifier<List<({String name, String time, String text})>>
   _comments = ValueNotifier([
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "کارت عالیه! 🔥😍"),
     (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Amazing work! 🔥😍',
+      name: 'david.colo',
+      time: "۱۳ ساعت پیش",
+      text: "دقیقاً همون چیزیه که دنبالش بودم! 🙌",
     ),
     (
-    name: 'david.colo',
-    time: '13h',
-    text: 'This is exactly what I was looking for! 🙌',
+      name: 'david.colo',
+      time: "۱۳ ساعت پیش",
+      text: "ایده عالیه! ادامه بده! 🚀",
     ),
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "واقعاً فوق‌العاده است! ✨"),
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "چه تجربه خوبی! ❤️"),
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "آفرین! 👏"),
     (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Great idea! Keep it up! 🚀',
+      name: 'david.colo',
+      time: "۱۳ ساعت پیش",
+      text: "این کار شایسته توجه بیشتریه! 🌟",
     ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Absolutely brilliant! ✨',
-    ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Such a great experience! ❤️',
-    ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Well done! 👏',
-    ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: 'This deserves more attention! 🌟',
-    ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: 'Wowwww! 😍🔥',
-    ),
-    (
-    name: 'david.colo',
-    time: '13h',
-    text: "That's awesome!",
-    ),
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "وای، عالیه! 😍🔥"),
+    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "خیلی عالیه!"),
   ]);
 
   void _addComment() {
@@ -107,7 +76,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
 
     // Temporary local preview. No backend connection.
     _comments.value = [
-      (name: 'you', time: 'now', text: text),
+      (name: "شما", time: "همین حالا", text: text),
       ..._comments.value,
     ];
 
@@ -130,17 +99,13 @@ class _CommentsSheetState extends State<CommentsSheet> {
     // Dark app -> pure white sheet.
     final isDark = theme.brightness == Brightness.dark;
 
-    final background =
-    isDark ? AppColors.white : AppColors.black;
+    final background = isDark ? AppColors.white : AppColors.black;
 
-    final foreground =
-    isDark ? AppColors.black : AppColors.white;
+    final foreground = isDark ? AppColors.black : AppColors.white;
 
     return Material(
       color: background,
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(24),
-      ),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       clipBehavior: Clip.antiAlias,
       child: SafeArea(
         top: false,
@@ -163,11 +128,10 @@ class _CommentsSheetState extends State<CommentsSheet> {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                'comments',
-                style: AppTextStyles.bodyText.copyWith(
-                  color: foreground,
-                ),
+                "دیدگاه‌ها",
+                style: AppTextStyles.bodyText.copyWith(color: foreground),
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
 
@@ -184,49 +148,47 @@ class _CommentsSheetState extends State<CommentsSheet> {
                       vertical: 8,
                     ),
                     itemCount: comments.length,
-                    separatorBuilder: (_, __) =>
-                    const SizedBox(height: 14),
+                    separatorBuilder: (_, __) => const SizedBox(height: 14),
                     itemBuilder: (context, index) {
                       final comment = comments[index];
 
                       return Row(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Align(alignment: Alignment.centerRight, child: Text(
-                                  '${comment.time}  ${comment.name}',
-                                  textAlign: TextAlign.right,
-                                  style:
-                                  AppTextStyles.caption.copyWith(
-                                    color: foreground.withValues(
-                                      alpha: 0.55,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    '${comment.time}  ${comment.name}',
+                                    textAlign: TextAlign.right,
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: foreground.withValues(alpha: 0.55),
                                     ),
+                                    textDirection: TextDirection.rtl,
                                   ),
-                                )),
+                                ),
                                 const SizedBox(height: 3),
-                                Align(alignment: Alignment.centerRight, child: Text(
-                                  comment.text,
-                                  textAlign: TextAlign.right,
-                                  style:
-                                  AppTextStyles.bodyText.copyWith(
-                                    color: foreground,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    comment.text,
+                                    textAlign: TextAlign.right,
+                                    style: AppTextStyles.bodyText.copyWith(
+                                      color: foreground,
+                                    ),
+                                    textDirection: TextDirection.rtl,
                                   ),
-                                )),
+                                ),
                               ],
                             ),
                           ),
                           const SizedBox(width: 10),
                           CircleAvatar(
                             radius: 18,
-                            backgroundColor:
-                            foreground.withValues(
-                              alpha: 0.85,
-                            ),
+                            backgroundColor: foreground.withValues(alpha: 0.85),
                           ),
                         ],
                       );
@@ -236,60 +198,41 @@ class _CommentsSheetState extends State<CommentsSheet> {
               ),
             ),
 
-            Divider(
-              height: 1,
-              color: foreground.withValues(alpha: 0.2),
-            ),
+            Divider(height: 1, color: foreground.withValues(alpha: 0.2)),
 
             // Comment input.
             Padding(
-              padding:
-              const EdgeInsets.fromLTRB(16, 10, 16, 12),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
               child: Theme(
                 data: theme.copyWith(
-                  colorScheme:
-                  theme.colorScheme.copyWith(
+                  colorScheme: theme.colorScheme.copyWith(
                     surface: background,
                     onSurface: foreground,
                   ),
-                  inputDecorationTheme:
-                  theme.inputDecorationTheme.copyWith(
+                  inputDecorationTheme: theme.inputDecorationTheme.copyWith(
                     filled: true,
-                    fillColor: foreground.withValues(
-                      alpha: 0.1,
-                    ),
-                    hintStyle:
-                    AppTextStyles.bodyText.copyWith(
-                      color: foreground.withValues(
-                        alpha: 0.55,
-                      ),
+                    fillColor: foreground.withValues(alpha: 0.1),
+                    hintStyle: AppTextStyles.bodyText.copyWith(
+                      color: foreground.withValues(alpha: 0.55),
                     ),
                     border: OutlineInputBorder(
-                      borderRadius:
-                      BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
                     ),
                   ),
                 ),
                 child: AppTextField(
                   controller: _commentController,
-                  hint: 'Add a comment...',
-                  textStyle:
-                  AppTextStyles.bodyText.copyWith(
-                    color: foreground,
-                  ),
+                  hint: "دیدگاهی بنویسید…",
+                  textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.ltr,
-                  textInputAction:
-                  TextInputAction.send,
+                  textInputAction: TextInputAction.send,
                   onSubmitted: (_) => _addComment(),
                   suffixIcon: IconButton(
                     onPressed: _addComment,
-                    tooltip: 'Add comment',
-                    icon: Icon(
-                      Icons.send_rounded,
-                      color: foreground,
-                    ),
+                    tooltip: "افزودن دیدگاه",
+                    icon: Icon(Icons.send_rounded, color: foreground),
                   ),
                 ),
               ),

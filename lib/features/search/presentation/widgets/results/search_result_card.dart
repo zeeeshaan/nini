@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
@@ -29,7 +28,7 @@ class SearchResultCard extends StatelessWidget {
       detailsHeight:
           detailsHeight ??
           ProfilePostCard.detailsHeightFor(context, contentScale),
-      titleOverride: SearchStrings.display(post.title),
+      titleOverride: post.title,
       categoryLabel: AppStrings.services,
       showStock: false,
       impressionSource: 'search',
@@ -49,6 +48,7 @@ class SearchResultCard extends StatelessWidget {
                     fontSize: AppTextStyles.badgeSmall.fontSize! * contentScale,
                     color: colors.surface,
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
             )

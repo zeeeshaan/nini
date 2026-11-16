@@ -122,6 +122,7 @@ class _ImpressionsSectionState extends State<ImpressionsSection> {
                               maxLines: 1,
                               style: AppTextStyles.micro,
                               textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
                             ),
                           ),
                         ],

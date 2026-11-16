@@ -28,9 +28,10 @@ class TeamRequestSummary extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       children: [
         const Text(
-          'Order Details',
+          "جزئیات سفارش",
           textAlign: TextAlign.right,
           style: AppTextStyles.sectionTitle,
+          textDirection: TextDirection.rtl,
         ),
         SizedBox(height: spacing),
         TeamRequestProviderList(request: request),
@@ -48,12 +49,14 @@ class TeamRequestSummary extends StatelessWidget {
                 request.title,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyBold,
+                textDirection: TextDirection.rtl,
               ),
               SizedBox(height: spacing),
               Text(
                 request.description,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyText,
+                textDirection: TextDirection.rtl,
               ),
               SizedBox(height: spacing * 2),
               Row(
@@ -63,6 +66,7 @@ class TeamRequestSummary extends StatelessWidget {
                     child: Text(
                       '${dates.formatMediumDate(start)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(start))}',
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -92,12 +96,14 @@ class TeamRequestSummary extends StatelessWidget {
                                   attachment.file!.name,
                                   textAlign: TextAlign.right,
                                   style: AppTextStyles.bodyText,
+                                  textDirection: TextDirection.rtl,
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'Selected attachment',
+                                  "پیوست انتخاب‌شده",
                                   textAlign: TextAlign.right,
                                   style: AppTextStyles.smallPrint,
+                                  textDirection: TextDirection.rtl,
                                 ),
                               ],
                             ),

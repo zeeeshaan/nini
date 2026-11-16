@@ -38,15 +38,17 @@ class TeamPersonCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.right,
           style: AppTextStyles.bodyText,
+          textDirection: TextDirection.rtl,
         ),
         Text(
-          service?.post.title ?? 'Organizer',
+          service?.post.title ?? "مدیر تیم",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.right,
           style: AppTextStyles.helper.copyWith(
             color: colors.onSurface.withValues(alpha: .55),
           ),
+          textDirection: TextDirection.rtl,
         ),
         if (item != null) ...[
           const SizedBox(height: 6),
@@ -54,6 +56,7 @@ class TeamPersonCard extends StatelessWidget {
             cartMoney((item.unitPrice - item.discountPerUnit) * 100),
             textAlign: TextAlign.right,
             style: AppTextStyles.pageTitleBold,
+            textDirection: TextDirection.rtl,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -65,6 +68,7 @@ class TeamPersonCard extends StatelessWidget {
               item.unit.label,
               textAlign: TextAlign.right,
               style: AppTextStyles.micro.copyWith(color: colors.onPrimary),
+              textDirection: TextDirection.rtl,
             ),
           ),
         ],

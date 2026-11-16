@@ -61,7 +61,9 @@ List<AppNotification> orderNotifications(
 String _relativeTime(DateTime date) {
   final elapsed = DateTime.now().difference(date);
   if (elapsed.inMinutes < 1) return NotificationStrings.now;
-  if (elapsed.inHours < 1) return '${elapsed.inMinutes}m ago';
-  if (elapsed.inDays < 1) return '${elapsed.inHours}h ago';
-  return '${elapsed.inDays}d ago';
+  if (elapsed.inHours < 1) {
+    return NotificationStrings.minutesAgo(elapsed.inMinutes);
+  }
+  if (elapsed.inDays < 1) return NotificationStrings.hoursAgo(elapsed.inHours);
+  return NotificationStrings.daysAgo(elapsed.inDays);
 }

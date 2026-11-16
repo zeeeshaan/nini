@@ -1,20 +1,20 @@
 /// Labels for the local profile editor.
 abstract final class ProfileEditStrings {
-  static const title = "Profile settings";
-  static const name = "Name";
-  static const lastName = "Last name";
-  static const businessType = 'Shop / business type';
-  static const nationality = "Nationality";
-  static const username = "Username";
-  static const email = "Email";
-  static const birth = "Date of birth";
-  static const gender = "Gender";
-  static const bio = "Bio";
-  static const choosePhoto = "Choose profile photo";
-  static const cropPhoto = 'Crop profile photo';
-  static const photoError = 'Could not prepare your profile photo. Try again.';
-  static const saved = 'Profile updated';
-  static const saveFailed = 'Could not save your profile. Please try again.';
-  static const loadFailed = 'Could not load your profile. Please try again.';
-  static const nameRequired = 'Enter your name.';
+  static const title = 'تنظیمات پروفایل';
+  static const name = 'نام';
+  static const lastName = 'نام خانوادگی';
+  static const businessType = "نوع فروشگاه یا کسب‌وکار";
+  static const nationality = 'ملیت';
+  static const username = 'نام کاربری';
+  static const email = 'ایمیل';
+  static const birth = 'تاریخ تولد';
+  static const gender = 'جنسیت';
+  static const bio = 'درباره من';
+  static const choosePhoto = 'انتخاب عکس پروفایل';
+  static const cropPhoto = "برش عکس پروفایل";
+  static const photoError = 'گالری باز نشد. دوباره تلاش کنید.';
+  static const saved = "پروفایل به‌روزرسانی شد";
+  static const saveFailed = "ذخیره پروفایل انجام نشد. دوباره تلاش کنید.";
+  static const loadFailed = "بارگذاری پروفایل انجام نشد. دوباره تلاش کنید.";
+  static const nameRequired = "نام خود را وارد کنید.";
 }

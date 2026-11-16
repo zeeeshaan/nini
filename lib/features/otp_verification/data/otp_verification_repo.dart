@@ -46,11 +46,13 @@ class OtpVerificationRepository {
 
     final token = data['token'];
 
-    if (token is! String || token.trim().isEmpty) {
+    if (token is! String ||
+        token.trim().isEmpty ||
+        token.contains(RegExp(r'[\r\n]'))) {
       throw const FormatException('Authentication token missing.');
     }
 
-    await _tokenStore.saveToken(token);
+    await _tokenStore.saveToken(token.trim());
   }
 
   String _normalizePhone(String input) {

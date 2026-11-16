@@ -33,9 +33,7 @@ class OrderCustomerDetails {
       city: value(OrderCustomerField.city),
       province: value(OrderCustomerField.province),
       address: value(OrderCustomerField.address),
-      postalCode: AppStrings.persianDigits(
-        value(OrderCustomerField.postalCode),
-      ),
+      postalCode: AppStrings.latinDigits(value(OrderCustomerField.postalCode)),
     );
   }
 
@@ -64,5 +62,5 @@ class OrderCustomerDetails {
       );
 
   static String normalizeMobile(String value) =>
-      AppStrings.persianDigits(value).replaceAll(RegExp(r'[\s()-]'), '');
+      AppStrings.latinDigits(value).replaceAll(RegExp(r'[\s()-]'), '');
 }

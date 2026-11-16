@@ -48,7 +48,7 @@ class SearchSuggestions extends StatelessWidget {
                 Expanded(
                   child: Text(
                     SearchStrings.display(suggestion),
-                    textDirection: TextDirection.ltr,
+                    textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                   ),
                 ),

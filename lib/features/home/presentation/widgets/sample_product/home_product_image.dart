@@ -65,7 +65,11 @@ class HomeProductImage extends StatelessWidget {
                           style: TextButton.styleFrom(
                             foregroundColor: AppColors.black,
                           ),
-                          child: const Text(AppStrings.retry),
+                          child: const Text(
+                            AppStrings.retry,
+                            textDirection: TextDirection.rtl,
+                            textAlign: TextAlign.right,
+                          ),
                         ),
                       ],
                     ),

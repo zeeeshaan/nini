@@ -102,6 +102,7 @@ class _FeaturesDialogState extends State<FeaturesDialog> {
                     _draft.state.error!,
                     style: AppTextStyles.label,
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
               ),
@@ -114,6 +115,7 @@ class _FeaturesDialogState extends State<FeaturesDialog> {
                         child: Text(
                           CreatePostStrings.firstFeatureHelp,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                     )
@@ -140,12 +142,14 @@ class _FeaturesDialogState extends State<FeaturesDialog> {
                                   child: Text(
                                     _draft.state.features[index].value,
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                                 Expanded(
                                   child: Text(
                                     _draft.state.features[index].name,
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                               ],

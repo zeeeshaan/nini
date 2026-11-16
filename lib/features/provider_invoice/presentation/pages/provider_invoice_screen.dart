@@ -62,6 +62,7 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
               ReceiptStrings.invoice,
               style: AppTextStyles.screenTitle,
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
           ),
           centerTitle: false,
@@ -71,7 +72,11 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
                 onPressed: _saving
                     ? null
                     : () => openSavedInvoice(context, order.id),
-                child: const Text(ProviderOrderStrings.buyerInvoice),
+                child: const Text(
+                  ProviderOrderStrings.buyerInvoice,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
+                ),
               ),
             if (contact != null)
               IconButton(
@@ -99,6 +104,7 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
                   child: Text(
                     ProviderOrderStrings.unavailable,
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
               ),

@@ -69,11 +69,13 @@ class TagsKeywordsList extends StatelessWidget {
                     tag,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.body,
+                    textDirection: TextDirection.rtl,
                   ),
                   subtitle: Text(
                     ProfileSettingsStrings.tagPosts(grouped[tag]!.length),
                     textAlign: TextAlign.right,
                     style: AppTextStyles.helper,
+                    textDirection: TextDirection.rtl,
                   ),
                   onTap: () => openTag(tag),
                 );

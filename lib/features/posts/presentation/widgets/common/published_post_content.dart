@@ -67,6 +67,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
               AppStrings.serviceDescription,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
+              textDirection: TextDirection.rtl,
             ),
             const SizedBox(height: 20),
           ],

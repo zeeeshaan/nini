@@ -20,14 +20,14 @@ class WalletTransactionTile extends StatelessWidget {
       WalletTransactionType.pending => AppColors.walletPending,
     };
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
-          Flexible(
+          Expanded(
             child: Text(
               AppStrings.persianDigits(transaction.amount),
-              style: AppTextStyles.pageTitle.copyWith(color: amountColor),
-              textAlign: TextAlign.right,
+              style: AppTextStyles.amount.copyWith(color: amountColor),
+              textAlign: TextAlign.left,
               textDirection: TextDirection.ltr,
             ),
           ),
@@ -44,19 +44,21 @@ class WalletTransactionTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  AppStrings.persianDigits(transaction.date),
-                  style: AppTextStyles.smallPrint.copyWith(
-                    color: colors.onSurface.withValues(alpha: .35),
+                  AppStrings.persianDigits(
+                    WalletStrings.transactionDate(transaction.date),
+                  ),
+                  style: AppTextStyles.micro.copyWith(
+                    color: colors.onSurface.withValues(alpha: .4),
                   ),
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 14),
+          const SizedBox(width: 12),
           CircleAvatar(
-            radius: 18,
+            radius: 19,
             backgroundColor: colors.surfaceContainerHighest,
             child: AppIcon(
               AppIcons.personOutline,

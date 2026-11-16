@@ -1,57 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
 import 'package:nini/core/localization/strings/wallet_strings.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
+import '../../data/wallet_sample_data.dart';
 import '../widgets/overview/wallet_balance_card.dart';
 import '../widgets/overview/wallet_bottom_button.dart';
-import '../widgets/overview/wallet_header.dart';
+import '../widgets/overview/wallet_page.dart';
+import '../widgets/summary/withdraw_success_sheet.dart';
 import '../widgets/withdraw/wallet_amount_section.dart';
-import '../widgets/withdraw/withdraw_account_section.dart';
-import '../widgets/withdraw/withdraw_otp_fields.dart';
-import 'withdraw_summary_screen.dart';
+import '../widgets/withdraw/withdraw_review_notice.dart';
+import 'top_up_screen.dart';
 
-/// UI-only form. Done opens a summary preview without moving funds.
-class WithdrawScreen extends StatelessWidget {
+/// UI-only form; the confirmation sheet does not reserve or transfer funds.
+class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});
-  Future<void> _openSummary(BuildContext context) async {
-    FocusScope.of(context).unfocus();
-    final done = await Navigator.of(context).push<bool>(
-      MaterialPageRoute(builder: (_) => const WithdrawSummaryScreen()),
-    );
-    if (context.mounted && done == true) Navigator.of(context).pop();
+  @override
+  State<WithdrawScreen> createState() => _WithdrawScreenState();
+}
+
+class _WithdrawScreenState extends State<WithdrawScreen> {
+  final _amount = TextEditingController(text: WalletSampleData.pendingAmount);
+  bool _showingSummary = false;
+
+  @override
+  void dispose() {
+    _amount.dispose();
+    super.dispose();
+  }
+
+  Future<void> _openSummary() async {
+    if (_showingSummary) return;
+    final amount = AppStrings.latinDigits(_amount.text).trim();
+    final value = int.tryParse(amount.replaceAll(',', ''));
+    if (value == null || value <= 0) {
+      AppToast.error(context, WalletStrings.enterValidAmount);
+      return;
+    }
+    _showingSummary = true;
+    try {
+      await showPostDialog<void>(context, WithdrawSuccessSheet(amount: amount));
+      if (mounted) Navigator.of(context).pop();
+    } finally {
+      _showingSummary = false;
+    }
   }
 
   @override
-  Widget build(BuildContext context) => PersianFeature(
-    child: Scaffold(
-      appBar: const WalletHeader(title: WalletStrings.withdraw),
-      body: SafeArea(
-        top: false,
-        bottom: false,
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 430),
-            child: const SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: EdgeInsets.fromLTRB(22, 14, 22, 20),
-              child: Column(
-                children: [
-                  WalletBalanceCard(showWithdrawal: true),
-                  SizedBox(height: 30),
-                  WalletAmountSection(),
-                  SizedBox(height: 36),
-                  WithdrawAccountSection(),
-                  SizedBox(height: 20),
-                  WithdrawOtpFields(),
-                ],
-              ),
-            ),
+  Widget build(BuildContext context) => WalletPage(
+    title: WalletStrings.withdraw,
+    bottomNote: const WithdrawReviewNotice(),
+    footer: WalletBottomButton(onPressed: _openSummary),
+    child: Column(
+      children: [
+        WalletBalanceCard(
+          onTopUp: () => Navigator.of(context).pushReplacement<void, void>(
+            MaterialPageRoute(builder: (_) => const TopUpScreen()),
+          ),
+          onWithdraw: () => FocusScope.of(context).unfocus(),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(14, 32, 14, 0),
+          child: WalletAmountSection(
+            label: WalletStrings.withdrawAmountHint,
+            controller: _amount,
           ),
         ),
-      ),
-      bottomNavigationBar: WalletBottomButton(
-        onPressed: () => _openSummary(context),
-      ),
+      ],
     ),
   );
 }

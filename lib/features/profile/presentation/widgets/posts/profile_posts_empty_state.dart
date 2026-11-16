@@ -54,6 +54,7 @@ class ProfilePostsEmptyState extends StatelessWidget {
               ProfilePostStrings.noPublishedPosts,
               textAlign: TextAlign.center,
               style: AppTextStyles.largeBody,
+              textDirection: TextDirection.rtl,
             ),
           ],
         ),

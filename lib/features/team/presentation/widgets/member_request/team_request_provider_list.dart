@@ -39,6 +39,7 @@ class TeamRequestProviderList extends StatelessWidget {
             '${cartQuantity(request.providers[index].quantity)} ${request.providers[index].post.details.unit?.label ?? 'عدد'}',
             textAlign: TextAlign.right,
             style: AppTextStyles.bodyBold,
+            textDirection: TextDirection.rtl,
           ),
       ],
     ],

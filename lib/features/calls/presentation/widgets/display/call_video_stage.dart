@@ -113,6 +113,7 @@ class CallVideoHeader extends StatelessWidget {
                     color: AppColors.white,
                     shadows: [Shadow(blurRadius: 4, color: AppColors.black)],
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
               Positioned(

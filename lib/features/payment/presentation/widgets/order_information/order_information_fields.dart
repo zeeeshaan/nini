@@ -38,7 +38,7 @@ class OrderInformationFields extends StatelessWidget {
     }
     if (field == OrderCustomerField.postalCode &&
         !RegExp(r'^[A-Za-z0-9][A-Za-z0-9 -]{2,15}$')
-            .hasMatch(AppStrings.persianDigits(value))) {
+            .hasMatch(AppStrings.latinDigits(value))) {
       return OrderInformationStrings.invalidPostalCode;
     }
     return null;
@@ -46,7 +46,11 @@ class OrderInformationFields extends StatelessWidget {
 
   Widget _input(OrderCustomerField field) => AppTextField(
     controller: controllers[field],
-    textDirection: TextDirection.ltr,
+    textDirection:
+        field == OrderCustomerField.mobile ||
+            field == OrderCustomerField.postalCode
+        ? TextDirection.ltr
+        : TextDirection.rtl,
     textInputAction: field == OrderCustomerField.postalCode
         ? TextInputAction.done
         : TextInputAction.next,
@@ -69,6 +73,7 @@ class OrderInformationFields extends StatelessWidget {
           OrderInformationStrings.personalInformation,
           textAlign: TextAlign.right,
           style: AppTextStyles.sectionTitle,
+          textDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 26),
         for (final field in OrderCustomerField.values) ...[
@@ -76,6 +81,7 @@ class OrderInformationFields extends StatelessWidget {
             _labels[field]!,
             textAlign: TextAlign.right,
             style: AppTextStyles.body,
+            textDirection: TextDirection.rtl,
           ),
           const SizedBox(height: 4),
           if (field == OrderCustomerField.address)

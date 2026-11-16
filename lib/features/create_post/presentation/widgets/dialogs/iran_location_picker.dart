@@ -56,7 +56,7 @@ class _IranLocationPickerState extends State<IranLocationPicker> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
-              textDirection: TextDirection.ltr,
+              textDirection: TextDirection.rtl,
               children: [
                 Expanded(
                   child: Text(
@@ -65,6 +65,7 @@ class _IranLocationPickerState extends State<IranLocationPicker> {
                         : CreatePostStrings.province,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.heading,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
                 IconButton(
@@ -82,7 +83,7 @@ class _IranLocationPickerState extends State<IranLocationPicker> {
               hint: widget.cities
                   ? CreatePostStrings.searchCities
                   : CreatePostStrings.searchProvinces,
-              textDirection: TextDirection.ltr,
+              textDirection: TextDirection.rtl,
               suffixIcon: const Center(
                 widthFactor: 1,
                 heightFactor: 1,
@@ -103,7 +104,11 @@ class _IranLocationPickerState extends State<IranLocationPicker> {
                 }).toList();
                 if (choices.isEmpty) {
                   return const Center(
-                    child: Text(CreatePostStrings.noLocationsFound),
+                    child: Text(
+                      CreatePostStrings.noLocationsFound,
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
                   );
                 }
                 return ListView.builder(
@@ -113,15 +118,15 @@ class _IranLocationPickerState extends State<IranLocationPicker> {
                     final choice = choices[index];
                     return ListTile(
                       title: Text(
-                        IranAddressCatalog.englishLabel(choice.englishName),
-                        textDirection: TextDirection.ltr,
+                        widget.cities ? choice.city : choice.province,
+                        textDirection: TextDirection.rtl,
                         textAlign: TextAlign.right,
                         style: AppTextStyles.body,
                       ),
                       subtitle: widget.cities
                           ? Text(
                               IranAddressCatalog.provinceLabel(choice.province),
-                              textDirection: TextDirection.ltr,
+                              textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right,
                             )
                           : null,

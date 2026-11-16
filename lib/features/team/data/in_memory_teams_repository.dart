@@ -12,6 +12,15 @@ class InMemoryTeamsRepository {
   final chats = InMemoryChatRepository.empty();
   final _teams = <String, TeamWorkspace>{};
   final _changes = StreamController<List<TeamWorkspace>>.broadcast();
+  String? _accountId;
+
+  void useAccount(String accountId) {
+    if (_accountId == accountId) return;
+    _teams.clear();
+    chats.useAccount(accountId);
+    _accountId = accountId;
+    _changes.add(teams);
+  }
 
   List<TeamWorkspace> get teams =>
       List.unmodifiable(_teams.values.toList().reversed);

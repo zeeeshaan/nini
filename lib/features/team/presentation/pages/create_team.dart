@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/strings/team_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,8 +45,15 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
   final TeamFormCubit _formCubit = TeamFormCubit();
 
   void _showMessage(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.right,
+        ),
+      ),
+    );
   }
 
   void _saveTeam() {
@@ -58,12 +66,12 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
     }
 
     if (!form.canSubmit) {
-      _showMessage('Please enter a team name.');
+      _showMessage("نام تیم را وارد کنید.");
       return;
     }
 
     if (widget.onSubmit == null) {
-      _showMessage('Complete the team request and demo payment first.');
+      _showMessage("ابتدا درخواست تیم و پرداخت آزمایشی را تکمیل کنید.");
       return;
     }
 
@@ -219,8 +227,9 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
                                     form.memberServices.isNotEmpty) ...[
                                   SizedBox(height: spacing / 2),
                                   AppButton(
-                                    label:
-                                        'Request selected providers (${form.memberServices.length})',
+                                    label: TeamStrings.requestProviders(
+                                      form.memberServices.length,
+                                    ),
                                     onPressed: _openRequest,
                                   ),
                                 ],

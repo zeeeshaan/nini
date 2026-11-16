@@ -13,6 +13,16 @@ class InMemoryChatRepository implements ChatMessagesRepository {
   final Map<String, List<ChatMessage>> _messages = {};
   final Set<String> _blocked = {};
   final Map<String, ChatConversation> _conversations = {};
+  String? _accountId;
+
+  /// Do not carry a previous account's session-only messages into a new login.
+  void useAccount(String accountId) {
+    if (_accountId == accountId) return;
+    _messages.clear();
+    _blocked.clear();
+    _conversations.clear();
+    _accountId = accountId;
+  }
 
   List<ChatConversation> get conversations =>
       List.unmodifiable(_conversations.values);

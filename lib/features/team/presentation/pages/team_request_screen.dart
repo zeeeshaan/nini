@@ -45,8 +45,9 @@ class TeamRequestScreen extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'Please enter a work title, description and start date.',
+            "عنوان کار، توضیحات و تاریخ شروع را وارد کنید.",
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
           ),
         ),
       );
@@ -91,17 +92,18 @@ class TeamRequestScreen extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Text(
                           editing
-                              ? 'Request selected providers'
-                              : 'Team request',
+                              ? "ارسال درخواست به افراد انتخاب‌شده"
+                              : "درخواست تیم",
                           textAlign: TextAlign.right,
                           style: AppTextStyles.pageTitle,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
 
                       actions: [
                         IconButton(
                           onPressed: close,
-                          tooltip: 'Back',
+                          tooltip: "بازگشت",
                           icon: const AppIcon(AppIcons.backRight, size: 20),
                         ),
                       ],

@@ -57,18 +57,27 @@ class GalleryBody extends StatelessWidget {
                   child: const Text(
                     CreatePostStrings.galleryAccessRequired,
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton(
                   onPressed: PhotoManager.openSetting,
-                  child: const Text(CreatePostStrings.openSettings),
+                  child: const Text(
+                    CreatePostStrings.openSettings,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
                     context.read<GalleryCubit>().changeTab(state.tab);
                   },
-                  child: const Text(CreatePostStrings.tryAgain),
+                  child: const Text(
+                    CreatePostStrings.tryAgain,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
               ],
             ),
@@ -93,12 +102,17 @@ class GalleryBody extends StatelessWidget {
                       state.errorMessage ?? CreatePostStrings.galleryLoadFailed,
                     ),
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
                 TextButton(
                   onPressed: () =>
                       context.read<GalleryCubit>().changeTab(state.tab),
-                  child: const Text(CreatePostStrings.tryAgain),
+                  child: const Text(
+                    CreatePostStrings.tryAgain,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
               ],
             ),
@@ -145,7 +159,11 @@ class GalleryBody extends StatelessWidget {
                 child: TextButton(
                   onPressed: () =>
                       context.read<GalleryCubit>().loadMore(retry: true),
-                  child: const Text(CreatePostStrings.retry),
+                  child: const Text(
+                    CreatePostStrings.retry,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
               );
             }
@@ -262,6 +280,7 @@ class _GalleryMessage extends StatelessWidget {
             style: AppTextStyles.inherit.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
+            textDirection: TextDirection.rtl,
           ),
         ),
       ),

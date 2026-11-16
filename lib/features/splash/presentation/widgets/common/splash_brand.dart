@@ -28,6 +28,7 @@ class SplashBrand extends StatelessWidget {
             textDirection: TextDirection.ltr,
             style: AppTextStyles.scaledSplashBrand(scale)
                 .copyWith(color: AppColors.white),
+            textAlign: TextAlign.right,
           ),
         ),
       ),

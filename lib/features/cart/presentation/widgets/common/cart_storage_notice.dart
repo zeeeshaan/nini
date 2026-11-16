@@ -11,7 +11,14 @@ class CartStorageNotice extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: Row(
       children: [
-        TextButton(onPressed: onRetry, child: const Text(CartStrings.retry)),
+        TextButton(
+          onPressed: onRetry,
+          child: const Text(
+            CartStrings.retry,
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
+          ),
+        ),
         const SizedBox(width: 8),
         const Expanded(
           child: Text(

@@ -67,6 +67,7 @@ class ConversationHeader extends StatelessWidget
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.comfortableBody,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               )
             : titleContent ??
                   Row(
@@ -83,6 +84,7 @@ class ConversationHeader extends StatelessWidget
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.comfortableBodyBold,
                               textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
                             ),
                             if (subtitle?.isNotEmpty == true)
                               Text(
@@ -95,6 +97,7 @@ class ConversationHeader extends StatelessWidget
                                   ),
                                 ),
                                 textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
                               ),
                           ],
                         ),
@@ -151,7 +154,11 @@ class ConversationHeader extends StatelessWidget
             if (canCopy)
               const PopupMenuItem(
                 value: ConversationAction.copy,
-                child: Text(AppStrings.copyMessage, textAlign: TextAlign.right),
+                child: Text(
+                  AppStrings.copyMessage,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
+                ),
               ),
             if (!selectionMode)
               PopupMenuItem(
@@ -160,6 +167,7 @@ class ConversationHeader extends StatelessWidget
                 child: const Text(
                   AppStrings.deleteMessages,
                   textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
             PopupMenuItem(
@@ -168,6 +176,7 @@ class ConversationHeader extends StatelessWidget
               child: const Text(
                 AppStrings.clearConversation,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
             if (allowBlocking)
@@ -176,6 +185,7 @@ class ConversationHeader extends StatelessWidget
                 child: Text(
                   blocked ? AppStrings.unblockPerson : AppStrings.blockPerson,
                   textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
           ],

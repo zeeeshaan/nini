@@ -20,12 +20,12 @@ class TeamRequestStatusSheet extends StatelessWidget {
   final VoidCallback onCheckout;
 
   static String label(TeamRequestStatus status) => switch (status) {
-    TeamRequestStatus.draft => 'Draft request',
-    TeamRequestStatus.awaiting => 'Awaiting Acceptance',
-    TeamRequestStatus.accepted => 'Your request has been accepted.',
-    TeamRequestStatus.declined => 'Your request has been declined.',
-    TeamRequestStatus.cancelled => 'Request cancelled.',
-    TeamRequestStatus.paid => 'Demo payment completed.',
+    TeamRequestStatus.draft => "پیش‌نویس درخواست",
+    TeamRequestStatus.awaiting => "در انتظار پذیرش",
+    TeamRequestStatus.accepted => "درخواست شما پذیرفته شده است.",
+    TeamRequestStatus.declined => "درخواست شما رد شده است.",
+    TeamRequestStatus.cancelled => "درخواست لغو شد.",
+    TeamRequestStatus.paid => "پرداخت آزمایشی تکمیل شد.",
   };
 
   @override
@@ -48,9 +48,10 @@ class TeamRequestStatusSheet extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               const Text(
-                'UI preview',
+                "پیش‌نمایش رابط",
                 style: AppTextStyles.smallPrint,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
               Expanded(
                 child: Center(
@@ -62,6 +63,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                           label(request.status),
                           textAlign: TextAlign.center,
                           style: AppTextStyles.bodyText,
+                          textDirection: TextDirection.rtl,
                         ),
                         if (request.status == TeamRequestStatus.awaiting) ...[
                           const SizedBox(height: 20),
@@ -72,12 +74,20 @@ class TeamRequestStatusSheet extends StatelessWidget {
                               TextButton(
                                 onPressed: () =>
                                     cubit.previewResponse(accepted: true),
-                                child: const Text('Preview acceptance'),
+                                child: const Text(
+                                  "پیش‌نمایش پذیرش",
+                                  textDirection: TextDirection.rtl,
+                                  textAlign: TextAlign.right,
+                                ),
                               ),
                               TextButton(
                                 onPressed: () =>
                                     cubit.previewResponse(accepted: false),
-                                child: const Text('Preview decline'),
+                                child: const Text(
+                                  "پیش‌نمایش رد درخواست",
+                                  textDirection: TextDirection.rtl,
+                                  textAlign: TextAlign.right,
+                                ),
                               ),
                             ],
                           ),
@@ -92,7 +102,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        label: 'Cancel',
+                        label: "انصراف",
                         variant: AppButtonVariant.outlined,
                         onPressed: () {
                           cubit.cancelRequest();
@@ -103,7 +113,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: AppButton(
-                        label: 'Checkout',
+                        label: "تسویه‌حساب",
                         onPressed: () {
                           Navigator.of(context).pop();
                           onCheckout();
@@ -121,14 +131,18 @@ class TeamRequestStatusSheet extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     icon: const AppIcon(AppIcons.close, size: 20),
-                    label: const Text('Cancel Request'),
+                    label: const Text(
+                      "لغو درخواست",
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 )
               else
                 AppButton(
                   label: request.status == TeamRequestStatus.paid
-                      ? 'Done'
-                      : 'Edit request',
+                      ? "تأیید"
+                      : "ویرایش درخواست",
                   onPressed: () {
                     if (request.status != TeamRequestStatus.paid) cubit.edit();
                     Navigator.of(context).pop();

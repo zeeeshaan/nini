@@ -50,6 +50,7 @@ class OrderInformationItem extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.username,
                               textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
                             ),
                             if (seller.location.isNotEmpty)
                               Text(
@@ -58,6 +59,7 @@ class OrderInformationItem extends StatelessWidget {
                                   color: colors.onSurface.withValues(alpha: .7),
                                 ),
                                 textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
                               ),
                           ],
                         ),
@@ -77,6 +79,7 @@ class OrderInformationItem extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.bodyBold,
+                  textDirection: TextDirection.rtl,
                 ),
                 const SizedBox(height: 8),
                 Align(
@@ -88,6 +91,7 @@ class OrderInformationItem extends StatelessWidget {
                           '${cartQuantity(item.quantity)} ${item.unit.label}',
                           style: AppTextStyles.labelMedium,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                         )
                       : Tooltip(
                           message: CartStrings.quantity,
@@ -118,6 +122,7 @@ class OrderInformationItem extends StatelessWidget {
                                       color: colors.surface,
                                     ),
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ],
                               ),

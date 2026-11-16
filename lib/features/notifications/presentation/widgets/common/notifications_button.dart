@@ -45,6 +45,7 @@ class NotificationsButton extends StatelessWidget {
                   style: AppTextStyles.smallPrintBold.copyWith(
                     color: AppColors.white,
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
             ),

@@ -150,12 +150,14 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
               Text(
                 '${MaterialLocalizations.of(context).formatMediumDate(_schedule.state.date)} · ${_schedule.state.from.format(context)} – ${_schedule.state.to.format(context)}',
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
               const SizedBox(height: 8),
               const Text(
                 CreatePostStrings.scheduleHelp,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.helper,
+                textDirection: TextDirection.rtl,
               ),
               if (_schedule.state.error != null)
                 Padding(
@@ -163,13 +165,18 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                   child: Text(
                     _schedule.state.error!,
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
               if (widget.initial != null)
                 TextButton(
                   onPressed: () =>
                       Navigator.of(context).pop(const ScheduleSelection(null)),
-                  child: const Text(CreatePostStrings.removeSchedule),
+                  child: const Text(
+                    CreatePostStrings.removeSchedule,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
             ],
           ),
@@ -186,7 +193,11 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
       borderRadius: BorderRadius.circular(24),
       child: Column(
         children: [
-          Text(label, textAlign: TextAlign.right),
+          Text(
+            label,
+            textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
+          ),
           const SizedBox(height: 6),
           Container(
             width: double.infinity,
@@ -197,7 +208,11 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                   : null,
               borderRadius: BorderRadius.circular(24),
             ),
-            child: Text(time.format(context), textAlign: TextAlign.center),
+            child: Text(
+              time.format(context),
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.rtl,
+            ),
           ),
         ],
       ),

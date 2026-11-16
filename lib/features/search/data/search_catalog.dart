@@ -37,7 +37,7 @@ abstract final class SearchCatalog {
     final words = normalize(query).split(' ');
     for (final title in SearchStrings.suggestions) {
       final normalizedTitle = normalize(
-        '$title ${SearchStrings.display(title)}',
+        '$title ${SearchStrings.searchLabel(title)}',
       );
       if (words.every((word) => normalizedTitle.contains(word))) {
         matches.add(title);
@@ -72,7 +72,7 @@ abstract final class SearchCatalog {
       // Local posts have a free-form address, not a structured city field.
       // Keep them discoverable instead of assigning the demo catalogue's city.
       final text = normalize(
-        '${post.title} ${SearchStrings.display(post.title)} '
+        '${post.title} ${SearchStrings.display(post.title)} ${SearchStrings.searchLabel(post.title)} '
         '${post.caption} ${post.category} ${post.details.tags.join(' ')}',
       );
       return words.every((word) => text.contains(word));

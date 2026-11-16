@@ -135,16 +135,18 @@ class HomePublishedPostCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.homePostTitle,
+                    textDirection: TextDirection.rtl,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  post.category,
+                  AppStrings.postCategory(post.category),
                   textAlign: TextAlign.right,
                   style: AppTextStyles.subtitle.copyWith(
                     color: Theme.of(context).colorScheme.onSurface
                         .withValues(alpha: .3),
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
                 if (post.price.isNotEmpty || !post.isService) ...[
                   const SizedBox(height: 28),

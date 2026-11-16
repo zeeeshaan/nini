@@ -97,6 +97,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
               AppStrings.chat,
               style: AppTextStyles.inboxTitle.copyWith(color: colors.onSurface),
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
           ),
           actions: [
@@ -125,6 +126,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                             ? AppStrings.showAllChats
                             : AppStrings.unreadChats,
                         textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                       ),
                     ),
                     PopupMenuItem(
@@ -133,6 +135,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                       child: const Text(
                         AppStrings.markAllRead,
                         textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                       ),
                     ),
                   ],
@@ -220,6 +223,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                                 style: AppTextStyles.comfortableBody.copyWith(
                                   color: colors.onSurface,
                                 ),
+                                textDirection: TextDirection.rtl,
                               ),
                             ),
                           ],

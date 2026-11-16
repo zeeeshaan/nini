@@ -73,6 +73,7 @@ class NotificationAvatar extends StatelessWidget {
                   style: AppTextStyles.helperBold.copyWith(
                     color: AppColors.white,
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
             ),

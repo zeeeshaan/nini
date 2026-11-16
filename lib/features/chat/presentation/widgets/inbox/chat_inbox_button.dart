@@ -46,10 +46,14 @@ class ChatInboxButton extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Text(
-                notificationCount > 9 ? '9+' : notificationCount.toString(),
+                AppStrings.persianDigits(
+                  notificationCount > 9 ? '9+' : notificationCount,
+                ),
                 style: AppTextStyles.notificationBadge.copyWith(
                   color: AppColors.white,
                 ),
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
               ),
             ),
           ),

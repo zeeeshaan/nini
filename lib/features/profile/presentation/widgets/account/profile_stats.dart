@@ -51,7 +51,9 @@ class _StatisticItem extends StatelessWidget {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerRight,
             child: Text(
-              value,
+              AppStrings.persianDigits(
+                value.replaceAll('K', ' هزار').replaceAll('M', ' میلیون'),
+              ),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
               style: AppTextStyles.statNumber.copyWith(height: 1.2),

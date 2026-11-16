@@ -1,21 +1,23 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '../config/app_config/app_config.dart';
 
 class ApiClient {
-  ApiClient()
-    : _dio = Dio(
-        BaseOptions(
-          baseUrl: _getBaseUrl(),
-          connectTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 20),
-          contentType: Headers.jsonContentType,
-          headers: {'Accept': 'application/json', 'X-Client': 'mobile'},
-        ),
-      );
+  ApiClient();
 
-  final Dio _dio;
+  // Configuration errors belong to the recoverable request flow, not widget creation.
+  late final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: _getBaseUrl(),
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 20),
+      contentType: Headers.jsonContentType,
+      headers: {'Accept': 'application/json', 'X-Client': 'mobile'},
+    ),
+  );
 
   static String _getBaseUrl() {
     final url = AppConfig.apiBaseUrl.trim();
@@ -55,6 +57,29 @@ class ApiClient {
       return body;
     }
 
+    throw const FormatException('Invalid API response.');
+  }
+
+  Future<Map<String, dynamic>> get(
+    String endpoint, {
+    required String token,
+  }) async {
+    final cancellation = CancelToken();
+    final response = await _dio
+        .get<dynamic>(
+          endpoint,
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          cancelToken: cancellation,
+        )
+        .timeout(
+          const Duration(seconds: 35),
+          onTimeout: () {
+            cancellation.cancel();
+            throw TimeoutException('Session check timed out.');
+          },
+        );
+    final body = response.data;
+    if (body is Map<String, dynamic>) return body;
     throw const FormatException('Invalid API response.');
   }
 }

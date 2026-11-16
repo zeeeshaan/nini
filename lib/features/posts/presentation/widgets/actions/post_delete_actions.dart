@@ -20,6 +20,7 @@ class PostDeleteActions extends StatelessWidget {
           child: const Text(
             ProfilePostStrings.cancel,
             textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
           ),
         ),
       ),
@@ -36,6 +37,7 @@ class PostDeleteActions extends StatelessWidget {
                 ? ProfilePostStrings.deleting
                 : ProfilePostStrings.deletePost,
             textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
           ),
         ),
       ),

@@ -17,7 +17,7 @@ class ProfileCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) => PersianFeature(
     child: Localizations.override(
       context: context,
-      locale: const Locale('en'),
+      locale: const Locale('fa', 'IR'),
       child: BlocBuilder<ProfileCategoriesCubit, ProfileCategoriesState>(
         builder: (context, state) {
           final categories = context.read<ProfileCategoriesCubit>();

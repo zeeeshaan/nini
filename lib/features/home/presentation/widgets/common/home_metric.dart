@@ -22,8 +22,7 @@ class HomeMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The legacy AppStrings helper normalizes inputs to English digits.
-    // Convert only post metrics back to Persian, leaving other app numbers alone.
+    // Keep engagement counts in Persian, including legacy formatted values.
     final displayedCount = PostDetailStrings.persianDigits(
       AppStrings.persianDigits(count),
     ).replaceAll(',', '٬');
@@ -51,6 +50,7 @@ class HomeMetric extends StatelessWidget {
                       displayedCount,
                       textDirection: TextDirection.ltr,
                       style: AppTextStyles.labelEmphasis,
+                      textAlign: TextAlign.right,
                     ),
                   ),
                   const SizedBox(width: 3),

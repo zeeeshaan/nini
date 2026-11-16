@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
@@ -7,11 +6,7 @@ import 'package:nini/shared/cubits/countdown_cubit.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 
 class OtpCountdown extends StatefulWidget {
-  const OtpCountdown({
-    super.key,
-    this.onResend,
-    this.onExpired,
-  });
+  const OtpCountdown({super.key, this.onResend, this.onExpired});
 
   // Return true only when the backend accepts the resend.
   final Future<bool> Function()? onResend;
@@ -22,15 +17,9 @@ class OtpCountdown extends StatefulWidget {
 }
 
 class _OtpCountdownState extends State<OtpCountdown> {
-  final _expiry = CountdownCubit(
-    300,
-    startImmediately: true,
-  );
+  final _expiry = CountdownCubit(300, startImmediately: true);
 
-  final _resend = CountdownCubit(
-    60,
-    startImmediately: true,
-  );
+  final _resend = CountdownCubit(60, startImmediately: true);
 
   bool _resending = false;
 
@@ -56,9 +45,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
 
   String _formatTime(int seconds) {
     final minutes = seconds ~/ 60;
-    final remaining = (seconds % 60)
-        .toString()
-        .padLeft(2, '0');
+    final remaining = (seconds % 60).toString().padLeft(2, '0');
 
     return AppStrings.persianDigits('$minutes:$remaining');
   }
@@ -75,7 +62,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
     return BlocListener<CountdownCubit, CountdownState>(
       bloc: _expiry,
       listenWhen: (previous, current) =>
-      previous.seconds > 0 && current.seconds == 0,
+          previous.seconds > 0 && current.seconds == 0,
       listener: (context, state) {
         widget.onExpired?.call();
       },
@@ -95,6 +82,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
                         : 'اعتبار کد: ${_formatTime(expiryState.seconds)}',
                     textDirection: TextDirection.rtl,
                     style: AppTextStyles.label,
+                    textAlign: TextAlign.right,
                   ),
                   const SizedBox(height: 8),
                   if (resendState.seconds == 0)
@@ -102,7 +90,11 @@ class _OtpCountdownState extends State<OtpCountdown> {
                       onPressed: widget.onResend == null
                           ? null
                           : _requestResend,
-                      child: const Text(AuthStrings.resendCode),
+                      child: const Text(
+                        AuthStrings.resendCode,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                      ),
                     )
                   else
                     Semantics(
@@ -114,9 +106,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
                         ),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -124,6 +114,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
                           _formatTime(resendState.seconds),
                           textDirection: TextDirection.ltr,
                           style: AppTextStyles.label,
+                          textAlign: TextAlign.right,
                         ),
                       ),
                     ),

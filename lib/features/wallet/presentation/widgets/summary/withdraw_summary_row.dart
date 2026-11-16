@@ -27,12 +27,12 @@ class WithdrawSummaryRow extends StatelessWidget {
           child: Text(
             AppStrings.persianDigits(value),
             style: AppTextStyles.helper,
-            textAlign: TextAlign.right,
+            textAlign: TextAlign.left,
             textDirection: TextDirection.ltr,
           ),
         ),
         const SizedBox(width: 12),
-        Flexible(
+        Expanded(
           child: Text(
             label,
             textAlign: TextAlign.right,

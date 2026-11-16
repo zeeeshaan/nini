@@ -23,13 +23,14 @@ class TeamGeneralSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          'General',
+          "عمومی",
           textAlign: TextAlign.right,
           style: AppTextStyles.caption.copyWith(color: foreground),
+          textDirection: TextDirection.rtl,
         ),
         SizedBox(height: spacing),
         AppTextField(
-          hint: 'Team name',
+          hint: "نام تیم",
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
           textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
@@ -37,7 +38,7 @@ class TeamGeneralSection extends StatelessWidget {
         ),
         SizedBox(height: spacing),
         AppTextField(
-          hint: 'Description',
+          hint: "توضیحات",
           maxLines: 5,
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,

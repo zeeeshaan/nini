@@ -9,14 +9,14 @@ import 'package:nini/core/responsiveness/responsive_config/config.dart';
 import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/core/theme/theme_cubit.dart';
 import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
-import 'package:nini/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:nini/core/network/api_client.dart';
+import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/features/splash/presentation/pages/splash_screen.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/features/posts/domain/profile_categories_repository.dart';
 import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
 import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
-import 'package:nini/features/otp_verification/presentation/pages/otp_verification_screen.dart';
 
 import 'app_providers.dart';
 
@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
     this.categoriesRepository,
     this.savedPostsRepository,
     this.userProfileRepository,
+    this.apiClient,
+    this.tokenStore,
   });
 
   final ThemeMode initialThemeMode;
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
   final ProfileCategoriesRepository? categoriesRepository;
   final SavedPostsRepository? savedPostsRepository;
   final UserProfileRepository? userProfileRepository;
+  final ApiClient? apiClient;
+  final SecureTokenStore? tokenStore;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,8 @@ class MyApp extends StatelessWidget {
       categoriesRepository: categoriesRepository,
       savedPostsRepository: savedPostsRepository,
       userProfileRepository: userProfileRepository,
+      apiClient: apiClient,
+      tokenStore: tokenStore,
       child: const _ThemedApp(),
     );
   }
@@ -65,14 +71,14 @@ class _ThemedApp extends StatelessWidget {
       builder: (context, mode) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
-        locale: const Locale('en'),
+        locale: const Locale('fa', 'IR'),
         supportedLocales: const [Locale('en'), Locale('fa', 'IR')],
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         navigatorObservers: [entranceRouteObserver],
-        // Keep the established layout order and right-aligned development copy.
+        // Preserve control positions; Persian text uses RTL direction within each widget.
         builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
           value: Theme.of(context).appBarTheme.systemOverlayStyle!,
           child: Directionality(
@@ -86,7 +92,7 @@ class _ThemedApp extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: mode,
-        home: const DashboardScreen(initialTab: DashboardTab.home),
+        home: const SplashScreen(),
       ),
     );
   }

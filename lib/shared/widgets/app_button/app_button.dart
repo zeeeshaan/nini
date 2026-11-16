@@ -50,7 +50,13 @@ class AppButton extends StatelessWidget {
         else
           ?icon,
         if (isLoading || icon != null) const SizedBox(width: 8),
-        Flexible(child: Text(label, textAlign: TextAlign.center)),
+        Flexible(
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.rtl,
+          ),
+        ),
       ],
     );
 

@@ -19,7 +19,11 @@ class SearchAllServicesFilter extends StatelessWidget {
     child: Padding(
       padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
       child: ChoiceChip(
-        label: const Text(SearchStrings.allServices),
+        label: const Text(
+          SearchStrings.allServices,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.right,
+        ),
         labelStyle: AppTextStyles.labelMedium,
         selected: selected,
         showCheckmark: false,

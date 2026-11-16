@@ -65,7 +65,7 @@ class OtpVerificationCubit extends Cubit<OtpVerificationState> {
       emit(
         OtpVerificationState(
           code: code,
-          errorMessage: 'OTP verification failed. Please try again.',
+          errorMessage: "تأیید کد انجام نشد. دوباره تلاش کنید.",
         ),
       );
     }
@@ -76,13 +76,13 @@ class OtpVerificationCubit extends Cubit<OtpVerificationState> {
       case 400:
       case 401:
       case 422:
-        return 'Invalid OTP. Please check your code.';
+        return "کد تأیید معتبر نیست. کد را بررسی کنید.";
       case 410:
-        return 'OTP expired. Please request a new code.';
+        return "کد تأیید منقضی شده است. کد جدید درخواست کنید.";
       case 429:
-        return 'Too many attempts. Please try again later.';
+        return "تعداد تلاش‌ها بیش از حد مجاز است. بعداً دوباره تلاش کنید.";
       default:
-        return 'Connection failed. Please try again.';
+        return "اتصال برقرار نشد. دوباره تلاش کنید.";
     }
   }
 }

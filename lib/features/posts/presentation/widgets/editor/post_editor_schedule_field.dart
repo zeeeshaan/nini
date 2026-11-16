@@ -21,6 +21,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
     final now = DateTime.now();
     final date = await showDatePicker(
       context: context,
+      textDirection: TextDirection.rtl,
       initialDate: initial ?? now,
       firstDate: DateTime(1900),
       lastDate: DateTime(now.year + 100),
@@ -28,6 +29,8 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
     if (date == null || !mounted) return null;
     final time = await showTimePicker(
       context: context,
+      builder: (context, child) =>
+          Directionality(textDirection: TextDirection.rtl, child: child!),
       initialTime: TimeOfDay.fromDateTime(initial ?? now),
     );
     if (time == null) return null;

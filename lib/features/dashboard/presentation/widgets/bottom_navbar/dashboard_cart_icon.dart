@@ -54,13 +54,15 @@ class DashboardCartIcon extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 selected
-                    ? badgeCount
+                    ? AppStrings.persianDigits(badgeCount)
                     : AppStrings.persianDigits(
                         itemCount > 99 ? '99+' : itemCount,
                       ),
                 style: AppTextStyles.notificationBadge.copyWith(
                   color: AppColors.white,
                 ),
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
               ),
             ),
           ),

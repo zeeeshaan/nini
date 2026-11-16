@@ -7,7 +7,9 @@ import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.d
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
+
 import 'profile_posts_empty_state.dart';
+
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
 
@@ -71,11 +73,16 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                     child: Text(
                       AppStrings.savedPostsLoadFailed,
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                   TextButton(
                     onPressed: () => context.read<PostsCubit>().load(),
-                    child: const Text(AppStrings.retry),
+                    child: const Text(
+                      AppStrings.retry,
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ],
               ),
@@ -88,6 +95,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
               child: Text(
                 ProfilePostStrings.noPosts,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
           AppResponsiveBuilder(

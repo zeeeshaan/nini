@@ -1455,7 +1455,7 @@ abstract final class IranAddressCatalog {
 
   static String provinceLabel(String value) {
     final province = provinces[provinceKey(value)];
-    return province == null ? value : englishLabel(province.englishName);
+    return province == null ? value : provinceKey(value);
   }
 
   static String cityKey(String value, String province) {
@@ -1473,7 +1473,7 @@ abstract final class IranAddressCatalog {
   static String cityLabel(String value, String province) {
     final english =
         provinces[provinceKey(province)]?.cities[cityKey(value, province)];
-    return english == null ? value : englishLabel(english);
+    return english == null ? value : cityKey(value, province);
   }
 
   static String normalize(String value) => value

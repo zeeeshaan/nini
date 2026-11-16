@@ -61,7 +61,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         bloc: _payment,
         builder: (context, method) => Localizations.override(
           context: context,
-          locale: const Locale('en'),
+          locale: const Locale('fa', 'IR'),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: ScreenEntrance(
@@ -74,6 +74,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       PaymentStrings.checkout,
                       style: AppTextStyles.screenTitle,
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                   centerTitle: false,
@@ -88,6 +89,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           child: Text(
                             PaymentStrings.editInformation,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                       ],
@@ -124,6 +126,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               PaymentStrings.paymentMethod,
                               textAlign: TextAlign.right,
                               style: AppTextStyles.sectionTitle,
+                              textDirection: TextDirection.rtl,
                             ),
                             const SizedBox(height: 10),
                             PaymentMethods(

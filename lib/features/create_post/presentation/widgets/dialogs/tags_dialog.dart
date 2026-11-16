@@ -67,7 +67,11 @@ class _TagsDialogState extends State<TagsDialog> {
               children: [
                 for (final tag in _draft.state.tags)
                   InputChip(
-                    label: Text('#$tag'),
+                    label: Text(
+                      '#$tag',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
                     deleteIcon: const AppIcon(AppIcons.close, size: 18),
                     onDeleted: () => _draft.removeTag(tag),
                   ),

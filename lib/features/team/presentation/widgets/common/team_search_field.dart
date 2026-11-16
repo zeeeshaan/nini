@@ -8,7 +8,7 @@ class TeamSearchField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   @override
   Widget build(BuildContext context) => AppTextField(
-    hint: 'Search',
+    hint: "جستجو",
     onChanged: onChanged,
     prefixIcon: const Center(
       widthFactor: 1,

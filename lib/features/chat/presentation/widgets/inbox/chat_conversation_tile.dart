@@ -47,6 +47,7 @@ class ChatConversationTile extends StatelessWidget {
                         color: colors.onSurface.withValues(alpha: 0.42),
                       ),
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                     if (conversation.unreadCount > 0) ...[
                       const SizedBox(height: 9),
@@ -60,7 +61,7 @@ class ChatConversationTile extends StatelessWidget {
                         ),
                         child: Text(
                           conversation.unreadCount > 99
-                              ? '99+'
+                              ? AppStrings.persianDigits('99+')
                               : AppStrings.persianDigits(
                                   conversation.unreadCount,
                                 ),
@@ -68,6 +69,7 @@ class ChatConversationTile extends StatelessWidget {
                             color: colors.surface,
                           ),
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                     ],
@@ -89,6 +91,7 @@ class ChatConversationTile extends StatelessWidget {
                       style: AppTextStyles.conversationName.copyWith(
                         color: colors.onSurface,
                       ),
+                      textDirection: TextDirection.rtl,
                     ),
                     const SizedBox(height: 7),
                     Text(
@@ -101,6 +104,7 @@ class ChatConversationTile extends StatelessWidget {
                       style: AppTextStyles.compactBody.copyWith(
                         color: colors.onSurface,
                       ),
+                      textDirection: TextDirection.rtl,
                     ),
                   ],
                 ),

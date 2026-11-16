@@ -11,21 +11,22 @@ class MyTeamsHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AppBar(
     leading: IconButton(
-      tooltip: 'Create team',
+      tooltip: "ایجاد تیم",
       onPressed: onCreate,
       icon: const AppIcon(AppIcons.add, size: 26),
     ),
     title: const Align(
       alignment: Alignment.centerRight,
       child: Text(
-        'MyTeam',
+        "تیم‌های من",
         textAlign: TextAlign.right,
         style: AppTextStyles.screenTitle,
+        textDirection: TextDirection.rtl,
       ),
     ),
     actions: [
       IconButton(
-        tooltip: 'Back',
+        tooltip: "بازگشت",
         onPressed: () => Navigator.of(context).maybePop(),
         icon: const RotatedBox(
           quarterTurns: 2,

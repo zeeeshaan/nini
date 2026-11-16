@@ -40,6 +40,7 @@ class AnalyticsPostHeader extends StatelessWidget {
                     .withValues(alpha: .5),
               ),
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
             const Spacer(),
             Flexible(
@@ -52,6 +53,7 @@ class AnalyticsPostHeader extends StatelessWidget {
                         : AppStrings.authorName,
                     style: AppTextStyles.labelEmphasis,
                     textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
                   if (location.isNotEmpty)
                     Text(
@@ -63,6 +65,7 @@ class AnalyticsPostHeader extends StatelessWidget {
                             .withValues(alpha: .38),
                       ),
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                 ],
               ),

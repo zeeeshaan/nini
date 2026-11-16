@@ -26,6 +26,7 @@ class HomeBadge extends StatelessWidget {
           label,
           textDirection: TextDirection.rtl,
           style: AppTextStyles.badgeLabel.copyWith(color: foreground),
+          textAlign: TextAlign.right,
         ),
       ),
     );

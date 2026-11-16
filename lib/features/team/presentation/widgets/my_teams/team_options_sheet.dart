@@ -9,17 +9,21 @@ class TeamOptionsSheet extends StatelessWidget {
   const TeamOptionsSheet({super.key});
   @override
   Widget build(BuildContext context) => PostDialog(
-    title: 'More Options',
+    title: "گزینه‌های بیشتر",
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         for (final option in TeamOption.values)
           ListTile(
-            title: Text(switch (option) {
-              TeamOption.edit => 'Edit',
-              TeamOption.delete => 'Delete',
-              TeamOption.chat => 'Chat',
-            }, textAlign: TextAlign.right),
+            title: Text(
+              switch (option) {
+                TeamOption.edit => "ویرایش",
+                TeamOption.delete => "حذف",
+                TeamOption.chat => "گفتگو",
+              },
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+            ),
             trailing: AppIcon(switch (option) {
               TeamOption.edit => AppIcons.edit,
               TeamOption.delete => AppIcons.trash,

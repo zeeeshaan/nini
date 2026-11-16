@@ -144,6 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 AppStrings.create,
                 style: AppTextStyles.createPlaceholder,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
           ),

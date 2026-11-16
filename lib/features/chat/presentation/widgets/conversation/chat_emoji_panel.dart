@@ -22,13 +22,17 @@ class ChatEmojiPanel extends StatelessWidget {
         textEditingController: controller,
         config: Config(
           height: height,
-          locale: const Locale('en'),
+          locale: const Locale('fa', 'IR'),
           emojiTextStyle: AppTextStyles.emoji,
           emojiViewConfig: EmojiViewConfig(
             columns: 7,
             emojiSizeMax: AppTextStyles.emojiSize,
             backgroundColor: colors.surface,
-            noRecents: const Text(AppStrings.noRecentEmoji),
+            noRecents: const Text(
+              AppStrings.noRecentEmoji,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+            ),
           ),
           categoryViewConfig: CategoryViewConfig(
             initCategory: Category.SMILEYS,

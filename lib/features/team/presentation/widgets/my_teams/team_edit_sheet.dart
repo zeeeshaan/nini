@@ -35,7 +35,7 @@ class _TeamEditSheetState extends State<TeamEditSheet> {
 
   @override
   Widget build(BuildContext context) => PostDialog(
-    title: 'Edit team',
+    title: "ویرایش تیم",
     actions: PostDialogActions(onDone: _save),
     child: Form(
       key: _form,
@@ -44,16 +44,13 @@ class _TeamEditSheetState extends State<TeamEditSheet> {
         children: [
           AppTextField(
             controller: _name,
-            hint: 'Team name',
-            validator: (value) =>
-                value?.trim().isNotEmpty == true ? null : 'Enter a team name.',
+            hint: "نام تیم",
+            validator: (value) => value?.trim().isNotEmpty == true
+                ? null
+                : "نام تیم را وارد کنید.",
           ),
           const SizedBox(height: 12),
-          AppTextField(
-            controller: _description,
-            hint: 'Description',
-            maxLines: 4,
-          ),
+          AppTextField(controller: _description, hint: "توضیحات", maxLines: 4),
         ],
       ),
     ),

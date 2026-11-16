@@ -66,14 +66,15 @@ class ProfilePostCard extends StatelessWidget {
   }
 
   double? _number(String value) => double.tryParse(
-    AppStrings.persianDigits(value).replaceAll(RegExp(r'[,\s%]'), ''),
+    AppStrings.latinDigits(value).replaceAll(RegExp(r'[,\s%]'), ''),
   );
 
-  String _price(String value) => AppStrings.persianDigits(value)
-      .replaceAllMapped(
-        RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
-        (match) => '${match[1]},',
-      );
+  String _price(String value) => AppStrings.persianDigits(
+    AppStrings.latinDigits(value).replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (match) => '${match[1]},',
+    ),
+  );
 
   String? get _discountLabel {
     final saved = _number(post.details.discount);
@@ -89,7 +90,7 @@ class ProfilePostCard extends StatelessWidget {
         : 0.0;
     if (!percent.isFinite || percent <= 0 || percent > 100) return null;
     final value = percent.toStringAsFixed(1).replaceFirst(RegExp(r'\.0$'), '');
-    return '$value%';
+    return AppStrings.persianDigits('$value%');
   }
 
   String? get _ratingLabel {
@@ -170,6 +171,7 @@ class ProfilePostCard extends StatelessWidget {
                                 textDirection: TextDirection.ltr,
                                 style: scaled(AppTextStyles.discountBadge)
                                     .copyWith(color: AppColors.white),
+                                textAlign: TextAlign.right,
                               ),
                             ),
                           ),
@@ -197,6 +199,7 @@ class ProfilePostCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: headingStyle,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                         SizedBox(
@@ -210,6 +213,7 @@ class ProfilePostCard extends StatelessWidget {
                             style: metadataStyle.copyWith(
                               color: colors.onSurface,
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                         SizedBox(height: 4 * contentScale),
@@ -289,6 +293,8 @@ class ProfilePostCard extends StatelessWidget {
                                                 unit,
                                                 style: unitStyle,
                                                 textAlign: TextAlign.right,
+                                                textDirection:
+                                                    TextDirection.rtl,
                                               ),
                                             ],
                                           ],
@@ -314,6 +320,8 @@ class ProfilePostCard extends StatelessWidget {
                                             Text(
                                               AppStrings.persianDigits(rating),
                                               style: ratingStyle,
+                                              textDirection: TextDirection.rtl,
+                                              textAlign: TextAlign.right,
                                             ),
                                         ],
                                       ),

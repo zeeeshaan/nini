@@ -32,6 +32,7 @@ class PaymentDelivery extends StatelessWidget {
           PaymentStrings.buyerInformation,
           textAlign: TextAlign.right,
           style: AppTextStyles.sectionTitle,
+          textDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 16),
         Container(
@@ -56,6 +57,9 @@ class PaymentDelivery extends StatelessWidget {
                         flex: 5,
                         child: Text(
                           rows[index].$2,
+                          textDirection: index == 2 || index == 6
+                              ? TextDirection.ltr
+                              : TextDirection.rtl,
                           textAlign: TextAlign.right,
                           style: AppTextStyles.body.copyWith(
                             fontWeight: AppTextStyles.medium,
@@ -71,6 +75,7 @@ class PaymentDelivery extends StatelessWidget {
                           style: AppTextStyles.label.copyWith(
                             color: colors.onSurface.withValues(alpha: .7),
                           ),
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                     ],

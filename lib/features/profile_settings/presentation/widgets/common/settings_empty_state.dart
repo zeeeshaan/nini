@@ -32,12 +32,14 @@ class SettingsEmptyState extends StatelessWidget {
               title,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
+              textDirection: TextDirection.rtl,
             ),
             const SizedBox(height: 12),
             Text(
               message,
               textAlign: TextAlign.right,
               style: AppTextStyles.body,
+              textDirection: TextDirection.rtl,
             ),
             if (onRetry != null) ...[
               const SizedBox(height: 20),

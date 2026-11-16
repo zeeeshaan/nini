@@ -34,7 +34,11 @@ class SettingsPostsContent extends StatelessWidget {
           if (state.loadFailed)
             TextButton(
               onPressed: context.read<PostsCubit>().load,
-              child: const Text(AppStrings.retry),
+              child: const Text(
+                AppStrings.retry,
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+              ),
             ),
           Expanded(child: builder(context, state.posts)),
         ],

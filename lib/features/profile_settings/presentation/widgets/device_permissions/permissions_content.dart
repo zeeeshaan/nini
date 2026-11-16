@@ -84,7 +84,11 @@ class _PermissionsContentState extends State<PermissionsContent>
           if (state.failed)
             TextButton(
               onPressed: cubit.load,
-              child: const Text(AppStrings.retry),
+              child: const Text(
+                AppStrings.retry,
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+              ),
             ),
           for (final permission in DeviceAccess.values)
             ListTile(
@@ -97,6 +101,7 @@ class _PermissionsContentState extends State<PermissionsContent>
                 },
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyEmphasis,
+                textDirection: TextDirection.rtl,
               ),
               subtitle: Text(
                 switch (state.values[permission] ??
@@ -110,6 +115,7 @@ class _PermissionsContentState extends State<PermissionsContent>
                 },
                 textAlign: TextAlign.right,
                 style: AppTextStyles.helper,
+                textDirection: TextDirection.rtl,
               ),
             ),
           Padding(

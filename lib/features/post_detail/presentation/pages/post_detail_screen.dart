@@ -111,24 +111,30 @@ class PostDetailScreen extends StatelessWidget {
               toolbarHeight: 44,
               actions: [
                 if (canViewAnalytics)
-                  TextButton.icon(
-                    onPressed: () {
-                      if (context.read<PostsCubit?>()?.state.canViewAnalytics(
-                            post,
-                          ) !=
-                          true) {
-                        return;
-                      }
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => PostAnalyticsScreen(post: post),
-                        ),
-                      );
-                    },
-                    icon: const AppIcon(AppIcons.analytics, size: 17),
-                    label: const Text(
-                      AppStrings.viewAnalytics,
-                      style: AppTextStyles.label,
+                  Flexible(
+                    child: TextButton.icon(
+                      onPressed: () {
+                        if (context.read<PostsCubit?>()?.state.canViewAnalytics(
+                              post,
+                            ) !=
+                            true) {
+                          return;
+                        }
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => PostAnalyticsScreen(post: post),
+                          ),
+                        );
+                      },
+                      icon: const AppIcon(AppIcons.analytics, size: 17),
+                      label: const Text(
+                        AppStrings.viewAnalytics,
+                        style: AppTextStyles.label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                   ),
 

@@ -42,7 +42,11 @@ class BlockedContactsList extends StatelessWidget {
                             onPressed: () => context
                                 .read<BlockedContactsCubit>()
                                 .unblock(contact.id),
-                            child: const Text(ProfileSettingsStrings.unblock),
+                            child: const Text(
+                              ProfileSettingsStrings.unblock,
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right,
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -51,6 +55,7 @@ class BlockedContactsList extends StatelessWidget {
                                   ProfileSettingsStrings.blockedConversation,
                               textAlign: TextAlign.right,
                               style: AppTextStyles.body,
+                              textDirection: TextDirection.rtl,
                             ),
                           ),
                           const SizedBox(width: 12),

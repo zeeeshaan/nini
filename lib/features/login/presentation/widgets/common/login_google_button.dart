@@ -11,7 +11,11 @@ class LoginGoogleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton.icon(
-    label: const Text(AuthStrings.loginWithGoogle, textAlign: TextAlign.center),
+    label: const Text(
+      AuthStrings.loginWithGoogle,
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.rtl,
+    ),
     style: TextButton.styleFrom(
       minimumSize: const Size(0, 48),
       textStyle: AppTextStyles.button.copyWith(

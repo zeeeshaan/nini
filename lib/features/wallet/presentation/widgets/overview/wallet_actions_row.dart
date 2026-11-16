@@ -10,46 +10,28 @@ class WalletActionsRow extends StatelessWidget {
     required this.onWithdraw,
     required this.onTopUp,
   });
-  final VoidCallback onWithdraw, onTopUp;
+  final VoidCallback? onWithdraw, onTopUp;
+
   @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) {
-      final scale = MediaQuery.textScalerOf(context).scale(9) / 9;
-      final columns = ((constraints.maxWidth + 7) / (52 * scale + 7))
-          .floor()
-          .clamp(1, 5);
-      final width = (constraints.maxWidth - 7 * (columns - 1)) / columns;
-      final actions = [
-        WalletActionTile(
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Flexible(
+        child: WalletActionTile(
           label: WalletStrings.topUp,
           icon: AppIcons.walletTopUp,
           onTap: onTopUp,
         ),
-        const WalletActionTile(
-          label: WalletStrings.transfer,
-          icon: AppIcons.walletTransfer,
-        ),
-        const WalletActionTile(
-          label: WalletStrings.request,
-          icon: AppIcons.walletRequest,
-        ),
-        WalletActionTile(
+      ),
+      const SizedBox(width: 8),
+      Flexible(
+        child: WalletActionTile(
           label: WalletStrings.withdraw,
           icon: AppIcons.walletWithdraw,
           onTap: onWithdraw,
         ),
-        const WalletActionTile(
-          label: WalletStrings.payment,
-          icon: AppIcons.walletPayment,
-        ),
-      ];
-      return Wrap(
-        spacing: 7,
-        runSpacing: 7,
-        children: [
-          for (final action in actions) SizedBox(width: width, child: action),
-        ],
-      );
-    },
+      ),
+    ],
   );
 }

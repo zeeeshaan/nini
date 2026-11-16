@@ -23,6 +23,7 @@ class GalleryAccessNotice extends StatelessWidget {
               CreatePostStrings.limitedGalleryAccess,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
+              textDirection: TextDirection.rtl,
             ),
           ),
           Wrap(
@@ -35,6 +36,8 @@ class GalleryAccessNotice extends StatelessWidget {
                 child: const Text(
                   CreatePostStrings.selectMoreMedia,
                   style: AppTextStyles.helper,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
                 ),
               ),
               TextButton(
@@ -42,6 +45,8 @@ class GalleryAccessNotice extends StatelessWidget {
                 child: const Text(
                   CreatePostStrings.fullGalleryAccess,
                   style: AppTextStyles.helper,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
                 ),
               ),
             ],

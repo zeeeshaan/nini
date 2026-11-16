@@ -24,17 +24,22 @@ class ThemeOptions extends StatelessWidget {
               AppStrings.appearance,
               textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.titleMedium,
+              textDirection: TextDirection.rtl,
             ),
           ),
           for (final option in ThemeMode.values)
             RadioListTile<ThemeMode>(
               value: option,
               controlAffinity: ListTileControlAffinity.trailing,
-              title: Text(switch (option) {
-                ThemeMode.system => AppStrings.systemTheme,
-                ThemeMode.light => AppStrings.lightTheme,
-                ThemeMode.dark => AppStrings.darkTheme,
-              }, textAlign: TextAlign.right),
+              title: Text(
+                switch (option) {
+                  ThemeMode.system => AppStrings.systemTheme,
+                  ThemeMode.light => AppStrings.lightTheme,
+                  ThemeMode.dark => AppStrings.darkTheme,
+                },
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
             ),
         ],
       ),

@@ -40,6 +40,7 @@ class SavedPostsScreen extends StatelessWidget {
             SavedPostsStrings.title,
             textAlign: TextAlign.right,
             style: AppTextStyles.pageTitle,
+            textDirection: TextDirection.rtl,
           ),
         ),
 
@@ -84,6 +85,7 @@ class SavedPostsScreen extends StatelessWidget {
                                     : SavedPostsStrings.saveFailed,
                                 textAlign: TextAlign.right,
                                 style: AppTextStyles.body,
+                                textDirection: TextDirection.rtl,
                               ),
                               TextButton(
                                 onPressed: state.loading || state.saving
@@ -91,7 +93,11 @@ class SavedPostsScreen extends StatelessWidget {
                                     : () => context
                                           .read<SavedPostsCubit>()
                                           .load(),
-                                child: const Text(AppStrings.retry),
+                                child: const Text(
+                                  AppStrings.retry,
+                                  textDirection: TextDirection.rtl,
+                                  textAlign: TextAlign.right,
+                                ),
                               ),
                             ],
                           ),
@@ -110,12 +116,14 @@ class SavedPostsScreen extends StatelessWidget {
                                 SavedPostsStrings.empty,
                                 textAlign: TextAlign.right,
                                 style: AppTextStyles.sectionTitle,
+                                textDirection: TextDirection.rtl,
                               ),
                               SizedBox(height: 8),
                               Text(
                                 SavedPostsStrings.emptyHelp,
                                 textAlign: TextAlign.right,
                                 style: AppTextStyles.body,
+                                textDirection: TextDirection.rtl,
                               ),
                             ],
                           ),

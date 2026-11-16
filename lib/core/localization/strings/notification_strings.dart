@@ -1,15 +1,23 @@
-/// English development text for the notification preview and its accessibility labels.
+import '../app_string/app_string.dart';
+
+/// Persian interface text for the notification preview and its accessibility labels.
 abstract final class NotificationStrings {
-  static const title = "Notifications";
-  static const search = "Search notifications";
-  static const clearSearch = "Clear search";
-  static const noResults = "No notifications match your search.";
-  static const empty = "No notifications yet.";
-  static const now = "Now";
-  static const minuteAgo = "1m ago";
-  static const brand = 'HYWORK';
-  static const newOrder = "You have a new order.";
-  static const saleTitle = "SALE IS LIVE";
+  static const title = 'اعلان‌ها';
+  static const search = 'جستجو در اعلان‌ها';
+  static const clearSearch = 'پاک کردن جستجو';
+  static const noResults = 'اعلانی با این عبارت پیدا نشد.';
+  static const empty = 'هنوز اعلانی ندارید.';
+  static const now = 'اکنون';
+  static String minutesAgo(int count) =>
+      '${AppStrings.persianDigits(count)} دقیقه پیش';
+  static String hoursAgo(int count) =>
+      '${AppStrings.persianDigits(count)} ساعت پیش';
+  static String daysAgo(int count) =>
+      '${AppStrings.persianDigits(count)} روز پیش';
+  static const minuteAgo = '۱ دقیقه پیش';
+  static const brand = "های‌ورک";
+  static const newOrder = 'یک سفارش جدید دارید.';
+  static const saleTitle = 'فروش ویژه شروع شد';
   static const saleMessage =
-      "The sale has started. Do not miss the latest offers.";
+      'فروش ویژه آغاز شده است. پیشنهادهای تازه را از دست ندهید.';
 }

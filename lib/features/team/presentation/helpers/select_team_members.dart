@@ -19,6 +19,7 @@ Future<bool?> selectTeamMembers(
           title: const Text(
             TeamStrings.selectMembers,
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
           ),
           actions: [
             BlocBuilder<TeamFormCubit, TeamFormState>(
@@ -29,7 +30,11 @@ Future<bool?> selectTeamMembers(
                   onPressed: () => Navigator.of(searchContext).pop(true),
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
-                    child: Text(TeamStrings.done(state.members.length)),
+                    child: Text(
+                      TeamStrings.done(state.members.length),
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ),
               ),

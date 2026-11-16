@@ -65,7 +65,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
   @override
   Widget build(BuildContext context) => Localizations.override(
     context: context,
-    locale: const Locale('en'),
+    locale: const Locale('fa', 'IR'),
     child: Directionality(
       textDirection: TextDirection.ltr,
       child: PopScope(
@@ -79,6 +79,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                 PaymentStrings.paymentGateway,
                 style: AppTextStyles.pageTitle,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
             centerTitle: false,
@@ -94,6 +95,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                     child: Text(
                       PaymentStrings.backToCheckout,
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                 ],
@@ -123,6 +125,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                           ReceiptStrings.demoPayment,
                           style: AppTextStyles.pageTitleBold,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                       const SizedBox(height: 18),
@@ -133,6 +136,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             widget.method!.label,
                             style: AppTextStyles.bodyBold,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                       if (widget.details != null) ...[
@@ -143,6 +147,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             '${cartMoney(widget.details!.total)} ${CartStrings.toman}',
                             textAlign: TextAlign.right,
                             style: AppTextStyles.analyticsTotal,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                       ],
@@ -153,6 +158,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                           ReceiptStrings.demoNotice,
                           textAlign: TextAlign.right,
                           style: AppTextStyles.body,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                       const SizedBox(height: 28),

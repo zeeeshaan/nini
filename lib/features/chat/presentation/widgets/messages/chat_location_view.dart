@@ -78,6 +78,7 @@ class ChatLocationView extends StatelessWidget {
                 decorationColor: foreground,
               ),
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
           ],
         ),

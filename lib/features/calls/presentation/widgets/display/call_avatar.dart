@@ -21,6 +21,8 @@ class CallAvatar extends StatelessWidget {
         name.trim().isEmpty ? '?' : name.trim().characters.first.toUpperCase(),
         style: AppTextStyles.avatarInitial(radius)
             .copyWith(color: colors.onSurface),
+        textDirection: TextDirection.rtl,
+        textAlign: TextAlign.right,
       ),
     );
     final avatar = Container(

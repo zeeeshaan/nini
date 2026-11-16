@@ -74,6 +74,7 @@ class _TotalViewsSectionState extends State<TotalViewsSection> {
                 ),
                 style: AppTextStyles.smallPrint,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
         ],

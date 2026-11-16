@@ -152,6 +152,7 @@ class _OrderProblemFormState extends State<OrderProblemForm> {
                       widget.heading,
                       textAlign: TextAlign.right,
                       style: AppTextStyles.bodyEmphasis,
+                      textDirection: TextDirection.rtl,
                     ),
                     const SizedBox(height: 14),
                     TextField(
@@ -213,6 +214,7 @@ class _OrderProblemFormState extends State<OrderProblemForm> {
                                       Text(
                                         ReceiptStrings.file,
                                         textAlign: TextAlign.right,
+                                        textDirection: TextDirection.rtl,
                                       ),
                                     ],
                                   ),
@@ -226,6 +228,7 @@ class _OrderProblemFormState extends State<OrderProblemForm> {
                                       Text(
                                         ReceiptStrings.image,
                                         textAlign: TextAlign.right,
+                                        textDirection: TextDirection.rtl,
                                       ),
                                     ],
                                   ),
@@ -258,6 +261,7 @@ class _OrderProblemFormState extends State<OrderProblemForm> {
                       widget.localNotice,
                       textAlign: TextAlign.right,
                       style: AppTextStyles.label,
+                      textDirection: TextDirection.rtl,
                     ),
                   ],
                 ),

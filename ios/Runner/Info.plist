@@ -27,15 +27,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>HYWORK needs camera access to take and send photos in chats.</string>
+	<string>های‌ورک برای گرفتن و ارسال عکس در گفتگوها به دسترسی دوربین نیاز دارد.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>HYWORK needs your permission to access your location while you use the app.</string>
+	<string>های‌ورک برای انتخاب موقعیت مکانی هنگام استفاده از برنامه به اجازه شما نیاز دارد.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>HYWORK can access your location when the app is closed only if you choose to allow access all the time.</string>
+	<string>های‌ورک تنها در صورت اجازه دسترسی همیشگی شما می‌تواند هنگام بسته بودن برنامه به موقعیت مکانی دسترسی داشته باشد.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>HYWORK needs microphone access to record and send voice messages in chats.</string>
+	<string>های‌ورک برای ضبط و ارسال پیام صوتی در گفتگوها به دسترسی میکروفون نیاز دارد.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>HYWORK needs photo library access to select photos and videos for your posts and chats.</string>
+	<string>های‌ورک برای انتخاب عکس و ویدیو برای پست‌ها و گفتگوها به دسترسی گالری نیاز دارد.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

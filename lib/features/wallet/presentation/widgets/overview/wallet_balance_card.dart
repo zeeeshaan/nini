@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/wallet_strings.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import '../../../data/wallet_sample_data.dart';
 import 'wallet_card_footer.dart';
 
-/// The same layered balance card is used on both wallet screens.
 class WalletBalanceCard extends StatelessWidget {
-  const WalletBalanceCard({super.key, this.showWithdrawal = false});
+  const WalletBalanceCard({
+    super.key,
+    this.showWithdrawal = false,
+    this.onTopUp,
+    this.onWithdraw,
+  });
   final bool showWithdrawal;
+  final VoidCallback? onTopUp, onWithdraw;
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -47,7 +53,7 @@ class WalletBalanceCard extends StatelessWidget {
               color: colors.onSurface,
               borderRadius: BorderRadius.circular(20),
             ),
-            padding: const EdgeInsets.fromLTRB(40, 32, 16, 24),
+            padding: const EdgeInsets.fromLTRB(20, 28, 28, 14),
             child: DefaultTextStyle.merge(
               style: AppTextStyles.inherit.copyWith(color: colors.surface),
               child: Column(
@@ -55,25 +61,24 @@ class WalletBalanceCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        WalletStrings.balance,
-                        style: AppTextStyles.label,
-                        textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
-                      ),
-                      Text(
-                        AppStrings.persianDigits(WalletSampleData.balance),
-                        style: AppTextStyles.walletBalance,
-                        textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
-                      ),
-                    ],
+                  const Text(
+                    WalletStrings.balance,
+                    style: AppTextStyles.label,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
                   ),
-                  const SizedBox(height: 24),
-                  WalletCardFooter(showWithdrawal: showWithdrawal),
+                  Text(
+                    AppStrings.persianDigits(WalletSampleData.balance),
+                    style: AppTextStyles.walletBalance,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
+                  ),
+                  const SizedBox(height: 28),
+                  WalletCardFooter(
+                    showWithdrawal: showWithdrawal,
+                    onTopUp: onTopUp,
+                    onWithdraw: onWithdraw,
+                  ),
                 ],
               ),
             ),

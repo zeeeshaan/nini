@@ -13,7 +13,7 @@ class HomeFeedHeader extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
-              'HYWORK',
+              "های‌ورک",
               textDirection: TextDirection.ltr,
               textAlign: TextAlign.center,
               style: AppTextStyles.homeBrand,

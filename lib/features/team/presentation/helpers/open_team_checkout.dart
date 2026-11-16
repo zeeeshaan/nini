@@ -23,8 +23,9 @@ Future<String?> openTeamCheckout(
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
-          'A selected service has no valid price or quantity.',
+          "قیمت یا مقدار یکی از خدمات انتخاب‌شده معتبر نیست.",
           textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
         ),
       ),
     );

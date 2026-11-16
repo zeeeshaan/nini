@@ -11,28 +11,48 @@ class WalletActionTile extends StatelessWidget {
   });
   final String label, icon;
   final VoidCallback? onTap;
+
   @override
-  Widget build(BuildContext context) => Material(
-    color: Theme.of(context).colorScheme.surfaceContainerHighest,
-    borderRadius: BorderRadius.circular(14),
-    child: InkWell(
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Semantics(
+      button: true,
+      label: label,
+      enabled: onTap != null,
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 9),
-        child: Column(
-          children: [
-            AppIcon(icon, size: 23),
-            const SizedBox(height: 5),
-            Text(
-              label,
-              style: AppTextStyles.metadata,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+      excludeSemantics: true,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 44, minHeight: 52),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: colors.surface,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: AppIcon(icon, size: 18, color: colors.onSurface),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  label,
+                  style: AppTextStyles.micro.copyWith(color: colors.surface),
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

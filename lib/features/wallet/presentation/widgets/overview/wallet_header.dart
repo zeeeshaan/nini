@@ -18,6 +18,8 @@ class WalletHeader extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.centerRight,
       child: Text(
         title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: AppTextStyles.dialogTitle,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,

@@ -131,11 +131,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   const Text(
                                     ProfileEditStrings.loadFailed,
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                   TextButton(
                                     onPressed: () =>
                                         context.read<UserProfileCubit>().load(),
-                                    child: const Text(AppStrings.retry),
+                                    child: const Text(
+                                      AppStrings.retry,
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                    ),
                                   ),
                                 ],
                               ),

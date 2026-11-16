@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/strings/team_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/team/presentation/widgets/common/team_member_avatars.dart';
@@ -27,9 +28,10 @@ class TeamChatMembersBar extends StatelessWidget
             children: [
               Flexible(
                 child: Text(
-                  'People (${members.length})',
+                  TeamStrings.peopleCount(members.length),
                   textAlign: TextAlign.right,
                   style: AppTextStyles.smallPrint,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
               const SizedBox(width: 12),

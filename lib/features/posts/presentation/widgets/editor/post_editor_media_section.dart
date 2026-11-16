@@ -56,6 +56,7 @@ class PostEditorMediaSection extends StatelessWidget {
                     label: const Text(
                       ProfilePostStrings.replaceMedia,
                       textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
                     ),
                   ),
                   TextButton.icon(
@@ -67,6 +68,7 @@ class PostEditorMediaSection extends StatelessWidget {
                     label: const Text(
                       ProfilePostStrings.addMedia,
                       textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
                     ),
                   ),
                 ],

@@ -66,6 +66,7 @@ class PostPricingInventorySection extends StatelessWidget {
           CreatePostStrings.inventoryHelp,
           textAlign: TextAlign.right,
           style: theme.textTheme.bodySmall,
+          textDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 8),
         AppTextField(

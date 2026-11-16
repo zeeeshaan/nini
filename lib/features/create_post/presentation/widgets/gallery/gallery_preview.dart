@@ -238,6 +238,8 @@ class GalleryFileTile extends StatelessWidget {
                           ? AppColors.white
                           : colors.surface,
                     ),
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ),
@@ -257,6 +259,7 @@ class GalleryFileTile extends StatelessWidget {
                   style: AppTextStyles.smallPrint.copyWith(
                     color: colors.onSurface,
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
             ),

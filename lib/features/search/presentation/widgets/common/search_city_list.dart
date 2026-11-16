@@ -53,7 +53,7 @@ class SearchCityList extends StatelessWidget {
                   const SizedBox(width: 20),
                   Text(
                     SearchStrings.display(city),
-                    textDirection: TextDirection.ltr,
+                    textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                   ),
                 ],

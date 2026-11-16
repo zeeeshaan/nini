@@ -10,7 +10,9 @@ import 'splash_brand.dart';
 
 /// Fit the reference on phones and larger displays; short windows can scroll.
 class SplashContent extends StatelessWidget {
-  const SplashContent({super.key});
+  const SplashContent({super.key, this.status});
+
+  final Widget? status;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -34,15 +36,17 @@ class SplashContent extends StatelessWidget {
                     SizedBox(height: 18 * scale),
                     StaggeredEntrance(
                       index: 2,
-                      child: Semantics(
-                        label: AuthStrings.loading,
-                        liveRegion: true,
-                        child: AppLoader(
-                          size: 24 * scale,
-                          strokeWidth: 2,
-                          color: AppColors.white,
-                        ),
-                      ),
+                      child:
+                          status ??
+                          Semantics(
+                            label: AuthStrings.loading,
+                            liveRegion: true,
+                            child: AppLoader(
+                              size: 24 * scale,
+                              strokeWidth: 2,
+                              color: AppColors.white,
+                            ),
+                          ),
                     ),
                   ],
                 ),

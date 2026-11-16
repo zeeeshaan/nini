@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/strings/profile_settings_strings.dart';
@@ -50,6 +51,7 @@ class InsightsContent extends StatelessWidget {
               ProfileSettingsStrings.postStatistics,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
+              textDirection: TextDirection.rtl,
             ),
           ),
           RadioGroup<InsightMetric>(
@@ -68,6 +70,7 @@ class InsightsContent extends StatelessWidget {
                       insightMetricLabel(metric),
                       textAlign: TextAlign.right,
                       style: AppTextStyles.body,
+                      textDirection: TextDirection.rtl,
                     ),
                     subtitle: Text(
                       (analytics.storageError || analytics.loading) &&
@@ -79,9 +82,10 @@ class InsightsContent extends StatelessWidget {
                                   (metric == InsightMetric.bookings ||
                                       metric == InsightMetric.sales)
                           ? '—'
-                          : '${values.value(metric)}',
+                          : AppStrings.persianDigits(values.value(metric)),
                       textAlign: TextAlign.right,
                       style: AppTextStyles.bodyEmphasis,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
               ],

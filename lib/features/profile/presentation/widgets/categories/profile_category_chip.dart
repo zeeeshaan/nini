@@ -46,6 +46,7 @@ class ProfileCategoryChip extends StatelessWidget {
               softWrap: false,
               textScaler: MediaQuery.textScalerOf(context),
               style: AppTextStyles.body.copyWith(height: 1.4),
+              textAlign: TextAlign.right,
             ),
           ),
         ),

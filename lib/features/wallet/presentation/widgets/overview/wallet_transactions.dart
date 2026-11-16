@@ -17,7 +17,7 @@ class WalletTransactions extends StatelessWidget {
         style: AppTextStyles.bodyEmphasis,
         textDirection: TextDirection.rtl,
       ),
-      const SizedBox(height: 18),
+      const SizedBox(height: 16),
       const Text(
         WalletStrings.today,
         textAlign: TextAlign.right,
@@ -27,7 +27,7 @@ class WalletTransactions extends StatelessWidget {
       const SizedBox(height: 6),
       for (final transaction in WalletSampleData.today)
         WalletTransactionTile(transaction: transaction),
-      const SizedBox(height: 24),
+      const SizedBox(height: 22),
       const Text(
         WalletStrings.yesterday,
         textAlign: TextAlign.right,

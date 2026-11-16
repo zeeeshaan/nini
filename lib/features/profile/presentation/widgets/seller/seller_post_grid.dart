@@ -48,6 +48,7 @@ class SellerPostGrid extends StatelessWidget {
               AppStrings.noSellerPosts,
               style: AppTextStyles.body,
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
             ),
           ),
         )

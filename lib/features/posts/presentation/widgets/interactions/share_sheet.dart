@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
@@ -10,11 +9,11 @@ import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 
 // Open the share sheet from any post screen.
 Future<void> openPostShareSheet(
-    BuildContext context, {
-      required String postId,
-      required String postText,
-      String? postUrl,
-    }) {
+  BuildContext context, {
+  required String postId,
+  required String postText,
+  String? postUrl,
+}) {
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
@@ -62,8 +61,7 @@ class ShareSheet extends StatefulWidget {
 }
 
 class _ShareSheetState extends State<ShareSheet> {
-  final TextEditingController _searchController =
-  TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   // Demo contacts until real chat sharing is connected.
   static const List<String> _contacts = [
@@ -83,7 +81,7 @@ class _ShareSheetState extends State<ShareSheet> {
     final url = widget.postUrl?.trim();
 
     return [
-      text.isEmpty ? 'Check out this post on HYWORK!' : text,
+      text.isEmpty ? "این پست را در های‌ورک ببینید!" : text,
       if (url != null && url.isNotEmpty) url,
     ].join('\n\n');
   }
@@ -92,7 +90,13 @@ class _ShareSheetState extends State<ShareSheet> {
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message, textAlign: TextAlign.right)),
+      SnackBar(
+        content: Text(
+          message,
+          textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
+        ),
+      ),
     );
   }
 
@@ -102,14 +106,13 @@ class _ShareSheetState extends State<ShareSheet> {
       final renderObject = context.findRenderObject();
 
       final origin = renderObject is RenderBox
-          ? renderObject.localToGlobal(Offset.zero) &
-      renderObject.size
+          ? renderObject.localToGlobal(Offset.zero) & renderObject.size
           : null;
 
       final result = await SharePlus.instance.share(
         ShareParams(
           text: _shareText,
-          subject: 'HYWORK post',
+          subject: "پست های‌ورک",
           sharePositionOrigin: origin,
         ),
       );
@@ -120,59 +123,43 @@ class _ShareSheetState extends State<ShareSheet> {
         Navigator.of(context).pop();
       }
     } catch (_) {
-      _showError('Could not open sharing options.');
+      _showError("باز کردن گزینه‌های اشتراک‌گذاری انجام نشد.");
     }
   }
 
   // Opens an external app or its web sharing page.
   Future<void> _openExternal(Uri uri) async {
     try {
-      final opened = await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
+      final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
 
       if (!mounted) return;
 
       if (opened) {
         Navigator.of(context).pop();
       } else {
-        _showError('Could not open this sharing option.');
+        _showError("باز کردن این روش اشتراک‌گذاری انجام نشد.");
       }
     } catch (_) {
-      _showError('Could not open this sharing option.');
+      _showError("باز کردن این روش اشتراک‌گذاری انجام نشد.");
     }
   }
 
   Future<void> _shareWhatsApp() {
-    return _openExternal(
-      Uri.https(
-        'wa.me',
-        '/',
-        {'text': _shareText},
-      ),
-    );
+    return _openExternal(Uri.https('wa.me', '/', {'text': _shareText}));
   }
 
   Future<void> _shareTelegram() {
     return _openExternal(
-      Uri.https(
-        't.me',
-        '/share/url',
-        {
-          'url': widget.postUrl?.trim() ?? '',
-          'text': widget.postText.trim(),
-        },
-      ),
+      Uri.https('t.me', '/share/url', {
+        'url': widget.postUrl?.trim() ?? '',
+        'text': widget.postText.trim(),
+      }),
     );
   }
 
   Future<void> _shareMessages() {
     return _openExternal(
-      Uri(
-        scheme: 'sms',
-        queryParameters: {'body': _shareText},
-      ),
+      Uri(scheme: 'sms', queryParameters: {'body': _shareText}),
     );
   }
 
@@ -180,11 +167,7 @@ class _ShareSheetState extends State<ShareSheet> {
     final url = widget.postUrl?.trim();
     final hasLink = url != null && url.isNotEmpty;
 
-    await Clipboard.setData(
-      ClipboardData(
-        text: hasLink ? url : _shareText,
-      ),
-    );
+    await Clipboard.setData(ClipboardData(text: hasLink ? url : _shareText));
 
     if (!mounted) return;
 
@@ -195,8 +178,9 @@ class _ShareSheetState extends State<ShareSheet> {
     messenger.showSnackBar(
       SnackBar(
         content: Text(
-          hasLink ? 'Post link copied' : 'Post text copied',
+          hasLink ? "پیوند پست کپی شد" : "متن پست کپی شد",
           textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
         ),
       ),
     );
@@ -215,17 +199,13 @@ class _ShareSheetState extends State<ShareSheet> {
 
     // Light theme -> pure black.
     // Dark theme -> pure white.
-    final background =
-    isDark ? AppColors.white : AppColors.black;
+    final background = isDark ? AppColors.white : AppColors.black;
 
-    final foreground =
-    isDark ? AppColors.black : AppColors.white;
+    final foreground = isDark ? AppColors.black : AppColors.white;
 
     return Material(
       color: background,
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(24),
-      ),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       clipBehavior: Clip.antiAlias,
       child: SafeArea(
         top: false,
@@ -254,8 +234,7 @@ class _ShareSheetState extends State<ShareSheet> {
                     surface: background,
                     onSurface: foreground,
                   ),
-                  inputDecorationTheme:
-                  theme.inputDecorationTheme.copyWith(
+                  inputDecorationTheme: theme.inputDecorationTheme.copyWith(
                     filled: true,
                     fillColor: foreground.withValues(alpha: 0.12),
                     hintStyle: AppTextStyles.bodyText.copyWith(
@@ -269,10 +248,8 @@ class _ShareSheetState extends State<ShareSheet> {
                 ),
                 child: AppTextField(
                   controller: _searchController,
-                  hint: 'Search',
-                  textStyle: AppTextStyles.bodyText.copyWith(
-                    color: foreground,
-                  ),
+                  hint: "جستجو",
+                  textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.rtl,
                   suffixIcon: Icon(
@@ -291,13 +268,10 @@ class _ShareSheetState extends State<ShareSheet> {
               child: AnimatedBuilder(
                 animation: _searchController,
                 builder: (context, _) {
-                  final query =
-                  _searchController.text.trim().toLowerCase();
+                  final query = _searchController.text.trim().toLowerCase();
 
                   final contacts = _contacts
-                      .where(
-                        (name) => name.toLowerCase().contains(query),
-                  )
+                      .where((name) => name.toLowerCase().contains(query))
                       .toList();
 
                   if (contacts.isEmpty) {
@@ -305,11 +279,12 @@ class _ShareSheetState extends State<ShareSheet> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          'No contacts found',
+                          "مخاطبی یافت نشد",
                           style: AppTextStyles.bodyText.copyWith(
                             color: foreground,
                           ),
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                     );
@@ -321,12 +296,12 @@ class _ShareSheetState extends State<ShareSheet> {
                       vertical: 8,
                     ),
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 1.05,
-                    ),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 1.05,
+                        ),
                     itemCount: contacts.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -334,9 +309,7 @@ class _ShareSheetState extends State<ShareSheet> {
                         children: [
                           CircleAvatar(
                             radius: 28,
-                            backgroundColor: foreground.withValues(
-                              alpha: 0.85,
-                            ),
+                            backgroundColor: foreground.withValues(alpha: 0.85),
                           ),
                           const SizedBox(height: 8),
                           Text(
@@ -347,6 +320,7 @@ class _ShareSheetState extends State<ShareSheet> {
                             style: AppTextStyles.caption.copyWith(
                               color: foreground,
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
                         ],
                       );
@@ -356,10 +330,7 @@ class _ShareSheetState extends State<ShareSheet> {
               ),
             ),
 
-            Divider(
-              height: 1,
-              color: foreground.withValues(alpha: 0.2),
-            ),
+            Divider(height: 1, color: foreground.withValues(alpha: 0.2)),
 
             // External sharing shortcuts.
             SizedBox(
@@ -372,21 +343,21 @@ class _ShareSheetState extends State<ShareSheet> {
                 ),
                 children: [
                   _shareOption(
-                    label: 'WhatsApp',
+                    label: "واتساپ",
                     icon: Icons.phone_rounded,
                     color: const Color(0xFF25D366),
                     foreground: foreground,
                     onTap: _shareWhatsApp,
                   ),
                   _shareOption(
-                    label: 'Telegram',
+                    label: "تلگرام",
                     icon: Icons.send_rounded,
                     color: const Color(0xFF229ED9),
                     foreground: foreground,
                     onTap: _shareTelegram,
                   ),
                   _shareOption(
-                    label: 'Messenger',
+                    label: "مسنجر",
                     icon: Icons.message_rounded,
                     color: const Color(0xFF168AFF),
                     foreground: foreground,
@@ -394,7 +365,7 @@ class _ShareSheetState extends State<ShareSheet> {
                     onTap: _sharePost,
                   ),
                   _shareOption(
-                    label: 'Messages',
+                    label: "پیام‌ها",
                     icon: Icons.sms_rounded,
                     color: const Color(0xFF1877F2),
                     foreground: foreground,
@@ -402,15 +373,15 @@ class _ShareSheetState extends State<ShareSheet> {
                   ),
                   _shareOption(
                     label: widget.postUrl?.trim().isNotEmpty == true
-                        ? 'Copy link'
-                        : 'Copy text',
+                        ? "کپی پیوند"
+                        : "کپی متن",
                     icon: Icons.link_rounded,
                     color: const Color(0xFF505050),
                     foreground: foreground,
                     onTap: _copyPost,
                   ),
                   _shareOption(
-                    label: 'More',
+                    label: "بیشتر",
                     icon: Icons.more_horiz_rounded,
                     color: const Color(0xFF505050),
                     foreground: foreground,
@@ -442,11 +413,7 @@ class _ShareSheetState extends State<ShareSheet> {
             CircleAvatar(
               radius: 20,
               backgroundColor: color,
-              child: Icon(
-                icon,
-                size: 22,
-                color: Colors.white,
-              ),
+              child: Icon(icon, size: 22, color: Colors.white),
             ),
             const SizedBox(height: 6),
             Text(
@@ -454,9 +421,8 @@ class _ShareSheetState extends State<ShareSheet> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: AppTextStyles.caption.copyWith(
-                color: foreground,
-              ),
+              style: AppTextStyles.caption.copyWith(color: foreground),
+              textDirection: TextDirection.rtl,
             ),
           ],
         ),

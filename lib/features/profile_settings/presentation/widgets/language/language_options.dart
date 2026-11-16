@@ -16,21 +16,19 @@ class LanguageOptions extends StatelessWidget {
           children: [
             RadioListTile<String>(
               value: 'en',
+              enabled: false,
               title: Text(
                 ProfileSettingsStrings.english,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
             RadioListTile<String>(
               value: 'fa',
-              enabled: false,
               title: Text(
                 ProfileSettingsStrings.persian,
                 textAlign: TextAlign.right,
-              ),
-              subtitle: Text(
-                ProfileSettingsStrings.notAvailable,
-                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
               ),
             ),
           ],

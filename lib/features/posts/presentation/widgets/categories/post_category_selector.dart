@@ -15,7 +15,7 @@ class PostCategorySelector extends StatelessWidget {
   Widget build(BuildContext context) => PersianFeature(
     child: Localizations.override(
       context: context,
-      locale: const Locale('en'),
+      locale: const Locale('fa', 'IR'),
       child: BlocBuilder<ProfileCategoriesCubit, ProfileCategoriesState>(
         builder: (context, categories) => BlocBuilder<CreatePostCubit, PostDraft>(
           builder: (context, draft) {
@@ -33,14 +33,14 @@ class PostCategorySelector extends StatelessWidget {
                     isExpanded: true,
                     decoration: InputDecoration(
                       labelText: english
-                          ? 'Category'
+                          ? "دسته‌بندی"
                           : ProfilePostStrings.category,
                     ),
                     items: [
                       DropdownMenuItem(
                         value: '',
                         child: Text(
-                          english ? 'All only' : ProfilePostStrings.allOnly,
+                          english ? "فقط همه" : ProfilePostStrings.allOnly,
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.right,
                         ),
@@ -80,7 +80,7 @@ class PostCategorySelector extends StatelessWidget {
                       Expanded(
                         child: Text(
                           english
-                              ? 'Could not load categories. Try again.'
+                              ? "بارگذاری دسته‌بندی‌ها انجام نشد. دوباره تلاش کنید."
                               : ProfilePostStrings.loadFailed,
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.right,
@@ -89,7 +89,7 @@ class PostCategorySelector extends StatelessWidget {
                       TextButton(
                         onPressed: context.read<ProfileCategoriesCubit>().load,
                         child: Text(
-                          english ? 'Retry' : ProfilePostStrings.retry,
+                          english ? "تلاش دوباره" : ProfilePostStrings.retry,
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.right,
                         ),
@@ -108,7 +108,7 @@ class PostCategorySelector extends StatelessWidget {
                     icon: const Icon(Icons.tune, size: 18),
                     label: Text(
                       english
-                          ? 'Manage categories'
+                          ? "مدیریت دسته‌بندی‌ها"
                           : ProfilePostStrings.manageTabs,
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.right,

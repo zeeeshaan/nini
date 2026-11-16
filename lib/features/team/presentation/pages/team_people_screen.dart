@@ -33,7 +33,13 @@ class TeamPeopleScreen extends StatelessWidget {
 
               automaticallyImplyLeading: false,
             ),
-            body: const Center(child: Text('Team unavailable')),
+            body: const Center(
+              child: Text(
+                "تیم در دسترس نیست",
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+              ),
+            ),
           );
         }
         final query = state.query.trim().toLowerCase();
@@ -41,24 +47,28 @@ class TeamPeopleScreen extends StatelessWidget {
           final selection = team.providers
               .where((entry) => entry.provider.id == person.id)
               .firstOrNull;
-          return '${person.name} ${selection?.post.title ?? 'Organizer'}'
+          return '${person.name} ${selection?.post.title ?? "مدیر تیم"}'
               .toLowerCase()
               .contains(query);
         }).toList();
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              tooltip: 'Add people',
+              tooltip: "افزودن افراد",
               onPressed: () => addTeamPeople(context, team, repository),
               icon: const AppIcon(AppIcons.add, size: 26),
             ),
             title: const Align(
               alignment: Alignment.centerRight,
-              child: Text('People', textAlign: TextAlign.right),
+              child: Text(
+                "اعضا",
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
             ),
             actions: [
               IconButton(
-                tooltip: 'Back',
+                tooltip: "بازگشت",
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const RotatedBox(
                   quarterTurns: 2,
@@ -95,9 +105,10 @@ class TeamPeopleScreen extends StatelessWidget {
                             child: people.isEmpty
                                 ? const Center(
                                     child: Text(
-                                      'No people match your search',
+                                      "فردی مطابق جستجوی شما یافت نشد",
                                       textAlign: TextAlign.right,
                                       style: AppTextStyles.bodyText,
+                                      textDirection: TextDirection.rtl,
                                     ),
                                   )
                                 : SingleChildScrollView(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/assets/app_assets.dart';
 import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/core/network/api_client.dart';
 import 'package:nini/features/otp_verification/presentation/pages/otp_verification_screen.dart';
 import 'package:nini/features/login/presentation/widgets/common/auth_screen_layout.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
@@ -61,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(AuthRepository(ApiClient())),
+      create: (context) => AuthBloc(context.read<AuthRepository>()),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is OtpRequestAccepted) {

@@ -97,7 +97,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
         (cartItem != null ||
             (itemToAdd != null && itemToAdd.accepts(quantity)));
     final savedRating = double.tryParse(
-      AppStrings.persianDigits(post.metadata['rating'] ?? ''),
+      AppStrings.latinDigits(post.metadata['rating'] ?? ''),
     );
     final rating =
         savedRating != null &&
@@ -117,7 +117,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
             ),
             (
               AppStrings.serviceMinimumOrder,
-              '1 ${(post.details.unit ?? PostUnit.session).label}',
+              '۱ ${(post.details.unit ?? PostUnit.session).label}',
             ),
             if (post.details.address?.address.isNotEmpty == true)
               (AppStrings.serviceArea, post.details.address!.address),

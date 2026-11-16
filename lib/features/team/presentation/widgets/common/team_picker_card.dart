@@ -1,3 +1,4 @@
+import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -45,9 +46,10 @@ class TeamPickerCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Team',
+                "تیم",
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyText.copyWith(color: colors.onSurface),
+                textDirection: TextDirection.rtl,
               ),
 
               const SizedBox(height: 10),
@@ -67,14 +69,19 @@ class TeamPickerCard extends StatelessWidget {
                 children: [
                   Icon(Icons.chevron_left, color: colors.onSurface),
 
-                  const Spacer(),
+                  const SizedBox(width: 8),
 
-                  Text(
-                    memberCount == 0 ? 'Add members' : '$memberCount',
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.bodyText.copyWith(
-                      color: colors.onSurface,
-                      fontWeight: FontWeight.w600,
+                  Expanded(
+                    child: Text(
+                      memberCount == 0
+                          ? "افزودن اعضا"
+                          : AppStrings.persianDigits(memberCount),
+                      textAlign: TextAlign.right,
+                      style: AppTextStyles.bodyText.copyWith(
+                        color: colors.onSurface,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
 

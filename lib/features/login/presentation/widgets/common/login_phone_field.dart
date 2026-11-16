@@ -41,7 +41,11 @@ class LoginPhoneField extends StatelessWidget {
         ),
         prefixIcon: const Center(
           widthFactor: 1,
-          child: Text('+98', textDirection: TextDirection.ltr),
+          child: Text(
+            '+98',
+            textDirection: TextDirection.ltr,
+            textAlign: TextAlign.right,
+          ),
         ),
       ),
     ),

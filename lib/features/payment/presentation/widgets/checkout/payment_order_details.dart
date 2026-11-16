@@ -16,6 +16,7 @@ class PaymentOrderDetails extends StatelessWidget {
         PaymentStrings.orderDetails,
         textAlign: TextAlign.right,
         style: AppTextStyles.sectionTitle,
+        textDirection: TextDirection.rtl,
       ),
       const SizedBox(height: 12),
       for (final item in details.items)

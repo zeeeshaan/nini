@@ -1,61 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/wallet_strings.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:nini/core/theme/app_text_styles.dart';
 
 import '../../../data/wallet_sample_data.dart';
+import 'wallet_actions_row.dart';
 
 class WalletCardFooter extends StatelessWidget {
-  const WalletCardFooter({super.key, required this.showWithdrawal});
+  const WalletCardFooter({
+    super.key,
+    required this.showWithdrawal,
+    this.onTopUp,
+    this.onWithdraw,
+  });
   final bool showWithdrawal;
+  final VoidCallback? onTopUp, onWithdraw;
+
   @override
-  Widget build(BuildContext context) => Wrap(
-    alignment: WrapAlignment.spaceBetween,
-    crossAxisAlignment: WrapCrossAlignment.end,
-    spacing: 12,
-    runSpacing: 12,
-    children: [
-      Text(
+  Widget build(BuildContext context) => AppResponsiveBuilder(
+    builder: (context, responsive) {
+      final scale = MediaQuery.textScalerOf(context).scale(14) / 14;
+      final actions = SizedBox(
+        width: (104 * scale).clamp(0, responsive.width),
+        child: WalletActionsRow(onTopUp: onTopUp, onWithdraw: onWithdraw),
+      );
+      final owner = Text(
         WalletStrings.ownerLabel(WalletSampleData.owner),
         style: AppTextStyles.label,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
-      ),
-      if (showWithdrawal)
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
+      );
+      if (responsive.width < 220 * scale) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              AppStrings.persianDigits(WalletSampleData.withdrawalAmount),
-              style: AppTextStyles.amount,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-            ),
-            const SizedBox(height: 2),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Flexible(
-                  child: Text(
-                    WalletStrings.withdrawalAmount,
-                    style: AppTextStyles.smallPrint,
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                AppIcon(
-                  AppIcons.walletPayment,
-                  size: 18,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-              ],
-            ),
+            Align(alignment: Alignment.centerLeft, child: actions),
+            const SizedBox(height: 8),
+            owner,
           ],
-        ),
-    ],
+        );
+      }
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          actions,
+          const SizedBox(width: 12),
+          Expanded(child: owner),
+        ],
+      );
+    },
   );
 }

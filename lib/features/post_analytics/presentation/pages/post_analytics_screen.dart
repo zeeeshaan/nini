@@ -68,6 +68,7 @@ class _AnalyticsAccessNotice extends StatelessWidget {
                   AppStrings.analyticsOwnerOnly,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.body,
+                  textDirection: TextDirection.rtl,
                 ),
         ),
       ),
@@ -90,6 +91,7 @@ class _PostAnalyticsView extends StatelessWidget {
           AppStrings.analytics,
           style: AppTextStyles.analyticsTitle,
           textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
         ),
       ),
 
@@ -143,6 +145,7 @@ class _PostAnalyticsView extends StatelessWidget {
                             AppStrings.analyticsSaveFailed,
                             style: AppTextStyles.helper,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                       TotalViewsSection(reportForPeriod: report),

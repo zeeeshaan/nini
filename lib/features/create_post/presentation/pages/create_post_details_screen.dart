@@ -129,7 +129,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
       final theme = Theme.of(context), colors = theme.colorScheme;
       return Localizations.override(
         context: context,
-        locale: const Locale('en'),
+        locale: const Locale('fa', 'IR'),
         child: PopScope(
           canPop: !_operation.state.saving,
           child: Scaffold(

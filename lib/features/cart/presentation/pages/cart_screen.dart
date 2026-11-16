@@ -66,7 +66,7 @@ class CartScreen extends StatelessWidget {
       };
       return Localizations.override(
         context: context,
-        locale: const Locale('en'),
+        locale: const Locale('fa', 'IR'),
         child: Directionality(
           textDirection: TextDirection.ltr,
           child: PopScope(

@@ -15,21 +15,25 @@ class WalletAmountSection extends StatefulWidget {
   const WalletAmountSection({
     super.key,
     this.label = WalletStrings.pendingAmount,
+    this.controller,
   });
   final String label;
+  final TextEditingController? controller;
   @override
   State<WalletAmountSection> createState() => _WalletAmountSectionState();
 }
 
 class _WalletAmountSectionState extends State<WalletAmountSection> {
-  final _amount = TextEditingController(
-    text: AppStrings.persianDigits(WalletSampleData.pendingAmount),
-  );
+  late final _amount =
+      widget.controller ??
+      TextEditingController(
+        text: AppStrings.persianDigits(WalletSampleData.pendingAmount),
+      );
   final _presets = WalletAmountCubit();
   @override
   void dispose() {
     _presets.close();
-    _amount.dispose();
+    if (widget.controller == null) _amount.dispose();
     super.dispose();
   }
 

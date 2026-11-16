@@ -42,7 +42,8 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
     if (!widget.enabled) return;
     final date = await showDatePicker(
       context: context,
-      locale: const Locale('en'),
+      locale: const Locale('fa', 'IR'),
+      textDirection: TextDirection.rtl,
       initialDate: _date ?? DateTime(2000),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),

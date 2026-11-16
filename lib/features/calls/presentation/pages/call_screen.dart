@@ -145,6 +145,7 @@ class _CallViewState extends State<_CallView> {
                                       color: foreground.withValues(alpha: .55),
                                     ),
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                               if (!video) ...[
@@ -157,6 +158,7 @@ class _CallViewState extends State<_CallView> {
                                       color: foreground,
                                     ),
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                                 Expanded(
@@ -191,6 +193,7 @@ class _CallViewState extends State<_CallView> {
                                     style: AppTextStyles.callName.copyWith(
                                       color: foreground,
                                     ),
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                               ),
@@ -203,6 +206,7 @@ class _CallViewState extends State<_CallView> {
                                     style: AppTextStyles.comfortableBody
                                         .copyWith(color: foreground),
                                     textAlign: TextAlign.right,
+                                    textDirection: TextDirection.rtl,
                                   ),
                                 ),
                               ],
@@ -236,6 +240,7 @@ class _CallViewState extends State<_CallView> {
                                         title: const Text(
                                           AppStrings.speakerOn,
                                           textAlign: TextAlign.right,
+                                          textDirection: TextDirection.rtl,
                                         ),
                                         value: state.session.speakerEnabled,
                                         onChanged: state.busy

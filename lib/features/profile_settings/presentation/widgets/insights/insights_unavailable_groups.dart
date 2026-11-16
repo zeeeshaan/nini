@@ -25,20 +25,28 @@ class InsightsUnavailableGroups extends StatelessWidget {
             group.key,
             textAlign: TextAlign.right,
             style: AppTextStyles.sectionTitle,
+            textDirection: TextDirection.rtl,
           ),
         ),
         for (final label in group.value)
           ListTile(
-            leading: const Text('—', style: AppTextStyles.bodyEmphasis),
+            leading: const Text(
+              '—',
+              style: AppTextStyles.bodyEmphasis,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+            ),
             title: Text(
               label,
               textAlign: TextAlign.right,
               style: AppTextStyles.body,
+              textDirection: TextDirection.rtl,
             ),
             subtitle: const Text(
               ProfileSettingsStrings.backendRequired,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
+              textDirection: TextDirection.rtl,
             ),
           ),
       ],

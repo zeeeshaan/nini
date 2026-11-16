@@ -26,7 +26,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
   @override
   Widget build(BuildContext context) => Localizations.override(
     context: context,
-    locale: const Locale('en'),
+    locale: const Locale('fa', 'IR'),
     delegates: const [
       ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,

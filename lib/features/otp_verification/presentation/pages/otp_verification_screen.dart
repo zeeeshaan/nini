@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/assets/app_assets.dart';
 import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/core/network/api_client.dart';
-import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
+import 'package:nini/features/login/presentation/pages/login_screen.dart';
 import 'package:nini/features/login/presentation/widgets/common/auth_screen_layout.dart';
 import 'package:nini/features/otp_verification/presentation/cubit/otp_verification_cubit.dart';
 
@@ -34,16 +34,15 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  late final ApiClient _apiClient = ApiClient();
-
-  late final AuthRepository _authRepository = AuthRepository(_apiClient);
+  late final AuthRepository _authRepository = context.read<AuthRepository>();
 
   late final OtpVerificationCubit _verification = OtpVerificationCubit(
-    OtpVerificationRepository(_apiClient, SecureTokenStore()),
+    context.read<OtpVerificationRepository>(),
   );
 
   bool _expired = false;
   int _inputVersion = 0;
+  bool _navigated = false;
 
   void _verifyOtp() {
     if (_expired || !_verification.state.canVerify) return;
@@ -90,15 +89,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       if (!mounted) return false;
 
       final message = error.response?.statusCode == 429
-          ? 'Too many requests. Please try again later.'
-          : 'Could not resend OTP. Please try again.';
+          ? "تعداد درخواست‌ها بیش از حد مجاز است. بعداً دوباره تلاش کنید."
+          : "ارسال دوباره کد انجام نشد. دوباره تلاش کنید.";
 
       _showError(message);
       return false;
     } catch (_) {
       if (!mounted) return false;
 
-      _showError('Could not resend OTP. Please try again.');
+      _showError("ارسال دوباره کد انجام نشد. دوباره تلاش کنید.");
       return false;
     }
   }
@@ -108,6 +107,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void _openHome() {
+    if (_navigated || !mounted) return;
+    _navigated = true;
     FocusScope.of(context).unfocus();
 
     Navigator.of(context).pushAndRemoveUntil<void>(
@@ -126,59 +127,89 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OtpVerificationCubit, OtpVerificationState>(
-      bloc: _verification,
-      listener: (context, state) {
-        if (state.isVerified) {
+    return BlocListener<SessionCubit, SessionState>(
+      listener: (context, session) {
+        if (!_verification.state.isVerified || _navigated) return;
+        if (session.status == SessionStatus.authenticated) {
           _openHome();
-        } else if (state.errorMessage != null) {
-          _showError(state.errorMessage!);
+        } else if (session.status == SessionStatus.failure) {
+          _showError(AuthStrings.sessionRestoreFailed);
+        } else if (session.status == SessionStatus.unauthenticated) {
+          _navigated = true;
+          Navigator.of(context).pushAndRemoveUntil<void>(
+            MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
+            (_) => false,
+          );
         }
       },
-      builder: (context, state) {
-        return AuthScreenLayout(
-          illustration: AppAssets.otpIllustration,
-          illustrationScale: .72,
-          title: AuthStrings.enterOtp,
-          buttonLabel: AuthStrings.continueLabel,
-          onContinue: state.canVerify && !_expired ? _verifyOtp : null,
-          actions: state.isLoading
-              ? Semantics(
-                  label: AuthStrings.loading,
-                  liveRegion: true,
-                  child: const SizedBox(
-                    height: 56,
-                    child: Center(child: AppLoader(size: 24)),
+      child: BlocConsumer<OtpVerificationCubit, OtpVerificationState>(
+        bloc: _verification,
+        listener: (context, state) {
+          if (state.isVerified) {
+            context.read<SessionCubit>().restore();
+          } else if (state.errorMessage != null) {
+            _showError(state.errorMessage!);
+          }
+        },
+        builder: (context, state) {
+          final session = context.watch<SessionCubit>().state;
+          final checking = session.status == SessionStatus.checking;
+          return PopScope(
+            canPop: !state.isLoading && !checking,
+            child: AuthScreenLayout(
+              illustration: AppAssets.otpIllustration,
+              illustrationScale: .72,
+              title: AuthStrings.enterOtp,
+              buttonLabel: state.isVerified
+                  ? AuthStrings.retrySession
+                  : AuthStrings.continueLabel,
+              onContinue: checking
+                  ? null
+                  : state.isVerified
+                  ? () => context.read<SessionCubit>().restore()
+                  : state.canVerify && !_expired
+                  ? _verifyOtp
+                  : null,
+              actions: state.isLoading || checking
+                  ? Semantics(
+                      label: AuthStrings.loading,
+                      liveRegion: true,
+                      child: const SizedBox(
+                        height: 56,
+                        child: Center(child: AppLoader(size: 24)),
+                      ),
+                    )
+                  : null,
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (widget.email != null) ...[
+                    Text(
+                      AuthStrings.codeSentTo(widget.email!),
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                  OtpCodeInput(
+                    key: ValueKey(_inputVersion),
+                    phoneNumber: widget.email ?? widget.phoneNumber,
+                    onChanged: _verification.changeCode,
                   ),
-                )
-              : null,
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (widget.email != null) ...[
-                Text(
-                  AuthStrings.codeSentTo(widget.email!),
-                  textAlign: TextAlign.right,
-                ),
-                const SizedBox(height: 16),
-              ],
-              OtpCodeInput(
-                key: ValueKey(_inputVersion),
-                phoneNumber: widget.email ?? widget.phoneNumber,
-                onChanged: _verification.changeCode,
+                  const SizedBox(height: 24),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OtpCountdown(
+                      onResend: _resendOtp,
+                      onExpired: _onExpired,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 24),
-              Align(
-                alignment: Alignment.centerRight,
-                child: OtpCountdown(
-                  onResend: _resendOtp,
-                  onExpired: _onExpired,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+          );
+        },
+      ),
     );
   }
 }

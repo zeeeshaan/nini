@@ -35,7 +35,7 @@ Future<T?> showPostDialog<T>(
         ),
         child: Localizations.override(
           context: context,
-          locale: const Locale('en'),
+          locale: const Locale('fa', 'IR'),
           child: dialog,
         ),
       ),
