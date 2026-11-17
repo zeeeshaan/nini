@@ -35,8 +35,8 @@ class TeamPeopleScreen extends StatelessWidget {
             ),
             body: const Center(
               child: Text(
-                "تیم در دسترس نیست",
-                textDirection: TextDirection.rtl,
+                "Team unavailable",
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),
@@ -47,28 +47,28 @@ class TeamPeopleScreen extends StatelessWidget {
           final selection = team.providers
               .where((entry) => entry.provider.id == person.id)
               .firstOrNull;
-          return '${person.name} ${selection?.post.title ?? "مدیر تیم"}'
+          return '${person.name} ${selection?.post.title ?? "Team manager"}'
               .toLowerCase()
               .contains(query);
         }).toList();
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              tooltip: "افزودن افراد",
+              tooltip: "Add people",
               onPressed: () => addTeamPeople(context, team, repository),
               icon: const AppIcon(AppIcons.add, size: 26),
             ),
             title: const Align(
               alignment: Alignment.centerRight,
               child: Text(
-                "اعضا",
+                "People",
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
             actions: [
               IconButton(
-                tooltip: "بازگشت",
+                tooltip: "Back",
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const RotatedBox(
                   quarterTurns: 2,
@@ -105,17 +105,17 @@ class TeamPeopleScreen extends StatelessWidget {
                             child: people.isEmpty
                                 ? const Center(
                                     child: Text(
-                                      "فردی مطابق جستجوی شما یافت نشد",
+                                      "No people match your search",
                                       textAlign: TextAlign.right,
                                       style: AppTextStyles.bodyText,
-                                      textDirection: TextDirection.rtl,
+                                      textDirection: TextDirection.ltr,
                                     ),
                                   )
                                 : SingleChildScrollView(
                                     child: Align(
                                       alignment: Alignment.topRight,
                                       child: Wrap(
-                                        textDirection: TextDirection.rtl,
+                                        textDirection: TextDirection.ltr,
                                         spacing: 16,
                                         runSpacing: 24,
                                         children: [

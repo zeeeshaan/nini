@@ -1,9 +1,9 @@
 // dart format width=100
 
 enum PaymentMethod {
-  melli("بانک ملی ایران"),
-  mellat("بانک ملت"),
-  saman("بانک سامان");
+  melli('Bank Melli'),
+  mellat('Bank Mellat'),
+  saman('Saman Bank');
 
   const PaymentMethod(this.label);
   final String label;

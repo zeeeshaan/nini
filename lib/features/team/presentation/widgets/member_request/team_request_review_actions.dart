@@ -28,14 +28,14 @@ class TeamRequestReviewActions extends StatelessWidget {
         label: Text(
           TeamRequestStatusSheet.label(request.status),
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
       if (request.status == TeamRequestStatus.accepted)
-        AppButton(label: "افزودن پرداخت / تسویه‌حساب", onPressed: onCheckout)
+        AppButton(label: 'Add payment / Checkout', onPressed: onCheckout)
       else if (request.status == TeamRequestStatus.declined ||
           request.status == TeamRequestStatus.cancelled)
-        AppButton(label: "ویرایش درخواست", onPressed: onEdit),
+        AppButton(label: 'Edit request', onPressed: onEdit),
     ],
   );
 }

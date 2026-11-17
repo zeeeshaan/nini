@@ -3,98 +3,110 @@ import 'package:nini/core/localization/strings/notification_strings.dart';
 
 /// Labels shared by Profile Settings and its detail screens.
 abstract final class ProfileSettingsStrings {
-  static const title = 'تنظیمات';
-  static const general = 'عمومی';
-  static const myTeam = "تیم‌های من";
-  static const profile = 'تنظیمات پروفایل';
-  static const locations = 'موقعیت‌های مکانی';
-  static const wallet = 'کیف پول';
-  static const saved = 'ذخیره‌شده‌ها';
+  static const title = "Settings";
+  static const logout = 'Log out';
+  static const logoutTitle = 'Log out?';
+  static const logoutConfirmation = 'Are you sure you want to log out?';
+  static const loggingOut = 'Logging out…';
+  static const logoutFailed = 'Could not log out. Please try again.';
+  static const logoutTimeout =
+      'Logout could not be confirmed because the request timed out. Please try again.';
+  static const logoutConnectionFailed =
+      'Could not connect to log out. Check your internet connection and try again.';
+  static const logoutServerFailed =
+      'The server did not confirm logout. Please try again.';
+  static const logoutCleanupFailed =
+      'Your server session has ended, but the saved login could not be removed. Please retry to finish logging out.';
+  static const general = "General";
+  static const myTeam = "My Team";
+  static const profile = "Profile settings";
+  static const locations = "Locations";
+  static const wallet = "Wallet";
+  static const saved = "Saved";
   static const notifications = NotificationStrings.title;
-  static const trending = 'پرطرفدارها';
-  static const insights = 'آمار و تحلیل‌ها';
-  static const scheduledContent = 'محتوای زمان‌بندی‌شده';
-  static const blocked = 'مسدودشده‌ها';
+  static const trending = "Trending";
+  static const insights = "Insights";
+  static const scheduledContent = "Scheduled content";
+  static const blocked = "Blocked";
   static const comments = AppStrings.comments;
-  static const language = 'زبان';
-  static const devicePermissions = 'مجوزهای دستگاه';
-  static const accessibility = 'دسترس‌پذیری';
+  static const language = "Language";
+  static const devicePermissions = "Device permissions";
+  static const accessibility = "Accessibility";
   static const posts = AppStrings.posts;
-  static const myMedia = 'رسانه‌های من';
+  static const myMedia = "My media";
   static const tags = AppStrings.tagsKeywords;
-  static const archive = 'بایگانی';
-  static const searchHint = "جستجو";
-  static const noResults = "نتیجه‌ای پیدا نشد";
-  static const tryAnotherSearch = "عبارت دیگری جستجو کنید.";
-  static const localActivity = "فعالیت ثبت‌شده در این دستگاه";
-  static const noTrending = "هنوز پست پرطرفداری وجود ندارد";
+  static const archive = "Archive";
+  static const searchHint = 'Search';
+  static const noResults = 'No results found';
+  static const tryAnotherSearch = 'Try another search.';
+  static const localActivity = 'Activity recorded on this device';
+  static const noTrending = 'No trending posts yet';
   static const trendingHelp =
-      "پست‌های منتشرشده شما پس از ثبت بازدید یا تعامل در اینجا نمایش داده می‌شوند. این رتبه‌بندی فقط مربوط به همین دستگاه است.";
-  static const noScheduled = "محتوای زمان‌بندی‌شده‌ای وجود ندارد";
+      'Your published posts appear here when they have recorded views or interactions. This is not a global ranking.';
+  static const noScheduled = 'No scheduled content';
   static const scheduledHelp =
-      "در ویرایشگر پست، زمان‌بندی اضافه کنید تا در اینجا نمایش داده شود.";
+      'Add a schedule in the post editor to see it here.';
   static const scheduleNotice =
-      "این‌ها زمان‌بندی‌های ذخیره‌شده پست‌ها هستند. انتشار خودکار هنوز فعال نیست.";
-  static const viewPost = "مشاهده پست";
-  static const editPost = "ویرایش پست";
-  static const noBlocked = "گفتگوی مسدودشده‌ای وجود ندارد";
-  static const blockedHelp =
-      "گفتگوهایی که مسدود می‌کنید در اینجا نمایش داده می‌شوند.";
-  static const blockedConversation = "گفتگوی مسدودشده";
-  static const unblock = "رفع مسدودیت";
+      'These are saved post schedules. Automatic publishing is not connected.';
+  static const viewPost = 'View post';
+  static const editPost = 'Edit post';
+  static const noBlocked = 'No blocked conversations';
+  static const blockedHelp = 'Conversations you block in Chat appear here.';
+  static const blockedConversation = 'Blocked conversation';
+  static const unblock = 'Unblock';
   static const sessionBlocks =
-      "مسدودیت گفتگو در حال حاضر فقط در همین نشست برنامه نگهداری می‌شود.";
-  static const noCommentHistory = "تاریخچه دیدگاه ذخیره‌شده‌ای وجود ندارد";
+      'Chat blocking is currently stored for this app session.';
+  static const noCommentHistory = 'No saved comment history';
   static const commentsHelp =
-      "بخش دیدگاه‌های پست فعلاً پیش‌نمایش است و تاریخچه دیدگاه‌ها هنوز متصل نشده است.";
-  static const english = "انگلیسی";
-  static const persian = 'فارسی';
-  static const languageHelp =
-      "زبان رابط برنامه فارسی است. ترتیب بخش‌ها و دکمه‌ها حفظ شده است.";
-  static const notAvailable = "هنوز در دسترس نیست";
-  static const photoLibrary = "عکس‌ها و ویدیوها";
-  static const location = "موقعیت مکانی";
-  static const microphone = "میکروفون";
+      'The current post comment sheet is a temporary preview. A comment-history data source is not connected yet.';
+  static const english = 'English';
+  static const persian = 'Persian';
+  static const languageHelp = 'English is enabled for app testing.';
+  static const notAvailable = 'Not available yet';
+  static const photoLibrary = 'Photos and videos';
+  static const location = 'Location';
+  static const microphone = 'Microphone';
   static const permissionHelp =
-      "دسترسی‌ها را در تنظیمات دستگاه مدیریت کنید. با بازگشت به این صفحه، وضعیت به‌روز می‌شود.";
-  static const openDeviceSettings = "باز کردن تنظیمات دستگاه";
+      'Manage access in your device settings. Return here to refresh the current status.';
+  static const openDeviceSettings = 'Open device settings';
   static const permissionFailed =
-      "خواندن مجوزهای دستگاه انجام نشد. دوباره تلاش کنید.";
-  static const settingsFailed = "باز کردن تنظیمات دستگاه انجام نشد.";
-  static const granted = "مجاز";
-  static const denied = "دسترسی داده نشده";
-  static const restricted = "محدودشده توسط دستگاه";
-  static const limited = "دسترسی محدود";
-  static const unknown = "وضعیت در دسترس نیست";
-  static const noMedia = "هنوز رسانه‌ای بارگذاری نشده است";
+      'Could not read device permissions. Try again.';
+  static const settingsFailed = 'Could not open device settings.';
+  static const granted = 'Allowed';
+  static const denied = 'Not granted';
+  static const restricted = 'Restricted by the device';
+  static const limited = 'Limited access';
+  static const unknown = 'Status unavailable';
+  static const noMedia = 'No uploaded media yet';
   static const mediaHelp =
-      "عکس‌ها، ویدیوها و فایل‌های پیوست پست‌های شما در اینجا نمایش داده می‌شوند.";
+      'Photos, videos and files attached to your posts appear here.';
   static const mediaNotice =
-      "پیوست‌ها را در ویرایشگر پست مدیریت کنید. فایل‌های مشترک از این صفحه حذف نمی‌شوند.";
-  static const noTags = "هنوز برچسب یا کلیدواژه‌ای وجود ندارد";
-  static const tagsHelp = "هنگام ایجاد یا ویرایش پست، برچسب اضافه کنید.";
+      'Manage attachments in the existing post editor. Shared media files are not deleted from this screen.';
+  static const noTags = 'No tags or keywords yet';
+  static const tagsHelp = 'Add tags in Create Post or edit an existing post.';
   static const tagsNotice =
-      "برای دیدن پست‌ها و ویرایش برچسب‌های آن‌ها، روی کلیدواژه بزنید.";
-  static const noArchive = "بایگانی هنوز متصل نشده است";
+      'Tap a keyword to view its posts and edit their tags.';
+  static const noArchive = 'No archive is connected';
   static const archiveHelp =
-      "بایگانی پست‌ها هنوز فعال نیست. پس از اتصال ذخیره‌سازی و عملیات بایگانی و بازیابی، موارد در اینجا نمایش داده می‌شوند.";
-  static const postStatistics = "آمار پست‌ها و خدمات";
-  static const customerStatistics = "آمار کاربران و مشتریان";
-  static const alerts = "هشدارها و یادآورها";
-  static const totalPosts = "تعداد کل پست‌ها";
-  static const views = "بازدیدها";
-  static const interactions = "تعامل‌ها";
-  static const bookings = "رزروها";
-  static const sales = "فروش‌ها";
-  static const trendingServices = "خدمات پرطرفدار";
-  static const newFollowers = "دنبال‌کنندگان جدید";
-  static const topCustomers = "مشتریان برتر";
-  static const feedback = "بازخورد";
-  static const usageReminder = "یادآور محدودیت استفاده";
-  static const unansweredMessages = "پیام‌های بی‌پاسخ";
-  static const backendRequired = "نیازمند اتصال به سرور";
-  static const analyticsFailed = "بارگذاری تاریخچه آمار این دستگاه انجام نشد.";
+      'Posts cannot be archived in the current app. An archive data source and archive/restore operations are required before items can appear here.';
+  static const postStatistics = 'Posts and services statistics';
+  static const customerStatistics = 'Statistics of users and customers';
+  static const alerts = 'Alerts and reminders';
+  static const totalPosts = 'Total posts';
+  static const views = 'Views';
+  static const interactions = 'Interactions';
+  static const bookings = 'Bookings';
+  static const sales = 'Sales';
+  static const trendingServices = 'Trending services';
+  static const newFollowers = 'New followers';
+  static const topCustomers = 'Top customers';
+  static const feedback = 'Feedback';
+  static const usageReminder = 'Usage limit reminder';
+  static const unansweredMessages = 'Unanswered messages';
+  static const backendRequired = 'Requires a connected backend';
+  static const analyticsFailed = 'Could not load the local analytics history.';
   static const analyticsHelp =
-      "آمار از پست‌های منتشرشده، رویدادهای ثبت‌شده و سفارش‌های غیرآزمایشی شما در این دستگاه محاسبه می‌شود و آمار کل سامانه نیست.";
-  static String tagPosts(int count) => '${AppStrings.persianDigits(count)} پست';
+      'Counts use your published posts, recorded local events and non-demo provider orders. They are not server-wide statistics.';
+  static String tagPosts(int count) =>
+      '$count ${count == 1 ? 'post' : 'posts'}';
 }

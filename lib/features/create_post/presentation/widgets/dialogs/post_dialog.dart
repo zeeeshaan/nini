@@ -35,7 +35,7 @@ Future<T?> showPostDialog<T>(
         ),
         child: Localizations.override(
           context: context,
-          locale: const Locale('fa', 'IR'),
+          locale: const Locale('en'),
           child: dialog,
         ),
       ),
@@ -73,7 +73,7 @@ class PostDialog extends StatelessWidget {
     required this.child,
     this.icon,
     this.actions,
-    this.textDirection = TextDirection.rtl,
+    this.textDirection = TextDirection.ltr,
   });
   final String title;
   final String? icon;
@@ -188,7 +188,7 @@ class PostChoiceTile extends StatelessWidget {
       ),
       title: Text(
         label,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
       ),
     ),

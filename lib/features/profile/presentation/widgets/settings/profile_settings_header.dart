@@ -17,7 +17,7 @@ class ProfileSettingsHeader extends StatelessWidget
       alignment: Alignment.centerRight,
       child: Text(
         ProfileSettingsStrings.title,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
         style: AppTextStyles.screenTitle,
       ),

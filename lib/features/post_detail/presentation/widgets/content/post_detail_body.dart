@@ -63,7 +63,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
             cart.state.storageError
                 ? AppStrings.cartStorageError
                 : AppStrings.cartStockExceeded,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
         ),
@@ -117,7 +117,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
             ),
             (
               AppStrings.serviceMinimumOrder,
-              '۱ ${(post.details.unit ?? PostUnit.session).label}',
+              '1 ${(post.details.unit ?? PostUnit.session).label}',
             ),
             if (post.details.address?.address.isNotEmpty == true)
               (AppStrings.serviceArea, post.details.address!.address),
@@ -151,16 +151,12 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                         onMorePressed: widget.onMorePressed,
                         onProfilePressed: widget.onSellerPressed,
                         onMessagePressed: widget.onMessagePressed,
-                        name:
-                            seller?.name ??
-                            (hasPostContent
-                                ? AppStrings.sellerName
-                                : AppStrings.authorName),
-                        location:
-                            seller?.location ??
-                            (hasPostContent
-                                ? (post.details.address?.address ?? '')
-                                : AppStrings.authorLocation),
+                        name: seller == null
+                            ? AppStrings.profile
+                            : seller.name.isEmpty
+                            ? seller.username
+                            : seller.name,
+                        location: seller?.location ?? '',
                         avatarAsset: seller?.avatarAsset ?? '',
                       ),
                     ),

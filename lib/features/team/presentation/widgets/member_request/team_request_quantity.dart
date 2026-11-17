@@ -21,7 +21,7 @@ class TeamRequestQuantity extends StatelessWidget {
     final result = await showCartAmountDialog(
       context,
       value: quantity,
-      title: "مقدار",
+      title: 'Amount',
     );
     if (context.mounted && result != null) onChanged(result);
   }
@@ -49,7 +49,7 @@ class TeamRequestQuantity extends StatelessWidget {
                   style: AppTextStyles.bodyText.copyWith(
                     color: colors.onPrimary,
                   ),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             ],

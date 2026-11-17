@@ -21,10 +21,13 @@ class HomeEngagementLayout extends StatelessWidget {
       rating,
       const SizedBox(width: 12),
       Expanded(
-        child: Wrap(
-          textDirection: TextDirection.rtl,
-          spacing: 6,
-          children: actions.reversed.toList(),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Wrap(
+            textDirection: TextDirection.rtl,
+            spacing: 6,
+            children: actions.reversed.toList(),
+          ),
         ),
       ),
     ],

@@ -24,7 +24,7 @@ class ThemeOptions extends StatelessWidget {
               AppStrings.appearance,
               textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.titleMedium,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           for (final option in ThemeMode.values)
@@ -38,7 +38,7 @@ class ThemeOptions extends StatelessWidget {
                   ThemeMode.dark => AppStrings.darkTheme,
                 },
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
         ],

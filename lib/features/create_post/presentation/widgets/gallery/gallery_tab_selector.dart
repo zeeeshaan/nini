@@ -70,7 +70,7 @@ class GalleryTabSelector extends StatelessWidget {
                   ? AppTextStyles.semiBold
                   : AppTextStyles.regular,
             ),
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
       ),

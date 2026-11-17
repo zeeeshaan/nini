@@ -14,7 +14,7 @@ class TeamChatTitle extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: AppTextStyles.pageTitle,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
     ),
   );
 }

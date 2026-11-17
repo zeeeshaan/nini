@@ -9,12 +9,12 @@ Future<bool> confirmDiscardPostChanges(BuildContext context) async =>
         child: AlertDialog(
           title: const Text(
             ProfilePostStrings.unsavedTitle,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
           content: const Text(
             ProfilePostStrings.unsavedHelp,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
           actions: [
@@ -22,7 +22,7 @@ Future<bool> confirmDiscardPostChanges(BuildContext context) async =>
               onPressed: () => Navigator.pop(context, false),
               child: const Text(
                 ProfilePostStrings.keepEditing,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),
@@ -30,7 +30,7 @@ Future<bool> confirmDiscardPostChanges(BuildContext context) async =>
               onPressed: () => Navigator.pop(context, true),
               child: const Text(
                 ProfilePostStrings.discard,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

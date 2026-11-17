@@ -28,7 +28,7 @@ class DisputeScreen extends StatelessWidget {
             ReceiptStrings.dispute,
             style: AppTextStyles.pageTitle,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
         centerTitle: false,
@@ -48,7 +48,7 @@ class DisputeScreen extends StatelessWidget {
                 child: Text(
                   ReceiptStrings.unavailable,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             )

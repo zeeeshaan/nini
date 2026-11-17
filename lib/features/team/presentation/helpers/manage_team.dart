@@ -30,29 +30,29 @@ Future<void> manageTeam(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            "حذف تیم؟",
+            'Delete team?',
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           content: const Text(
-            "این تیم از نشست فعلی حذف شود؟",
+            'Remove this team from your current session?',
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text(
-                "انصراف",
-                textDirection: TextDirection.rtl,
+                'Cancel',
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               child: const Text(
-                "حذف",
-                textDirection: TextDirection.rtl,
+                'Delete',
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

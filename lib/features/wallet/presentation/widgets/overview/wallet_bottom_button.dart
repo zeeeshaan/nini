@@ -28,7 +28,7 @@ class WalletBottomButton extends StatelessWidget {
                 label,
                 style: AppTextStyles.pageTitle,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           ),

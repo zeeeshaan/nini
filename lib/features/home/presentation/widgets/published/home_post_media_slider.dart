@@ -7,9 +7,11 @@ class HomePostMediaSlider extends StatelessWidget {
     super.key,
     required this.post,
     required this.onTap,
+    this.active = true,
   });
   final PostItem post;
   final VoidCallback onTap;
+  final bool active;
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -19,6 +21,8 @@ class HomePostMediaSlider extends StatelessWidget {
       media: post.media,
       images: [post.imageAsset],
       mediaFit: BoxFit.cover,
+      active: active,
+      resetOnReturn: true,
     ),
   );
 }

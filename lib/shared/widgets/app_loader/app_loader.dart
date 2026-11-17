@@ -36,7 +36,7 @@ class AppLoader extends StatelessWidget {
             label!,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ],
       ],

@@ -33,7 +33,7 @@ class PostEditorAltTextFields extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: TextFormField(
                 initialValue: editor.state.altTexts[entry.id] ?? entry.altText,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
                 decoration: InputDecoration(
                   labelText: ProfilePostStrings.altText,

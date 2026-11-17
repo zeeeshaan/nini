@@ -6,10 +6,15 @@ import 'package:nini/shared/models/post/post_item.dart';
 
 import 'home_post_navigation.dart';
 
-void openPublishedHomePost(BuildContext context, PostItem post) => openHomePost(
+void openPublishedHomePost(
+  BuildContext context,
+  PostItem post, {
+  VoidCallback? onOwnProfilePressed,
+}) => openHomePost(
   context,
   post,
   context.read<UserProfileCubit?>()?.seller ?? localPostSeller,
+  onOwnProfilePressed: onOwnProfilePressed,
 );
 
 void openPublishedHomeSeller(BuildContext context, PostItem post) =>

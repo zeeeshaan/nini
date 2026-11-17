@@ -62,7 +62,7 @@ class CartItemCard extends StatelessWidget {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.right,
-                                  textDirection: TextDirection.rtl,
+                                  textDirection: TextDirection.ltr,
                                   style: AppTextStyles.compactBodyBold,
                                 ),
                               ),
@@ -71,7 +71,7 @@ class CartItemCard extends StatelessWidget {
                           Text(
                             cartItemCategory(item),
                             textAlign: TextAlign.right,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             style: AppTextStyles.label.copyWith(
                               color: colors.onSurface.withValues(alpha: .25),
                             ),
@@ -83,7 +83,7 @@ class CartItemCard extends StatelessWidget {
                                 child: readOnly
                                     ? Text(
                                         '${cartMoney(item.quantity)} ${cartUnit(item.unit, item.quantity)}',
-                                        textDirection: TextDirection.rtl,
+                                        textDirection: TextDirection.ltr,
                                         textAlign: TextAlign.right,
                                         style: AppTextStyles.helper,
                                       )
@@ -93,7 +93,7 @@ class CartItemCard extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   cartMoney(item.total),
-                                  textDirection: TextDirection.rtl,
+                                  textDirection: TextDirection.ltr,
                                   textAlign: TextAlign.right,
                                   style: AppTextStyles.pageTitleBold,
                                 ),

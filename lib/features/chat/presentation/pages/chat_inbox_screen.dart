@@ -97,7 +97,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
               AppStrings.chat,
               style: AppTextStyles.inboxTitle.copyWith(color: colors.onSurface),
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           actions: [
@@ -126,7 +126,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                             ? AppStrings.showAllChats
                             : AppStrings.unreadChats,
                         textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                       ),
                     ),
                     PopupMenuItem(
@@ -135,7 +135,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                       child: const Text(
                         AppStrings.markAllRead,
                         textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                       ),
                     ),
                   ],
@@ -159,7 +159,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                 constraints: const BoxConstraints(minHeight: 48),
                 child: TextField(
                   controller: _searchController,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   textInputAction: TextInputAction.search,
                   onChanged: (value) {
@@ -223,7 +223,7 @@ class _ChatInboxViewState extends State<_ChatInboxView> {
                                 style: AppTextStyles.comfortableBody.copyWith(
                                   color: colors.onSurface,
                                 ),
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                               ),
                             ),
                           ],

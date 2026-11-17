@@ -25,7 +25,7 @@ class ProfileSettingsTile extends StatelessWidget {
     trailing: trailingIcon != null ? AppIcon(trailingIcon!, size: 28) : null,
     title: Text(
       label,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       textAlign: TextAlign.right,
       style: AppTextStyles.settingsLabel,
     ),

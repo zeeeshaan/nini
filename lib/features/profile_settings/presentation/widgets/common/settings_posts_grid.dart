@@ -11,9 +11,11 @@ class SettingsPostsGrid extends StatelessWidget {
     super.key,
     this.posts = const [],
     this.loading = false,
+    this.gridDirection = TextDirection.ltr,
   });
   final List<PostItem> posts;
   final bool loading;
+  final TextDirection gridDirection;
 
   @override
   Widget build(BuildContext context) => AppResponsiveBuilder(
@@ -34,7 +36,7 @@ class SettingsPostsGrid extends StatelessWidget {
       );
       final direction = Directionality.of(context);
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: gridDirection,
         child: GridView.builder(
           padding: EdgeInsets.zero,
           reverse: false,

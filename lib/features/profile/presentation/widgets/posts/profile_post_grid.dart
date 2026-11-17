@@ -73,14 +73,14 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                     child: Text(
                       AppStrings.savedPostsLoadFailed,
                       textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                   ),
                   TextButton(
                     onPressed: () => context.read<PostsCubit>().load(),
                     child: const Text(
                       AppStrings.retry,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -95,7 +95,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
               child: Text(
                 ProfilePostStrings.noPosts,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           AppResponsiveBuilder(

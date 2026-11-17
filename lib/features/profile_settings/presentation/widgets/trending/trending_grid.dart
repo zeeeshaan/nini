@@ -18,7 +18,10 @@ class TrendingGrid extends StatelessWidget {
       BlocBuilder<PostAnalyticsCubit, PostAnalyticsState>(
         builder: (context, state) {
           if (state.loading && state.events.isEmpty) {
-            return const SettingsPostsGrid(loading: true);
+            return const SettingsPostsGrid(
+              loading: true,
+              gridDirection: TextDirection.rtl,
+            );
           }
           final ranked = LocalPostInsights(
             posts: posts,
@@ -45,7 +48,12 @@ class TrendingGrid extends StatelessWidget {
                 const SettingsNotice(
                   text: ProfileSettingsStrings.analyticsFailed,
                 ),
-              Expanded(child: SettingsPostsGrid(posts: ranked)),
+              Expanded(
+                child: SettingsPostsGrid(
+                  posts: ranked,
+                  gridDirection: TextDirection.rtl,
+                ),
+              ),
             ],
           );
         },

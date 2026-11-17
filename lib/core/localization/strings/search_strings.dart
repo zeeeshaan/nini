@@ -1,17 +1,17 @@
-/// Persian display copy with stable local Search catalogue keys.
+/// English display copy with stable local Search catalogue keys.
 abstract final class SearchStrings {
-  static const hint = 'جستجوی خدمات';
+  static const hint = "Search services";
   static const initialQuery = 'لوله‌کش';
-  static const chooseCity = 'انتخاب شهر';
-  static const closeSearch = 'بازگشت به نتایج';
-  static const clearQuery = 'پاک کردن جستجو';
-  static const noResults = 'نتیجه‌ای پیدا نشد';
-  static const providerUnavailable = "اطلاعات ارائه‌دهنده در دسترس نیست.";
-  static const tryAnotherQuery = 'عبارت دیگری جستجو کنید یا شهر را تغییر دهید.';
-  static const showAll = 'نمایش همه خدمات';
-  static const allServices = "همه خدمات";
+  static const chooseCity = "Choose city";
+  static const closeSearch = "Back to results";
+  static const clearQuery = "Clear search";
+  static const noResults = "No results found";
+  static const providerUnavailable = 'Provider information is unavailable.';
+  static const tryAnotherQuery = "Try another search or change the city.";
+  static const showAll = "Show all services";
+  static const allServices = 'All services';
   static const service = 'خدمات لوله‌کشی';
-  static const currency = 'تومان';
+  static const currency = "toman";
   static const tehran = 'تهران';
   static const cities = [
     tehran,
@@ -143,12 +143,5 @@ abstract final class SearchStrings {
 
   static String searchLabel(String value) => _displayLabels[value] ?? value;
 
-  static String display(String value) {
-    if (_displayLabels.containsKey(value)) return value;
-    return _displayLabels.entries
-            .where((entry) => entry.value.toLowerCase() == value.toLowerCase())
-            .firstOrNull
-            ?.key ??
-        value;
-  }
+  static String display(String value) => _displayLabels[value] ?? value;
 }

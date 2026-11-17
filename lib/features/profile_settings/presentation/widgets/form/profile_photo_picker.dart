@@ -58,7 +58,7 @@ class _ProfilePhotoPickerState extends State<ProfilePhotoPicker> {
         content: Text(
           ProfileEditStrings.photoError,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
     );

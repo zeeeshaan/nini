@@ -40,9 +40,13 @@ class ApiClient {
 
   Future<Map<String, dynamic>> post(
     String endpoint, {
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     String? token,
   }) async {
+    if (token != null &&
+        (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]')))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
     final response = await _dio.post<dynamic>(
       endpoint,
       data: data,
@@ -60,15 +64,25 @@ class ApiClient {
     throw const FormatException('Invalid API response.');
   }
 
-  Future<Map<String, dynamic>> get(
-    String endpoint, {
-    required String token,
-  }) async {
+  Future<Map<String, dynamic>> get(String endpoint, {required String token}) =>
+      _get(endpoint, token: token);
+
+  Future<Map<String, dynamic>> getPublic(String endpoint, {String? token}) {
+    if (token != null &&
+        (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]')))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
+    return _get(endpoint, token: token);
+  }
+
+  Future<Map<String, dynamic>> _get(String endpoint, {String? token}) async {
     final cancellation = CancelToken();
     final response = await _dio
         .get<dynamic>(
           endpoint,
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(
+            headers: token == null ? null : {'Authorization': 'Bearer $token'},
+          ),
           cancelToken: cancellation,
         )
         .timeout(
@@ -78,6 +92,46 @@ class ApiClient {
             throw TimeoutException('Session check timed out.');
           },
         );
+    final body = response.data;
+    if (body is Map<String, dynamic>) return body;
+    throw const FormatException('Invalid API response.');
+  }
+
+  Future<Map<String, dynamic>> postMultipart(
+    String endpoint, {
+    required FormData data,
+    required String token,
+  }) async {
+    if (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
+    final response = await _dio.post<dynamic>(
+      endpoint,
+      data: data,
+      options: Options(
+        contentType: Headers.multipartFormDataContentType,
+        sendTimeout: const Duration(seconds: 30),
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+    final body = response.data;
+    if (body is Map<String, dynamic>) return body;
+    throw const FormatException('Invalid API response.');
+  }
+
+  Future<Map<String, dynamic>> patch(
+    String endpoint, {
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    if (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
+    final response = await _dio.patch<dynamic>(
+      endpoint,
+      data: data,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
     final body = response.data;
     if (body is Map<String, dynamic>) return body;
     throw const FormatException('Invalid API response.');

@@ -51,7 +51,7 @@ class PaymentSuccessCard extends StatelessWidget {
             ReceiptStrings.paymentSuccessful,
             textAlign: TextAlign.right,
             style: AppTextStyles.pageTitleBold,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           if (amount != null) ...[
             const SizedBox(height: 12),
@@ -59,7 +59,7 @@ class PaymentSuccessCard extends StatelessWidget {
               amount!,
               textAlign: TextAlign.right,
               style: AppTextStyles.analyticsTotal,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
           if (method != null) ...[
@@ -68,7 +68,7 @@ class PaymentSuccessCard extends StatelessWidget {
               method!,
               textAlign: TextAlign.right,
               style: AppTextStyles.bodyText,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
           if (reference != null) ...[
@@ -77,7 +77,7 @@ class PaymentSuccessCard extends StatelessWidget {
               reference!,
               textAlign: TextAlign.right,
               style: AppTextStyles.smallPrint,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
         ],

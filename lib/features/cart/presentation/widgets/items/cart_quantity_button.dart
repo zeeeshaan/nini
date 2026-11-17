@@ -42,7 +42,7 @@ class CartQuantityButton extends StatelessWidget {
                   Flexible(
                     child: Text(
                       '${cartQuantity(item.quantity)} ${cartUnit(item.unit, item.quantity)}',
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                       style: AppTextStyles.smallPrint.copyWith(color: colors.surface),
                     ),

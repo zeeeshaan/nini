@@ -20,7 +20,7 @@ class CartHeader extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.cartTitle,
             ),

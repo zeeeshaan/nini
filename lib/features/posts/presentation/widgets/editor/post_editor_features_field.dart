@@ -32,7 +32,7 @@ class PostEditorFeaturesField extends StatelessWidget {
             Text(
               ProfilePostStrings.features,
               style: Theme.of(context).textTheme.titleMedium,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
             const SizedBox(height: 12),
@@ -60,7 +60,7 @@ class PostEditorFeaturesField extends StatelessWidget {
                 style: AppTextStyles.inherit.copyWith(
                   color: Theme.of(context).colorScheme.error,
                 ),
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             Align(
@@ -73,7 +73,7 @@ class PostEditorFeaturesField extends StatelessWidget {
                 icon: const Icon(Icons.add, size: 18),
                 label: const Text(
                   ProfilePostStrings.addFeature,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),

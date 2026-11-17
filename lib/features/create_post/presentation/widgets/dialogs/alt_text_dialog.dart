@@ -53,7 +53,7 @@ class _AltTextDialogState extends State<AltTextDialog> {
             CreatePostStrings.altTextHelp,
             textAlign: TextAlign.right,
             style: AppTextStyles.label,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           const SizedBox(height: 18),
           if (widget.attachments.isEmpty)
@@ -62,7 +62,7 @@ class _AltTextDialogState extends State<AltTextDialog> {
               child: Text(
                 CreatePostStrings.noAttachments,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           for (final item in widget.attachments)

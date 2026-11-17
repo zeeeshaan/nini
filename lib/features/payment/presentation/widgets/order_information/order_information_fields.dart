@@ -50,7 +50,7 @@ class OrderInformationFields extends StatelessWidget {
         field == OrderCustomerField.mobile ||
             field == OrderCustomerField.postalCode
         ? TextDirection.ltr
-        : TextDirection.rtl,
+        : TextDirection.ltr,
     textInputAction: field == OrderCustomerField.postalCode
         ? TextInputAction.done
         : TextInputAction.next,
@@ -73,7 +73,7 @@ class OrderInformationFields extends StatelessWidget {
           OrderInformationStrings.personalInformation,
           textAlign: TextAlign.right,
           style: AppTextStyles.sectionTitle,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 26),
         for (final field in OrderCustomerField.values) ...[
@@ -81,7 +81,7 @@ class OrderInformationFields extends StatelessWidget {
             _labels[field]!,
             textAlign: TextAlign.right,
             style: AppTextStyles.body,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           const SizedBox(height: 4),
           if (field == OrderCustomerField.address)

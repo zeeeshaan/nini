@@ -10,6 +10,7 @@ class AuthRepository {
 
   final ApiClient _apiClient;
   final SecureTokenStore _tokenStore;
+  bool _logoutConfirmed = false;
 
   /// A stored credential is never enough to open the authenticated app.
   Future<String?> restoreSession() async {
@@ -54,6 +55,40 @@ class AuthRepository {
       }
     }
     return id.trim();
+  }
+
+  Future<void> logout() async {
+    // If deletion failed after revocation, retry local cleanup without another
+    // request. The logout dialog blocks access until cleanup succeeds.
+    if (!_logoutConfirmed) {
+      final stored = await _tokenStore.getToken().timeout(
+        const Duration(seconds: 10),
+      );
+      final token = stored?.trim();
+      if (token != null && token.isNotEmpty) {
+        if (token.contains(RegExp(r'[\r\n]'))) {
+          throw const FormatException('Invalid stored credential.');
+        }
+        try {
+          final response = await _apiClient.post('auth/logout', token: token);
+          if (response['success'] != true) {
+            throw StateError('Server logout was not confirmed.');
+          }
+        } on DioException catch (error) {
+          // A rejected credential is already unauthenticated, not a network
+          // failure. Every other uncertain result must remain retryable.
+          if (error.response?.statusCode != 401) rethrow;
+        }
+      }
+      _logoutConfirmed = true;
+    }
+
+    try {
+      await _tokenStore.deleteToken().timeout(const Duration(seconds: 10));
+    } catch (_) {
+      throw const LogoutCleanupException();
+    }
+    _logoutConfirmed = false;
   }
 
   Future<String> requestOtp(String input) async {
@@ -111,4 +146,9 @@ class AuthRepository {
 
     return phone.startsWith('0') ? phone : '0$phone';
   }
+}
+
+/// The backend session has ended, but the saved credential still needs removal.
+class LogoutCleanupException implements Exception {
+  const LogoutCleanupException();
 }

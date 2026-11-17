@@ -30,6 +30,12 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
       selection: const TextSelection.collapsed(offset: 0),
       readOnly: true,
     );
+    // This document is a display copy; stored caption content stays untouched.
+    _caption.document.format(
+      0,
+      _caption.document.length,
+      quill.Attribute.rightAlignment,
+    );
   }
 
   @override
@@ -59,7 +65,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
                     fontWeight: AppTextStyles.bold,
                   )
                 : theme.textTheme.titleLarge,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           const SizedBox(height: 12),
           if (widget.serviceLayout) ...[
@@ -67,7 +73,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
               AppStrings.serviceDescription,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 20),
           ],
@@ -75,7 +81,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
             context: context,
             delegates: const [quill.FlutterQuillLocalizations.delegate],
             child: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               child: quill.QuillEditor.basic(
                 controller: _caption,
                 focusNode: _focus,
@@ -98,7 +104,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
                   Chip(
                     label: Text(
                       '#$tag',
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -110,7 +116,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
             Text(
               address.address,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
           if (schedule != null) ...[
@@ -121,7 +127,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
                     .formatMediumDate(schedule.startsAt),
               ),
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
         ],

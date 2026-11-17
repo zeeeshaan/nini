@@ -33,19 +33,19 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
         title: const Text(
           ReceiptStrings.confirmCompletion,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         content: const Text(
           ReceiptStrings.confirmCompletionHelp,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child: const Text(
               AppStrings.cancel,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -53,7 +53,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
             onPressed: () => Navigator.pop(context, true),
             child: const Text(
               ReceiptStrings.confirm,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -113,7 +113,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
               ReceiptStrings.invoice,
               style: AppTextStyles.screenTitle,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           centerTitle: false,
@@ -125,7 +125,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                     : () => openProviderInvoice(context, order.id),
                 child: const Text(
                   ProviderOrderStrings.manageSale,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -171,7 +171,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                   child: Text(
                     ReceiptStrings.unavailable,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
               ),

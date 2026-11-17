@@ -19,7 +19,7 @@ class PostDeleteActions extends StatelessWidget {
           onPressed: busy ? null : () => Navigator.of(context).pop(false),
           child: const Text(
             ProfilePostStrings.cancel,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
         ),
@@ -36,7 +36,7 @@ class PostDeleteActions extends StatelessWidget {
             deleting
                 ? ProfilePostStrings.deleting
                 : ProfilePostStrings.deletePost,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
         ),

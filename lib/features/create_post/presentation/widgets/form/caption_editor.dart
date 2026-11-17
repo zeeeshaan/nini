@@ -26,7 +26,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
   @override
   Widget build(BuildContext context) => Localizations.override(
     context: context,
-    locale: const Locale('fa', 'IR'),
+    locale: const Locale('en'),
     delegates: const [
       ...GlobalMaterialLocalizations.delegates,
       FlutterQuillLocalizations.delegate,
@@ -66,7 +66,7 @@ class _CaptionEditorState extends State<CaptionEditor> {
             SizedBox(
               height: 180,
               child: Directionality(
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 child: QuillEditor.basic(
                   controller: widget.controller,
                   focusNode: _focusNode,

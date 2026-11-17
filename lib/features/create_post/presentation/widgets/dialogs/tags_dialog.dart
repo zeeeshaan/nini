@@ -69,7 +69,7 @@ class _TagsDialogState extends State<TagsDialog> {
                   InputChip(
                     label: Text(
                       '#$tag',
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                     deleteIcon: const AppIcon(AppIcons.close, size: 18),

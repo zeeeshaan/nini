@@ -158,7 +158,7 @@ class _ManualAddressDialogState extends State<ManualAddressDialog> {
                       CreatePostStrings.address,
                       textAlign: TextAlign.right,
                       style: AppTextStyles.heading,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                   ),
                   IconButton(

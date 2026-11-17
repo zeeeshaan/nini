@@ -110,7 +110,7 @@ class _CreatePostGalleryView extends StatelessWidget {
 
     return Localizations.override(
       context: context,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en'),
       child: BlocListener<GalleryCubit, GalleryState>(
         listenWhen: (previous, current) =>
             current.errorMessage != null &&
@@ -186,7 +186,7 @@ class _CreatePostGalleryView extends StatelessWidget {
                                                         color: colors.onSurface,
                                                       ),
                                                   textDirection:
-                                                      TextDirection.rtl,
+                                                      TextDirection.ltr,
                                                   textAlign: TextAlign.right,
                                                 ),
                                         );

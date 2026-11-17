@@ -11,7 +11,7 @@ class HomeProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 28),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -19,14 +19,17 @@ class HomeProductDetails extends StatelessWidget {
             title,
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.right,
+            maxLines: 2,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
             style: AppTextStyles.homePostTitle,
           ),
           const SizedBox(height: 8),
           Text(
             AppStrings.mobile,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
-            style: AppTextStyles.subtitle.copyWith(
+            style: AppTextStyles.heading.copyWith(
               color: Theme.of(context).colorScheme.onSurface
                   .withValues(alpha: .3),
             ),

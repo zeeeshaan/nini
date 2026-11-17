@@ -53,7 +53,7 @@ class DisputeAttachmentTile extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: AppTextStyles.label,
       textAlign: TextAlign.right,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
     ),
     trailing: onRemove == null
         ? null

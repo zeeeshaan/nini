@@ -28,6 +28,7 @@ class ScheduledPostsList extends StatelessWidget {
           );
     if (scheduled.isEmpty) {
       return const SettingsEmptyState(
+        textAlign: TextAlign.center,
         title: ProfileSettingsStrings.noScheduled,
         message: ProfileSettingsStrings.scheduledHelp,
         icon: AppIcons.calendar,
@@ -58,7 +59,7 @@ class ScheduledPostsList extends StatelessWidget {
                       value: false,
                       child: Text(
                         ProfileSettingsStrings.viewPost,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -66,7 +67,7 @@ class ScheduledPostsList extends StatelessWidget {
                       value: true,
                       child: Text(
                         ProfileSettingsStrings.editPost,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -85,7 +86,7 @@ class ScheduledPostsList extends StatelessWidget {
                   '${locale.formatCompactDate(date)}\n${locale.formatTimeOfDay(TimeOfDay.fromDateTime(date))}',
                   textAlign: TextAlign.right,
                   style: AppTextStyles.body,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 subtitle: Text(
                   post.title,
@@ -93,7 +94,7 @@ class ScheduledPostsList extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.helper,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 onTap: () => openSettingsPost(context, post),
               );

@@ -92,7 +92,7 @@ class ProfileSkeleton extends StatelessWidget {
                       const SizedBox(height: 16),
                       // Only the grid uses RTL ordering, matching profile posts.
                       Directionality(
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         child: GridView.builder(
                           primary: false,
                           padding: EdgeInsets.zero,

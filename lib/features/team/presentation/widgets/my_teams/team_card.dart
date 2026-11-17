@@ -47,7 +47,7 @@ class TeamCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(
-                    tooltip: "گزینه‌های تیم",
+                    tooltip: "Team options",
                     onPressed: onMore,
                     icon: const AppIcon(AppIcons.more, size: 18),
                   ),
@@ -58,7 +58,7 @@ class TeamCard extends StatelessWidget {
                         team.name,
                         textAlign: TextAlign.right,
                         style: AppTextStyles.bodyBold,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                       ),
                     ),
                   ),
@@ -71,7 +71,7 @@ class TeamCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.smallPrint,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
               const SizedBox(height: 28),
               Row(
@@ -85,7 +85,7 @@ class TeamCard extends StatelessWidget {
                         Text(
                           _duration,
                           style: AppTextStyles.smallPrint,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                         Row(
@@ -98,7 +98,7 @@ class TeamCard extends StatelessWidget {
                                 team.request.attachments.length,
                               ),
                               style: AppTextStyles.smallPrint,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                               textAlign: TextAlign.right,
                             ),
                           ],
@@ -111,7 +111,7 @@ class TeamCard extends StatelessWidget {
                             Text(
                               AppStrings.persianDigits(messageCount),
                               style: AppTextStyles.smallPrint,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                               textAlign: TextAlign.right,
                             ),
                           ],

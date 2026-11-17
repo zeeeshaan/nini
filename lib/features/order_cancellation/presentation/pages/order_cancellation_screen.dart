@@ -28,7 +28,7 @@ class OrderCancellationScreen extends StatelessWidget {
             ProviderOrderStrings.cancellation,
             style: AppTextStyles.pageTitle,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
         centerTitle: false,
@@ -48,7 +48,7 @@ class OrderCancellationScreen extends StatelessWidget {
                 child: Text(
                   ProviderOrderStrings.unavailable,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             )

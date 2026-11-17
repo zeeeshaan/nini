@@ -86,7 +86,7 @@ class _PermissionsContentState extends State<PermissionsContent>
               onPressed: cubit.load,
               child: const Text(
                 AppStrings.retry,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),
@@ -101,7 +101,7 @@ class _PermissionsContentState extends State<PermissionsContent>
                 },
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyEmphasis,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
               subtitle: Text(
                 switch (state.values[permission] ??
@@ -115,7 +115,7 @@ class _PermissionsContentState extends State<PermissionsContent>
                 },
                 textAlign: TextAlign.right,
                 style: AppTextStyles.helper,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           Padding(

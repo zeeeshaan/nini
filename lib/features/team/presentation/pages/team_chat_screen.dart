@@ -39,8 +39,8 @@ class TeamChatScreen extends StatelessWidget {
             ),
             body: const Center(
               child: Text(
-                "تیم در دسترس نیست",
-                textDirection: TextDirection.rtl,
+                'Team unavailable',
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

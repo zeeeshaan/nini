@@ -42,7 +42,7 @@ class ChatAttachmentView extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
 
@@ -136,7 +136,7 @@ class ChatAttachmentView extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.label.copyWith(color: foreground),
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
               ],
@@ -145,7 +145,7 @@ class ChatAttachmentView extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 AppStrings.chatFileSize(attachment.sizeBytes),
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 style: AppTextStyles.smallPrint.copyWith(
                   color: foreground.withValues(alpha: .7),
                 ),

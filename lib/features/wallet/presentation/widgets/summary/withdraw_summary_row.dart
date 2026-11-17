@@ -27,7 +27,7 @@ class WithdrawSummaryRow extends StatelessWidget {
           child: Text(
             AppStrings.persianDigits(value),
             style: AppTextStyles.helper,
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.right,
             textDirection: TextDirection.ltr,
           ),
         ),
@@ -37,7 +37,7 @@ class WithdrawSummaryRow extends StatelessWidget {
             label,
             textAlign: TextAlign.right,
             style: AppTextStyles.helper,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
       ],

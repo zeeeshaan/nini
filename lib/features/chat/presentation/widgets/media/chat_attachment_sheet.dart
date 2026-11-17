@@ -163,7 +163,7 @@ class _AttachmentOption extends StatelessWidget {
             onTap: onTap,
             child: Text(
               label,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.center,
               style: AppTextStyles.label.copyWith(color: colors.onSurface),
             ),

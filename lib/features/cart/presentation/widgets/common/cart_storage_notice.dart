@@ -15,7 +15,7 @@ class CartStorageNotice extends StatelessWidget {
           onPressed: onRetry,
           child: const Text(
             CartStrings.retry,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
         ),
@@ -24,7 +24,7 @@ class CartStorageNotice extends StatelessWidget {
           child: Text(
             CartStrings.storageError,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             style: AppTextStyles.helper,
           ),
         ),

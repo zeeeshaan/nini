@@ -42,7 +42,7 @@ class PostEditorMediaSection extends StatelessWidget {
             children: [
               Text(
                 ProfilePostStrings.media,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
@@ -55,7 +55,7 @@ class PostEditorMediaSection extends StatelessWidget {
                     icon: const Icon(Icons.swap_horiz, size: 18),
                     label: const Text(
                       ProfilePostStrings.replaceMedia,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -67,7 +67,7 @@ class PostEditorMediaSection extends StatelessWidget {
                     ),
                     label: const Text(
                       ProfilePostStrings.addMedia,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -79,7 +79,7 @@ class PostEditorMediaSection extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     field.errorText!,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,

@@ -28,7 +28,7 @@ class WalletCardFooter extends StatelessWidget {
         WalletStrings.ownerLabel(WalletSampleData.owner),
         style: AppTextStyles.label,
         textAlign: TextAlign.right,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       );
       if (responsive.width < 220 * scale) {
         return Column(

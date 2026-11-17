@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/profile_settings/domain/user_profile.dart';
+import 'package:nini/features/profile_settings/presentation/pages/profile_edit_screen.dart';
+import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
@@ -32,6 +34,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileState = context.watch<UserProfileCubit?>()?.state;
     final profile = profileState?.profile ?? const UserProfile();
+    final posts = context.watch<PostsCubit?>()?.state;
     return ColoredBox(
       color: Theme.of(context).colorScheme.surface,
       child: AppResponsiveBuilder(
@@ -93,11 +96,28 @@ class ProfileScreen extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Expanded(child: ProfileStats()),
+                                Expanded(
+                                  child: ProfileStats(
+                                    postCount:
+                                        posts == null ||
+                                            posts.isLoading ||
+                                            posts.loadFailed
+                                        ? '—'
+                                        : posts.posts.length.toString(),
+                                  ),
+                                ),
                                 const SizedBox(width: 8),
-                                ProfileAvatar(
-                                  size: avatarSize,
-                                  asset: profile.avatarPath,
+                                GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () => Navigator.of(context).push<void>(
+                                    MaterialPageRoute<void>(
+                                      builder: (_) => const ProfileEditScreen(),
+                                    ),
+                                  ),
+                                  child: ProfileAvatar(
+                                    size: avatarSize,
+                                    asset: profile.avatarPath,
+                                  ),
                                 ),
                               ],
                             ),
@@ -109,7 +129,9 @@ class ProfileScreen extends StatelessWidget {
                           StaggeredEntrance(
                             index: 2,
                             child: ProfileIdentity(
-                              name: profile.displayName,
+                              name: profile.displayName.isEmpty
+                                  ? profile.username
+                                  : profile.displayName,
                               category: profile.businessType,
                               bio: profile.bio,
                             ),

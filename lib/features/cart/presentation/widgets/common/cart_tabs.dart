@@ -43,7 +43,7 @@ class CartTabs extends StatelessWidget {
                             child: Text(
                               labels[tab.index],
                               textAlign: TextAlign.center,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.label.copyWith(

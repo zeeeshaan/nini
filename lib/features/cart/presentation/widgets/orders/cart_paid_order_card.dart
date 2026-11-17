@@ -57,7 +57,7 @@ class CartPaidOrderCard extends StatelessWidget {
                             style: AppTextStyles.micro.copyWith(
                               color: AppColors.white,
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
                         ),
@@ -69,7 +69,7 @@ class CartPaidOrderCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyles.compactBodyBold,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                         ),
                       ],
@@ -82,7 +82,7 @@ class CartPaidOrderCard extends StatelessWidget {
                       style: AppTextStyles.smallPrint.copyWith(
                         color: colors.onSurface.withValues(alpha: .4),
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                     const SizedBox(height: 18),
                     Wrap(
@@ -97,7 +97,7 @@ class CartPaidOrderCard extends StatelessWidget {
                           child: const Text(
                             ReceiptStrings.viewInvoice,
                             style: AppTextStyles.helperBold,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
                         ),
@@ -105,7 +105,7 @@ class CartPaidOrderCard extends StatelessWidget {
                           cartMoney(order.total),
                           textAlign: TextAlign.right,
                           style: AppTextStyles.pageTitleBold,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                       ],
                     ),

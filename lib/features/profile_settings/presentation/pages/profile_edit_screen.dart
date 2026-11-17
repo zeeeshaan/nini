@@ -27,7 +27,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       'firstName',
       'lastName',
       'businessType',
-      'nationality',
+      'city',
       'username',
       'email',
       'gender',
@@ -39,6 +39,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   DateTime? _birthDate;
   Uint8List? _photo;
   bool _choosingPhoto = false;
+  Future<void>? _savePending;
 
   void _initialize(UserProfile profile) {
     if (_initial != null) return;
@@ -50,35 +51,77 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     _birthDate = profile.birthDate;
   }
 
-  Future<void> _save() async {
+  Future<void> _save() =>
+      _savePending ??= _submit().whenComplete(() => _savePending = null);
+
+  Future<void> _submit() async {
     if (context.read<UserProfileCubit>().state.saving) return;
     if (_initial == null || _choosingPhoto || !_form.currentState!.validate()) {
       return;
     }
+    final cubit = context.read<UserProfileCubit>();
     final profile = UserProfile(
+      id: _initial!.id,
+      city: _controllers['city']!.text.trim(),
       firstName: _controllers['firstName']!.text.trim(),
       lastName: _controllers['lastName']!.text.trim(),
       businessType: _controllers['businessType']!.text.trim(),
-      nationality: _controllers['nationality']!.text.trim(),
+      nationality: cubit.state.profile.nationality,
       username: _controllers['username']!.text.trim(),
       email: _controllers['email']!.text.trim(),
       gender: _controllers['gender']!.text.trim(),
       bio: _controllers['bio']!.text.trim(),
       birthDate: _birthDate,
-      avatarPath: _initial!.avatarPath,
+      avatarPath: cubit.state.profile.avatarPath,
     );
-    final saved = await context.read<UserProfileCubit>().save(
-      profile,
-      photo: _photo,
-    );
+    var saved = await cubit.save(profile, photo: _photo);
     if (!mounted) return;
+    var textOnly = false;
+    if (!saved && _photo != null && cubit.state.photoUploadUnavailable) {
+      final proceed = await showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          title: const Text(
+            ProfileEditStrings.saveTextOnlyTitle,
+            textAlign: TextAlign.right,
+          ),
+          content: const Text(
+            ProfileEditStrings.saveTextOnlyMessage,
+            textAlign: TextAlign.right,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text(AppStrings.cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text(ProfileEditStrings.saveTextOnly),
+            ),
+          ],
+        ),
+      );
+      if (!mounted || proceed != true) return;
+      textOnly = true;
+      saved = await cubit.save(profile);
+      if (!mounted) return;
+    }
     if (saved) {
+      if (textOnly) {
+        _initial = cubit.state.profile;
+        AppToast.show(
+          context,
+          message: ProfileEditStrings.textSavedPhotoPending,
+        );
+        return;
+      }
       AppToast.success(context, ProfileEditStrings.saved);
       Navigator.of(context).pop();
     } else {
       AppToast.show(
         context,
-        message: ProfileEditStrings.saveFailed,
+        message: cubit.state.errorMessage ?? ProfileEditStrings.saveFailed,
         type: AppToastType.error,
       );
     }
@@ -131,14 +174,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   const Text(
                                     ProfileEditStrings.loadFailed,
                                     textAlign: TextAlign.right,
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                   TextButton(
                                     onPressed: () =>
                                         context.read<UserProfileCubit>().load(),
                                     child: const Text(
                                       AppStrings.retry,
-                                      textDirection: TextDirection.rtl,
+                                      textDirection: TextDirection.ltr,
                                       textAlign: TextAlign.right,
                                     ),
                                   ),

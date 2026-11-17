@@ -20,7 +20,7 @@ class LanguageOptions extends StatelessWidget {
               title: Text(
                 ProfileSettingsStrings.english,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
             RadioListTile<String>(
@@ -28,7 +28,7 @@ class LanguageOptions extends StatelessWidget {
               title: Text(
                 ProfileSettingsStrings.persian,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           ],

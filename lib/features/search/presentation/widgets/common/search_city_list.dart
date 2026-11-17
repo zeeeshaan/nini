@@ -31,7 +31,7 @@ class SearchCityList extends StatelessWidget {
             child: SizedBox(
               height: 36,
               child: Row(
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 children: [
                   Container(
                     width: 18,
@@ -53,7 +53,7 @@ class SearchCityList extends StatelessWidget {
                   const SizedBox(width: 20),
                   Text(
                     SearchStrings.display(city),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ],

@@ -67,7 +67,7 @@ class HomeProductImage extends StatelessWidget {
                           ),
                           child: const Text(
                             AppStrings.retry,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
                         ),

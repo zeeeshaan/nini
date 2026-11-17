@@ -49,7 +49,7 @@ class CartStatusMenu extends StatelessWidget {
               Flexible(
                 child: Text(
                   label,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.compactBody.copyWith(color: AppColors.white),
                 ),

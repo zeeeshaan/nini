@@ -13,7 +13,7 @@ class ProfileBirthField extends StatefulWidget {
     this.enabled = true,
   });
   final DateTime? initialDate;
-  final ValueChanged<DateTime>? onChanged;
+  final ValueChanged<DateTime?>? onChanged;
   final bool enabled;
   @override
   State<ProfileBirthField> createState() => _ProfileBirthFieldState();
@@ -25,11 +25,32 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_date != null) {
-      _controller.text = AppStrings.persianDigits(
-        MaterialLocalizations.of(context).formatMediumDate(_date!),
-      );
+    _displayDate();
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfileBirthField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!DateUtils.isSameDay(oldWidget.initialDate, widget.initialDate)) {
+      _date = widget.initialDate;
+      _displayDate();
     }
+  }
+
+  void _displayDate() {
+    final date = _date;
+    _controller.text = date == null
+        ? ''
+        : AppStrings.persianDigits(
+            MaterialLocalizations.of(context).formatMediumDate(date),
+          );
+  }
+
+  void _changeDate(DateTime? date) {
+    if (!widget.enabled) return;
+    _date = date;
+    _displayDate();
+    widget.onChanged?.call(date);
   }
 
   @override
@@ -40,20 +61,21 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
 
   Future<void> _chooseDate() async {
     if (!widget.enabled) return;
+    final today = DateUtils.dateOnly(DateTime.now());
+    final firstDate = DateTime(1900);
+    var initialDate = _date ?? today;
+    if (initialDate.isBefore(firstDate)) initialDate = firstDate;
+    if (initialDate.isAfter(today)) initialDate = today;
     final date = await showDatePicker(
       context: context,
-      locale: const Locale('fa', 'IR'),
-      textDirection: TextDirection.rtl,
-      initialDate: _date ?? DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      locale: const Locale('en'),
+      textDirection: TextDirection.ltr,
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: today,
     );
     if (date != null && mounted) {
-      _date = date;
-      widget.onChanged?.call(date);
-      _controller.text = AppStrings.persianDigits(
-        MaterialLocalizations.of(context).formatMediumDate(date),
-      );
+      _changeDate(date);
     }
   }
 
@@ -65,12 +87,27 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
       enabled: widget.enabled,
       readOnly: true,
       onTap: _chooseDate,
+      contextMenuBuilder: (context, editableText) =>
+          AdaptiveTextSelectionToolbar.buttonItems(
+            anchors: editableText.contextMenuAnchors,
+            buttonItems: [
+              ...editableText.contextMenuButtonItems,
+              if (_date != null && widget.enabled)
+                ContextMenuButtonItem(
+                  label: ProfileEditStrings.clearBirthDate,
+                  onPressed: () {
+                    editableText.hideToolbar();
+                    _changeDate(null);
+                  },
+                ),
+            ],
+          ),
       textAlign: TextAlign.right,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       style: AppTextStyles.caption,
       decoration: InputDecoration(
         hintText: ProfileEditStrings.birth,
-        hintTextDirection: TextDirection.rtl,
+        hintTextDirection: TextDirection.ltr,
         hintStyle: AppTextStyles.caption.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),

@@ -89,7 +89,7 @@ class _RadarPainter extends CustomPainter {
             color: foreground.withValues(alpha: .65),
           ),
         ),
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       )..layout();
       text.paint(
         canvas,

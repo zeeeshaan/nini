@@ -30,7 +30,7 @@ class SettingsDetailHeader extends StatelessWidget
         title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         style: AppTextStyles.settingsDetailTitle,
         textAlign: TextAlign.right,
       ),

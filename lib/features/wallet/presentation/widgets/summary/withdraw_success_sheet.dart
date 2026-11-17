@@ -33,14 +33,14 @@ class WithdrawSuccessSheet extends StatelessWidget {
               WalletStrings.withdrawalComplete,
               textAlign: TextAlign.center,
               style: AppTextStyles.bodyBold,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 8),
             const Text(
               WalletStrings.previewOnly,
               textAlign: TextAlign.center,
               style: AppTextStyles.helper,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 24),
             Container(

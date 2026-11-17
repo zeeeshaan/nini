@@ -20,6 +20,9 @@ import 'package:nini/features/profile_settings/domain/user_profile_repository.da
 
 import 'app_providers.dart';
 
+import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
+import 'package:nini/features/login/presentation/pages/login_screen.dart';
+
 /// Configures the app and connects it to its shared state.
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -71,14 +74,14 @@ class _ThemedApp extends StatelessWidget {
       builder: (context, mode) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
-        locale: const Locale('fa', 'IR'),
+        locale: const Locale('en'),
         supportedLocales: const [Locale('en'), Locale('fa', 'IR')],
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
           FlutterQuillLocalizations.delegate,
         ],
         navigatorObservers: [entranceRouteObserver],
-        // Preserve control positions; Persian text uses RTL direction within each widget.
+        // English testing locale with the existing control positions.
         builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
           value: Theme.of(context).appBarTheme.systemOverlayStyle!,
           child: Directionality(
@@ -92,7 +95,11 @@ class _ThemedApp extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: mode,
-        home: const SplashScreen(),
+        home:
+            context.read<SessionCubit>().state.status ==
+                SessionStatus.unauthenticated
+            ? const LoginScreen()
+            : const SplashScreen(),
       ),
     );
   }

@@ -150,14 +150,14 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
               Text(
                 '${MaterialLocalizations.of(context).formatMediumDate(_schedule.state.date)} · ${_schedule.state.from.format(context)} – ${_schedule.state.to.format(context)}',
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
               const SizedBox(height: 8),
               const Text(
                 CreatePostStrings.scheduleHelp,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.helper,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
               if (_schedule.state.error != null)
                 Padding(
@@ -165,7 +165,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                   child: Text(
                     _schedule.state.error!,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
               if (widget.initial != null)
@@ -174,7 +174,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                       Navigator.of(context).pop(const ScheduleSelection(null)),
                   child: const Text(
                     CreatePostStrings.removeSchedule,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -196,7 +196,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
           Text(
             label,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
           const SizedBox(height: 6),
           Container(
@@ -211,7 +211,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
             child: Text(
               time.format(context),
               textAlign: TextAlign.center,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
         ],

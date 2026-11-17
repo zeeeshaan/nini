@@ -17,7 +17,7 @@ class CartStatusFilter extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: InputChip(
         key: const ValueKey('cart-active-status'),
-        label: Text(status.label, textDirection: TextDirection.rtl, textAlign: TextAlign.right),
+        label: Text(status.label, textDirection: TextDirection.ltr, textAlign: TextAlign.right),
         deleteIcon: const AppIcon(AppIcons.close, size: 16),
         deleteButtonTooltipMessage: CartStrings.clearFilter,
         onDeleted: onClear,

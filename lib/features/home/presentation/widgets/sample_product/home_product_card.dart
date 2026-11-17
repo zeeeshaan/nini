@@ -93,7 +93,7 @@ class _HomeProductCardState extends State<HomeProductCard>
                 : cart.state.storageError
                 ? AppStrings.cartStorageError
                 : AppStrings.cartStockExceeded,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
         ),

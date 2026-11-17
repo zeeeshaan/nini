@@ -24,7 +24,7 @@ class NotificationTile extends StatelessWidget {
             width: 58,
             child: Text(
               notification.timeLabel,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: AppTextStyles.smallPrintMedium.copyWith(
                 color: Theme.of(context).colorScheme.onSurface
                     .withValues(alpha: .6),
@@ -39,14 +39,14 @@ class NotificationTile extends StatelessWidget {
               children: [
                 Text(
                   notification.title,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.bodyBold,
                 ),
                 const SizedBox(height: 3),
                 Text(
                   notification.message,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.notificationBody,
                 ),

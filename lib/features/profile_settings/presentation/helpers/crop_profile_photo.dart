@@ -19,7 +19,7 @@ Future<Uint8List?> cropProfilePhoto(BuildContext context, String path) async {
     aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
     maxWidth: 1024,
     maxHeight: 1024,
-    // The shared profile repository performs the final quality compression.
+    // Keep crop quality until the upload contract defines compression needs.
     compressQuality: 100,
     compressFormat: transparent
         ? ImageCompressFormat.png

@@ -30,16 +30,16 @@ class TeamRequestProviderList extends StatelessWidget {
         if (onQuantityChanged != null)
           TeamRequestQuantity(
             quantity: request.providers[index].quantity,
-            unit: request.providers[index].post.details.unit?.label ?? 'عدد',
+            unit: request.providers[index].post.details.unit?.label ?? 'item',
             onChanged: (value) =>
                 onQuantityChanged!(request.providers[index].provider.id, value),
           )
         else
           Text(
-            '${cartQuantity(request.providers[index].quantity)} ${request.providers[index].post.details.unit?.label ?? 'عدد'}',
+            '${cartQuantity(request.providers[index].quantity)} ${request.providers[index].post.details.unit?.label ?? 'item'}',
             textAlign: TextAlign.right,
             style: AppTextStyles.bodyBold,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
       ],
     ],

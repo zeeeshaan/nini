@@ -48,7 +48,7 @@ class SearchResultCard extends StatelessWidget {
                     fontSize: AppTextStyles.badgeSmall.fontSize! * contentScale,
                     color: colors.surface,
                   ),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             )

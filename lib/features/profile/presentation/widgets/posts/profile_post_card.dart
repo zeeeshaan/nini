@@ -37,7 +37,7 @@ class ProfilePostCard extends StatelessWidget {
   static double lineHeightFor(BuildContext context, TextStyle style) {
     final painter = TextPainter(
       text: TextSpan(
-        text: 'Agآی',
+        text: 'Ag',
         style: AppTextStyles.profileCardText.merge(style),
       ),
       textDirection: Directionality.of(context),
@@ -211,9 +211,9 @@ class ProfilePostCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: metadataStyle.copyWith(
-                              color: colors.onSurface,
+                              color: colors.onSurface.withValues(alpha: .4),
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                         ),
                         SizedBox(height: 4 * contentScale),
@@ -224,6 +224,7 @@ class ProfilePostCard extends StatelessWidget {
                               Visibility(
                                 visible:
                                     showStock &&
+                                    !post.isService &&
                                     (!post.isPublished ||
                                         post.details.warehouseStock.isNotEmpty),
                                 maintainState: true,
@@ -252,11 +253,11 @@ class ProfilePostCard extends StatelessWidget {
                                   textAlign: TextAlign.left,
                                   style: originalPriceStyle.copyWith(
                                     color: colors.onSurface.withValues(
-                                      alpha: .65,
+                                      alpha: .25,
                                     ),
                                     decoration: TextDecoration.lineThrough,
                                     decorationColor: colors.onSurface
-                                        .withValues(alpha: .65),
+                                        .withValues(alpha: .25),
                                   ),
                                 )
                               : null,
@@ -269,7 +270,6 @@ class ProfilePostCard extends StatelessWidget {
                                   textDirection: TextDirection.ltr,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    SizedBox(width: 2 * contentScale),
                                     Expanded(
                                       child: FittedBox(
                                         fit: BoxFit.scaleDown,
@@ -285,7 +285,7 @@ class ProfilePostCard extends StatelessWidget {
                                               _price(post.price),
                                               textDirection: TextDirection.ltr,
                                               style: priceStyle,
-                                              textAlign: TextAlign.right,
+                                              textAlign: TextAlign.left,
                                             ),
                                             if (unit != null) ...[
                                               SizedBox(width: 4 * contentScale),
@@ -294,7 +294,7 @@ class ProfilePostCard extends StatelessWidget {
                                                 style: unitStyle,
                                                 textAlign: TextAlign.right,
                                                 textDirection:
-                                                    TextDirection.rtl,
+                                                    TextDirection.ltr,
                                               ),
                                             ],
                                           ],
@@ -309,18 +309,19 @@ class ProfilePostCard extends StatelessWidget {
                                       excludeSemantics: true,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
+                                        textDirection: TextDirection.ltr,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
                                           AppIcon(
                                             AppIcons.starFilled,
-                                            size: 16 * contentScale,
+                                            size: 10 * contentScale,
                                           ),
                                           if (rating != null)
                                             Text(
                                               AppStrings.persianDigits(rating),
                                               style: ratingStyle,
-                                              textDirection: TextDirection.rtl,
+                                              textDirection: TextDirection.ltr,
                                               textAlign: TextAlign.right,
                                             ),
                                         ],

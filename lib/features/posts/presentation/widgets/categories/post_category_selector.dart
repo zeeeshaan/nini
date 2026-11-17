@@ -15,7 +15,7 @@ class PostCategorySelector extends StatelessWidget {
   Widget build(BuildContext context) => PersianFeature(
     child: Localizations.override(
       context: context,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en'),
       child: BlocBuilder<ProfileCategoriesCubit, ProfileCategoriesState>(
         builder: (context, categories) => BlocBuilder<CreatePostCubit, PostDraft>(
           builder: (context, draft) {
@@ -33,15 +33,15 @@ class PostCategorySelector extends StatelessWidget {
                     isExpanded: true,
                     decoration: InputDecoration(
                       labelText: english
-                          ? "دسته‌بندی"
+                          ? 'Category'
                           : ProfilePostStrings.category,
                     ),
                     items: [
                       DropdownMenuItem(
                         value: '',
                         child: Text(
-                          english ? "فقط همه" : ProfilePostStrings.allOnly,
-                          textDirection: TextDirection.rtl,
+                          english ? 'All only' : ProfilePostStrings.allOnly,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -56,7 +56,7 @@ class PostCategorySelector extends StatelessWidget {
                                     category.name,
                                   ),
                             overflow: TextOverflow.ellipsis,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
                         ),
@@ -80,17 +80,17 @@ class PostCategorySelector extends StatelessWidget {
                       Expanded(
                         child: Text(
                           english
-                              ? "بارگذاری دسته‌بندی‌ها انجام نشد. دوباره تلاش کنید."
+                              ? 'Could not load categories. Try again.'
                               : ProfilePostStrings.loadFailed,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                       ),
                       TextButton(
                         onPressed: context.read<ProfileCategoriesCubit>().load,
                         child: Text(
-                          english ? "تلاش دوباره" : ProfilePostStrings.retry,
-                          textDirection: TextDirection.rtl,
+                          english ? 'Retry' : ProfilePostStrings.retry,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -108,9 +108,9 @@ class PostCategorySelector extends StatelessWidget {
                     icon: const Icon(Icons.tune, size: 18),
                     label: Text(
                       english
-                          ? "مدیریت دسته‌بندی‌ها"
+                          ? 'Manage categories'
                           : ProfilePostStrings.manageTabs,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),

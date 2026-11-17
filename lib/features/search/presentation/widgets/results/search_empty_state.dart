@@ -23,7 +23,7 @@ class SearchEmptyState extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: const Text(
               SearchStrings.noResults,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -32,7 +32,7 @@ class SearchEmptyState extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: const Text(
               SearchStrings.tryAnotherQuery,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),

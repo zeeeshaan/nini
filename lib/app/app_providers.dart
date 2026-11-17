@@ -25,7 +25,8 @@ import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.
 import 'package:nini/features/saved_posts/data/local_saved_posts_repository.dart';
 import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
 import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/features/profile_settings/data/local_user_profile_repository.dart';
+import 'package:nini/features/profile_settings/data/api_user_profile_repository.dart';
+import 'package:nini/features/profile/data/api_public_profile_repository.dart';
 import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 
@@ -73,6 +74,12 @@ class AppProviders extends StatelessWidget {
         RepositoryProvider<SecureTokenStore>(
           create: (_) => tokenStore ?? SecureTokenStore(),
         ),
+        RepositoryProvider<ApiPublicProfileRepository>(
+          create: (context) => ApiPublicProfileRepository(
+            context.read<ApiClient>(),
+            context.read<SecureTokenStore>(),
+          ),
+        ),
         RepositoryProvider<AuthRepository>(
           create: (context) => AuthRepository(
             context.read<ApiClient>(),
@@ -91,73 +98,97 @@ class AppProviders extends StatelessWidget {
           BlocProvider(
             create: (context) => SessionCubit(context.read<AuthRepository>()),
           ),
-          // Account data stays lazy until session validation opens Dashboard.
-          BlocProvider(
-            create: (context) => UserProfileCubit(
-              userProfileRepository ??
-                  LocalUserProfileRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-            )..load(),
-          ),
-          BlocProvider(create: (_) => PostLikesCubit()),
-          BlocProvider(
-            create: (context) => ProfileCategoriesCubit(
-              categoriesRepository ??
-                  LocalProfileCategoriesRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-            )..load(),
-          ),
-          BlocProvider(
-            create: (context) => CartCubit(
-              cartRepository ??
-                  LocalCartRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-            )..load(),
-          ),
-          BlocProvider(
-            create: (context) => NotificationsCubit(context.read<CartCubit>()),
-          ),
-          BlocProvider(
-            create: (context) => PostAnalyticsCubit(
-              analyticsRepository ??
-                  LocalPostAnalyticsRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-            ),
-          ),
           BlocProvider(
             create: (_) => ThemeCubit(initialMode: initialThemeMode),
           ),
-          BlocProvider(
-            create: (context) => PostsCubit(
-              postsRepository ??
-                  LocalPostsRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-            )..load(),
-          ),
-          BlocProvider(
-            create: (context) => SavedPostsCubit(
-              savedPostsRepository ??
-                  LocalSavedPostsRepository(
-                    directoryProvider: _storage(context).directory,
-                  ),
-              posts: context.read<PostsCubit>(),
-            )..load(),
-          ),
         ],
         child: BlocListener<SessionCubit, SessionState>(
-          listenWhen: (previous, current) =>
-              current.status == SessionStatus.authenticated &&
-              current.userId != previous.userId,
+          listenWhen: (previous, current) => current.userId != previous.userId,
           listener: (context, session) {
-            InMemoryChatRepository.instance.useAccount(session.userId!);
-            InMemoryTeamsRepository.instance.useAccount(session.userId!);
+            final account = session.status == SessionStatus.authenticated
+                ? session.userId
+                : null;
+            InMemoryChatRepository.instance.useAccount(account);
+            InMemoryTeamsRepository.instance.useAccount(account);
           },
-          child: child,
+          child: BlocBuilder<SessionCubit, SessionState>(
+            // Dispose account state and the navigation stack only on logout.
+            buildWhen: (previous, current) =>
+                previous.accountRevision != current.accountRevision,
+            builder: (context, session) => MultiBlocProvider(
+              key: ValueKey(session.accountRevision),
+              providers: [
+                // Account data stays lazy until session validation opens Dashboard.
+                BlocProvider(
+                  create: (context) {
+                    final session = context.read<SessionCubit>();
+                    final userId = session.state.userId ?? '';
+                    return UserProfileCubit(
+                      userProfileRepository ??
+                          ApiUserProfileRepository(
+                            context.read<ApiClient>(),
+                            context.read<SecureTokenStore>(),
+                            userId: userId,
+                            onUnauthorized: () async {
+                              if (session.state.userId == userId) {
+                                await session.logout();
+                              }
+                            },
+                          ),
+                      userId: userId,
+                    )..load();
+                  },
+                ),
+                BlocProvider(create: (_) => PostLikesCubit()),
+                BlocProvider(
+                  create: (context) => ProfileCategoriesCubit(
+                    categoriesRepository ??
+                        LocalProfileCategoriesRepository(
+                          directoryProvider: _storage(context).directory,
+                        ),
+                  )..load(),
+                ),
+                BlocProvider(
+                  create: (context) => CartCubit(
+                    cartRepository ??
+                        LocalCartRepository(
+                          directoryProvider: _storage(context).directory,
+                        ),
+                  )..load(),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      NotificationsCubit(context.read<CartCubit>()),
+                ),
+                BlocProvider(
+                  create: (context) => PostAnalyticsCubit(
+                    analyticsRepository ??
+                        LocalPostAnalyticsRepository(
+                          directoryProvider: _storage(context).directory,
+                        ),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => PostsCubit(
+                    postsRepository ??
+                        LocalPostsRepository(
+                          directoryProvider: _storage(context).directory,
+                        ),
+                  )..load(),
+                ),
+                BlocProvider(
+                  create: (context) => SavedPostsCubit(
+                    savedPostsRepository ??
+                        LocalSavedPostsRepository(
+                          directoryProvider: _storage(context).directory,
+                        ),
+                    posts: context.read<PostsCubit>(),
+                  )..load(),
+                ),
+              ],
+              child: child,
+            ),
+          ),
         ),
       ),
     );

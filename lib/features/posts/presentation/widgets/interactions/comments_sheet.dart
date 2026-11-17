@@ -46,27 +46,19 @@ class _CommentsSheetState extends State<CommentsSheet> {
 
   final ValueNotifier<List<({String name, String time, String text})>>
   _comments = ValueNotifier([
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "کارت عالیه! 🔥😍"),
+    (name: 'david.colo', time: '13h', text: 'Amazing work! 🔥😍'),
     (
       name: 'david.colo',
-      time: "۱۳ ساعت پیش",
-      text: "دقیقاً همون چیزیه که دنبالش بودم! 🙌",
+      time: '13h',
+      text: 'This is exactly what I was looking for! 🙌',
     ),
-    (
-      name: 'david.colo',
-      time: "۱۳ ساعت پیش",
-      text: "ایده عالیه! ادامه بده! 🚀",
-    ),
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "واقعاً فوق‌العاده است! ✨"),
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "چه تجربه خوبی! ❤️"),
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "آفرین! 👏"),
-    (
-      name: 'david.colo',
-      time: "۱۳ ساعت پیش",
-      text: "این کار شایسته توجه بیشتریه! 🌟",
-    ),
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "وای، عالیه! 😍🔥"),
-    (name: 'david.colo', time: "۱۳ ساعت پیش", text: "خیلی عالیه!"),
+    (name: 'david.colo', time: '13h', text: 'Great idea! Keep it up! 🚀'),
+    (name: 'david.colo', time: '13h', text: 'Absolutely brilliant! ✨'),
+    (name: 'david.colo', time: '13h', text: 'Such a great experience! ❤️'),
+    (name: 'david.colo', time: '13h', text: 'Well done! 👏'),
+    (name: 'david.colo', time: '13h', text: 'This deserves more attention! 🌟'),
+    (name: 'david.colo', time: '13h', text: 'Wowwww! 😍🔥'),
+    (name: 'david.colo', time: '13h', text: "That's awesome!"),
   ]);
 
   void _addComment() {
@@ -76,7 +68,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
 
     // Temporary local preview. No backend connection.
     _comments.value = [
-      (name: "شما", time: "همین حالا", text: text),
+      (name: 'you', time: 'now', text: text),
       ..._comments.value,
     ];
 
@@ -125,13 +117,16 @@ class _CommentsSheetState extends State<CommentsSheet> {
 
             const SizedBox(height: 12),
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "دیدگاه‌ها",
-                style: AppTextStyles.bodyText.copyWith(color: foreground),
-                textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'comments',
+                  style: AppTextStyles.bodyText.copyWith(color: foreground),
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.ltr,
+                ),
               ),
             ),
 
@@ -167,7 +162,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
                                     style: AppTextStyles.caption.copyWith(
                                       color: foreground.withValues(alpha: 0.55),
                                     ),
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                                 const SizedBox(height: 3),
@@ -179,7 +174,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
                                     style: AppTextStyles.bodyText.copyWith(
                                       color: foreground,
                                     ),
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                               ],
@@ -223,7 +218,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
                 ),
                 child: AppTextField(
                   controller: _commentController,
-                  hint: "دیدگاهی بنویسید…",
+                  hint: 'Add a comment...',
                   textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
                   textAlign: TextAlign.right,
                   textDirection: TextDirection.ltr,
@@ -231,7 +226,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
                   onSubmitted: (_) => _addComment(),
                   suffixIcon: IconButton(
                     onPressed: _addComment,
-                    tooltip: "افزودن دیدگاه",
+                    tooltip: 'Add comment',
                     icon: Icon(Icons.send_rounded, color: foreground),
                   ),
                 ),

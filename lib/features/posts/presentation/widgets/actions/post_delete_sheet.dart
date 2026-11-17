@@ -52,14 +52,14 @@ class PostDeleteSheet extends StatelessWidget {
             children: [
               Text(
                 post.title,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 16),
               const Text(
                 ProfilePostStrings.deletePostHelp,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
               if (state.deleteError != null)
@@ -67,7 +67,7 @@ class PostDeleteSheet extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 16),
                   child: Text(
                     state.deleteError!,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,

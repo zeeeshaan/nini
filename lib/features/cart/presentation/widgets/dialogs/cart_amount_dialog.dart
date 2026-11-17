@@ -98,7 +98,7 @@ class _CartAmountDialogState extends State<CartAmountDialog> {
             Text(
               CartStrings.quantityHelp,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: AppTextStyles.inherit.copyWith(color: Theme.of(context).hintColor),
             ),
             const SizedBox(height: 30),
@@ -123,7 +123,7 @@ class _CartAmountDialogState extends State<CartAmountDialog> {
             Text(
               widget.wholeUnits ? CartStrings.integerHelp : CartStrings.decimalHelp,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: AppTextStyles.inherit.copyWith(color: Theme.of(context).hintColor),
             ),
             const SizedBox(height: 42),

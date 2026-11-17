@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/security/account_storage.dart';
+import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
 import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
@@ -34,8 +36,17 @@ class PostAnalyticsScreen extends StatelessWidget {
       existing.load();
       return _PostAnalyticsView(post: ownedPost);
     }
+    final session = context.read<SessionCubit?>()?.state;
+    if (session?.status != SessionStatus.authenticated ||
+        session?.userId == null) {
+      return const _AnalyticsAccessNotice(loading: false);
+    }
     return BlocProvider(
-      create: (_) => PostAnalyticsCubit(LocalPostAnalyticsRepository())..load(),
+      create: (_) => PostAnalyticsCubit(
+        LocalPostAnalyticsRepository(
+          directoryProvider: AccountStorage(session!.userId!).directory,
+        ),
+      )..load(),
       child: _PostAnalyticsView(post: ownedPost),
     );
   }
@@ -68,7 +79,7 @@ class _AnalyticsAccessNotice extends StatelessWidget {
                   AppStrings.analyticsOwnerOnly,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.body,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
         ),
       ),
@@ -91,7 +102,7 @@ class _PostAnalyticsView extends StatelessWidget {
           AppStrings.analytics,
           style: AppTextStyles.analyticsTitle,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
 
@@ -145,7 +156,7 @@ class _PostAnalyticsView extends StatelessWidget {
                             AppStrings.analyticsSaveFailed,
                             style: AppTextStyles.helper,
                             textAlign: TextAlign.right,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                         ),
                       TotalViewsSection(reportForPeriod: report),

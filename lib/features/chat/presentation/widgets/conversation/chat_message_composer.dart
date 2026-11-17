@@ -77,7 +77,7 @@ class ChatMessageComposer extends StatelessWidget {
                         controller: controller,
                         focusNode: focusNode,
                         enabled: interactive,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,

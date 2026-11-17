@@ -6,9 +6,10 @@ class PostSeller {
     required this.avatarAsset,
     this.location = '',
     this.bio = '',
+    this.username = '',
   });
 
-  final String id, name, avatarAsset, location, bio;
+  final String id, name, avatarAsset, location, bio, username;
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -16,6 +17,7 @@ class PostSeller {
     'avatarAsset': avatarAsset,
     'location': location,
     'bio': bio,
+    'username': username,
   };
 
   factory PostSeller.fromJson(Map<String, dynamic> json) => PostSeller(
@@ -24,5 +26,6 @@ class PostSeller {
     avatarAsset: json['avatarAsset'] as String? ?? '',
     location: json['location'] as String? ?? '',
     bio: json['bio'] as String? ?? '',
+    username: json['username'] as String? ?? '',
   );
 }

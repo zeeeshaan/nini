@@ -26,7 +26,7 @@ class HomeSellerHeader extends StatelessWidget {
             children: [
               Text(
                 seller.name,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -38,7 +38,7 @@ class HomeSellerHeader extends StatelessWidget {
               if (seller.location.isNotEmpty)
                 Text(
                   seller.location,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

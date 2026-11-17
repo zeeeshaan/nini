@@ -46,10 +46,10 @@ class TeamPickerCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "تیم",
+                "Team",
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyText.copyWith(color: colors.onSurface),
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
 
               const SizedBox(height: 10),
@@ -74,14 +74,14 @@ class TeamPickerCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       memberCount == 0
-                          ? "افزودن اعضا"
+                          ? "Add members"
                           : AppStrings.persianDigits(memberCount),
                       textAlign: TextAlign.right,
                       style: AppTextStyles.bodyText.copyWith(
                         color: colors.onSurface,
                         fontWeight: FontWeight.w600,
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                   ),
 

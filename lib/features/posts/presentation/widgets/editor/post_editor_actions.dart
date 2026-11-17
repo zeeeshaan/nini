@@ -26,7 +26,7 @@ class PostEditorActions extends StatelessWidget {
                   onPressed: saving ? null : onCancel,
                   child: const Text(
                     ProfilePostStrings.cancel,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -39,7 +39,7 @@ class PostEditorActions extends StatelessWidget {
                     saving
                         ? ProfilePostStrings.saving
                         : ProfilePostStrings.saveChanges,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),

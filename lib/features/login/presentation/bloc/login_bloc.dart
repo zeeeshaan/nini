@@ -42,13 +42,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } on FormatException {
       emit(
         AuthFailure(
-          useEmail ? AuthStrings.invalidEmail : "شماره تلفن معتبر وارد کنید.",
+          useEmail ? AuthStrings.invalidEmail : 'Enter a valid phone number.',
         ),
       );
     } on DioException catch (error) {
       emit(AuthFailure(_networkError(error, useEmail: useEmail)));
     } catch (_) {
-      emit(const AuthFailure("درخواست کد تأیید انجام نشد. دوباره تلاش کنید."));
+      emit(const AuthFailure('Unable to request OTP. Try again.'));
     }
   }
 
@@ -56,15 +56,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     switch (error.response?.statusCode) {
       case 400:
       case 422:
-        return useEmail ? AuthStrings.invalidEmail : "شماره تلفن معتبر نیست.";
+        return useEmail ? AuthStrings.invalidEmail : 'Invalid phone number.';
       case 429:
-        return "تعداد تلاش‌ها بیش از حد مجاز است. بعداً دوباره تلاش کنید.";
+        return 'Too many attempts. Please try again later.';
       case 500:
       case 502:
       case 503:
-        return "سرور در دسترس نیست. دوباره تلاش کنید.";
+        return 'Server unavailable. Please try again.';
       default:
-        return "اتصال برقرار نشد. دوباره تلاش کنید.";
+        return 'Connection failed. Please try again.';
     }
   }
 }

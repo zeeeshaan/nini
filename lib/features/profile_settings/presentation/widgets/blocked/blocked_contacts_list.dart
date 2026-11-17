@@ -18,6 +18,7 @@ class BlockedContactsList extends StatelessWidget {
         builder: (context, contacts) {
           if (contacts.isEmpty) {
             return const SettingsEmptyState(
+              textAlign: TextAlign.center,
               title: ProfileSettingsStrings.noBlocked,
               message: ProfileSettingsStrings.blockedHelp,
               icon: AppIcons.profile,
@@ -44,7 +45,7 @@ class BlockedContactsList extends StatelessWidget {
                                 .unblock(contact.id),
                             child: const Text(
                               ProfileSettingsStrings.unblock,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                               textAlign: TextAlign.right,
                             ),
                           ),
@@ -55,7 +56,7 @@ class BlockedContactsList extends StatelessWidget {
                                   ProfileSettingsStrings.blockedConversation,
                               textAlign: TextAlign.right,
                               style: AppTextStyles.body,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                             ),
                           ),
                           const SizedBox(width: 12),

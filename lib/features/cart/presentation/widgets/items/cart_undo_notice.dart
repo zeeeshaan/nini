@@ -39,13 +39,13 @@ class CartUndoNotice extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.bodyEmphasis.copyWith(color: colors.onInverseSurface),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                   Text(
                     CartStrings.removed,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.helper.copyWith(color: colors.onInverseSurface),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ],
               );
@@ -63,7 +63,7 @@ class CartUndoNotice extends StatelessWidget {
                     ),
                     child: const Text(
                       CartStrings.undo,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -71,7 +71,7 @@ class CartUndoNotice extends StatelessWidget {
                     builder: (context, state) => Text(
                       CartStrings.undoCountdown(state.seconds),
                       style: AppTextStyles.labelEmphasis.copyWith(color: colors.onInverseSurface),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),

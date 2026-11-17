@@ -55,6 +55,8 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
       document: document,
       selection: const TextSelection.collapsed(offset: 0),
     );
+    document.format(0, document.length, quill.Attribute.rightAlignment);
+    document.history.clear();
     _captionSynchronizer = PostCaptionSynchronizer(
       controller: _captionController,
       onChanged: _draft.updateRichCaption,
@@ -129,7 +131,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
       final theme = Theme.of(context), colors = theme.colorScheme;
       return Localizations.override(
         context: context,
-        locale: const Locale('fa', 'IR'),
+        locale: const Locale('en'),
         child: PopScope(
           canPop: !_operation.state.saving,
           child: Scaffold(
@@ -148,7 +150,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       CreatePostStrings.createPost,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                       style: theme.textTheme.titleMedium,
                     ),

@@ -17,7 +17,7 @@ class CartSection extends StatelessWidget {
           child: Text(
             title,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             style: AppTextStyles.bodyBold,
           ),
         ),

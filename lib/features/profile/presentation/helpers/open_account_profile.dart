@@ -5,7 +5,29 @@ import 'package:nini/core/icons/app_icons.dart';
 
 import '../pages/profile_screen.dart';
 
+class AccountProfileNavigation extends InheritedWidget {
+  const AccountProfileNavigation({
+    super.key,
+    required this.onOpenProfile,
+    required super.child,
+  });
+  final VoidCallback onOpenProfile;
+
+  static VoidCallback? maybeOf(BuildContext context) => context
+      .getInheritedWidgetOfExactType<AccountProfileNavigation>()
+      ?.onOpenProfile;
+
+  @override
+  bool updateShouldNotify(AccountProfileNavigation oldWidget) =>
+      onOpenProfile != oldWidget.onOpenProfile;
+}
+
 void openAccountProfile(BuildContext context) {
+  final open = AccountProfileNavigation.maybeOf(context);
+  if (open != null) {
+    open();
+    return;
+  }
   Navigator.of(context).push<void>(
     MaterialPageRoute(
       builder: (context) => Scaffold(

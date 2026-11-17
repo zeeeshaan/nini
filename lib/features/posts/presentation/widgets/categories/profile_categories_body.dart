@@ -34,14 +34,14 @@ class ProfileCategoriesBody extends StatelessWidget {
           children: [
             Text(
               CategoryStrings.of(context).text(ProfilePostStrings.loadFailed),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
             TextButton(
               onPressed: onRetry,
               child: Text(
                 CategoryStrings.of(context).text(ProfilePostStrings.retry),
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),
@@ -54,7 +54,7 @@ class ProfileCategoriesBody extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Text(
           CategoryStrings.of(context).text(ProfilePostStrings.noTabs),
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
         ),
       );

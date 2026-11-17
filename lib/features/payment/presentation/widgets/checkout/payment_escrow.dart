@@ -14,7 +14,7 @@ class PaymentEscrow extends StatelessWidget {
         PaymentStrings.buyerEscrowSecurity,
         textAlign: TextAlign.right,
         style: AppTextStyles.bodyBold,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       ),
       const SizedBox(height: 4),
       ConstrainedBox(
@@ -23,7 +23,7 @@ class PaymentEscrow extends StatelessWidget {
           CartStrings.escrowHelp,
           textAlign: TextAlign.right,
           style: AppTextStyles.smallPrint.copyWith(height: 1.5),
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
     ],

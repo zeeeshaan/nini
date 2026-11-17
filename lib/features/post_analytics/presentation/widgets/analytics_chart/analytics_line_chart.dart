@@ -269,7 +269,7 @@ class _LinePainter extends CustomPainter {
           fontFamily: fontFamily,
         ),
       ),
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
     )..layout();
     painter.paint(canvas, offset);
   }

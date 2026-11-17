@@ -33,7 +33,7 @@ class TeamFileList extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      tooltip: "حذف فایل",
+                      tooltip: "Remove file",
                       onPressed: () => onRemove(attachment.id),
                       icon: const Icon(Icons.delete_outline),
                     ),
@@ -50,7 +50,7 @@ class TeamFileList extends StatelessWidget {
                             style: AppTextStyles.bodyText.copyWith(
                               color: colors.onSurface,
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
 
                           const SizedBox(height: 4),
@@ -64,7 +64,7 @@ class TeamFileList extends StatelessWidget {
                             style: AppTextStyles.caption.copyWith(
                               color: colors.onSurfaceVariant,
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                         ],
                       ),

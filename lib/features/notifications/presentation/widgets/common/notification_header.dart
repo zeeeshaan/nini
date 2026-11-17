@@ -16,7 +16,7 @@ class NotificationHeader extends StatelessWidget {
         const Expanded(
           child: Text(
             NotificationStrings.title,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.screenTitle,
           ),

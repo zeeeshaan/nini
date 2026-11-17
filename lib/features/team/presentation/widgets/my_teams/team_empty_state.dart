@@ -20,10 +20,12 @@ class TeamEmptyState extends StatelessWidget {
           Image.asset(imageAsset, width: imageWidth, fit: BoxFit.contain),
         const SizedBox(height: 12),
         Text(
-          searching ? "تیمی مطابق جستجوی شما یافت نشد" : "هنوز تیمی ندارید",
+          searching
+              ? 'No teams match your search'
+              : "You don't have a team yet",
           textAlign: TextAlign.center,
           style: AppTextStyles.bodyText,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ],
     ),

@@ -21,7 +21,7 @@ class SearchAllServicesFilter extends StatelessWidget {
       child: ChoiceChip(
         label: const Text(
           SearchStrings.allServices,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
         ),
         labelStyle: AppTextStyles.labelMedium,

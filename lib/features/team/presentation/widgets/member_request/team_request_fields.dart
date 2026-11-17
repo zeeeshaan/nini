@@ -59,21 +59,21 @@ class _TeamRequestFieldsState extends State<TeamRequestFields> {
       children: [
         AppTextField(
           controller: _title,
-          hint: "عنوان",
+          hint: 'Title',
           textStyle: AppTextStyles.bodyText,
           onChanged: widget.onTitleChanged,
         ),
         SizedBox(height: widget.spacing),
         AppTextField(
           controller: _description,
-          hint: "توضیحات",
+          hint: 'Description',
           maxLines: 5,
           textStyle: AppTextStyles.bodyText,
           onChanged: widget.onDescriptionChanged,
         ),
         SizedBox(height: widget.spacing),
         PostFormOptionTile(
-          label: "تاریخ شروع",
+          label: 'Start Date',
           value: schedule == null
               ? null
               : '${dates.formatMediumDate(schedule.startsAt)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(schedule.startsAt))}',

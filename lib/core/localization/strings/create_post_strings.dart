@@ -1,145 +1,142 @@
 import 'package:nini/core/localization/app_string/app_string.dart';
 
-/// Persian interface copy for the Create Post flow; stored model values stay intact.
+/// English interface copy for the Create Post flow; stored model values stay intact.
 abstract final class CreatePostStrings {
-  static const cancel = "انصراف";
-  static const done = "تأیید";
-  static const add = "افزودن";
-  static const close = "بستن";
-  static const next = "بعدی";
-  static const retry = "تلاش دوباره";
-  static const tryAgain = "تلاش دوباره";
-  static const createPost = "ایجاد پست";
-  static const backToGallery = "بازگشت به گالری";
-  static const publish = "انتشار";
-  static const publishing = "در حال انتشار…";
-  static const postType = "نوع پست";
-  static const product = "محصول";
-  static const services = "خدمات";
-  static const productServiceTitle = "عنوان محصول یا خدمت";
-  static const enterPostTitle = "عنوان پست را وارد کنید";
-  static const postCaption = "توضیحات";
-  static const undo = "واگرد";
-  static const redo = "انجام دوباره";
-  static const writeCaption = "توضیحات پست را بنویسید…";
-  static const altText = "متن جایگزین";
+  static const cancel = "Cancel";
+  static const done = "Done";
+  static const add = "Add";
+  static const close = "Close";
+  static const next = "Next";
+  static const retry = "Retry";
+  static const tryAgain = "Try again";
+  static const createPost = "Create Post";
+  static const backToGallery = "Back to gallery";
+  static const publish = "Publish";
+  static const publishing = "Publishing…";
+  static const postType = "Post type";
+  static const product = "Product";
+  static const services = "Services";
+  static const productServiceTitle = "Product or service title";
+  static const enterPostTitle = "Enter the post title";
+  static const postCaption = "Caption";
+  static const undo = "Undo";
+  static const redo = "Redo";
+  static const writeCaption = "Write a caption…";
+  static const altText = "Alt text";
   static const altTextHelp =
-      "برای هر پیوست توضیحی بنویسید تا کاربران صفحه‌خوان بتوانند محتوای آن را درک کنند.";
-  static const noAttachments = "هیچ پیوستی انتخاب نشده است.";
-  static const describeAttachment = "این پیوست را توصیف کنید…";
-  static const price = "قیمت";
-  static const enterPrice = "قیمت را وارد کنید";
-  static const discount = "تخفیف";
+      "Describe each attachment so screen reader users can understand its content.";
+  static const noAttachments = "No attachments selected.";
+  static const describeAttachment = "Describe this attachment…";
+  static const price = "Price";
+  static const enterPrice = "Enter the price";
+  static const discount = "Discount";
   static const zeroPercent = "0%";
-  static const inventoryStatus = "وضعیت موجودی";
-  static const inventoryHelp = "وضعیت فعلی موجودی را انتخاب کنید.";
-  static const warehouseStock = "موجودی انبار";
-  static const enterStock = "تعداد موجودی را وارد کنید";
-  static const stockAvailable = "موجود";
-  static const stockUnavailable = "ناموجود";
-  static const preOrder = "پیش‌سفارش";
-  static const preparationTime = "زمان آماده‌سازی";
-  static const unit = "واحد";
-  static const scheduledPosts = "زمان‌بندی انتشار";
-  static const time = "زمان";
-  static const calendar = "تقویم";
-  static const timeFrom = "از";
-  static const timeTo = "تا";
-  static const removeSchedule = "حذف زمان‌بندی";
+  static const inventoryStatus = "Inventory status";
+  static const inventoryHelp = "Select the current inventory status.";
+  static const warehouseStock = "Warehouse stock";
+  static const enterStock = "Enter the stock quantity";
+  static const stockAvailable = "In stock";
+  static const stockUnavailable = "Out of stock";
+  static const preOrder = "Pre-order";
+  static const preparationTime = "Preparation time";
+  static const unit = "Unit";
+  static const scheduledPosts = "Schedule post";
+  static const time = "Time";
+  static const calendar = "Calendar";
+  static const timeFrom = "From";
+  static const timeTo = "To";
+  static const removeSchedule = "Remove schedule";
   static const scheduleHelp =
-      "زمان بر اساس ساعت دستگاه است. اگر ساعت پایان زودتر باشد، پایان در روز بعد خواهد بود.";
-  static const differentTimesRequired = "ساعت شروع و پایان باید متفاوت باشند.";
-  static const futureTimeRequired = "تاریخ و ساعت شروعی در آینده انتخاب کنید.";
+      "Times use the device clock. If the end time is earlier, it ends the following day.";
+  static const differentTimesRequired =
+      "Start and end times must be different.";
+  static const futureTimeRequired = "Choose a future start date and time.";
   static const schedulePassed =
-      "زمان تعیین‌شده گذشته است. زمانی در آینده انتخاب کنید.";
-  static const location = "موقعیت مکانی";
-  static const address = "نشانی";
-  static const enterFullAddress = "نشانی کامل را وارد کنید";
-  static const addAddress = "افزودن نشانی";
-  static const enterAddressManually = "وارد کردن دستی نشانی";
-  static const city = "شهر";
-  static const province = "استان";
-  static const postalCode = "کد پستی";
-  static const addressFieldRequired = "تکمیل این بخش الزامی است.";
-  static const buildingNumber = "پلاک";
-  static const searchCities = "جستجوی شهرها";
-  static const searchProvinces = "جستجوی استان‌ها";
-  static const noLocationsFound = "موقعیتی یافت نشد.";
-  static const addressRequired = "نشانی کامل را وارد کنید.";
-  static const findingAddress = "در حال یافتن نشانی این موقعیت…";
+      "The scheduled time has passed. Choose a future time.";
+  static const location = "Location";
+  static const address = "Address";
+  static const enterFullAddress = "Enter the full address";
+  static const addAddress = "Add address";
+  static const enterAddressManually = "Enter address manually";
+  static const city = "City";
+  static const province = "Province";
+  static const postalCode = "Postal code";
+  static const addressFieldRequired = "This field is required.";
+  static const buildingNumber = "Number";
+  static const searchCities = "Search cities";
+  static const searchProvinces = "Search provinces";
+  static const noLocationsFound = "No locations found.";
+  static const addressRequired = "Enter the full address.";
+  static const findingAddress = "Finding the address for this location…";
   static const addressLookupFailed =
-      "نشانی این نقطه پیدا نشد. نشانی را دستی وارد کنید یا نقطه دیگری انتخاب کنید.";
+      "Could not find an address for this pin. Type the address manually or select another location.";
   static const addressPinRequired =
-      "نشانی وارد شده است. روی نقشه بزنید تا موقعیت مشخص شود، سپس تأیید را بزنید.";
+      "Your address is entered. Tap the map above to place its location pin, then tap Done.";
   static const chooseMapLocation =
-      "برای تکمیل خودکار نشانی روی نقشه بزنید. می‌توانید نشانی را دستی وارد یا ویرایش کنید. نقشه ابتدا روی تهران است.";
+      "Tap the map to fill the address automatically. You can also type or edit the address. The initial map is centered on Tehran.";
   static const mapUnavailable =
-      "نقشه در دسترس نیست. اتصال اینترنت را بررسی کنید.";
-  static const mapAttribution = "© مشارکت‌کنندگان اوپن‌استریت‌مپ";
-  static const feature = "ویژگی";
-  static const featureValue = "مقدار";
-  static const addFeature = "افزودن ویژگی";
-  static const saveFeature = "ذخیره ویژگی";
-  static const featureAndValueRequired = "نام ویژگی و مقدار آن را وارد کنید.";
-  static const featureExists =
-      "این ویژگی قبلاً اضافه شده است. برای ویرایش روی آن بزنید.";
-  static const firstFeatureHelp = "نخستین ویژگی را از قسمت بالا اضافه کنید.";
-  static const featuresHeading = "ویژگی‌ها";
-  static const tagsKeywords = "برچسب‌ها و کلیدواژه‌ها";
-  static const keywords = "کلیدواژه‌ها";
-  static const separateTags = "برچسب‌ها را با ویرگول جدا کنید";
-  static const addTags = "افزودن برچسب";
-  static const galleryAccessRequired = "اجازه دسترسی به گالری تصاویر را بدهید.";
+      "Map unavailable. Check your internet connection.";
+  static const mapAttribution = "© OpenStreetMap contributors";
+  static const feature = "Feature";
+  static const featureValue = "Value";
+  static const addFeature = "Add feature";
+  static const saveFeature = "Save feature";
+  static const featureAndValueRequired = "Enter a feature name and value.";
+  static const featureExists = "This feature already exists. Tap it to edit.";
+  static const firstFeatureHelp = "Add your first feature above.";
+  static const featuresHeading = "Specifications";
+  static const tagsKeywords = "Tags & keywords";
+  static const keywords = "Keywords";
+  static const separateTags = "Separate tags with commas";
+  static const addTags = "Add tags";
+  static const galleryAccessRequired = "Allow access to your photo library.";
   static const limitedGalleryAccess =
-      "فقط عکس‌ها و ویدیوهای مجاز نمایش داده می‌شوند.";
-  static const selectMoreMedia = "انتخاب موارد بیشتر";
-  static const fullGalleryAccess = "دسترسی کامل در تنظیمات";
-  static const refreshGallery = "تازه‌سازی گالری";
+      "Only permitted photos and videos are shown.";
+  static const selectMoreMedia = "Select more media";
+  static const fullGalleryAccess = "Full access in Settings";
+  static const refreshGallery = "Refresh gallery";
   static const filesPickerHelp =
-      "برای دیدن فایل‌های گوشی و انتخاب آن‌ها، روی افزودن فایل بزنید.";
-  static const openSettings = "باز کردن تنظیمات";
-  static const galleryLoadFailed = "بارگذاری گالری انجام نشد.";
-  static const yourGalleryLoadFailed = "بارگذاری گالری شما انجام نشد.";
-  static const filesSelectionFailed = "انتخاب فایل‌ها انجام نشد.";
-  static const noVideos = "ویدیویی یافت نشد.";
-  static const noPhotos = "عکسی یافت نشد.";
-  static const addFiles = "افزودن فایل";
-  static const photo = "عکس";
-  static const video = "ویدیو";
-  static const file = "فایل";
-  static const genericFile = "فایل";
-  static const selectItemRequired = "لطفاً حداقل یک مورد را انتخاب کنید.";
-  static const selectAttachmentRequired =
-      "لطفاً حداقل یک پیوست را انتخاب کنید.";
-  static const selectPostTypeRequired = "لطفاً نوع پست را انتخاب کنید.";
-  static const titleRequired = "لطفاً عنوان را وارد کنید.";
-  static const captionRequired = "لطفاً توضیحات را وارد کنید.";
-  static const publishFailed = "انتشار انجام نشد. لطفاً دوباره تلاش کنید.";
-  static const invalidPrice = "قیمت معتبری وارد کنید.";
-  static const invalidDiscount = "تخفیف باید بین ۰ تا ۱۰۰ باشد.";
+      "Tap Add files to browse and select files on your device.";
+  static const openSettings = "Open Settings";
+  static const galleryLoadFailed = "Could not load the gallery.";
+  static const yourGalleryLoadFailed = "Could not load your gallery.";
+  static const filesSelectionFailed = "Could not select files.";
+  static const noVideos = "No videos found.";
+  static const noPhotos = "No photos found.";
+  static const addFiles = "Add files";
+  static const photo = "Photo";
+  static const video = "Video";
+  static const file = "File";
+  static const genericFile = "File";
+  static const selectItemRequired = "Select at least one item.";
+  static const selectAttachmentRequired = "Select at least one attachment.";
+  static const selectPostTypeRequired = "Select a post type.";
+  static const titleRequired = "Enter a title.";
+  static const captionRequired = "Enter a caption.";
+  static const publishFailed = "Could not publish. Please try again.";
+  static const invalidPrice = "Enter a valid price.";
+  static const invalidDiscount = "Discount must be between 0 and 100.";
   static const invalidStock =
-      "موجودی باید عدد صحیح و برابر یا بزرگ‌تر از صفر باشد.";
+      "Stock must be a whole number greater than or equal to zero.";
   static const publishDetailsRequired =
-      "پیش از انتشار، رسانه، نوع پست، عنوان و توضیحات را وارد کنید.";
+      "Add media, post type, title, and caption before publishing.";
   static const mediaUnavailable =
-      "یکی از عکس‌ها یا ویدیوهای انتخاب‌شده در دسترس نیست. لطفاً آن را دوباره انتخاب کنید.";
+      "A selected photo or video is unavailable. Select it again.";
   static const storagePluginUnavailable =
-      "بخش ذخیره‌سازی یا گالری آماده نیست. برنامه را کاملاً ببندید و دوباره اجرا کنید؛ در صورت نیاز آن را دوباره بسازید. پیش‌نویس شما محفوظ است.";
+      "Storage or gallery is not ready. Restart the app; rebuild if needed. Your draft is preserved.";
   static const mediaExportFailed =
-      "رسانه انتخاب‌شده دریافت نشد. آن را در برنامه عکس‌ها باز کنید تا دانلود شود، سپس دوباره تلاش کنید. پیش‌نویس شما محفوظ است.";
+      "Could not retrieve the selected media. Open it in Photos to download it, then try again. Your draft is preserved.";
   static const savePostFailed =
-      "ذخیره پست انجام نشد. پیش‌نویس شما محفوظ است. لطفاً دوباره تلاش کنید.";
+      "Could not save the post. Your draft is preserved. Please try again.";
 
-  static String descriptionCount(int count) =>
-      '${AppStrings.persianDigits(count)} توضیح';
-  static String featureCount(int count) =>
-      '${AppStrings.persianDigits(count)} ویژگی';
-  static String removeFeature(String name) => 'حذف $name';
+  static String descriptionCount(int count) => '$count descriptions';
+  static String featureCount(int count) => '$count features';
+  static String removeFeature(String name) => 'Remove $name';
   static String mapPin(double latitude, double longitude) =>
-      'مختصات: ${AppStrings.persianDigits(latitude.toStringAsFixed(5))}، ${AppStrings.persianDigits(longitude.toStringAsFixed(5))}';
+      'Coordinates: ${latitude.toStringAsFixed(5)}, ${longitude.toStringAsFixed(5)}';
   static String fileTypeLabel(String extension) =>
       switch (extension.toUpperCase()) {
-        'PDF' || 'DOC' || 'DOCX' || 'TXT' || 'RTF' || 'ODT' => "سند",
+        'PDF' || 'DOC' || 'DOCX' || 'TXT' || 'RTF' || 'ODT' => 'Document',
         'JPG' ||
         'JPEG' ||
         'PNG' ||
@@ -148,39 +145,39 @@ abstract final class CreatePostStrings {
         'HEIF' ||
         'WEBP' ||
         'BMP' ||
-        'SVG' => "عکس",
-        'MP4' || 'MKV' || 'MOV' || 'AVI' || 'WEBM' || 'M4V' => "ویدیو",
-        'M4A' || 'AAC' || 'MP3' || 'WAV' || 'OGG' || 'FLAC' => "صوت",
-        'ZIP' || 'RAR' || '7Z' || 'TAR' || 'GZ' => "فشرده",
-        'XLS' || 'XLSX' || 'CSV' || 'ODS' => "جدول",
-        'PPT' || 'PPTX' || 'ODP' => "اسلایدها",
-        _ => "فایل",
+        'SVG' => 'Photo',
+        'MP4' || 'MKV' || 'MOV' || 'AVI' || 'WEBM' || 'M4V' => 'Video',
+        'M4A' || 'AAC' || 'MP3' || 'WAV' || 'OGG' || 'FLAC' => 'Audio',
+        'ZIP' || 'RAR' || '7Z' || 'TAR' || 'GZ' => 'Archive',
+        'XLS' || 'XLSX' || 'CSV' || 'ODS' => 'Spreadsheet',
+        'PPT' || 'PPTX' || 'ODP' => 'Slides',
+        _ => 'File',
       };
 
   static String optionLabel(Enum value) => switch (value.name) {
-    'none' => "بدون زمان آماده‌سازی",
-    'sameDay' => "همان روز",
-    'oneDay' => "۱ روز",
-    'twoDays' => "۲ روز",
-    'threeDays' => "۳ روز",
-    'fiveDays' => "۵ روز",
-    'sevenDays' => "۷ روز",
-    'tenDays' => "۱۰ روز",
-    'fourteenDays' => "۱۴ روز",
-    'thirtyDays' => "۳۰ روز",
+    'none' => 'No preparation',
+    'sameDay' => 'Same day',
+    'oneDay' => '1 day',
+    'twoDays' => '2 days',
+    'threeDays' => '3 days',
+    'fiveDays' => '5 days',
+    'sevenDays' => '7 days',
+    'tenDays' => '10 days',
+    'fourteenDays' => '14 days',
+    'thirtyDays' => '30 days',
     'inStock' => stockAvailable,
     'outOfStock' => stockUnavailable,
     'preOrder' => preOrder,
-    'piece' => "قطعه",
-    'item' => "عدد",
-    'hour' => "ساعت",
-    'day' => "روز",
-    'session' => "جلسه",
-    'project' => "پروژه",
-    'meter' => "متر",
-    'centimeter' => "سانتی‌متر",
-    'kilogram' => "کیلوگرم",
-    'set' => "مجموعه",
+    'piece' => 'Piece',
+    'item' => 'Item',
+    'hour' => 'Hour',
+    'day' => 'Day',
+    'session' => 'Session',
+    'project' => 'Project',
+    'meter' => 'Meter',
+    'centimeter' => 'Centimeter',
+    'kilogram' => 'Kilogram',
+    'set' => 'Set',
     _ => value.name,
   };
 

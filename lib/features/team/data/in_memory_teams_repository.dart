@@ -13,10 +13,14 @@ class InMemoryTeamsRepository {
   final _teams = <String, TeamWorkspace>{};
   final _changes = StreamController<List<TeamWorkspace>>.broadcast();
   String? _accountId;
+  final _accounts = <String, Map<String, TeamWorkspace>>{};
 
-  void useAccount(String accountId) {
+  void useAccount(String? accountId) {
     if (_accountId == accountId) return;
+    final previous = _accountId;
+    if (previous != null) _accounts[previous] = Map.of(_teams);
     _teams.clear();
+    _teams.addAll(_accounts.remove(accountId) ?? {});
     chats.useAccount(accountId);
     _accountId = accountId;
     _changes.add(teams);

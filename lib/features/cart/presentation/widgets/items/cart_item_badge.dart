@@ -14,7 +14,7 @@ class CartItemBadge extends StatelessWidget {
       decoration: BoxDecoration(color: colors.onSurface, borderRadius: BorderRadius.circular(12)),
       child: Text(
         label,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
         style: AppTextStyles.micro.copyWith(color: colors.surface),
       ),

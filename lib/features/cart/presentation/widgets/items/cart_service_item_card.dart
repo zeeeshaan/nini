@@ -46,7 +46,7 @@ class CartServiceItemCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyles.bodyBold,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                           Text(
                             cartItemCategory(item),
@@ -54,7 +54,7 @@ class CartServiceItemCard extends StatelessWidget {
                             style: AppTextStyles.label.copyWith(
                               color: colors.onSurface.withValues(alpha: .35),
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                           const Spacer(),
                           const SizedBox(height: 12),

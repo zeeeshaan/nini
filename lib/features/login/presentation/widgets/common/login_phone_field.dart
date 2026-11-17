@@ -32,7 +32,7 @@ class LoginPhoneField extends StatelessWidget {
       onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       decoration: InputDecoration(
         hintText: AuthStrings.mobile,
-        hintTextDirection: TextDirection.rtl,
+        hintTextDirection: TextDirection.ltr,
         contentPadding: const EdgeInsets.symmetric(vertical: 18),
         suffixIcon: const Icon(Icons.phone_iphone_outlined, size: 20),
         prefixIconConstraints: const BoxConstraints(

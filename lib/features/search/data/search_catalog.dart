@@ -1,11 +1,8 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 
-import 'demo_search_posts.dart';
-
-/// Published local services alongside the existing preview listings.
+/// Published account-owned services until a backend service catalogue is connected.
 abstract final class SearchCatalog {
   static String normalize(String value) {
     // Accept Persian/Arabic keyboard variants and Persian half-spaces.
@@ -51,15 +48,7 @@ abstract final class SearchCatalog {
     String query, {
     Iterable<PostItem> publishedPosts = const [],
   }) {
-    final matchingTitles = suggestionsFor(query);
-    final posts = _matchingServices(publishedPosts, query).toList();
-    for (final example in demoSearchPosts) {
-      if (example.cities.contains(city) &&
-          matchingTitles.contains(example.title)) {
-        posts.add(_createPost(example, city));
-      }
-    }
-    return posts;
+    return _matchingServices(publishedPosts, query).toList();
   }
 
   static Iterable<PostItem> _matchingServices(
@@ -77,43 +66,6 @@ abstract final class SearchCatalog {
       );
       return words.every((word) => text.contains(word));
     });
-  }
-
-  // Only examples available in the selected city reach this conversion.
-  static PostItem _createPost(DemoSearchPost example, String city) {
-    final provider = example.seller;
-    final seller = PostSeller(
-      id: provider.id,
-      name: provider.name,
-      avatarAsset: provider.avatarAsset,
-      location: SearchStrings.display(city),
-      bio: provider.bio,
-    );
-    return PostItem(
-      id: 'search_${city}_${example.title}',
-      imageAsset: example.imageAsset,
-      title: SearchStrings.display(example.title),
-      category: SearchStrings.service,
-      stockCount: 0,
-      price: example.price,
-      originalPrice: example.originalPrice,
-      metadata: {
-        ...PostDetails(
-          caption:
-              '${SearchStrings.display(example.title)}, ${SearchStrings.display(city)}',
-          tags: [
-            city,
-            SearchStrings.service,
-            if (example.isPreOrder) AppStrings.preOrder,
-          ],
-          discount: example.discount,
-          unit: PostUnit.hour,
-          address: PostAddress(address: city, latitude: 0, longitude: 0),
-        ).toJson(),
-        'postType': 'services',
-        'seller': seller.toJson(),
-      },
-    );
   }
 
   static PostSeller? sellerFor(PostItem post) {

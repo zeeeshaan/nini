@@ -14,14 +14,37 @@ class InMemoryChatRepository implements ChatMessagesRepository {
   final Set<String> _blocked = {};
   final Map<String, ChatConversation> _conversations = {};
   String? _accountId;
+  final _accounts =
+      <
+        String,
+        ({
+          Map<String, List<ChatMessage>> messages,
+          Set<String> blocked,
+          Map<String, ChatConversation> conversations,
+        })
+      >{};
 
-  /// Do not carry a previous account's session-only messages into a new login.
-  void useAccount(String accountId) {
+  /// Detach private state on logout; preserve unsynchronized work for its owner.
+  void useAccount(String? accountId) {
     if (_accountId == accountId) return;
+    final previous = _accountId;
+    if (previous != null) {
+      _accounts[previous] = (
+        messages: Map.of(_messages),
+        blocked: Set.of(_blocked),
+        conversations: Map.of(_conversations),
+      );
+    }
     _messages.clear();
     _blocked.clear();
     _conversations.clear();
     _accountId = accountId;
+    final saved = _accounts.remove(accountId);
+    if (saved != null) {
+      _messages.addAll(saved.messages);
+      _blocked.addAll(saved.blocked);
+      _conversations.addAll(saved.conversations);
+    }
   }
 
   List<ChatConversation> get conversations =>

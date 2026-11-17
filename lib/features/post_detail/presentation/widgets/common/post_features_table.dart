@@ -18,7 +18,7 @@ class PostFeaturesTable extends StatelessWidget {
           const SizedBox(height: 36),
           const Text(
             AppStrings.featuresHeading,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             style: AppTextStyles.specificationsHeading,
             textAlign: TextAlign.right,
           ),
@@ -54,7 +54,7 @@ class _FeatureRow extends StatelessWidget {
             flex: 3,
             child: Text(
               value,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.specificationValue,
             ),
@@ -64,7 +64,7 @@ class _FeatureRow extends StatelessWidget {
             flex: 2,
             child: Text(
               label,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.specificationValue,
             ),

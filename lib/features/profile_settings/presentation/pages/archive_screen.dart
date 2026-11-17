@@ -11,6 +11,7 @@ class ArchiveScreen extends StatelessWidget {
   Widget build(BuildContext context) => const SettingsPage(
     title: ProfileSettingsStrings.archive,
     child: SettingsEmptyState(
+      textAlign: TextAlign.center,
       title: ProfileSettingsStrings.noArchive,
       message: ProfileSettingsStrings.archiveHelp,
       icon: AppIcons.bookmark,

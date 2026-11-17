@@ -24,13 +24,13 @@ class LocationLabelCard extends StatelessWidget {
         TextField(
           controller: controller,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           style: AppTextStyles.label,
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => onAdd(),
           decoration: InputDecoration(
             hintText: LocationStrings.label,
-            hintTextDirection: TextDirection.rtl,
+            hintTextDirection: TextDirection.ltr,
             hintStyle: AppTextStyles.label.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -63,7 +63,7 @@ class LocationLabelCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.smallPrint,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
             const SizedBox(width: 8),

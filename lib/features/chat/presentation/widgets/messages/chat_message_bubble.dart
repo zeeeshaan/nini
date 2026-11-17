@@ -72,7 +72,7 @@ class ChatMessageBubble extends StatelessWidget {
                     message.text,
                     textDirection:
                         RegExp(r'[\u0600-\u06ff]').hasMatch(message.text)
-                        ? TextDirection.rtl
+                        ? TextDirection.ltr
                         : TextDirection.ltr,
                     style: AppTextStyles.messageBody.copyWith(
                       color: foreground,

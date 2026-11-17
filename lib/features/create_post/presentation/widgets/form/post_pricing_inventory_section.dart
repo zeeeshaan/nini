@@ -33,6 +33,7 @@ class PostPricingInventorySection extends StatelessWidget {
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textAlign: TextAlign.right,
           onChanged: draftCubit.updatePrice,
+          decorationDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 10),
         AppTextField(
@@ -42,6 +43,7 @@ class PostPricingInventorySection extends StatelessWidget {
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textAlign: TextAlign.right,
           onChanged: draftCubit.updateDiscount,
+          decorationDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 10),
         BlocSelector<CreatePostCubit, PostDraft, InventoryStatus>(
@@ -66,7 +68,7 @@ class PostPricingInventorySection extends StatelessWidget {
           CreatePostStrings.inventoryHelp,
           textAlign: TextAlign.right,
           style: theme.textTheme.bodySmall,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 8),
         AppTextField(
@@ -76,6 +78,7 @@ class PostPricingInventorySection extends StatelessWidget {
           keyboardType: TextInputType.number,
           textAlign: TextAlign.right,
           onChanged: draftCubit.updateWarehouseStock,
+          decorationDirection: TextDirection.rtl,
         ),
         const SizedBox(height: 10),
       ],

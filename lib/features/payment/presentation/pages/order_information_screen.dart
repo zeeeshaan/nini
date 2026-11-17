@@ -165,7 +165,7 @@ class _OrderInformationScreenState extends State<OrderInformationScreen> {
   Widget build(BuildContext context) => BlocBuilder<CartCubit, CartState>(
     builder: (context, state) => Localizations.override(
       context: context,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en'),
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Scaffold(

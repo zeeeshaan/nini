@@ -40,7 +40,7 @@ class TeamTimeFrameField extends StatelessWidget {
     }
 
     return PostFormOptionTile(
-      label: "بازه زمانی پروژه",
+      label: 'Project time frame',
       value: label,
       trailing: const Icon(Icons.calendar_today_outlined),
       onTap: () => _selectTimeFrame(context),

@@ -22,10 +22,10 @@ class HomeMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Keep engagement counts in Persian, including legacy formatted values.
+    // Display engagement counts with English digits, including legacy values.
     final displayedCount = PostDetailStrings.persianDigits(
       AppStrings.persianDigits(count),
-    ).replaceAll(',', '٬');
+    );
     return Semantics(
       button: onTap != null,
       toggled: selected,

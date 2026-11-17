@@ -31,7 +31,7 @@ class TeamChatMembersBar extends StatelessWidget
                   TeamStrings.peopleCount(members.length),
                   textAlign: TextAlign.right,
                   style: AppTextStyles.smallPrint,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
               const SizedBox(width: 12),

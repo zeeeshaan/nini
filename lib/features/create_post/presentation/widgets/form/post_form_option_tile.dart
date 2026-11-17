@@ -44,7 +44,7 @@ class PostFormOptionTile extends StatelessWidget {
                   children: [
                     Text(
                       label,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                       style: theme.textTheme.bodySmall,
                     ),
@@ -52,7 +52,7 @@ class PostFormOptionTile extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         value!,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

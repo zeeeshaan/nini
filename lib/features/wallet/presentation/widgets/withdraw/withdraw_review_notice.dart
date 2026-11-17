@@ -31,7 +31,7 @@ class WithdrawReviewNotice extends StatelessWidget {
                     WalletStrings.reviewCarefully,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.helperBold,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -42,7 +42,7 @@ class WithdrawReviewNotice extends StatelessWidget {
             const Text(
               WalletStrings.withdrawalReview,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
         ),

@@ -37,13 +37,13 @@ class _NotificationSearchFieldState extends State<NotificationSearchField> {
       child: TextField(
         controller: _controller,
         onChanged: widget.onChanged,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
         textInputAction: TextInputAction.search,
         onSubmitted: (_) => FocusScope.of(context).unfocus(),
         decoration: InputDecoration(
           hintText: NotificationStrings.search,
-          hintTextDirection: TextDirection.rtl,
+          hintTextDirection: TextDirection.ltr,
           hintStyle: AppTextStyles.compactBody.copyWith(
             color: colors.onSurface.withValues(alpha: .35),
           ),

@@ -78,9 +78,9 @@ class _OtpCountdownState extends State<OtpCountdown> {
                 children: [
                   Text(
                     expiryState.seconds == 0
-                        ? 'کد منقضی شده است'
-                        : 'اعتبار کد: ${_formatTime(expiryState.seconds)}',
-                    textDirection: TextDirection.rtl,
+                        ? 'Code expired'
+                        : 'Code expires in: ${_formatTime(expiryState.seconds)}',
+                    textDirection: TextDirection.ltr,
                     style: AppTextStyles.label,
                     textAlign: TextAlign.right,
                   ),
@@ -92,7 +92,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
                           : _requestResend,
                       child: const Text(
                         AuthStrings.resendCode,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                       ),
                     )

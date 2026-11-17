@@ -21,7 +21,7 @@ class ConversationEmptyState extends StatelessWidget {
           style: AppTextStyles.bodyText.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
     ),

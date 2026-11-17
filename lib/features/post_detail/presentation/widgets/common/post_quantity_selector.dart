@@ -51,7 +51,7 @@ class PostQuantitySelector extends StatelessWidget {
                 label: PostDetailStrings.quantity,
                 child: Text(
                   '${PostDetailStrings.persianDigits(cartQuantity(quantity))} $unitLabel',
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

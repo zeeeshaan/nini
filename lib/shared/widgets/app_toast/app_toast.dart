@@ -77,7 +77,7 @@ class AppToast {
                                 color: colors.onInverseSurface,
                               ),
                               textAlign: TextAlign.right,
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                             ),
                           ),
                         ],

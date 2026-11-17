@@ -27,7 +27,7 @@ class WalletTransactionTile extends StatelessWidget {
             child: Text(
               AppStrings.persianDigits(transaction.amount),
               style: AppTextStyles.amount.copyWith(color: amountColor),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.right,
               textDirection: TextDirection.ltr,
             ),
           ),
@@ -40,7 +40,7 @@ class WalletTransactionTile extends StatelessWidget {
                   WalletStrings.transactionTitle(transaction.title),
                   style: AppTextStyles.helper,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 const SizedBox(height: 3),
                 Text(

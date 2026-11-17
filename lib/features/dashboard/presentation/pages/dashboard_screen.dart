@@ -14,6 +14,7 @@ import 'package:nini/features/dashboard/presentation/widgets/bottom_navbar/dashb
 import 'package:nini/features/home/presentation/pages/home_screen.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/profile/presentation/pages/profile_screen.dart';
+import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
 import 'package:nini/features/search/presentation/pages/search_screen.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
@@ -113,6 +114,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  void _openAccountProfileTab() {
+    if (!mounted) return;
+    final route = ModalRoute.of(context);
+    if (route != null) {
+      Navigator.of(context).popUntil((current) => current == route);
+    }
+    _onTabSelected(DashboardTab.profile);
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -126,86 +136,93 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final profileImage = profile == null
         ? widget.profileImage
         : profileImageProvider(profile.avatarPath);
-    return BlocBuilder<DashboardNavigationCubit, DashboardTab>(
-      bloc: _navigation,
-      builder: (context, selectedTab) {
-        final pages = [
-          HomeScreen(onViewCart: () => _onTabSelected(DashboardTab.cart)),
-          CartScreen(
-            active: selectedTab == DashboardTab.cart,
-            onBack: () => _onTabSelected(DashboardTab.home),
-          ),
-          // Create opens a separate route.
-          // Keep this page to preserve tab indexes.
-          const Center(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                AppStrings.create,
-                style: AppTextStyles.createPlaceholder,
-                textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+    return AccountProfileNavigation(
+      onOpenProfile: _openAccountProfileTab,
+      child: BlocBuilder<DashboardNavigationCubit, DashboardTab>(
+        bloc: _navigation,
+        builder: (context, selectedTab) {
+          final pages = [
+            HomeScreen(
+              active: selectedTab == DashboardTab.home,
+              onViewCart: () => _onTabSelected(DashboardTab.cart),
+              onProfilePressed: _openAccountProfileTab,
+            ),
+            CartScreen(
+              active: selectedTab == DashboardTab.cart,
+              onBack: () => _onTabSelected(DashboardTab.home),
+            ),
+            // Create opens a separate route.
+            // Keep this page to preserve tab indexes.
+            const Center(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  AppStrings.create,
+                  style: AppTextStyles.createPlaceholder,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.ltr,
+                ),
               ),
             ),
-          ),
-          SearchScreen(
-            active: selectedTab == DashboardTab.search,
-            publishedServiceId: _publishedServiceId,
-          ),
-          widget.profilePage ?? const ProfileScreen(),
-        ];
+            SearchScreen(
+              active: selectedTab == DashboardTab.search,
+              publishedServiceId: _publishedServiceId,
+            ),
+            widget.profilePage ?? const ProfileScreen(),
+          ];
 
-        return AppResponsiveBuilder(
-          builder: (context, responsive) {
-            return Scaffold(
-              body: SafeArea(
-                bottom: false,
-                child: NotificationListener<ScrollStartNotification>(
-                  onNotification: (notification) {
-                    if (notification.depth == 0 &&
-                        notification.dragDetails != null) {
-                      _targetTab = null;
-                    }
-                    return false;
-                  },
-                  child: PageView(
-                    key: const PageStorageKey<String>('dashboard_tabs'),
-                    controller: _pageController,
-                    onPageChanged: (index) {
-                      if (_targetTab == null || index == _targetTab!.index) {
-                        _navigation.selectPage(index);
+          return AppResponsiveBuilder(
+            builder: (context, responsive) {
+              return Scaffold(
+                body: SafeArea(
+                  bottom: false,
+                  child: NotificationListener<ScrollStartNotification>(
+                    onNotification: (notification) {
+                      if (notification.depth == 0 &&
+                          notification.dragDetails != null) {
+                        _targetTab = null;
                       }
+                      return false;
                     },
-                    children: [
-                      for (final tab in DashboardTab.values)
-                        ScreenEntrance(
-                          key: ValueKey(tab),
-                          active: selectedTab == tab,
-                          child: tab == DashboardTab.search
-                              ? pages[tab.index]
-                              : StaggeredEntrance(child: pages[tab.index]),
-                        ),
-                    ],
+                    child: PageView(
+                      key: const PageStorageKey<String>('dashboard_tabs'),
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        if (_targetTab == null || index == _targetTab!.index) {
+                          _navigation.selectPage(index);
+                        }
+                      },
+                      children: [
+                        for (final tab in DashboardTab.values)
+                          ScreenEntrance(
+                            key: ValueKey(tab),
+                            active: selectedTab == tab,
+                            child: tab == DashboardTab.search
+                                ? pages[tab.index]
+                                : StaggeredEntrance(child: pages[tab.index]),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              bottomNavigationBar: ScreenEntrance(
-                child: StaggeredEntrance(
-                  distance: 10,
-                  child: DashboardBottomNav(
-                    selectedTab: selectedTab,
-                    onTabSelected: _onTabSelected,
-                    profileImage: profileImage,
-                    maxContentWidth: responsive.isExpanded
-                        ? 720
-                        : double.infinity,
+                bottomNavigationBar: ScreenEntrance(
+                  child: StaggeredEntrance(
+                    distance: 10,
+                    child: DashboardBottomNav(
+                      selectedTab: selectedTab,
+                      onTabSelected: _onTabSelected,
+                      profileImage: profileImage,
+                      maxContentWidth: responsive.isExpanded
+                          ? 720
+                          : double.infinity,
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        );
-      },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

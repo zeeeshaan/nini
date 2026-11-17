@@ -14,7 +14,7 @@ class LoginGoogleButton extends StatelessWidget {
     label: const Text(
       AuthStrings.loginWithGoogle,
       textAlign: TextAlign.center,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
     ),
     style: TextButton.styleFrom(
       minimumSize: const Size(0, 48),

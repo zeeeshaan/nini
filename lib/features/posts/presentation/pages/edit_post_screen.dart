@@ -61,6 +61,14 @@ class _EditPostViewState extends State<_EditPostView> {
           : quill.Document.fromJson(draft.captionDelta),
       selection: const TextSelection.collapsed(offset: 0),
     );
+    // Set the presentation before synchronization so opening the editor alone
+    // does not mark the post dirty or discard its inline formatting.
+    _caption.document.format(
+      0,
+      _caption.document.length,
+      quill.Attribute.rightAlignment,
+    );
+    _caption.document.history.clear();
     _synchronizer = PostCaptionSynchronizer(
       controller: _caption,
       onChanged: (text, delta) {
@@ -147,7 +155,7 @@ class _EditPostViewState extends State<_EditPostView> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   ProfilePostStrings.editPost,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -176,7 +184,7 @@ class _EditPostViewState extends State<_EditPostView> {
                             style: AppTextStyles.inherit.copyWith(
                               color: Theme.of(context).colorScheme.error,
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
                         ),

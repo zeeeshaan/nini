@@ -71,52 +71,55 @@ class HomePostMediaIndicator extends StatelessWidget {
           0.0,
           (count - visibleCount).toDouble(),
         );
-        return FittedBox(
-          fit: BoxFit.scaleDown,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: theme.brightness == Brightness.dark
-                  ? AppColors.black
-                  : foreground.withValues(alpha: .04),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: SizedBox(
-                width: visibleCount * 12,
-                height: 8,
-                child: ClipRect(
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: CustomPaint(
-                          painter: _CarouselDotsPainter(
-                            count: count,
-                            page: page,
-                            firstDot: firstDot,
-                            foreground: foreground,
+        return Transform.flip(
+          flipX: Directionality.of(context) == TextDirection.rtl,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: theme.brightness == Brightness.dark
+                    ? AppColors.black
+                    : foreground.withValues(alpha: .04),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: SizedBox(
+                  width: visibleCount * 12,
+                  height: 8,
+                  child: ClipRect(
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: CustomPaint(
+                            painter: _CarouselDotsPainter(
+                              count: count,
+                              page: page,
+                              firstDot: firstDot,
+                              foreground: foreground,
+                            ),
                           ),
                         ),
-                      ),
-                      // One highlight follows the finger while the strip catches
-                      // up, rather than remaining pinned in the centre.
-                      Positioned(
-                        key: const ValueKey('carousel-active-dot'),
-                        left:
-                            (page - firstDot).clamp(0.0, visibleCount - 1.0) *
-                                12 +
-                            2,
-                        top: 0,
-                        width: 8,
-                        height: 8,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: foreground,
+                        // One highlight follows the finger while the strip catches
+                        // up, rather than remaining pinned in the centre.
+                        Positioned(
+                          key: const ValueKey('carousel-active-dot'),
+                          left:
+                              (page - firstDot).clamp(0.0, visibleCount - 1.0) *
+                                  12 +
+                              2,
+                          top: 0,
+                          width: 8,
+                          height: 8,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: foreground,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

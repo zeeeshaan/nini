@@ -15,14 +15,14 @@ class WalletTransactions extends StatelessWidget {
         WalletStrings.transactions,
         textAlign: TextAlign.right,
         style: AppTextStyles.bodyEmphasis,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       ),
       const SizedBox(height: 16),
       const Text(
         WalletStrings.today,
         textAlign: TextAlign.right,
         style: AppTextStyles.bodyText,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       ),
       const SizedBox(height: 6),
       for (final transaction in WalletSampleData.today)
@@ -32,7 +32,7 @@ class WalletTransactions extends StatelessWidget {
         WalletStrings.yesterday,
         textAlign: TextAlign.right,
         style: AppTextStyles.bodyText,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       ),
       const SizedBox(height: 6),
       for (final transaction in WalletSampleData.yesterday)

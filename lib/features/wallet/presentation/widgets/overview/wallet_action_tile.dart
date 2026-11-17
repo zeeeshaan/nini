@@ -46,7 +46,7 @@ class WalletActionTile extends StatelessWidget {
                   label,
                   style: AppTextStyles.micro.copyWith(color: colors.surface),
                   textAlign: TextAlign.center,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ],
             ),

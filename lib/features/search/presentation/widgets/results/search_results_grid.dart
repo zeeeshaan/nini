@@ -53,7 +53,7 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
         contentScale,
       );
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         child: GridView.builder(
           controller: _scrollController,
           padding: EdgeInsets.zero,

@@ -52,7 +52,7 @@ class ChatInboxButton extends StatelessWidget {
                 style: AppTextStyles.notificationBadge.copyWith(
                   color: AppColors.white,
                 ),
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

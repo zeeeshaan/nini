@@ -23,7 +23,7 @@ class CategorySheetActions extends StatelessWidget {
             onPressed: saving ? null : () => Navigator.pop(context),
             child: Text(
               CategoryStrings.of(context).text(ProfilePostStrings.cancel),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -41,7 +41,7 @@ class CategorySheetActions extends StatelessWidget {
             child: Text(
               CategoryStrings.of(context)
                   .text(saving ? ProfilePostStrings.saving : submitLabel),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),

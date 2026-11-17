@@ -145,7 +145,7 @@ class _CallViewState extends State<_CallView> {
                                       color: foreground.withValues(alpha: .55),
                                     ),
                                     textAlign: TextAlign.right,
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                               if (!video) ...[
@@ -158,7 +158,7 @@ class _CallViewState extends State<_CallView> {
                                       color: foreground,
                                     ),
                                     textAlign: TextAlign.right,
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                                 Expanded(
@@ -193,7 +193,7 @@ class _CallViewState extends State<_CallView> {
                                     style: AppTextStyles.callName.copyWith(
                                       color: foreground,
                                     ),
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                               ),
@@ -206,7 +206,7 @@ class _CallViewState extends State<_CallView> {
                                     style: AppTextStyles.comfortableBody
                                         .copyWith(color: foreground),
                                     textAlign: TextAlign.right,
-                                    textDirection: TextDirection.rtl,
+                                    textDirection: TextDirection.ltr,
                                   ),
                                 ),
                               ],
@@ -240,7 +240,7 @@ class _CallViewState extends State<_CallView> {
                                         title: const Text(
                                           AppStrings.speakerOn,
                                           textAlign: TextAlign.right,
-                                          textDirection: TextDirection.rtl,
+                                          textDirection: TextDirection.ltr,
                                         ),
                                         value: state.session.speakerEnabled,
                                         onChanged: state.busy

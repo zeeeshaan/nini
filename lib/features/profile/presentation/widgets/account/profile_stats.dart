@@ -6,12 +6,15 @@ import 'package:nini/core/theme/app_text_styles.dart';
 class ProfileStats extends StatelessWidget {
   const ProfileStats({
     super.key,
-    this.postCount = '385',
-    this.salesCount = '1,051',
-    this.customerCount = '1.5K',
+    this.postCount = '—',
+    this.salesCount = '—',
+    this.customerCount = '—',
+    this.salesLabel = AppStrings.sales,
+    this.customerLabel = AppStrings.customers,
   });
 
   final String postCount, salesCount, customerCount;
+  final String salesLabel, customerLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +24,10 @@ class ProfileStats extends StatelessWidget {
           child: _StatisticItem(value: postCount, label: AppStrings.posts),
         ),
         Expanded(
-          child: _StatisticItem(value: salesCount, label: AppStrings.sales),
+          child: _StatisticItem(value: salesCount, label: salesLabel),
         ),
         Expanded(
-          child: _StatisticItem(
-            value: customerCount,
-            label: AppStrings.customers,
-          ),
+          child: _StatisticItem(value: customerCount, label: customerLabel),
         ),
       ],
     );
@@ -51,10 +51,8 @@ class _StatisticItem extends StatelessWidget {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerRight,
             child: Text(
-              AppStrings.persianDigits(
-                value.replaceAll('K', ' هزار').replaceAll('M', ' میلیون'),
-              ),
-              textDirection: TextDirection.rtl,
+              AppStrings.persianDigits(value),
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.statNumber.copyWith(height: 1.2),
             ),
@@ -68,7 +66,7 @@ class _StatisticItem extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               label,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.statLabel,
             ),

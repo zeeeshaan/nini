@@ -45,17 +45,17 @@ abstract final class AppTextStyles {
     fontFamilyFallback: [fontFamily],
   );
   static const postCardHeading = TextStyle(
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: bold,
-    height: 1.15,
+    height: 1.05,
   );
-  static const profileCardMetadata = TextStyle(fontSize: 14, height: 1.2);
+  static const profileCardMetadata = TextStyle(fontSize: 10, height: 1.2);
   static const profileCardStock = TextStyle(fontSize: 10, height: 1.2);
-  static const profileCardOriginalPrice = TextStyle(fontSize: 10, height: 1.05);
+  static const profileCardOriginalPrice = TextStyle(fontSize: 10, height: 1);
   static const profileCardPrice = TextStyle(
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: heavy,
-    height: 1.1,
+    height: 1,
   );
   static const profileCardUnit = TextStyle(fontSize: 8, height: 1.2);
   static const profileCardRating = TextStyle(fontSize: 5, height: 1);

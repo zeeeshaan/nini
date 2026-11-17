@@ -40,7 +40,7 @@ class SavedPostsScreen extends StatelessWidget {
             SavedPostsStrings.title,
             textAlign: TextAlign.right,
             style: AppTextStyles.pageTitle,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
 
@@ -85,7 +85,7 @@ class SavedPostsScreen extends StatelessWidget {
                                     : SavedPostsStrings.saveFailed,
                                 textAlign: TextAlign.right,
                                 style: AppTextStyles.body,
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                               ),
                               TextButton(
                                 onPressed: state.loading || state.saving
@@ -95,7 +95,7 @@ class SavedPostsScreen extends StatelessWidget {
                                           .load(),
                                 child: const Text(
                                   AppStrings.retry,
-                                  textDirection: TextDirection.rtl,
+                                  textDirection: TextDirection.ltr,
                                   textAlign: TextAlign.right,
                                 ),
                               ),
@@ -108,22 +108,22 @@ class SavedPostsScreen extends StatelessWidget {
                         const Padding(
                           padding: EdgeInsets.all(24),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               AppIcon(AppIcons.bookmark, size: 40),
                               SizedBox(height: 12),
                               Text(
                                 SavedPostsStrings.empty,
-                                textAlign: TextAlign.right,
+                                textAlign: TextAlign.center,
                                 style: AppTextStyles.sectionTitle,
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                               ),
                               SizedBox(height: 8),
                               Text(
                                 SavedPostsStrings.emptyHelp,
-                                textAlign: TextAlign.right,
+                                textAlign: TextAlign.center,
                                 style: AppTextStyles.body,
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                               ),
                             ],
                           ),

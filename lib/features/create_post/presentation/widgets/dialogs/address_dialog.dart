@@ -225,7 +225,7 @@ class _AddressDialogState extends State<AddressDialog> {
                                   CreatePostStrings.findingAddress,
                                   style: AppTextStyles.helper,
                                   textAlign: TextAlign.right,
-                                  textDirection: TextDirection.rtl,
+                                  textDirection: TextDirection.ltr,
                                 ),
                               ),
                             ),
@@ -238,7 +238,7 @@ class _AddressDialogState extends State<AddressDialog> {
                                   ),
                             style: AppTextStyles.helper,
                             textAlign: TextAlign.right,
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                           if (_draft.state.error != null)
                             Padding(
@@ -248,7 +248,7 @@ class _AddressDialogState extends State<AddressDialog> {
                                 child: Text(
                                   _draft.state.error!,
                                   textAlign: TextAlign.right,
-                                  textDirection: TextDirection.rtl,
+                                  textDirection: TextDirection.ltr,
                                 ),
                               ),
                             ),

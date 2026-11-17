@@ -21,7 +21,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
     final now = DateTime.now();
     final date = await showDatePicker(
       context: context,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       initialDate: initial ?? now,
       firstDate: DateTime(1900),
       lastDate: DateTime(now.year + 100),
@@ -30,7 +30,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
     final time = await showTimePicker(
       context: context,
       builder: (context, child) =>
-          Directionality(textDirection: TextDirection.rtl, child: child!),
+          Directionality(textDirection: TextDirection.ltr, child: child!),
       initialTime: TimeOfDay.fromDateTime(initial ?? now),
     );
     if (time == null) return null;
@@ -82,7 +82,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
           Text(
             ProfilePostStrings.schedule,
             style: Theme.of(context).textTheme.titleMedium,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
           const SizedBox(height: 8),
@@ -96,7 +96,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
             },
             child: Text(
               _label(context, ProfilePostStrings.start, _fields.state.startsAt),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -112,7 +112,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
             },
             child: Text(
               _label(context, ProfilePostStrings.end, _fields.state.endsAt),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),
@@ -126,7 +126,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
                 },
                 child: const Text(
                   ProfilePostStrings.clearSchedule,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -137,7 +137,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
               style: AppTextStyles.inherit.copyWith(
                 color: Theme.of(context).colorScheme.error,
               ),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
         ],

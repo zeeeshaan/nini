@@ -14,12 +14,12 @@ Future<bool> confirmChatAction(
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
         ),
         content: Text(
           description,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
         ),
         actions: [

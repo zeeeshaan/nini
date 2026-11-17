@@ -47,7 +47,7 @@ class MyMediaGrid extends StatelessWidget {
           );
           final direction = Directionality.of(context);
           return Directionality(
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(

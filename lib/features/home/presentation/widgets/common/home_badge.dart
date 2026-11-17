@@ -24,7 +24,7 @@ class HomeBadge extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
         child: Text(
           label,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           style: AppTextStyles.badgeLabel.copyWith(color: foreground),
           textAlign: TextAlign.right,
         ),

@@ -88,6 +88,7 @@ abstract final class AppIcons {
   static const walletWithdraw = 'assets/icons/finance/wallet-03.png';
   static const walletPayment =
       'assets/icons/vectors/interface/credit-card-02.svg';
+  static const logout = 'assets/icons/general/logout-01.png';
   static const bank = 'assets/icons/finance/bank.png';
   static const bankNote = 'assets/icons/finance/bank-note-01.png';
   static const personOutline = 'assets/icons/vectors/user/user-01.svg';

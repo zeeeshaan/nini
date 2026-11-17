@@ -17,7 +17,7 @@ class ProfileCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) => PersianFeature(
     child: Localizations.override(
       context: context,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en'),
       child: BlocBuilder<ProfileCategoriesCubit, ProfileCategoriesState>(
         builder: (context, state) {
           final categories = context.read<ProfileCategoriesCubit>();
@@ -29,7 +29,7 @@ class ProfileCategoriesScreen extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   strings.text(ProfilePostStrings.tabs),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),

@@ -21,6 +21,7 @@ import 'package:nini/features/saved_posts/presentation/pages/saved_posts_screen.
 import 'package:nini/features/team/presentation/pages/my_team.dart';
 
 import 'profile_settings_tile.dart';
+import 'profile_logout_dialog.dart';
 
 class ProfileSettingsList extends StatelessWidget {
   const ProfileSettingsList({super.key});
@@ -126,6 +127,14 @@ class ProfileSettingsList extends StatelessWidget {
             _ => null,
           },
         ),
+      ProfileSettingsTile(
+        label: ProfileSettingsStrings.logout,
+        onTap: () => showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const ProfileLogoutDialog(),
+        ),
+      ),
     ],
   );
 }

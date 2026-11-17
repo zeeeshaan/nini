@@ -67,7 +67,7 @@ class DashboardFoldLayout extends StatelessWidget {
     final rightWidth = availableWidth - rightStart;
     final gapWidth = availableWidth - leftWidth - rightWidth;
 
-    final isRtl = textDirection == TextDirection.rtl;
+    final isRtl = textDirection == TextDirection.ltr;
 
     final leftTabs = isRtl
         ? [DashboardTab.profile, DashboardTab.search, DashboardTab.create]

@@ -28,7 +28,7 @@ class SearchSuggestions extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               children: [
                 Container(
                   width: 28,
@@ -48,7 +48,7 @@ class SearchSuggestions extends StatelessWidget {
                 Expanded(
                   child: Text(
                     SearchStrings.display(suggestion),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),

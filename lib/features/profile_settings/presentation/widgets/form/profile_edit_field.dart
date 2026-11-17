@@ -36,12 +36,12 @@ class ProfileEditField extends StatelessWidget {
       ],
       textDirection: keyboardType == TextInputType.emailAddress
           ? TextDirection.ltr
-          : TextDirection.rtl,
+          : TextDirection.ltr,
       textAlign: TextAlign.right,
       style: textStyle,
       decoration: InputDecoration(
         hintText: label,
-        hintTextDirection: TextDirection.rtl,
+        hintTextDirection: TextDirection.ltr,
         hintStyle: AppTextStyles.caption.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),

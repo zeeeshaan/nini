@@ -37,7 +37,7 @@ class _CategoryDeleteSheet extends StatelessWidget {
           child: PostDialog(
             title: CategoryStrings.of(context)
                 .text(ProfilePostStrings.deleteTab),
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             actions: CategorySheetActions(
               saving: state.saving,
               destructive: true,
@@ -60,14 +60,14 @@ class _CategoryDeleteSheet extends StatelessWidget {
                         .name(category.id, category.name),
                   ),
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   CategoryStrings.of(context)
                       .text(ProfilePostStrings.deleteHelp),
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 if (state.error != null)
                   Padding(
@@ -77,7 +77,7 @@ class _CategoryDeleteSheet extends StatelessWidget {
                       style: AppTextStyles.inherit.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),

@@ -65,7 +65,7 @@ class PostMediaView extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                       ),
                     ],

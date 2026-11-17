@@ -25,7 +25,7 @@ class InsightsUnavailableGroups extends StatelessWidget {
             group.key,
             textAlign: TextAlign.right,
             style: AppTextStyles.sectionTitle,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
         for (final label in group.value)
@@ -33,20 +33,20 @@ class InsightsUnavailableGroups extends StatelessWidget {
             leading: const Text(
               '—',
               style: AppTextStyles.bodyEmphasis,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
             title: Text(
               label,
               textAlign: TextAlign.right,
               style: AppTextStyles.body,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             subtitle: const Text(
               ProfileSettingsStrings.backendRequired,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
       ],

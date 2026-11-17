@@ -65,13 +65,13 @@ class WalletBalanceCard extends StatelessWidget {
                     WalletStrings.balance,
                     style: AppTextStyles.label,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                   Text(
                     AppStrings.persianDigits(WalletSampleData.balance),
                     style: AppTextStyles.walletBalance,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                   const SizedBox(height: 28),
                   WalletCardFooter(

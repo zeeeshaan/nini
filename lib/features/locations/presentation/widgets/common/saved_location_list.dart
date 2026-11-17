@@ -36,7 +36,7 @@ class SavedLocationList extends StatelessWidget {
                 label,
                 textAlign: TextAlign.right,
                 style: AppTextStyles.label,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           ),

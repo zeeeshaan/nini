@@ -30,7 +30,7 @@ class PostEditorBasicFields extends StatelessWidget {
                 value: CreatePostType.product,
                 child: Text(
                   ProfilePostStrings.product,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -38,7 +38,7 @@ class PostEditorBasicFields extends StatelessWidget {
                 value: CreatePostType.services,
                 child: Text(
                   ProfilePostStrings.service,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -60,7 +60,7 @@ class PostEditorBasicFields extends StatelessWidget {
             validator: PostEditorValidation.requiredText,
             onChanged: editor.updateTitle,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
         const SizedBox(height: 16),
@@ -73,7 +73,7 @@ class PostEditorBasicFields extends StatelessWidget {
             children: [
               const Text(
                 ProfilePostStrings.caption,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: 8),
@@ -86,7 +86,7 @@ class PostEditorBasicFields extends StatelessWidget {
                     style: AppTextStyles.inherit.copyWith(
                       color: Theme.of(context).colorScheme.error,
                     ),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),

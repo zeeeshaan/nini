@@ -21,25 +21,25 @@ class TeamHeader extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: foreground,
       elevation: 0,
       leading: IconButton(
-        tooltip: "ایجاد تیم",
+        tooltip: 'CreateTeam',
         icon: const Icon(Icons.check),
         onPressed: onSave,
       ),
       title: Align(
         alignment: Alignment.centerRight,
         child: Text(
-          "ایجاد تیم",
+          'CreateTeam',
           textAlign: TextAlign.right,
           style: AppTextStyles.bodyText.copyWith(
             color: foreground,
             fontWeight: FontWeight.w600,
           ),
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
       actions: [
         IconButton(
-          tooltip: "بازگشت",
+          tooltip: 'Back',
           icon: const Icon(Icons.chevron_right),
           onPressed: onBack,
         ),

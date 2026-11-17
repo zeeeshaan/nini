@@ -41,7 +41,7 @@ class ProfileCategoryChip extends StatelessWidget {
             ),
             child: Text(
               label,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               maxLines: 1,
               softWrap: false,
               textScaler: MediaQuery.textScalerOf(context),

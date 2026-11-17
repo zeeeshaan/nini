@@ -6,9 +6,9 @@ import 'package:nini/core/theme/app_text_styles.dart';
 class ProfileIdentity extends StatelessWidget {
   const ProfileIdentity({
     super.key,
-    this.name = AppStrings.sellerName,
-    this.category = AppStrings.shopAndStore,
-    this.bio = AppStrings.sellerBio,
+    this.name = '',
+    this.category = '',
+    this.bio = '',
     this.location = '',
   });
 
@@ -20,8 +20,8 @@ class ProfileIdentity extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          name,
-          textDirection: TextDirection.rtl,
+          name.isEmpty ? AppStrings.profile : name,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
           style: AppTextStyles.profileName.copyWith(height: 1.4),
         ),
@@ -29,7 +29,7 @@ class ProfileIdentity extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             category,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.category.copyWith(
               color: Theme.of(context).colorScheme.onSurface
@@ -42,7 +42,7 @@ class ProfileIdentity extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             bio,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.bio.copyWith(height: 1.6),
           ),
@@ -51,7 +51,7 @@ class ProfileIdentity extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             location,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.caption.copyWith(
               color: Theme.of(context).colorScheme.onSurface

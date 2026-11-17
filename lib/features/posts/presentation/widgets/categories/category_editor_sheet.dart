@@ -66,7 +66,7 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
             title: widget.category == null
                 ? CategoryStrings.of(context).text(ProfilePostStrings.addTab)
                 : CategoryStrings.of(context).text(ProfilePostStrings.editTab),
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             actions: CategorySheetActions(
               saving: state.saving,
               onSubmit: _save,
@@ -78,7 +78,7 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Directionality(
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       child: TextFormField(
                         controller: _name,
                         autofocus: true,
@@ -101,7 +101,7 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                               ? null
                               : CategoryStrings.of(context).text(error);
                         },
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                       ),
                     ),
                     if (state.error != null)
@@ -112,7 +112,7 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                           style: AppTextStyles.inherit.copyWith(
                             color: Theme.of(context).colorScheme.error,
                           ),
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                       ),

@@ -29,7 +29,7 @@ class TeamAttachmentsSection extends StatelessWidget {
       MaterialPageRoute(
         builder: (galleryContext) {
           return CreatePostGalleryScreen(
-            nextLabel: "افزودن",
+            nextLabel: 'Add',
             onNext: (attachments) {
               Navigator.of(galleryContext).pop(attachments);
             },
@@ -58,7 +58,7 @@ class TeamAttachmentsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: PostFormOptionTile(
-            label: "بارگذاری فایل و تصویر",
+            label: 'Upload File & Picture',
             trailing: const Icon(Icons.cloud_upload_outlined),
             onTap: () => _openGallery(context),
           ),

@@ -58,7 +58,7 @@ class PostAuthorHeader extends StatelessWidget {
                       onTap: onProfilePressed,
                       child: Text(
                         name,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.authorName,
@@ -69,7 +69,7 @@ class PostAuthorHeader extends StatelessWidget {
                   const SizedBox(height: 3),
                   Text(
                     location,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     style: AppTextStyles.label,
                     textAlign: TextAlign.right,
                   ),

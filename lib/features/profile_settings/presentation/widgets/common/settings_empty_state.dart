@@ -12,9 +12,11 @@ class SettingsEmptyState extends StatelessWidget {
     required this.message,
     this.icon = AppIcons.grid,
     this.onRetry,
+    this.textAlign = TextAlign.right,
   });
   final String title, message, icon;
   final VoidCallback? onRetry;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -30,16 +32,16 @@ class SettingsEmptyState extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               title,
-              textAlign: TextAlign.right,
+              textAlign: textAlign,
               style: AppTextStyles.sectionTitle,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 12),
             Text(
               message,
-              textAlign: TextAlign.right,
+              textAlign: textAlign,
               style: AppTextStyles.body,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             if (onRetry != null) ...[
               const SizedBox(height: 20),

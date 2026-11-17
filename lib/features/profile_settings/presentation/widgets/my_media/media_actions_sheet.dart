@@ -23,7 +23,7 @@ Future<void> showSettingsMediaActions(
             title: const Text(
               ProfileSettingsStrings.viewPost,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             trailing: const AppIcon(AppIcons.grid),
             onTap: () => Navigator.of(context).pop(false),
@@ -32,7 +32,7 @@ Future<void> showSettingsMediaActions(
             title: const Text(
               ProfileSettingsStrings.editPost,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             trailing: const AppIcon(AppIcons.edit),
             onTap: () => Navigator.of(context).pop(true),

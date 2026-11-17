@@ -22,7 +22,7 @@ class SettingsMediaPreview extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.right,
             style: AppTextStyles.body,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
         Expanded(

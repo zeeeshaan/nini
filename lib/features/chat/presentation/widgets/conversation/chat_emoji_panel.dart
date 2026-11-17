@@ -22,7 +22,7 @@ class ChatEmojiPanel extends StatelessWidget {
         textEditingController: controller,
         config: Config(
           height: height,
-          locale: const Locale('fa', 'IR'),
+          locale: const Locale('en'),
           emojiTextStyle: AppTextStyles.emoji,
           emojiViewConfig: EmojiViewConfig(
             columns: 7,
@@ -30,7 +30,7 @@ class ChatEmojiPanel extends StatelessWidget {
             backgroundColor: colors.surface,
             noRecents: const Text(
               AppStrings.noRecentEmoji,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
           ),

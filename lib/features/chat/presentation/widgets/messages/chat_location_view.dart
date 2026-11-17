@@ -57,14 +57,14 @@ class ChatLocationView extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               location.address,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: AppTextStyles.bodyText.copyWith(color: foreground),
               textAlign: TextAlign.right,
             ),
             const SizedBox(height: 4),
             Text(
               AppStrings.mapPin(location.latitude, location.longitude),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: AppTextStyles.smallPrint.copyWith(
                 color: foreground.withValues(alpha: .65),
               ),
@@ -78,7 +78,7 @@ class ChatLocationView extends StatelessWidget {
                 decorationColor: foreground,
               ),
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
         ),

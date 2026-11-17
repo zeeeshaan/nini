@@ -77,7 +77,9 @@ class PostDetailScreen extends StatelessWidget {
   Widget _buildDetail(BuildContext context, PostItem post) {
     final posts = context.read<PostsCubit?>()?.state;
     final isOwnPost = posts?.find(post.id) != null;
-    final isOwnSeller = isOwnPost || seller?.id == localPostSeller.id;
+    final isOwnSeller = seller == null
+        ? isOwnPost
+        : isAccountPostSeller(context, post, seller!);
     final author = isOwnSeller
         ? context.watch<UserProfileCubit?>()?.seller ?? localPostSeller
         : seller;
@@ -132,7 +134,7 @@ class PostDetailScreen extends StatelessWidget {
                         style: AppTextStyles.label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                       ),
                     ),

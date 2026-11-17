@@ -20,12 +20,12 @@ class TeamRequestStatusSheet extends StatelessWidget {
   final VoidCallback onCheckout;
 
   static String label(TeamRequestStatus status) => switch (status) {
-    TeamRequestStatus.draft => "پیش‌نویس درخواست",
-    TeamRequestStatus.awaiting => "در انتظار پذیرش",
-    TeamRequestStatus.accepted => "درخواست شما پذیرفته شده است.",
-    TeamRequestStatus.declined => "درخواست شما رد شده است.",
-    TeamRequestStatus.cancelled => "درخواست لغو شد.",
-    TeamRequestStatus.paid => "پرداخت آزمایشی تکمیل شد.",
+    TeamRequestStatus.draft => 'Draft request',
+    TeamRequestStatus.awaiting => 'Awaiting Acceptance',
+    TeamRequestStatus.accepted => 'Your request has been accepted.',
+    TeamRequestStatus.declined => 'Your request has been declined.',
+    TeamRequestStatus.cancelled => 'Request cancelled.',
+    TeamRequestStatus.paid => 'Demo payment completed.',
   };
 
   @override
@@ -48,10 +48,10 @@ class TeamRequestStatusSheet extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               const Text(
-                "پیش‌نمایش رابط",
+                'UI preview',
                 style: AppTextStyles.smallPrint,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
               Expanded(
                 child: Center(
@@ -63,7 +63,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                           label(request.status),
                           textAlign: TextAlign.center,
                           style: AppTextStyles.bodyText,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                         if (request.status == TeamRequestStatus.awaiting) ...[
                           const SizedBox(height: 20),
@@ -75,8 +75,8 @@ class TeamRequestStatusSheet extends StatelessWidget {
                                 onPressed: () =>
                                     cubit.previewResponse(accepted: true),
                                 child: const Text(
-                                  "پیش‌نمایش پذیرش",
-                                  textDirection: TextDirection.rtl,
+                                  'Preview acceptance',
+                                  textDirection: TextDirection.ltr,
                                   textAlign: TextAlign.right,
                                 ),
                               ),
@@ -84,8 +84,8 @@ class TeamRequestStatusSheet extends StatelessWidget {
                                 onPressed: () =>
                                     cubit.previewResponse(accepted: false),
                                 child: const Text(
-                                  "پیش‌نمایش رد درخواست",
-                                  textDirection: TextDirection.rtl,
+                                  'Preview decline',
+                                  textDirection: TextDirection.ltr,
                                   textAlign: TextAlign.right,
                                 ),
                               ),
@@ -102,7 +102,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        label: "انصراف",
+                        label: 'Cancel',
                         variant: AppButtonVariant.outlined,
                         onPressed: () {
                           cubit.cancelRequest();
@@ -113,7 +113,7 @@ class TeamRequestStatusSheet extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: AppButton(
-                        label: "تسویه‌حساب",
+                        label: 'Checkout',
                         onPressed: () {
                           Navigator.of(context).pop();
                           onCheckout();
@@ -132,8 +132,8 @@ class TeamRequestStatusSheet extends StatelessWidget {
                     },
                     icon: const AppIcon(AppIcons.close, size: 20),
                     label: const Text(
-                      "لغو درخواست",
-                      textDirection: TextDirection.rtl,
+                      'Cancel Request',
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -141,8 +141,8 @@ class TeamRequestStatusSheet extends StatelessWidget {
               else
                 AppButton(
                   label: request.status == TeamRequestStatus.paid
-                      ? "تأیید"
-                      : "ویرایش درخواست",
+                      ? 'Done'
+                      : 'Edit request',
                   onPressed: () {
                     if (request.status != TeamRequestStatus.paid) cubit.edit();
                     Navigator.of(context).pop();

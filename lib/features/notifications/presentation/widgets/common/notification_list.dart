@@ -23,13 +23,13 @@ class NotificationList extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.center,
             child: Text(
               searching
                   ? NotificationStrings.noResults
                   : NotificationStrings.empty,
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.right,
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.center,
             ),
           ),
         ),

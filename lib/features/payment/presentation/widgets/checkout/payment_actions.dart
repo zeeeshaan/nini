@@ -13,7 +13,7 @@ class PaymentActions extends StatelessWidget {
       children: [
         Expanded(
           child: AppButton(
-            label: "انصراف",
+            label: 'Cancel',
             variant: AppButtonVariant.outlined,
             onPressed: isProcessing ? null : () => Navigator.of(context).pop(),
           ),
@@ -31,9 +31,9 @@ class PaymentActions extends StatelessWidget {
                     ..showSnackBar(
                       const SnackBar(
                         content: Text(
-                          "پرداخت هنوز متصل نشده است و مبلغی برداشت نشده است.",
+                          'Payment is not connected yet. No money has been charged.',
                           textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                       ),
                     );

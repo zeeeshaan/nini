@@ -20,7 +20,7 @@ class CartPaymentSummary extends StatelessWidget {
             child: Text(
               cartMoney(amount),
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               style: (bold ? AppTextStyles.pageTitleBold : AppTextStyles.bodyBold),
             ),
           ),
@@ -28,7 +28,7 @@ class CartPaymentSummary extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: (bold ? AppTextStyles.boldText : AppTextStyles.regularText),
             ),

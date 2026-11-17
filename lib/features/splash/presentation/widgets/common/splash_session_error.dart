@@ -19,7 +19,7 @@ class SplashSessionError extends StatelessWidget {
         children: [
           Text(
             AuthStrings.sessionRestoreFailed,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.body.copyWith(
               color: Theme.of(context).colorScheme.onSurface,

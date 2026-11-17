@@ -34,7 +34,10 @@ class SettingsPostsList extends StatelessWidget {
               : ProfileSettingsStrings.tryAnotherSearch,
         );
       }
-      return SettingsPostsGrid(posts: matches);
+      return SettingsPostsGrid(
+        posts: matches,
+        gridDirection: TextDirection.rtl,
+      );
     },
   );
 }

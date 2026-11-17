@@ -62,7 +62,7 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
               ReceiptStrings.invoice,
               style: AppTextStyles.screenTitle,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           centerTitle: false,
@@ -74,7 +74,7 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
                     : () => openSavedInvoice(context, order.id),
                 child: const Text(
                   ProviderOrderStrings.buyerInvoice,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -104,7 +104,7 @@ class _ProviderInvoiceScreenState extends State<ProviderInvoiceScreen> {
                   child: Text(
                     ProviderOrderStrings.unavailable,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
               ),

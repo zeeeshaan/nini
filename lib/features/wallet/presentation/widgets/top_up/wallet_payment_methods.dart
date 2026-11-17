@@ -32,7 +32,7 @@ class _WalletPaymentMethodsState extends State<WalletPaymentMethods> {
               WalletStrings.paymentMethod,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 14),
             for (final bank in ['melli', 'mellat', 'saman'])

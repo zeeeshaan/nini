@@ -49,7 +49,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
       SnackBar(
         content: Text(
           message,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
         ),
       ),
@@ -66,12 +66,12 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
     }
 
     if (!form.canSubmit) {
-      _showMessage("نام تیم را وارد کنید.");
+      _showMessage("Enter a team name.");
       return;
     }
 
     if (widget.onSubmit == null) {
-      _showMessage("ابتدا درخواست تیم و پرداخت آزمایشی را تکمیل کنید.");
+      _showMessage("Complete the team request and demo checkout first.");
       return;
     }
 

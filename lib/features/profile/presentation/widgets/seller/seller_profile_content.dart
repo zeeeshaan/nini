@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+
+import '../../../domain/public_user_profile.dart';
 
 import 'seller_profile_actions.dart';
 import 'seller_post_grid.dart';
 import 'seller_profile_header.dart';
 
 class SellerProfileContent extends StatelessWidget {
-  const SellerProfileContent({
-    super.key,
-    required this.seller,
-    required this.posts,
-    required this.onPostTap,
-  });
+  const SellerProfileContent({super.key, required this.profile});
 
-  final PostSeller seller;
-  final List<PostItem> posts;
-  final ValueChanged<PostItem> onPostTap;
+  final PublicUserProfile profile;
 
   @override
   Widget build(BuildContext context) => AppResponsiveBuilder(
@@ -42,26 +35,29 @@ class SellerProfileContent extends StatelessWidget {
                 16,
               ),
               child: SellerProfileHeader(
-                seller: seller,
-                postCount: posts.length,
+                profile: profile,
                 avatarSize: responsive.adaptive<double>(
                   compact: 104,
                   medium: 124,
                   expanded: 136,
                 ),
-                category: posts.isEmpty
-                    ? ''
-                    : AppStrings.postCategory(posts.first.category),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: responsive.horizontalPadding,
               ),
-              child: SellerProfileActions(seller: seller),
+              child: SellerProfileActions(
+                seller: profile.seller,
+                isFollowing: profile.isFollowing,
+              ),
             ),
             const SizedBox(height: 16),
-            SellerPostGrid(posts: posts, onPostTap: onPostTap),
+            SellerPostGrid(
+              posts: const [],
+              onPostTap: (_) {},
+              emptyMessage: ProfilePostStrings.publicPostsUnavailable,
+            ),
             const SizedBox(height: 24),
           ],
         ),

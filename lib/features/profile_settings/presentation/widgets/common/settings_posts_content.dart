@@ -36,7 +36,7 @@ class SettingsPostsContent extends StatelessWidget {
               onPressed: context.read<PostsCubit>().load,
               child: const Text(
                 AppStrings.retry,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

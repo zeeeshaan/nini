@@ -28,7 +28,7 @@ class ChatConversationTile extends StatelessWidget {
     return Semantics(
       button: true,
       label:
-          '${conversation.name}، ${AppStrings.unreadMessageCount(conversation.unreadCount)}',
+          '${conversation.name}, ${AppStrings.unreadMessageCount(conversation.unreadCount)}',
       child: InkWell(
         onTap: onTap,
         child: Padding(
@@ -47,7 +47,7 @@ class ChatConversationTile extends StatelessWidget {
                         color: colors.onSurface.withValues(alpha: 0.42),
                       ),
                       textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                     if (conversation.unreadCount > 0) ...[
                       const SizedBox(height: 9),
@@ -69,7 +69,7 @@ class ChatConversationTile extends StatelessWidget {
                             color: colors.surface,
                           ),
                           textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                       ),
                     ],
@@ -91,7 +91,7 @@ class ChatConversationTile extends StatelessWidget {
                       style: AppTextStyles.conversationName.copyWith(
                         color: colors.onSurface,
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                     const SizedBox(height: 7),
                     Text(
@@ -104,7 +104,7 @@ class ChatConversationTile extends StatelessWidget {
                       style: AppTextStyles.compactBody.copyWith(
                         color: colors.onSurface,
                       ),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                   ],
                 ),

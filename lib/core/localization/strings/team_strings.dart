@@ -2,20 +2,19 @@ import '../app_string/app_string.dart';
 
 abstract final class TeamStrings {
   static String requestProviders(int count) =>
-      'درخواست از متخصصان انتخاب‌شده (${AppStrings.persianDigits(count)})';
+      'Request selected providers (${AppStrings.persianDigits(count)})';
   static String peopleCount(int count) =>
-      'اعضا (${AppStrings.persianDigits(count)})';
+      'People (${AppStrings.persianDigits(count)})';
   static String duration(Duration value) => value.inDays > 0
-      ? '${AppStrings.persianDigits(value.inDays)} روز'
-      : '${AppStrings.persianDigits(value.inHours)} ساعت';
+      ? '${AppStrings.persianDigits(value.inDays)} days'
+      : '${AppStrings.persianDigits(value.inHours)} hours';
   static String selectedFileSize(int? bytes) => bytes == null
-      ? 'انتخاب‌شده'
-      : 'انتخاب‌شده · ${AppStrings.persianDigits((bytes / 1024).toStringAsFixed(1))} کیلوبایت';
+      ? 'Selected'
+      : 'Selected · ${AppStrings.persianDigits((bytes / 1024).toStringAsFixed(1))} KB';
 
-  static const selectMembers = "انتخاب اعضای تیم";
+  static const selectMembers = 'Select team members';
 
-  static String done(int count) =>
-      '${AppStrings.done} (${AppStrings.persianDigits(count)})';
-  static String addMember(String name) => 'افزودن $name به تیم';
-  static String removeMember(String name) => 'حذف $name از تیم';
+  static String done(int count) => '${AppStrings.done} ($count)';
+  static String addMember(String name) => 'Add $name to team';
+  static String removeMember(String name) => 'Remove $name from team';
 }

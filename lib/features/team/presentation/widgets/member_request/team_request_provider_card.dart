@@ -39,7 +39,7 @@ class TeamRequestProviderCard extends StatelessWidget {
                           seller.name,
                           textAlign: TextAlign.right,
                           style: AppTextStyles.authorName,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                         if (seller.location.isNotEmpty)
                           Text(
@@ -48,7 +48,7 @@ class TeamRequestProviderCard extends StatelessWidget {
                             style: AppTextStyles.smallPrint.copyWith(
                               color: colors.onSurface.withValues(alpha: .55),
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                       ],
                     ),
@@ -63,10 +63,10 @@ class TeamRequestProviderCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'عنوان: ${post.title}',
+                'Title: ${post.title}',
                 textAlign: TextAlign.right,
                 style: AppTextStyles.bodyBold,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ],
           ),

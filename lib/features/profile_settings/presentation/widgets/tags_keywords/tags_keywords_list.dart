@@ -31,6 +31,7 @@ class TagsKeywordsList extends StatelessWidget {
         ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
       if (tags.isEmpty) {
         return SettingsEmptyState(
+          textAlign: TextAlign.center,
           title: query.isEmpty
               ? ProfileSettingsStrings.noTags
               : ProfileSettingsStrings.noResults,
@@ -69,13 +70,13 @@ class TagsKeywordsList extends StatelessWidget {
                     tag,
                     textAlign: TextAlign.right,
                     style: AppTextStyles.body,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                   subtitle: Text(
                     ProfileSettingsStrings.tagPosts(grouped[tag]!.length),
                     textAlign: TextAlign.right,
                     style: AppTextStyles.helper,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                   onTap: () => openTag(tag),
                 );

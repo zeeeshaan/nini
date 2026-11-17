@@ -17,7 +17,7 @@ class ProfileEditFields extends StatelessWidget {
 
   final Map<String, TextEditingController> controllers;
   final DateTime? birthDate;
-  final ValueChanged<DateTime>? onBirthDateChanged;
+  final ValueChanged<DateTime?>? onBirthDateChanged;
   final bool enabled;
   @override
   Widget build(BuildContext context) => Column(
@@ -29,9 +29,6 @@ class ProfileEditFields extends StatelessWidget {
         textStyle: AppTextStyles.profileName,
         controller: controllers['firstName'],
         enabled: enabled,
-        validator: (value) => value == null || value.trim().isEmpty
-            ? ProfileEditStrings.nameRequired
-            : null,
       ),
       ProfileEditField(
         label: ProfileEditStrings.lastName,
@@ -42,12 +39,12 @@ class ProfileEditFields extends StatelessWidget {
       ProfileEditField(
         label: ProfileEditStrings.businessType,
         controller: controllers['businessType'],
-        maxLength: ProfileLimits.businessType,
         enabled: enabled,
       ),
       ProfileEditField(
-        label: ProfileEditStrings.nationality,
-        controller: controllers['nationality'],
+        label: ProfileEditStrings.city,
+        controller: controllers['city'],
+        maxLength: ProfileLimits.city,
         enabled: enabled,
       ),
       ProfileEditField(

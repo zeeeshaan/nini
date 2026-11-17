@@ -23,8 +23,21 @@ import '../common/home_engagement_bar.dart';
 import '../common/home_seller_header.dart';
 
 class HomePublishedPostCard extends StatelessWidget {
-  const HomePublishedPostCard({super.key, required this.post});
+  const HomePublishedPostCard({
+    super.key,
+    required this.post,
+    this.active = true,
+    this.onProfilePressed,
+  });
   final PostItem post;
+  final bool active;
+  final VoidCallback? onProfilePressed;
+
+  void _openPost(BuildContext context) => openPublishedHomePost(
+    context,
+    post,
+    onOwnProfilePressed: onProfilePressed,
+  );
 
   void _toggleCart(BuildContext context) {
     final cart = context.read<CartCubit?>();
@@ -74,11 +87,14 @@ class HomePublishedPostCard extends StatelessWidget {
         children: [
           HomeSellerHeader(
             seller: seller,
-            onPressed: () => openPublishedHomeSeller(context, post),
+            onPressed:
+                onProfilePressed ??
+                () => openPublishedHomeSeller(context, post),
           ),
           HomePostMediaSlider(
             post: post,
-            onTap: () => openPublishedHomePost(context, post),
+            active: active,
+            onTap: () => _openPost(context),
           ),
           BlocBuilder<PostDetailCubit, PostDetailState>(
             buildWhen: (previous, current) =>
@@ -128,11 +144,12 @@ class HomePublishedPostCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 InkWell(
-                  onTap: () => openPublishedHomePost(context, post),
+                  onTap: () => _openPost(context),
                   child: Text(
                     post.title,
                     textAlign: TextAlign.right,
                     maxLines: 2,
+                    softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.homePostTitle,
                     textDirection: TextDirection.rtl,
@@ -142,14 +159,14 @@ class HomePublishedPostCard extends StatelessWidget {
                 Text(
                   AppStrings.postCategory(post.category),
                   textAlign: TextAlign.right,
-                  style: AppTextStyles.subtitle.copyWith(
+                  style: AppTextStyles.heading.copyWith(
                     color: Theme.of(context).colorScheme.onSurface
                         .withValues(alpha: .3),
                   ),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 if (post.price.isNotEmpty || !post.isService) ...[
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 12),
                   HomePostPricing(post: post),
                 ],
               ],

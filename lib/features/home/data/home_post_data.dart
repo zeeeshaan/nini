@@ -14,9 +14,9 @@ const homeSeller = PostSeller(
 
 const localPostSeller = PostSeller(
   id: localProfileId,
-  name: AppStrings.sellerName,
+  name: '',
   avatarAsset: '',
-  bio: AppStrings.sellerBio,
+  bio: '',
 );
 
 PostItem homeProductPost({required String title, required String imageUrl}) =>

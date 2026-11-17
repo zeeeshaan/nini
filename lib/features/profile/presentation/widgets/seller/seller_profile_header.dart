@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+
+import '../../../domain/public_user_profile.dart';
 
 import '../account/profile_avatar.dart';
 import '../account/profile_identity.dart';
@@ -9,15 +10,11 @@ import '../account/profile_stats.dart';
 class SellerProfileHeader extends StatelessWidget {
   const SellerProfileHeader({
     super.key,
-    required this.seller,
-    required this.postCount,
-    this.category = '',
+    required this.profile,
     this.avatarSize = 104,
   });
 
-  final PostSeller seller;
-  final int postCount;
-  final String category;
+  final PublicUserProfile profile;
   final double avatarSize;
 
   @override
@@ -30,21 +27,25 @@ class SellerProfileHeader extends StatelessWidget {
         children: [
           Expanded(
             child: ProfileStats(
-              postCount: AppStrings.persianDigits(postCount),
-              salesCount: '—',
-              customerCount: '—',
+              postCount: profile.postsCount?.toString() ?? '—',
+              salesCount: profile.followersCount?.toString() ?? '—',
+              customerCount: profile.followingCount?.toString() ?? '—',
+              salesLabel: AppStrings.followers,
+              customerLabel: AppStrings.following,
             ),
           ),
           const SizedBox(width: 8),
-          ProfileAvatar(size: avatarSize, asset: seller.avatarAsset),
+          ProfileAvatar(size: avatarSize, asset: profile.seller.avatarAsset),
         ],
       ),
       const SizedBox(height: 8),
       ProfileIdentity(
-        name: seller.name,
-        category: category,
-        bio: seller.bio,
-        location: seller.location,
+        name: profile.seller.name.isEmpty
+            ? profile.seller.username
+            : profile.seller.name,
+        category: '@${profile.seller.username}',
+        bio: profile.seller.bio,
+        location: profile.seller.location,
       ),
     ],
   );

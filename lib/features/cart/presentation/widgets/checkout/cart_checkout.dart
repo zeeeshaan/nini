@@ -67,7 +67,7 @@ class CartCheckout extends StatelessWidget {
           child: Text(
             CartStrings.escrowHelp,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             style: AppTextStyles.checkoutHelp,
           ),
         ),

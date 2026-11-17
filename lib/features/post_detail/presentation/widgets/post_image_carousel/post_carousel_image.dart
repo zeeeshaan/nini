@@ -3,9 +3,14 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class PostCarouselImage extends StatelessWidget {
-  const PostCarouselImage({super.key, required this.path});
+  const PostCarouselImage({
+    super.key,
+    required this.path,
+    this.fit = BoxFit.cover,
+  });
 
   final String path;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class PostCarouselImage extends StatelessWidget {
         : AssetImage(path);
     return Image(
       image: image,
-      fit: BoxFit.cover,
+      fit: fit,
       filterQuality: FilterQuality.medium,
       errorBuilder: (context, _, _) => ColoredBox(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,

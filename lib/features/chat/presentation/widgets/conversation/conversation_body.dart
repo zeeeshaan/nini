@@ -69,7 +69,7 @@ class ConversationBody extends StatelessWidget {
                   const Expanded(
                     child: Text(
                       AppStrings.personBlocked,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       style: AppTextStyles.label,
                       textAlign: TextAlign.right,
                     ),
@@ -78,7 +78,7 @@ class ConversationBody extends StatelessWidget {
                     onPressed: () => onUnblock(),
                     child: const Text(
                       AppStrings.unblockPerson,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -93,7 +93,7 @@ class ConversationBody extends StatelessWidget {
                 child: Text(
                   AppStrings.selectMessagesHelp,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             ),

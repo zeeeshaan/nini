@@ -19,7 +19,7 @@ class PostOwnerActionTile extends StatelessWidget {
     leading: Icon(icon, color: destructive ? AppColors.red : null),
     title: Text(
       label,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       textAlign: TextAlign.right,
       style: destructive
           ? AppTextStyles.inherit.copyWith(color: AppColors.red)

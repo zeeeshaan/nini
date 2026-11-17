@@ -27,7 +27,7 @@ class GalleryFilesGrid extends StatelessWidget {
               CreatePostStrings.errorMessage(
                 state.errorMessage ?? CreatePostStrings.filesPickerHelp,
               ),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
             ),
@@ -71,7 +71,7 @@ class GalleryFilesGrid extends StatelessWidget {
                                   color: colors.onSurface,
                                 ),
                                 textAlign: TextAlign.right,
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                               ),
                             ],
                           ),

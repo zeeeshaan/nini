@@ -1,26 +1,21 @@
 import 'package:nini/shared/models/post/post_unit.dart';
 
-/// Persian copy for post quantities and unit labels.
+/// English copy for post quantities and unit labels.
 abstract final class PostDetailStrings {
-  static const quantity = 'تعداد';
-  static const increaseQuantity = 'افزایش تعداد';
+  static const quantity = 'Quantity';
+  static const increaseQuantity = 'Increase quantity';
 
   static String unit(PostUnit unit) => switch (unit) {
-    PostUnit.piece || PostUnit.item => 'عدد',
-    PostUnit.hour => 'ساعت',
-    PostUnit.day => 'روز',
-    PostUnit.session => 'جلسه',
-    PostUnit.project => 'پروژه',
-    PostUnit.meter => 'متر',
-    PostUnit.centimeter => 'سانتی‌متر',
-    PostUnit.kilogram => 'کیلوگرم',
-    PostUnit.set => 'مجموعه',
+    PostUnit.piece || PostUnit.item => 'item',
+    PostUnit.hour => 'hour',
+    PostUnit.day => 'day',
+    PostUnit.session => 'session',
+    PostUnit.project => 'project',
+    PostUnit.meter => 'meter',
+    PostUnit.centimeter => 'centimeter',
+    PostUnit.kilogram => 'kilogram',
+    PostUnit.set => 'set',
   };
 
-  static String persianDigits(String value) => value
-      .replaceAllMapped(
-        RegExp('[0-9]'),
-        (match) => '۰۱۲۳۴۵۶۷۸۹'[int.parse(match[0]!)],
-      )
-      .replaceAll('.', '٫');
+  static String persianDigits(String value) => value;
 }

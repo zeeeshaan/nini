@@ -30,7 +30,7 @@ class PostEditorOptionsFields extends StatelessWidget {
                         : value.days == 0
                         ? ProfilePostStrings.sameDay
                         : ProfilePostStrings.preparationDays(value.days!),
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -55,7 +55,7 @@ class PostEditorOptionsFields extends StatelessWidget {
                 value: InventoryStatus.inStock,
                 child: Text(
                   ProfilePostStrings.inStock,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -63,7 +63,7 @@ class PostEditorOptionsFields extends StatelessWidget {
                 value: InventoryStatus.outOfStock,
                 child: Text(
                   ProfilePostStrings.outOfStock,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -71,7 +71,7 @@ class PostEditorOptionsFields extends StatelessWidget {
                 value: InventoryStatus.preOrder,
                 child: Text(
                   ProfilePostStrings.preOrder,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -99,7 +99,7 @@ class PostEditorOptionsFields extends StatelessWidget {
                   .toList(),
             ),
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
       ],

@@ -14,7 +14,8 @@ class AppTextField extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.textAlign = TextAlign.right,
-    this.textDirection = TextDirection.rtl,
+    this.textDirection = TextDirection.ltr,
+    this.decorationDirection,
     this.maxLines = 1,
     this.maxLength,
     this.obscureText = false,
@@ -44,6 +45,7 @@ class AppTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextAlign textAlign;
   final TextDirection textDirection;
+  final TextDirection? decorationDirection;
 
   final int? maxLines;
   final int? maxLength;
@@ -67,7 +69,7 @@ class AppTextField extends StatelessWidget {
     // InputDecorator uses ambient direction for labels and floating labels;
     // setting TextFormField.textDirection alone only changes the input text.
     return Directionality(
-      textDirection: textDirection,
+      textDirection: decorationDirection ?? textDirection,
       child: TextFormField(
         // Keep selection menus inside Flutter so iOS native menus cannot overlap.
         contextMenuBuilder: (context, editableTextState) =>
@@ -97,6 +99,7 @@ class AppTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
+          hintTextDirection: textDirection,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
         ),

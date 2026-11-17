@@ -81,7 +81,7 @@ class _ShareSheetState extends State<ShareSheet> {
     final url = widget.postUrl?.trim();
 
     return [
-      text.isEmpty ? "این پست را در های‌ورک ببینید!" : text,
+      text.isEmpty ? 'Check out this post on HYWORK!' : text,
       if (url != null && url.isNotEmpty) url,
     ].join('\n\n');
   }
@@ -94,7 +94,7 @@ class _ShareSheetState extends State<ShareSheet> {
         content: Text(
           message,
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
     );
@@ -112,7 +112,7 @@ class _ShareSheetState extends State<ShareSheet> {
       final result = await SharePlus.instance.share(
         ShareParams(
           text: _shareText,
-          subject: "پست های‌ورک",
+          subject: "HYWORK post",
           sharePositionOrigin: origin,
         ),
       );
@@ -123,7 +123,7 @@ class _ShareSheetState extends State<ShareSheet> {
         Navigator.of(context).pop();
       }
     } catch (_) {
-      _showError("باز کردن گزینه‌های اشتراک‌گذاری انجام نشد.");
+      _showError("Could not open sharing options.");
     }
   }
 
@@ -137,10 +137,10 @@ class _ShareSheetState extends State<ShareSheet> {
       if (opened) {
         Navigator.of(context).pop();
       } else {
-        _showError("باز کردن این روش اشتراک‌گذاری انجام نشد.");
+        _showError("Could not open this sharing option.");
       }
     } catch (_) {
-      _showError("باز کردن این روش اشتراک‌گذاری انجام نشد.");
+      _showError("Could not open this sharing option.");
     }
   }
 
@@ -178,9 +178,9 @@ class _ShareSheetState extends State<ShareSheet> {
     messenger.showSnackBar(
       SnackBar(
         content: Text(
-          hasLink ? "پیوند پست کپی شد" : "متن پست کپی شد",
+          hasLink ? "Post link copied" : "Post text copied",
           textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
       ),
     );
@@ -248,10 +248,10 @@ class _ShareSheetState extends State<ShareSheet> {
                 ),
                 child: AppTextField(
                   controller: _searchController,
-                  hint: "جستجو",
+                  hint: "Search",
                   textStyle: AppTextStyles.bodyText.copyWith(color: foreground),
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   suffixIcon: Icon(
                     Icons.search,
                     size: 20,
@@ -279,12 +279,12 @@ class _ShareSheetState extends State<ShareSheet> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "مخاطبی یافت نشد",
+                          "No contacts found",
                           style: AppTextStyles.bodyText.copyWith(
                             color: foreground,
                           ),
                           textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                         ),
                       ),
                     );
@@ -320,7 +320,7 @@ class _ShareSheetState extends State<ShareSheet> {
                             style: AppTextStyles.caption.copyWith(
                               color: foreground,
                             ),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                         ],
                       );
@@ -343,21 +343,21 @@ class _ShareSheetState extends State<ShareSheet> {
                 ),
                 children: [
                   _shareOption(
-                    label: "واتساپ",
+                    label: "WhatsApp",
                     icon: Icons.phone_rounded,
                     color: const Color(0xFF25D366),
                     foreground: foreground,
                     onTap: _shareWhatsApp,
                   ),
                   _shareOption(
-                    label: "تلگرام",
+                    label: "Telegram",
                     icon: Icons.send_rounded,
                     color: const Color(0xFF229ED9),
                     foreground: foreground,
                     onTap: _shareTelegram,
                   ),
                   _shareOption(
-                    label: "مسنجر",
+                    label: "Messenger",
                     icon: Icons.message_rounded,
                     color: const Color(0xFF168AFF),
                     foreground: foreground,
@@ -365,7 +365,7 @@ class _ShareSheetState extends State<ShareSheet> {
                     onTap: _sharePost,
                   ),
                   _shareOption(
-                    label: "پیام‌ها",
+                    label: "Messages",
                     icon: Icons.sms_rounded,
                     color: const Color(0xFF1877F2),
                     foreground: foreground,
@@ -373,15 +373,15 @@ class _ShareSheetState extends State<ShareSheet> {
                   ),
                   _shareOption(
                     label: widget.postUrl?.trim().isNotEmpty == true
-                        ? "کپی پیوند"
-                        : "کپی متن",
+                        ? "Copy link"
+                        : "Copy text",
                     icon: Icons.link_rounded,
                     color: const Color(0xFF505050),
                     foreground: foreground,
                     onTap: _copyPost,
                   ),
                   _shareOption(
-                    label: "بیشتر",
+                    label: "More",
                     icon: Icons.more_horiz_rounded,
                     color: const Color(0xFF505050),
                     foreground: foreground,
@@ -422,7 +422,7 @@ class _ShareSheetState extends State<ShareSheet> {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: AppTextStyles.caption.copyWith(color: foreground),
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ],
         ),

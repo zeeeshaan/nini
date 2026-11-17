@@ -89,15 +89,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       if (!mounted) return false;
 
       final message = error.response?.statusCode == 429
-          ? "تعداد درخواست‌ها بیش از حد مجاز است. بعداً دوباره تلاش کنید."
-          : "ارسال دوباره کد انجام نشد. دوباره تلاش کنید.";
+          ? 'Too many requests. Please try again later.'
+          : 'Could not resend OTP. Please try again.';
 
       _showError(message);
       return false;
     } catch (_) {
       if (!mounted) return false;
 
-      _showError("ارسال دوباره کد انجام نشد. دوباره تلاش کنید.");
+      _showError('Could not resend OTP. Please try again.');
       return false;
     }
   }
@@ -187,7 +187,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     Text(
                       AuthStrings.codeSentTo(widget.email!),
                       textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                     const SizedBox(height: 16),
                   ],

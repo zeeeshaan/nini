@@ -11,7 +11,7 @@ class SettingsNotice extends StatelessWidget {
       text,
       textAlign: TextAlign.right,
       style: AppTextStyles.helper,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
     ),
   );
 }

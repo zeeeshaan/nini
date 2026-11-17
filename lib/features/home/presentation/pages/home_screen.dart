@@ -8,9 +8,16 @@ import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/post_card_skeleton.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, this.onViewCart});
+  const HomeScreen({
+    super.key,
+    this.onViewCart,
+    this.onProfilePressed,
+    this.active = true,
+  });
 
   final VoidCallback? onViewCart;
+  final VoidCallback? onProfilePressed;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +72,8 @@ class HomeScreen extends StatelessWidget {
             return HomePublishedPostCard(
               key: ValueKey('home-post-${post.id}'),
               post: post,
+              active: active,
+              onProfilePressed: onProfilePressed,
             );
           },
         ),

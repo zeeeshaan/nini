@@ -15,9 +15,9 @@ enum CartOrderStatus {
   returned(CartStrings.returned),
   disputed(CartStrings.disputed),
   completed(CartStrings.completed),
-  preparing("در حال آماده‌سازی سفارش"),
-  shipped("در مسیر ارسال"),
-  inProgress("در حال انجام");
+  preparing('Preparing order'),
+  shipped('On the way'),
+  inProgress('In progress');
 
   const CartOrderStatus(this.label);
   final String label;

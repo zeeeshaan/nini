@@ -17,7 +17,7 @@ class WithdrawAccountSection extends StatelessWidget {
         WalletStrings.accountNumber,
         textAlign: TextAlign.right,
         style: AppTextStyles.helper,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       ),
       const SizedBox(height: 8),
       WalletTextField(

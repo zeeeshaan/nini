@@ -33,6 +33,7 @@ class HomePostPricing extends StatelessWidget {
     final original = post.originalPrice.trim();
     final unit = post.details.unit;
     final currencyStyle = AppTextStyles.labelBold.copyWith(
+      fontSize: 8,
       height: 1,
       color: foreground,
     );
@@ -41,7 +42,8 @@ class HomePostPricing extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final prices = Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          textDirection: TextDirection.ltr,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (original.isNotEmpty && _amount(original) != _amount(price))
               Padding(
@@ -51,6 +53,7 @@ class HomePostPricing extends StatelessWidget {
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: AppTextStyles.homeOriginalPrice.copyWith(
+                    height: 1,
                     color: foreground.withValues(alpha: .3),
                     decoration: TextDecoration.lineThrough,
                     decorationColor: foreground.withValues(alpha: .3),
@@ -72,7 +75,7 @@ class HomePostPricing extends StatelessWidget {
                         quarterTurns: 3,
                         child: Text(
                           AppStrings.tomanPersian,
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                           style: currencyStyle,
                         ),
@@ -84,6 +87,7 @@ class HomePostPricing extends StatelessWidget {
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.left,
                           style: AppTextStyles.homePostPrice.copyWith(
+                            height: 1,
                             color: foreground,
                           ),
                         ),
@@ -93,9 +97,9 @@ class HomePostPricing extends StatelessWidget {
                   if (unit != null)
                     Text(
                       PostDetailStrings.unit(unit),
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                       textAlign: TextAlign.right,
-                      style: AppTextStyles.heading.copyWith(
+                      style: AppTextStyles.subtitle.copyWith(
                         fontWeight: AppTextStyles.bold,
                         color: foreground,
                       ),
@@ -130,10 +134,13 @@ class HomePostPricing extends StatelessWidget {
         }
         return Row(
           textDirection: TextDirection.ltr,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(child: prices),
-            if (stock != null) ...[const SizedBox(width: 12), stock],
+            if (stock != null) ...[
+              const SizedBox(width: 12),
+              Padding(padding: const EdgeInsets.only(bottom: 6), child: stock),
+            ],
           ],
         );
       },

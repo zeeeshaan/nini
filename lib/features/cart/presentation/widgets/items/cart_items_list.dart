@@ -41,7 +41,7 @@ class CartItemsList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 32, bottom: 12),
             child: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               child: AppButton(
                 key: const ValueKey('cart-checkout'),
                 label:

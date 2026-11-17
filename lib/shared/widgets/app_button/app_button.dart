@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
       ],

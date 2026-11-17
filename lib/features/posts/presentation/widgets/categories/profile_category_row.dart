@@ -41,7 +41,7 @@ class ProfileCategoryRow extends StatelessWidget {
               child: Text(
                 CategoryStrings.of(context).name(category.id, category.name),
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           ),

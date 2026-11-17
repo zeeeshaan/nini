@@ -20,12 +20,12 @@ class CartEmptyState extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           if (message != null) ...[
             const SizedBox(height: 10),
-            Text(message!, textAlign: TextAlign.right, textDirection: TextDirection.rtl),
+            Text(message!, textAlign: TextAlign.right, textDirection: TextDirection.ltr),
           ],
         ],
       ),

@@ -38,7 +38,7 @@ class PaymentSuccessScreen extends StatelessWidget {
           child: const Text(
             ReceiptStrings.paymentDone,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
           ),
         ),
 
@@ -70,7 +70,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                   child: const Text(
                     ReceiptStrings.demoNotice,
                     textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
                 const SizedBox(height: 24),

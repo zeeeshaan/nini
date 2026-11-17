@@ -35,7 +35,7 @@ class _WithdrawOtpFieldsState extends State<WithdrawOtpFields> {
           WalletStrings.password,
           textAlign: TextAlign.right,
           style: AppTextStyles.helper,
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 8),
         Row(
@@ -61,7 +61,7 @@ class _WithdrawOtpFieldsState extends State<WithdrawOtpFields> {
                   WalletStrings.otp,
                   style: AppTextStyles.helper,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
               ),
             ),
@@ -75,7 +75,7 @@ class _WithdrawOtpFieldsState extends State<WithdrawOtpFields> {
             color: Theme.of(context).colorScheme.onSurface
                 .withValues(alpha: .3),
           ),
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 12),
         Row(
@@ -101,7 +101,7 @@ class _WithdrawOtpFieldsState extends State<WithdrawOtpFields> {
                 ),
                 style: AppTextStyles.helper,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
               ),
             ),
           ],

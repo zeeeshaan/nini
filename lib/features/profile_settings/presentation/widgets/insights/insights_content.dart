@@ -51,7 +51,7 @@ class InsightsContent extends StatelessWidget {
               ProfileSettingsStrings.postStatistics,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           RadioGroup<InsightMetric>(
@@ -70,7 +70,7 @@ class InsightsContent extends StatelessWidget {
                       insightMetricLabel(metric),
                       textAlign: TextAlign.right,
                       style: AppTextStyles.body,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                     subtitle: Text(
                       (analytics.storageError || analytics.loading) &&
@@ -85,7 +85,7 @@ class InsightsContent extends StatelessWidget {
                           : AppStrings.persianDigits(values.value(metric)),
                       textAlign: TextAlign.right,
                       style: AppTextStyles.bodyEmphasis,
-                      textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.ltr,
                     ),
                   ),
               ],

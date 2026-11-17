@@ -58,12 +58,12 @@ class CartOrderHistory extends StatelessWidget {
           ),
           title: Text(
             CartStrings.previewOrder,
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
           subtitle: Text(
             '$date · ${cartMoney(order.total)} ${CartStrings.toman}',
-            textDirection: TextDirection.rtl,
+            textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
           childrenPadding: const EdgeInsets.all(12),
@@ -77,7 +77,7 @@ class CartOrderHistory extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               '${CartStrings.receipt}: ${order.id}',
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
             ),
@@ -86,7 +86,7 @@ class CartOrderHistory extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 order.method.label,
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.right,
               ),
             ),

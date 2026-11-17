@@ -12,34 +12,35 @@ class CategoryStrings {
   String name(String id, String name) =>
       english ? name : ProfilePostStrings.categoryName(id, name);
   String deleteQuestion(String name) => english
-      ? 'دسته‌بندی «$name» حذف شود؟'
+      ? 'Remove the "$name" category?'
       : ProfilePostStrings.deleteQuestion(name);
   String text(String message) => !english
       ? message
       : switch (message) {
-          ProfilePostStrings.tabs => "دسته‌بندی‌ها",
-          ProfilePostStrings.addTab => "افزودن دسته‌بندی",
-          ProfilePostStrings.editTab => "ویرایش دسته‌بندی",
-          ProfilePostStrings.deleteTab => "حذف دسته‌بندی",
-          ProfilePostStrings.tabName => "نام دسته‌بندی",
-          ProfilePostStrings.cancel => "انصراف",
-          ProfilePostStrings.done => "تأیید",
-          ProfilePostStrings.delete => "حذف",
-          ProfilePostStrings.saving => "در حال ذخیره…",
-          ProfilePostStrings.retry => "تلاش دوباره",
-          ProfilePostStrings.noTabs => "هنوز دسته‌بندی‌ای ندارید. برای مرتب کردن پست‌ها، یک دسته‌بندی اضافه کنید.",
+          ProfilePostStrings.tabs => 'Categories',
+          ProfilePostStrings.addTab => 'Add category',
+          ProfilePostStrings.editTab => 'Edit category',
+          ProfilePostStrings.deleteTab => 'Delete category',
+          ProfilePostStrings.tabName => 'Category name',
+          ProfilePostStrings.cancel => 'Cancel',
+          ProfilePostStrings.done => 'Done',
+          ProfilePostStrings.delete => 'Delete',
+          ProfilePostStrings.saving => 'Saving…',
+          ProfilePostStrings.retry => 'Retry',
+          ProfilePostStrings.noTabs =>
+            'No categories yet. Add one to organise your posts.',
           ProfilePostStrings.loadFailed =>
-            "بارگذاری دسته‌بندی‌ها انجام نشد. دوباره تلاش کنید.",
-          ProfilePostStrings.saveFailed =>
-            "ذخیره تغییرات انجام نشد. دوباره تلاش کنید.",
-          ProfilePostStrings.nameRequired => "نام دسته‌بندی را وارد کنید.",
+            'Could not load categories. Try again.',
+          ProfilePostStrings.saveFailed => 'Could not save changes. Try again.',
+          ProfilePostStrings.nameRequired => 'Enter a category name.',
           ProfilePostStrings.nameTooLong =>
-            "نام دسته‌بندی باید حداکثر ۵۰ نویسه داشته باشد.",
+            'Category names must be at most 50 characters.',
           ProfilePostStrings.duplicateName =>
-            "دسته‌بندی‌ای با این نام وجود دارد.",
+            'A category with this name already exists.',
           ProfilePostStrings.reservedName =>
-            "«همه» یک بخش دائمی است. نام دیگری انتخاب کنید.",
-          ProfilePostStrings.deleteHelp => "پست‌های این دسته‌بندی حفظ می‌شوند و در بخش «همه» قابل مشاهده خواهند بود.",
+            'All is a permanent section. Choose another name.',
+          ProfilePostStrings.deleteHelp =>
+            'Posts in this category will remain visible under All.',
           _ => message,
         };
 }

@@ -45,7 +45,7 @@ class TeamMemberAvatars extends StatelessWidget {
                           style: AppTextStyles.smallPrint.copyWith(
                             color: colors.onPrimary,
                           ),
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                         ),
                       ),

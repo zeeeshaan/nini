@@ -11,7 +11,7 @@ class GalleryAccessNotice extends StatelessWidget {
   final bool busy;
   @override
   Widget build(BuildContext context) => Directionality(
-    textDirection: TextDirection.rtl,
+    textDirection: TextDirection.ltr,
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Column(
@@ -23,7 +23,7 @@ class GalleryAccessNotice extends StatelessWidget {
               CreatePostStrings.limitedGalleryAccess,
               textAlign: TextAlign.right,
               style: AppTextStyles.helper,
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
             ),
           ),
           Wrap(
@@ -36,7 +36,7 @@ class GalleryAccessNotice extends StatelessWidget {
                 child: const Text(
                   CreatePostStrings.selectMoreMedia,
                   style: AppTextStyles.helper,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -45,7 +45,7 @@ class GalleryAccessNotice extends StatelessWidget {
                 child: const Text(
                   CreatePostStrings.fullGalleryAccess,
                   style: AppTextStyles.helper,
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                 ),
               ),
