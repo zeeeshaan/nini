@@ -77,9 +77,9 @@ class LocalProfileCategoriesRepository implements ProfileCategoriesRepository {
   }
 
   @override
-  Future<List<ProfileCategory>> load() async {
+  Future<ProfileCategoryList> load() async {
     await _pending;
-    return _read();
+    return ProfileCategoryList(items: List.unmodifiable(await _read()));
   }
 
   @override
@@ -117,8 +117,15 @@ class LocalProfileCategoriesRepository implements ProfileCategoriesRepository {
       });
 
   @override
-  Future<void> delete(String id) => _serialize(() async {
+  Future<int?> delete(String id) => _serialize(() async {
     final categories = await _read();
     await _write(categories.where((item) => item.id != id).toList());
+    return null;
   });
+
+  @override
+  Future<ProfileCategoryList> reorder(List<String> ids) async =>
+      throw const ProfileCategoryException(
+        ProfilePostStrings.categoryLegacyUnavailable,
+      );
 }

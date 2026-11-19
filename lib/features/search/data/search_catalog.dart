@@ -2,7 +2,7 @@ import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 
-/// Published account-owned services until a backend service catalogue is connected.
+/// Published account-owned posts until a backend catalogue is connected.
 abstract final class SearchCatalog {
   static String normalize(String value) {
     // Accept Persian/Arabic keyboard variants and Persian half-spaces.
@@ -25,7 +25,7 @@ abstract final class SearchCatalog {
     Iterable<PostItem> publishedPosts = const [],
   }) {
     final matches = <String>{
-      for (final post in _matchingServices(publishedPosts, query)) post.title,
+      for (final post in _matchingPosts(publishedPosts, query)) post.title,
     };
     if (_isGeneralQuery(query)) {
       matches.addAll(SearchStrings.suggestions);
@@ -48,16 +48,16 @@ abstract final class SearchCatalog {
     String query, {
     Iterable<PostItem> publishedPosts = const [],
   }) {
-    return _matchingServices(publishedPosts, query).toList();
+    return _matchingPosts(publishedPosts, query).toList();
   }
 
-  static Iterable<PostItem> _matchingServices(
+  static Iterable<PostItem> _matchingPosts(
     Iterable<PostItem> posts,
     String query,
   ) {
     final words = normalize(query).split(' ');
     return posts.where((post) {
-      if (!post.isPublished || !post.isService) return false;
+      if (!post.isPublished) return false;
       // Local posts have a free-form address, not a structured city field.
       // Keep them discoverable instead of assigning the demo catalogue's city.
       final text = normalize(

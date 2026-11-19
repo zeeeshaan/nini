@@ -6,6 +6,7 @@ import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/shared/models/post/post_attributes.dart';
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 
 class PostEditorScheduleField extends StatefulWidget {
   const PostEditorScheduleField({super.key});
@@ -19,9 +20,8 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
   PostEditorFieldsCubit get _fields => context.read<PostEditorFieldsCubit>();
   Future<DateTime?> _pick(DateTime? initial) async {
     final now = DateTime.now();
-    final date = await showDatePicker(
+    final date = await showAppDatePicker(
       context: context,
-      textDirection: TextDirection.ltr,
       initialDate: initial ?? now,
       firstDate: DateTime(1900),
       lastDate: DateTime(now.year + 100),
@@ -57,7 +57,7 @@ class _PostEditorScheduleFieldState extends State<PostEditorScheduleField> {
   String _label(BuildContext context, String title, DateTime? value) {
     if (value == null) return title;
     return AppStrings.persianDigits(
-      '$title: ${MaterialLocalizations.of(context).formatMediumDate(value)} · ${TimeOfDay.fromDateTime(value).format(context)}',
+      '$title: ${formatSolarDate(value)} · ${TimeOfDay.fromDateTime(value).format(context)}',
     );
   }
 

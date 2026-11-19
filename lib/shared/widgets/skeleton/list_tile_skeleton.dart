@@ -6,9 +6,14 @@ import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.d
 import 'app_shimmer.dart';
 
 class ListTileSkeleton extends StatelessWidget {
-  const ListTileSkeleton({super.key, this.showAvatar = true});
+  const ListTileSkeleton({
+    super.key,
+    this.showAvatar = true,
+    this.animated = true,
+  });
 
   final bool showAvatar;
+  final bool animated;
 
   @override
   Widget build(BuildContext context) => AppResponsiveBuilder(
@@ -29,7 +34,8 @@ class ListTileSkeleton extends StatelessWidget {
           alignment: Alignment.topRight,
           child: SizedBox(
             width: responsive.width,
-            child: AppShimmer(
+            child: AppShimmer.when(
+              enabled: animated,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: padding,

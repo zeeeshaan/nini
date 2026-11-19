@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_colors.dart';
+
+Color _skeletonColor(BuildContext context, double opacity) {
+  final colors = Theme.of(context).colorScheme;
+  return Color.alphaBlend(
+    colors.onSurface.withValues(alpha: opacity),
+    colors.surface,
+  );
+}
 
 class AppShimmer extends StatefulWidget {
   const AppShimmer({super.key, required this.child});
+
+  static Widget when({required bool enabled, required Widget child}) =>
+      enabled ? AppShimmer(child: child) : child;
 
   final Widget child;
 
@@ -14,7 +24,7 @@ class _AppShimmerState extends State<AppShimmer>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 1400),
+    duration: const Duration(milliseconds: 1800),
   );
   bool _reduceMotion = false;
 
@@ -37,13 +47,8 @@ class _AppShimmerState extends State<AppShimmer>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final baseColor = isDark
-        ? AppColors.skeletonDarkBase
-        : AppColors.skeletonLightBase;
-    final highlightColor = isDark
-        ? AppColors.skeletonDarkHighlight
-        : AppColors.skeletonLightHighlight;
+    final baseColor = _skeletonColor(context, .07);
+    final highlightColor = _skeletonColor(context, .11);
 
     if (_reduceMotion) return widget.child;
 
@@ -83,14 +88,11 @@ class AppSkeletonBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.skeletonDarkBase
-            : AppColors.skeletonLightBase,
+        color: _skeletonColor(context, .07),
         shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
         borderRadius: isCircle ? null : BorderRadius.circular(radius),
       ),

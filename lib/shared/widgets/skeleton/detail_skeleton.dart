@@ -1,129 +1,108 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
+import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
+import 'package:nini/features/search/data/search_catalog.dart';
+import 'package:nini/shared/models/post/post_item.dart';
 
 import 'app_shimmer.dart';
 
+/// Keeps card data visible while the remaining post details are fetched.
 class DetailsSkeleton extends StatelessWidget {
-  const DetailsSkeleton({super.key});
+  const DetailsSkeleton({super.key, required this.post});
+
+  final PostItem post;
 
   @override
   Widget build(BuildContext context) => AppResponsiveBuilder(
     builder: (context, responsive) {
-      final theme = Theme.of(context);
-      final textScaler = MediaQuery.textScalerOf(context);
-      final width = math.min(responsive.width, 720.0);
-      final padding = math.min(responsive.horizontalPadding, width / 8);
-      final contentWidth = width - padding * 2;
-      final avatarSize = math.min(46.0, contentWidth / 4);
-      final headerGap = math.min(12.0, contentWidth / 8);
-
+      final seller = SearchCatalog.sellerFor(post);
+      final scale = MediaQuery.textScalerOf(context);
       return Align(
         alignment: Alignment.topCenter,
-        heightFactor: 1,
-        child: SizedBox(
-          width: width,
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.topRight,
-            child: SizedBox(
-              width: width,
-              child: AppShimmer(
-                child: Padding(
-                  padding: EdgeInsets.all(padding),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: responsive.adaptive<double>(
+              compact: 600,
+              medium: 640,
+              expanded: 720,
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                PostAuthorHeader(
+                  name: seller?.name ?? '',
+                  location: seller?.location ?? '',
+                  avatarAsset: seller?.avatarAsset ?? '',
+                ),
+                if (post.media.isNotEmpty || post.imageAsset.isNotEmpty)
+                  PostImageCarousel(
+                    media: post.media,
+                    images: [post.imageAsset],
+                    mediaFit: BoxFit.cover,
+                  )
+                else
+                  const AppShimmer(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: AppSkeletonBox(height: double.infinity, radius: 0),
+                    ),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(22, 16, 22, 0),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        textDirection: TextDirection.ltr,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              textDirection: TextDirection.ltr,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                AppSkeletonBox(
-                                  width: 135,
-                                  height: textScaler.scale(14),
-                                ),
-                                const SizedBox(height: 9),
-                                AppSkeletonBox(
-                                  width: 85,
-                                  height: textScaler.scale(10),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: headerGap),
-                          AppSkeletonBox(
-                            width: avatarSize,
-                            height: avatarSize,
-                            isCircle: true,
-                          ),
-                        ],
+                      Text(
+                        post.title,
+                        textAlign: TextAlign.right,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const SizedBox(height: 20),
-                      const AspectRatio(
-                        aspectRatio: 4 / 3,
-                        child: AppSkeletonBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          radius: 14,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      AppSkeletonBox(width: 200, height: textScaler.scale(17)),
-                      const SizedBox(height: 14),
-                      AppSkeletonBox(
-                        width: double.infinity,
-                        height: textScaler.scale(12),
-                      ),
-                      const SizedBox(height: 9),
-                      AppSkeletonBox(
-                        width: double.infinity,
-                        height: textScaler.scale(12),
-                      ),
-                      const SizedBox(height: 9),
-                      AppSkeletonBox(width: 180, height: textScaler.scale(12)),
-                      const SizedBox(height: 24),
-                      Divider(color: theme.colorScheme.outlineVariant),
+                      if (post.price.isNotEmpty)
+                        Text(post.price, textAlign: TextAlign.right),
                       const SizedBox(height: 16),
-                      Wrap(
-                        textDirection: TextDirection.ltr,
-                        alignment: WrapAlignment.end,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        spacing: 16,
-                        runSpacing: 8,
-                        children: [
-                          AppSkeletonBox(
-                            width: 90,
-                            height: textScaler.scale(16),
-                          ),
-                          AppSkeletonBox(
-                            width: 115,
-                            height: textScaler.scale(12),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      const Wrap(
-                        textDirection: TextDirection.ltr,
-                        alignment: WrapAlignment.end,
-                        spacing: 12,
-                        runSpacing: 8,
-                        children: [
-                          AppSkeletonBox(width: 44, height: 30, radius: 8),
-                          AppSkeletonBox(width: 44, height: 30, radius: 8),
-                          AppSkeletonBox(width: 44, height: 30, radius: 8),
-                        ],
+                      AppShimmer(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            AppSkeletonBox(
+                              height: scale.scale(12),
+                              width: double.infinity,
+                              radius: 3,
+                            ),
+                            const SizedBox(height: 8),
+                            AppSkeletonBox(
+                              height: scale.scale(12),
+                              width: 180,
+                              radius: 3,
+                            ),
+                            const SizedBox(height: 24),
+                            AppSkeletonBox(
+                              height: scale.scale(12),
+                              width: 110,
+                              radius: 3,
+                            ),
+                            const SizedBox(height: 12),
+                            AppSkeletonBox(
+                              height: scale.scale(12),
+                              width: double.infinity,
+                              radius: 3,
+                            ),
+                            const SizedBox(height: 10),
+                            AppSkeletonBox(
+                              height: scale.scale(12),
+                              width: double.infinity,
+                              radius: 3,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

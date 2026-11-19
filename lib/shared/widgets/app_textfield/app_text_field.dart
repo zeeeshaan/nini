@@ -29,6 +29,7 @@ class AppTextField extends StatelessWidget {
     this.onTap,
     this.onSubmitted,
     this.onSaved,
+    this.hasError = false,
   }) : assert(maxLines == null || maxLines > 0);
 
   final TextEditingController? controller;
@@ -63,6 +64,7 @@ class AppTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final ValueChanged<String>? onSubmitted;
   final FormFieldSetter<String>? onSaved;
+  final bool hasError;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +104,22 @@ class AppTextField extends StatelessWidget {
           hintTextDirection: textDirection,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
+          enabledBorder: hasError
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                )
+              : null,
+          focusedBorder: hasError
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                )
+              : null,
         ),
       ),
     );

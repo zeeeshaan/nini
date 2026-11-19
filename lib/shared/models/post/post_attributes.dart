@@ -1,10 +1,28 @@
 class PostFeature {
-  const PostFeature({required this.name, required this.value});
+  const PostFeature({
+    required this.name,
+    required this.value,
+    this.apiValue,
+    this.unit,
+  });
   final String name;
   final String value;
-  Map<String, dynamic> toJson() => {'name': name, 'value': value};
-  factory PostFeature.fromJson(Map<String, dynamic> json) =>
-      PostFeature(name: json['name'] as String, value: json['value'] as String);
+
+  /// Explicit backend value, when its type is known; the display value stays text.
+  final Object? apiValue;
+  final String? unit;
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'value': value,
+    if (apiValue != null) 'apiValue': apiValue,
+    if (unit != null) 'unit': unit,
+  };
+  factory PostFeature.fromJson(Map<String, dynamic> json) => PostFeature(
+    name: json['name'] as String,
+    value: json['value'] as String,
+    apiValue: json['apiValue'],
+    unit: json['unit'] as String?,
+  );
 }
 
 class PostSchedule {

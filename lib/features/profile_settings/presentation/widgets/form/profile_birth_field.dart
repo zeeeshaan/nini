@@ -4,6 +4,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_edit_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 
 class ProfileBirthField extends StatefulWidget {
   const ProfileBirthField({
@@ -41,9 +42,7 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
     final date = _date;
     _controller.text = date == null
         ? ''
-        : AppStrings.persianDigits(
-            MaterialLocalizations.of(context).formatMediumDate(date),
-          );
+        : AppStrings.persianDigits(formatSolarDate(date));
   }
 
   void _changeDate(DateTime? date) {
@@ -66,10 +65,8 @@ class _ProfileBirthFieldState extends State<ProfileBirthField> {
     var initialDate = _date ?? today;
     if (initialDate.isBefore(firstDate)) initialDate = firstDate;
     if (initialDate.isAfter(today)) initialDate = today;
-    final date = await showDatePicker(
+    final date = await showAppDatePicker(
       context: context,
-      locale: const Locale('en'),
-      textDirection: TextDirection.ltr,
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: today,

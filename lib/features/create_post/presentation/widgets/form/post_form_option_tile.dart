@@ -10,12 +10,14 @@ class PostFormOptionTile extends StatelessWidget {
     required this.onTap,
     this.value,
     this.trailing,
+    this.hasError = false,
   });
 
   final String label;
   final String? value;
   final VoidCallback onTap;
   final Widget? trailing;
+  final bool hasError;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,10 @@ class PostFormOptionTile extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 44),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
-            border: Border.all(color: colors.outline, width: 0.8),
+            border: Border.all(
+              color: hasError ? colors.error : colors.outline,
+              width: 0.8,
+            ),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Row(

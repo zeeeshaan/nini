@@ -20,6 +20,7 @@ import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_loader/app_loader.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 class PostAnalyticsScreen extends StatelessWidget {
   const PostAnalyticsScreen({super.key, required this.post});
@@ -123,11 +124,15 @@ class _PostAnalyticsView extends StatelessWidget {
           child: BlocBuilder<PostAnalyticsCubit, PostAnalyticsState>(
             builder: (context, state) {
               if (state.loading && state.events.isEmpty) {
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: 6,
-                  itemBuilder: (_, index) =>
-                      const ListTileSkeleton(showAvatar: false),
+                return AppShimmer(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: 6,
+                    itemBuilder: (_, index) => const ListTileSkeleton(
+                      showAvatar: false,
+                      animated: false,
+                    ),
+                  ),
                 );
               }
               PostAnalyticsReport report(AnalyticsPeriod period) =>

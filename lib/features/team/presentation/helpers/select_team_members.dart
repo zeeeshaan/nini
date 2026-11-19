@@ -16,36 +16,45 @@ Future<bool?> selectTeamMembers(
       builder: (searchContext) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(
-            TeamStrings.selectMembers,
-            textAlign: TextAlign.right,
+          centerTitle: false,
+          title: Row(
             textDirection: TextDirection.ltr,
-          ),
-          actions: [
-            BlocBuilder<TeamFormCubit, TeamFormState>(
-              bloc: form,
-              builder: (context, state) => ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 140),
-                child: TextButton(
-                  onPressed: () => Navigator.of(searchContext).pop(true),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      TeamStrings.done(state.members.length),
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.right,
+            children: [
+              BlocBuilder<TeamFormCubit, TeamFormState>(
+                bloc: form,
+                builder: (context, state) => ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 140),
+                  child: TextButton(
+                    onPressed: () => Navigator.of(searchContext).pop(true),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        TeamStrings.done(state.members.length),
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.right,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-
-            const AppBackButton(),
-          ],
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  TeamStrings.selectMembers,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ],
+          ),
+          actions: const [AppBackButton()],
         ),
         body: SafeArea(
           top: false,
           child: SearchScreen(
+            emptyStateTextAlign: TextAlign.center,
             onPostSelected: (post, seller) {
               Navigator.of(searchContext).push<void>(
                 MaterialPageRoute(

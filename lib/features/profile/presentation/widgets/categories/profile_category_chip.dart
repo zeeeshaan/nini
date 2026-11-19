@@ -8,17 +8,20 @@ class ProfileCategoryChip extends StatelessWidget {
     required this.label,
     required this.isSelected,
     required this.onTap,
+    this.count,
   });
 
   final String label;
   final bool isSelected;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final int? count;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      button: true,
+      button: onTap != null,
       selected: isSelected,
+      value: count?.toString(),
       child: Material(
         color: AppColors.transparent,
         child: InkWell(

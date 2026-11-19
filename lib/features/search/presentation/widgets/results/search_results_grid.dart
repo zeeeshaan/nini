@@ -4,6 +4,7 @@ import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.d
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import 'package:nini/features/search/presentation/widgets/results/search_result_card.dart';
 
@@ -13,10 +14,12 @@ class SearchResultsGrid extends StatefulWidget {
     required this.posts,
     this.onPostSelected,
     this.isLoading = false,
+    this.onLoadMore,
   });
 
   final List<PostItem> posts;
   final bool isLoading;
+  final VoidCallback? onLoadMore;
   final ValueChanged<PostItem>? onPostSelected;
 
   @override
@@ -53,29 +56,43 @@ class _SearchResultsGridState extends State<SearchResultsGrid> {
         contentScale,
       );
       return Directionality(
-        textDirection: TextDirection.ltr,
-        child: GridView.builder(
-          controller: _scrollController,
-          padding: EdgeInsets.zero,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: columns,
-            crossAxisSpacing: spacing,
-            mainAxisSpacing: 0,
-            mainAxisExtent: cardWidth + detailsHeight,
+        textDirection: TextDirection.rtl,
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification.metrics.axis == Axis.vertical &&
+                notification.metrics.extentAfter < 500)
+              widget.onLoadMore?.call();
+            return false;
+          },
+          child: AppShimmer.when(
+            enabled: widget.isLoading,
+            child: GridView.builder(
+              controller: _scrollController,
+              padding: EdgeInsets.zero,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columns,
+                crossAxisSpacing: spacing,
+                mainAxisSpacing: 0,
+                mainAxisExtent: cardWidth + detailsHeight,
+              ),
+              itemCount: widget.isLoading ? columns * 2 : widget.posts.length,
+              itemBuilder: (_, index) => Directionality(
+                textDirection: Directionality.of(context),
+                child: widget.isLoading
+                    ? const ProductCardSkeleton(animated: false)
+                    : SearchResultCard(
+                        key: ValueKey(widget.posts[index].id),
+                        post: widget.posts[index],
+                        contentScale: contentScale,
+                        detailsHeight: detailsHeight,
+                        onTap: widget.onPostSelected == null
+                            ? null
+                            : () => widget.onPostSelected!(widget.posts[index]),
+                      ),
+              ),
+            ),
           ),
-          itemCount: widget.isLoading ? columns * 2 : widget.posts.length,
-          itemBuilder: (context, index) => widget.isLoading
-              ? const ProductCardSkeleton()
-              : SearchResultCard(
-                  key: ValueKey(widget.posts[index].id),
-                  post: widget.posts[index],
-                  contentScale: contentScale,
-                  detailsHeight: detailsHeight,
-                  onTap: widget.onPostSelected == null
-                      ? null
-                      : () => widget.onPostSelected!(widget.posts[index]),
-                ),
         ),
       );
     },

@@ -9,6 +9,7 @@ PostDraft postDraftFromPost(PostItem post) {
   return PostDraft(
     postType: post.isService ? CreatePostType.services : CreatePostType.product,
     profileCategoryId: post.profileCategoryId,
+    categoryKey: data['category'] as String?,
     title: post.title,
     caption: post.caption,
     captionDelta: post.captionDelta,

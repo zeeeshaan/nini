@@ -11,16 +11,39 @@ class PostMediaView extends StatelessWidget {
     super.key,
     required this.media,
     this.fit = BoxFit.cover,
+    this.preferThumbnail = false,
   });
   final PostMedia media;
   final BoxFit fit;
+  final bool preferThumbnail;
+
+  bool _networkUrl(String? value) {
+    if (value == null ||
+        value.trim() != value ||
+        !(value.startsWith('http://') || value.startsWith('https://'))) {
+      return false;
+    }
+    final uri = Uri.tryParse(value);
+    return uri != null &&
+        (uri.scheme == 'http' || uri.scheme == 'https') &&
+        uri.host.isNotEmpty;
+  }
+
   Widget _imageError(BuildContext context, Object error, StackTrace? stack) =>
       const Center(child: AppIcon(AppIcons.imageUnavailable, size: 36));
   @override
   Widget build(BuildContext context) {
-    final preview = media.type == PostMediaType.image
+    final original = media.type == PostMediaType.image
         ? media.path
         : media.thumbnailPath;
+    final useThumbnail =
+        preferThumbnail &&
+        media.type == PostMediaType.image &&
+        media.source != PostMediaSource.asset &&
+        _networkUrl(media.path) &&
+        _networkUrl(media.thumbnailPath) &&
+        media.thumbnailPath != media.path;
+    final preview = useThumbnail ? media.thumbnailPath : original;
     return Semantics(
       label: media.altText.isEmpty ? media.name : media.altText,
       child: ColoredBox(
@@ -35,6 +58,21 @@ class PostMediaView extends StatelessWidget {
                   fit: fit,
                   excludeFromSemantics: true,
                   errorBuilder: _imageError,
+                )
+              else if (preview.startsWith('https://') ||
+                  preview.startsWith('http://'))
+                Image.network(
+                  preview,
+                  fit: fit,
+                  excludeFromSemantics: true,
+                  errorBuilder: (context, error, stack) => useThumbnail
+                      ? Image.network(
+                          media.path,
+                          fit: fit,
+                          excludeFromSemantics: true,
+                          errorBuilder: _imageError,
+                        )
+                      : _imageError(context, error, stack),
                 )
               else
                 Image.file(

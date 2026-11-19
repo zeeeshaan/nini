@@ -5,13 +5,17 @@ import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/domain/models/profile_category.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 
 import 'profile_posts_empty_state.dart';
 
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 class ProfilePostGrid extends StatefulWidget {
   const ProfilePostGrid({super.key, required this.onPostTap});
@@ -25,6 +29,48 @@ class ProfilePostGrid extends StatefulWidget {
 class _ProfilePostGridState extends State<ProfilePostGrid> {
   final _gridKey = GlobalKey();
   String? _focusedPost;
+  bool _started = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_started) {
+      _started = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final backend = context.read<OwnPostsCubit?>();
+        final selected = context
+            .read<ProfileCategoriesCubit>()
+            .state
+            .selectedId;
+        if (backend != null &&
+            backend.hasRequestedCategory &&
+            backend.requestedCategoryId == selected &&
+            (backend.state.loading || backend.state.page > 0)) {
+          return;
+        }
+        _refreshCategory(selected);
+      });
+    }
+  }
+
+  void _refreshCategory(String? id) {
+    final backend = context.read<OwnPostsCubit?>();
+    final repository = context.read<ApiPostsRepository?>();
+    if (backend == null || repository == null) return;
+    backend.requestedCategoryId = id;
+    backend.hasRequestedCategory = true;
+    if (id != null && !ProfileCategory.isBackendId(id)) {
+      backend.refresh(
+        load: (_) async =>
+            const BackendPostsPage(items: [], total: 0, page: 1, limit: 20),
+      );
+      return;
+    }
+    backend.refresh(
+      load: (page) => repository.loadPublishedMine(page: page, categoryId: id),
+    );
+  }
 
   void _focusNewPost(PostsState state) {
     final id = state.lastPublished?.id;
@@ -45,89 +91,114 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
   }
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<PostsCubit, PostsState>(
-    builder: (context, state) {
-      _focusNewPost(state);
-      final categoryId = context
-          .watch<ProfileCategoriesCubit>()
-          .state
-          .selectedId;
-      final posts = state.posts
-          .where(
-            (post) =>
-                categoryId == null || post.profileCategoryId == categoryId,
-          )
-          .toList();
-
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (state.isLoading && state.posts.isNotEmpty)
-            const LinearProgressIndicator(minHeight: 2),
-          if (state.loadFailed)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      AppStrings.savedPostsLoadFailed,
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.ltr,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => context.read<PostsCubit>().load(),
-                    child: const Text(
-                      AppStrings.retry,
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+  Widget build(BuildContext context) {
+    final backend = context.read<OwnPostsCubit?>();
+    if (backend != null) {
+      return BlocListener<ProfileCategoriesCubit, ProfileCategoriesState>(
+        listenWhen: (previous, current) =>
+            previous.selectedId != current.selectedId,
+        listener: (_, state) => _refreshCategory(state.selectedId),
+        child: BlocBuilder<OwnPostsCubit, BackendPostsState>(
+          builder: (context, state) => _buildGrid(
+            context,
+            PostsState(
+              posts: state.posts,
+              isLoading: state.loading,
+              loadFailed: state.error,
             ),
-          if (!state.isLoading && !state.loadFailed && state.posts.isEmpty)
-            const ProfilePostsEmptyState()
-          else if (!state.isLoading && !state.loadFailed && posts.isEmpty)
-            const Padding(
-              padding: EdgeInsets.all(24),
-              child: Text(
-                ProfilePostStrings.noPosts,
-                textAlign: TextAlign.right,
-                textDirection: TextDirection.ltr,
-              ),
+            backend,
+          ),
+        ),
+      );
+    }
+    return BlocBuilder<PostsCubit, PostsState>(
+      builder: (context, state) => _buildGrid(context, state, null),
+    );
+  }
+
+  Widget _buildGrid(
+    BuildContext context,
+    PostsState state,
+    OwnPostsCubit? backend,
+  ) {
+    _focusNewPost(state);
+    final categoryId = context.watch<ProfileCategoriesCubit>().state.selectedId;
+    final posts = state.posts
+        .where(
+          (post) => categoryId == null || post.profileCategoryId == categoryId,
+        )
+        .toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (state.isLoading && state.posts.isNotEmpty)
+          const LinearProgressIndicator(minHeight: 2),
+        if (state.loadFailed)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    AppStrings.savedPostsLoadFailed,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.ltr,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => backend == null
+                      ? context.read<PostsCubit>().load()
+                      : backend.loadMore(),
+                  child: const Text(
+                    AppStrings.retry,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ],
             ),
-          AppResponsiveBuilder(
-            key: _gridKey,
-            builder: (context, responsive) {
-              final width = responsive.width;
+          ),
+        if (!state.isLoading && !state.loadFailed && state.posts.isEmpty)
+          const ProfilePostsEmptyState()
+        else if (!state.isLoading && !state.loadFailed && posts.isEmpty)
+          const Padding(
+            padding: EdgeInsets.all(24),
+            child: Text(
+              ProfilePostStrings.noPosts,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+        AppResponsiveBuilder(
+          key: _gridKey,
+          builder: (context, responsive) {
+            final width = responsive.width;
 
-              // Keep 3 columns as in Figma on normal phones.
-              // Use 2 only on exceptionally narrow displays.
-              final textScale =
-                  (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(
-                    1.0,
-                    double.infinity,
-                  );
-              final maxColumns = responsive.gridColumns.clamp(1, 3);
-              final columns = (width / (110 * textScale)).floor().clamp(
-                1,
-                maxColumns,
-              );
+            // Keep 3 columns as in Figma on normal phones.
+            // Use 2 only on exceptionally narrow displays.
+            final textScale = (MediaQuery.textScalerOf(context).scale(14) / 14)
+                .clamp(1.0, double.infinity);
+            final maxColumns = responsive.gridColumns.clamp(1, 3);
+            final columns = (width / (110 * textScale)).floor().clamp(
+              1,
+              maxColumns,
+            );
 
-              const spacing = 2.0;
+            const spacing = 2.0;
 
-              final cardWidth = (width - spacing * (columns - 1)) / columns;
+            final cardWidth = (width - spacing * (columns - 1)) / columns;
 
-              final contentScale = cardWidth / ProfilePostCard.referenceWidth;
-              final detailsHeight = ProfilePostCard.detailsHeightFor(
-                context,
-                contentScale,
-              );
+            final contentScale = cardWidth / ProfilePostCard.referenceWidth;
+            final detailsHeight = ProfilePostCard.detailsHeightFor(
+              context,
+              contentScale,
+            );
 
-              return Directionality(
-                textDirection: TextDirection.rtl,
+            return Directionality(
+              textDirection: TextDirection.rtl,
+              child: AppShimmer.when(
+                enabled: state.isLoading && state.posts.isEmpty,
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -143,7 +214,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                   ),
                   itemBuilder: (_, index) {
                     if (state.isLoading && state.posts.isEmpty) {
-                      return const ProductCardSkeleton();
+                      return const ProductCardSkeleton(animated: false);
                     }
                     final post = posts[index];
 
@@ -154,6 +225,9 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                         textDirection: Directionality.of(context),
                         child: ProfilePostCard(
                           post: post,
+                          showStock:
+                              post.metadata['backend'] != true ||
+                              post.details.warehouseStock.isNotEmpty,
                           detailsHeight: detailsHeight,
                           contentScale: contentScale,
                           onTap: () => widget.onPostTap(post),
@@ -162,11 +236,11 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                     );
                   },
                 ),
-              );
-            },
-          ),
-        ],
-      );
-    },
-  );
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
 }

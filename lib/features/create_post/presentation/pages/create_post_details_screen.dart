@@ -9,16 +9,21 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/domain/validation/post_draft_validator.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_basic_details_section.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_options_section.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_pricing_inventory_section.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_publish_actions.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:dio/dio.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
@@ -38,6 +43,10 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
   late final quill.QuillController _captionController;
   late final PostCaptionSynchronizer _captionSynchronizer;
   final _operation = PostOperationCubit();
+  final _basicKey = GlobalKey();
+  final _priceKey = GlobalKey();
+  final _mediaKey = GlobalKey();
+  bool _showValidation = false;
   CreatePostCubit get _draft => context.read<CreatePostCubit>();
 
   @override
@@ -96,27 +105,161 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     return false;
   }
 
+  String _submissionError(Object error) {
+    if (error is PostApiException) return error.message;
+    if (error is DioException) {
+      final retrySeconds = int.tryParse(
+        error.response?.headers.value('retry-after') ?? '',
+      );
+      return switch (error.response?.statusCode) {
+        400 =>
+          'The server rejected the post or image. Check the entered details.',
+        401 => 'Your session has expired.',
+        403 => 'Your account cannot submit posts right now.',
+        404 => 'The requested upload or post service is unavailable.',
+        413 => 'An image exceeds the server size limit.',
+        415 => 'The server rejected the image format.',
+        429 =>
+          retrySeconds != null && retrySeconds > 0
+              ? 'Too many requests. Wait $retrySeconds seconds before trying again.'
+              : 'Too many requests. Wait before trying again.',
+        _ => 'The request could not be confirmed. Check My Posts before retrying if submission may have started.',
+      };
+    }
+    return 'The request could not be confirmed. Check My Posts before retrying if submission may have started.';
+  }
+
   Future<void> _onPublish() async {
     if (_operation.state.saving) return;
     _captionSynchronizer.flush();
+    setState(() => _showValidation = true);
+    final current = _draft.state;
+    final categories = context.read<PostCategoriesCubit>().state;
+    final missingCategory =
+        current.categoryKey != null &&
+        (!categories.loading &&
+            categories.error == null &&
+            categories.find(current.categoryKey) == null);
+    final missingBasic =
+        current.postType == null ||
+        current.title.trim().isEmpty ||
+        current.caption.trim().isEmpty ||
+        missingCategory;
+    final missingKey = widget.attachments.isEmpty
+        ? _mediaKey
+        : missingBasic
+        ? _basicKey
+        : current.price.trim().isEmpty
+        ? _priceKey
+        : null;
+    if (missingKey != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final target = missingKey.currentContext;
+        if (mounted && target != null) {
+          Scrollable.ensureVisible(
+            target,
+            duration: const Duration(milliseconds: 250),
+            alignment: 0.1,
+          );
+        }
+      });
+    }
     if (!_validateBasicDetails()) return;
+    if (current.categoryKey != null &&
+        (categories.loading ||
+            categories.error != null ||
+            categories.categories.isEmpty)) {
+      AppToast.warning(
+        context,
+        categories.error ??
+            (categories.loading
+                ? CreatePostStrings.categoriesLoadFailed
+                : CreatePostStrings.categoriesEmpty),
+      );
+      return;
+    }
+    if (current.categoryKey != null &&
+        categories.find(current.categoryKey) == null) {
+      AppToast.warning(context, CreatePostStrings.categoryRequired);
+      return;
+    }
+    final profileCategoryId = _draft.state.profileCategoryId;
+    if (profileCategoryId != null) {
+      final personal = context.read<ProfileCategoriesCubit>();
+      final state = personal.state;
+      if (personal.isClosed || state.loading || state.loadFailed) {
+        if (!personal.isClosed && state.loading) unawaited(personal.load());
+        AppToast.warning(
+          context,
+          state.loading
+              ? CreatePostStrings.profileCategoriesLoading
+              : state.error ?? CreatePostStrings.categoriesLoadFailed,
+        );
+        return;
+      }
+      if (!ProfileCategory.isBackendId(profileCategoryId) ||
+          state.find(profileCategoryId) == null) {
+        AppToast.warning(context, CreatePostStrings.profileCategoryUnavailable);
+        return;
+      }
+    }
+    if (_draft.state.price.trim().isEmpty) {
+      AppToast.warning(context, CreatePostStrings.invalidPrice);
+      return;
+    }
     ContextMenuController.removeAny();
     FocusScope.of(context).unfocus();
-    final posts = context.read<PostsCubit>();
+    final posts = context.read<ApiPostsRepository>();
     final draft = _draft.state;
+    final hasRichFormatting = draft.captionDelta.any((op) {
+      final attributes = op['attributes'];
+      return attributes is Map &&
+          attributes.keys.any((key) => key != 'align' && key != 'direction');
+    });
+    if (hasRichFormatting) {
+      AppToast.warning(
+        context,
+        'The server saves the caption as plain text; formatting will not be saved.',
+      );
+    }
     _operation.beginSave();
-    final post = await posts.publish(draft, widget.attachments);
-    if (!mounted) return;
-    if (post != null) {
-      // Keep the UI busy during the closing transition. Typed route results
-      // unwind details -> gallery -> dashboard without fragile popUntil calls.
-      Navigator.of(context).pop<PostItem>(post);
-    } else {
+    try {
+      final post = await posts.submit(draft, widget.attachments);
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (dialogContext) => PopScope(
+          canPop: false,
+          child: AlertDialog(
+            title: const Text(
+              'Post Submitted for Review',
+              textAlign: TextAlign.right,
+            ),
+            content: Text(
+              '${post.status == 'pending_review' ? 'Your post has been submitted successfully and is now awaiting admin review. You can check its status in My Posts.' : 'Your post was submitted. Its current status is ${post.status.replaceAll('_', ' ')}. You can check its status in My Posts.'}${hasRichFormatting ? '\n\nThe caption was saved as plain text; formatting was not saved.' : ''}',
+              textAlign: TextAlign.right,
+            ),
+            actions: [
+              AppButton(
+                label: 'Got it',
+                onPressed: () => Navigator.of(dialogContext).pop(),
+                height: 44,
+              ),
+            ],
+          ),
+        ),
+      );
+      if (!mounted) return;
+      _operation.retry();
+      Navigator.of(context).pop<bool>(true);
+    } catch (error) {
+      if (!mounted) return;
       _operation.retry();
       AppToast.error(
         context,
         CreatePostStrings.errorMessage(
-          posts.state.publishError ?? CreatePostStrings.publishFailed,
+          posts.uncertainMessage ?? _submissionError(error),
         ),
       );
     }
@@ -186,31 +329,77 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                       key: const PageStorageKey('create-post-details'),
                       keyboardDismissBehavior:
                           ScrollViewKeyboardDismissBehavior.onDrag,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SelectedMediaGrid(attachments: widget.attachments),
-                          const SizedBox(height: 22),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                PostBasicDetailsSection(
-                                  titleController: _titleController,
-                                  captionController: _captionController,
-                                  attachments: widget.attachments,
-                                ),
-                                PostPricingInventorySection(
-                                  priceController: _priceController,
-                                  discountController: _discountController,
-                                  stockController: _stockController,
-                                ),
-                                const PostOptionsSection(),
-                              ],
+                      child: BlocBuilder<CreatePostCubit, PostDraft>(
+                        builder: (context, draft) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              key: _mediaKey,
+                              decoration:
+                                  _showValidation && widget.attachments.isEmpty
+                                  ? BoxDecoration(
+                                      border: Border.all(color: colors.error),
+                                    )
+                                  : null,
+                              child: SelectedMediaGrid(
+                                attachments: widget.attachments,
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 22),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  PostBasicDetailsSection(
+                                    key: _basicKey,
+                                    titleController: _titleController,
+                                    captionController: _captionController,
+                                    attachments: widget.attachments,
+                                    categoryError:
+                                        _showValidation &&
+                                        draft.categoryKey != null &&
+                                        !context
+                                            .read<PostCategoriesCubit>()
+                                            .state
+                                            .loading &&
+                                        context
+                                                .read<PostCategoriesCubit>()
+                                                .state
+                                                .error ==
+                                            null &&
+                                        context
+                                                .read<PostCategoriesCubit>()
+                                                .state
+                                                .find(draft.categoryKey) ==
+                                            null,
+                                    typeError:
+                                        _showValidation &&
+                                        draft.postType == null,
+                                    titleError:
+                                        _showValidation &&
+                                        draft.title.trim().isEmpty,
+                                    captionError:
+                                        _showValidation &&
+                                        draft.caption.trim().isEmpty,
+                                  ),
+                                  PostPricingInventorySection(
+                                    key: _priceKey,
+                                    priceController: _priceController,
+                                    discountController: _discountController,
+                                    stockController: _stockController,
+                                    priceError:
+                                        _showValidation &&
+                                        draft.price.trim().isEmpty,
+                                  ),
+                                  const PostOptionsSection(),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

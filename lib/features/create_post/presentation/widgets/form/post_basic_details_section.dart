@@ -20,10 +20,15 @@ class PostBasicDetailsSection extends StatelessWidget {
     required this.titleController,
     required this.captionController,
     required this.attachments,
+    this.categoryError = false,
+    this.typeError = false,
+    this.titleError = false,
+    this.captionError = false,
   });
   final TextEditingController titleController;
   final quill.QuillController captionController;
   final List<GalleryAttachment> attachments;
+  final bool categoryError, typeError, titleError, captionError;
   @override
   Widget build(BuildContext context) {
     final draftCubit = context.read<CreatePostCubit>();
@@ -31,11 +36,16 @@ class PostBasicDetailsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const PostCategorySelector(english: true),
+        PostCategorySelector(
+          english: true,
+          backendCategories: true,
+          hasError: categoryError,
+        ),
         const SizedBox(height: 16),
         BlocSelector<CreatePostCubit, PostDraft, CreatePostType?>(
           selector: (state) => state.postType,
           builder: (context, value) => PostFormOptionTile(
+            hasError: typeError,
             label: CreatePostStrings.postType,
             value: value == null
                 ? null
@@ -51,6 +61,7 @@ class PostBasicDetailsSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         AppTextField(
+          hasError: titleError,
           controller: titleController,
           label: CreatePostStrings.productServiceTitle,
           hint: CreatePostStrings.enterPostTitle,
@@ -67,7 +78,7 @@ class PostBasicDetailsSection extends StatelessWidget {
           textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 8),
-        CaptionEditor(controller: captionController),
+        CaptionEditor(controller: captionController, hasError: captionError),
         const SizedBox(height: 16),
         BlocSelector<CreatePostCubit, PostDraft, int>(
           selector: (state) =>

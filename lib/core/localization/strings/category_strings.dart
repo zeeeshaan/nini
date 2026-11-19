@@ -34,7 +34,7 @@ class CategoryStrings {
           ProfilePostStrings.saveFailed => 'Could not save changes. Try again.',
           ProfilePostStrings.nameRequired => 'Enter a category name.',
           ProfilePostStrings.nameTooLong =>
-            'Category names must be at most 50 characters.',
+            'Category names must be at most 40 characters.',
           ProfilePostStrings.duplicateName =>
             'A category with this name already exists.',
           ProfilePostStrings.reservedName =>

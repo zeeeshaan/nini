@@ -83,7 +83,7 @@ class _CategoryEditorSheetState extends State<_CategoryEditorSheet> {
                         controller: _name,
                         autofocus: true,
                         enabled: !state.saving,
-                        maxLength: 50,
+                        maxLength: ProfileCategoryValidator.maxLength,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                           labelText: CategoryStrings.of(context)

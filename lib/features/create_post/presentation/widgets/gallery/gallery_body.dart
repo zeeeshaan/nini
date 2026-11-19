@@ -24,7 +24,8 @@ class GalleryBody extends StatelessWidget {
       return GalleryFilesGrid(state: state);
     }
 
-    if (state.status == GalleryStatus.loading) {
+    if (state.status == GalleryStatus.initial ||
+        state.status == GalleryStatus.loading) {
       return AppShimmer(
         child: GridView.builder(
           padding: EdgeInsets.only(bottom: bottomPadding),

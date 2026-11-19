@@ -10,6 +10,7 @@ class PostDraft {
   const PostDraft({
     this.postType,
     this.profileCategoryId,
+    this.categoryKey,
     this.title = '',
     this.caption = '',
     this.captionDelta = const [],
@@ -28,6 +29,7 @@ class PostDraft {
   });
   final CreatePostType? postType;
   final String? profileCategoryId;
+  final String? categoryKey;
   final String title, caption, price, discount, warehouseStock;
   final List<Map<String, dynamic>> captionDelta;
   final PreparationTime preparationTime;
@@ -44,6 +46,8 @@ class PostDraft {
     CreatePostType? postType,
     String? profileCategoryId,
     bool clearProfileCategory = false,
+    String? categoryKey,
+    bool clearCategory = false,
     String? title,
     String? caption,
     List<Map<String, dynamic>>? captionDelta,
@@ -66,6 +70,7 @@ class PostDraft {
     profileCategoryId: clearProfileCategory
         ? null
         : profileCategoryId ?? this.profileCategoryId,
+    categoryKey: clearCategory ? null : categoryKey ?? this.categoryKey,
     title: title ?? this.title,
     caption: caption ?? this.caption,
     captionDelta: captionDelta == null
@@ -96,6 +101,7 @@ class PostDraft {
   Map<String, dynamic> toJson() => {
     'postType': postType?.name,
     'profileCategoryId': profileCategoryId,
+    'category': categoryKey,
     'title': title,
     'caption': caption,
     'captionDelta': captionDelta,

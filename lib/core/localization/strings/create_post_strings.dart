@@ -14,6 +14,22 @@ abstract final class CreatePostStrings {
   static const publish = "Publish";
   static const publishing = "Publishing…";
   static const postType = "Post type";
+  static const selectCategory = 'Select a category';
+  static const categoryRequired =
+      'Select a predefined post category before publishing.';
+  static const choosePredefinedCategory = 'Select predefined category';
+  static const noProfileCategory = 'No profile category';
+  static const profileCategoriesLoading =
+      'Your profile categories are still loading. Try again.';
+  static const profileCategoryUnavailable =
+      'The selected profile category is unavailable. Choose an available category in Manage categories.';
+  static const categoriesEmpty = 'No categories are available. Try again.';
+  static const categoriesLoadFailed = 'Could not load categories. Try again.';
+  static const categoriesTimeout = 'Loading categories timed out. Try again.';
+  static const categoriesConnectionFailed =
+      'Could not connect to load categories. Try again.';
+  static const categoriesInvalid =
+      'The category response could not be read. Try again.';
   static const product = "Product";
   static const services = "Services";
   static const productServiceTitle = "Product or service title";

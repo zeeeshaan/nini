@@ -7,6 +7,8 @@ abstract final class AppIcons {
   static const home = 'assets/icons/vectors/navigation/house-01.svg';
   static const cart = 'assets/icons/finance/bag-03.png';
   static const shoppingBag = cart;
+  static const shoppingBagOutline =
+      'assets/icons/vectors/interface/shopping-bag-01.svg';
   static const add = 'assets/icons/vectors/edit/add-plus.svg';
   static const minus = 'assets/icons/vectors/edit/remove-minus.svg';
   static const search =

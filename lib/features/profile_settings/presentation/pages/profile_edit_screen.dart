@@ -7,7 +7,7 @@ import 'package:nini/core/localization/persian_feature/persian_feature.dart';
 import 'package:nini/core/localization/strings/profile_edit_strings.dart';
 import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../domain/user_profile.dart';
 import '../cubit/user_profile_cubit.dart';
@@ -136,92 +136,106 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<UserProfileCubit, UserProfileState>(
-        builder: (context, state) {
-          if (!state.loading && !state.loadFailed) _initialize(state.profile);
-          return PersianFeature(
-            child: PopScope(
-              canPop: !state.saving,
-              child: Scaffold(
-                appBar: SettingsDetailHeader(
-                  title: ProfileEditStrings.title,
-                  enabled:
-                      _initial != null &&
-                      !state.loading &&
-                      !state.loadFailed &&
-                      !_choosingPhoto,
-                  saving: state.saving,
-                  onDone: _save,
-                ),
-                body: SafeArea(
-                  top: false,
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 560),
-                      child: state.loading
-                          ? ListView.builder(
-                              itemCount: 6,
-                              itemBuilder: (_, index) =>
-                                  const ListTileSkeleton(showAvatar: false),
-                            )
-                          : state.loadFailed
-                          ? Padding(
-                              padding: const EdgeInsets.all(24),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    ProfileEditStrings.loadFailed,
-                                    textAlign: TextAlign.right,
-                                    textDirection: TextDirection.ltr,
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        context.read<UserProfileCubit>().load(),
-                                    child: const Text(
-                                      AppStrings.retry,
-                                      textDirection: TextDirection.ltr,
-                                      textAlign: TextAlign.right,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : SingleChildScrollView(
-                              keyboardDismissBehavior:
-                                  ScrollViewKeyboardDismissBehavior.onDrag,
-                              padding: EdgeInsets.fromLTRB(12, 24, 12, 24),
-                              child: Form(
-                                key: _form,
-                                child: Column(
-                                  children: [
-                                    ProfilePhotoPicker(
-                                      initialImage: _initial!.avatarPath,
-                                      enabled: !state.saving && !_choosingPhoto,
-                                      onChanged: (bytes) => _photo = bytes,
-                                      onPickingChanged: (value) => setState(
-                                        () => _choosingPhoto = value,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 44),
-                                    ProfileEditFields(
-                                      controllers: _controllers,
-                                      birthDate: _birthDate,
-                                      onBirthDateChanged: (value) =>
-                                          _birthDate = value,
-                                      enabled: !state.saving,
-                                    ),
-                                  ],
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<UserProfileCubit, UserProfileState>(
+    builder: (context, state) {
+      if (!state.loading && !state.loadFailed) _initialize(state.profile);
+      return PersianFeature(
+        child: PopScope(
+          canPop: !state.saving,
+          child: Scaffold(
+            appBar: SettingsDetailHeader(
+              title: ProfileEditStrings.title,
+              enabled:
+                  _initial != null &&
+                  !state.loading &&
+                  !state.loadFailed &&
+                  !_choosingPhoto,
+              saving: state.saving,
+              onDone: _save,
+            ),
+            body: SafeArea(
+              top: false,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 560),
+                  child: state.loading
+                      ? AppShimmer(
+                          child: ListView(
+                            padding: const EdgeInsets.fromLTRB(12, 24, 12, 24),
+                            children: [
+                              const Center(
+                                child: AppSkeletonBox(
+                                  width: 106,
+                                  height: 106,
+                                  isCircle: true,
                                 ),
                               ),
+                              const SizedBox(height: 44),
+                              for (var index = 0; index < 5; index++) ...[
+                                const AppSkeletonBox(height: 52, radius: 8),
+                                const SizedBox(height: 12),
+                              ],
+                            ],
+                          ),
+                        )
+                      : state.loadFailed
+                      ? Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                ProfileEditStrings.loadFailed,
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.ltr,
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    context.read<UserProfileCubit>().load(),
+                                child: const Text(
+                                  AppStrings.retry,
+                                  textDirection: TextDirection.ltr,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SingleChildScrollView(
+                          keyboardDismissBehavior:
+                              ScrollViewKeyboardDismissBehavior.onDrag,
+                          padding: EdgeInsets.fromLTRB(12, 24, 12, 24),
+                          child: Form(
+                            key: _form,
+                            child: Column(
+                              children: [
+                                ProfilePhotoPicker(
+                                  initialImage: _initial!.avatarPath,
+                                  enabled: !state.saving && !_choosingPhoto,
+                                  onChanged: (bytes) => _photo = bytes,
+                                  onPickingChanged: (value) =>
+                                      setState(() => _choosingPhoto = value),
+                                ),
+                                const SizedBox(height: 44),
+                                ProfileEditFields(
+                                  controllers: _controllers,
+                                  birthDate: _birthDate,
+                                  onBirthDateChanged: (value) =>
+                                      _birthDate = value,
+                                  enabled: !state.saving,
+                                ),
+                              ],
                             ),
-                    ),
-                  ),
+                          ),
+                        ),
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ),
       );
+    },
+  );
 }

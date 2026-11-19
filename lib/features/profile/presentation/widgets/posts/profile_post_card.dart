@@ -19,6 +19,7 @@ class ProfilePostCard extends StatelessWidget {
     this.categoryLabel,
     this.showStock = true,
     this.statusLabel,
+    this.imageOverride,
     this.impressionSource = 'profile',
   });
 
@@ -29,6 +30,7 @@ class ProfilePostCard extends StatelessWidget {
   final String? titleOverride, categoryLabel;
   final bool showStock;
   final Widget? statusLabel;
+  final Widget? imageOverride;
   final String impressionSource;
 
   // A reference card is 200 units wide with a square image and ~100 of details.
@@ -136,20 +138,26 @@ class ProfilePostCard extends StatelessWidget {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      post.media.isNotEmpty
-                          ? PostMediaView(media: post.media.first)
-                          : Image.asset(
-                              post.imageAsset,
-                              fit: BoxFit.cover,
-                              filterQuality: FilterQuality.medium,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  ColoredBox(
-                                    color: colors.surfaceContainerHighest,
-                                    child: const Center(
-                                      child: AppIcon(AppIcons.imageUnavailable),
-                                    ),
-                                  ),
-                            ),
+                      imageOverride ??
+                          (post.media.isNotEmpty
+                              ? PostMediaView(
+                                  media: post.media.first,
+                                  preferThumbnail: true,
+                                )
+                              : Image.asset(
+                                  post.imageAsset,
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.medium,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      ColoredBox(
+                                        color: colors.surfaceContainerHighest,
+                                        child: const Center(
+                                          child: AppIcon(
+                                            AppIcons.imageUnavailable,
+                                          ),
+                                        ),
+                                      ),
+                                )),
                       if (discount != null)
                         Positioned(
                           top: 3 * contentScale,
@@ -191,16 +199,13 @@ class ProfilePostCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(
-                          height: lineHeight(headingStyle) * 2,
-                          child: Text(
-                            titleOverride ?? post.title,
-                            textAlign: TextAlign.right,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: headingStyle,
-                            textDirection: TextDirection.rtl,
-                          ),
+                        Text(
+                          titleOverride ?? post.title,
+                          textAlign: TextAlign.right,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: headingStyle,
+                          textDirection: TextDirection.rtl,
                         ),
                         SizedBox(
                           height: lineHeight(metadataStyle),
@@ -216,52 +221,51 @@ class ProfilePostCard extends StatelessWidget {
                             textDirection: TextDirection.ltr,
                           ),
                         ),
-                        SizedBox(height: 4 * contentScale),
-                        SizedBox(
-                          height: lineHeight(stockStyle),
-                          child:
-                              statusLabel ??
-                              Visibility(
-                                visible:
-                                    showStock &&
-                                    !post.isService &&
-                                    (!post.isPublished ||
-                                        post.details.warehouseStock.isNotEmpty),
-                                maintainState: true,
-                                maintainAnimation: true,
-                                maintainSize: true,
-                                child: Text(
-                                  AppStrings.inStock(post.stockCount),
-                                  textDirection: Directionality.of(context),
-                                  textAlign: TextAlign.right,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: stockStyle.copyWith(
-                                    color: AppColors.red,
+                        Visibility(
+                          visible:
+                              statusLabel != null ||
+                              (showStock &&
+                                  !post.isService &&
+                                  (!post.isPublished ||
+                                      post.details.warehouseStock.isNotEmpty)),
+                          maintainState: true,
+                          maintainAnimation: true,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 4 * contentScale),
+                            child: SizedBox(
+                              height: lineHeight(stockStyle),
+                              child:
+                                  statusLabel ??
+                                  Text(
+                                    AppStrings.inStock(post.stockCount),
+                                    textDirection: Directionality.of(context),
+                                    textAlign: TextAlign.right,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: stockStyle.copyWith(
+                                      color: AppColors.red,
+                                    ),
                                   ),
-                                ),
-                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(height: 6 * contentScale),
-                        SizedBox(
-                          height: lineHeight(originalPriceStyle),
-                          child:
-                              discount != null && post.originalPrice.isNotEmpty
-                              ? Text(
-                                  _price(post.originalPrice),
-                                  textDirection: TextDirection.ltr,
-                                  textAlign: TextAlign.left,
-                                  style: originalPriceStyle.copyWith(
-                                    color: colors.onSurface.withValues(
-                                      alpha: .25,
-                                    ),
-                                    decoration: TextDecoration.lineThrough,
-                                    decorationColor: colors.onSurface
-                                        .withValues(alpha: .25),
-                                  ),
-                                )
-                              : null,
-                        ),
+                        if (discount != null && post.originalPrice.isNotEmpty)
+                          SizedBox(
+                            height: lineHeight(originalPriceStyle),
+                            child: Text(
+                              _price(post.originalPrice),
+                              textDirection: TextDirection.ltr,
+                              textAlign: TextAlign.left,
+                              style: originalPriceStyle.copyWith(
+                                color: colors.onSurface.withValues(alpha: .25),
+                                decoration: TextDecoration.lineThrough,
+                                decorationColor: colors.onSurface.withValues(
+                                  alpha: .25,
+                                ),
+                              ),
+                            ),
+                          ),
                         SizedBox(
                           height: lineHeight(priceStyle),
                           child: post.price.isEmpty

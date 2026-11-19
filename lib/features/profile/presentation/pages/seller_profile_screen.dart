@@ -66,8 +66,13 @@ class SellerProfileScreen extends StatelessWidget {
           centerTitle: false,
         ),
         body: SafeArea(
-          child: state.loading
-              ? const SingleChildScrollView(child: ProfileSkeleton())
+          child: state.loading && profile == null
+              ? const SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: ProfileSkeleton(seller: true),
+                  ),
+                )
               : profile == null
               ? SettingsEmptyState(
                   title: ProfilePostStrings.publicProfile,
@@ -76,7 +81,13 @@ class SellerProfileScreen extends StatelessWidget {
                   onRetry: state.canRetry ? retry : null,
                 )
               : SingleChildScrollView(
-                  child: SellerProfileContent(profile: profile),
+                  child: SellerProfileContent(
+                    profile: profile,
+                    categories: state.categories,
+                    categoryMessage: state.categoriesLoading
+                        ? ProfilePostStrings.publicCategoriesLoading
+                        : state.categoriesError,
+                  ),
                 ),
         ),
       ),
@@ -103,6 +114,8 @@ class SellerProfileScreen extends StatelessWidget {
         builder: (context) {
           final cubit = context.read<SellerProfileCubit>();
           Widget view = BlocConsumer<SellerProfileCubit, SellerProfileState>(
+            listenWhen: (previous, current) =>
+                previous.profile != current.profile,
             listener: (context, state) {
               final profile = state.profile;
               if (profile != null && _isOwn(context, profile)) {

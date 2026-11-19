@@ -48,6 +48,7 @@ class MediaCompressor {
   Future<File> compressOwnedFile(
     File source, {
     MediaCompressionKind? kind,
+    bool allowLargerImageResult = false,
   }) async {
     if (await source.length() == 0) {
       throw const FormatException('Empty attachment');
@@ -96,7 +97,28 @@ class MediaCompressor {
       }
       if (await candidate.exists()) {
         final length = await candidate.length();
-        if (length > 0 && length < await source.length()) {
+        var validConversion = false;
+        if (allowLargerImageResult &&
+            type == MediaCompressionKind.image &&
+            length > 0) {
+          final input = await candidate.open();
+          try {
+            final bytes = await input.read(8);
+            validConversion = png
+                ? bytes.length >= 8 &&
+                      bytes.join(',') == '137,80,78,71,13,10,26,10'
+                : bytes.length >= 3 &&
+                      bytes[0] == 255 &&
+                      bytes[1] == 216 &&
+                      bytes[2] == 255;
+          } finally {
+            await input.close();
+          }
+        }
+        if (length > 0 &&
+            (allowLargerImageResult && type == MediaCompressionKind.image
+                ? validConversion
+                : length < await source.length())) {
           await source.delete();
           accepted = true;
           return candidate;

@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nini/features/create_post/domain/models/post_options.dart';
@@ -31,10 +32,8 @@ class TeamTimeFrameField extends StatelessWidget {
     String? label;
 
     if (timeFrame != null) {
-      final dates = MaterialLocalizations.of(context);
-
-      final start = dates.formatMediumDate(timeFrame!.startsAt);
-      final end = dates.formatMediumDate(timeFrame!.endsAt);
+      final start = formatSolarDate(timeFrame!.startsAt);
+      final end = formatSolarDate(timeFrame!.endsAt);
 
       label = '$start - $end';
     }

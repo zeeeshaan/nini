@@ -15,17 +15,17 @@ class CartEmptyState extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const AppIcon(AppIcons.shoppingBag, size: 44),
+          const Center(child: AppIcon(AppIcons.shoppingBagOutline, size: 44)),
           const SizedBox(height: 20),
           Text(
             title,
-            textAlign: TextAlign.right,
+            textAlign: TextAlign.center,
             textDirection: TextDirection.ltr,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           if (message != null) ...[
             const SizedBox(height: 10),
-            Text(message!, textAlign: TextAlign.right, textDirection: TextDirection.ltr),
+            Text(message!, textAlign: TextAlign.center, textDirection: TextDirection.ltr),
           ],
         ],
       ),

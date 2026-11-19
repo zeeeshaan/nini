@@ -8,7 +8,8 @@ import 'gallery_preview.dart';
 
 /// Keep the gallery usable when a landscape window has little vertical space.
 class GalleryContent extends StatelessWidget {
-  const GalleryContent({super.key});
+  const GalleryContent({super.key, this.previewOnly = false});
+  final bool previewOnly;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -23,7 +24,7 @@ class GalleryContent extends StatelessWidget {
           children: [
             Expanded(child: preview),
             const VerticalDivider(width: 1),
-            const Expanded(child: GalleryGrid()),
+            Expanded(child: GalleryGrid(previewOnly: previewOnly)),
           ],
         );
       }
@@ -32,7 +33,7 @@ class GalleryContent extends StatelessWidget {
           Expanded(flex: 6, child: preview),
           SizedBox(height: constraints.maxHeight < 500 ? 8 : 24),
           const Divider(height: 1, thickness: .5),
-          const Expanded(flex: 5, child: GalleryGrid()),
+          Expanded(flex: 5, child: GalleryGrid(previewOnly: previewOnly)),
         ],
       );
     },

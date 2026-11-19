@@ -5,6 +5,7 @@ import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.d
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../../domain/saved_post.dart';
 
@@ -41,49 +42,55 @@ class SavedPostsGrid extends StatelessWidget {
       final cardDirection = Directionality.of(context);
       return Directionality(
         textDirection: TextDirection.ltr,
-        child: GridView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: loading ? columns * 2 : posts.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: columns,
-            crossAxisSpacing: spacing,
-            mainAxisExtent: cardWidth + detailsHeight,
-          ),
-          itemBuilder: (_, index) {
-            if (loading) return const ProductCardSkeleton();
-            final entry = posts[index];
-            return Directionality(
-              key: ValueKey(entry.post.id),
-              textDirection: cardDirection,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  ProfilePostCard(
-                    post: entry.post,
-                    detailsHeight: detailsHeight,
-                    contentScale: scale,
-                    onTap: () => onPostTap(entry),
-                  ),
-                  Positioned(
-                    top: 4,
-                    left: 4,
-                    child: Material(
-                      color: Theme.of(context).colorScheme.surface
-                          .withValues(alpha: .92),
-                      shape: const CircleBorder(),
-                      child: IconButton(
-                        tooltip: SavedPostsStrings.unsave,
-                        onPressed: saving ? null : () => onRemove(entry),
-                        icon: const AppIcon(AppIcons.bookmarkFilled, size: 20),
+        child: AppShimmer.when(
+          enabled: loading,
+          child: GridView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: loading ? columns * 2 : posts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: columns,
+              crossAxisSpacing: spacing,
+              mainAxisExtent: cardWidth + detailsHeight,
+            ),
+            itemBuilder: (_, index) {
+              if (loading) return const ProductCardSkeleton(animated: false);
+              final entry = posts[index];
+              return Directionality(
+                key: ValueKey(entry.post.id),
+                textDirection: cardDirection,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    ProfilePostCard(
+                      post: entry.post,
+                      detailsHeight: detailsHeight,
+                      contentScale: scale,
+                      onTap: () => onPostTap(entry),
+                    ),
+                    Positioned(
+                      top: 4,
+                      left: 4,
+                      child: Material(
+                        color: Theme.of(context).colorScheme.surface
+                            .withValues(alpha: .92),
+                        shape: const CircleBorder(),
+                        child: IconButton(
+                          tooltip: SavedPostsStrings.unsave,
+                          onPressed: saving ? null : () => onRemove(entry),
+                          icon: const AppIcon(
+                            AppIcons.bookmarkFilled,
+                            size: 20,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       );
     },

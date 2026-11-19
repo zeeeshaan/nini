@@ -5,6 +5,7 @@ import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
 import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
 
 class PostDetailState {
   const PostDetailState({
@@ -13,6 +14,9 @@ class PostDetailState {
     this.isBookmarked = false,
     this.quantity = 100,
     this.bookmarkAction = 0,
+    this.backendPost,
+    this.loadingDetail = false,
+    this.detailError = false,
   });
 
   final int imageIndex;
@@ -22,6 +26,8 @@ class PostDetailState {
 
   /// Hundredths of a unit, matching the Cart quantity format.
   final int quantity;
+  final PostItem? backendPost;
+  final bool loadingDetail, detailError;
 
   PostDetailState copyWith({
     int? imageIndex,
@@ -29,6 +35,9 @@ class PostDetailState {
     bool? isBookmarked,
     int? quantity,
     int? bookmarkAction,
+    PostItem? backendPost,
+    bool? loadingDetail,
+    bool? detailError,
   }) {
     return PostDetailState(
       imageIndex: imageIndex ?? this.imageIndex,
@@ -36,6 +45,9 @@ class PostDetailState {
       isBookmarked: isBookmarked ?? this.isBookmarked,
       quantity: quantity ?? this.quantity,
       bookmarkAction: bookmarkAction ?? this.bookmarkAction,
+      backendPost: backendPost ?? this.backendPost,
+      loadingDetail: loadingDetail ?? this.loadingDetail,
+      detailError: detailError ?? this.detailError,
     );
   }
 }
@@ -84,6 +96,20 @@ class PostDetailCubit extends Cubit<PostDetailState> {
   final SavedPostsCubit? _savedPosts;
   StreamSubscription<Set<String>>? _likesSubscription;
   StreamSubscription<SavedPostsState>? _savedSubscription;
+  int _detailRevision = 0;
+
+  Future<void> loadDetail(ApiPostsRepository repository, String id) async {
+    final revision = ++_detailRevision;
+    emit(state.copyWith(loadingDetail: true, detailError: false));
+    try {
+      final post = await repository.loadDetail(id);
+      if (!isClosed && revision == _detailRevision)
+        emit(state.copyWith(backendPost: post, loadingDetail: false));
+    } catch (_) {
+      if (!isClosed && revision == _detailRevision)
+        emit(state.copyWith(loadingDetail: false, detailError: true));
+    }
+  }
 
   void selectQuantity(int quantity) {
     if (quantity < 0 || quantity == state.quantity) return;
@@ -120,6 +146,7 @@ class PostDetailCubit extends Cubit<PostDetailState> {
 
   @override
   Future<void> close() async {
+    _detailRevision++;
     await _likesSubscription?.cancel();
     await _savedSubscription?.cancel();
     await super.close();

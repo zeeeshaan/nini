@@ -5,10 +5,11 @@ abstract final class SearchStrings {
   static const chooseCity = "Choose city";
   static const closeSearch = "Back to results";
   static const clearQuery = "Clear search";
-  static const noResults = "No results found";
+  static const noResults = "No matching posts";
   static const providerUnavailable = 'Provider information is unavailable.';
-  static const tryAnotherQuery = "Try another search or change the city.";
-  static const showAll = "Show all services";
+  static const tryAnotherQuery =
+      "Try a different keyword or choose another city.";
+  static const showAll = "Browse all posts";
   static const allServices = 'All services';
   static const service = 'خدمات لوله‌کشی';
   static const currency = "toman";

@@ -81,13 +81,18 @@ class GalleryCubit extends Cubit<GalleryState> {
   final Future<List<PlatformFile>> Function() _filePicker;
   final GalleryMediaPreparer _mediaPreparer;
 
-  Future<List<GalleryAttachment>?> prepareSelection() async {
+  Future<List<GalleryAttachment>?> prepareSelection({
+    bool forPost = false,
+  }) async {
     if (state.isPreparing || state.isPickingFiles || state.selected.isEmpty) {
       return null;
     }
     emit(state.copyWith(isPreparing: true));
     try {
-      final prepared = await _mediaPreparer.prepare(state.selected);
+      final prepared = await _mediaPreparer.prepare(
+        state.selected,
+        forPost: forPost,
+      );
       if (isClosed) return null;
       emit(state.copyWith(selected: prepared, isPreparing: false));
       return prepared;

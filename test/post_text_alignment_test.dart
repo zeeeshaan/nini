@@ -9,6 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/core/theme/app_theme.dart';
+import 'package:nini/core/network/api_client.dart';
+import 'package:nini/features/create_post/data/api_categories_repository.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
@@ -20,16 +23,27 @@ import 'package:nini/features/posts/presentation/pages/edit_post_screen.dart';
 import 'package:nini/features/posts/presentation/widgets/common/published_post_content.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 
+class _PostCategoriesApi extends ApiClient {
+  @override
+  Future<Map<String, dynamic>> getPublic(
+    String endpoint, {
+    String? token,
+  }) async => {'success': true, 'data': <Object>[]};
+}
+
 class _Categories extends ProfileCategoriesRepository {
   @override
-  Future<List<ProfileCategory>> load() async => [];
+  Future<ProfileCategoryList> load() async => const ProfileCategoryList();
   @override
   Future<ProfileCategory> create(String name) => throw UnimplementedError();
   @override
   Future<ProfileCategory> rename(String id, String name) =>
       throw UnimplementedError();
   @override
-  Future<void> delete(String id) => throw UnimplementedError();
+  Future<int?> delete(String id) => throw UnimplementedError();
+  @override
+  Future<ProfileCategoryList> reorder(List<String> ids) =>
+      throw UnimplementedError();
 }
 
 PostItem _post({bool rich = true}) => PostItem(
@@ -121,6 +135,11 @@ void main() {
           captionDelta: rich ? _post().captionDelta : const [],
         );
         final draft = CreatePostCubit(initial: initial);
+        final postCategories = PostCategoriesCubit(
+          ApiCategoriesRepository(_PostCategoriesApi()),
+        );
+        await postCategories.load();
+        addTearDown(postCategories.close);
         final categories = ProfileCategoriesCubit(_Categories());
         await categories.load();
         addTearDown(draft.close);
@@ -130,6 +149,7 @@ void main() {
           MultiBlocProvider(
             providers: [
               BlocProvider.value(value: draft),
+              BlocProvider.value(value: postCategories),
               BlocProvider.value(value: categories),
             ],
             child: MaterialApp(
@@ -264,6 +284,29 @@ void main() {
       },
     );
   }
+
+  testWidgets(
+    'published hashtags use inline right-aligned text without changing saved tags',
+    (tester) async {
+      final initial = _post();
+      final post = PostItem.fromJson({
+        ...initial.toJson(),
+        'metadata': {
+          ...initial.metadata,
+          'tags': ['mobile', 'apple', 'brand', 'apple community'],
+        },
+      });
+      final saved = jsonEncode(post.toJson());
+      await tester.pumpWidget(_app(PublishedPostContent(post: post)));
+      await tester.pumpAndSettle();
+      expect(find.byType(Chip), findsNothing);
+      final hashtags = find.text('#mobile #apple #brand #apple community');
+      expect(hashtags, findsOneWidget);
+      expect(tester.widget<Text>(hashtags).textAlign, TextAlign.right);
+      expect(jsonEncode(post.toJson()), saved);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('Edit Post field labels, values and dropdowns align right', (
     tester,

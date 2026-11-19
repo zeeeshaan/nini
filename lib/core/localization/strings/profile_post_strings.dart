@@ -56,7 +56,31 @@ abstract final class ProfilePostStrings {
   static const loadFailed = "Could not load categories. Try again.";
   static const saveFailed = "Could not save changes. Try again.";
   static const nameRequired = "Enter a category name.";
-  static const nameTooLong = "Category names must be at most 50 characters.";
+  static const nameTooLong = "Category names must be at most 40 characters.";
+  static const nameTooShort = 'Category names must be at least 2 characters.';
+  static const categoryLimit = 'You can have at most 20 profile categories.';
+  static const categoryConflict =
+      'This name is already in use or the 20-category limit was reached. Reload categories and try again.';
+  static const categoryInvalid =
+      'Invalid category request. Check the name or category order.';
+  static const categoryResponseInvalid =
+      'The category response could not be confirmed. Reload categories before trying again.';
+  static const categoryTimeout = 'The category request timed out. Try again.';
+  static const categoryConnectionFailed =
+      'Could not connect to the category service. Try again.';
+  static const categorySessionExpired =
+      'Your session has expired. Please sign in again.';
+  static const categoryAccountChanged =
+      'Your account changed. Reload categories to continue.';
+  static const categoryUnavailable =
+      'This profile category is no longer available. Reload categories and try again.';
+  static const categoryOrderInvalid =
+      'Category order must contain each current category exactly once.';
+  static const categoryLegacyUnavailable =
+      'Legacy local category IDs cannot be used for backend category operations.';
+  static const publicCategoriesLoading = 'Loading profile categories…';
+  static const publicCategoriesFailed =
+      "Could not load this user's profile categories. Reopen the profile to try again.";
   static const duplicateName = "A category with this name already exists.";
   static const reservedName =
       "All is a permanent section. Choose another name.";

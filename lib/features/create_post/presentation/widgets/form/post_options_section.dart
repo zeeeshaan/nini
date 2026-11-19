@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,7 +57,7 @@ class PostOptionsSection extends StatelessWidget {
           builder: (context, schedule) {
             final scheduleLabel = schedule == null
                 ? null
-                : '${MaterialLocalizations.of(context).formatMediumDate(schedule.startsAt)} · ${TimeOfDay.fromDateTime(schedule.startsAt).format(context)} – ${TimeOfDay.fromDateTime(schedule.endsAt).format(context)}';
+                : '${formatSolarDate(schedule.startsAt)} · ${TimeOfDay.fromDateTime(schedule.startsAt).format(context)} – ${TimeOfDay.fromDateTime(schedule.endsAt).format(context)}';
             return PostFormOptionTile(
               label: CreatePostStrings.scheduledPosts,
               value: scheduleLabel,

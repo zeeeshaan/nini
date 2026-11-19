@@ -1,118 +1,82 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 import 'app_shimmer.dart';
 
+/// The feed card uses a 43px author avatar followed by a full-width square image.
 class PostCardSkeleton extends StatelessWidget {
   const PostCardSkeleton({super.key});
 
   @override
-  Widget build(BuildContext context) => AppResponsiveBuilder(
-    builder: (context, responsive) {
-      final theme = Theme.of(context);
-      final textScaler = MediaQuery.textScalerOf(context);
-      final width = math.min(responsive.width, 650.0);
-      final padding = math.min(
-        responsive.adaptive<double>(compact: 12, medium: 16, expanded: 16),
-        width / 8,
-      );
-      final contentWidth = width - padding * 2;
-      final avatarSize = math.min(42.0, contentWidth / 4);
-      final headerGap = math.min(12.0, contentWidth / 8);
-
-      return Align(
-        alignment: Alignment.topCenter,
-        heightFactor: 1,
-        child: SizedBox(
-          width: width,
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.topRight,
-            child: SizedBox(
-              width: width,
-              child: AppShimmer(
-                child: Container(
-                  padding: EdgeInsets.all(padding),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: theme.colorScheme.outlineVariant.withValues(
-                        alpha: .4,
-                      ),
-                    ),
-                  ),
+  Widget build(BuildContext context) {
+    final scale = MediaQuery.textScalerOf(context);
+    return AppShimmer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                Expanded(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    textDirection: TextDirection.ltr,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        textDirection: TextDirection.ltr,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              textDirection: TextDirection.ltr,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                AppSkeletonBox(
-                                  width: 125,
-                                  height: textScaler.scale(12),
-                                ),
-                                const SizedBox(height: 8),
-                                AppSkeletonBox(
-                                  width: 75,
-                                  height: textScaler.scale(9),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: headerGap),
-                          AppSkeletonBox(
-                            width: avatarSize,
-                            height: avatarSize,
-                            isCircle: true,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      const AspectRatio(
-                        aspectRatio: 4 / 3,
-                        child: AppSkeletonBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          radius: 12,
-                        ),
-                      ),
-                      const SizedBox(height: 14),
                       AppSkeletonBox(
-                        width: double.infinity,
-                        height: textScaler.scale(12),
+                        width: 125,
+                        height: scale.scale(12),
+                        radius: 4,
                       ),
-                      const SizedBox(height: 8),
-                      AppSkeletonBox(width: 210, height: textScaler.scale(12)),
-                      const SizedBox(height: 16),
-                      const Wrap(
-                        textDirection: TextDirection.ltr,
-                        alignment: WrapAlignment.end,
-                        spacing: 18,
-                        runSpacing: 8,
-                        children: [
-                          AppSkeletonBox(width: 38, height: 18),
-                          AppSkeletonBox(width: 38, height: 18),
-                          AppSkeletonBox(width: 38, height: 18),
-                        ],
+                      const SizedBox(height: 5),
+                      AppSkeletonBox(
+                        width: 75,
+                        height: scale.scale(9),
+                        radius: 4,
                       ),
                     ],
                   ),
                 ),
-              ),
+                const SizedBox(width: 10),
+                const AppSkeletonBox(width: 43, height: 43, isCircle: true),
+              ],
             ),
           ),
-        ),
-      );
-    },
-  );
+          const AspectRatio(
+            aspectRatio: 1,
+            child: AppSkeletonBox(height: double.infinity, radius: 0),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                for (var i = 0; i < 5; i++)
+                  const AppSkeletonBox(width: 24, height: 24, radius: 5),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                AppSkeletonBox(width: 190, height: scale.scale(14), radius: 4),
+                const SizedBox(height: 8),
+                AppSkeletonBox(width: 95, height: scale.scale(10), radius: 4),
+                const SizedBox(height: 12),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppSkeletonBox(
+                    width: 90,
+                    height: scale.scale(15),
+                    radius: 4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1, thickness: .5),
+        ],
+      ),
+    );
+  }
 }

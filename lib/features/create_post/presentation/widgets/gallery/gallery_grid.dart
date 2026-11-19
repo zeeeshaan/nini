@@ -13,10 +13,15 @@ import 'gallery_body.dart';
 import 'gallery_tab_selector.dart';
 
 class GalleryGrid extends StatefulWidget {
-  const GalleryGrid({super.key, this.compact = false});
+  const GalleryGrid({
+    super.key,
+    this.compact = false,
+    this.previewOnly = false,
+  });
 
   /// The chat sheet reuses the same assets/selection without the post toolbar.
   final bool compact;
+  final bool previewOnly;
 
   @override
   State<GalleryGrid> createState() => _GalleryGridState();
@@ -27,13 +32,15 @@ class _GalleryGridState extends State<GalleryGrid> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    if (!widget.previewOnly) WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _syncLibraryObserver(context.read<GalleryCubit>().state);
+    if (!widget.previewOnly) {
+      _syncLibraryObserver(context.read<GalleryCubit>().state);
+    }
   }
 
   void _syncLibraryObserver(GalleryState state) {
@@ -52,7 +59,7 @@ class _GalleryGridState extends State<GalleryGrid> with WidgetsBindingObserver {
   @override
   void dispose() {
     _stopListening?.call();
-    WidgetsBinding.instance.removeObserver(this);
+    if (!widget.previewOnly) WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

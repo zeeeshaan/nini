@@ -28,6 +28,7 @@ class SearchCubit extends Cubit<SearchState> {
     emit(
       state.copyWith(
         city: city,
+        citySelected: true,
         query: state.submittedQuery,
         panel: SearchPanel.results,
       ),

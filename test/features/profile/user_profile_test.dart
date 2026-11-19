@@ -220,15 +220,15 @@ Future<void> _chooseBirth(WidgetTester tester, DateTime date) async {
   await tester.ensureVisible(_birthField());
   await tester.tap(_birthField());
   await tester.pumpAndSettle();
-  final dialog = find.byType(DatePickerDialog);
-  final labels = MaterialLocalizations.of(tester.element(dialog));
-  await tester.tap(find.byTooltip(labels.inputDateModeButtonLabel));
+  await tester.tap(find.text('Gregorian'));
   await tester.pumpAndSettle();
-  final input = find.descendant(
-    of: dialog,
-    matching: find.byType(TextFormField),
+  tester
+      .widget<CalendarDatePicker>(find.byType(CalendarDatePicker))
+      .onDateChanged(date);
+  await tester.pump();
+  final labels = MaterialLocalizations.of(
+    tester.element(find.byType(AlertDialog)),
   );
-  await tester.enterText(input, labels.formatCompactDate(date));
   await tester.tap(find.text(labels.okButtonLabel));
   await tester.pumpAndSettle();
 }
@@ -1538,10 +1538,7 @@ void main() {
       await cubit.load();
       await tester.pumpWidget(editor());
       await tester.pumpAndSettle();
-      final expected = AppStrings.persianDigits(
-        MaterialLocalizations.of(tester.element(_birthField()))
-            .formatMediumDate(DateTime.utc(2000, 1, 15)),
-      );
+      final expected = AppStrings.persianDigits('1378/10/25');
       expect(
         tester.widget<TextFormField>(_birthField()).controller!.text,
         expected,
@@ -1591,7 +1588,7 @@ void main() {
       await tester.tap(_birthField());
       await tester.pumpAndSettle();
       final labels = MaterialLocalizations.of(
-        tester.element(find.byType(DatePickerDialog)),
+        tester.element(find.byType(AlertDialog)),
       );
       await tester.tap(find.text(labels.cancelButtonLabel));
       await tester.pumpAndSettle();

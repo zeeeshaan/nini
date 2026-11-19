@@ -11,16 +11,23 @@ import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/network/api_client.dart';
 import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/core/theme/app_theme.dart';
 import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
 import 'package:nini/features/home/presentation/widgets/common/home_seller_header.dart';
 import 'package:nini/features/login/data/auth_repo.dart';
 import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
 import 'package:nini/features/profile/data/api_public_profile_repository.dart';
+import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:nini/features/posts/domain/profile_categories_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:nini/features/profile/presentation/widgets/categories/profile_category_chip.dart';
+import 'package:nini/features/profile/presentation/widgets/categories/category_chips.dart';
 import 'package:nini/features/profile/presentation/cubit/seller_profile_cubit.dart';
 import 'package:nini/features/profile/presentation/pages/seller_profile_screen.dart';
 import 'package:nini/features/profile/presentation/widgets/account/profile_stats.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/features/profile/presentation/widgets/seller/seller_profile_header.dart';
+import 'package:nini/features/profile/presentation/widgets/seller/seller_profile_content.dart';
 import 'package:nini/features/profile_settings/domain/user_profile.dart';
 import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
@@ -33,6 +40,26 @@ import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/skeleton/profile_skeleton.dart';
+
+const _publicOne = '10000000-0000-4000-8000-000000000001';
+const _publicTwo = '10000000-0000-4000-8000-000000000002';
+const _categoryOne = '20000000-0000-4000-8000-000000000001';
+const _categoryTwo = '20000000-0000-4000-8000-000000000002';
+Map<String, dynamic> _categoryList(String name, {int count = 5}) => _response({
+  'allCount': count,
+  'uncategorizedCount': 1,
+  'items': [
+    {'id': _categoryOne, 'name': name, 'position': 0, 'postsCount': 3},
+    {
+      'id': _categoryTwo,
+      'name': 'Second public category',
+      'position': 1,
+      'postsCount': 1,
+    },
+  ],
+});
+
+class _OwnCategories extends Fake implements ProfileCategoriesRepository {}
 
 Map<String, dynamic> _data(String username, {String? id}) => {
   'id': id ?? 'id-$username',
@@ -71,6 +98,8 @@ class _Api extends ApiClient {
   final gates = <String, Completer<void>>{};
   Object? failure;
   int writes = 0;
+  final categoryReplies = <String, Map<String, dynamic>>{};
+  Object? categoryFailure;
   @override
   Future<Map<String, dynamic>> getPublic(
     String endpoint, {
@@ -78,6 +107,15 @@ class _Api extends ApiClient {
   }) async {
     paths.add(endpoint);
     credentials.add(token);
+    if (endpoint.startsWith('users/') && endpoint.endsWith('/categories')) {
+      final id = endpoint.split('/')[1];
+      final reply =
+          categoryReplies[id] ??
+          _response({'allCount': 27, 'items': <Object>[]});
+      await gates['categories:$id']?.future;
+      if (categoryFailure != null) throw categoryFailure!;
+      return reply;
+    }
     final username = Uri.decodeComponent(
       endpoint.substring('users/profile/'.length),
     );
@@ -372,7 +410,7 @@ void main() {
     (tester) async {
       final api = _Api()
         ..replies['seller.one'] = _response({
-          ..._data('seller.one'),
+          ..._data('seller.one', id: _publicOne),
           'isFollowing': true,
         });
       final own = UserProfileCubit(_OwnProfiles());
@@ -689,6 +727,338 @@ void main() {
     },
   );
 
+  test('public categories require a user UUID and use the public endpoint without credentials', () async {
+    final api = _Api();
+    api.categoryReplies[_publicOne] = _categoryList('Real public name');
+    final tokens = _Tokens()..value = 'synthetic-credential';
+    final repo = _repository(api, tokens);
+    final categories = await repo.loadCategories(_publicOne);
+    expect(api.paths, ['users/$_publicOne/categories']);
+    expect(api.credentials, [null]);
+    expect(categories.allCount, 5);
+    expect(categories.items.map((item) => item.name), [
+      'Real public name',
+      'Second public category',
+    ]);
+    expect(categories.items.map((item) => item.position), [0, 1]);
+    for (final id in ['seller.one', 'local-id', '../other']) {
+      await expectLater(repo.loadCategories(id), throwsFormatException);
+    }
+    expect(api.paths.length, 1);
+    expect(tokens.value, 'synthetic-credential');
+    expect(tokens.deletions, 0);
+  });
+
+  test('profile fetch supplies the UUID; duplicate loads and old category responses cannot cross profiles', () async {
+    final api = _Api();
+    api.replies['seller.one'] = _response(_data('seller.one', id: _publicOne));
+    api.replies['seller.two'] = _response(_data('seller.two', id: _publicTwo));
+    api.categoryReplies[_publicOne] = _categoryList('First user categories');
+    api.categoryReplies[_publicTwo] = _categoryList(
+      'Second user categories',
+      count: 8,
+    );
+    api.gates['categories:$_publicOne'] = Completer<void>();
+    final cubit = SellerProfileCubit(_repository(api));
+    addTearDown(cubit.close);
+    final first = cubit.load('seller.one');
+    await Future<void>.delayed(Duration.zero);
+    expect(cubit.state.profile?.seller.id, _publicOne);
+    expect(cubit.state.categoriesLoading, isTrue);
+    final duplicate = cubit.load('seller.one');
+    expect(identical(first, duplicate), isTrue);
+    expect(api.paths, [
+      'users/profile/seller.one',
+      'users/$_publicOne/categories',
+    ]);
+    final second = cubit.load('seller.two');
+    expect(cubit.state.profile, isNull);
+    expect(cubit.state.categories, isNull);
+    await second;
+    expect(cubit.state.categories?.items.first.name, 'Second user categories');
+    expect(cubit.state.categories?.allCount, 8);
+    api.gates['categories:$_publicOne']!.complete();
+    await first;
+    expect(cubit.state.profile?.seller.id, _publicTwo);
+    expect(cubit.state.categories?.items.first.name, 'Second user categories');
+    expect(api.writes, 0);
+  });
+
+  test('public category failure retains confirmed profile, supports retry and has no own-category fallback', () async {
+    final api = _Api();
+    api.replies['seller.one'] = _response(_data('seller.one', id: _publicOne));
+    api.categoryFailure = _error(type: DioExceptionType.connectionError);
+    final cubit = SellerProfileCubit(_repository(api));
+    addTearDown(cubit.close);
+    await cubit.load('seller.one');
+    expect(cubit.state.profile?.seller.id, _publicOne);
+    expect(cubit.state.categories, isNull);
+    expect(
+      cubit.state.categoriesError,
+      ProfilePostStrings.publicCategoriesFailed,
+    );
+    api.categoryFailure = null;
+    api.categoryReplies[_publicOne] = _response({
+      'allCount': 0,
+      'items': <Object>[],
+    });
+    await cubit.retryCategories();
+    expect(cubit.state.categories?.items, isEmpty);
+    expect(cubit.state.categories?.allCount, 0);
+    expect(cubit.state.categoriesError, isNull);
+    expect(
+      api.paths.where((path) => path.startsWith('users/profile/')).length,
+      1,
+    );
+    api.categoryReplies[_publicOne] = _response({
+      'items': [
+        {'id': 'invalid'},
+      ],
+    });
+    await cubit.retryCategories();
+    expect(cubit.state.categories, isNull);
+    expect(cubit.state.categoriesError, isNotNull);
+  });
+
+  test(
+    'pending category results are discarded on invalidation and closure',
+    () async {
+      for (final close in [false, true]) {
+        final api = _Api();
+        api.replies['seller.one'] = _response(
+          _data('seller.one', id: _publicOne),
+        );
+        api.gates['categories:$_publicOne'] = Completer<void>();
+        final cubit = SellerProfileCubit(_repository(api));
+        final request = cubit.load('seller.one');
+        await Future<void>.delayed(Duration.zero);
+        if (close) {
+          await cubit.close();
+        } else {
+          cubit.invalidate();
+        }
+        api.gates['categories:$_publicOne']!.complete();
+        await request;
+        expect(cubit.state.categories, isNull);
+        if (!close) {
+          expect(cubit.state.profile, isNull);
+          await cubit.close();
+        }
+      }
+    },
+  );
+
+  testWidgets(
+    'public counts bind to the existing header while own category state stays isolated',
+    (tester) async {
+      final api = _Api();
+      api.replies['seller.one'] = _response(
+        _data('seller.one', id: _publicOne),
+      );
+      api.categoryReplies[_publicOne] = _categoryList(
+        'Public backend category',
+        count: 5,
+      );
+      final own = ProfileCategoriesCubit(_OwnCategories());
+      own.emit(
+        const ProfileCategoriesState(
+          categories: [
+            ProfileCategory(id: _categoryTwo, name: 'Own private category'),
+          ],
+          loading: false,
+          allCount: 99,
+        ),
+      );
+      addTearDown(own.close);
+      final before = own.state;
+      await tester.pumpWidget(
+        BlocProvider.value(
+          value: own,
+          child: _host(api, const SellerProfileScreen(username: 'seller.one')),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<ProfileStats>(find.byType(ProfileStats)).postCount,
+        '5',
+      );
+      final state = tester
+          .element(find.byType(SellerProfileContent))
+          .read<SellerProfileCubit>()
+          .state;
+      expect(state.categories?.items.first.name, 'Public backend category');
+      expect(own.state, same(before));
+      expect(find.text('Own private category'), findsNothing);
+      final chips = tester
+          .widgetList<ProfileCategoryChip>(find.byType(ProfileCategoryChip))
+          .toList();
+      expect(chips.map((chip) => chip.label), [
+        ProfilePostStrings.all,
+        'Public backend category',
+        'Second public category',
+      ]);
+      expect(chips.map((chip) => chip.count), [5, 3, 1]);
+      expect(chips.every((chip) => chip.onTap == null), isTrue);
+      expect(find.byIcon(Icons.add), findsNothing);
+      expect(find.byIcon(Icons.edit_outlined), findsNothing);
+      expect(find.byIcon(Icons.delete_outline), findsNothing);
+      await tester.ensureVisible(find.text('Public backend category'));
+      await tester.tap(find.text('Public backend category'));
+      await tester.pumpAndSettle();
+      expect(own.state, same(before));
+      expect(api.writes, 0);
+      expect(find.byType(ProfilePostCard), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'public category UI clears during profile switching and ignores late responses',
+    (tester) async {
+      final api = _Api();
+      api.replies['seller.one'] = _response(
+        _data('seller.one', id: _publicOne),
+      );
+      api.replies['seller.two'] = _response(
+        _data('seller.two', id: _publicTwo),
+      );
+      api.categoryReplies[_publicOne] = _categoryList(
+        'First public categories',
+      );
+      api.categoryReplies[_publicTwo] = _categoryList('Second user categories');
+      await tester.pumpWidget(
+        _host(api, const SellerProfileScreen(username: 'seller.one')),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('First public categories'), findsOneWidget);
+      final oldCubit = tester
+          .element(find.byType(SellerProfileContent))
+          .read<SellerProfileCubit>();
+      api.gates['categories:$_publicOne'] = Completer<void>();
+      final oldRequest = oldCubit.retryCategories();
+      await tester.pumpAndSettle();
+      expect(find.byType(ProfileCategoryChip), findsNothing);
+      expect(
+        find.text(ProfilePostStrings.publicCategoriesLoading),
+        findsOneWidget,
+      );
+      api.gates['categories:$_publicTwo'] = Completer<void>();
+      await tester.pumpWidget(
+        _host(api, const SellerProfileScreen(username: 'seller.two')),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('First public categories'), findsNothing);
+      expect(find.byType(ProfileCategoryChip), findsNothing);
+      api.gates['categories:$_publicTwo']!.complete();
+      await tester.pumpAndSettle();
+      expect(find.text('Second user categories'), findsOneWidget);
+      api.gates['categories:$_publicOne']!.complete();
+      await oldRequest;
+      await tester.pumpAndSettle();
+      expect(find.text('First public categories'), findsNothing);
+      expect(find.text('Second user categories'), findsOneWidget);
+      expect(api.writes, 0);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'public category failure and empty results never show fabricated chips',
+    (tester) async {
+      final api = _Api();
+      api.replies['seller.one'] = _response(
+        _data('seller.one', id: _publicOne),
+      );
+      api.categoryFailure = _error(type: DioExceptionType.connectionError);
+      await tester.pumpWidget(
+        _host(api, const SellerProfileScreen(username: 'seller.one')),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        find.text(ProfilePostStrings.publicCategoriesFailed),
+        findsOneWidget,
+      );
+      expect(find.byType(ProfileCategoryChip), findsNothing);
+      expect(find.text('Backend seller.one'), findsOneWidget);
+      api.categoryFailure = null;
+      api.categoryReplies[_publicOne] = _response({
+        'allCount': 0,
+        'items': <Object>[],
+      });
+      final cubit = tester
+          .element(find.byType(SellerProfileContent))
+          .read<SellerProfileCubit>();
+      await cubit.retryCategories();
+      await tester.pumpAndSettle();
+      final chip = tester.widget<ProfileCategoryChip>(
+        find.byType(ProfileCategoryChip),
+      );
+      expect(chip.label, ProfilePostStrings.all);
+      expect(chip.count, 0);
+      expect(chip.onTap, isNull);
+      expect(find.byIcon(Icons.add), findsNothing);
+      expect(find.byType(ProfilePostCard), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  for (final brightness in Brightness.values) {
+    for (final width in [320.0, 720.0]) {
+      testWidgets(
+        'read-only public chips retain styling, RTL order and large-text layout in $brightness at $width',
+        (tester) async {
+          tester.view.physicalSize = Size(width, 900);
+          tester.view.devicePixelRatio = 1;
+          addTearDown(tester.view.resetPhysicalSize);
+          addTearDown(tester.view.resetDevicePixelRatio);
+          final categories = ProfileCategoryList.fromApiJson(
+            _categoryList('Public backend category')['data']
+                as Map<String, dynamic>,
+          );
+          await tester.pumpWidget(
+            MaterialApp(
+              theme: brightness == Brightness.dark
+                  ? AppTheme.dark
+                  : AppTheme.light,
+              home: MediaQuery(
+                data: MediaQueryData(
+                  size: Size(width, 900),
+                  textScaler: TextScaler.linear(1.6),
+                ),
+                child: Scaffold(
+                  body: ProfileCategoryChips.readOnly(categories: categories),
+                ),
+              ),
+            ),
+          );
+          await tester.pumpAndSettle();
+          final chips = tester
+              .widgetList<ProfileCategoryChip>(find.byType(ProfileCategoryChip))
+              .toList();
+          expect(chips.first.label, ProfilePostStrings.all);
+          expect(chips.every((chip) => chip.onTap == null), isTrue);
+          expect(
+            tester.getCenter(find.text(ProfilePostStrings.all)).dx,
+            greaterThan(width / 2),
+          );
+          expect(
+            tester.getCenter(find.text(ProfilePostStrings.all)).dx,
+            greaterThan(
+              tester.getCenter(find.text('Public backend category')).dx,
+            ),
+          );
+          final text = tester.widget<Text>(
+            find.text('Public backend category'),
+          );
+          expect(text.textAlign, TextAlign.right);
+          expect(text.textDirection, TextDirection.ltr);
+          expect(find.byType(IconButton), findsNothing);
+          expect(tester.takeException(), isNull);
+        },
+      );
+    }
+  }
+
   final local = Uri.tryParse(AppConfig.apiBaseUrl);
   test('real Dio public GET sends optional Bearer and mobile headers with the configured URL', () async {
     final server = await HttpServer.bind(
@@ -722,5 +1092,46 @@ void main() {
     }, _RealHttp());
     expect(errors, isEmpty);
     expect(headers, [null, 'Bearer synthetic-credential']);
+  }, skip: local?.host != '127.0.0.1');
+  test('real Dio fetches public categories by backend UUID without Bearer authentication', () async {
+    final server = await HttpServer.bind(
+      InternetAddress.loopbackIPv4,
+      local!.port,
+    );
+    addTearDown(() => server.close(force: true));
+    final errors = <Object>[];
+    final paths = <String>[];
+    server.listen((request) async {
+      try {
+        expect(request.method, 'GET');
+        expect(request.headers.value('X-Client'), 'mobile');
+        expect(request.headers.value('Authorization'), isNull);
+        paths.add(request.uri.path);
+        request.response.headers.contentType = ContentType.json;
+        request.response.write(
+          jsonEncode(
+            request.uri.path == '/api/users/profile/seller.one'
+                ? _response(_data('seller.one', id: _publicOne))
+                : _categoryList('Public category'),
+          ),
+        );
+      } catch (error) {
+        errors.add(error);
+        request.response.statusCode = 500;
+      } finally {
+        await request.response.close();
+      }
+    });
+    await HttpOverrides.runWithHttpOverrides(() async {
+      final repo = ApiPublicProfileRepository(ApiClient(), _Tokens());
+      final profile = await repo.load('seller.one');
+      final categories = await repo.loadCategories(profile.seller.id);
+      expect(categories.items.first.name, 'Public category');
+    }, _RealHttp());
+    expect(paths, [
+      '/api/users/profile/seller.one',
+      '/api/users/$_publicOne/categories',
+    ]);
+    expect(errors, isEmpty);
   }, skip: local?.host != '127.0.0.1');
 }

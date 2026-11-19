@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../cubit/profile_categories_cubit.dart';
 import 'profile_category_row.dart';
@@ -15,16 +16,21 @@ class ProfileCategoriesBody extends StatelessWidget {
     required this.onSelect,
     required this.onEdit,
     required this.onDelete,
+    required this.onReorder,
   });
   final ProfileCategoriesState state;
   final VoidCallback onRetry;
   final ValueChanged<ProfileCategory> onSelect, onEdit, onDelete;
+  final ReorderCallback onReorder;
   @override
   Widget build(BuildContext context) {
     if (state.loading && state.categories.isEmpty) {
-      return ListView.builder(
-        itemCount: 5,
-        itemBuilder: (_, index) => const ListTileSkeleton(showAvatar: false),
+      return AppShimmer(
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (_, index) =>
+              const ListTileSkeleton(showAvatar: false, animated: false),
+        ),
       );
     }
     if (state.loadFailed) {
@@ -33,7 +39,8 @@ class ProfileCategoriesBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              CategoryStrings.of(context).text(ProfilePostStrings.loadFailed),
+              CategoryStrings.of(context)
+                  .text(state.error ?? ProfilePostStrings.loadFailed),
               textDirection: TextDirection.ltr,
               textAlign: TextAlign.right,
             ),
@@ -59,11 +66,18 @@ class ProfileCategoriesBody extends StatelessWidget {
         ),
       );
     }
-    return ListView(
+    return ReorderableListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      children: [
-        for (final category in state.categories)
-          ProfileCategoryRow(
+      buildDefaultDragHandles: false,
+      itemCount: state.categories.length,
+      onReorderItem: onReorder,
+      itemBuilder: (context, index) {
+        final category = state.categories[index];
+        return ReorderableDelayedDragStartListener(
+          key: ValueKey(category.id),
+          index: index,
+          enabled: !state.loading && !state.saving,
+          child: ProfileCategoryRow(
             category: category,
             selected: state.selectedId == category.id,
             enabled: !state.saving,
@@ -71,7 +85,8 @@ class ProfileCategoriesBody extends StatelessWidget {
             onEdit: () => onEdit(category),
             onDelete: () => onDelete(category),
           ),
-      ],
+        );
+      },
     );
   }
 }

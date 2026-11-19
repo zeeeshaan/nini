@@ -3,21 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/animation/screen_entrance.dart';
 import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
 
 import 'package:nini/features/cart/presentation/pages/cart_screen.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_gallery_screen.dart';
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:nini/features/dashboard/presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart';
 import 'package:nini/features/home/presentation/pages/home_screen.dart';
-import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/profile/presentation/pages/profile_screen.dart';
 import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
 import 'package:nini/features/search/presentation/pages/search_screen.dart';
-import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';
 
 // dart format width=100
@@ -43,7 +40,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late final DashboardNavigationCubit _navigation;
 
   DashboardTab? _targetTab;
-  String? _publishedServiceId;
+  bool _createRouteOpen = false;
+  bool _createSwipeScheduled = false;
 
   @override
   void initState() {
@@ -67,25 +65,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> _openCreatePost() async {
-    final published = await Navigator.of(context).push<PostItem>(
-      MaterialPageRoute<PostItem>(
-        builder: (_) => const CreatePostGalleryScreen(),
-      ),
-    );
-
-    if (!mounted || published == null) return;
-
-    context.read<ProfileCategoriesCubit>().select(published.profileCategoryId);
-
-    if (published.isService) {
-      setState(() {
-        _publishedServiceId = published.id;
-      });
+    if (_createRouteOpen) return;
+    _createRouteOpen = true;
+    try {
+      await Navigator.of(context).push<bool>(
+        MaterialPageRoute<bool>(
+          builder: (_) => const CreatePostGalleryScreen(),
+        ),
+      );
+    } finally {
+      _createRouteOpen = false;
     }
+  }
 
-    await _onTabSelected(
-      published.isService ? DashboardTab.search : DashboardTab.home,
-    );
+  void _openCreateAfterSwipe() {
+    if (_createSwipeScheduled || _createRouteOpen) return;
+    final previous = _navigation.state;
+    _createSwipeScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _createSwipeScheduled = false;
+      if (!mounted ||
+          _createRouteOpen ||
+          _targetTab != null ||
+          _navigation.state != previous ||
+          !_pageController.hasClients ||
+          _pageController.page?.round() != DashboardTab.create.index) {
+        return;
+      }
+      // Create is a route, so keep the originating page selected underneath.
+      _pageController.jumpToPage(previous.index);
+      _openCreatePost();
+    });
   }
 
   Future<void> _changeTab(DashboardTab tab) async {
@@ -151,22 +161,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               active: selectedTab == DashboardTab.cart,
               onBack: () => _onTabSelected(DashboardTab.home),
             ),
-            // Create opens a separate route.
-            // Keep this page to preserve tab indexes.
-            const Center(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  AppStrings.create,
-                  style: AppTextStyles.createPlaceholder,
-                  textAlign: TextAlign.right,
-                  textDirection: TextDirection.ltr,
-                ),
-              ),
-            ),
+            // Show the actual gallery layout while swiping; media access starts
+            // only when the Create route opens after the swipe settles.
+            const CreatePostGalleryScreen(previewOnly: true),
             SearchScreen(
               active: selectedTab == DashboardTab.search,
-              publishedServiceId: _publishedServiceId,
+              emptyStateTextAlign: TextAlign.center,
             ),
             widget.profilePage ?? const ProfileScreen(),
           ];
@@ -176,11 +176,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return Scaffold(
                 body: SafeArea(
                   bottom: false,
-                  child: NotificationListener<ScrollStartNotification>(
+                  child: NotificationListener<ScrollNotification>(
                     onNotification: (notification) {
-                      if (notification.depth == 0 &&
+                      if (notification.depth != 0) return false;
+                      if (notification is ScrollStartNotification &&
                           notification.dragDetails != null) {
                         _targetTab = null;
+                      }
+                      if (notification is ScrollEndNotification &&
+                          notification.metrics is PageMetrics &&
+                          (notification.metrics as PageMetrics).page?.round() ==
+                              DashboardTab.create.index &&
+                          _targetTab == null) {
+                        _openCreateAfterSwipe();
                       }
                       return false;
                     },
@@ -188,8 +196,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       key: const PageStorageKey<String>('dashboard_tabs'),
                       controller: _pageController,
                       onPageChanged: (index) {
-                        if (_targetTab == null || index == _targetTab!.index) {
+                        if (index != DashboardTab.create.index &&
+                            (_targetTab == null ||
+                                index == _targetTab!.index)) {
                           _navigation.selectPage(index);
+                          if (index == DashboardTab.profile.index)
+                            context.read<OwnPostsCubit?>()?.refresh();
                         }
                       },
                       children: [

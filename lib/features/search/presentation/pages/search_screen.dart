@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 
 import 'search_view.dart';
 
@@ -13,9 +15,11 @@ class SearchScreen extends StatefulWidget {
     this.active = true,
     this.publishedServiceId,
     this.onPostSelected,
+    this.emptyStateTextAlign = TextAlign.right,
   });
 
   final bool active;
+  final TextAlign emptyStateTextAlign;
   final String? publishedServiceId;
   final void Function(PostItem post, PostSeller seller)? onPostSelected;
 
@@ -31,12 +35,22 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocProvider(
-      create: (_) => SearchCubit(),
+    final repository = context.read<ApiPostsRepository?>();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => SearchCubit()),
+        if (repository != null)
+          BlocProvider<BackendPostsCubit>(
+            create: (_) => BackendPostsCubit(
+              (page) => repository.search(query: '', page: page),
+            ),
+          ),
+      ],
       child: SearchView(
         active: widget.active,
         publishedServiceId: widget.publishedServiceId,
         onPostSelected: widget.onPostSelected,
+        emptyStateTextAlign: widget.emptyStateTextAlign,
       ),
     );
   }

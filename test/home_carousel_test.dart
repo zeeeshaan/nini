@@ -67,7 +67,7 @@ Widget _app(
 void main() {
   for (final brightness in Brightness.values) {
     testWidgets(
-      'starts on first image at right and swipes in order ($brightness)',
+      'starts on first image at left and swipes in order ($brightness)',
       (tester) async {
         final detail = PostDetailCubit();
         addTearDown(detail.close);
@@ -80,15 +80,15 @@ void main() {
         expect(pager.controller!.keepPage, isFalse);
         expect(
           Directionality.of(tester.element(find.byType(PageView))),
-          TextDirection.rtl,
+          TextDirection.ltr,
         );
         final dot = find.byKey(const ValueKey('carousel-active-dot'));
         final firstX = tester.getCenter(dot).dx;
-        await tester.drag(find.byType(PageView), const Offset(260, 0));
+        await tester.drag(find.byType(PageView), const Offset(-260, 0));
         await tester.pumpAndSettle();
         expect(detail.state.imageIndex, 1);
-        expect(tester.getCenter(dot).dx, lessThan(firstX));
-        await tester.drag(find.byType(PageView), const Offset(-260, 0));
+        expect(tester.getCenter(dot).dx, greaterThan(firstX));
+        await tester.drag(find.byType(PageView), const Offset(260, 0));
         await tester.pumpAndSettle();
         expect(detail.state.imageIndex, 0);
         expect(tester.getCenter(dot).dx, closeTo(firstX, .1));
@@ -103,7 +103,7 @@ void main() {
     addTearDown(detail.close);
     await tester.pumpWidget(_app(detail));
     await tester.pumpAndSettle();
-    await tester.drag(find.byType(PageView), const Offset(260, 0));
+    await tester.drag(find.byType(PageView), const Offset(-260, 0));
     await tester.pumpAndSettle();
     expect(detail.state.imageIndex, 1);
     await tester.pumpWidget(_app(detail, active: false));
@@ -121,7 +121,7 @@ void main() {
     addTearDown(detail.close);
     await tester.pumpWidget(_app(detail));
     await tester.pumpAndSettle();
-    await tester.drag(find.byType(PageView), const Offset(260, 0));
+    await tester.drag(find.byType(PageView), const Offset(-260, 0));
     await tester.pumpAndSettle();
     expect(detail.state.imageIndex, 1);
     final navigator = Navigator.of(
@@ -146,7 +146,7 @@ void main() {
     addTearDown(detail.close);
     await tester.pumpWidget(_app(detail));
     await tester.pumpAndSettle();
-    await tester.drag(find.byType(PageView), const Offset(260, 0));
+    await tester.drag(find.byType(PageView), const Offset(-260, 0));
     await tester.pumpAndSettle();
     expect(detail.state.imageIndex, 1);
     await tester.pumpWidget(_app(detail, show: false));
@@ -173,7 +173,7 @@ void main() {
       expect(images, isNotEmpty);
       expect(images.every((image) => image.fit == BoxFit.cover), isTrue);
       if (index < 2) {
-        await tester.drag(find.byType(PageView), const Offset(260, 0));
+        await tester.drag(find.byType(PageView), const Offset(-260, 0));
         await tester.pumpAndSettle();
       }
     }

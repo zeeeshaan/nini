@@ -10,9 +10,11 @@ class ProfileIdentity extends StatelessWidget {
     this.category = '',
     this.bio = '',
     this.location = '',
+    this.bioSpacing = 10,
   });
 
   final String name, category, bio, location;
+  final double bioSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class ProfileIdentity extends StatelessWidget {
           ),
         ],
         if (bio.isNotEmpty) ...[
-          const SizedBox(height: 10),
+          SizedBox(height: bioSpacing),
           Text(
             bio,
             textDirection: TextDirection.ltr,

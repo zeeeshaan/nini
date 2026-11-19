@@ -1,66 +1,78 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 
 import 'app_shimmer.dart';
 
+/// Matches the square image and text area of ProfilePostCard.
 class ProductCardSkeleton extends StatelessWidget {
-  const ProductCardSkeleton({super.key});
+  const ProductCardSkeleton({
+    super.key,
+    this.animated = true,
+    this.showStatus = false,
+  });
+
+  final bool animated;
+  final bool showStatus;
 
   @override
-  Widget build(BuildContext context) => AppResponsiveBuilder(
-    builder: (context, responsive) {
-      final theme = Theme.of(context);
-      final textScaler = MediaQuery.textScalerOf(context);
-      final padding = math.min(12.0, responsive.width / 8);
-
-      return AppShimmer(
-        child: Container(
-          width: responsive.width,
-          padding: EdgeInsets.all(padding),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: theme.colorScheme.outlineVariant.withValues(alpha: .4),
-            ),
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      final width = constraints.maxWidth;
+      final scale = width / ProfilePostCard.referenceWidth;
+      final textScale = MediaQuery.textScalerOf(context).scale(14) / 14;
+      final content = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const AspectRatio(
+            aspectRatio: 1,
+            child: AppSkeletonBox(height: double.infinity, radius: 0),
           ),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.topRight,
-            child: SizedBox(
-              width: math.max(0.0, responsive.width - padding * 2 - 2),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                4 * scale,
+                4 * scale,
+                6 * scale,
+                6 * scale,
+              ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                textDirection: TextDirection.ltr,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const AspectRatio(
-                    aspectRatio: 4 / 3,
+                  AppSkeletonBox(
+                    width: width * .70,
+                    height: 10 * scale * textScale,
+                    radius: 3,
+                  ),
+                  SizedBox(height: 5 * scale),
+                  AppSkeletonBox(
+                    width: width * .45,
+                    height: 8 * scale * textScale,
+                    radius: 3,
+                  ),
+                  if (showStatus) ...[
+                    SizedBox(height: 4 * scale),
+                    AppSkeletonBox(
+                      width: width * .32,
+                      height: 8 * scale * textScale,
+                      radius: 4,
+                    ),
+                  ],
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
                     child: AppSkeletonBox(
-                      width: double.infinity,
-                      height: double.infinity,
-                      radius: 12,
+                      width: width * .40,
+                      height: 12 * scale * textScale,
+                      radius: 3,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  AppSkeletonBox(width: 145, height: textScaler.scale(13)),
-                  const SizedBox(height: 9),
-                  AppSkeletonBox(
-                    width: double.infinity,
-                    height: textScaler.scale(10),
-                  ),
-                  const SizedBox(height: 8),
-                  AppSkeletonBox(width: 100, height: textScaler.scale(10)),
-                  const SizedBox(height: 15),
-                  AppSkeletonBox(width: 85, height: textScaler.scale(16)),
                 ],
               ),
             ),
           ),
-        ),
+        ],
       );
+      return animated ? AppShimmer(child: content) : content;
     },
   );
 }

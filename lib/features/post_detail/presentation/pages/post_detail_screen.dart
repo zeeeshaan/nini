@@ -24,6 +24,9 @@ import 'package:nini/features/home/presentation/helpers/home_post_navigation.dar
 import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/search/data/search_catalog.dart';
+import 'package:nini/shared/widgets/skeleton/detail_skeleton.dart';
 
 class PostDetailScreen extends StatelessWidget {
   const PostDetailScreen({
@@ -58,6 +61,44 @@ class PostDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (post.metadata['backend'] == true) {
+      final repository = context.read<ApiPostsRepository>();
+      return BlocProvider(
+        create: (context) => PostDetailCubit(
+          postId: post.id,
+          likes: context.read<PostLikesCubit?>(),
+          savedPosts: context.read<SavedPostsCubit?>(),
+        )..loadDetail(repository, post.id),
+        child: BlocBuilder<PostDetailCubit, PostDetailState>(
+          builder: (context, state) {
+            if (state.loadingDetail) {
+              return Scaffold(
+                appBar: AppBar(),
+                body: DetailsSkeleton(post: post),
+              );
+            }
+            if (state.detailError || state.backendPost == null)
+              return Scaffold(
+                appBar: AppBar(),
+                body: Center(
+                  child: TextButton(
+                    onPressed: () => context.read<PostDetailCubit>().loadDetail(
+                      repository,
+                      post.id,
+                    ),
+                    child: const Text('Post unavailable. Tap to retry.'),
+                  ),
+                ),
+              );
+            return _buildDetail(
+              context,
+              state.backendPost!,
+              useExistingCubit: true,
+            );
+          },
+        ),
+      );
+    }
     final posts = context.read<PostsCubit?>();
     if (posts == null) return _buildDetail(context, post);
     return BlocBuilder<PostsCubit, PostsState>(
@@ -74,15 +115,22 @@ class PostDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetail(BuildContext context, PostItem post) {
+  Widget _buildDetail(
+    BuildContext context,
+    PostItem post, {
+    bool useExistingCubit = false,
+  }) {
     final posts = context.read<PostsCubit?>()?.state;
     final isOwnPost = posts?.find(post.id) != null;
-    final isOwnSeller = seller == null
+    final actualSeller = SearchCatalog.sellerFor(post) ?? seller;
+    final isOwnSeller = actualSeller == null
         ? isOwnPost
-        : isAccountPostSeller(context, post, seller!);
-    final author = isOwnSeller
+        : isAccountPostSeller(context, post, actualSeller);
+    final author = post.metadata['backend'] == true
+        ? actualSeller
+        : isOwnSeller
         ? context.watch<UserProfileCubit?>()?.seller ?? localPostSeller
-        : seller;
+        : actualSeller;
     final canManage = allowOwnerActions && posts?.canManage(post) == true;
     final canViewAnalytics = posts?.canViewAnalytics(post) == true;
     var openAuthorProfile = onSellerPressed;
@@ -97,95 +145,96 @@ class PostDetailScreen extends StatelessWidget {
         ? galleryImages!
         : <String>[post.imageAsset];
 
+    final content = PostDetailActivityTracker(
+      post: post,
+      child: ScreenEntrance(
+        child: Scaffold(
+          extendBody: true,
+          appBar: AppBar(
+            elevation: 0,
+            toolbarHeight: 44,
+            actions: [
+              if (canViewAnalytics)
+                Flexible(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      if (context.read<PostsCubit?>()?.state.canViewAnalytics(
+                            post,
+                          ) !=
+                          true) {
+                        return;
+                      }
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => PostAnalyticsScreen(post: post),
+                        ),
+                      );
+                    },
+                    icon: const AppIcon(AppIcons.analytics, size: 17),
+                    label: const Text(
+                      AppStrings.viewAnalytics,
+                      style: AppTextStyles.label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ),
+
+              StaggeredEntrance(
+                distance: 8,
+                child: IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const AppIcon(AppIcons.backRight, size: 18),
+                  tooltip: AppStrings.back,
+                ),
+              ),
+            ],
+            automaticallyImplyLeading: false,
+          ),
+
+          bottomNavigationBar: PostDetailBottomBar(
+            post: post,
+            seller: author,
+            trailing: post.isService ? purchaseTrailing : null,
+          ),
+          body: PostDetailBody(
+            post: post,
+            seller: author,
+            onSellerPressed: openAuthorProfile,
+            onMessagePressed: !isOwnSeller && author != null
+                ? () => openSellerConversation(context, author)
+                : null,
+            images: images,
+            onCommentsPressed:
+                onCommentsPressed ??
+                () => openPostCommentsSheet(context, postId: post.id),
+            onSharePressed:
+                onSharePressed ??
+                () => openPostShareSheet(
+                  context,
+                  postId: post.id,
+                  postText: [
+                    post.title,
+                    post.caption,
+                  ].where((text) => text.trim().isNotEmpty).join('\n\n'),
+                ),
+            onMorePressed: canManage
+                ? () => managePostActions(context, post, onEdit: onEditPressed)
+                : onMorePressed,
+          ),
+        ),
+      ),
+    );
+    if (useExistingCubit) return content;
     return BlocProvider(
       create: (context) => PostDetailCubit(
         postId: post.id,
         likes: context.read<PostLikesCubit?>(),
         savedPosts: context.read<SavedPostsCubit?>(),
       ),
-      child: PostDetailActivityTracker(
-        post: post,
-        child: ScreenEntrance(
-          child: Scaffold(
-            extendBody: true,
-            appBar: AppBar(
-              elevation: 0,
-              toolbarHeight: 44,
-              actions: [
-                if (canViewAnalytics)
-                  Flexible(
-                    child: TextButton.icon(
-                      onPressed: () {
-                        if (context.read<PostsCubit?>()?.state.canViewAnalytics(
-                              post,
-                            ) !=
-                            true) {
-                          return;
-                        }
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => PostAnalyticsScreen(post: post),
-                          ),
-                        );
-                      },
-                      icon: const AppIcon(AppIcons.analytics, size: 17),
-                      label: const Text(
-                        AppStrings.viewAnalytics,
-                        style: AppTextStyles.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                  ),
-
-                StaggeredEntrance(
-                  distance: 8,
-                  child: IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const AppIcon(AppIcons.backRight, size: 18),
-                    tooltip: AppStrings.back,
-                  ),
-                ),
-              ],
-              automaticallyImplyLeading: false,
-            ),
-
-            bottomNavigationBar: PostDetailBottomBar(
-              post: post,
-              seller: author,
-              trailing: post.isService ? purchaseTrailing : null,
-            ),
-            body: PostDetailBody(
-              post: post,
-              seller: author,
-              onSellerPressed: openAuthorProfile,
-              onMessagePressed: !isOwnSeller && author != null
-                  ? () => openSellerConversation(context, author)
-                  : null,
-              images: images,
-              onCommentsPressed:
-                  onCommentsPressed ??
-                  () => openPostCommentsSheet(context, postId: post.id),
-              onSharePressed:
-                  onSharePressed ??
-                  () => openPostShareSheet(
-                    context,
-                    postId: post.id,
-                    postText: [
-                      post.title,
-                      post.caption,
-                    ].where((text) => text.trim().isNotEmpty).join('\n\n'),
-                  ),
-              onMorePressed: canManage
-                  ? () =>
-                        managePostActions(context, post, onEdit: onEditPressed)
-                  : onMorePressed,
-            ),
-          ),
-        ),
-      ),
+      child: content,
     );
   }
 }

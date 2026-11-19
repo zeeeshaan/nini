@@ -33,7 +33,15 @@ class PostFeaturesCubit extends Cubit<PostFeaturesState> {
       return false;
     }
     final features = [...state.features];
-    final feature = PostFeature(name: name, value: value);
+    final existing = state.editing == null
+        ? null
+        : state.features[state.editing!];
+    final feature = PostFeature(
+      name: name,
+      value: value,
+      apiValue: existing?.value == value ? existing?.apiValue : null,
+      unit: existing?.unit,
+    );
     if (state.editing == null) {
       features.add(feature);
     } else {

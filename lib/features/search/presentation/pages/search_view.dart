@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/strings/search_strings.dart';
@@ -5,9 +7,10 @@ import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/models/post/post_seller.dart';
 
 import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
-import 'package:nini/features/search/presentation/widgets/results/search_all_services_filter.dart';
 import 'package:nini/features/search/presentation/widgets/common/search_content.dart';
 import 'package:nini/features/search/presentation/widgets/header/search_header.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 
 /// Connects the header's buttons to search state. The lists live in SearchContent.
 class SearchView extends StatefulWidget {
@@ -16,9 +19,11 @@ class SearchView extends StatefulWidget {
     required this.active,
     this.publishedServiceId,
     this.onPostSelected,
+    this.emptyStateTextAlign = TextAlign.right,
   });
 
   final bool active;
+  final TextAlign emptyStateTextAlign;
   final String? publishedServiceId;
   final void Function(PostItem post, PostSeller seller)? onPostSelected;
 
@@ -29,6 +34,8 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
+  Timer? _debounce;
+  String? _requestedQuery;
 
   SearchCubit get _search => context.read<SearchCubit>();
 
@@ -37,6 +44,7 @@ class _SearchViewState extends State<SearchView> {
     super.initState();
     if (widget.publishedServiceId != null) _search.submit('');
     _controller.text = SearchStrings.display(_search.state.query);
+    if (widget.active) _request(_search.state.submittedQuery);
   }
 
   @override
@@ -46,7 +54,44 @@ class _SearchViewState extends State<SearchView> {
         widget.publishedServiceId != oldWidget.publishedServiceId) {
       _submit('');
     }
-    if (!widget.active) _focusNode.unfocus();
+    if (!widget.active) {
+      _focusNode.unfocus();
+      _debounce?.cancel();
+    }
+    if (!oldWidget.active && widget.active)
+      _request(_search.state.submittedQuery, refresh: true);
+  }
+
+  void _request(String query, {bool refresh = false}) {
+    final results = context.read<BackendPostsCubit?>();
+    final repository = context.read<ApiPostsRepository?>();
+    final city = _search.state.citySelected ? _search.state.city : '';
+    final searchQuery = [
+      query.trim(),
+      city,
+    ].where((part) => part.isNotEmpty).join(' ');
+    if (results == null ||
+        repository == null ||
+        (_requestedQuery == searchQuery && (!refresh || results.state.loading)))
+      return;
+    final preserve = refresh && _requestedQuery == searchQuery;
+    _requestedQuery = searchQuery;
+    results.refresh(
+      preserve: preserve,
+      load: (page) => searchQuery.isEmpty
+          ? repository.loadFeed(page: page)
+          : repository.search(query: searchQuery, page: page),
+    );
+  }
+
+  void _editQuery(String query) {
+    _search.editQuery(query);
+    _debounce?.cancel();
+    _requestedQuery = null;
+    context.read<BackendPostsCubit?>()?.invalidate();
+    _debounce = Timer(const Duration(milliseconds: 350), () {
+      if (mounted) _request(query.trim());
+    });
   }
 
   void _updateField(String query) {
@@ -58,7 +103,9 @@ class _SearchViewState extends State<SearchView> {
   }
 
   void _submit(String query) {
+    _debounce?.cancel();
     _search.submit(query);
+    _request(_search.state.submittedQuery);
     _updateField(_search.state.query);
     _focusNode.unfocus();
   }
@@ -69,18 +116,22 @@ class _SearchViewState extends State<SearchView> {
 
   void _clearQuery() {
     _controller.clear();
-    _search.editQuery('');
+    _editQuery('');
   }
 
   void _closeSearch() {
     _focusNode.unfocus();
     _search.closePanel();
     _updateField(_search.state.query);
+    _debounce?.cancel();
+    _request(_search.state.submittedQuery);
   }
 
   void _selectCity(String city) {
+    _debounce?.cancel();
     _search.selectCity(city);
     _updateField(_search.state.query);
+    _request(_search.state.submittedQuery);
   }
 
   void _toggleCities() {
@@ -97,6 +148,7 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
@@ -127,20 +179,12 @@ class _SearchViewState extends State<SearchView> {
                       showClear:
                           state.panel == SearchPanel.suggestions &&
                           state.query.isNotEmpty,
-                      onChanged: _search.editQuery,
+                      onChanged: _editQuery,
                       onTap: _search.showSuggestions,
                       onSearch: _submitField,
                       onClear: _clearQuery,
                       onCityPressed: _toggleCities,
                     ),
-                    if (state.panel != SearchPanel.cities)
-                      SearchAllServicesFilter(
-                        selected:
-                            state.submittedQuery.isEmpty &&
-                            state.query.isEmpty &&
-                            state.panel == SearchPanel.results,
-                        onSelected: () => _submit(''),
-                      ),
                     Expanded(
                       child: SearchContent(
                         key: ValueKey(widget.publishedServiceId),
@@ -148,6 +192,7 @@ class _SearchViewState extends State<SearchView> {
                         onCitySelected: _selectCity,
                         onQuerySelected: _submit,
                         onPostSelected: widget.onPostSelected,
+                        emptyStateTextAlign: widget.emptyStateTextAlign,
                       ),
                     ),
                   ],

@@ -136,4 +136,38 @@ class ApiClient {
     if (body is Map<String, dynamic>) return body;
     throw const FormatException('Invalid API response.');
   }
+
+  Future<Map<String, dynamic>> put(
+    String endpoint, {
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    if (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
+    final response = await _dio.put<dynamic>(
+      endpoint,
+      data: data,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
+    final body = response.data;
+    if (body is Map<String, dynamic>) return body;
+    throw const FormatException('Invalid API response.');
+  }
+
+  Future<Map<String, dynamic>> delete(
+    String endpoint, {
+    required String token,
+  }) async {
+    if (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid authentication credential.');
+    }
+    final response = await _dio.delete<dynamic>(
+      endpoint,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
+    final body = response.data;
+    if (body is Map<String, dynamic>) return body;
+    throw const FormatException('Invalid API response.');
+  }
 }

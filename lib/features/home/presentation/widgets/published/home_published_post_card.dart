@@ -16,6 +16,8 @@ import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.d
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/features/search/data/search_catalog.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
 
 import 'home_post_media_slider.dart';
 import '../common/home_post_pricing.dart';
@@ -39,13 +41,32 @@ class HomePublishedPostCard extends StatelessWidget {
     onOwnProfilePressed: onProfilePressed,
   );
 
-  void _toggleCart(BuildContext context) {
+  Future<void> _toggleCart(BuildContext context) async {
     final cart = context.read<CartCubit?>();
-    final seller = context.read<UserProfileCubit?>()?.seller ?? localPostSeller;
+    final seller =
+        SearchCatalog.sellerFor(post) ??
+        context.read<UserProfileCubit?>()?.seller ??
+        localPostSeller;
     final existing = cart?.state.items
         .where((item) => item.id == post.id)
         .firstOrNull;
-    final item = existing ?? postCartItem(post, seller: seller);
+    var item = existing ?? postCartItem(post, seller: seller);
+    if (item == null && post.metadata['backend'] == true && cart != null) {
+      try {
+        final detail = await context.read<ApiPostsRepository>().loadDetail(
+          post.id,
+        );
+        item = postCartItem(
+          detail,
+          seller: SearchCatalog.sellerFor(detail) ?? seller,
+        );
+      } catch (_) {
+        if (context.mounted)
+          AppToast.warning(context, 'Could not load post details.');
+        return;
+      }
+    }
+    if (!context.mounted) return;
     if (cart == null || item == null) return;
     if (cart.toggleItem(item.withQuantity(100))) {
       AppToast.success(
@@ -67,7 +88,9 @@ class HomePublishedPostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = context.watch<CartCubit?>();
     final seller =
-        context.watch<UserProfileCubit?>()?.seller ?? localPostSeller;
+        SearchCatalog.sellerFor(post) ??
+        context.watch<UserProfileCubit?>()?.seller ??
+        localPostSeller;
     final inCart = cart?.state.items
         .where((item) => item.id == post.id)
         .firstOrNull;
@@ -75,7 +98,10 @@ class HomePublishedPostCard extends StatelessWidget {
     final canToggle =
         cart != null &&
         !cart.state.loading &&
-        (inCart != null || (item != null && item.accepts(100)));
+        (inCart != null ||
+            (item != null && item.accepts(100)) ||
+            (post.metadata['backend'] == true &&
+                post.metadata['inStock'] == true));
     return BlocProvider(
       create: (context) => PostDetailCubit(
         postId: post.id,
@@ -87,9 +113,11 @@ class HomePublishedPostCard extends StatelessWidget {
         children: [
           HomeSellerHeader(
             seller: seller,
-            onPressed:
-                onProfilePressed ??
-                () => openPublishedHomeSeller(context, post),
+            onPressed: () => openPublishedHomeSeller(
+              context,
+              post,
+              onOwnProfilePressed: onProfilePressed,
+            ),
           ),
           HomePostMediaSlider(
             post: post,

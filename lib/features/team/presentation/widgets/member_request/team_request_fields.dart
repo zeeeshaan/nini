@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -76,7 +77,7 @@ class _TeamRequestFieldsState extends State<TeamRequestFields> {
           label: 'Start Date',
           value: schedule == null
               ? null
-              : '${dates.formatMediumDate(schedule.startsAt)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(schedule.startsAt))}',
+              : '${formatSolarDate(schedule.startsAt)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(schedule.startsAt))}',
           trailing: const AppIcon(AppIcons.calendar, size: 20),
           onTap: () => _selectDate(context),
         ),

@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -64,7 +65,7 @@ class TeamRequestSummary extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      '${dates.formatMediumDate(start)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(start))}',
+                      '${formatSolarDate(start)} · ${dates.formatTimeOfDay(TimeOfDay.fromDateTime(start))}',
                       textAlign: TextAlign.right,
                       textDirection: TextDirection.ltr,
                     ),

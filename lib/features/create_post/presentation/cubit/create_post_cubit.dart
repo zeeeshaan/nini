@@ -1,12 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
+import 'package:nini/features/posts/domain/models/profile_category.dart';
 
 class CreatePostCubit extends Cubit<PostDraft> {
   CreatePostCubit({PostDraft initial = const PostDraft()}) : super(initial);
+  void selectCategory(String? key) =>
+      emit(state.copyWith(categoryKey: key, clearCategory: key == null));
   void selectProfileCategory(String? id) => emit(
     state.copyWith(profileCategoryId: id, clearProfileCategory: id == null),
   );
+  bool assignProfileCategory(String id, List<ProfileCategory> available) {
+    if (isClosed ||
+        !ProfileCategory.isBackendId(id) ||
+        !available.any((category) => category.id == id)) {
+      return false;
+    }
+    selectProfileCategory(id);
+    return true;
+  }
+
   void selectPostType(CreatePostType value) =>
       emit(state.copyWith(postType: value));
   void updateTitle(String value) => emit(state.copyWith(title: value));

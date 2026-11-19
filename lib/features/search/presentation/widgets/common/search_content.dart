@@ -12,6 +12,7 @@ import 'package:nini/shared/models/post/post_seller.dart';
 import 'package:nini/features/home/data/home_post_data.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/features/search/presentation/cubit/search_state.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 
 import 'package:nini/features/search/presentation/widgets/results/search_empty_state.dart';
 import 'package:nini/features/search/presentation/widgets/common/search_city_list.dart';
@@ -26,9 +27,11 @@ class SearchContent extends StatelessWidget {
     required this.onCitySelected,
     required this.onQuerySelected,
     this.onPostSelected,
+    this.emptyStateTextAlign = TextAlign.right,
   });
 
   final SearchState state;
+  final TextAlign emptyStateTextAlign;
   final ValueChanged<String> onCitySelected;
   final ValueChanged<String> onQuerySelected;
   final void Function(PostItem post, PostSeller seller)? onPostSelected;
@@ -70,13 +73,73 @@ class SearchContent extends StatelessWidget {
       );
     }
 
+    final backend = context.read<BackendPostsCubit?>();
+    if (backend != null) {
+      return BlocBuilder<BackendPostsCubit, BackendPostsState>(
+        builder: (context, result) {
+          final posts = result.posts;
+          if (result.loading && result.posts.isEmpty)
+            return const SearchResultsGrid(posts: [], isLoading: true);
+          if (result.error && result.posts.isEmpty)
+            return Center(
+              child: TextButton(
+                onPressed: backend.loadMore,
+                child: const Text('Could not load search results. Retry'),
+              ),
+            );
+          if (state.panel == SearchPanel.suggestions && posts.isNotEmpty) {
+            return SearchSuggestions(
+              suggestions: posts.map((post) => post.title).toSet().toList(),
+              onSelected: onQuerySelected,
+            );
+          }
+          if (posts.isEmpty) {
+            return Column(
+              children: [
+                Expanded(
+                  child: SearchEmptyState(
+                    onReset: () => onQuerySelected(''),
+                    textAlign: emptyStateTextAlign,
+                  ),
+                ),
+                if (result.hasMore)
+                  TextButton(
+                    onPressed: backend.loadMore,
+                    child: const Text('More results'),
+                  ),
+              ],
+            );
+          }
+          return Column(
+            children: [
+              if (result.error)
+                TextButton(
+                  onPressed: backend.loadMore,
+                  child: const Text('Could not load more. Retry'),
+                ),
+              Expanded(
+                child: SearchResultsGrid(
+                  posts: posts,
+                  onLoadMore: result.error ? null : backend.loadMore,
+                  onPostSelected: (post) => _openPost(context, post),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     if (state.panel == SearchPanel.suggestions) {
       final suggestions = SearchCatalog.suggestionsFor(
         state.query,
         publishedPosts: publishedPosts,
       );
       if (suggestions.isEmpty) {
-        return SearchEmptyState(onReset: () => onQuerySelected(''));
+        return SearchEmptyState(
+          onReset: () => onQuerySelected(''),
+          textAlign: emptyStateTextAlign,
+        );
       }
       return SearchSuggestions(
         suggestions: suggestions,
@@ -94,7 +157,10 @@ class SearchContent extends StatelessWidget {
       publishedPosts: publishedPosts,
     );
     if (posts.isEmpty) {
-      return SearchEmptyState(onReset: () => onQuerySelected(''));
+      return SearchEmptyState(
+        onReset: () => onQuerySelected(''),
+        textAlign: emptyStateTextAlign,
+      );
     }
     return SearchResultsGrid(
       key: ValueKey('${state.city}:${state.submittedQuery}'),

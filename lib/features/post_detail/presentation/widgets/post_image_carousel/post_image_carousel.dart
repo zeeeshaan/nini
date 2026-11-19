@@ -84,7 +84,7 @@ class _PostImageCarouselState extends State<PostImageCarousel> with RouteAware {
         ? widget.media.length
         : widget.images.length;
     final images = Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       child: AspectRatio(
         aspectRatio: 1,
         child: PageView.builder(
@@ -119,7 +119,7 @@ class _PostImageCarouselState extends State<PostImageCarousel> with RouteAware {
           child: Center(
             child: IgnorePointer(
               child: Directionality(
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.ltr,
                 child: HomePostMediaIndicator(
                   count: count,
                   controller: _pageController,

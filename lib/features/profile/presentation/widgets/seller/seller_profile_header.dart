@@ -12,10 +12,12 @@ class SellerProfileHeader extends StatelessWidget {
     super.key,
     required this.profile,
     this.avatarSize = 104,
+    this.postCount,
   });
 
   final PublicUserProfile profile;
   final double avatarSize;
+  final int? postCount;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -27,7 +29,7 @@ class SellerProfileHeader extends StatelessWidget {
         children: [
           Expanded(
             child: ProfileStats(
-              postCount: profile.postsCount?.toString() ?? '—',
+              postCount: (postCount ?? profile.postsCount)?.toString() ?? '—',
               salesCount: profile.followersCount?.toString() ?? '—',
               customerCount: profile.followingCount?.toString() ?? '—',
               salesLabel: AppStrings.followers,

@@ -8,6 +8,7 @@ import 'package:nini/core/icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 
 class SchedulePostDialog extends StatefulWidget {
   const SchedulePostDialog({super.key, this.initial});
@@ -80,7 +81,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                 ],
               ),
               SizedBox(
-                height: 350,
+                height: 410,
                 child: TabBarView(
                   controller: _tabs,
                   children: [
@@ -138,8 +139,8 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                         ),
                       ],
                     ),
-                    CalendarDatePicker(
-                      initialDate: _schedule.state.date,
+                    AppCalendar(
+                      selectedDate: _schedule.state.date,
                       firstDate: today,
                       lastDate: DateTime(today.year + 5, 12, 31),
                       onDateChanged: _schedule.changeDate,
@@ -148,7 +149,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
                 ),
               ),
               Text(
-                '${MaterialLocalizations.of(context).formatMediumDate(_schedule.state.date)} · ${_schedule.state.from.format(context)} – ${_schedule.state.to.format(context)}',
+                '${formatSolarDate(_schedule.state.date)} · ${_schedule.state.from.format(context)} – ${_schedule.state.to.format(context)}',
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.ltr,
               ),

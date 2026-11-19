@@ -7,16 +7,24 @@ import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';
 
+import 'package:nini/features/posts/domain/models/profile_category.dart';
+
 class SellerProfileState {
   const SellerProfileState({
     this.profile,
     this.loading = false,
     this.error,
     this.canRetry = true,
+    this.categories,
+    this.categoriesLoading = false,
+    this.categoriesError,
   });
   final PublicUserProfile? profile;
   final bool loading, canRetry;
   final String? error;
+  final ProfileCategoryList? categories;
+  final bool categoriesLoading;
+  final String? categoriesError;
 }
 
 class SellerProfileCubit extends Cubit<SellerProfileState> {
@@ -30,7 +38,7 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
     if (isClosed) return Future.value();
     final key =
         '${PublicUserProfile.normalizeUsername(username)}:$expectedUserId';
-    if (state.loading && key == _key && _pending != null) return _pending!;
+    if (key == _key && _pending != null) return _pending!;
     _key = key;
     final request = ++_request;
     emit(const SellerProfileState(loading: true));
@@ -52,13 +60,41 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
     try {
       final profile = await _repository.load(username, expectedUserId: id);
       if (!isClosed && request == _request) {
-        emit(SellerProfileState(profile: profile));
+        emit(SellerProfileState(profile: profile, categoriesLoading: true));
+        await _loadCategories(profile, request);
       }
     } catch (error) {
       if (isClosed || request != _request) return;
       final status = error is DioException ? error.response?.statusCode : null;
       emit(SellerProfileState(error: _message(error), canRetry: status != 404));
     }
+  }
+
+  Future<void> _loadCategories(PublicUserProfile profile, int request) async {
+    if (isClosed || request != _request) return;
+    try {
+      final categories = await _repository.loadCategories(profile.seller.id);
+      if (isClosed || request != _request) return;
+      emit(SellerProfileState(profile: profile, categories: categories));
+    } catch (_) {
+      if (isClosed || request != _request) return;
+      emit(
+        SellerProfileState(
+          profile: profile,
+          categoriesError: ProfilePostStrings.publicCategoriesFailed,
+        ),
+      );
+    }
+  }
+
+  Future<void> retryCategories() {
+    final profile = state.profile;
+    if (isClosed || profile == null || state.categoriesLoading) {
+      return Future.value();
+    }
+    final request = _request;
+    emit(SellerProfileState(profile: profile, categoriesLoading: true));
+    return _loadCategories(profile, request);
   }
 
   String _message(Object error) {

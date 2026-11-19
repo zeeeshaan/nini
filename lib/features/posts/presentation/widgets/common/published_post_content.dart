@@ -1,3 +1,4 @@
+import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:nini/core/localization/app_string/app_string.dart';
@@ -52,6 +53,17 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
     final tags = post.details.tags;
     final address = post.details.address;
     final schedule = post.details.schedule;
+    final captionStyle = AppTextStyles.body.copyWith(
+      fontFamily: 'ProfileCard',
+      fontFamilyFallback: const [
+        AppTextStyles.fontFamily,
+        'Apple Color Emoji',
+        'Noto Color Emoji',
+      ],
+      fontSize: 12,
+      height: 1.25,
+      color: theme.colorScheme.onSurface,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Column(
@@ -86,29 +98,30 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
                 controller: _caption,
                 focusNode: _focus,
                 scrollController: _scroll,
-                config: const quill.QuillEditorConfig(
+                config: quill.QuillEditorConfig(
                   scrollable: false,
                   enableInteractiveSelection: false,
                   padding: EdgeInsets.zero,
+                  customStyles: quill.DefaultStyles(
+                    paragraph: quill.DefaultTextBlockStyle(
+                      captionStyle,
+                      quill.HorizontalSpacing.zero,
+                      quill.VerticalSpacing.zero,
+                      quill.VerticalSpacing.zero,
+                      null,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
           if (!widget.serviceLayout && tags.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final tag in tags)
-                  Chip(
-                    label: Text(
-                      '#$tag',
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-              ],
+            const SizedBox(height: 20),
+            Text(
+              tags.map((tag) => '#$tag').join(' '),
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.right,
+              style: captionStyle,
             ),
           ],
           if (!widget.serviceLayout && address != null) ...[
@@ -122,10 +135,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
           if (schedule != null) ...[
             const SizedBox(height: 12),
             Text(
-              AppStrings.scheduledFor(
-                MaterialLocalizations.of(context)
-                    .formatMediumDate(schedule.startsAt),
-              ),
+              AppStrings.scheduledFor(formatSolarDate(schedule.startsAt)),
               textAlign: TextAlign.right,
               textDirection: TextDirection.ltr,
             ),

@@ -8,10 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:nini/features/create_post/data/api_categories_repository.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
 import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
 import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
 import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_content.dart';
-import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 class CreatePostGalleryScreen extends StatelessWidget {
@@ -21,9 +22,14 @@ class CreatePostGalleryScreen extends StatelessWidget {
     this.onNext,
     this.initialTab = GalleryTab.photo,
     this.nextLabel = CreatePostStrings.next,
+    this.previewOnly = false,
   });
   final GalleryTab initialTab;
   final String nextLabel;
+
+  /// Displays the real gallery layout during a dashboard swipe without
+  /// requesting media access before the user opens the route.
+  final bool previewOnly;
 
   final VoidCallback? onClose;
 
@@ -35,16 +41,32 @@ class CreatePostGalleryScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GalleryCubit>(
-          create: (_) => GalleryCubit()..changeTab(initialTab),
+          create: (_) {
+            final cubit = GalleryCubit();
+            if (!previewOnly) cubit.changeTab(initialTab);
+            return cubit;
+          },
         ),
 
         // Holds post form data throughout this flow.
         BlocProvider<CreatePostCubit>(create: (_) => CreatePostCubit()),
+        BlocProvider<PostCategoriesCubit>(
+          create: (context) =>
+              PostCategoriesCubit(context.read<ApiCategoriesRepository>())
+                ..load(),
+        ),
       ],
-      child: _CreatePostGalleryView(
-        onClose: onClose,
-        onNext: onNext,
-        nextLabel: nextLabel,
+      child: IgnorePointer(
+        ignoring: previewOnly,
+        child: ExcludeSemantics(
+          excluding: previewOnly,
+          child: _CreatePostGalleryView(
+            onClose: onClose,
+            onNext: onNext,
+            nextLabel: nextLabel,
+            previewOnly: previewOnly,
+          ),
+        ),
       ),
     );
   }
@@ -55,8 +77,10 @@ class _CreatePostGalleryView extends StatelessWidget {
     this.onClose,
     this.onNext,
     this.nextLabel = CreatePostStrings.next,
+    this.previewOnly = false,
   });
   final String nextLabel;
+  final bool previewOnly;
 
   final VoidCallback? onClose;
   final ValueChanged<List<GalleryAttachment>>? onNext;
@@ -79,7 +103,9 @@ class _CreatePostGalleryView extends StatelessWidget {
       return;
     }
 
-    final attachments = await context.read<GalleryCubit>().prepareSelection();
+    final attachments = await context.read<GalleryCubit>().prepareSelection(
+      forPost: onNext == null,
+    );
     if (!context.mounted || attachments == null) return;
 
     // Preserve the existing optional callback.
@@ -90,17 +116,21 @@ class _CreatePostGalleryView extends StatelessWidget {
 
     // Reuse the same draft Cubit on the details route.
     final createPostCubit = context.read<CreatePostCubit>();
+    final categoriesCubit = context.read<PostCategoriesCubit>();
 
-    final published = await Navigator.of(context).push<PostItem>(
-      MaterialPageRoute<PostItem>(
-        builder: (_) => BlocProvider<CreatePostCubit>.value(
-          value: createPostCubit,
+    final published = await Navigator.of(context).push<bool>(
+      MaterialPageRoute<bool>(
+        builder: (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider<CreatePostCubit>.value(value: createPostCubit),
+            BlocProvider<PostCategoriesCubit>.value(value: categoriesCubit),
+          ],
           child: CreatePostDetailsScreen(attachments: attachments),
         ),
       ),
     );
-    if (context.mounted && published != null) {
-      Navigator.of(context).pop(published);
+    if (context.mounted && published == true) {
+      Navigator.of(context).pop<bool>(true);
     }
   }
 
@@ -208,7 +238,7 @@ class _CreatePostGalleryView extends StatelessWidget {
                     Expanded(
                       child: AbsorbPointer(
                         absorbing: preparation.isPreparing,
-                        child: const GalleryContent(),
+                        child: GalleryContent(previewOnly: previewOnly),
                       ),
                     ),
                   ],

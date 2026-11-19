@@ -3,6 +3,7 @@ import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.d
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../helpers/open_settings_post.dart';
 
@@ -11,10 +12,12 @@ class SettingsPostsGrid extends StatelessWidget {
     super.key,
     this.posts = const [],
     this.loading = false,
+    this.showStatus = false,
     this.gridDirection = TextDirection.ltr,
   });
   final List<PostItem> posts;
   final bool loading;
+  final bool showStatus;
   final TextDirection gridDirection;
 
   @override
@@ -37,26 +40,29 @@ class SettingsPostsGrid extends StatelessWidget {
       final direction = Directionality.of(context);
       return Directionality(
         textDirection: gridDirection,
-        child: GridView.builder(
-          padding: EdgeInsets.zero,
-          reverse: false,
-          itemCount: loading ? columns * 2 : posts.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: columns,
-            crossAxisSpacing: 2,
-            mainAxisExtent: cardWidth + detailsHeight,
-          ),
-          itemBuilder: (context, index) => loading
-              ? const ProductCardSkeleton()
-              : Directionality(
-                  textDirection: direction,
-                  child: ProfilePostCard(
-                    post: posts[index],
-                    detailsHeight: detailsHeight,
-                    contentScale: contentScale,
-                    onTap: () => openSettingsPost(context, posts[index]),
+        child: AppShimmer.when(
+          enabled: loading,
+          child: GridView.builder(
+            padding: EdgeInsets.zero,
+            reverse: false,
+            itemCount: loading ? columns * 2 : posts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: columns,
+              crossAxisSpacing: 2,
+              mainAxisExtent: cardWidth + detailsHeight,
+            ),
+            itemBuilder: (context, index) => loading
+                ? ProductCardSkeleton(animated: false, showStatus: showStatus)
+                : Directionality(
+                    textDirection: direction,
+                    child: ProfilePostCard(
+                      post: posts[index],
+                      detailsHeight: detailsHeight,
+                      contentScale: contentScale,
+                      onTap: () => openSettingsPost(context, posts[index]),
+                    ),
                   ),
-                ),
+          ),
         ),
       );
     },

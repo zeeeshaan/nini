@@ -6,6 +6,7 @@ import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
+import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../../domain/device_permissions_repository.dart';
 import '../../cubit/device_permissions_cubit.dart';
@@ -50,10 +51,12 @@ class _PermissionsContentState extends State<PermissionsContent>
     builder: (context, state) {
       final cubit = context.read<DevicePermissionsCubit>();
       if (state.loading && state.values.isEmpty) {
-        return ListView(
-          children: List.generate(
-            4,
-            (_) => const ListTileSkeleton(showAvatar: false),
+        return AppShimmer(
+          child: ListView(
+            children: List.generate(
+              4,
+              (_) => const ListTileSkeleton(showAvatar: false, animated: false),
+            ),
           ),
         );
       }

@@ -15,10 +15,12 @@ class PostPricingInventorySection extends StatelessWidget {
     required this.priceController,
     required this.discountController,
     required this.stockController,
+    this.priceError = false,
   });
   final TextEditingController priceController,
       discountController,
       stockController;
+  final bool priceError;
   @override
   Widget build(BuildContext context) {
     final draftCubit = context.read<CreatePostCubit>();
@@ -27,6 +29,7 @@ class PostPricingInventorySection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AppTextField(
+          hasError: priceError,
           controller: priceController,
           label: CreatePostStrings.price,
           hint: CreatePostStrings.enterPrice,

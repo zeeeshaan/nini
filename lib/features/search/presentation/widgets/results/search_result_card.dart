@@ -29,8 +29,13 @@ class SearchResultCard extends StatelessWidget {
           detailsHeight ??
           ProfilePostCard.detailsHeightFor(context, contentScale),
       titleOverride: post.title,
-      categoryLabel: AppStrings.services,
-      showStock: false,
+      categoryLabel: post.isService
+          ? AppStrings.services
+          : AppStrings.postCategory(post.category),
+      showStock:
+          !post.isService &&
+          (post.metadata['backend'] != true ||
+              post.details.warehouseStock.isNotEmpty),
       impressionSource: 'search',
       statusLabel: post.details.tags.contains(AppStrings.preOrder)
           ? Align(

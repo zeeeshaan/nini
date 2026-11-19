@@ -7,8 +7,13 @@ import 'package:nini/features/create_post/presentation/widgets/form/client_capti
 /// A real rich-text editor. Its controller stores Quill Delta, so formatting is
 /// retained when leaving the screen; toolbar actions affect the selection.
 class CaptionEditor extends StatefulWidget {
-  const CaptionEditor({super.key, required this.controller});
+  const CaptionEditor({
+    super.key,
+    required this.controller,
+    this.hasError = false,
+  });
   final QuillController controller;
+  final bool hasError;
   @override
   State<CaptionEditor> createState() => _CaptionEditorState();
 }
@@ -34,7 +39,11 @@ class _CaptionEditorState extends State<CaptionEditor> {
     child: Builder(
       builder: (context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.outline),
+          border: Border.all(
+            color: widget.hasError
+                ? Theme.of(context).colorScheme.error
+                : Theme.of(context).colorScheme.outline,
+          ),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Column(
