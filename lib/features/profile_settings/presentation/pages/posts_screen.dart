@@ -5,6 +5,14 @@ import 'package:nini/features/posts/data/api_posts_repository.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
 import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/features/posts/presentation/pages/edit_post_screen.dart';
+import 'package:nini/features/posts/presentation/widgets/actions/post_owner_actions_sheet.dart';
+import 'package:nini/features/posts/presentation/widgets/actions/post_delete_sheet.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_operation_cubit.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+
+import 'dart:async';
 
 import '../cubit/settings_query_cubit.dart';
 import '../widgets/common/settings_page.dart';
@@ -49,6 +57,70 @@ class _ServerPosts extends StatefulWidget {
 class _ServerPostsState extends State<_ServerPosts> {
   late Future<MyPostsPage> _loading;
   int _page = 1;
+  final _operation = PostOperationCubit();
+
+  @override
+  void dispose() {
+    _operation.close();
+    super.dispose();
+  }
+
+  Future<void> _manage(MyServerPost post, PostItem card) async {
+    if (_operation.state.saving) return;
+    final editable = const {
+      'published',
+      'pending_review',
+      'changes_requested',
+    }.contains(post.status);
+    final action = await showPostOwnerActions(
+      context,
+      allowEdit: editable,
+      allowResubmit: post.status == 'changes_requested',
+    );
+    if (!mounted || action == null) return;
+    final repository = context.read<ApiPostsRepository>();
+    switch (action) {
+      case PostOwnerAction.edit:
+        final updated = await Navigator.of(context).push<PostItem>(
+          MaterialPageRoute(
+            builder: (_) => BackendEditPostScreen(postId: post.id),
+          ),
+        );
+        if (mounted && updated != null) _load(_page);
+      case PostOwnerAction.delete:
+        final deleted = await showPostDeleteConfirmation(
+          context,
+          card,
+          onBackendDelete: () => repository.deleteOwnedPost(post),
+        );
+        if (!mounted || !deleted) return;
+        final feed = context.read<FeedCubit?>();
+        final own = context.read<OwnPostsCubit?>();
+        if (feed != null) unawaited(feed.refreshFromServer());
+        if (own != null) unawaited(own.refresh());
+        _load(_page);
+        AppToast.success(context, 'Post deleted.');
+      case PostOwnerAction.resubmit:
+        if (_operation.state.saving) return;
+        _operation.beginSave();
+        try {
+          await repository.resubmitOwnedPost(post);
+          if (!mounted) return;
+          _load(_page);
+          AppToast.success(context, 'Post sent for review.');
+        } catch (error) {
+          if (mounted)
+            AppToast.error(
+              context,
+              error is PostApiException
+                  ? error.message
+                  : 'Could not resubmit the post.',
+            );
+        } finally {
+          if (!_operation.isClosed) _operation.retry();
+        }
+    }
+  }
 
   String? _imageUrl(Object? value) {
     if (value is! String || value.trim() != value) return null;
@@ -96,7 +168,11 @@ class _ServerPostsState extends State<_ServerPosts> {
       return BlocBuilder<SettingsQueryCubit, String>(
         builder: (context, query) {
           final posts = result.items
-              .where((p) => p.title.toLowerCase().contains(query))
+              .where(
+                (p) =>
+                    !context.read<ApiPostsRepository>().isDeleted(p.id) &&
+                    p.title.toLowerCase().contains(query),
+              )
               .toList();
           return Column(
             children: [
@@ -152,17 +228,18 @@ class _ServerPostsState extends State<_ServerPosts> {
                                         category['label'] is String
                                     ? category['label'] as String
                                     : '';
+                                final card = PostItem(
+                                  id: post.id,
+                                  imageAsset: '',
+                                  title: post.title,
+                                  category: label,
+                                  stockCount: 0,
+                                  price: toman,
+                                  originalPrice: '',
+                                );
                                 return ProfilePostCard(
-                                  post: PostItem(
-                                    id: post.id,
-                                    imageAsset: '',
-                                    title: post.title,
-                                    category: label,
-                                    stockCount: 0,
-                                    price: toman,
-                                    originalPrice: '',
-                                  ),
-                                  onTap: null,
+                                  post: card,
+                                  onTap: () => _manage(post, card),
                                   detailsHeight: detailsHeight,
                                   contentScale: scale,
                                   categoryLabel: label,

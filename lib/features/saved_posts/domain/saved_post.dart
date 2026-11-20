@@ -11,7 +11,7 @@ class SavedPost {
 
   final PostItem post;
   final PostSeller? seller;
-  final DateTime savedAt;
+  final DateTime? savedAt;
 
   /// A post in the existing local Posts repository, not a remote seller record.
   final bool isLocalPost;
@@ -26,7 +26,7 @@ class SavedPost {
   Map<String, dynamic> toJson() => {
     'post': post.toJson(),
     if (seller != null) 'seller': seller!.toJson(),
-    'savedAt': savedAt.toUtc().toIso8601String(),
+    'savedAt': savedAt?.toUtc().toIso8601String(),
     'isLocalPost': isLocalPost,
   };
 
@@ -35,7 +35,9 @@ class SavedPost {
     seller: json['seller'] == null
         ? null
         : PostSeller.fromJson(Map<String, dynamic>.from(json['seller'] as Map)),
-    savedAt: DateTime.parse(json['savedAt'] as String).toLocal(),
+    savedAt: json['savedAt'] is String
+        ? DateTime.parse(json['savedAt'] as String).toLocal()
+        : null,
     isLocalPost: json['isLocalPost'] as bool? ?? false,
   );
 }

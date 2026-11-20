@@ -10,11 +10,13 @@ import 'post_editor_alt_text_fields.dart';
 import '../media/post_editor_media_grid.dart';
 
 class PostEditorMediaSection extends StatelessWidget {
-  const PostEditorMediaSection({super.key});
+  const PostEditorMediaSection({super.key, this.backend = false});
+  final bool backend;
   Future<void> _pick(BuildContext context, {bool replace = false}) async {
     final selected = await Navigator.of(context).push<List<GalleryAttachment>>(
       MaterialPageRoute(
         builder: (pickerContext) => CreatePostGalleryScreen(
+          prepareForPost: backend,
           nextLabel: ProfilePostStrings.next,
           onNext: (items) => Navigator.of(pickerContext).pop(items),
         ),

@@ -66,87 +66,100 @@ class SavedPostsScreen extends StatelessWidget {
                 ),
               ),
               child: BlocBuilder<SavedPostsCubit, SavedPostsState>(
-                builder: (context, state) => SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if ((state.loading && state.posts.isNotEmpty) ||
-                          state.saving)
-                        const LinearProgressIndicator(minHeight: 2),
-                      if (state.loadFailed || state.storageError)
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                state.loadFailed
-                                    ? SavedPostsStrings.loadFailed
-                                    : SavedPostsStrings.saveFailed,
-                                textAlign: TextAlign.right,
-                                style: AppTextStyles.body,
-                                textDirection: TextDirection.ltr,
-                              ),
-                              TextButton(
-                                onPressed: state.loading || state.saving
-                                    ? null
-                                    : () => context
-                                          .read<SavedPostsCubit>()
-                                          .load(),
-                                child: const Text(
-                                  AppStrings.retry,
-                                  textDirection: TextDirection.ltr,
-                                  textAlign: TextAlign.right,
+                builder: (context, state) =>
+                    NotificationListener<ScrollNotification>(
+                      onNotification: (notification) {
+                        if ((notification is ScrollUpdateNotification ||
+                                notification is OverscrollNotification) &&
+                            notification.metrics.extentAfter < 200 &&
+                            !state.loadFailed) {
+                          context.read<SavedPostsCubit>().loadMore();
+                        }
+                        return false;
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            if ((state.loading && state.posts.isNotEmpty) ||
+                                state.saving)
+                              const LinearProgressIndicator(minHeight: 2),
+                            if (state.loadFailed || state.storageError)
+                              Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      state.loadFailed
+                                          ? SavedPostsStrings.loadFailed
+                                          : SavedPostsStrings.saveFailed,
+                                      textAlign: TextAlign.right,
+                                      style: AppTextStyles.body,
+                                      textDirection: TextDirection.ltr,
+                                    ),
+                                    TextButton(
+                                      onPressed: state.loading || state.saving
+                                          ? null
+                                          : () => context
+                                                .read<SavedPostsCubit>()
+                                                .load(),
+                                      child: const Text(
+                                        AppStrings.retry,
+                                        textDirection: TextDirection.ltr,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      if (!state.loading &&
-                          !state.loadFailed &&
-                          state.posts.isEmpty)
-                        const Padding(
-                          padding: EdgeInsets.all(24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              AppIcon(AppIcons.bookmark, size: 40),
-                              SizedBox(height: 12),
-                              Text(
-                                SavedPostsStrings.empty,
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.sectionTitle,
-                                textDirection: TextDirection.ltr,
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                SavedPostsStrings.emptyHelp,
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.body,
-                                textDirection: TextDirection.ltr,
-                              ),
-                            ],
-                          ),
-                        ),
-                      if (state.posts.isNotEmpty || state.loading)
-                        SavedPostsGrid(
-                          loading: state.loading && state.posts.isEmpty,
-                          posts: state.posts,
-                          saving: state.saving,
-                          onRemove: (entry) => _remove(context, entry),
-                          onPostTap: (entry) =>
-                              Navigator.of(context).push<void>(
-                                MaterialPageRoute(
-                                  builder: (_) => PostDetailScreen(
-                                    post: entry.post,
-                                    seller: entry.seller,
-                                  ),
+                            if (!state.loading &&
+                                !state.loadFailed &&
+                                state.posts.isEmpty)
+                              const Padding(
+                                padding: EdgeInsets.all(24),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    AppIcon(AppIcons.bookmark, size: 40),
+                                    SizedBox(height: 12),
+                                    Text(
+                                      SavedPostsStrings.empty,
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.sectionTitle,
+                                      textDirection: TextDirection.ltr,
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      SavedPostsStrings.emptyHelp,
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.body,
+                                      textDirection: TextDirection.ltr,
+                                    ),
+                                  ],
                                 ),
                               ),
+                            if (state.posts.isNotEmpty || state.loading)
+                              SavedPostsGrid(
+                                loading: state.loading && state.posts.isEmpty,
+                                posts: state.posts,
+                                saving: state.saving,
+                                onRemove: (entry) => _remove(context, entry),
+                                onPostTap: (entry) =>
+                                    Navigator.of(context).push<void>(
+                                      MaterialPageRoute(
+                                        builder: (_) => PostDetailScreen(
+                                          post: entry.post,
+                                          seller: entry.seller,
+                                        ),
+                                      ),
+                                    ),
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
-                ),
+                      ),
+                    ),
               ),
             ),
           ),

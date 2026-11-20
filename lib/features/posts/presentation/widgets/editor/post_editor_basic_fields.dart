@@ -10,43 +10,51 @@ import 'package:nini/features/create_post/presentation/widgets/form/caption_edit
 import '../../helpers/post_editor_validation.dart';
 
 class PostEditorBasicFields extends StatelessWidget {
-  const PostEditorBasicFields({super.key, required this.captionController});
+  const PostEditorBasicFields({
+    super.key,
+    required this.captionController,
+    this.backend = false,
+  });
   final quill.QuillController captionController;
+  final bool backend;
   @override
   Widget build(BuildContext context) {
     final editor = context.read<CreatePostCubit>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: DropdownButtonFormField<CreatePostType>(
-            initialValue: editor.state.postType,
-            decoration: const InputDecoration(
-              labelText: ProfilePostStrings.type,
+        IgnorePointer(
+          ignoring: backend,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: DropdownButtonFormField<CreatePostType>(
+              initialValue: editor.state.postType,
+              decoration: const InputDecoration(
+                labelText: ProfilePostStrings.type,
+              ),
+              items: const [
+                DropdownMenuItem(
+                  value: CreatePostType.product,
+                  child: Text(
+                    ProfilePostStrings.product,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+                DropdownMenuItem(
+                  value: CreatePostType.services,
+                  child: Text(
+                    ProfilePostStrings.service,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ],
+              onChanged: (value) {
+                if (value != null && !backend) editor.selectPostType(value);
+              },
+              alignment: Alignment.centerRight,
             ),
-            items: const [
-              DropdownMenuItem(
-                value: CreatePostType.product,
-                child: Text(
-                  ProfilePostStrings.product,
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.right,
-                ),
-              ),
-              DropdownMenuItem(
-                value: CreatePostType.services,
-                child: Text(
-                  ProfilePostStrings.service,
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-            onChanged: (value) {
-              if (value != null) editor.selectPostType(value);
-            },
-            alignment: Alignment.centerRight,
           ),
         ),
         const SizedBox(height: 16),

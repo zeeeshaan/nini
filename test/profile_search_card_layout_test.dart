@@ -400,7 +400,7 @@ void main() {
         .load();
   });
 
-  test('Search results and suggestions include both published post types', () {
+  test('Local Search results include both published post types', () {
     final product = _post(title: 'Repair kit', published: true);
     final service = _post(
       title: 'Repair service',
@@ -413,9 +413,6 @@ void main() {
       product,
       service,
     ]);
-    final suggestions = SearchCatalog.suggestionsFor('', publishedPosts: posts);
-    expect(suggestions, containsAll([product.title, service.title]));
-    expect(suggestions, isNot(contains(draft.title)));
   });
 
   test(
@@ -447,10 +444,6 @@ void main() {
       expect(
         SearchCatalog.resultsFor('تهران', 'unrelated', publishedPosts: posts),
         isEmpty,
-      );
-      expect(
-        SearchCatalog.suggestionsFor('repair', publishedPosts: posts),
-        containsAll([product.title, service.title]),
       );
     },
   );

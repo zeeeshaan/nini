@@ -44,7 +44,10 @@ class _SearchViewState extends State<SearchView> {
     super.initState();
     if (widget.publishedServiceId != null) _search.submit('');
     _controller.text = SearchStrings.display(_search.state.query);
-    if (widget.active) _request(_search.state.submittedQuery);
+    if (widget.active) {
+      _request(_search.state.submittedQuery);
+      if (_search.state.query.trim().isEmpty) _search.loadDiscovery();
+    }
   }
 
   @override
@@ -58,8 +61,10 @@ class _SearchViewState extends State<SearchView> {
       _focusNode.unfocus();
       _debounce?.cancel();
     }
-    if (!oldWidget.active && widget.active)
+    if (!oldWidget.active && widget.active) {
       _request(_search.state.submittedQuery, refresh: true);
+      if (_search.state.query.trim().isEmpty) _search.loadDiscovery();
+    }
   }
 
   void _request(String query, {bool refresh = false}) {
@@ -89,8 +94,12 @@ class _SearchViewState extends State<SearchView> {
     _debounce?.cancel();
     _requestedQuery = null;
     context.read<BackendPostsCubit?>()?.invalidate();
-    _debounce = Timer(const Duration(milliseconds: 350), () {
-      if (mounted) _request(query.trim());
+    if (query.trim().isEmpty) _search.loadDiscovery();
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        _request(query.trim());
+        if (query.trim().isNotEmpty) _search.loadSuggestions(query);
+      }
     });
   }
 
@@ -105,6 +114,7 @@ class _SearchViewState extends State<SearchView> {
   void _submit(String query) {
     _debounce?.cancel();
     _search.submit(query);
+    if (query.trim().isEmpty) _search.loadDiscovery();
     _request(_search.state.submittedQuery);
     _updateField(_search.state.query);
     _focusNode.unfocus();

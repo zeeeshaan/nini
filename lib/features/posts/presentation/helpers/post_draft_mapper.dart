@@ -37,3 +37,49 @@ PostDraft postDraftFromPost(PostItem post) {
     altTexts: details.altTexts,
   );
 }
+
+/// Rehydrates values that are representable by the existing editor; the raw
+/// owner response remains authoritative for all comparisons and nulls.
+PostDraft postDraftFromBackend(PostItem post, Map<String, dynamic> data) {
+  final base = postDraftFromPost(post);
+  final price = data['price'];
+  final discount = data['discountPrice'];
+  var percent = '';
+  if (price is int &&
+      price > 0 &&
+      discount is int &&
+      discount >= 0 &&
+      discount < price) {
+    final scaled = BigInt.from(price - discount) * BigInt.from(10000);
+    if (scaled % BigInt.from(price) == BigInt.zero) {
+      final points = (scaled ~/ BigInt.from(price)).toInt();
+      percent = points % 100 == 0
+          ? '${points ~/ 100}'
+          : '${points ~/ 100}.${(points % 100).toString().padLeft(2, '0')}';
+    }
+  }
+  final start = data['scheduleStart'] is String
+      ? DateTime.tryParse(data['scheduleStart'] as String)
+      : null;
+  final end = data['scheduleEnd'] is String
+      ? DateTime.tryParse(data['scheduleEnd'] as String)
+      : null;
+  final stock = data['stock'];
+  final inventory = data['inventoryStatus'];
+  final preparation = data['preparationTime'];
+  return base.copyWith(
+    discount: percent,
+    warehouseStock: stock is int ? '$stock' : '',
+    inventoryStatus: inventory == 'out_of_stock'
+        ? InventoryStatus.outOfStock
+        : InventoryStatus.inStock,
+    preparationTime: PreparationTime.values.firstWhere(
+      (v) => v.label == preparation,
+      orElse: () => PreparationTime.none,
+    ),
+    schedule: start != null && end != null
+        ? PostSchedule(startsAt: start.toLocal(), endsAt: end.toLocal())
+        : null,
+    clearSchedule: start == null || end == null,
+  );
+}

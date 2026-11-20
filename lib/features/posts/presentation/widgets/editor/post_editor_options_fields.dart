@@ -5,7 +5,9 @@ import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 
 class PostEditorOptionsFields extends StatelessWidget {
-  const PostEditorOptionsFields({super.key});
+  const PostEditorOptionsFields({super.key, this.backendData, this.onTouched});
+  final Map<String, dynamic>? backendData;
+  final ValueChanged<String>? onTouched;
   @override
   Widget build(BuildContext context) {
     final editor = context.read<CreatePostCubit>();
@@ -15,7 +17,11 @@ class PostEditorOptionsFields extends StatelessWidget {
         Directionality(
           textDirection: TextDirection.rtl,
           child: DropdownButtonFormField<PreparationTime>(
-            initialValue: editor.state.preparationTime,
+            initialValue: backendData == null
+                ? editor.state.preparationTime
+                : PreparationTime.values
+                      .where((v) => v.label == backendData!['preparationTime'])
+                      .firstOrNull,
             isExpanded: true,
             decoration: const InputDecoration(
               labelText: ProfilePostStrings.preparation,
@@ -36,7 +42,10 @@ class PostEditorOptionsFields extends StatelessWidget {
                 ),
             ],
             onChanged: (value) {
-              if (value != null) editor.selectPreparationTime(value);
+              if (value != null) {
+                editor.selectPreparationTime(value);
+                onTouched?.call('preparationTime');
+              }
             },
             alignment: Alignment.centerRight,
           ),
@@ -45,7 +54,13 @@ class PostEditorOptionsFields extends StatelessWidget {
         Directionality(
           textDirection: TextDirection.rtl,
           child: DropdownButtonFormField<InventoryStatus>(
-            initialValue: editor.state.inventoryStatus,
+            initialValue: backendData == null
+                ? editor.state.inventoryStatus
+                : switch (backendData!['inventoryStatus']) {
+                    'available' => InventoryStatus.inStock,
+                    'out_of_stock' => InventoryStatus.outOfStock,
+                    _ => null,
+                  },
             isExpanded: true,
             decoration: const InputDecoration(
               labelText: ProfilePostStrings.inventory,
@@ -77,7 +92,10 @@ class PostEditorOptionsFields extends StatelessWidget {
               ),
             ],
             onChanged: (value) {
-              if (value != null) editor.selectInventoryStatus(value);
+              if (value != null) {
+                editor.selectInventoryStatus(value);
+                onTouched?.call('inventoryStatus');
+              }
             },
             alignment: Alignment.centerRight,
           ),

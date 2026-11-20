@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/core/localization/app_string/app_string.dart';
 
 import '../../../domain/public_user_profile.dart';
 import '../categories/category_chips.dart';
@@ -16,11 +18,25 @@ class SellerProfileContent extends StatelessWidget {
     required this.profile,
     this.categories,
     this.categoryMessage,
+    this.onFollow,
+    this.following = false,
+    this.posts = const BackendPostsState(),
+    this.selectedCategoryId,
+    this.onCategorySelected,
+    this.onPostTap,
+    this.onRetryPosts,
   });
 
   final PublicUserProfile profile;
   final ProfileCategoryList? categories;
   final String? categoryMessage;
+  final VoidCallback? onFollow;
+  final bool following;
+  final BackendPostsState posts;
+  final String? selectedCategoryId;
+  final ValueChanged<String?>? onCategorySelected;
+  final ValueChanged<PostItem>? onPostTap;
+  final VoidCallback? onRetryPosts;
 
   @override
   Widget build(BuildContext context) => AppResponsiveBuilder(
@@ -60,6 +76,8 @@ class SellerProfileContent extends StatelessWidget {
               child: SellerProfileActions(
                 seller: profile.seller,
                 isFollowing: profile.isFollowing,
+                onFollow: onFollow,
+                following: following,
               ),
             ),
             const SizedBox(height: 16),
@@ -70,14 +88,24 @@ class SellerProfileContent extends StatelessWidget {
                 ),
                 child: ProfileCategoryChips.readOnly(
                   categories: publicCategories,
+                  selectedId: selectedCategoryId,
+                  onSelect: onCategorySelected,
                 ),
               ),
             SellerPostGrid(
-              posts: const [],
-              onPostTap: (_) {},
-              emptyMessage:
-                  categoryMessage ?? ProfilePostStrings.publicPostsUnavailable,
+              posts: posts.posts,
+              onPostTap: onPostTap ?? (_) {},
+              emptyMessage: posts.loading
+                  ? 'Loading posts...'
+                  : posts.error
+                  ? 'Unable to load posts.'
+                  : categoryMessage ?? AppStrings.noSellerPosts,
             ),
+            if (posts.error)
+              TextButton(
+                onPressed: onRetryPosts,
+                child: const Text(AppStrings.retry),
+              ),
             const SizedBox(height: 24),
           ],
         ),

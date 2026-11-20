@@ -8,7 +8,15 @@ import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.d
 import '../../helpers/post_editor_validation.dart';
 
 class PostEditorPricingFields extends StatelessWidget {
-  const PostEditorPricingFields({super.key});
+  const PostEditorPricingFields({
+    super.key,
+    this.backend = false,
+    this.backendData,
+    this.onTouched,
+  });
+  final bool backend;
+  final Map<String, dynamic>? backendData;
+  final ValueChanged<String>? onTouched;
   @override
   Widget build(BuildContext context) {
     final editor = context.read<CreatePostCubit>();
@@ -63,7 +71,13 @@ class PostEditorPricingFields extends StatelessWidget {
         Directionality(
           textDirection: TextDirection.rtl,
           child: DropdownButtonFormField<PostUnit>(
-            initialValue: editor.state.unit,
+            initialValue: backend
+                ? PostUnit.fromName(
+                    backendData?['unit'] is String
+                        ? backendData!['unit'] as String
+                        : null,
+                  )
+                : editor.state.unit,
             isExpanded: true,
             decoration: const InputDecoration(
               labelText: ProfilePostStrings.unit,
@@ -80,7 +94,10 @@ class PostEditorPricingFields extends StatelessWidget {
                 ),
             ],
             onChanged: (value) {
-              if (value != null) editor.selectUnit(value);
+              if (value != null) {
+                editor.selectUnit(value);
+                onTouched?.call('unit');
+              }
             },
             alignment: Alignment.centerRight,
           ),

@@ -422,6 +422,59 @@ void main() {
     },
   );
 
+  testWidgets(
+    'backend edit keeps an unlisted category when the catalog reloads',
+    (tester) async {
+      final api = _Api();
+      final categories = PostCategoriesCubit(ApiCategoriesRepository(api));
+      final personal = ProfileCategoriesCubit(_PersonalCategories());
+      final draft = CreatePostCubit(
+        initial: const PostDraft(
+          categoryKey: 'tools',
+          profileCategoryId: '00000000-0000-4000-8000-000000000001',
+        ),
+      );
+      addTearDown(categories.close);
+      addTearDown(personal.close);
+      addTearDown(draft.close);
+      await categories.load();
+      await personal.load();
+      await tester.pumpWidget(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider<PostCategoriesCubit>.value(value: categories),
+            BlocProvider<ProfileCategoriesCubit>.value(value: personal),
+            BlocProvider<CreatePostCubit>.value(value: draft),
+          ],
+          child: const MaterialApp(
+            home: Scaffold(
+              body: PostCategorySelector(
+                english: true,
+                backendCategories: true,
+                preserveUnlisted: true,
+                existingGlobal: {'key': 'tools', 'label': 'Tools'},
+                existingPersonal: {
+                  'id': '00000000-0000-4000-8000-000000000001',
+                  'name': 'My category',
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      api.response = {'success': true, 'data': []};
+      await categories.load(refresh: true);
+      await tester.pumpAndSettle();
+      expect(draft.state.categoryKey, 'tools');
+      expect(
+        draft.state.profileCategoryId,
+        '00000000-0000-4000-8000-000000000001',
+      );
+      expect(find.text('Tools · My category'), findsOneWidget);
+    },
+  );
+
   testWidgets('personal-first selection works in a narrow dark layout', (
     tester,
   ) async {

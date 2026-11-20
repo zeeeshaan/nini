@@ -12,10 +12,14 @@ class SellerProfileActions extends StatelessWidget {
     super.key,
     required this.seller,
     this.isFollowing,
+    this.onFollow,
+    this.following = false,
   });
 
   final PostSeller seller;
   final bool? isFollowing;
+  final VoidCallback? onFollow;
+  final bool following;
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +56,16 @@ class SellerProfileActions extends StatelessWidget {
             child: AppButton(
               label: following ? AppStrings.following : AppStrings.follow,
               height: 44,
+              isLoading: this.following,
               variant: following
                   ? AppButtonVariant.outlined
                   : AppButtonVariant.primary,
-              onPressed: () => AppToast.show(
-                context,
-                message: ProfilePostStrings.followUnavailable,
-              ),
+              onPressed:
+                  onFollow ??
+                  () => AppToast.show(
+                    context,
+                    message: ProfilePostStrings.followUnavailable,
+                  ),
             ),
           ),
         ),

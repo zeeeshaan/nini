@@ -15,34 +15,6 @@ abstract final class SearchCatalog {
         .trim();
   }
 
-  static bool _isGeneralQuery(String query) {
-    const generalQueries = ['', 'لوله کش', 'لوله کشی', 'plumber', 'plumbing'];
-    return generalQueries.contains(normalize(query));
-  }
-
-  static List<String> suggestionsFor(
-    String query, {
-    Iterable<PostItem> publishedPosts = const [],
-  }) {
-    final matches = <String>{
-      for (final post in _matchingPosts(publishedPosts, query)) post.title,
-    };
-    if (_isGeneralQuery(query)) {
-      matches.addAll(SearchStrings.suggestions);
-      return matches.toList();
-    }
-    final words = normalize(query).split(' ');
-    for (final title in SearchStrings.suggestions) {
-      final normalizedTitle = normalize(
-        '$title ${SearchStrings.searchLabel(title)}',
-      );
-      if (words.every((word) => normalizedTitle.contains(word))) {
-        matches.add(title);
-      }
-    }
-    return matches.toList();
-  }
-
   static List<PostItem> resultsFor(
     String city,
     String query, {

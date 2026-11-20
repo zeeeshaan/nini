@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/shared/models/post/post_attributes.dart';
 
 import 'post_feature_editor_row.dart';
 
@@ -22,10 +21,8 @@ class PostEditorFeaturesField extends StatelessWidget {
             )
             ? ProfilePostStrings.invalidFeatures
             : null,
-        onSaved: (_) => context.read<CreatePostCubit>().setFeatures([
-          for (final item in fields.state.features)
-            PostFeature(name: item.name.trim(), value: item.value.trim()),
-        ]),
+        onSaved: (_) =>
+            context.read<CreatePostCubit>().setFeatures(fields.toFeatures()),
         builder: (field) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

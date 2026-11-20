@@ -44,6 +44,8 @@ class PostEngagementBar extends StatelessWidget {
   ) => BlocBuilder<PostDetailCubit, PostDetailState>(
     buildWhen: (previous, current) =>
         previous.isLiked != current.isLiked ||
+        previous.likeCount != current.likeCount ||
+        previous.commentCount != current.commentCount ||
         previous.isBookmarked != current.isBookmarked,
     builder: (context, state) {
       final displayedRating = rating ?? (showSampleMetrics ? '4.5' : '');
@@ -90,7 +92,11 @@ class PostEngagementBar extends StatelessWidget {
             AppIcons.postComment,
             size: HomeEngagementLayout.actionIconSize,
           ),
-          count: showSampleMetrics ? '886' : '0',
+          count:
+              state.commentCount?.toString() ??
+              (post?.metadata['backend'] == true
+                  ? ''
+                  : (showSampleMetrics ? '886' : '0')),
           onTap: onCommentsPressed,
         ),
         HomeMetric(
@@ -110,8 +116,20 @@ class PostEngagementBar extends StatelessWidget {
             color: state.isLiked ? AppColors.red : null,
           ),
           selected: state.isLiked,
-          count: state.isLiked ? '1' : '0',
-          onTap: context.read<PostDetailCubit>().toggleLike,
+          count:
+              state.likeCount?.toString() ??
+              (post?.metadata['backend'] == true
+                  ? ''
+                  : (state.isLiked ? '1' : '0')),
+          onTap: () async {
+            final success = await context.read<PostDetailCubit>().toggleLike();
+            if (!success && context.mounted) {
+              AppToast.error(
+                context,
+                'Unable to update like. Please try again.',
+              );
+            }
+          },
         ),
         HomeMetric(
           label: isInCart ? CartStrings.remove : AppStrings.addToCart,

@@ -24,6 +24,17 @@ class _PostEditorLocationFieldsState extends State<PostEditorLocationFields> {
   late final _longitude = TextEditingController(
     text: _coordinate(context.read<CreatePostCubit>().state.address?.longitude),
   );
+  late final String _initialAddress;
+  late final String _initialLatitude;
+  late final String _initialLongitude;
+  @override
+  void initState() {
+    super.initState();
+    _initialAddress = _address.text;
+    _initialLatitude = _latitude.text;
+    _initialLongitude = _longitude.text;
+  }
+
   String _coordinate(double? value) =>
       value == null ? '' : AppStrings.persianDigits(value);
   bool get _empty => [
@@ -61,25 +72,41 @@ class _PostEditorLocationFieldsState extends State<PostEditorLocationFields> {
         : null;
   }
 
-  void _save(String? _) => context.read<CreatePostCubit>().updateAddress(
-    _empty
-        ? null
-        : PostAddress(
-            address: _address.text.trim(),
-            latitude: PostEditorValidation.number(_latitude.text),
-            longitude: PostEditorValidation.number(_longitude.text),
-            city: context.read<CreatePostCubit>().state.address?.city ?? '',
-            province:
-                context.read<CreatePostCubit>().state.address?.province ?? '',
-            postalCode:
-                context.read<CreatePostCubit>().state.address?.postalCode ?? '',
-            buildingNumber:
-                context.read<CreatePostCubit>().state.address?.buildingNumber ??
-                '',
-            unitNumber:
-                context.read<CreatePostCubit>().state.address?.unitNumber ?? '',
-          ),
-  );
+  void _save(String? _) {
+    if (_address.text == _initialAddress &&
+        _latitude.text == _initialLatitude &&
+        _longitude.text == _initialLongitude)
+      return;
+    if (_validate(null) != null) {
+      throw const FormatException('Enter a valid location.');
+    }
+    context.read<CreatePostCubit>().updateAddress(
+      _empty
+          ? null
+          : PostAddress(
+              address: _address.text.trim(),
+              latitude: PostEditorValidation.number(_latitude.text),
+              longitude: PostEditorValidation.number(_longitude.text),
+              city: context.read<CreatePostCubit>().state.address?.city ?? '',
+              province:
+                  context.read<CreatePostCubit>().state.address?.province ?? '',
+              postalCode:
+                  context.read<CreatePostCubit>().state.address?.postalCode ??
+                  '',
+              buildingNumber:
+                  context
+                      .read<CreatePostCubit>()
+                      .state
+                      .address
+                      ?.buildingNumber ??
+                  '',
+              unitNumber:
+                  context.read<CreatePostCubit>().state.address?.unitNumber ??
+                  '',
+            ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,

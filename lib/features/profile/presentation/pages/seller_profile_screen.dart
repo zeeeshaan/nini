@@ -10,6 +10,8 @@ import 'package:nini/features/profile_settings/presentation/cubit/user_profile_c
 import 'package:nini/features/profile_settings/presentation/widgets/common/settings_empty_state.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/skeleton/profile_skeleton.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
 
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';
@@ -42,6 +44,8 @@ class SellerProfileScreen extends StatelessWidget {
     BuildContext context,
     SellerProfileState state, {
     VoidCallback? retry,
+    VoidCallback? follow,
+    SellerProfileCubit? cubit,
   }) {
     final profile = state.profile;
     return ScreenEntrance(
@@ -80,13 +84,36 @@ class SellerProfileScreen extends StatelessWidget {
                   icon: AppIcons.profile,
                   onRetry: state.canRetry ? retry : null,
                 )
-              : SingleChildScrollView(
-                  child: SellerProfileContent(
-                    profile: profile,
-                    categories: state.categories,
-                    categoryMessage: state.categoriesLoading
-                        ? ProfilePostStrings.publicCategoriesLoading
-                        : state.categoriesError,
+              : NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if ((notification is ScrollUpdateNotification ||
+                            notification is OverscrollNotification) &&
+                        notification.metrics.extentAfter < 200 &&
+                        !state.posts.error) {
+                      cubit?.loadPosts(next: true);
+                    }
+                    return false;
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SellerProfileContent(
+                      profile: profile,
+                      onFollow: follow,
+                      following: state.following,
+                      posts: state.posts,
+                      selectedCategoryId: state.selectedCategoryId,
+                      onCategorySelected: cubit?.selectCategory,
+                      onPostTap: (post) =>
+                          openHomePost(context, post, profile.seller),
+                      onRetryPosts: () => cubit?.loadPosts(
+                        next:
+                            state.posts.page > 0 && !state.posts.failedRefresh,
+                      ),
+                      categories: state.categories,
+                      categoryMessage: state.categoriesLoading
+                          ? ProfilePostStrings.publicCategoriesLoading
+                          : state.categoriesError,
+                    ),
                   ),
                 ),
         ),
@@ -115,8 +142,12 @@ class SellerProfileScreen extends StatelessWidget {
           final cubit = context.read<SellerProfileCubit>();
           Widget view = BlocConsumer<SellerProfileCubit, SellerProfileState>(
             listenWhen: (previous, current) =>
-                previous.profile != current.profile,
+                previous.profile != current.profile ||
+                previous.followError != current.followError,
             listener: (context, state) {
+              if (state.followError != null) {
+                AppToast.error(context, state.followError!);
+              }
               final profile = state.profile;
               if (profile != null && _isOwn(context, profile)) {
                 onOwnProfilePressed?.call();
@@ -126,6 +157,30 @@ class SellerProfileScreen extends StatelessWidget {
               context,
               state,
               retry: () => cubit.load(username, expectedUserId: expectedUserId),
+              follow: () {
+                final session = context.read<SessionCubit?>();
+                final initial = session?.state;
+                bool current() =>
+                    session != null &&
+                    !session.isClosed &&
+                    session.state.status == SessionStatus.authenticated &&
+                    !session.state.isLoggingOut &&
+                    !session.state.logoutCleanupRequired &&
+                    session.state.userId == initial?.userId &&
+                    session.state.accountRevision == initial?.accountRevision;
+                if (cubit.state.profile?.isFollowing == true) {
+                  cubit.unfollow(
+                    accountId: initial?.userId,
+                    isCurrentAccount: current,
+                  );
+                } else {
+                  cubit.follow(
+                    accountId: initial?.userId,
+                    isCurrentAccount: current,
+                  );
+                }
+              },
+              cubit: cubit,
             ),
           );
           final session = context.read<SessionCubit?>();

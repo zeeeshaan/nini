@@ -23,6 +23,7 @@ class CreatePostGalleryScreen extends StatelessWidget {
     this.initialTab = GalleryTab.photo,
     this.nextLabel = CreatePostStrings.next,
     this.previewOnly = false,
+    this.prepareForPost = false,
   });
   final GalleryTab initialTab;
   final String nextLabel;
@@ -30,6 +31,7 @@ class CreatePostGalleryScreen extends StatelessWidget {
   /// Displays the real gallery layout during a dashboard swipe without
   /// requesting media access before the user opens the route.
   final bool previewOnly;
+  final bool prepareForPost;
 
   final VoidCallback? onClose;
 
@@ -65,6 +67,7 @@ class CreatePostGalleryScreen extends StatelessWidget {
             onNext: onNext,
             nextLabel: nextLabel,
             previewOnly: previewOnly,
+            prepareForPost: prepareForPost,
           ),
         ),
       ),
@@ -78,9 +81,11 @@ class _CreatePostGalleryView extends StatelessWidget {
     this.onNext,
     this.nextLabel = CreatePostStrings.next,
     this.previewOnly = false,
+    this.prepareForPost = false,
   });
   final String nextLabel;
   final bool previewOnly;
+  final bool prepareForPost;
 
   final VoidCallback? onClose;
   final ValueChanged<List<GalleryAttachment>>? onNext;
@@ -104,7 +109,7 @@ class _CreatePostGalleryView extends StatelessWidget {
     }
 
     final attachments = await context.read<GalleryCubit>().prepareSelection(
-      forPost: onNext == null,
+      forPost: onNext == null || prepareForPost,
     );
     if (!context.mounted || attachments == null) return;
 

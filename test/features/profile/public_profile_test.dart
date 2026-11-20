@@ -45,6 +45,23 @@ const _publicOne = '10000000-0000-4000-8000-000000000001';
 const _publicTwo = '10000000-0000-4000-8000-000000000002';
 const _categoryOne = '20000000-0000-4000-8000-000000000001';
 const _categoryTwo = '20000000-0000-4000-8000-000000000002';
+const _postOne = '30000000-0000-4000-8000-000000000001';
+const _postTwo = '30000000-0000-4000-8000-000000000002';
+Map<String, dynamic> _serverPost(
+  String id, {
+  String owner = _publicOne,
+  String status = 'published',
+}) => {
+  'id': id,
+  'title': 'Real post $id',
+  'postType': 'product',
+  'status': status,
+  'price': 10000,
+  'finalPrice': 10000,
+  'owner': {'id': owner, 'name': 'Seller', 'username': 'seller.one'},
+  'image': 'https://example.test/image.jpg',
+  'thumbnailUrl': 'https://example.test/thumb.jpg',
+};
 Map<String, dynamic> _categoryList(String name, {int count = 5}) => _response({
   'allCount': count,
   'uncategorizedCount': 1,
@@ -96,8 +113,23 @@ class _Api extends ApiClient {
   final credentials = <String?>[];
   final replies = <String, Map<String, dynamic>>{};
   final gates = <String, Completer<void>>{};
+  final peopleReplies = <String, Map<String, dynamic>>{};
+  final postReplies = <String, Map<String, dynamic>>{};
+  Object? postsFailure;
+  Object? peopleFailure;
   Object? failure;
   int writes = 0;
+  String? followPath;
+  String? followToken;
+  Map<String, dynamic>? followReply;
+  Object? followFailure;
+  Completer<void>? followGate;
+  String? deletePath;
+  String? deleteToken;
+  Map<String, dynamic>? deleteReply;
+  Object? deleteFailure;
+  Completer<void>? deleteGate;
+  int deletes = 0;
   final categoryReplies = <String, Map<String, dynamic>>{};
   Object? categoryFailure;
   @override
@@ -107,6 +139,19 @@ class _Api extends ApiClient {
   }) async {
     paths.add(endpoint);
     credentials.add(token);
+    if (endpoint.contains('/posts?')) {
+      await gates[endpoint]?.future;
+      if (postsFailure != null) throw postsFailure!;
+      return postReplies[endpoint] ??
+          _response({'items': [], 'total': 0, 'page': 1, 'limit': 20});
+    }
+    if (endpoint.contains('/followers?') || endpoint.contains('/following?')) {
+      final reply = peopleReplies[endpoint];
+      await gates[endpoint]?.future;
+      if (peopleFailure != null) throw peopleFailure!;
+      if (reply == null) throw StateError('Missing people fixture');
+      return reply;
+    }
     if (endpoint.startsWith('users/') && endpoint.endsWith('/categories')) {
       final id = endpoint.split('/')[1];
       final reply =
@@ -132,7 +177,27 @@ class _Api extends ApiClient {
     String? token,
   }) async {
     writes++;
+    followPath = path;
+    followToken = token;
+    expect(data, isNull);
+    await followGate?.future;
+    if (followFailure != null) throw followFailure!;
+    if (followReply != null) return followReply!;
     throw StateError('Unexpected write in public-profile flow');
+  }
+
+  @override
+  Future<Map<String, dynamic>> delete(
+    String path, {
+    required String token,
+  }) async {
+    deletes++;
+    deletePath = path;
+    deleteToken = token;
+    await deleteGate?.future;
+    if (deleteFailure != null) throw deleteFailure!;
+    return deleteReply ??
+        _response({'userId': _publicOne, 'isFollowing': false});
   }
 }
 
@@ -181,11 +246,12 @@ Widget _host(
   Widget screen, {
   UserProfileCubit? own,
   SessionCubit? session,
+  _Tokens? tokens,
 }) {
   Widget app = MaterialApp(home: screen);
   if (own != null) app = BlocProvider.value(value: own, child: app);
   if (session != null) app = BlocProvider.value(value: session, child: app);
-  return RepositoryProvider.value(value: _repository(api), child: app);
+  return RepositoryProvider.value(value: _repository(api, tokens), child: app);
 }
 
 PostItem _post({bool service = false, PostSeller? seller}) => PostItem(
@@ -204,6 +270,648 @@ PostItem _post({bool service = false, PostSeller? seller}) => PostItem(
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test(
+    'public posts use target UUID, category and shared public mapper',
+    () async {
+      const endpoint =
+          'users/$_publicOne/posts?categoryId=$_categoryOne&page=1&limit=20';
+      final api = _Api()
+        ..postReplies[endpoint] = _response({
+          'items': [
+            _serverPost(_postOne),
+            _serverPost(_postTwo, status: 'pending_review'),
+          ],
+          'total': 2,
+          'page': 1,
+          'limit': 20,
+        });
+      final result = await _repository(api)
+          .loadPosts(_publicOne, categoryId: _categoryOne);
+      expect(api.paths, [endpoint]);
+      expect(result.items.map((p) => p.id), [_postOne]);
+      expect(result.items.single.price, '1000');
+      expect(
+        result.items.single.media.single.thumbnailPath,
+        'https://example.test/thumb.jpg',
+      );
+      await expectLater(
+        _repository(api).loadPosts('invalid'),
+        throwsFormatException,
+      );
+    },
+  );
+
+  test(
+    'public post pagination, category switching and stale responses',
+    () async {
+      const first = 'users/$_publicOne/posts?page=1&limit=20';
+      const second = 'users/$_publicOne/posts?page=2&limit=20';
+      const category =
+          'users/$_publicOne/posts?categoryId=$_categoryOne&page=1&limit=20';
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..postReplies[first] = _response({
+          'items': [_serverPost(_postOne)],
+          'total': 21,
+          'page': 1,
+          'limit': 20,
+        })
+        ..postReplies[second] = _response({
+          'items': [_serverPost(_postTwo)],
+          'total': 21,
+          'page': 2,
+          'limit': 20,
+        })
+        ..postReplies[category] = _response({
+          'items': [],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+        });
+      final cubit = SellerProfileCubit(_repository(api));
+      await cubit.load('seller.one');
+      await Future<void>.delayed(Duration.zero);
+      await cubit.loadPosts(next: true);
+      expect(cubit.state.posts.posts.map((p) => p.id), [_postOne, _postTwo]);
+      cubit.selectCategory(_categoryOne);
+      await Future<void>.delayed(Duration.zero);
+      expect(cubit.state.posts.posts, isEmpty);
+      expect(api.paths, contains(category));
+      await cubit.close();
+    },
+  );
+
+  testWidgets(
+    'public profile shows backend posts in existing grid and category selection',
+    (tester) async {
+      const first = 'users/$_publicOne/posts?page=1&limit=20';
+      const category =
+          'users/$_publicOne/posts?categoryId=$_categoryOne&page=1&limit=20';
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..categoryReplies[_publicOne] = _categoryList('Real category')
+        ..postReplies[first] = _response({
+          'items': [_serverPost(_postOne)],
+          'total': 1,
+          'page': 1,
+          'limit': 20,
+        })
+        ..postReplies[category] = _response({
+          'items': [],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+        });
+      await tester.pumpWidget(
+        _host(api, const SellerProfileScreen(username: 'seller.one')),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(ProfilePostCard), findsOneWidget);
+      await tester.tap(find.text('Real category'));
+      await tester.pumpAndSettle();
+      expect(api.paths, contains(category));
+      expect(find.byType(ProfilePostCard), findsNothing);
+    },
+  );
+
+  test(
+    'late profile posts cannot replace a different profile or category',
+    () async {
+      const first = 'users/$_publicOne/posts?page=1&limit=20';
+      const category =
+          'users/$_publicOne/posts?categoryId=$_categoryOne&page=1&limit=20';
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..replies['seller.two'] = _response(_data('seller.two', id: _publicTwo))
+        ..gates[first] = Completer<void>()
+        ..postReplies[first] = _response({
+          'items': [_serverPost(_postOne)],
+          'total': 1,
+          'page': 1,
+          'limit': 20,
+        })
+        ..postReplies[category] = _response({
+          'items': [],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+        });
+      final cubit = SellerProfileCubit(_repository(api));
+      await cubit.load('seller.one');
+      cubit.selectCategory(_categoryOne);
+      await Future<void>.delayed(Duration.zero);
+      api.gates[first]!.complete();
+      await Future<void>.delayed(Duration.zero);
+      expect(cubit.state.posts.posts, isEmpty);
+      await cubit.load('seller.two');
+      expect(cubit.state.profile?.seller.id, _publicTwo);
+      expect(cubit.state.posts.posts, isEmpty);
+      await cubit.close();
+    },
+  );
+  test(
+    'followers and following requests preserve backend ordering and metadata',
+    () async {
+      const followers = 'users/$_publicOne/followers?page=1&limit=20';
+      const following = 'users/$_publicOne/following?page=1&limit=20';
+      final api = _Api()
+        ..peopleReplies[followers] = _response({
+          'items': [
+            {
+              ..._data('seller.two', id: _publicTwo),
+              'verified': true,
+              'followedAt': '2026-11-15T08:30:00Z',
+            },
+            {..._data('seller.one', id: _publicOne), 'username': null},
+          ],
+          'total': 2,
+          'page': 1,
+          'limit': 20,
+        })
+        ..peopleReplies[following] = _response({
+          'items': [],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+        });
+      final repo = _repository(api, _Tokens()..value = 'token');
+      final people = await repo.loadFollowers(_publicOne);
+      expect(api.paths.first, followers);
+      expect(api.credentials.first, 'token');
+      expect(people.items.map((p) => p.profile.seller.id), [
+        _publicTwo,
+        _publicOne,
+      ]);
+      expect(people.items.first.verified, true);
+      expect(people.items.first.followedAt, DateTime.utc(2026, 11, 15, 8, 30));
+      expect(people.items.last.profile.seller.username, '');
+      expect((await repo.loadFollowing(_publicOne)).items, isEmpty);
+      expect(api.paths.last, following);
+      await expectLater(repo.loadFollowers('invalid'), throwsFormatException);
+    },
+  );
+
+  test(
+    'people pagination retains separate lists and preserves profile on failure',
+    () async {
+      const first = 'users/$_publicOne/followers?page=1&limit=20';
+      const second = 'users/$_publicOne/followers?page=2&limit=20';
+      const following = 'users/$_publicOne/following?page=1&limit=20';
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..peopleReplies[first] = _response({
+          'items': [_data('seller.one', id: _publicOne)],
+          'total': 21,
+          'page': 1,
+          'limit': 20,
+        })
+        ..peopleReplies[second] = _response({
+          'items': [_data('seller.two', id: _publicTwo)],
+          'total': 21,
+          'page': 2,
+          'limit': 20,
+        })
+        ..peopleReplies[following] = _response({
+          'items': [],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+        });
+      final cubit = SellerProfileCubit(_repository(api));
+      await cubit.load('seller.one');
+      await cubit.loadFollowers();
+      await cubit.loadFollowers(next: true);
+      await cubit.loadFollowing();
+      expect(cubit.state.followers.items.map((p) => p.profile.seller.id), [
+        _publicOne,
+        _publicTwo,
+      ]);
+      expect(cubit.state.followedUsers.items, isEmpty);
+      expect(cubit.state.followedUsers.loaded, isTrue);
+      api.peopleFailure = _error(type: DioExceptionType.connectionError);
+      await cubit.loadFollowers();
+      expect(cubit.state.followers.error, isTrue);
+      expect(cubit.state.followers.items, hasLength(2));
+      expect(cubit.state.profile?.seller.id, _publicOne);
+      await cubit.close();
+    },
+  );
+
+  test(
+    'late people response cannot cross profile or session invalidation',
+    () async {
+      const endpoint = 'users/$_publicOne/followers?page=1&limit=20';
+      for (final invalidate in [false, true]) {
+        final api = _Api()
+          ..replies['seller.one'] = _response(
+            _data('seller.one', id: _publicOne),
+          )
+          ..replies['seller.two'] = _response(
+            _data('seller.two', id: _publicTwo),
+          )
+          ..peopleReplies[endpoint] = _response({
+            'items': [_data('seller.one', id: _publicOne)],
+            'total': 1,
+            'page': 1,
+            'limit': 20,
+          })
+          ..gates[endpoint] = Completer<void>();
+        final cubit = SellerProfileCubit(_repository(api));
+        await cubit.load('seller.one');
+        final pending = cubit.loadFollowers();
+        await Future<void>.delayed(Duration.zero);
+        if (invalidate) {
+          cubit.invalidate();
+        } else {
+          await cubit.load('seller.two');
+        }
+        api.gates[endpoint]!.complete();
+        await pending;
+        expect(cubit.state.followers.items, isEmpty);
+        expect(cubit.state.profile?.seller.id, invalidate ? null : _publicTwo);
+        await cubit.close();
+      }
+    },
+  );
+
+  test('loaded followers refresh after a confirmed follow without fabricating entries', () async {
+    const endpoint = 'users/$_publicOne/followers?page=1&limit=20';
+    final api = _Api()
+      ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+      ..peopleReplies[endpoint] = _response({
+        'items': [],
+        'total': 0,
+        'page': 1,
+        'limit': 20,
+      })
+      ..followReply = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      });
+    final cubit = SellerProfileCubit(
+      _repository(api, _Tokens()..value = 'token'),
+    );
+    await cubit.load('seller.one');
+    await cubit.loadFollowers();
+    api.peopleReplies[endpoint] = _response({
+      'items': [_data('seller.two', id: _publicTwo)],
+      'total': 1,
+      'page': 1,
+      'limit': 20,
+    });
+    await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+    await Future<void>.delayed(Duration.zero);
+    expect(api.paths.where((path) => path == endpoint), hasLength(2));
+    expect(cubit.state.followers.items.single.profile.seller.id, _publicTwo);
+    await cubit.close();
+  });
+  test(
+    'unfollow sends authenticated DELETE and refreshes authoritative count',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+        });
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      final categories = cubit.state.categories;
+      api.replies['seller.one'] = _response({
+        ..._data('seller.one', id: _publicOne),
+        'followersCount': 11,
+      });
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.deletePath, 'users/$_publicOne/follow');
+      expect(api.deleteToken, 'token');
+      expect(cubit.state.profile?.isFollowing, isFalse);
+      expect(cubit.state.profile?.followersCount, 11);
+      expect(cubit.state.categories, same(categories));
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.deletes, 1);
+      await cubit.close();
+    },
+  );
+
+  test(
+    'unfollow failure and uncertain outcome do not invent success or retry',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+        })
+        ..deleteFailure = _error(type: DioExceptionType.receiveTimeout);
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(cubit.state.profile?.isFollowing, isTrue);
+      expect(cubit.state.profile?.followersCount, 12);
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.deletes, 1);
+      await cubit.close();
+    },
+  );
+
+  test(
+    'confirmed unfollow does not invent a count when refresh fails',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+        });
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      api.failure = _error(type: DioExceptionType.connectionError);
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(cubit.state.profile?.isFollowing, isFalse);
+      expect(cubit.state.profile?.followersCount, isNull);
+      await cubit.close();
+    },
+  );
+
+  test('late unfollow result is discarded after switching profile', () async {
+    final api = _Api()
+      ..replies['seller.one'] = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      })
+      ..replies['seller.two'] = _response(_data('seller.two', id: _publicTwo))
+      ..deleteGate = Completer<void>();
+    final cubit = SellerProfileCubit(
+      _repository(api, _Tokens()..value = 'token'),
+    );
+    await cubit.load('seller.one');
+    final pending = cubit.unfollow(
+      accountId: 'other-account',
+      isCurrentAccount: () => true,
+    );
+    await Future<void>.delayed(Duration.zero);
+    await cubit.load('seller.two');
+    api.deleteGate!.complete();
+    await pending;
+    expect(cubit.state.profile?.seller.id, _publicTwo);
+    expect(cubit.state.profile?.followersCount, 12);
+    await cubit.close();
+  });
+
+  test('unfollow response for another user cannot confirm success', () async {
+    final api = _Api()
+      ..replies['seller.one'] = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      })
+      ..deleteReply = _response({'userId': _publicTwo, 'isFollowing': false});
+    final cubit = SellerProfileCubit(
+      _repository(api, _Tokens()..value = 'token'),
+    );
+    await cubit.load('seller.one');
+    await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+    expect(cubit.state.profile?.isFollowing, isTrue);
+    expect(cubit.state.followError, contains('could not be confirmed'));
+    await cubit.close();
+  });
+
+  test(
+    'unfollow prevents self, unauthenticated and concurrent mutations',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+        })
+        ..deleteGate = Completer<void>();
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      await cubit.unfollow(accountId: null, isCurrentAccount: () => false);
+      await cubit.unfollow(accountId: _publicOne, isCurrentAccount: () => true);
+      expect(api.deletes, 0);
+      final pending = cubit.unfollow(
+        accountId: _publicTwo,
+        isCurrentAccount: () => true,
+      );
+      await Future<void>.delayed(Duration.zero);
+      await cubit.unfollow(accountId: _publicTwo, isCurrentAccount: () => true);
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.deletes, 1);
+      expect(api.writes, 0);
+      api.deleteGate!.complete();
+      await pending;
+      await cubit.close();
+    },
+  );
+
+  testWidgets('existing Following button invokes unfollow and updates count', (
+    tester,
+  ) async {
+    final api = _Api()
+      ..replies['seller.one'] = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      });
+    final session = SessionCubit(_Auth());
+    await session.restore();
+    addTearDown(session.close);
+    await tester.pumpWidget(
+      _host(
+        api,
+        const SellerProfileScreen(username: 'seller.one'),
+        session: session,
+        tokens: _Tokens()..value = 'token',
+      ),
+    );
+    await tester.pumpAndSettle();
+    api.replies['seller.one'] = _response({
+      ..._data('seller.one', id: _publicOne),
+      'followersCount': 11,
+    });
+    await tester.tap(find.widgetWithText(AppButton, AppStrings.following));
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(AppButton, AppStrings.follow), findsOneWidget);
+    expect(
+      tester.widget<ProfileStats>(find.byType(ProfileStats)).salesCount,
+      '11',
+    );
+    expect(api.deletes, 1);
+    await tester.pumpWidget(const SizedBox());
+  });
+  test(
+    'follow posts the real user UUID and uses confirmed status and count',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..followReply = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+          'followersCount': 13,
+        });
+      final tokens = _Tokens()..value = 'synthetic-credential';
+      final cubit = SellerProfileCubit(_repository(api, tokens));
+      await cubit.load('seller.one');
+      final categories = cubit.state.categories;
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.followPath, 'users/$_publicOne/follow');
+      expect(api.followToken, 'synthetic-credential');
+      expect(cubit.state.profile?.isFollowing, isTrue);
+      expect(cubit.state.profile?.followersCount, 13);
+      expect(cubit.state.categories, same(categories));
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.writes, 1);
+      await cubit.close();
+    },
+  );
+
+  test(
+    'follow blocks self, logged-out users and repeated concurrent taps',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..followReply = _response({
+          ..._data('seller.one', id: _publicOne),
+          'isFollowing': true,
+        })
+        ..followGate = Completer<void>();
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      await cubit.follow(accountId: null, isCurrentAccount: () => false);
+      await cubit.follow(accountId: _publicOne, isCurrentAccount: () => true);
+      expect(api.writes, 0);
+      final first = cubit.follow(
+        accountId: _publicTwo,
+        isCurrentAccount: () => true,
+      );
+      await Future<void>.delayed(Duration.zero);
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.writes, 1);
+      api.followGate!.complete();
+      await first;
+      await cubit.close();
+    },
+  );
+
+  test('failed or stale follow never changes another profile', () async {
+    final api = _Api()
+      ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+      ..replies['seller.two'] = _response(_data('seller.two', id: _publicTwo))
+      ..followReply = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      })
+      ..followGate = Completer<void>();
+    final cubit = SellerProfileCubit(
+      _repository(api, _Tokens()..value = 'token'),
+    );
+    await cubit.load('seller.one');
+    final pending = cubit.follow(
+      accountId: 'other-account',
+      isCurrentAccount: () => true,
+    );
+    await Future<void>.delayed(Duration.zero);
+    await cubit.load('seller.two');
+    api.followGate!.complete();
+    await pending;
+    expect(cubit.state.profile?.seller.id, _publicTwo);
+    expect(cubit.state.profile?.isFollowing, isFalse);
+    api.followFailure = _error(status: 403);
+    await cubit.follow(
+      accountId: 'other-account',
+      isCurrentAccount: () => true,
+    );
+    expect(cubit.state.profile?.isFollowing, isFalse);
+    expect(cubit.state.followError, isNotNull);
+    await cubit.close();
+  });
+
+  test(
+    'an uncertain follow is reconciled or blocked from blind retry',
+    () async {
+      final api = _Api()
+        ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+        ..followFailure = _error(type: DioExceptionType.receiveTimeout);
+      final cubit = SellerProfileCubit(
+        _repository(api, _Tokens()..value = 'token'),
+      );
+      await cubit.load('seller.one');
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(cubit.state.profile?.isFollowing, isFalse);
+      expect(cubit.state.followError, contains('could not be confirmed'));
+      await cubit.follow(accountId: _publicTwo, isCurrentAccount: () => true);
+      expect(api.writes, 1);
+      await cubit.close();
+    },
+  );
+
+  test('account switch during follow ignores the late response', () async {
+    final api = _Api()
+      ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+      ..followReply = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+      })
+      ..followGate = Completer<void>();
+    final cubit = SellerProfileCubit(
+      _repository(api, _Tokens()..value = 'token'),
+    );
+    await cubit.load('seller.one');
+    var current = true;
+    final pending = cubit.follow(
+      accountId: _publicTwo,
+      isCurrentAccount: () => current,
+    );
+    await Future<void>.delayed(Duration.zero);
+    current = false;
+    cubit.invalidate();
+    api.followGate!.complete();
+    await pending;
+    expect(cubit.state.profile, isNull);
+    await cubit.close();
+  });
+
+  testWidgets('existing Follow button displays confirmed server result', (
+    tester,
+  ) async {
+    final api = _Api()
+      ..replies['seller.one'] = _response(_data('seller.one', id: _publicOne))
+      ..followReply = _response({
+        ..._data('seller.one', id: _publicOne),
+        'isFollowing': true,
+        'followersCount': 18,
+      });
+    final session = SessionCubit(_Auth());
+    await session.restore();
+    addTearDown(session.close);
+    await tester.pumpWidget(
+      _host(
+        api,
+        const SellerProfileScreen(username: 'seller.one'),
+        session: session,
+        tokens: _Tokens()..value = 'token',
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(AppButton, AppStrings.follow));
+    await tester.pumpAndSettle();
+    expect(
+      find.widgetWithText(AppButton, AppStrings.following),
+      findsOneWidget,
+    );
+    expect(
+      tester.widget<ProfileStats>(find.byType(ProfileStats)).salesCount,
+      '18',
+    );
+    expect(api.writes, 1);
+    await tester.pumpWidget(const SizedBox());
+  });
   for (final authenticated in [false, true]) {
     test(
       'valid public profile ${authenticated ? 'with' : 'without'} authentication maps actual server fields',
@@ -406,7 +1114,7 @@ void main() {
     }
   });
   testWidgets(
-    'real profile fields and backend counts replace passed identities and follow remains read-only',
+    'real profile fields and backend counts remain visible when logged out',
     (tester) async {
       final api = _Api()
         ..replies['seller.one'] = _response({
@@ -432,17 +1140,14 @@ void main() {
       expect(stats.salesLabel, AppStrings.followers);
       expect(stats.customerLabel, AppStrings.following);
       expect(find.byType(ProfilePostCard), findsNothing);
-      expect(
-        find.text(ProfilePostStrings.publicPostsUnavailable),
-        findsOneWidget,
-      );
+      expect(find.text(AppStrings.noSellerPosts), findsOneWidget);
       await tester.tap(find.widgetWithText(AppButton, AppStrings.following));
       await tester.pumpAndSettle();
       expect(
         find.widgetWithText(AppButton, AppStrings.following),
         findsOneWidget,
       );
-      expect(find.text(ProfilePostStrings.followUnavailable), findsOneWidget);
+      expect(find.text('Please sign in to follow this user.'), findsOneWidget);
       expect(api.writes, 0);
       expect(own.state.profile, same(previous));
       await tester.pump(const Duration(seconds: 4));
@@ -767,10 +1472,14 @@ void main() {
     expect(cubit.state.categoriesLoading, isTrue);
     final duplicate = cubit.load('seller.one');
     expect(identical(first, duplicate), isTrue);
-    expect(api.paths, [
-      'users/profile/seller.one',
-      'users/$_publicOne/categories',
-    ]);
+    expect(
+      api.paths,
+      unorderedEquals([
+        'users/profile/seller.one',
+        'users/$_publicOne/posts?page=1&limit=20',
+        'users/$_publicOne/categories',
+      ]),
+    );
     final second = cubit.load('seller.two');
     expect(cubit.state.profile, isNull);
     expect(cubit.state.categories, isNull);
@@ -898,7 +1607,7 @@ void main() {
         'Second public category',
       ]);
       expect(chips.map((chip) => chip.count), [5, 3, 1]);
-      expect(chips.every((chip) => chip.onTap == null), isTrue);
+      expect(chips.every((chip) => chip.onTap != null), isTrue);
       expect(find.byIcon(Icons.add), findsNothing);
       expect(find.byIcon(Icons.edit_outlined), findsNothing);
       expect(find.byIcon(Icons.delete_outline), findsNothing);
@@ -995,7 +1704,7 @@ void main() {
       );
       expect(chip.label, ProfilePostStrings.all);
       expect(chip.count, 0);
-      expect(chip.onTap, isNull);
+      expect(chip.onTap, isNotNull);
       expect(find.byIcon(Icons.add), findsNothing);
       expect(find.byType(ProfilePostCard), findsNothing);
       expect(tester.takeException(), isNull);

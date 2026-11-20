@@ -105,6 +105,10 @@ class HomePublishedPostCard extends StatelessWidget {
     return BlocProvider(
       create: (context) => PostDetailCubit(
         postId: post.id,
+        post: post,
+        repository: post.metadata['backend'] == true
+            ? context.read<ApiPostsRepository?>()
+            : null,
         likes: context.read<PostLikesCubit?>(),
         savedPosts: context.read<SavedPostsCubit?>(),
       ),
@@ -127,15 +131,30 @@ class HomePublishedPostCard extends StatelessWidget {
           BlocBuilder<PostDetailCubit, PostDetailState>(
             buildWhen: (previous, current) =>
                 previous.isLiked != current.isLiked ||
+                previous.likeCount != current.likeCount ||
+                previous.commentCount != current.commentCount ||
                 previous.isBookmarked != current.isBookmarked,
             builder: (context, state) => HomeEngagementBar(
               isLiked: state.isLiked,
+              likeCount: state.likeCount,
+              backendLikes: post.metadata['backend'] == true,
+              commentCount: state.commentCount,
               isBookmarked: state.isBookmarked,
               showSampleMetrics: false,
               cartCount: inCart == null ? '0' : cartQuantity(inCart.quantity),
               isInCart: inCart != null,
               onAddToCart: canToggle ? () => _toggleCart(context) : null,
-              onLike: context.read<PostDetailCubit>().toggleLike,
+              onLike: () async {
+                final success = await context
+                    .read<PostDetailCubit>()
+                    .toggleLike();
+                if (!success && context.mounted) {
+                  AppToast.error(
+                    context,
+                    'Unable to update like. Please try again.',
+                  );
+                }
+              },
               onBookmark: () async {
                 final detail = context.read<PostDetailCubit>();
                 final success = await detail.toggleBookmark(
@@ -154,8 +173,11 @@ class HomePublishedPostCard extends StatelessWidget {
                   AppToast.success(context, SavedPostsStrings.saved);
                 }
               },
-              onCommentsPressed: () =>
-                  openPostCommentsSheet(context, postId: post.id),
+              onCommentsPressed: () => openPostCommentsSheet(
+                context,
+                postId: post.id,
+                backend: post.metadata['backend'] == true,
+              ),
               onSharePressed: () => openPostShareSheet(
                 context,
                 postId: post.id,

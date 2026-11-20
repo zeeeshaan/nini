@@ -12,23 +12,37 @@ class ProfileCategoryChips extends StatelessWidget {
     super.key,
     this.onCategoryChanged,
     this.onAddPressed,
-  }) : _publicCategories = null;
+  }) : _publicCategories = null,
+       _publicSelectedId = null,
+       _onPublicSelect = null;
 
   const ProfileCategoryChips.readOnly({
     super.key,
     required ProfileCategoryList categories,
+    String? selectedId,
+    ValueChanged<String?>? onSelect,
   }) : _publicCategories = categories,
+       _publicSelectedId = selectedId,
+       _onPublicSelect = onSelect,
        onCategoryChanged = null,
        onAddPressed = null;
 
   final ProfileCategoryList? _publicCategories;
+  final String? _publicSelectedId;
+  final ValueChanged<String?>? _onPublicSelect;
   final ValueChanged<String>? onCategoryChanged;
   final VoidCallback? onAddPressed;
   @override
   Widget build(BuildContext context) {
     final publicCategories = _publicCategories;
     if (publicCategories != null) {
-      return _chips(context, publicCategories.items, publicCategories.allCount);
+      return _chips(
+        context,
+        publicCategories.items,
+        publicCategories.allCount,
+        selectedId: _publicSelectedId,
+        onSelect: _onPublicSelect,
+      );
     }
     return BlocBuilder<ProfileCategoriesCubit, ProfileCategoriesState>(
       builder: (context, state) => _chips(

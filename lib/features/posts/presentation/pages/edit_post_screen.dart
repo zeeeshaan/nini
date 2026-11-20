@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:nini/features/posts/presentation/cubit/post_editor_fields_cubit.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
 import 'package:nini/features/create_post/presentation/cubit/post_operation_cubit.dart';
@@ -7,8 +9,14 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:nini/core/localization/persian_feature/persian_feature.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
 import 'package:nini/shared/models/post/post_item.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:nini/features/create_post/data/api_categories_repository.dart';
+import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
 
 import '../cubit/post_editor_media_cubit.dart';
 import '../cubit/posts_cubit.dart';
@@ -18,27 +26,96 @@ import '../helpers/post_draft_mapper.dart';
 import '../widgets/editor/edit_post_form.dart';
 import '../widgets/editor/post_editor_actions.dart';
 
+/// Loads the owner's canonical post before constructing the existing editor.
+class BackendEditPostScreen extends StatefulWidget {
+  const BackendEditPostScreen({super.key, required this.postId});
+  final String postId;
+
+  @override
+  State<BackendEditPostScreen> createState() => _BackendEditPostScreenState();
+}
+
+class _BackendEditPostScreenState extends State<BackendEditPostScreen> {
+  late final Future<MyServerPost> _post;
+
+  @override
+  void initState() {
+    super.initState();
+    _post = context.read<ApiPostsRepository>().loadEditablePost(widget.postId);
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<MyServerPost>(
+    future: _post,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      }
+      if (snapshot.hasError || !snapshot.hasData) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: const Center(
+            child: Text('Unable to load this post for editing.'),
+          ),
+        );
+      }
+      try {
+        final post = snapshot.data!;
+        return EditPostScreen(
+          post: backendPostFromJson(post.data),
+          backendPost: post,
+        );
+      } catch (_) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: const Center(
+            child: Text('Unable to load this post for editing.'),
+          ),
+        );
+      }
+    },
+  );
+}
+
 class EditPostScreen extends StatelessWidget {
-  const EditPostScreen({super.key, required this.post});
+  const EditPostScreen({super.key, required this.post, this.backendPost});
   final PostItem post;
+  final MyServerPost? backendPost;
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider(
-        create: (_) => CreatePostCubit(initial: postDraftFromPost(post)),
+        create: (_) => CreatePostCubit(
+          initial: backendPost == null
+              ? postDraftFromPost(post)
+              : postDraftFromBackend(post, backendPost!.data),
+        ),
       ),
       BlocProvider(create: (_) => PostEditorMediaCubit(post.media)),
       BlocProvider(
-        create: (_) => PostEditorFieldsCubit(postDraftFromPost(post)),
+        create: (_) => PostEditorFieldsCubit(
+          backendPost == null
+              ? postDraftFromPost(post)
+              : postDraftFromBackend(post, backendPost!.data),
+        ),
       ),
+      if (backendPost != null)
+        BlocProvider(
+          create: (context) => PostCategoriesCubit(
+            ApiCategoriesRepository(context.read<ApiPostsRepository>().client),
+          )..load(),
+        ),
     ],
-    child: PersianFeature(child: _EditPostView(post: post)),
+    child: PersianFeature(
+      child: _EditPostView(post: post, backendPost: backendPost),
+    ),
   );
 }
 
 class _EditPostView extends StatefulWidget {
-  const _EditPostView({required this.post});
+  const _EditPostView({required this.post, this.backendPost});
   final PostItem post;
+  final MyServerPost? backendPost;
   @override
   State<_EditPostView> createState() => _EditPostViewState();
 }
@@ -48,6 +125,8 @@ class _EditPostViewState extends State<_EditPostView> {
   late final quill.QuillController _caption;
   late final PostCaptionSynchronizer _synchronizer;
   final _operation = PostOperationCubit();
+  late final PostDraft _initialDraft;
+  final Set<String> _touched = {};
   bool _confirming = false;
   CreatePostCubit get _editor => context.read<CreatePostCubit>();
 
@@ -55,6 +134,7 @@ class _EditPostViewState extends State<_EditPostView> {
   void initState() {
     super.initState();
     final draft = _editor.state;
+    _initialDraft = draft;
     _caption = quill.QuillController(
       document: draft.captionDelta.isEmpty
           ? (quill.Document()..insert(0, draft.caption))
@@ -107,6 +187,10 @@ class _EditPostViewState extends State<_EditPostView> {
 
   Future<void> _save() async {
     if (_operation.state.saving) return;
+    if (widget.backendPost != null) {
+      await _saveBackend();
+      return;
+    }
     final categories = context.read<ProfileCategoriesCubit>();
     if (categories.state.loading || categories.state.loadFailed) {
       _operation.showError(ProfilePostStrings.loadFailed);
@@ -134,6 +218,51 @@ class _EditPostViewState extends State<_EditPostView> {
       _operation.fail(
         posts.state.publishError ?? ProfilePostStrings.saveFailed,
       );
+    }
+  }
+
+  Future<void> _saveBackend() async {
+    _synchronizer.flush();
+    FocusScope.of(context).unfocus();
+    _operation.beginSave();
+    final repository = context.read<ApiPostsRepository>();
+    try {
+      _form.currentState!.save();
+      final original = widget.backendPost!;
+      final result = await repository.updateEditablePost(
+        original,
+        _editor.state,
+        initialDraft: _initialDraft,
+        touched: _touched,
+        mediaChanges: context.read<PostEditorMediaCubit>().state.changes,
+        initialMediaPaths: [for (final media in widget.post.media) media.path],
+      );
+      if (!mounted) return;
+      if (!identical(result, original)) {
+        final feed = context.read<FeedCubit?>();
+        final own = context.read<OwnPostsCubit?>();
+        if (result.status != 'published') {
+          feed?.removePost(result.id);
+          own?.removePost(result.id);
+        }
+        if (feed != null) unawaited(feed.refreshFromServer());
+        if (own != null) unawaited(own.refresh());
+        AppToast.success(
+          context,
+          result.status == 'pending_review'
+              ? 'Saved and sent for review.'
+              : 'Post changes saved.',
+        );
+      }
+      await _close(backendPostFromJson(result.data));
+    } catch (error) {
+      if (mounted) {
+        _operation.fail(
+          error is PostApiException
+              ? error.message
+              : ProfilePostStrings.saveFailed,
+        );
+      }
     }
   }
 
@@ -195,6 +324,11 @@ class _EditPostViewState extends State<_EditPostView> {
                             formKey: _form,
                             captionController: _caption,
                             onChanged: _markDirty,
+                            backend: widget.backendPost != null,
+                            backendData: widget.backendPost?.data,
+                            onTouched: widget.backendPost == null
+                                ? null
+                                : _touched.add,
                           ),
                         ),
                       ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +15,7 @@ import 'package:nini/features/home/data/home_post_data.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:nini/features/search/presentation/cubit/search_state.dart';
 import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:nini/features/posts/data/api_posts_repository.dart';
 
 import 'package:nini/features/search/presentation/widgets/results/search_empty_state.dart';
 import 'package:nini/features/search/presentation/widgets/common/search_city_list.dart';
@@ -47,6 +50,7 @@ class SearchContent extends StatelessWidget {
         AppToast.warning(context, SearchStrings.providerUnavailable);
         return;
       }
+      if (!isLocalPost) _logClick(context, post);
       onPostSelected!(post, seller);
       return;
     }
@@ -59,8 +63,55 @@ class SearchContent extends StatelessWidget {
       AppToast.warning(context, SearchStrings.providerUnavailable);
       return;
     }
+    _logClick(context, post);
     openHomePost(context, post, seller);
   }
+
+  void _logClick(BuildContext context, PostItem post) {
+    final result = context.read<BackendPostsCubit?>()?.state;
+    final repository = context.read<ApiPostsRepository?>();
+    final id = result?.searchId;
+    final position = result?.searchPositions[post.id];
+    if (id == null || position == null || repository == null) return;
+    unawaited(
+      repository
+          .logSearchClick(searchId: id, postId: post.id, position: position)
+          .catchError((_) {}),
+    );
+  }
+
+  Widget _discovery(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      for (final section in [
+        ('Popular searches', state.popular),
+        ('Trending searches', state.trending),
+      ])
+        if (section.$2.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(section.$1, style: Theme.of(context).textTheme.labelLarge),
+                SizedBox(
+                  height: 40,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    itemCount: section.$2.length,
+                    separatorBuilder: (_, _) => const SizedBox(width: 8),
+                    itemBuilder: (context, index) => ActionChip(
+                      label: Text(section.$2[index]),
+                      onPressed: () => onQuerySelected(section.$2[index]),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -78,72 +129,80 @@ class SearchContent extends StatelessWidget {
       return BlocBuilder<BackendPostsCubit, BackendPostsState>(
         builder: (context, result) {
           final posts = result.posts;
-          if (result.loading && result.posts.isEmpty)
-            return const SearchResultsGrid(posts: [], isLoading: true);
-          if (result.error && result.posts.isEmpty)
-            return Center(
-              child: TextButton(
-                onPressed: backend.loadMore,
-                child: const Text('Could not load search results. Retry'),
-              ),
-            );
-          if (state.panel == SearchPanel.suggestions && posts.isNotEmpty) {
+          Widget withDiscovery(Widget child) => state.query.trim().isEmpty
+              ? Column(
+                  children: [
+                    _discovery(context),
+                    Expanded(child: child),
+                  ],
+                )
+              : child;
+          if (state.panel == SearchPanel.suggestions &&
+              state.query.trim().isNotEmpty &&
+              state.suggestions.isNotEmpty) {
             return SearchSuggestions(
-              suggestions: posts.map((post) => post.title).toSet().toList(),
+              suggestions: state.suggestions,
               onSelected: onQuerySelected,
             );
           }
-          if (posts.isEmpty) {
-            return Column(
-              children: [
-                Expanded(
-                  child: SearchEmptyState(
-                    onReset: () => onQuerySelected(''),
-                    textAlign: emptyStateTextAlign,
-                  ),
-                ),
-                if (result.hasMore)
-                  TextButton(
-                    onPressed: backend.loadMore,
-                    child: const Text('More results'),
-                  ),
-              ],
+          if (result.loading && result.posts.isEmpty)
+            return withDiscovery(
+              const SearchResultsGrid(posts: [], isLoading: true),
             );
-          }
-          return Column(
-            children: [
-              if (result.error)
-                TextButton(
+          if (result.error && result.posts.isEmpty)
+            return withDiscovery(
+              Center(
+                child: TextButton(
                   onPressed: backend.loadMore,
-                  child: const Text('Could not load more. Retry'),
-                ),
-              Expanded(
-                child: SearchResultsGrid(
-                  posts: posts,
-                  onLoadMore: result.error ? null : backend.loadMore,
-                  onPostSelected: (post) => _openPost(context, post),
+                  child: const Text('Could not load search results. Retry'),
                 ),
               ),
-            ],
+            );
+          if (posts.isEmpty) {
+            return withDiscovery(
+              Column(
+                children: [
+                  Expanded(
+                    child: SearchEmptyState(
+                      onReset: () => onQuerySelected(''),
+                      textAlign: emptyStateTextAlign,
+                    ),
+                  ),
+                  if (result.hasMore)
+                    TextButton(
+                      onPressed: backend.loadMore,
+                      child: const Text('More results'),
+                    ),
+                ],
+              ),
+            );
+          }
+          return withDiscovery(
+            Column(
+              children: [
+                if (result.error)
+                  TextButton(
+                    onPressed: backend.loadMore,
+                    child: const Text('Could not load more. Retry'),
+                  ),
+                Expanded(
+                  child: SearchResultsGrid(
+                    posts: posts,
+                    onLoadMore: result.error ? null : backend.loadMore,
+                    onPostSelected: (post) => _openPost(context, post),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       );
     }
 
     if (state.panel == SearchPanel.suggestions) {
-      final suggestions = SearchCatalog.suggestionsFor(
-        state.query,
-        publishedPosts: publishedPosts,
-      );
-      if (suggestions.isEmpty) {
-        return SearchEmptyState(
-          onReset: () => onQuerySelected(''),
-          textAlign: emptyStateTextAlign,
-        );
-      }
-      return SearchSuggestions(
-        suggestions: suggestions,
-        onSelected: onQuerySelected,
+      return SearchEmptyState(
+        onReset: () => onQuerySelected(''),
+        textAlign: emptyStateTextAlign,
       );
     }
 

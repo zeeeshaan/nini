@@ -23,6 +23,9 @@ class HomeEngagementBar extends StatelessWidget {
     this.cartCount = '0',
     this.isInCart = false,
     this.showSampleMetrics = true,
+    this.likeCount,
+    this.backendLikes = false,
+    this.commentCount,
   });
 
   final bool isLiked;
@@ -35,11 +38,15 @@ class HomeEngagementBar extends StatelessWidget {
   final String cartCount;
   final bool isInCart;
   final bool showSampleMetrics;
+  final int? likeCount;
+  final bool backendLikes;
+  final int? commentCount;
 
   @override
   Widget build(BuildContext context) {
     final bookmarkCount = isBookmarked ? '1' : '0';
-    final likeCount = isLiked ? '1' : '0';
+    final displayedLikes =
+        likeCount?.toString() ?? (backendLikes ? '' : (isLiked ? '1' : '0'));
     final rating = HomeMetric(
       label: AppStrings.rating,
       count: showSampleMetrics ? '4.5' : '',
@@ -58,7 +65,9 @@ class HomeEngagementBar extends StatelessWidget {
       ),
       HomeMetric(
         label: AppStrings.comments,
-        count: showSampleMetrics ? '886' : '0',
+        count:
+            commentCount?.toString() ??
+            (backendLikes ? '' : (showSampleMetrics ? '886' : '0')),
         onTap: onCommentsPressed,
         icon: const AppIcon(
           AppIcons.postComment,
@@ -76,7 +85,7 @@ class HomeEngagementBar extends StatelessWidget {
       ),
       HomeMetric(
         label: isLiked ? AppStrings.unlike : AppStrings.like,
-        count: likeCount,
+        count: displayedLikes,
         selected: isLiked,
         onTap: onLike,
         icon: AppIcon(

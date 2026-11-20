@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/theme/app_text_styles.dart';
@@ -7,7 +10,10 @@ import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 Future<void> openPostCommentsSheet(
   BuildContext context, {
   required String postId,
+  bool backend = false,
 }) {
+  final cubit = backend ? context.read<PostDetailCubit?>() : null;
+  if (backend) cubit?.loadComments();
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
@@ -23,7 +29,13 @@ Future<void> openPostCommentsSheet(
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 560),
-              child: SizedBox.expand(child: CommentsSheet(postId: postId)),
+              child: SizedBox.expand(
+                child: CommentsSheet(
+                  postId: postId,
+                  backend: backend,
+                  cubit: cubit,
+                ),
+              ),
             ),
           ),
         ),
@@ -33,9 +45,16 @@ Future<void> openPostCommentsSheet(
 }
 
 class CommentsSheet extends StatefulWidget {
-  const CommentsSheet({super.key, required this.postId});
+  const CommentsSheet({
+    super.key,
+    required this.postId,
+    this.backend = false,
+    this.cubit,
+  });
 
   final String postId;
+  final bool backend;
+  final PostDetailCubit? cubit;
 
   @override
   State<CommentsSheet> createState() => _CommentsSheetState();
@@ -61,10 +80,26 @@ class _CommentsSheetState extends State<CommentsSheet> {
     (name: 'david.colo', time: '13h', text: "That's awesome!"),
   ]);
 
-  void _addComment() {
+  Future<void> _addComment() async {
     final text = _commentController.text.trim();
 
     if (text.isEmpty) return;
+
+    if (widget.backend) {
+      final cubit = widget.cubit;
+      final success = cubit == null ? false : await cubit.submitComment(text);
+      if (!mounted) return;
+      if (!success) {
+        AppToast.error(
+          context,
+          cubit?.state.commentMutationError ?? 'Unable to post comment.',
+        );
+        return;
+      }
+      if (_commentController.text.trim() == text) _commentController.clear();
+      FocusScope.of(context).unfocus();
+      return;
+    }
 
     // Temporary local preview. No backend connection.
     _comments.value = [
@@ -134,63 +169,69 @@ class _CommentsSheetState extends State<CommentsSheet> {
 
             // Comments list.
             Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: _comments,
-                builder: (context, comments, _) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    itemCount: comments.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 14),
-                    itemBuilder: (context, index) {
-                      final comment = comments[index];
+              child: widget.backend
+                  ? _backendComments(foreground)
+                  : ValueListenableBuilder(
+                      valueListenable: _comments,
+                      builder: (context, comments, _) {
+                        return ListView.separated(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          itemCount: comments.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 14),
+                          itemBuilder: (context, index) {
+                            final comment = comments[index];
 
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    '${comment.time}  ${comment.name}',
-                                    textAlign: TextAlign.right,
-                                    style: AppTextStyles.caption.copyWith(
-                                      color: foreground.withValues(alpha: 0.55),
-                                    ),
-                                    textDirection: TextDirection.ltr,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          '${comment.time}  ${comment.name}',
+                                          textAlign: TextAlign.right,
+                                          style: AppTextStyles.caption.copyWith(
+                                            color: foreground.withValues(
+                                              alpha: 0.55,
+                                            ),
+                                          ),
+                                          textDirection: TextDirection.ltr,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          comment.text,
+                                          textAlign: TextAlign.right,
+                                          style: AppTextStyles.bodyText
+                                              .copyWith(color: foreground),
+                                          textDirection: TextDirection.ltr,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                const SizedBox(height: 3),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    comment.text,
-                                    textAlign: TextAlign.right,
-                                    style: AppTextStyles.bodyText.copyWith(
-                                      color: foreground,
-                                    ),
-                                    textDirection: TextDirection.ltr,
+                                const SizedBox(width: 10),
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: foreground.withValues(
+                                    alpha: 0.85,
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          CircleAvatar(
-                            radius: 18,
-                            backgroundColor: foreground.withValues(alpha: 0.85),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
             ),
 
             Divider(height: 1, color: foreground.withValues(alpha: 0.2)),
@@ -235,6 +276,106 @@ class _CommentsSheetState extends State<CommentsSheet> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _backendComments(Color foreground) {
+    final cubit = widget.cubit;
+    if (cubit == null) {
+      return const Center(child: Text('Comments unavailable.'));
+    }
+    return BlocBuilder<PostDetailCubit, PostDetailState>(
+      bloc: cubit,
+      builder: (context, state) {
+        if (state.commentsLoading && state.comments.isEmpty) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state.commentsError && state.comments.isEmpty) {
+          return Center(
+            child: TextButton(
+              onPressed: cubit.loadComments,
+              child: const Text('Unable to load comments. Tap to retry.'),
+            ),
+          );
+        }
+        if (state.comments.isEmpty) {
+          return Center(
+            child: Text(
+              'No comments yet.',
+              style: AppTextStyles.bodyText.copyWith(color: foreground),
+            ),
+          );
+        }
+        return NotificationListener<ScrollNotification>(
+          onNotification: (event) {
+            if ((event is ScrollUpdateNotification ||
+                    event is OverscrollNotification) &&
+                event.metrics.extentAfter < 200 &&
+                !state.commentsError) {
+              cubit.loadComments(next: true);
+            }
+            return false;
+          },
+          child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            itemCount: state.comments.length + (state.commentsError ? 1 : 0),
+            separatorBuilder: (_, _) => const SizedBox(height: 14),
+            itemBuilder: (context, index) {
+              if (index == state.comments.length) {
+                return TextButton(
+                  onPressed: () => cubit.loadComments(next: true),
+                  child: const Text('Retry'),
+                );
+              }
+              final comment = state.comments[index];
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            '${comment.createdAt.toLocal().toString().split('.').first}  ${comment.authorName}',
+                            textAlign: TextAlign.right,
+                            style: AppTextStyles.caption.copyWith(
+                              color: foreground.withValues(alpha: 0.55),
+                            ),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            comment.text,
+                            textAlign: TextAlign.right,
+                            style: AppTextStyles.bodyText.copyWith(
+                              color: foreground,
+                            ),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundColor: foreground.withValues(alpha: 0.85),
+                    backgroundImage: comment.authorAvatar.isEmpty
+                        ? null
+                        : NetworkImage(comment.authorAvatar),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

@@ -18,8 +18,12 @@ class PostCategorySelector extends StatelessWidget {
     this.english = false,
     this.backendCategories = false,
     this.hasError = false,
+    this.preserveUnlisted = false,
+    this.existingGlobal,
+    this.existingPersonal,
   });
-  final bool english, backendCategories, hasError;
+  final bool english, backendCategories, hasError, preserveUnlisted;
+  final Map<String, dynamic>? existingGlobal, existingPersonal;
 
   Future<void> _openPersonalCategories(BuildContext context) async {
     final categories = context.read<ProfileCategoriesCubit>();
@@ -46,7 +50,8 @@ class PostCategorySelector extends StatelessWidget {
                     .read<CreatePostCubit>()
                     .state
                     .profileCategoryId;
-                return id != null &&
+                return !preserveUnlisted &&
+                    id != null &&
                     previous.find(id) != null &&
                     !current.loading &&
                     !current.loadFailed &&
@@ -57,7 +62,9 @@ class PostCategorySelector extends StatelessWidget {
               builder: (context, personal) =>
                   BlocConsumer<PostCategoriesCubit, PostCategoriesState>(
                     listener: (context, state) {
-                      if (!state.loading && state.error == null) {
+                      if (!preserveUnlisted &&
+                          !state.loading &&
+                          state.error == null) {
                         final draft = context.read<CreatePostCubit>();
                         if (state.find(draft.state.categoryKey) == null) {
                           draft.selectCategory(null);
@@ -71,14 +78,47 @@ class PostCategorySelector extends StatelessWidget {
                             final profile = personal.loadFailed
                                 ? null
                                 : personal.find(draft.profileCategoryId);
+                            final missingGlobal =
+                                preserveUnlisted &&
+                                global == null &&
+                                draft.categoryKey != null &&
+                                existingGlobal?['key'] == draft.categoryKey;
+                            final missingPersonal =
+                                preserveUnlisted &&
+                                profile == null &&
+                                draft.profileCategoryId != null &&
+                                existingPersonal?['id'] ==
+                                    draft.profileCategoryId;
+                            final globalLabel =
+                                existingGlobal?['label'] is String
+                                ? existingGlobal!['label'] as String
+                                : draft.categoryKey ?? '';
+                            final personalLabel =
+                                existingPersonal?['name'] is String
+                                ? existingPersonal!['name'] as String
+                                : draft.profileCategoryId ?? '';
                             final label = [
                               if (global != null)
                                 english
                                     ? global.label
                                     : global.labelFa ?? global.label,
+                              if (missingGlobal) globalLabel,
                               if (profile != null) profile.name,
+                              if (missingPersonal) personalLabel,
                             ].join(' · ');
                             final items = [
+                              if (missingGlobal)
+                                DropdownMenuItem<String>(
+                                  value: 'post:${draft.categoryKey}',
+                                  enabled: false,
+                                  child: Text(globalLabel),
+                                ),
+                              if (missingPersonal)
+                                DropdownMenuItem<String>(
+                                  value: 'profile:${draft.profileCategoryId}',
+                                  enabled: false,
+                                  child: Text(personalLabel),
+                                ),
                               for (final category in categories.categories)
                                 _item(
                                   'post:${category.key}',
@@ -100,11 +140,11 @@ class PostCategorySelector extends StatelessWidget {
                             ];
                             return _field(
                               context,
-                              selectedId: profile != null
-                                  ? 'profile:${profile.id}'
-                                  : global == null
+                              selectedId: profile != null || missingPersonal
+                                  ? 'profile:${profile?.id ?? draft.profileCategoryId}'
+                                  : global == null && !missingGlobal
                                   ? null
-                                  : 'post:${global.key}',
+                                  : 'post:${global?.key ?? draft.categoryKey}',
                               selectedLabel: label,
                               items: items,
                               loading: categories.loading || personal.loading,
@@ -311,7 +351,7 @@ class PostCategorySelector extends StatelessWidget {
             ),
           ],
         ),
-      if (!backendCategories)
+      if (!backendCategories || preserveUnlisted)
         Align(
           alignment: Alignment.centerRight,
           child: TextButton.icon(

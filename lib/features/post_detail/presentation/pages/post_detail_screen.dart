@@ -66,6 +66,8 @@ class PostDetailScreen extends StatelessWidget {
       return BlocProvider(
         create: (context) => PostDetailCubit(
           postId: post.id,
+          post: post,
+          repository: repository,
           likes: context.read<PostLikesCubit?>(),
           savedPosts: context.read<SavedPostsCubit?>(),
         )..loadDetail(repository, post.id),
@@ -209,7 +211,11 @@ class PostDetailScreen extends StatelessWidget {
             images: images,
             onCommentsPressed:
                 onCommentsPressed ??
-                () => openPostCommentsSheet(context, postId: post.id),
+                () => openPostCommentsSheet(
+                  context,
+                  postId: post.id,
+                  backend: post.metadata['backend'] == true,
+                ),
             onSharePressed:
                 onSharePressed ??
                 () => openPostShareSheet(

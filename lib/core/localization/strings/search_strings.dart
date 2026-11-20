@@ -66,27 +66,6 @@ abstract final class SearchStrings {
   static const waterHeaterRepair = 'تعمیر آبگرمکن';
   static const gasPlumbing = 'لوله‌کشی گاز';
 
-  static const suggestions = [
-    emergencyPlumbing,
-    drainCleaning,
-    blockedDrain,
-    toiletRepair,
-    toiletInstallation,
-    leakDetection,
-    waterLeakRepair,
-    pipeRepair,
-    burstPipeRepair,
-    boilerRepair,
-    radiatorRepair,
-    tapRepair,
-    faucetRepair,
-    showerRepair,
-    bathroomPlumbing,
-    kitchenPlumbing,
-    waterHeaterRepair,
-    gasPlumbing,
-  ];
-
   // Keep canonical values stable for existing search IDs and saved bookings.
   static const _displayLabels = {
     emergencyPlumbing: 'Emergency plumbing',

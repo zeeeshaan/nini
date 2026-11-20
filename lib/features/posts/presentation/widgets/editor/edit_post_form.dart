@@ -17,10 +17,16 @@ class EditPostForm extends StatelessWidget {
     required this.formKey,
     required this.captionController,
     required this.onChanged,
+    this.backend = false,
+    this.backendData,
+    this.onTouched,
   });
   final GlobalKey<FormState> formKey;
   final quill.QuillController captionController;
   final VoidCallback onChanged;
+  final bool backend;
+  final Map<String, dynamic>? backendData;
+  final ValueChanged<String>? onTouched;
   @override
   Widget build(BuildContext context) => Form(
     key: formKey,
@@ -31,15 +37,36 @@ class EditPostForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const PostEditorMediaSection(),
+          PostEditorMediaSection(backend: backend),
           const SizedBox(height: 24),
-          const PostCategorySelector(),
+          PostCategorySelector(
+            backendCategories: backend,
+            preserveUnlisted: backend,
+            existingGlobal: backendData?['category'] is Map
+                ? Map<String, dynamic>.from(backendData!['category'] as Map)
+                : null,
+            existingPersonal: backendData?['profileCategory'] is Map
+                ? Map<String, dynamic>.from(
+                    backendData!['profileCategory'] as Map,
+                  )
+                : null,
+          ),
           const SizedBox(height: 16),
-          PostEditorBasicFields(captionController: captionController),
+          PostEditorBasicFields(
+            captionController: captionController,
+            backend: backend,
+          ),
           const SizedBox(height: 24),
-          const PostEditorPricingFields(),
+          PostEditorPricingFields(
+            backend: backend,
+            backendData: backendData,
+            onTouched: onTouched,
+          ),
           const SizedBox(height: 24),
-          const PostEditorOptionsFields(),
+          PostEditorOptionsFields(
+            backendData: backendData,
+            onTouched: onTouched,
+          ),
           const SizedBox(height: 24),
           const PostEditorLocationFields(),
           const SizedBox(height: 24),

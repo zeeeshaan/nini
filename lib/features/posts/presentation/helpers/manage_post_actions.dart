@@ -42,5 +42,7 @@ Future<void> managePostActions(
     case PostOwnerAction.delete:
       final deleted = await showPostDeleteConfirmation(context, current);
       if (context.mounted && deleted) Navigator.of(context).pop();
+    case PostOwnerAction.resubmit:
+      return;
   }
 }

@@ -9,6 +9,9 @@ class SavedPostsState {
     this.storageError = false,
     this.actionPostId,
     this.actionRevision = 0,
+    this.backendSaved = const {},
+    this.page = 0,
+    this.hasMore = false,
   });
 
   final List<SavedPost> posts;
@@ -17,6 +20,10 @@ class SavedPostsState {
   /// Only successful user toggles carry an action ID; loading/sync never do.
   final String? actionPostId;
   final int actionRevision;
+  final Map<String, bool> backendSaved;
+  final int page;
+  final bool hasMore;
 
-  bool isSaved(String postId) => posts.any((entry) => entry.post.id == postId);
+  bool isSaved(String postId) =>
+      backendSaved[postId] ?? posts.any((entry) => entry.post.id == postId);
 }

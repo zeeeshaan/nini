@@ -125,6 +125,7 @@ class AppProviders extends StatelessWidget {
             builder: (context, session) =>
                 RepositoryProvider<ApiPostsRepository>(
                   key: ValueKey('api-posts-${session.accountRevision}'),
+                  dispose: (repository) => repository.dispose(),
                   create: (context) {
                     final account = context.read<SessionCubit>();
                     final initial = account.state;
@@ -178,7 +179,10 @@ class AppProviders extends StatelessWidget {
                           )..load();
                         },
                       ),
-                      BlocProvider(create: (_) => PostLikesCubit()),
+                      BlocProvider(
+                        create: (context) =>
+                            PostLikesCubit(context.read<ApiPostsRepository>()),
+                      ),
                       BlocProvider(
                         create: (context) {
                           final session = context.read<SessionCubit>();
@@ -243,6 +247,7 @@ class AppProviders extends StatelessWidget {
                                 directoryProvider: _storage(context).directory,
                               ),
                           posts: context.read<PostsCubit>(),
+                          backendPosts: context.read<ApiPostsRepository>(),
                         )..load(),
                       ),
                     ],

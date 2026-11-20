@@ -38,11 +38,12 @@ class _SearchScreenState extends State<SearchScreen>
     final repository = context.read<ApiPostsRepository?>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => SearchCubit()),
+        BlocProvider(create: (_) => SearchCubit(repository)),
         if (repository != null)
           BlocProvider<BackendPostsCubit>(
             create: (_) => BackendPostsCubit(
               (page) => repository.search(query: '', page: page),
+              repository: repository,
             ),
           ),
       ],

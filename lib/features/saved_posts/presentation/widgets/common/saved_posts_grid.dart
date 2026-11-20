@@ -41,7 +41,7 @@ class SavedPostsGrid extends StatelessWidget {
       final detailsHeight = ProfilePostCard.detailsHeightFor(context, scale);
       final cardDirection = Directionality.of(context);
       return Directionality(
-        textDirection: TextDirection.ltr,
+        textDirection: TextDirection.rtl,
         child: AppShimmer.when(
           enabled: loading,
           child: GridView.builder(
