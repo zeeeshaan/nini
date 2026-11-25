@@ -55,6 +55,8 @@ abstract final class ProfilePostStrings {
   static const followUnavailable = 'Follow and unfollow are not available yet.';
   static const loadFailed = "Could not load categories. Try again.";
   static const saveFailed = "Could not save changes. Try again.";
+  static const changesSaved = "Post edited successfully.";
+  static const changesSubmittedForReview = "Post edited successfully.";
   static const nameRequired = "Enter a category name.";
   static const nameTooLong = "Category names must be at most 40 characters.";
   static const nameTooShort = 'Category names must be at least 2 characters.';

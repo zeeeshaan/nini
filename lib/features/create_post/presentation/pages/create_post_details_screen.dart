@@ -211,7 +211,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     final updated = await posts.update(widget.editPost!.id, _draft.state);
     if (!mounted) return;
     if (updated != null) {
-      AppToast.success(context, 'Post changes saved.');
+      AppToast.success(context, ProfilePostStrings.changesSaved);
       _operation.allowPop();
       Navigator.of(context).pop(updated);
     } else {
@@ -237,10 +237,16 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
       if (!identical(result, original)) {
         final feed = context.read<FeedCubit?>();
         final own = context.read<OwnPostsCubit?>();
-        if (result.status != 'published') feed?.removePost(result.id);
+        // Withdrawal from Home/Search is emitted by the repository when status
+        // leaves published; refresh keeps lists aligned with the server.
         if (feed != null) unawaited(feed.refreshFromServer());
         if (own != null) unawaited(own.refresh());
-        AppToast.success(context, 'Post changes saved.');
+        AppToast.success(
+          context,
+          result.status == 'published'
+              ? ProfilePostStrings.changesSaved
+              : ProfilePostStrings.changesSubmittedForReview,
+        );
       }
       _operation.allowPop();
       Navigator.of(context).pop(backendPostFromJson(result.data));

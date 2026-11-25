@@ -26,11 +26,20 @@ class BackendPostsState {
 
 /// Each screen owns its own pagination and never merges private and public data.
 class BackendPostsCubit extends Cubit<BackendPostsState> {
-  BackendPostsCubit(this._load, {ApiPostsRepository? repository})
-    : super(const BackendPostsState()) {
+  BackendPostsCubit(
+    this._load, {
+    ApiPostsRepository? repository,
+    /// When true, posts withdrawn from public (edit → review) leave this list.
+    /// Own-profile lists keep them visible, so leave this false there.
+    bool syncPublicWithdrawals = false,
+  }) : super(const BackendPostsState()) {
     _deletions = repository?.deletedPosts.listen(removePost);
+    if (syncPublicWithdrawals) {
+      _withdrawals = repository?.withdrawnFromPublic.listen(removePost);
+    }
   }
   StreamSubscription<String>? _deletions;
+  StreamSubscription<String>? _withdrawals;
   Future<BackendPostsPage> Function(int page) _load;
   int _revision = 0;
 
@@ -141,13 +150,18 @@ class BackendPostsCubit extends Cubit<BackendPostsState> {
   Future<void> close() {
     _revision++;
     _deletions?.cancel();
+    _withdrawals?.cancel();
     return super.close();
   }
 }
 
 class FeedCubit extends BackendPostsCubit {
   FeedCubit(this.repository)
-    : super((page) => repository.loadFeed(page: page), repository: repository);
+    : super(
+        (page) => repository.loadFeed(page: page),
+        repository: repository,
+        syncPublicWithdrawals: true,
+      );
 
   final ApiPostsRepository repository;
   int _enrichRevision = 0;

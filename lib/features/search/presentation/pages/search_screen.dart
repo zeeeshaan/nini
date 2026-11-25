@@ -44,6 +44,7 @@ class _SearchScreenState extends State<SearchScreen>
             create: (_) => BackendPostsCubit(
               (page) => repository.search(query: '', page: page),
               repository: repository,
+              syncPublicWithdrawals: true,
             ),
           ),
       ],

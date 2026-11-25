@@ -25,6 +25,7 @@ import 'package:nini/features/chat/presentation/helpers/open_seller_conversation
 import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/reports/presentation/helpers/show_post_report_menu.dart';
 import 'package:nini/features/search/data/search_catalog.dart';
 import 'package:nini/shared/widgets/skeleton/detail_skeleton.dart';
 
@@ -79,7 +80,7 @@ class PostDetailScreen extends StatelessWidget {
                 body: DetailsSkeleton(post: post),
               );
             }
-            if (state.detailError || state.backendPost == null)
+            if (state.detailError || state.backendPost == null) {
               return Scaffold(
                 appBar: _postDetailAppBar(context),
                 body: Center(
@@ -92,6 +93,7 @@ class PostDetailScreen extends StatelessWidget {
                   ),
                 ),
               );
+            }
             return _buildDetail(
               context,
               state.backendPost!,
@@ -137,8 +139,7 @@ class PostDetailScreen extends StatelessWidget {
     // backend posts from the own-profile grid are already the account's posts.
     final canManage =
         allowOwnerActions &&
-        (posts?.canManage(post) == true ||
-            post.metadata['backend'] == true);
+        (posts?.canManage(post) == true || post.metadata['backend'] == true);
     final canViewAnalytics = posts?.canViewAnalytics(post) == true;
     var openAuthorProfile = onSellerPressed;
     if (isOwnSeller && openAuthorProfile == null) {
@@ -222,7 +223,10 @@ class PostDetailScreen extends StatelessWidget {
                 ),
             onMorePressed: canManage
                 ? () => managePostActions(context, post, onEdit: onEditPressed)
-                : onMorePressed,
+                : onMorePressed ??
+                      (post.metadata['backend'] == true && !isOwnSeller
+                          ? () => showPostReportMenu(context, postId: post.id)
+                          : null),
           ),
         ),
       ),

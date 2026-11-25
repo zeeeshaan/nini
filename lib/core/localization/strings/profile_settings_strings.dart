@@ -50,12 +50,18 @@ abstract final class ProfileSettingsStrings {
       'These are saved post schedules. Automatic publishing is not connected.';
   static const viewPost = 'View post';
   static const editPost = 'Edit post';
-  static const noBlocked = 'No blocked conversations';
-  static const blockedHelp = 'Conversations you block in Chat appear here.';
-  static const blockedConversation = 'Blocked conversation';
+  static const noBlocked = 'No blocked users';
+  static const blockedHelp =
+      'People you block appear here. You can unblock them at any time.';
+  static const blockedConversation = 'Blocked user';
   static const unblock = 'Unblock';
   static const sessionBlocks =
-      'Chat blocking is currently stored for this app session.';
+      'Blocked accounts are saved on your HYWORK profile.';
+  static const blockedLoadFailed = 'Could not load blocked users. Try again.';
+  static const blockedSignInRequired =
+      'Please sign in to manage blocked users.';
+  static const unblockFailed = 'Could not unblock this user. Try again.';
+  static const unblockSuccess = 'User unblocked.';
   static const noCommentHistory = 'No saved comment history';
   static const commentsHelp =
       'The current post comment sheet is a temporary preview. A comment-history data source is not connected yet.';

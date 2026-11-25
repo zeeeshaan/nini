@@ -30,6 +30,7 @@ import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
 import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
 import 'package:nini/features/profile_settings/data/api_user_profile_repository.dart';
 import 'package:nini/features/profile/data/api_public_profile_repository.dart';
+import 'package:nini/features/reports/data/api_reports_repository.dart';
 import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 
@@ -147,118 +148,144 @@ class AppProviders extends StatelessWidget {
                       },
                     );
                   },
-                  child: MultiBlocProvider(
-                    key: ValueKey(session.accountRevision),
-                    providers: [
-                      // Account data stays lazy until session validation opens Dashboard.
-                      BlocProvider(
-                        create: (context) =>
-                            FeedCubit(context.read<ApiPostsRepository>()),
-                      ),
-                      BlocProvider(
-                        create: (context) =>
-                            OwnPostsCubit(context.read<ApiPostsRepository>()),
-                      ),
-                      BlocProvider(
-                        create: (context) {
-                          final session = context.read<SessionCubit>();
-                          final userId = session.state.userId ?? '';
-                          return UserProfileCubit(
-                            userProfileRepository ??
-                                ApiUserProfileRepository(
-                                  context.read<ApiClient>(),
-                                  context.read<SecureTokenStore>(),
-                                  userId: userId,
-                                  onUnauthorized: () async {
-                                    if (session.state.userId == userId) {
-                                      await session.logout();
-                                    }
-                                  },
-                                ),
-                            userId: userId,
-                          )..load();
-                        },
-                      ),
-                      BlocProvider(
-                        create: (context) =>
-                            PostLikesCubit(context.read<ApiPostsRepository>()),
-                      ),
-                      BlocProvider(
-                        create: (context) {
-                          final session = context.read<SessionCubit>();
-                          final account = session.state;
-                          bool isCurrentAccount() =>
-                              !session.isClosed &&
-                              session.state.status ==
-                                  SessionStatus.authenticated &&
-                              !session.state.isLoggingOut &&
-                              !session.state.logoutCleanupRequired &&
-                              session.state.userId != null &&
-                              session.state.userId == account.userId &&
-                              session.state.accountRevision ==
-                                  account.accountRevision;
-                          return ProfileCategoriesCubit(
-                            categoriesRepository ??
-                                ApiProfileCategoriesRepository(
-                                  context.read<ApiClient>(),
-                                  context.read<SecureTokenStore>(),
-                                  isCurrentAccount: isCurrentAccount,
-                                  onUnauthorized: () async {
-                                    if (isCurrentAccount()) {
-                                      await session.logout();
-                                    }
-                                  },
-                                ),
-                          )..load();
-                        },
-                      ),
-                      BlocProvider(
-                        create: (context) => CartCubit(
-                          cartRepository ??
-                              LocalCartRepository(
-                                directoryProvider: _storage(context).directory,
-                              ),
-                        )..load(),
-                      ),
-                      BlocProvider(
-                        create: (context) =>
-                            NotificationsCubit(context.read<CartCubit>()),
-                      ),
-                      BlocProvider(
-                        create: (context) => PostAnalyticsCubit(
-                          analyticsRepository ??
-                              LocalPostAnalyticsRepository(
-                                directoryProvider: _storage(context).directory,
-                              ),
+                  child: RepositoryProvider<ApiReportsRepository>(
+                    key: ValueKey('api-reports-${session.accountRevision}'),
+                    create: (context) {
+                      final account = context.read<SessionCubit>();
+                      final initial = account.state;
+                      return ApiReportsRepository(
+                        context.read<ApiClient>(),
+                        context.read<SecureTokenStore>(),
+                        isCurrentAccount: () =>
+                            !account.isClosed &&
+                            account.state.status ==
+                                SessionStatus.authenticated &&
+                            !account.state.isLoggingOut &&
+                            !account.state.logoutCleanupRequired &&
+                            account.state.userId != null &&
+                            account.state.userId == initial.userId &&
+                            account.state.accountRevision ==
+                                initial.accountRevision,
+                      );
+                    },
+                    child: MultiBlocProvider(
+                      key: ValueKey(session.accountRevision),
+                      providers: [
+                        // Account data stays lazy until session validation opens Dashboard.
+                        BlocProvider(
+                          create: (context) =>
+                              FeedCubit(context.read<ApiPostsRepository>()),
                         ),
+                        BlocProvider(
+                          create: (context) =>
+                              OwnPostsCubit(context.read<ApiPostsRepository>()),
+                        ),
+                        BlocProvider(
+                          create: (context) {
+                            final session = context.read<SessionCubit>();
+                            final userId = session.state.userId ?? '';
+                            return UserProfileCubit(
+                              userProfileRepository ??
+                                  ApiUserProfileRepository(
+                                    context.read<ApiClient>(),
+                                    context.read<SecureTokenStore>(),
+                                    userId: userId,
+                                    onUnauthorized: () async {
+                                      if (session.state.userId == userId) {
+                                        await session.logout();
+                                      }
+                                    },
+                                  ),
+                              userId: userId,
+                            )..load();
+                          },
+                        ),
+                        BlocProvider(
+                          create: (context) => PostLikesCubit(
+                            context.read<ApiPostsRepository>(),
+                          ),
+                        ),
+                        BlocProvider(
+                          create: (context) {
+                            final session = context.read<SessionCubit>();
+                            final account = session.state;
+                            bool isCurrentAccount() =>
+                                !session.isClosed &&
+                                session.state.status ==
+                                    SessionStatus.authenticated &&
+                                !session.state.isLoggingOut &&
+                                !session.state.logoutCleanupRequired &&
+                                session.state.userId != null &&
+                                session.state.userId == account.userId &&
+                                session.state.accountRevision ==
+                                    account.accountRevision;
+                            return ProfileCategoriesCubit(
+                              categoriesRepository ??
+                                  ApiProfileCategoriesRepository(
+                                    context.read<ApiClient>(),
+                                    context.read<SecureTokenStore>(),
+                                    isCurrentAccount: isCurrentAccount,
+                                    onUnauthorized: () async {
+                                      if (isCurrentAccount()) {
+                                        await session.logout();
+                                      }
+                                    },
+                                  ),
+                            )..load();
+                          },
+                        ),
+                        BlocProvider(
+                          create: (context) => CartCubit(
+                            cartRepository ??
+                                LocalCartRepository(
+                                  directoryProvider: _storage(context)
+                                      .directory,
+                                ),
+                          )..load(),
+                        ),
+                        BlocProvider(
+                          create: (context) =>
+                              NotificationsCubit(context.read<CartCubit>()),
+                        ),
+                        BlocProvider(
+                          create: (context) => PostAnalyticsCubit(
+                            analyticsRepository ??
+                                LocalPostAnalyticsRepository(
+                                  directoryProvider: _storage(context)
+                                      .directory,
+                                ),
+                          ),
+                        ),
+                        BlocProvider(
+                          create: (context) => PostsCubit(
+                            postsRepository ??
+                                LocalPostsRepository(
+                                  directoryProvider: _storage(context)
+                                      .directory,
+                                ),
+                          )..load(),
+                        ),
+                        BlocProvider(
+                          create: (context) => SavedPostsCubit(
+                            savedPostsRepository ??
+                                LocalSavedPostsRepository(
+                                  directoryProvider: _storage(context)
+                                      .directory,
+                                ),
+                            posts: context.read<PostsCubit>(),
+                            backendPosts: context.read<ApiPostsRepository>(),
+                          )..load(),
+                        ),
+                      ],
+                      child: BlocListener<SessionCubit, SessionState>(
+                        listenWhen: (previous, current) =>
+                            current.status == SessionStatus.authenticated &&
+                            (previous.status != SessionStatus.authenticated ||
+                                previous.userId != current.userId),
+                        listener: (context, _) =>
+                            context.read<ProfileCategoriesCubit>().load(),
+                        child: child,
                       ),
-                      BlocProvider(
-                        create: (context) => PostsCubit(
-                          postsRepository ??
-                              LocalPostsRepository(
-                                directoryProvider: _storage(context).directory,
-                              ),
-                        )..load(),
-                      ),
-                      BlocProvider(
-                        create: (context) => SavedPostsCubit(
-                          savedPostsRepository ??
-                              LocalSavedPostsRepository(
-                                directoryProvider: _storage(context).directory,
-                              ),
-                          posts: context.read<PostsCubit>(),
-                          backendPosts: context.read<ApiPostsRepository>(),
-                        )..load(),
-                      ),
-                    ],
-                    child: BlocListener<SessionCubit, SessionState>(
-                      listenWhen: (previous, current) =>
-                          current.status == SessionStatus.authenticated &&
-                          (previous.status != SessionStatus.authenticated ||
-                              previous.userId != current.userId),
-                      listener: (context, _) =>
-                          context.read<ProfileCategoriesCubit>().load(),
-                      child: child,
                     ),
                   ),
                 ),

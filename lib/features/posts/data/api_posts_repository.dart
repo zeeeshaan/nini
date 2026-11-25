@@ -44,6 +44,8 @@ class ApiPostsRepository {
   final Set<String> _uncertainMutations = {};
   final Set<String> _deletedPosts = {};
   final _deletedController = StreamController<String>.broadcast(sync: true);
+  /// Posts that left `published` (e.g. edit → pending review). Home/search drop them.
+  final _withdrawnController = StreamController<String>.broadcast(sync: true);
   final _commentCounts =
       StreamController<({String postId, int count})>.broadcast(sync: true);
   final _commentCountVersions = <String, int>{};
@@ -74,11 +76,32 @@ class ApiPostsRepository {
   }
 
   Stream<String> get deletedPosts => _deletedController.stream;
+  Stream<String> get withdrawnFromPublic => _withdrawnController.stream;
   bool isDeleted(String id) => _deletedPosts.contains(id);
+
+  void _withdrawFromPublic(String id) {
+    _inventoryById.remove(id);
+    _pendingInventory.remove(id);
+    _feedGeneration++;
+    _feedCache.clear();
+    if (!_withdrawnController.isClosed) _withdrawnController.add(id);
+  }
+
+  MyServerPost _afterPublicEdit(MyServerPost result) {
+    if (result.status != 'published') {
+      _withdrawFromPublic(result.id);
+    } else {
+      _feedGeneration++;
+      _feedCache.clear();
+    }
+    return result;
+  }
+
   void dispose() {
     _inventoryById.clear();
     _pendingInventory.clear();
     _deletedController.close();
+    _withdrawnController.close();
     _commentCounts.close();
   }
 
@@ -1275,7 +1298,7 @@ class ApiPostsRepository {
         }
         _uncertainEdits.add(original.id);
         final fresh = await _reconcileEdit(original.id, changes);
-        if (fresh != null) return fresh;
+        if (fresh != null) return _afterPublicEdit(fresh);
         throw const PostApiException(
           'The save could not be confirmed. Check the post before trying again.',
         );
@@ -1287,7 +1310,7 @@ class ApiPostsRepository {
           data['isMine'] != true) {
         _uncertainEdits.add(original.id);
         final fresh = await _reconcileEdit(original.id, changes);
-        if (fresh != null) return fresh;
+        if (fresh != null) return _afterPublicEdit(fresh);
         throw const PostApiException(
           'The save could not be confirmed. Check the post before trying again.',
         );
@@ -1298,14 +1321,12 @@ class ApiPostsRepository {
       } catch (_) {
         _uncertainEdits.add(original.id);
         final fresh = await _reconcileEdit(original.id, changes);
-        if (fresh != null) return fresh;
+        if (fresh != null) return _afterPublicEdit(fresh);
         throw const PostApiException(
           'The save could not be confirmed. Check the post before trying again.',
         );
       }
-      _feedGeneration++;
-      _feedCache.clear();
-      return result;
+      return _afterPublicEdit(result);
     } finally {
       _editingPosts.remove(original.id);
     }

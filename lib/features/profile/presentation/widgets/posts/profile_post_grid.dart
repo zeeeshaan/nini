@@ -68,7 +68,8 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
       return;
     }
     backend.refresh(
-      load: (page) => repository.loadOwnProfilePosts(page: page, categoryId: id),
+      load: (page) =>
+          repository.loadOwnProfilePosts(page: page, categoryId: id),
     );
   }
 

@@ -16,6 +16,7 @@ import 'package:nini/features/home/presentation/helpers/home_post_navigation.dar
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';
 import '../cubit/seller_profile_cubit.dart';
+import '../helpers/show_seller_moderation_actions.dart';
 import '../widgets/seller/seller_profile_content.dart';
 
 class SellerProfileScreen extends StatelessWidget {
@@ -53,6 +54,17 @@ class SellerProfileScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
+            if (profile != null &&
+                !_isOwn(context, profile) &&
+                context.read<SessionCubit?>()?.state.status ==
+                    SessionStatus.authenticated)
+              IconButton(
+                tooltip: AppStrings.morePostOptions,
+                onPressed: state.blocking
+                    ? null
+                    : () => showSellerModerationActions(context),
+                icon: const AppIcon(AppIcons.more, size: 24),
+              ),
             IconButton(
               tooltip: AppStrings.message,
               onPressed: profile == null
@@ -98,8 +110,8 @@ class SellerProfileScreen extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: SellerProfileContent(
                       profile: profile,
-                      onFollow: follow,
-                      following: state.following,
+                      onFollow: state.blocking ? null : follow,
+                      following: state.following || state.blocking,
                       posts: state.posts,
                       selectedCategoryId: state.selectedCategoryId,
                       onCategorySelected: cubit?.selectCategory,

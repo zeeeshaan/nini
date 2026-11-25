@@ -92,6 +92,8 @@ Future<void> _manageBackendPost(
       if (updated != null) {
         final feed = context.read<FeedCubit?>();
         final own = context.read<OwnPostsCubit?>();
+        // Repo already withdrew non-published posts from public lists;
+        // review toast is shown on the edit screen after save.
         if (feed != null) unawaited(feed.refreshFromServer());
         if (own != null) unawaited(own.refresh());
         Navigator.of(context).pop(updated);

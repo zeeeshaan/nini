@@ -8,11 +8,20 @@ import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
-Future<T?> showPostDialog<T>(
-  BuildContext context,
-  Widget dialog, {
+/// Sheets stay dark while the page is light so popups stay readable.
+ThemeData popupSheetTheme(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.light
+    ? AppTheme.dark
+    : AppTheme.light;
+
+/// Shared dark/inverted bottom sheet used by report and action menus.
+Future<T?> showAppBottomSheet<T>(
+  BuildContext context, {
+  required WidgetBuilder builder,
   bool isDismissible = true,
   bool enableDrag = true,
+  bool isScrollControlled = false,
+  bool showDragHandle = false,
 }) {
   ContextMenuController.removeAny();
   FocusScope.of(context).unfocus();
@@ -21,47 +30,47 @@ Future<T?> showPostDialog<T>(
     useSafeArea: true,
     isDismissible: isDismissible,
     enableDrag: enableDrag,
-    isScrollControlled: true,
+    isScrollControlled: isScrollControlled,
+    showDragHandle: showDragHandle,
     backgroundColor: AppColors.transparent,
     constraints: const BoxConstraints(maxWidth: 560),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
     ),
     clipBehavior: Clip.antiAlias,
-    builder: (context) => _PostDialogSurface(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom,
+    builder: (sheetContext) {
+      final theme = popupSheetTheme(context);
+      return Theme(
+        data: theme,
+        child: Material(
+          color: theme.colorScheme.surface,
+          child: Localizations.override(
+            context: sheetContext,
+            locale: const Locale('en'),
+            child: builder(sheetContext),
+          ),
         ),
-        child: Localizations.override(
-          context: context,
-          locale: const Locale('en'),
-          child: dialog,
-        ),
-      ),
-    ),
+      );
+    },
   );
 }
 
-/// Only the sheet uses the opposite palette; the page keeps its app theme.
-/// Resolve it while building so an open sheet also follows later theme changes.
-class _PostDialogSurface extends StatelessWidget {
-  const _PostDialogSurface({required this.child});
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context).brightness == Brightness.light
-        ? AppTheme.dark
-        : AppTheme.light;
-    return Theme(
-      data: theme,
-      child: Material(
-        key: const ValueKey('post-dialog-surface'),
-        color: theme.colorScheme.surface,
-        child: child,
-      ),
-    );
-  }
+Future<T?> showPostDialog<T>(
+  BuildContext context,
+  Widget dialog, {
+  bool isDismissible = true,
+  bool enableDrag = true,
+}) {
+  return showAppBottomSheet<T>(
+    context,
+    isDismissible: isDismissible,
+    enableDrag: enableDrag,
+    isScrollControlled: true,
+    builder: (context) => Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: dialog,
+    ),
+  );
 }
 
 /// Shared layout for the reference sheets: handle, right-aligned heading,

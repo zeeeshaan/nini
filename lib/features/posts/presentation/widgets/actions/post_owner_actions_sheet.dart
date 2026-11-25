@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
+import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 
 import 'post_owner_action_tile.dart';
 
@@ -10,16 +10,11 @@ Future<PostOwnerAction?> showPostOwnerActions(
   BuildContext context, {
   bool allowEdit = true,
   bool allowResubmit = false,
-}) => showModalBottomSheet<PostOwnerAction>(
-  context: context,
-  useSafeArea: true,
+}) => showAppBottomSheet<PostOwnerAction>(
+  context,
   showDragHandle: true,
-  builder: (_) => PersianFeature(
-    child: PostOwnerActionsSheet(
-      allowEdit: allowEdit,
-      allowResubmit: allowResubmit,
-    ),
-  ),
+  builder: (_) =>
+      PostOwnerActionsSheet(allowEdit: allowEdit, allowResubmit: allowResubmit),
 );
 
 class PostOwnerActionsSheet extends StatelessWidget {

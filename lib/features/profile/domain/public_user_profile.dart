@@ -8,11 +8,12 @@ class PublicUserProfile {
     this.postsCount,
     this.isMe,
     this.isFollowing,
+    this.isBlocked,
   });
 
   final PostSeller seller;
   final int? followersCount, followingCount, postsCount;
-  final bool? isMe, isFollowing;
+  final bool? isMe, isFollowing, isBlocked;
 
   static String? normalizeUsername(String value) {
     final username = value.trim().replaceFirst(RegExp(r'^@'), '');
@@ -73,6 +74,25 @@ class PublicUserProfile {
       postsCount: count('postsCount'),
       isMe: flag('isMe'),
       isFollowing: flag('isFollowing'),
+      isBlocked: flag('isBlocked'),
     );
   }
+
+  PublicUserProfile copyWith({
+    PostSeller? seller,
+    int? followersCount,
+    int? followingCount,
+    int? postsCount,
+    bool? isMe,
+    bool? isFollowing,
+    bool? isBlocked,
+  }) => PublicUserProfile(
+    seller: seller ?? this.seller,
+    followersCount: followersCount ?? this.followersCount,
+    followingCount: followingCount ?? this.followingCount,
+    postsCount: postsCount ?? this.postsCount,
+    isMe: isMe ?? this.isMe,
+    isFollowing: isFollowing ?? this.isFollowing,
+    isBlocked: isBlocked ?? this.isBlocked,
+  );
 }

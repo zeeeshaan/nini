@@ -21,10 +21,38 @@ class FollowPeoplePage {
   final int total, page, limit;
 }
 
+/// One row from `GET /users/me/blocked` (Swagger person + blockedAt).
+class BlockedUserEntry {
+  const BlockedUserEntry({
+    required this.id,
+    this.name,
+    this.username,
+    this.avatarUrl,
+    this.verified,
+    this.blockedAt,
+  });
+  final String id;
+  final String? name, username, avatarUrl;
+  final bool? verified;
+  final DateTime? blockedAt;
+}
+
+class BlockedUsersPage {
+  const BlockedUsersPage({
+    required this.items,
+    required this.total,
+    required this.page,
+    required this.limit,
+  });
+  final List<BlockedUserEntry> items;
+  final int total, page, limit;
+}
+
 class ApiPublicProfileRepository {
   ApiPublicProfileRepository(this._apiClient, this._tokenStore);
   final ApiClient _apiClient;
   final SecureTokenStore _tokenStore;
+  final Set<String> _blockMutations = {};
 
   Future<BackendPostsPage> loadPosts(
     String userId, {
@@ -267,6 +295,171 @@ class ApiPublicProfileRepository {
       data,
       username: username,
       expectedUserId: expectedUserId,
+    );
+  }
+
+  Future<String> _requireToken(bool Function() isCurrentAccount) async {
+    if (!isCurrentAccount()) {
+      throw const FormatException('An authenticated session is required.');
+    }
+    final token = (await _tokenStore.getToken().timeout(
+      const Duration(seconds: 10),
+    ))?.trim();
+    if (!isCurrentAccount() ||
+        token == null ||
+        token.isEmpty ||
+        token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('An authenticated session is required.');
+    }
+    return token;
+  }
+
+  void _ensureAccount(bool Function() isCurrentAccount) {
+    if (!isCurrentAccount()) {
+      throw const FormatException('The account changed.');
+    }
+  }
+
+  /// `POST /users/{id}/block` — confirmed when `data.isBlocked == true`.
+  Future<void> block(
+    String userId, {
+    required String currentUserId,
+    required bool Function() isCurrentAccount,
+  }) async {
+    if (!ProfileCategory.isBackendId(userId) ||
+        !ProfileCategory.isBackendId(currentUserId)) {
+      throw const FormatException('A backend user UUID is required.');
+    }
+    if (userId == currentUserId) {
+      throw const FormatException('You cannot block your own account.');
+    }
+    if (!_blockMutations.add(userId)) {
+      throw const FormatException('A block action is already in progress.');
+    }
+    try {
+      final token = await _requireToken(isCurrentAccount);
+      final response = await _apiClient.post(
+        'users/${Uri.encodeComponent(userId)}/block',
+        token: token,
+      );
+      _ensureAccount(isCurrentAccount);
+      final data = response['data'];
+      if (response['success'] != true ||
+          data is! Map ||
+          data['userId'] != userId ||
+          data['isBlocked'] != true) {
+        throw const FormatException('Block could not be confirmed.');
+      }
+    } finally {
+      _blockMutations.remove(userId);
+    }
+  }
+
+  /// `DELETE /users/{id}/block` — confirmed when `data.isBlocked == false`.
+  Future<void> unblock(
+    String userId, {
+    required bool Function() isCurrentAccount,
+  }) async {
+    if (!ProfileCategory.isBackendId(userId)) {
+      throw const FormatException('A backend user UUID is required.');
+    }
+    if (!_blockMutations.add(userId)) {
+      throw const FormatException('A block action is already in progress.');
+    }
+    try {
+      final token = await _requireToken(isCurrentAccount);
+      final response = await _apiClient.delete(
+        'users/${Uri.encodeComponent(userId)}/block',
+        token: token,
+      );
+      _ensureAccount(isCurrentAccount);
+      final data = response['data'];
+      if (response['success'] != true ||
+          data is! Map ||
+          data['userId'] != userId ||
+          data['isBlocked'] != false) {
+        throw const FormatException('Unblock could not be confirmed.');
+      }
+    } finally {
+      _blockMutations.remove(userId);
+    }
+  }
+
+  /// `GET /users/me/blocked` — authenticated, paginated, server order preserved.
+  Future<BlockedUsersPage> loadBlocked({
+    int page = 1,
+    int limit = 20,
+    required bool Function() isCurrentAccount,
+  }) async {
+    if (page < 1 || limit < 1 || limit > 50) {
+      throw const FormatException('Invalid blocked-users pagination.');
+    }
+    final token = await _requireToken(isCurrentAccount);
+    final query = Uri(queryParameters: {'page': '$page', 'limit': '$limit'})
+        .query;
+    final response = await _apiClient.get(
+      'users/me/blocked?$query',
+      token: token,
+    );
+    _ensureAccount(isCurrentAccount);
+    final data = response['data'];
+    if (response['success'] != true ||
+        data is! Map ||
+        data['items'] is! List ||
+        data['total'] is! int ||
+        (data['total'] as int) < 0 ||
+        data['page'] != page ||
+        data['limit'] != limit) {
+      throw const FormatException('Invalid blocked users response.');
+    }
+    final items = <BlockedUserEntry>[];
+    for (final value in data['items'] as List) {
+      if (value is! Map<String, dynamic>) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      final id = value['id'];
+      if (id is! String || !ProfileCategory.isBackendId(id)) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      if (value['name'] != null && value['name'] is! String) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      if (value['username'] != null && value['username'] is! String) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      if (value['avatarUrl'] != null && value['avatarUrl'] is! String) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      if (value['verified'] != null && value['verified'] is! bool) {
+        throw const FormatException('Invalid blocked user.');
+      }
+      DateTime? blockedAt;
+      final rawBlockedAt = value['blockedAt'];
+      if (rawBlockedAt != null) {
+        if (rawBlockedAt is! String) {
+          throw const FormatException('Invalid blocked user.');
+        }
+        blockedAt = DateTime.tryParse(rawBlockedAt);
+        if (blockedAt == null) {
+          throw const FormatException('Invalid blocked user.');
+        }
+      }
+      items.add(
+        BlockedUserEntry(
+          id: id,
+          name: value['name'] as String?,
+          username: value['username'] as String?,
+          avatarUrl: value['avatarUrl'] as String?,
+          verified: value['verified'] as bool?,
+          blockedAt: blockedAt,
+        ),
+      );
+    }
+    return BlockedUsersPage(
+      items: List.unmodifiable(items),
+      total: data['total'] as int,
+      page: page,
+      limit: limit,
     );
   }
 }

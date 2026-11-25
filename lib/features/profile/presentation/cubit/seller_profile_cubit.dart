@@ -40,6 +40,8 @@ class SellerProfileState {
     this.categoriesError,
     this.following = false,
     this.followError,
+    this.blocking = false,
+    this.blockError,
     this.followers = const FollowListState(),
     this.followedUsers = const FollowListState(),
     this.posts = const BackendPostsState(),
@@ -53,6 +55,8 @@ class SellerProfileState {
   final String? categoriesError;
   final bool following;
   final String? followError;
+  final bool blocking;
+  final String? blockError;
   final FollowListState followers, followedUsers;
   final BackendPostsState posts;
   final String? selectedCategoryId;
@@ -61,6 +65,8 @@ class SellerProfileState {
     PublicUserProfile? profile,
     bool? following,
     String? followError,
+    bool? blocking,
+    String? blockError,
     FollowListState? followers,
     FollowListState? followedUsers,
     BackendPostsState? posts,
@@ -74,6 +80,8 @@ class SellerProfileState {
     categoriesError: categoriesError,
     following: following ?? this.following,
     followError: followError,
+    blocking: blocking ?? this.blocking,
+    blockError: blockError,
     followers: followers ?? this.followers,
     followedUsers: followedUsers ?? this.followedUsers,
     posts: posts ?? this.posts,
@@ -285,6 +293,89 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
     isCurrentAccount: isCurrentAccount,
   );
 
+  Future<void> block({
+    required String currentUserId,
+    required bool Function() isCurrentAccount,
+  }) => _changeBlock(
+    true,
+    currentUserId: currentUserId,
+    isCurrentAccount: isCurrentAccount,
+  );
+
+  Future<void> unblock({
+    required String currentUserId,
+    required bool Function() isCurrentAccount,
+  }) => _changeBlock(
+    false,
+    currentUserId: currentUserId,
+    isCurrentAccount: isCurrentAccount,
+  );
+
+  Future<void> _changeBlock(
+    bool blocked, {
+    required String currentUserId,
+    required bool Function() isCurrentAccount,
+  }) async {
+    final profile = state.profile;
+    if (isClosed ||
+        profile == null ||
+        state.blocking ||
+        state.following ||
+        profile.isBlocked == blocked) {
+      return;
+    }
+    if (currentUserId.isEmpty || !isCurrentAccount()) {
+      emit(state.copyWith(blockError: 'Please sign in to continue.'));
+      return;
+    }
+    if (profile.isMe == true || profile.seller.id == currentUserId) {
+      emit(state.copyWith(blockError: 'You cannot block your own account.'));
+      return;
+    }
+    final revision = _request;
+    bool current() =>
+        !isClosed &&
+        revision == _request &&
+        isCurrentAccount() &&
+        state.profile?.seller.id == profile.seller.id;
+    emit(state.copyWith(blocking: true));
+    try {
+      if (blocked) {
+        await _repository.block(
+          profile.seller.id,
+          currentUserId: currentUserId,
+          isCurrentAccount: current,
+        );
+      } else {
+        await _repository.unblock(profile.seller.id, isCurrentAccount: current);
+      }
+      if (!current()) return;
+      emit(
+        state.copyWith(
+          blocking: false,
+          profile: profile.copyWith(isBlocked: blocked),
+        ),
+      );
+    } catch (error) {
+      if (!current()) return;
+      final status = error is DioException ? error.response?.statusCode : null;
+      emit(
+        state.copyWith(
+          blocking: false,
+          blockError: error is FormatException
+              ? error.message
+              : status == 401
+              ? 'Please sign in to continue.'
+              : status == 403
+              ? 'Your account cannot update this block.'
+              : status == 404
+              ? 'This user is unavailable.'
+              : 'Could not update block status. Try again.',
+        ),
+      );
+    }
+  }
+
   Future<void> _changeFollow(
     bool desired, {
     required String? accountId,
@@ -294,6 +385,7 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
     if (isClosed ||
         profile == null ||
         state.following ||
+        state.blocking ||
         profile.isFollowing == desired) {
       return;
     }
