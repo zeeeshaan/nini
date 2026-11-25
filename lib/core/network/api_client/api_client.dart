@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../config/app_config/app_config.dart';
+import '../../config/app_config/app_config.dart';
 
 class ApiClient {
   ApiClient();

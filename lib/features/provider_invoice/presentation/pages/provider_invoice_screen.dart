@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/provider_order_strings.dart';
 import 'package:nini/core/localization/strings/receipt_strings.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/cart/domain/policies/order_access.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/chat/presentation/helpers/open_order_conversation.dart';

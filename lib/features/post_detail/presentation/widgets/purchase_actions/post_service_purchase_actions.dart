@@ -42,9 +42,8 @@ class PostServicePurchaseActions extends StatelessWidget {
           compact: true,
           quantity: quantity,
           maximum: maximum,
-          unitLabel: PostDetailStrings.unit(
-            post.details.unit ?? PostUnit.session,
-          ),
+          // Figma quantity pill uses عدد, not the service billing unit (جلسه).
+          unitLabel: PostDetailStrings.unit(PostUnit.piece),
           onChanged: onQuantityChanged,
           onEdit: onEditQuantity,
         );

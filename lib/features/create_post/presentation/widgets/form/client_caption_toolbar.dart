@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 /// Client artwork with Quill's existing selection, formatting, undo and redo

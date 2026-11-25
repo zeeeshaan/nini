@@ -1,5 +1,5 @@
 import 'package:nini/features/payment/domain/models/payment_method.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/payment/presentation/cubit/payment_selection_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';

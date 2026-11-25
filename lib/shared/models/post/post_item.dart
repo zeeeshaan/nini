@@ -23,7 +23,10 @@ class PostItem {
     this.profileCategoryId,
   });
   final String id, imageAsset, title, category, price, originalPrice;
-  final int stockCount;
+
+  /// Backend stock quantity when provided. Null means unknown / not tracked —
+  /// never treat a missing feed field as confirmed zero.
+  final int? stockCount;
 
   /// User-managed profile tab, independent of the Product/Service type.
   /// Null or a deleted tab ID is shown only under All.
@@ -38,6 +41,24 @@ class PostItem {
       (metadata['postType'] == null &&
           (category == 'خدمات' || category == 'Services'));
   PostDetails get details => _details ?? PostDetails.fromJson(_metadata);
+
+  /// True when the backend confirms the product cannot be sold.
+  bool get isExplicitlyOutOfStock {
+    if (isService) return false;
+    if (stockCount == 0) return true;
+    if (metadata['inStock'] == false) return true;
+    if (metadata['inventoryStatus'] == 'out_of_stock') return true;
+    return false;
+  }
+
+  /// True when availability is confirmed without inventing a quantity.
+  bool get isConfirmedAvailable {
+    if (isService) return true;
+    if (stockCount != null && stockCount! > 0) return true;
+    if (metadata['inStock'] == true) return true;
+    if (metadata['inventoryStatus'] == 'available') return true;
+    return false;
+  }
 
   /// Compatibility for existing JSON clients; UI code uses [details].
   Map<String, dynamic> get metadata => _details?.toJson() ?? _metadata;
@@ -65,7 +86,7 @@ class PostItem {
     title: json['title'] as String,
     category: json['category'] as String,
     profileCategoryId: json['profileCategoryId'] as String?,
-    stockCount: json['stockCount'] as int,
+    stockCount: json['stockCount'] as int?,
     price: json['price'] as String,
     originalPrice: json['originalPrice'] as String,
     media: List.unmodifiable(

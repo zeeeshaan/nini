@@ -1,7 +1,7 @@
 import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
 import 'package:nini/features/team/domain/team_request.dart';
 import 'package:nini/features/team/presentation/widgets/member_request/team_request_provider_list.dart';

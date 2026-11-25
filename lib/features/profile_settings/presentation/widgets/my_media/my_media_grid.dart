@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/profile_settings_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';

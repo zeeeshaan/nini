@@ -1,10 +1,10 @@
 import 'package:nini/features/create_post/presentation/cubit/post_schedule_cubit.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_options.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
@@ -59,7 +59,7 @@ class _SchedulePostDialogState extends State<SchedulePostDialog>
       final editing = editingFrom ? _schedule.state.from : _schedule.state.to;
       return PostDialog(
         title: CreatePostStrings.scheduledPosts,
-        icon: AppIcons.calendar,
+        icon: AppIcons.calendarDays,
         actions: PostDialogActions(
           onDone: _save,
           doneLabel: _tabs.index == 0

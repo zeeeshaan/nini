@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/strings/receipt_strings.dart';
-import 'package:nini/core/theme/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/cart/domain/models/cart_order.dart';
 import 'package:nini/features/cart/domain/models/cart_order_status.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';

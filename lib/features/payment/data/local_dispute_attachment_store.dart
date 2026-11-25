@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:nini/features/payment/domain/models/dispute_attachment.dart';
-import 'package:nini/core/media/media_compressor.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
 
 /// Owns copies of selected evidence, never the user's picker originals.
 class LocalDisputeAttachmentStore {

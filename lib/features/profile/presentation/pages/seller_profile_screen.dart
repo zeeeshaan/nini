@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
 import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';

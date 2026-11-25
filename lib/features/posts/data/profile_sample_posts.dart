@@ -42,7 +42,7 @@ PostItem _editableSample(PostItem post) {
       'caption': AppStrings.caption,
       'price': original.toString(),
       'discount': discount == 0 ? '' : discount.toString(),
-      'warehouseStock': '${post.stockCount}',
+      'warehouseStock': post.stockCount?.toString() ?? '',
       'features': [
         for (final feature in AppStrings.features)
           {'name': feature.$1, 'value': feature.$2},

@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 import 'package:nini/features/cart/presentation/pages/cart_screen.dart';
@@ -68,11 +70,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (_createRouteOpen) return;
     _createRouteOpen = true;
     try {
-      await Navigator.of(context).push<bool>(
+      final created = await Navigator.of(context).push<bool>(
         MaterialPageRoute<bool>(
           builder: (_) => const CreatePostGalleryScreen(),
         ),
       );
+      if (created == true && mounted) {
+        unawaited(context.read<OwnPostsCubit?>()?.refresh());
+      }
     } finally {
       _createRouteOpen = false;
     }

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
-import 'package:nini/core/theme/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
 
 Future<void> openPostCommentsSheet(

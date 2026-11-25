@@ -1,7 +1,7 @@
 import 'package:nini/core/localization/strings/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 
 class CategorySheetActions extends StatelessWidget {
   const CategorySheetActions({

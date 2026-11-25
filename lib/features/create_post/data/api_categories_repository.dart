@@ -1,4 +1,4 @@
-import 'package:nini/core/network/api_client.dart';
+import 'package:nini/core/network/api_client/api_client.dart';
 
 import '../domain/models/post_category.dart';
 

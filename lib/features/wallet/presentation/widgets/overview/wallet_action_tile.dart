@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class WalletActionTile extends StatelessWidget {

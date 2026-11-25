@@ -1,6 +1,6 @@
 // dart format width=100
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 class CartItemBadge extends StatelessWidget {
   const CartItemBadge({super.key, required this.label});

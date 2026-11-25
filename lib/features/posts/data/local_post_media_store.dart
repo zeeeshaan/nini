@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/media/media_compressor.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/posts/domain/posts_repository.dart';
 import 'package:nini/shared/models/post/post_media.dart';

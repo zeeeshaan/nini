@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/search_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 

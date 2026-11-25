@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/core/localization/strings/saved_posts_strings.dart';
 import 'package:nini/features/home/presentation/widgets/common/home_metric.dart';
 import 'package:nini/features/home/presentation/widgets/common/home_engagement_layout.dart';

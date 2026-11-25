@@ -1,5 +1,5 @@
-import 'package:nini/core/network/api_client.dart';
-import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/core/network/api_client/api_client.dart';
+import 'package:nini/core/security/secure_token/secure_token.dart';
 import 'package:nini/features/posts/data/api_posts_repository.dart';
 import 'package:nini/shared/models/post/post_item.dart';
 

@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import 'package:nini/features/chat/domain/models/chat_attachment.dart';
-import 'package:nini/core/media/media_compressor.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
 import 'package:nini/features/chat/domain/services/chat_media_store.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 

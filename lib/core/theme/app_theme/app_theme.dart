@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'app_colors.dart';
-import 'app_text_styles.dart';
+import '../app_colors/app_colors.dart';
+import '../app_text_styles/app_text_styles.dart';
 
 /// Shared monochrome theme. Feature widgets inherit foreground colors here.
 abstract final class AppTheme {

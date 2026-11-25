@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 import 'wallet_action_tile.dart';

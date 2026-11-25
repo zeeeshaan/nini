@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nini/core/localization/strings/create_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 class PostPublishActions extends StatelessWidget {
@@ -9,12 +10,21 @@ class PostPublishActions extends StatelessWidget {
     required this.publishing,
     required this.onCancel,
     required this.onPublish,
+    this.isEditing = false,
   });
   final bool publishing;
+  final bool isEditing;
   final VoidCallback onCancel, onPublish;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context), colors = theme.colorScheme;
+    final primaryLabel = isEditing
+        ? (publishing
+              ? ProfilePostStrings.saving
+              : ProfilePostStrings.saveChanges)
+        : (publishing
+              ? CreatePostStrings.publishing
+              : CreatePostStrings.publish);
     return SafeArea(
       top: false,
       child: Container(
@@ -39,9 +49,7 @@ class PostPublishActions extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: AppButton(
-                    label: publishing
-                        ? CreatePostStrings.publishing
-                        : CreatePostStrings.publish,
+                    label: primaryLabel,
                     isLoading: publishing,
                     onPressed: onPublish,
                   ),

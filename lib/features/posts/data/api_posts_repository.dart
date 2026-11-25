@@ -4,8 +4,8 @@ import 'dart:async';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:nini/core/network/api_client.dart';
-import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/core/network/api_client/api_client.dart';
+import 'package:nini/core/security/secure_token/secure_token.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
@@ -31,6 +31,10 @@ class ApiPostsRepository {
   final Map<String, Future<MyPostsPage>> _pendingPages = {};
   final _feedCache = <(int, int), (BackendPostsPage, DateTime)>{};
   final _pendingFeed = <(int, int), (Future<BackendPostsPage>, int, bool)>{};
+
+  /// Detail-backed stock/unit overlays for feed PostCards that omit them.
+  final _inventoryById = <String, PostItem>{};
+  final _pendingInventory = <String, Future<PostItem>>{};
   static const _feedFreshness = Duration(seconds: 25);
   int _feedGeneration = 0;
   bool _submitting = false;
@@ -72,8 +76,148 @@ class ApiPostsRepository {
   Stream<String> get deletedPosts => _deletedController.stream;
   bool isDeleted(String id) => _deletedPosts.contains(id);
   void dispose() {
+    _inventoryById.clear();
+    _pendingInventory.clear();
     _deletedController.close();
     _commentCounts.close();
+  }
+
+  static bool needsInventoryEnrichment(PostItem post) {
+    if (post.metadata['backend'] != true) return false;
+    final unit = post.metadata['unit'];
+    final hasUnit = unit is String && unit.trim().isNotEmpty;
+    if (!hasUnit) return true;
+    // Products need a real quantity (or confirmed null) from PublicPost.
+    return !post.isService && !post.metadata.containsKey('inventoryStatus');
+  }
+
+  /// Merges PublicPost inventory fields onto a feed PostCard without inventing values.
+  static PostItem mergeInventory(PostItem card, PostItem detail) {
+    if (card.id != detail.id) return card;
+    final meta = Map<String, dynamic>.from(card.metadata);
+    final unit = detail.metadata['unit'];
+    if (unit is String && unit.trim().isNotEmpty) {
+      meta['unit'] = unit.trim();
+    }
+    if (detail.metadata.containsKey('inventoryStatus')) {
+      meta['inventoryStatus'] = detail.metadata['inventoryStatus'];
+    }
+    if (detail.metadata.containsKey('inStock')) {
+      meta['inStock'] = detail.metadata['inStock'];
+    }
+    final stock = detail.stockCount;
+    if (stock != null) {
+      meta['warehouseStock'] = '$stock';
+    } else {
+      meta.remove('warehouseStock');
+    }
+    return PostItem(
+      id: card.id,
+      imageAsset: card.imageAsset,
+      title: card.title,
+      category: card.category,
+      profileCategoryId: card.profileCategoryId,
+      stockCount: stock,
+      price: card.price,
+      originalPrice: card.originalPrice,
+      media: card.media.isNotEmpty ? card.media : detail.media,
+      details: PostDetails.fromJson(meta),
+      publishedAt: card.publishedAt ?? detail.publishedAt,
+    );
+  }
+
+  Future<PostItem> _inventoryFor(PostItem post) async {
+    if (!needsInventoryEnrichment(post)) return post;
+    final cached = _inventoryById[post.id];
+    if (cached != null) return mergeInventory(post, cached);
+    final pending = _pendingInventory[post.id];
+    if (pending != null) {
+      try {
+        return mergeInventory(post, await pending);
+      } catch (_) {
+        return post;
+      }
+    }
+    final request = () async {
+      _checkAccount();
+      final detail = await loadDetail(post.id);
+      _checkAccount();
+      _inventoryById[post.id] = detail;
+      if (_inventoryById.length > 100) {
+        _inventoryById.remove(_inventoryById.keys.first);
+      }
+      return detail;
+    }();
+    _pendingInventory[post.id] = request;
+    try {
+      return mergeInventory(post, await request);
+    } catch (_) {
+      // Feed must remain usable if a detail read fails.
+      return post;
+    } finally {
+      _pendingInventory.remove(post.id);
+    }
+  }
+
+  Future<BackendPostsPage> _enrichInventory(BackendPostsPage page) async {
+    if (page.items.isEmpty) return page;
+    final items = await Future.wait(page.items.map(_inventoryFor));
+    _checkAccount();
+    return BackendPostsPage(
+      items: List.unmodifiable(items),
+      total: page.total,
+      page: page.page,
+      limit: page.limit,
+      searchId: page.searchId,
+      understood: page.understood,
+      searchPositions: page.searchPositions,
+    );
+  }
+
+  /// Applies a cached PublicPost overlay instantly when available.
+  PostItem applyCachedInventory(PostItem post) {
+    final cached = _inventoryById[post.id];
+    if (cached == null || !needsInventoryEnrichment(post)) return post;
+    return mergeInventory(post, cached);
+  }
+
+  void clearInventoryCache() => _inventoryById.clear();
+
+  /// Fills stock/unit after the feed is shown. Limited concurrency keeps the
+  /// first cards updating quickly without blocking the feed request.
+  Future<void> enrichInventoryProgressive(
+    List<PostItem> posts, {
+    required void Function(PostItem post) onUpdated,
+    int concurrency = 3,
+  }) async {
+    final pending = [
+      for (final post in posts)
+        if (needsInventoryEnrichment(post)) post,
+    ];
+    if (pending.isEmpty) return;
+    var next = 0;
+    Future<void> worker() async {
+      while (true) {
+        if (!isCurrentAccount()) return;
+        if (next >= pending.length) return;
+        final post = pending[next++];
+        final enriched = await _inventoryFor(post);
+        if (!isCurrentAccount()) return;
+        if (!identical(enriched, post) &&
+            (enriched.stockCount != post.stockCount ||
+                enriched.metadata['unit'] != post.metadata['unit'] ||
+                enriched.metadata['inventoryStatus'] !=
+                    post.metadata['inventoryStatus'] ||
+                enriched.metadata['inStock'] != post.metadata['inStock'])) {
+          onUpdated(enriched);
+        }
+      }
+    }
+
+    final workers = concurrency.clamp(1, 6);
+    await Future.wait([
+      for (var i = 0; i < workers && i < pending.length; i++) worker(),
+    ]);
   }
 
   bool _outcomeUnknown = false;
@@ -1493,6 +1637,19 @@ class ApiPostsRepository {
     return result;
   }
 
+  /// Home feed enrichment: PostCard omits stock/unit; PublicPost supplies them.
+  Future<BackendPostsPage> loadFeedEnriched({
+    int page = 1,
+    int limit = 20,
+    bool force = false,
+  }) async {
+    if (force && page == 1) {
+      _inventoryById.clear();
+    }
+    final feed = await loadFeed(page: page, limit: limit, force: force);
+    return _enrichInventory(feed);
+  }
+
   Future<BackendPostsPage> search({
     required String query,
     int page = 1,
@@ -1642,6 +1799,37 @@ class ApiPostsRepository {
     );
   }
 
+  /// Owner profile grid: include own posts that are not yet public.
+  /// Pending / revision / rejected stay visible to the uploader only;
+  /// feed and search continue to use published-only endpoints.
+  Future<BackendPostsPage> loadOwnProfilePosts({
+    int page = 1,
+    int limit = 20,
+    String? categoryId,
+  }) async {
+    final response = await loadMine(
+      page: page,
+      limit: limit,
+      categoryId: categoryId,
+    );
+    const visible = {
+      'published',
+      'pending_review',
+      'changes_requested',
+      'rejected',
+    };
+    return BackendPostsPage(
+      items: [
+        for (final post in response.items)
+          if (visible.contains(post.status) && !isDeleted(post.id))
+            backendPostFromJson(post.data),
+      ],
+      total: response.total,
+      page: response.page,
+      limit: response.limit,
+    );
+  }
+
   Future<BackendPostsPage> _publicPage(
     String path,
     Map<String, String> query, {
@@ -1718,8 +1906,21 @@ class ApiPostsRepository {
     if (isDeleted(id) ||
         response['success'] != true ||
         data is! Map<String, dynamic> ||
-        data['id'] != id ||
-        (data['status'] != null && data['status'] != 'published')) {
+        data['id'] != id) {
+      throw const FormatException('Post is unavailable.');
+    }
+    final status = data['status'];
+    final published = status == null || status == 'published';
+    // Owner may open their own pending/revision/rejected posts from profile.
+    final ownerVisible =
+        data['isMine'] == true &&
+        const {
+          'published',
+          'pending_review',
+          'changes_requested',
+          'rejected',
+        }.contains(status);
+    if (!published && !ownerVisible) {
       throw const FormatException('Post is unavailable.');
     }
     return backendPostFromJson(data);
@@ -2024,10 +2225,17 @@ PostItem backendPostFromJson(Map<String, dynamic> json) {
               },
         ]
       : <Map<String, dynamic>>[];
+  final stock = json['stock'];
+  final inventoryStatus = json['inventoryStatus'];
+  final unit = json['unit'];
+  // PostCard (feed) documents inStock only. PublicPost adds stock, unit, and
+  // inventoryStatus. Missing stock must stay null — never coerce to 0.
+  final int? stockCount = stock is int ? stock : null;
   final metadata = <String, dynamic>{
     'backend': true,
     'backendStatus': json['status'],
     'inStock': json['inStock'],
+    if (inventoryStatus is String) 'inventoryStatus': inventoryStatus,
     if (json['isLiked'] is bool) 'isLiked': json['isLiked'],
     if (json['isSaved'] is bool) 'isSaved': json['isSaved'],
     if (json['commentsCount'] is int && (json['commentsCount'] as int) >= 0)
@@ -2043,8 +2251,8 @@ PostItem backendPostFromJson(Map<String, dynamic> json) {
         ? (json['tags'] as List).whereType<String>().toList()
         : <String>[],
     'features': features,
-    if (json['unit'] is String) 'unit': json['unit'],
-    if (json['stock'] is int) 'warehouseStock': '${json['stock']}',
+    if (unit is String && unit.trim().isNotEmpty) 'unit': unit.trim(),
+    if (stockCount != null) 'warehouseStock': '$stockCount',
     if (json['location'] is String)
       'address': {
         'address': json['location'],
@@ -2069,7 +2277,7 @@ PostItem backendPostFromJson(Map<String, dynamic> json) {
             ProfileCategory.isBackendId(personal['id'] as String)
         ? personal['id'] as String
         : null,
-    stockCount: json['stock'] is int ? json['stock'] as int : 0,
+    stockCount: stockCount,
     price: money(finalPrice),
     originalPrice: rawPrice is int && finalPrice is int && finalPrice < rawPrice
         ? money(rawPrice)

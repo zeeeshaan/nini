@@ -10,6 +10,7 @@ abstract final class CreatePostStrings {
   static const retry = "Retry";
   static const tryAgain = "Try again";
   static const createPost = "Create Post";
+  static const typePost = "Type post";
   static const backToGallery = "Back to gallery";
   static const publish = "Publish";
   static const publishing = "Publishing…";
@@ -33,6 +34,8 @@ abstract final class CreatePostStrings {
   static const product = "Product";
   static const services = "Services";
   static const productServiceTitle = "Product or service title";
+  static const productServiceLabel = "Product/Service";
+  static const titleLabel = "Title";
   static const enterPostTitle = "Enter the post title";
   static const postCaption = "Caption";
   static const undo = "Undo";
@@ -44,19 +47,20 @@ abstract final class CreatePostStrings {
   static const noAttachments = "No attachments selected.";
   static const describeAttachment = "Describe this attachment…";
   static const price = "Price";
-  static const enterPrice = "Enter the price";
-  static const discount = "Discount";
+  static const enterPrice = "Price";
+  static const discount = "discount";
   static const zeroPercent = "0%";
-  static const inventoryStatus = "Inventory status";
-  static const inventoryHelp = "Select the current inventory status.";
-  static const warehouseStock = "Warehouse stock";
-  static const enterStock = "Enter the stock quantity";
+  static const inventoryStatus = "Inventory Status";
+  static const inventoryHelp =
+      "Choose the current availability status of this item.";
+  static const warehouseStock = "warehouse stock";
+  static const enterStock = "warehouse stock";
   static const stockAvailable = "In stock";
   static const stockUnavailable = "Out of stock";
   static const preOrder = "Pre-order";
   static const preparationTime = "Preparation time";
   static const unit = "Unit";
-  static const scheduledPosts = "Schedule post";
+  static const scheduledPosts = "Scheduled posts";
   static const time = "Time";
   static const calendar = "Calendar";
   static const timeFrom = "From";
@@ -100,8 +104,8 @@ abstract final class CreatePostStrings {
   static const featureAndValueRequired = "Enter a feature name and value.";
   static const featureExists = "This feature already exists. Tap it to edit.";
   static const firstFeatureHelp = "Add your first feature above.";
-  static const featuresHeading = "Specifications";
-  static const tagsKeywords = "Tags & keywords";
+  static const featuresHeading = "Features";
+  static const tagsKeywords = "Tag & Keyword";
   static const keywords = "Keywords";
   static const separateTags = "Separate tags with commas";
   static const addTags = "Add tags";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
 import 'package:nini/shared/models/post/post_item.dart';
@@ -93,6 +93,13 @@ class ProfilePostCard extends StatelessWidget {
     if (!percent.isFinite || percent <= 0 || percent > 100) return null;
     final value = percent.toStringAsFixed(1).replaceFirst(RegExp(r'\.0$'), '');
     return AppStrings.persianDigits('$value%');
+  }
+
+  String get _stockLabel {
+    final count = post.stockCount;
+    if (count != null && count > 0) return AppStrings.inStock(count);
+    if (post.isExplicitlyOutOfStock) return AppStrings.stockUnavailable;
+    return AppStrings.stockAvailable;
   }
 
   String? get _ratingLabel {
@@ -227,7 +234,9 @@ class ProfilePostCard extends StatelessWidget {
                               (showStock &&
                                   !post.isService &&
                                   (!post.isPublished ||
-                                      post.details.warehouseStock.isNotEmpty)),
+                                      post.details.warehouseStock.isNotEmpty ||
+                                      post.isConfirmedAvailable ||
+                                      post.isExplicitlyOutOfStock)),
                           maintainState: true,
                           maintainAnimation: true,
                           child: Padding(
@@ -237,7 +246,7 @@ class ProfilePostCard extends StatelessWidget {
                               child:
                                   statusLabel ??
                                   Text(
-                                    AppStrings.inStock(post.stockCount),
+                                    _stockLabel,
                                     textDirection: Directionality.of(context),
                                     textAlign: TextAlign.right,
                                     maxLines: 1,

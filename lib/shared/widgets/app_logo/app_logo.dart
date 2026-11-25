@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/assets/app_assets.dart';
+import 'package:nini/core/constants/app_assets/app_assets.dart';
 import 'package:nini/core/localization/strings/auth_strings.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
 import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:nini/features/payment/presentation/helpers/receipt_navigation.dart';
 import 'package:nini/features/provider_invoice/presentation/helpers/open_provider_invoice.dart';
 

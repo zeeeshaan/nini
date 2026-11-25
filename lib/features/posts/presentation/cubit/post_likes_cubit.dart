@@ -10,8 +10,30 @@ class PostLikesCubit extends Cubit<Set<String>> {
   final _backend = <String, ({bool liked, int count})>{};
   final _pending = <String>{};
   final _uncertain = <String>{};
+  final _revisions = <String, int>{};
 
   ({bool liked, int count})? backendState(String id) => _backend[id];
+
+  int beginBackendRead(String id) => _revisions[id] = (_revisions[id] ?? 0) + 1;
+
+  void reconcileBackendRead(PostItem post, int revision) {
+    if (isClosed ||
+        repository?.isCurrentAccount() != true ||
+        post.metadata['backend'] != true ||
+        _revisions[post.id] != revision ||
+        _pending.contains(post.id) ||
+        _uncertain.contains(post.id)) {
+      return;
+    }
+    final liked = post.metadata['isLiked'], count = post.metadata['likes'];
+    if (liked is bool && count is int && count >= 0) {
+      final value = (liked: liked, count: count);
+      if (_backend[post.id] != value) {
+        _backend[post.id] = value;
+        _notify();
+      }
+    }
+  }
 
   void seed(PostItem post) {
     if (isClosed ||
@@ -35,11 +57,14 @@ class PostLikesCubit extends Cubit<Set<String>> {
     var current = _backend[id];
     if (isClosed ||
         repo == null ||
+        !repo.isCurrentAccount() ||
         _pending.contains(id) ||
         _uncertain.contains(id)) {
       return false;
     }
     _pending.add(id);
+    _revisions[id] = (_revisions[id] ?? 0) + 1;
+    var mutationStarted = false;
     try {
       if (current == null) {
         final post = await repo.loadDetail(id);
@@ -48,15 +73,36 @@ class PostLikesCubit extends Cubit<Set<String>> {
         current = _backend[id];
         if (current == null) return false;
       }
-      final result = await repo.setLike(id, liked: !current.liked);
-      if (isClosed || !repo.isCurrentAccount()) return false;
-      _backend[id] = result;
+      final liked = !current.liked;
+      _backend[id] = (
+        liked: liked,
+        count: liked
+            ? current.count + 1
+            : (current.count - 1).clamp(0, current.count),
+      );
       _notify();
-      return true;
-    } catch (error) {
-      if (isClosed || !repo.isCurrentAccount() || error is PostApiException) {
+      mutationStarted = true;
+      final result = await repo.setLike(id, liked: liked);
+      if (isClosed || !repo.isCurrentAccount()) {
+        // Drop optimistic state for a different account; never keep it.
+        if (mutationStarted && current != null) {
+          _backend[id] = current;
+          _notify();
+        }
         return false;
       }
+      if (_backend[id] != result) {
+        _backend[id] = result;
+        _notify();
+      }
+      return true;
+    } catch (error) {
+      if (mutationStarted && current != null) {
+        _backend[id] = current;
+        _notify();
+      }
+      if (isClosed || !repo.isCurrentAccount()) return false;
+      if (!mutationStarted || error is PostApiException) return false;
       final status = error is DioException ? error.response?.statusCode : null;
       if (error is! DioException ||
           status == null ||
@@ -67,7 +113,11 @@ class PostLikesCubit extends Cubit<Set<String>> {
           final post = await repo.loadDetail(id);
           final liked = post.metadata['isLiked'],
               count = post.metadata['likes'];
-          if (!isClosed && liked is bool && count is int && count >= 0) {
+          if (!isClosed &&
+              repo.isCurrentAccount() &&
+              liked is bool &&
+              count is int &&
+              count >= 0) {
             _backend[id] = (liked: liked, count: count);
             _uncertain.remove(id);
             _notify();
@@ -78,6 +128,8 @@ class PostLikesCubit extends Cubit<Set<String>> {
       }
       return false;
     } finally {
+      // Invalidate reads started while this mutation was in flight.
+      _revisions[id] = (_revisions[id] ?? 0) + 1;
       _pending.remove(id);
     }
   }

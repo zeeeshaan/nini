@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
 import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
 import 'package:nini/shared/models/post/post_item.dart';

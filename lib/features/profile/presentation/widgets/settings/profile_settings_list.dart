@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/profile_settings_strings.dart';
 import 'package:nini/features/locations/presentation/pages/locations_screen.dart';
 import 'package:nini/features/notifications/presentation/helpers/open_notifications.dart';
@@ -18,6 +19,7 @@ import 'package:nini/features/profile_settings/presentation/pages/tags_keywords_
 import 'package:nini/features/profile_settings/presentation/pages/archive_screen.dart';
 import 'package:nini/features/wallet/presentation/pages/wallet_screen.dart';
 import 'package:nini/features/saved_posts/presentation/pages/saved_posts_screen.dart';
+import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
 import 'package:nini/features/team/presentation/pages/my_team.dart';
 
 import 'profile_settings_tile.dart';
@@ -72,10 +74,10 @@ class ProfileSettingsList extends StatelessWidget {
             ProfileSettingsStrings.notifications => () => openNotifications(
               context,
             ),
-            ProfileSettingsStrings.saved => () => _open(
-              context,
-              const SavedPostsScreen(),
-            ),
+            ProfileSettingsStrings.saved => () {
+              context.read<SavedPostsCubit>().refreshOnOpen();
+              _open(context, const SavedPostsScreen());
+            },
             ProfileSettingsStrings.accessibility => () => _open(
               context,
               const AccessibilityScreen(),

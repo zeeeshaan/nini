@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/calls/domain/call_session.dart';
 import 'package:nini/features/calls/presentation/pages/call_screen.dart';

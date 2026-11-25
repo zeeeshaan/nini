@@ -6,7 +6,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path/path.dart' as p;
 import 'package:video_compress_next/video_compress_next.dart';
 
-import 'document_compressor.dart';
+import '../document_compressor/document_compressor.dart';
 
 enum MediaCompressionKind { image, video, document }
 

@@ -5,11 +5,9 @@ import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/home/presentation/widgets/common/home_badge.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
 import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
 import 'package:nini/features/post_detail/presentation/widgets/common/post_engagement_bar.dart';
@@ -200,21 +198,6 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                             )
                           : const PostContent(),
                     ),
-
-                    if (!post.isService)
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(22, 12, 22, 0),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: HomeBadge(
-                            label: post.stockCount > 0
-                                ? AppStrings.inStock(post.stockCount)
-                                : AppStrings.stockUnavailable,
-                            background: AppColors.stockBadgeBackground,
-                            foreground: AppColors.notificationBadge,
-                          ),
-                        ),
-                      ),
 
                     if (!hasPostContent || features.isNotEmpty)
                       StaggeredEntrance(

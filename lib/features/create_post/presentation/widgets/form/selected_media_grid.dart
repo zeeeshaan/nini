@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_preview.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
@@ -84,6 +84,17 @@ class _MediaTile extends StatelessWidget {
               isOriginal: false,
               thumbnailSize: const ThumbnailSize.square(360),
               fit: BoxFit.cover,
+            )
+          else if (attachment.remoteUrl != null)
+            Image.network(
+              attachment.remoteUrl!,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => const ColoredBox(
+                color: AppColors.white,
+                child: Center(
+                  child: AppIcon(AppIcons.imageUnavailable, size: 28),
+                ),
+              ),
             )
           else if (attachment.file != null)
             GalleryFileTile(file: attachment.file!),

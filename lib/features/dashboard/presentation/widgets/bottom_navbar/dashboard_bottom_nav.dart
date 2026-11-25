@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foldable/foldable.dart';
 
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 
 import 'dashboard_fold_layout.dart';

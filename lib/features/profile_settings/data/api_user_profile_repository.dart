@@ -3,9 +3,9 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:nini/core/localization/strings/profile_edit_strings.dart';
-import 'package:nini/core/media/media_compressor.dart';
-import 'package:nini/core/network/api_client.dart';
-import 'package:nini/core/security/secure_token_store.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
+import 'package:nini/core/network/api_client/api_client.dart';
+import 'package:nini/core/security/secure_token/secure_token.dart';
 
 import '../domain/user_profile.dart';
 import '../domain/user_profile_repository.dart';

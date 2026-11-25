@@ -5,10 +5,23 @@ abstract final class AppIcons {
   static const sun = 'assets/icons/vectors/environment/sun.svg';
   static const moon = 'assets/icons/vectors/environment/moon.svg';
   static const home = 'assets/icons/vectors/navigation/house-01.svg';
-  static const cart = 'assets/icons/finance/bag-03.png';
+  /// Flaticon shopping-bag_808583 — home / post detail (CDN + disk cache).
+  /// https://www.flaticon.com/free-icon/shopping-bag_808583
+  static const cart =
+      'https://cdn-icons-png.flaticon.com/512/808/808583.png';
   static const shoppingBag = cart;
-  static const shoppingBagOutline =
-      'assets/icons/vectors/interface/shopping-bag-01.svg';
+
+  /// Offline fallback while the bag cart icon caches.
+  static const cartFallback =
+      'assets/icons/interface/cart-flaticon-808583.png';
+  static const shoppingBagOutline = cartFallback;
+
+  /// Flaticon shopping-cart-outline_54895 — bottom nav bar only.
+  /// https://www.flaticon.com/free-icon/shopping-cart-outline_54895
+  static const cartNav =
+      'https://cdn-icons-png.flaticon.com/512/54/54895.png';
+  static const cartNavFallback =
+      'assets/icons/interface/cart-flaticon-54895.png';
   static const add = 'assets/icons/vectors/edit/add-plus.svg';
   static const minus = 'assets/icons/vectors/edit/remove-minus.svg';
   static const search =
@@ -32,8 +45,9 @@ abstract final class AppIcons {
   static const postLike = 'assets/icons/vectors/interface/post-heart.svg';
   static const postLikeFilled =
       'assets/icons/vectors/interface/post-heart-filled.svg';
+  /// HD circular chat bubble from Figma (home + post detail).
   static const postComment =
-      'assets/icons/vectors/communication/post-comment.svg';
+      'assets/icons/vectors/communication/chat-circle.svg';
   static const postShare = 'assets/icons/vectors/communication/post-share.svg';
   static const share = 'assets/icons/vectors/communication/share-android.svg';
   static const imageUnavailable = 'assets/icons/images/image-x.png';
@@ -45,8 +59,16 @@ abstract final class AppIcons {
   static const check = 'assets/icons/vectors/interface/check.svg';
   static const close = 'assets/icons/vectors/menu/close-md.svg';
   static const calendar = 'assets/icons/vectors/calendar/calendar.svg';
+  static const calendarDays = 'assets/icons/vectors/calendar/calendar-days.svg';
   static const location = 'assets/icons/vectors/navigation/map-pin.svg';
+
+  /// Folded map with pin — Create Post location trailing icon (Figma).
+  static const mapWithPin = 'assets/icons/travel_location/map-01-variant-2.png';
   static const features = 'assets/icons/vectors/files/file-document.svg';
+  static const window = 'assets/icons/vectors/system/window.svg';
+
+  /// Window with header + text lines — Create Post features trailing icon (Figma).
+  static const form = 'assets/icons/vectors/interface/form.svg';
   static const ruler = 'assets/icons/vectors/edit/ruler.svg';
   static const analytics = 'assets/icons/vectors/interface/chart-line.svg';
   static const target = 'assets/icons/general/target-01.png';
@@ -59,7 +81,7 @@ abstract final class AppIcons {
   static const play = 'assets/icons/vectors/media/play.svg';
   static const pause = 'assets/icons/vectors/media/pause.svg';
   static const trash = 'assets/icons/vectors/interface/trash-empty.svg';
-  static const chat = 'assets/icons/vectors/communication/chat.svg';
+  static const chat = 'assets/icons/vectors/communication/chat-circle.svg';
   static const checkAll = 'assets/icons/vectors/interface/check-all.svg';
   static const selectAll = 'assets/icons/vectors/edit/select-multiple.svg';
   static const keyboard = 'assets/icons/vectors/system/keyboard.svg';

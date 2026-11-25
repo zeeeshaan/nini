@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 
 /// Fades, lifts, and gently scales content without changing its layout size.
 /// Delays are capped so even long grids finish their entrance within 760 ms.

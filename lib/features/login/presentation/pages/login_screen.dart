@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/assets/app_assets.dart';
+import 'package:nini/core/constants/app_assets/app_assets.dart';
 import 'package:nini/core/localization/strings/auth_strings.dart';
 import 'package:nini/features/otp_verification/presentation/pages/otp_verification_screen.dart';
 import 'package:nini/features/login/presentation/widgets/common/auth_screen_layout.dart';

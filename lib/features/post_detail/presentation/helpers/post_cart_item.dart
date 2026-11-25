@@ -13,7 +13,14 @@ CartItem? postCartItem(PostItem post, {PostSeller? seller}) {
   final price = amount(post.price);
   final serviceWithoutInventory =
       post.isService && post.details.warehouseStock.trim().isEmpty;
-  if (price == null || (!serviceWithoutInventory && post.stockCount <= 0)) {
+  final stock = post.stockCount;
+  // Null stock with confirmed availability means quantity is not tracked
+  // (Create Post: stock null = not tracked), not a confirmed zero.
+  final inventoryBlocked =
+      !serviceWithoutInventory &&
+      (post.isExplicitlyOutOfStock ||
+          (stock == null && !post.isConfirmedAvailable));
+  if (price == null || inventoryBlocked) {
     return null;
   }
   final original = amount(post.originalPrice);
@@ -27,8 +34,10 @@ CartItem? postCartItem(PostItem post, {PostSeller? seller}) {
         (post.isService ? PostUnit.session : PostUnit.piece),
     unitPrice: basePrice,
     discountPerUnit: basePrice - price,
-    // Services without an inventory limit use the Cart model's normal cap.
-    maxQuantity: serviceWithoutInventory ? 999900 : post.stockCount * 100,
+    // Services / untracked stock use the Cart model's normal cap.
+    maxQuantity: serviceWithoutInventory || stock == null
+        ? 999900
+        : stock * 100,
     imageUrl: post.media.isEmpty
         ? post.imageAsset
         : (post.media.first.type == PostMediaType.image

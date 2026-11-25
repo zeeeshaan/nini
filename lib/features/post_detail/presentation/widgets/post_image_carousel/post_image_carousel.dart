@@ -1,6 +1,6 @@
 import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/features/home/presentation/widgets/published/home_post_media_indicator.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';

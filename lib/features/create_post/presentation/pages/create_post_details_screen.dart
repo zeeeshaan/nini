@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
+import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/domain/validation/post_draft_validator.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
+import 'package:nini/features/create_post/presentation/helpers/attachments_from_post_media.dart';
 import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_basic_details_section.dart';
 import 'package:nini/features/create_post/presentation/widgets/form/post_options_section.dart';
@@ -21,15 +23,29 @@ import 'package:nini/features/create_post/presentation/widgets/form/post_publish
 import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
 import 'package:dio/dio.dart';
 import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:nini/features/posts/presentation/helpers/confirm_discard_post_changes.dart';
+import 'package:nini/shared/models/post/post_item.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 import 'package:nini/shared/widgets/app_toast/app_toast.dart';
 
 class CreatePostDetailsScreen extends StatefulWidget {
-  const CreatePostDetailsScreen({super.key, required this.attachments});
+  const CreatePostDetailsScreen({
+    super.key,
+    this.attachments = const [],
+    this.editPost,
+    this.backendPost,
+  });
+
   final List<GalleryAttachment> attachments;
+  final PostItem? editPost;
+  final MyServerPost? backendPost;
+
+  bool get isEditing => editPost != null;
+
   @override
   State<CreatePostDetailsScreen> createState() =>
       _CreatePostDetailsScreenState();
@@ -42,17 +58,28 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
       _stockController;
   late final quill.QuillController _captionController;
   late final PostCaptionSynchronizer _captionSynchronizer;
+  late final List<GalleryAttachment> _attachments;
+  late final PostDraft _initialDraft;
   final _operation = PostOperationCubit();
   final _basicKey = GlobalKey();
   final _priceKey = GlobalKey();
   final _mediaKey = GlobalKey();
   bool _showValidation = false;
+  bool _confirming = false;
   CreatePostCubit get _draft => context.read<CreatePostCubit>();
 
   @override
   void initState() {
     super.initState();
+    assert(
+      widget.attachments.isNotEmpty || widget.editPost != null,
+      'Create needs attachments; edit needs an existing post.',
+    );
     final draft = _draft.state;
+    _initialDraft = draft;
+    _attachments = widget.attachments.isNotEmpty
+        ? widget.attachments
+        : attachmentsFromPostMedia(widget.editPost!.media);
     _titleController = TextEditingController(text: draft.title);
     _priceController = TextEditingController(text: draft.price);
     _discountController = TextEditingController(text: draft.discount);
@@ -68,7 +95,10 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     document.history.clear();
     _captionSynchronizer = PostCaptionSynchronizer(
       controller: _captionController,
-      onChanged: _draft.updateRichCaption,
+      onChanged: (text, delta) {
+        _draft.updateRichCaption(text, delta);
+        _markDirty();
+      },
     );
   }
 
@@ -84,12 +114,33 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     super.dispose();
   }
 
-  void _goBack() => Navigator.of(context).pop();
+  void _markDirty() {
+    if (widget.isEditing && !_operation.state.dirty && mounted) {
+      _operation.markDirty();
+    }
+  }
+
+  Future<void> _goBack() async {
+    if (_operation.state.saving) return;
+    if (!widget.isEditing) {
+      Navigator.of(context).pop();
+      return;
+    }
+    if (_confirming) return;
+    _confirming = true;
+    final discard =
+        !_operation.state.dirty || await confirmDiscardPostChanges(context);
+    _confirming = false;
+    if (mounted && discard) {
+      _operation.allowPop();
+      Navigator.of(context).pop();
+    }
+  }
 
   bool _validateBasicDetails() {
     final issue = PostDraftValidator.forPublishing(
       _draft.state,
-      hasAttachments: widget.attachments.isNotEmpty,
+      hasAttachments: _attachments.isNotEmpty,
       now: DateTime.now(),
     );
     if (issue == null) return true;
@@ -123,10 +174,86 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
           retrySeconds != null && retrySeconds > 0
               ? 'Too many requests. Wait $retrySeconds seconds before trying again.'
               : 'Too many requests. Wait before trying again.',
-        _ => 'The request could not be confirmed. Check My Posts before retrying if submission may have started.',
+        _ =>
+          'The request could not be confirmed. Check My Posts before retrying if submission may have started.',
       };
     }
     return 'The request could not be confirmed. Check My Posts before retrying if submission may have started.';
+  }
+
+  Future<void> _onPrimaryAction() async {
+    if (widget.isEditing) {
+      await _onSave();
+      return;
+    }
+    await _onPublish();
+  }
+
+  Future<void> _onSave() async {
+    if (_operation.state.saving) return;
+    _captionSynchronizer.flush();
+    setState(() => _showValidation = true);
+    if (!_validateBasicDetails()) return;
+    if (_draft.state.price.trim().isEmpty) {
+      AppToast.warning(context, CreatePostStrings.invalidPrice);
+      return;
+    }
+    ContextMenuController.removeAny();
+    FocusScope.of(context).unfocus();
+    _operation.beginSave();
+
+    if (widget.backendPost != null) {
+      await _saveBackend();
+      return;
+    }
+
+    final posts = context.read<PostsCubit>();
+    final updated = await posts.update(widget.editPost!.id, _draft.state);
+    if (!mounted) return;
+    if (updated != null) {
+      AppToast.success(context, 'Post changes saved.');
+      _operation.allowPop();
+      Navigator.of(context).pop(updated);
+    } else {
+      _operation.fail(
+        posts.state.publishError ?? ProfilePostStrings.saveFailed,
+      );
+      if (mounted && _operation.state.error != null) {
+        AppToast.error(context, _operation.state.error!);
+      }
+    }
+  }
+
+  Future<void> _saveBackend() async {
+    final repository = context.read<ApiPostsRepository>();
+    try {
+      final original = widget.backendPost!;
+      final result = await repository.updateEditablePost(
+        original,
+        _draft.state,
+        initialDraft: _initialDraft,
+      );
+      if (!mounted) return;
+      if (!identical(result, original)) {
+        final feed = context.read<FeedCubit?>();
+        final own = context.read<OwnPostsCubit?>();
+        if (result.status != 'published') feed?.removePost(result.id);
+        if (feed != null) unawaited(feed.refreshFromServer());
+        if (own != null) unawaited(own.refresh());
+        AppToast.success(context, 'Post changes saved.');
+      }
+      _operation.allowPop();
+      Navigator.of(context).pop(backendPostFromJson(result.data));
+    } catch (error) {
+      if (!mounted) return;
+      _operation.retry();
+      AppToast.error(
+        context,
+        error is PostApiException
+            ? error.message
+            : ProfilePostStrings.saveFailed,
+      );
+    }
   }
 
   Future<void> _onPublish() async {
@@ -145,7 +272,7 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
         current.title.trim().isEmpty ||
         current.caption.trim().isEmpty ||
         missingCategory;
-    final missingKey = widget.attachments.isEmpty
+    final missingKey = _attachments.isEmpty
         ? _mediaKey
         : missingBasic
         ? _basicKey
@@ -224,34 +351,10 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     }
     _operation.beginSave();
     try {
-      final post = await posts.submit(draft, widget.attachments);
-      if (!mounted) return;
-      await showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (dialogContext) => PopScope(
-          canPop: false,
-          child: AlertDialog(
-            title: const Text(
-              'Post Submitted for Review',
-              textAlign: TextAlign.right,
-            ),
-            content: Text(
-              '${post.status == 'pending_review' ? 'Your post has been submitted successfully and is now awaiting admin review. You can check its status in My Posts.' : 'Your post was submitted. Its current status is ${post.status.replaceAll('_', ' ')}. You can check its status in My Posts.'}${hasRichFormatting ? '\n\nThe caption was saved as plain text; formatting was not saved.' : ''}',
-              textAlign: TextAlign.right,
-            ),
-            actions: [
-              AppButton(
-                label: 'Got it',
-                onPressed: () => Navigator.of(dialogContext).pop(),
-                height: 44,
-              ),
-            ],
-          ),
-        ),
-      );
+      await posts.submit(draft, _attachments);
       if (!mounted) return;
       _operation.retry();
+      AppToast.success(context, 'Post uploaded successfully.');
       Navigator.of(context).pop<bool>(true);
     } catch (error) {
       if (!mounted) return;
@@ -272,11 +375,20 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
     bloc: _operation,
     builder: (context, state) {
       final theme = Theme.of(context), colors = theme.colorScheme;
+      final title = widget.isEditing
+          ? ProfilePostStrings.editPost
+          : CreatePostStrings.typePost;
       return Localizations.override(
         context: context,
         locale: const Locale('en'),
         child: PopScope(
-          canPop: !_operation.state.saving,
+          canPop: widget.isEditing
+              ? _operation.state.allowPop ||
+                    (!_operation.state.dirty && !_operation.state.saving)
+              : !_operation.state.saving,
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop && widget.isEditing) unawaited(_goBack());
+          },
           child: Scaffold(
             backgroundColor: colors.surface,
             appBar: AppBar(
@@ -289,17 +401,23 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                 alignment: Alignment.centerRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 14),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      CreatePostStrings.createPost,
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.right,
-                      style: theme.textTheme.titleMedium,
-                    ),
+                  child: Text(
+                    title,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.right,
+                    style: theme.textTheme.titleMedium,
                   ),
                 ),
               ),
+              actions: [
+                IconButton(
+                  tooltip: widget.isEditing
+                      ? ProfilePostStrings.back
+                      : CreatePostStrings.backToGallery,
+                  onPressed: _operation.state.saving ? null : _goBack,
+                  icon: const AppIcon(AppIcons.backRight, size: 22),
+                ),
+              ],
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(1),
                 child: Divider(
@@ -308,14 +426,6 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                   color: theme.dividerColor,
                 ),
               ),
-
-              actions: [
-                IconButton(
-                  tooltip: CreatePostStrings.backToGallery,
-                  onPressed: _operation.state.saving ? null : _goBack,
-                  icon: const AppIcon(AppIcons.backRight, size: 22),
-                ),
-              ],
             ),
             body: AbsorbPointer(
               absorbing: _operation.state.saving,
@@ -325,8 +435,16 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 720),
-                    child: SingleChildScrollView(
-                      key: const PageStorageKey('create-post-details'),
+                    child: BlocListener<CreatePostCubit, PostDraft>(
+                      listenWhen: (previous, current) =>
+                          widget.isEditing && previous != current,
+                      listener: (_, _) => _markDirty(),
+                      child: SingleChildScrollView(
+                      key: PageStorageKey(
+                        widget.isEditing
+                            ? 'edit-post-details'
+                            : 'create-post-details',
+                      ),
                       keyboardDismissBehavior:
                           ScrollViewKeyboardDismissBehavior.onDrag,
                       child: BlocBuilder<CreatePostCubit, PostDraft>(
@@ -336,13 +454,13 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                             Container(
                               key: _mediaKey,
                               decoration:
-                                  _showValidation && widget.attachments.isEmpty
+                                  _showValidation && _attachments.isEmpty
                                   ? BoxDecoration(
                                       border: Border.all(color: colors.error),
                                     )
                                   : null,
                               child: SelectedMediaGrid(
-                                attachments: widget.attachments,
+                                attachments: _attachments,
                               ),
                             ),
                             const SizedBox(height: 22),
@@ -357,7 +475,8 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                                     key: _basicKey,
                                     titleController: _titleController,
                                     captionController: _captionController,
-                                    attachments: widget.attachments,
+                                    attachments: _attachments,
+                                    lockPostType: widget.backendPost != null,
                                     categoryError:
                                         _showValidation &&
                                         draft.categoryKey != null &&
@@ -402,14 +521,16 @@ class _CreatePostDetailsScreenState extends State<CreatePostDetailsScreen> {
                         ),
                       ),
                     ),
+                    ),
                   ),
                 ),
               ),
             ),
             bottomNavigationBar: PostPublishActions(
               publishing: _operation.state.saving,
+              isEditing: widget.isEditing,
               onCancel: _goBack,
-              onPublish: _onPublish,
+              onPublish: _onPrimaryAction,
             ),
           ),
         ),

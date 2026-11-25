@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';

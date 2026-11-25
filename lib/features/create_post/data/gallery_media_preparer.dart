@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:nini/core/media/media_compressor.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
 import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
 import 'package:path/path.dart' as p;
 import 'package:photo_manager/photo_manager.dart';

@@ -118,10 +118,14 @@ class SavedPostsCubit extends Cubit<SavedPostsState> {
   Future<void> load() => _closing
       ? Future.value()
       : _serialize(() async {
-          await _load();
+          await _load(reconcile: true);
         });
 
-  Future<bool> _load() async {
+  void refreshOnOpen() {
+    if (_loaded && !_closing) unawaited(load());
+  }
+
+  Future<bool> _load({bool reconcile = false}) async {
     _publish(state.posts, loading: true);
     try {
       final stored = await repository.load();
@@ -165,6 +169,14 @@ class SavedPostsCubit extends Cubit<SavedPostsState> {
         }
         if (_closing || isClosed || !_backendPosts.isCurrentAccount()) {
           return false;
+        }
+        if (reconcile) {
+          // Loads and mutations share the serialized queue. A successful
+          // explicit refresh can retire settled confirmations, while queued
+          // or uncertain mutations retain their protection.
+          _confirmed.removeWhere(
+            (id, _) => !_busy.contains(id) && !_uncertain.contains(id),
+          );
         }
         final remote = [
           for (final entry in page.items)

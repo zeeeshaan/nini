@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
@@ -68,7 +68,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
       return;
     }
     backend.refresh(
-      load: (page) => repository.loadPublishedMine(page: page, categoryId: id),
+      load: (page) => repository.loadOwnProfilePosts(page: page, categoryId: id),
     );
   }
 

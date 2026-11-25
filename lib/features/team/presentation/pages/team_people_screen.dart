@@ -1,9 +1,9 @@
 import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/features/team/data/in_memory_teams_repository.dart';
 import 'package:nini/features/team/presentation/cubit/teams_cubit.dart';
 import 'package:nini/features/team/presentation/helpers/add_team_people.dart';

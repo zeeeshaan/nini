@@ -1,3 +1,4 @@
+
 import 'package:nini/core/localization/app_string/app_string.dart';
 
 enum PostUnit {
@@ -13,13 +14,21 @@ enum PostUnit {
   set(AppStrings.unitSet);
 
   const PostUnit(this.label);
+
   final String label;
 
-  /// Missing or unknown legacy values must not imply a different sale unit.
   static PostUnit? fromName(String? name) {
+    final value = name?.trim().toLowerCase();
+
+    if (value == null || value.isEmpty) return null;
+
     for (final unit in values) {
-      if (unit.name == name) return unit;
+      if (unit.name.toLowerCase() == value ||
+          unit.label.trim().toLowerCase() == value) {
+        return unit;
+      }
     }
+
     return null;
   }
 }

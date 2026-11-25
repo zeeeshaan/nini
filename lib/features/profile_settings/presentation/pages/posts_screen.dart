@@ -107,7 +107,7 @@ class _ServerPostsState extends State<_ServerPosts> {
           await repository.resubmitOwnedPost(post);
           if (!mounted) return;
           _load(_page);
-          AppToast.success(context, 'Post sent for review.');
+          AppToast.success(context, 'Post updated successfully.');
         } catch (error) {
           if (mounted)
             AppToast.error(

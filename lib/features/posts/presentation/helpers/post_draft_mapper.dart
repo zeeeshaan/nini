@@ -18,7 +18,7 @@ PostDraft postDraftFromPost(PostItem post) {
         (post.originalPrice.isEmpty ? post.price : post.originalPrice),
     discount: details.discount,
     warehouseStock: details.warehouseStock.isEmpty
-        ? '${post.stockCount}'
+        ? (post.stockCount?.toString() ?? '')
         : details.warehouseStock,
     unit: details.unit ?? PostUnit.piece,
     preparationTime: PreparationTime.values.firstWhere(

@@ -5,23 +5,48 @@ class GalleryAttachment {
   const GalleryAttachment.fromAsset(AssetEntity value)
     : asset = value,
       file = null,
-      preparedFile = null;
+      preparedFile = null,
+      remoteUrl = null,
+      _remoteId = null;
 
   const GalleryAttachment.fromFile(PlatformFile value)
     : asset = null,
       file = value,
-      preparedFile = null;
+      preparedFile = null,
+      remoteUrl = null,
+      _remoteId = null;
 
-  const GalleryAttachment._(this.asset, this.file, this.preparedFile);
+  /// Existing post media shown on the create-style edit screen.
+  const GalleryAttachment.fromRemote({
+    required String url,
+    required String id,
+  }) : asset = null,
+       file = null,
+       preparedFile = null,
+       remoteUrl = url,
+       _remoteId = id;
+
+  const GalleryAttachment._(
+    this.asset,
+    this.file,
+    this.preparedFile, [
+    this.remoteUrl,
+    this._remoteId,
+  ]);
 
   final AssetEntity? asset;
   final PlatformFile? file;
   final PlatformFile? preparedFile;
+  final String? remoteUrl;
+  final String? _remoteId;
 
   GalleryAttachment withPreparedFile(PlatformFile value) =>
-      GalleryAttachment._(asset, file, value);
+      GalleryAttachment._(asset, file, value, remoteUrl, _remoteId);
 
   String get id {
+    if (remoteUrl != null) {
+      return 'remote:${_remoteId ?? remoteUrl}';
+    }
     if (asset != null) {
       return 'asset:${asset!.id}';
     }
@@ -30,4 +55,5 @@ class GalleryAttachment {
   }
 
   bool get isFile => file != null;
+  bool get isRemote => remoteUrl != null;
 }

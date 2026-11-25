@@ -4,7 +4,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:nini/shared/models/local_identity.dart';
-import 'package:nini/core/media/media_compressor.dart';
+import 'package:nini/core/media/media_compressor/media_compressor.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 

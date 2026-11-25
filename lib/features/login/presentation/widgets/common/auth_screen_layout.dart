@@ -1,13 +1,13 @@
 import 'dart:math' as math;
 
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/theme/app_theme.dart';
+import 'package:nini/core/theme/app_theme/app_theme.dart';
 import 'package:nini/shared/widgets/app_button/app_button.dart';
 
 /// Common responsive composition for the phone and OTP entry screens.

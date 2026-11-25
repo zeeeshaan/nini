@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:nini/features/post_analytics/domain/post_analytics.dart';
 import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
 import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';

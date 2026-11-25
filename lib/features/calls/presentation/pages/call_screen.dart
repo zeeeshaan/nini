@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/core/theme/app_theme.dart';
-import 'package:nini/core/theme/app_colors.dart';
+import 'package:nini/core/theme/app_theme/app_theme.dart';
+import 'package:nini/core/theme/app_colors/app_colors.dart';
 import 'package:nini/features/calls/data/preview_call_service.dart';
 import 'package:nini/features/calls/domain/call_session.dart';
 import 'package:nini/features/calls/domain/call_service.dart';

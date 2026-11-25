@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/core/localization/strings/profile_settings_strings.dart';
 import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';

@@ -1,10 +1,10 @@
 import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/app_string/app_string.dart';
 import 'package:nini/features/post_analytics/presentation/pages/post_analytics_screen.dart';
 import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
@@ -75,13 +75,13 @@ class PostDetailScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.loadingDetail) {
               return Scaffold(
-                appBar: AppBar(),
+                appBar: _postDetailAppBar(context),
                 body: DetailsSkeleton(post: post),
               );
             }
             if (state.detailError || state.backendPost == null)
               return Scaffold(
-                appBar: AppBar(),
+                appBar: _postDetailAppBar(context),
                 body: Center(
                   child: TextButton(
                     onPressed: () => context.read<PostDetailCubit>().loadDetail(
@@ -133,7 +133,12 @@ class PostDetailScreen extends StatelessWidget {
         : isOwnSeller
         ? context.watch<UserProfileCubit?>()?.seller ?? localPostSeller
         : actualSeller;
-    final canManage = allowOwnerActions && posts?.canManage(post) == true;
+    // Profile passes allowOwnerActions. Local posts need PostsCubit ownership;
+    // backend posts from the own-profile grid are already the account's posts.
+    final canManage =
+        allowOwnerActions &&
+        (posts?.canManage(post) == true ||
+            post.metadata['backend'] == true);
     final canViewAnalytics = posts?.canViewAnalytics(post) == true;
     var openAuthorProfile = onSellerPressed;
     if (isOwnSeller && openAuthorProfile == null) {
@@ -152,9 +157,8 @@ class PostDetailScreen extends StatelessWidget {
       child: ScreenEntrance(
         child: Scaffold(
           extendBody: true,
-          appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 44,
+          appBar: _postDetailAppBar(
+            context,
             actions: [
               if (canViewAnalytics)
                 Flexible(
@@ -183,17 +187,7 @@ class PostDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-              StaggeredEntrance(
-                distance: 8,
-                child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const AppIcon(AppIcons.backRight, size: 18),
-                  tooltip: AppStrings.back,
-                ),
-              ),
             ],
-            automaticallyImplyLeading: false,
           ),
 
           bottomNavigationBar: PostDetailBottomBar(
@@ -243,4 +237,26 @@ class PostDetailScreen extends StatelessWidget {
       child: content,
     );
   }
+
+  /// Keeps the back control on the trailing side for loading, error, and
+  /// loaded states so it does not jump when backend detail finishes loading.
+  PreferredSizeWidget _postDetailAppBar(
+    BuildContext context, {
+    List<Widget> actions = const [],
+  }) => AppBar(
+    elevation: 0,
+    toolbarHeight: 44,
+    automaticallyImplyLeading: false,
+    actions: [
+      ...actions,
+      StaggeredEntrance(
+        distance: 8,
+        child: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const AppIcon(AppIcons.backRight, size: 18),
+          tooltip: AppStrings.back,
+        ),
+      ),
+    ],
+  );
 }

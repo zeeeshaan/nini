@@ -24,11 +24,13 @@ class PostBasicDetailsSection extends StatelessWidget {
     this.typeError = false,
     this.titleError = false,
     this.captionError = false,
+    this.lockPostType = false,
   });
   final TextEditingController titleController;
   final quill.QuillController captionController;
   final List<GalleryAttachment> attachments;
   final bool categoryError, typeError, titleError, captionError;
+  final bool lockPostType;
   @override
   Widget build(BuildContext context) {
     final draftCubit = context.read<CreatePostCubit>();
@@ -52,19 +54,44 @@ class PostBasicDetailsSection extends StatelessWidget {
                 : value == CreatePostType.product
                 ? CreatePostStrings.product
                 : CreatePostStrings.services,
-            onTap: () => choosePostOption<CreatePostType>(
-              context,
-              TypePostDialog(selected: draftCubit.state.postType),
-              draftCubit.selectPostType,
-            ),
+            onTap: lockPostType
+                ? null
+                : () => choosePostOption<CreatePostType>(
+                    context,
+                    TypePostDialog(selected: draftCubit.state.postType),
+                    draftCubit.selectPostType,
+                  ),
           ),
         ),
         const SizedBox(height: 16),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                CreatePostStrings.productServiceLabel,
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.ltr,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: .45),
+                ),
+              ),
+              Text(
+                CreatePostStrings.titleLabel,
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.ltr,
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
         AppTextField(
           hasError: titleError,
           controller: titleController,
-          label: CreatePostStrings.productServiceTitle,
-          hint: CreatePostStrings.enterPostTitle,
           textAlign: TextAlign.right,
           decorationDirection: TextDirection.rtl,
           textInputAction: TextInputAction.next,
@@ -74,7 +101,9 @@ class PostBasicDetailsSection extends StatelessWidget {
         Text(
           CreatePostStrings.postCaption,
           textAlign: TextAlign.right,
-          style: theme.textTheme.bodySmall,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
           textDirection: TextDirection.ltr,
         ),
         const SizedBox(height: 8),

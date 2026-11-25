@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/animation/screen_entrance.dart';
+import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 import 'settings_detail_header.dart';

@@ -6,7 +6,7 @@ import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
 import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
 import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/core/animation/staggered_entrance.dart';
+import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
 import 'package:nini/features/profile/presentation/widgets/categories/category_chips.dart';

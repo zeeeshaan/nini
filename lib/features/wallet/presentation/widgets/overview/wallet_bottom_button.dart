@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:nini/core/localization/strings/wallet_strings.dart';
 
 class WalletBottomButton extends StatelessWidget {

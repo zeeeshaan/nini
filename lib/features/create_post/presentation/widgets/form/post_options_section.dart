@@ -2,7 +2,7 @@ import 'package:nini/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/core/localization/strings/create_post_strings.dart';
 import 'package:nini/features/create_post/domain/models/post_draft.dart';
 import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
@@ -29,8 +29,9 @@ class PostOptionsSection extends StatelessWidget {
           selector: (state) => state.preparationTime,
           builder: (context, value) => PostFormOptionTile(
             label: CreatePostStrings.preparationTime,
-            value: CreatePostStrings.optionLabel(value),
-            trailing: const AppIcon(AppIcons.clock, size: 18),
+            value: value == PreparationTime.none
+                ? null
+                : CreatePostStrings.optionLabel(value),
             onTap: () => choosePostOption<PreparationTime>(
               context,
               PreparationTimeDialog(selected: draftCubit.state.preparationTime),
@@ -61,7 +62,7 @@ class PostOptionsSection extends StatelessWidget {
             return PostFormOptionTile(
               label: CreatePostStrings.scheduledPosts,
               value: scheduleLabel,
-              trailing: const AppIcon(AppIcons.calendar, size: 18),
+              trailing: const AppIcon(AppIcons.calendarDays, size: 18),
               onTap: () => choosePostOption<ScheduleSelection>(
                 context,
                 SchedulePostDialog(initial: schedule),
@@ -73,30 +74,30 @@ class PostOptionsSection extends StatelessWidget {
         const SizedBox(height: 10),
         BlocSelector<CreatePostCubit, PostDraft, PostAddress?>(
           selector: (state) => state.address,
-          builder: (context, value) => PostFormOptionTile(
-            label: CreatePostStrings.location,
-            value: value?.address,
-            trailing: const AppIcon(AppIcons.location, size: 18),
-            onTap: () => choosePostOption<AddressSelection>(
-              context,
-              AddressDialog(
-                allowManualEntry: true,
-                initial: draftCubit.state.address,
-                saved: draftCubit.state.savedAddresses,
+          builder: (context, value) {
+            final address = value?.address.trim();
+            final hasAddress = address != null && address.isNotEmpty;
+            return PostFormOptionTile(
+              label: hasAddress ? address : CreatePostStrings.location,
+              trailing: const AppIcon(AppIcons.mapWithPin, size: 18),
+              onTap: () => choosePostOption<AddressSelection>(
+                context,
+                AddressDialog(
+                  allowManualEntry: true,
+                  initial: draftCubit.state.address,
+                  saved: draftCubit.state.savedAddresses,
+                ),
+                draftCubit.setAddress,
               ),
-              draftCubit.setAddress,
-            ),
-          ),
+            );
+          },
         ),
         const SizedBox(height: 10),
         BlocSelector<CreatePostCubit, PostDraft, List<PostFeature>>(
           selector: (state) => state.features,
-          builder: (context, value) => PostFormOptionTile(
+          builder: (context, _) => PostFormOptionTile(
             label: CreatePostStrings.featuresHeading,
-            value: value.isEmpty
-                ? null
-                : CreatePostStrings.featureCount(value.length),
-            trailing: const AppIcon(AppIcons.features, size: 18),
+            trailing: const AppIcon(AppIcons.form, size: 18),
             onTap: () => choosePostOption<List<PostFeature>>(
               context,
               FeaturesDialog(initial: draftCubit.state.features),
@@ -107,15 +108,55 @@ class PostOptionsSection extends StatelessWidget {
         const SizedBox(height: 10),
         BlocSelector<CreatePostCubit, PostDraft, List<String>>(
           selector: (state) => state.tags,
-          builder: (context, value) => PostFormOptionTile(
-            label: CreatePostStrings.tagsKeywords,
-            value: value.isEmpty ? null : value.map((tag) => '#$tag').join(' '),
-            onTap: () => choosePostOption<List<String>>(
-              context,
-              TagsDialog(initial: draftCubit.state.tags),
-              draftCubit.setTags,
-            ),
-          ),
+          builder: (context, value) {
+            final theme = Theme.of(context);
+            return PostFormOptionTile(
+              label: CreatePostStrings.tagsKeywords,
+              trailing: Text(
+                '#',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  height: 1,
+                ),
+              ),
+              footer: value.isEmpty
+                  ? null
+                  : Align(
+                      alignment: Alignment.centerRight,
+                      child: Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        alignment: WrapAlignment.end,
+                        textDirection: TextDirection.rtl,
+                        children: [
+                          for (final tag in value)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.onSurface.withValues(
+                                  alpha: .06,
+                                ),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Text(
+                                tag,
+                                textDirection: TextDirection.ltr,
+                                style: theme.textTheme.bodySmall,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+              onTap: () => choosePostOption<List<String>>(
+                context,
+                TagsDialog(initial: draftCubit.state.tags),
+                draftCubit.setTags,
+              ),
+            );
+          },
         ),
         const SizedBox(height: 28),
       ],

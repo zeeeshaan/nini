@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/assets/app_assets.dart';
+import 'package:nini/core/constants/app_assets/app_assets.dart';
 import 'package:nini/core/localization/strings/auth_strings.dart';
 import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
 import 'package:nini/features/login/presentation/pages/login_screen.dart';

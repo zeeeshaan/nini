@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nini/core/localization/strings/cart_strings.dart';
 import 'package:nini/core/localization/strings/payment_strings.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 class PaymentEscrow extends StatelessWidget {
   const PaymentEscrow({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 class TeamHeader extends StatelessWidget implements PreferredSizeWidget {
   const TeamHeader({super.key, required this.onSave, required this.onBack});

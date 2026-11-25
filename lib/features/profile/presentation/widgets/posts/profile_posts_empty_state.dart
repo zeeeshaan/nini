@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/assets/app_assets.dart';
+import 'package:nini/core/constants/app_assets/app_assets.dart';
 import 'package:nini/core/localization/strings/profile_post_strings.dart';
 import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/core/theme/app_text_styles.dart';
+import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
 
 class ProfilePostsEmptyState extends StatelessWidget {
   const ProfilePostsEmptyState({super.key});

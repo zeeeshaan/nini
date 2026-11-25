@@ -162,7 +162,7 @@ class PostDetailCubit extends Cubit<PostDetailState> {
   final ApiPostsRepository? _repository;
   StreamSubscription<({String postId, int count})>? _commentCountSubscription;
   int _commentsRevision = 0;
-  bool _commentOutcomeUnknown = false;
+  final _uncertainComments = <(String, String?)>{};
   final _uncertainDeletes = <String>{};
   final PostLikesCubit? _likes;
   final SavedPostsCubit? _savedPosts;
@@ -181,11 +181,14 @@ class PostDetailCubit extends Cubit<PostDetailState> {
       }
     });
     final revision = ++_detailRevision;
+    final likeRevision = _likes?.beginBackendRead(id);
     emit(state.copyWith(loadingDetail: true, detailError: false));
     try {
       final post = await repository.loadDetail(id);
       if (!isClosed && revision == _detailRevision) {
-        _likes?.seed(post);
+        if (likeRevision != null) {
+          _likes?.reconcileBackendRead(post, likeRevision);
+        }
         _savedPosts?.seed(post);
         emit(
           state.copyWith(
@@ -258,8 +261,16 @@ class PostDetailCubit extends Cubit<PostDetailState> {
         repo == null ||
         id == null ||
         isClosed ||
-        state.commentSubmitting ||
-        _commentOutcomeUnknown) {
+        state.commentSubmitting) {
+      return false;
+    }
+    final attempt = (text.trim(), parentId);
+    if (_uncertainComments.contains(attempt)) {
+      emit(
+        state.copyWith(
+          commentMutationError: 'This comment may already have been posted. Check all comments before trying it again later.',
+        ),
+      );
       return false;
     }
     emit(state.copyWith(commentSubmitting: true));
@@ -291,12 +302,12 @@ class PostDetailCubit extends Cubit<PostDetailState> {
           error is! DioException && error is! PostApiException ||
           error is DioException &&
               (status == null || status == 408 || status >= 500);
-      if (uncertain) _commentOutcomeUnknown = true;
+      if (uncertain) _uncertainComments.add(attempt);
       emit(
         state.copyWith(
           commentSubmitting: false,
           commentMutationError: uncertain
-              ? 'Comment could not be confirmed. Check comments before retrying.'
+              ? 'Comment could not be confirmed. Check all comments before retrying; you can still post a different comment.'
               : 'Unable to post comment.',
         ),
       );

@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/icons/app_icons.dart';
+import 'package:nini/core/constants/app_icons/app_icons.dart';
 import 'package:nini/shared/widgets/app_icons/app_icon.dart';
 
 class PostFormOptionTile extends StatelessWidget {
   const PostFormOptionTile({
     super.key,
     required this.label,
-    required this.onTap,
+    this.onTap,
     this.value,
     this.trailing,
+    this.footer,
     this.hasError = false,
   });
 
   final String label;
   final String? value;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Widget? trailing;
+  final Widget? footer;
   final bool hasError;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+    final hasValue = value?.isNotEmpty == true;
+    final showValueUnderLabel = footer == null && hasValue;
+    final labelColor = showValueUnderLabel || footer != null
+        ? null
+        : colors.onSurface.withValues(alpha: .35);
 
     return Material(
       color: colors.surface,
@@ -39,35 +46,48 @@ class PostFormOptionTile extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(6),
           ),
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const AppIcon(AppIcons.back, size: 18),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      label,
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.right,
-                      style: theme.textTheme.bodySmall,
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          label,
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.right,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: labelColor,
+                          ),
+                        ),
+                        if (showValueUnderLabel) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            value!,
+                            textDirection: TextDirection.ltr,
+                            textAlign: TextAlign.right,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
+                      ],
                     ),
-                    if (value?.isNotEmpty == true) ...[
-                      const SizedBox(height: 2),
-                      Text(
-                        value!,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.right,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
+                  ),
+                  const SizedBox(width: 10),
+                  const AppIcon(AppIcons.back, size: 18),
+                  if (trailing != null) ...[
+                    const SizedBox(width: 6),
+                    trailing!,
                   ],
-                ),
+                ],
               ),
-              if (trailing != null) ...[const SizedBox(width: 6), trailing!],
+              if (footer != null) ...[const SizedBox(height: 10), footer!],
             ],
           ),
         ),
