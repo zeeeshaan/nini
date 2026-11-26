@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/common/settings_empty_state.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/skeleton/profile_skeleton.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/features/chat/presentation/helpers/open_seller_conversation.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/profile_settings/presentation/widgets/common/settings_empty_state.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/skeleton/profile_skeleton.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
 
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';
@@ -59,14 +59,14 @@ class SellerProfileScreen extends StatelessWidget {
                 context.read<SessionCubit?>()?.state.status ==
                     SessionStatus.authenticated)
               IconButton(
-                tooltip: AppStrings.morePostOptions,
+                tooltip: ProfileScreenStrings.moreOptions,
                 onPressed: state.blocking
                     ? null
                     : () => showSellerModerationActions(context),
                 icon: const AppIcon(AppIcons.more, size: 24),
               ),
             IconButton(
-              tooltip: AppStrings.message,
+              tooltip: ProfileScreenStrings.message,
               onPressed: profile == null
                   ? null
                   : () => openSellerConversation(context, profile.seller),
@@ -74,7 +74,7 @@ class SellerProfileScreen extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             IconButton(
-              tooltip: AppStrings.back,
+              tooltip: ProfileScreenStrings.back,
               onPressed: () => Navigator.of(context).pop(),
               icon: const AppIcon(AppIcons.backRight),
             ),

@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
-import 'package:nini/features/chat/domain/services/voice_recorder.dart';
+import 'package:hywork/features/chat/domain/services/voice_recorder.dart';
 
 class DeviceVoiceRecorder implements VoiceRecorder {
   AudioRecorder? _instance;
@@ -17,7 +17,7 @@ class DeviceVoiceRecorder implements VoiceRecorder {
     final root = Platform.isIOS
         ? Directory.systemTemp
         : await getTemporaryDirectory();
-    final folder = await Directory(p.join(root.path, 'nini_voice_drafts'))
+    final folder = await Directory(p.join(root.path, 'hywork_voice_drafts'))
         .create(recursive: true);
     _path = p.join(folder.path, '${DateTime.now().microsecondsSinceEpoch}.m4a');
     await _recorder.start(

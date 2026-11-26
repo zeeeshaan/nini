@@ -1,17 +1,17 @@
-import 'package:nini/core/localization/strings/team_strings.dart';
+import 'package:hywork/core/localization/strings/team_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/team/presentation/cubit/team_form_cubit.dart';
-import 'package:nini/features/team/presentation/helpers/select_team_members.dart';
-import 'package:nini/features/team/domain/team_request.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/team/presentation/pages/team_request_screen.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/team/presentation/cubit/team_form_cubit.dart';
+import 'package:hywork/features/team/presentation/helpers/select_team_members.dart';
+import 'package:hywork/features/team/domain/team_request.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/team/presentation/pages/team_request_screen.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 import '../widgets/common/attachment_section.dart';
 import '../widgets/common/general_section.dart';

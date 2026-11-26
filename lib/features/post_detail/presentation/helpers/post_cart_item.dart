@@ -1,7 +1,7 @@
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 /// Post prices are whole toman; cart quantities use hundredths of a unit.
 CartItem? postCartItem(PostItem post, {PostSeller? seller}) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import '../common/home_post_pricing.dart';
 

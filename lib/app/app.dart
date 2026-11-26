@@ -3,25 +3,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/responsiveness/responsive_config/config.dart';
-import 'package:nini/core/theme/app_theme/app_theme.dart';
-import 'package:nini/core/theme/theme_cubit/theme_cubit.dart';
-import 'package:nini/features/cart/domain/repositories/cart_repository.dart';
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/splash/presentation/pages/splash_screen.dart';
-import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/posts/domain/posts_repository.dart';
-import 'package:nini/features/posts/domain/profile_categories_repository.dart';
-import 'package:nini/features/saved_posts/domain/saved_posts_repository.dart';
-import 'package:nini/features/profile_settings/domain/user_profile_repository.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/responsiveness/responsive_config/config.dart';
+import 'package:hywork/core/theme/app_theme/app_theme.dart';
+import 'package:hywork/core/theme/theme_cubit/theme_cubit.dart';
+import 'package:hywork/features/cart/domain/repositories/cart_repository.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/splash/presentation/pages/splash_screen.dart';
+import 'package:hywork/features/post_analytics/data/post_analytics_repository.dart';
+import 'package:hywork/features/posts/domain/posts_repository.dart';
+import 'package:hywork/features/posts/domain/profile_categories_repository.dart';
+import 'package:hywork/features/saved_posts/domain/saved_posts_repository.dart';
+import 'package:hywork/features/profile_settings/domain/user_profile_repository.dart';
 
 import 'app_providers.dart';
 
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/login/presentation/pages/login_screen.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/login/presentation/pages/login_screen.dart';
 
 /// Configures the app and connects it to its shared state.
 class MyApp extends StatelessWidget {

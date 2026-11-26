@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
-import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../helpers/open_settings_post.dart';
 

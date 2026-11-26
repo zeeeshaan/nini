@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/data/post_analytics_repository.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
 
 class PostAnalyticsState {
   const PostAnalyticsState({

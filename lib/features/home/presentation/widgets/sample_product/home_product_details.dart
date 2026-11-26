@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
 
 class HomeProductDetails extends StatelessWidget {
   const HomeProductDetails({super.key, required this.title});
@@ -26,7 +26,7 @@ class HomeProductDetails extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            AppStrings.mobile,
+            HomeStrings.mobile,
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.heading.copyWith(

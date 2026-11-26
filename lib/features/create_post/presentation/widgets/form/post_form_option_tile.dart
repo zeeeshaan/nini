@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class PostFormOptionTile extends StatelessWidget {
   const PostFormOptionTile({

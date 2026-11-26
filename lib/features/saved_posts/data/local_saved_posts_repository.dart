@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:nini/shared/models/local_identity.dart';
+import 'package:hywork/shared/models/local_identity.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -25,7 +25,7 @@ class LocalSavedPostsRepository implements SavedPostsRepository {
 
   Future<File> _index() async {
     final documents = await _directoryProvider();
-    final root = await Directory(p.join(documents.path, 'nini_saved_posts'))
+    final root = await Directory(p.join(documents.path, 'hywork_saved_posts'))
         .create(recursive: true);
     return File(p.join(root.path, '${Uri.encodeComponent(profileId)}.json'));
   }

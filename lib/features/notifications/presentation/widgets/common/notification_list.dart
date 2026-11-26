@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/notification_strings.dart';
+import 'package:hywork/core/localization/strings/notification_strings.dart';
 
 import '../../../domain/app_notification.dart';
 import 'notification_tile.dart';
@@ -19,23 +19,23 @@ class NotificationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty && leading.isEmpty) {
-      return Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(
-              searching
-                  ? NotificationStrings.noResults
-                  : NotificationStrings.empty,
-              textDirection: TextDirection.ltr,
-              textAlign: TextAlign.center,
-            ),
+      return ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(24),
+        children: [
+          const SizedBox(height: 80),
+          Text(
+            searching
+                ? NotificationStrings.noResults
+                : NotificationStrings.empty,
+            textDirection: TextDirection.ltr,
+            textAlign: TextAlign.center,
           ),
-        ),
+        ],
       );
     }
     return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 24),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       itemCount: leading.length + items.length,

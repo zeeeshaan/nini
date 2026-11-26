@@ -1,13 +1,13 @@
-import 'package:nini/core/localization/strings/category_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/strings/category_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/domain/validation/profile_category_validator.dart';
-import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/validation/profile_category_validator.dart';
+import 'package:hywork/features/posts/presentation/cubit/profile_categories_cubit.dart';
 
 import 'category_sheet_actions.dart';
 

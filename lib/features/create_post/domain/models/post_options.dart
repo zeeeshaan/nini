@@ -1,8 +1,8 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/models/post/post_attributes.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/shared/models/post/post_attributes.dart';
 
-export 'package:nini/shared/models/post/post_attributes.dart';
-export 'package:nini/shared/models/post/post_unit.dart';
+export 'package:hywork/shared/models/post/post_attributes.dart';
+export 'package:hywork/shared/models/post/post_unit.dart';
 
 enum PreparationTime {
   none('No preparation time', null),

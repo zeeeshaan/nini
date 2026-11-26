@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
 
 import '../common/settings_notice.dart';
 

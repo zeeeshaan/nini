@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/create_post/data/api_categories_repository.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
-import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/presentation/helpers/post_draft_mapper.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/create_post/data/api_categories_repository.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_categories_cubit.dart';
+import 'package:hywork/features/create_post/presentation/pages/create_post_details_screen.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/helpers/post_draft_mapper.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 /// Loads the owner's canonical post, then opens the create-style editor.
 class BackendEditPostScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nini/core/localization/strings/auth_strings.dart';
+import 'package:hywork/core/localization/strings/auth_strings.dart';
 
 class LoginPhoneField extends StatelessWidget {
   const LoginPhoneField({

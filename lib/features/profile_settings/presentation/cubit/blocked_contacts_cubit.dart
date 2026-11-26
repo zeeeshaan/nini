@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/chat/data/in_memory_chat_repository.dart';
+import 'package:hywork/features/chat/data/in_memory_chat_repository.dart';
 
 import '../../domain/blocked_contact.dart';
 

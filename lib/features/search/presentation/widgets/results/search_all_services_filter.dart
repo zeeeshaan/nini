@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/search_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 /// Clears the query while retaining the current city selection.
 class SearchAllServicesFilter extends StatelessWidget {

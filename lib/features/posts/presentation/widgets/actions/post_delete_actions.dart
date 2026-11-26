@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
 
 class PostDeleteActions extends StatelessWidget {
   const PostDeleteActions({

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/team/domain/team_request.dart';
-import 'package:nini/shared/models/post/post_attributes.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/team/domain/team_request.dart';
+import 'package:hywork/shared/models/post/post_attributes.dart';
 
 class TeamRequestCubit extends Cubit<TeamRequest> {
   TeamRequestCubit(super.initialState);

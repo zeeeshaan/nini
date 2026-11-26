@@ -1,4 +1,4 @@
-import 'package:nini/features/calls/domain/call_session.dart';
+import 'package:hywork/features/calls/domain/call_session.dart';
 
 /// One service owns one call. Implement with authenticated signaling and RTC.
 /// Emit connected only after a remote participant actually joins.

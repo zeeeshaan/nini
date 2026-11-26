@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/common/theme_options.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/profile_settings/presentation/widgets/common/theme_options.dart';
+import 'package:hywork/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
 
 class AccessibilityScreen extends StatelessWidget {
   const AccessibilityScreen({super.key});

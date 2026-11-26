@@ -1,5 +1,5 @@
 // dart format width=100
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 
 /// Parse Persian, Arabic or Latin numbers without floating point rounding.
 int? parseCartAmount(String input) {

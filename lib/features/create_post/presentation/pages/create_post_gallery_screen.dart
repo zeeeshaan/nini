@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/features/create_post/data/api_categories_repository.dart';
-import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
-import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
-import 'package:nini/features/create_post/presentation/pages/create_post_details_screen.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_content.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/data/api_categories_repository.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_categories_cubit.dart';
+import 'package:hywork/features/create_post/presentation/cubit/gallery_cubit.dart';
+import 'package:hywork/features/create_post/presentation/pages/create_post_details_screen.dart';
+import 'package:hywork/features/create_post/presentation/widgets/gallery/gallery_content.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class CreatePostGalleryScreen extends StatelessWidget {
   const CreatePostGalleryScreen({

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/calls/domain/call_session.dart';
-import 'package:nini/features/calls/domain/call_service.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/calls/domain/call_session.dart';
+import 'package:hywork/features/calls/domain/call_service.dart';
 
 class CallState {
   const CallState({

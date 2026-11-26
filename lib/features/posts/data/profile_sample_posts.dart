@@ -1,5 +1,5 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'demo_posts.dart';
 

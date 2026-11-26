@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/domain/profile_categories_repository.dart';
-import 'package:nini/features/posts/domain/validation/profile_category_validator.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/profile_categories_repository.dart';
+import 'package:hywork/features/posts/domain/validation/profile_category_validator.dart';
 
 import 'profile_categories_state.dart';
 

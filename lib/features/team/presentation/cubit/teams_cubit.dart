@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
 
 class TeamsState {
   const TeamsState({required this.teams, this.query = ''});

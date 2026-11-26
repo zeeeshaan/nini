@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_images/profile_image_provider.dart';
 
 class SellerAvatar extends StatelessWidget {
   const SellerAvatar({

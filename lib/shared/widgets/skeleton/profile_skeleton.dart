@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 import 'app_shimmer.dart';
 

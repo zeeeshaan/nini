@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/notifications/presentation/widgets/common/notifications_button.dart';
+import 'package:hywork/features/notifications/presentation/widgets/common/notifications_button.dart';
 
 class HomeNotificationButton extends StatelessWidget {
   const HomeNotificationButton({

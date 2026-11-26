@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
 
 /// Displays vector icons, legacy PNGs, or cached network icons.
 ///

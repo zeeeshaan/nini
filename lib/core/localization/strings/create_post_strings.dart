@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 
 /// English interface copy for the Create Post flow; stored model values stay intact.
 abstract final class CreatePostStrings {

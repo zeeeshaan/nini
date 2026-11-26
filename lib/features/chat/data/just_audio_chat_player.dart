@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:just_audio/just_audio.dart';
 
-import 'package:nini/features/chat/domain/services/chat_audio_player.dart';
+import 'package:hywork/features/chat/domain/services/chat_audio_player.dart';
 
 /// One lazily initialized player per conversation prevents overlapping notes.
 class JustAudioChatPlayer implements ChatAudioPlayer {

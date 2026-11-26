@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/report_strings.dart';
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/reports/data/api_reports_repository.dart';
-import 'package:nini/features/reports/presentation/cubit/report_cubit.dart';
-import 'package:nini/features/reports/presentation/widgets/report_sheet.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/report_strings.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/reports/data/api_reports_repository.dart';
+import 'package:hywork/features/reports/presentation/cubit/report_cubit.dart';
+import 'package:hywork/features/reports/presentation/widgets/report_sheet.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 Future<bool> openReportSheet(
   BuildContext context, {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class HomePostMediaSlider extends StatelessWidget {
   const HomePostMediaSlider({

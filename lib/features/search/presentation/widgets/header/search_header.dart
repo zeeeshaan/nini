@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/search_strings.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/features/search/presentation/widgets/header/search_city_button.dart';
-import 'package:nini/features/search/presentation/widgets/header/search_query_field.dart';
+import 'package:hywork/features/search/presentation/widgets/header/search_city_button.dart';
+import 'package:hywork/features/search/presentation/widgets/header/search_query_field.dart';
 
 class SearchHeader extends StatelessWidget {
   const SearchHeader({

@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
-import 'package:nini/features/posts/presentation/pages/profile_categories_screen.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_categories_cubit.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:hywork/features/posts/presentation/pages/profile_categories_screen.dart';
 
 /// Global post keys and personal profile-category UUIDs stay independent.
 class PostCategorySelector extends StatelessWidget {

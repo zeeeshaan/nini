@@ -4,13 +4,13 @@ import 'dart:async';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/domain/models/post_media_changes.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/models/post_media_changes.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 import 'package:path/path.dart' as p;
 
 /// Account-owned server posts are deliberately separate from local posts.
@@ -44,6 +44,7 @@ class ApiPostsRepository {
   final Set<String> _uncertainMutations = {};
   final Set<String> _deletedPosts = {};
   final _deletedController = StreamController<String>.broadcast(sync: true);
+
   /// Posts that left `published` (e.g. edit → pending review). Home/search drop them.
   final _withdrawnController = StreamController<String>.broadcast(sync: true);
   final _commentCounts =
@@ -107,11 +108,14 @@ class ApiPostsRepository {
 
   static bool needsInventoryEnrichment(PostItem post) {
     if (post.metadata['backend'] != true) return false;
+    // Detail already merged once — do not refetch forever when stock is null.
+    if (post.metadata['inventoryDetail'] == true) return false;
     final unit = post.metadata['unit'];
     final hasUnit = unit is String && unit.trim().isNotEmpty;
     if (!hasUnit) return true;
-    // Products need a real quantity (or confirmed null) from PublicPost.
-    return !post.isService && !post.metadata.containsKey('inventoryStatus');
+    if (post.isService) return false;
+    // List/mine cards often send inStock without a quantity. PublicPost has it.
+    return post.stockCount == null;
   }
 
   /// Merges PublicPost inventory fields onto a feed PostCard without inventing values.
@@ -128,12 +132,13 @@ class ApiPostsRepository {
     if (detail.metadata.containsKey('inStock')) {
       meta['inStock'] = detail.metadata['inStock'];
     }
-    final stock = detail.stockCount;
+    final stock = detail.stockCount ?? card.stockCount;
     if (stock != null) {
       meta['warehouseStock'] = '$stock';
     } else {
       meta.remove('warehouseStock');
     }
+    meta['inventoryDetail'] = true;
     return PostItem(
       id: card.id,
       imageAsset: card.imageAsset,
@@ -2246,12 +2251,19 @@ PostItem backendPostFromJson(Map<String, dynamic> json) {
               },
         ]
       : <Map<String, dynamic>>[];
-  final stock = json['stock'];
+  final stock = json['stock'] ?? json['warehouseStock'];
   final inventoryStatus = json['inventoryStatus'];
   final unit = json['unit'];
   // PostCard (feed) documents inStock only. PublicPost adds stock, unit, and
   // inventoryStatus. Missing stock must stay null — never coerce to 0.
-  final int? stockCount = stock is int ? stock : null;
+  // Accept int/num/digit strings so profile cards can show real quantities.
+  int? parseStock(dynamic value) => switch (value) {
+    int count => count,
+    num count => count.round(),
+    String text => int.tryParse(text.replaceAll(RegExp(r'[^\d-]'), '')),
+    _ => null,
+  };
+  final int? stockCount = parseStock(stock);
   final metadata = <String, dynamic>{
     'backend': true,
     'backendStatus': json['status'],
@@ -2263,7 +2275,11 @@ PostItem backendPostFromJson(Map<String, dynamic> json) {
       'commentsCount': json['commentsCount'],
     if (json['likes'] is int && (json['likes'] as int) >= 0)
       'likes': json['likes'],
-    if (json['rating'] is num) 'rating': json['rating'],
+    if (json['rating'] is num)
+      'rating': json['rating']
+    else if (json['rating'] is String &&
+        double.tryParse((json['rating'] as String).trim()) != null)
+      'rating': double.parse((json['rating'] as String).trim()),
     'postType': type == 'service' ? 'services' : 'product',
     if (category is Map) 'category': category['key'],
     'seller': seller,

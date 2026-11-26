@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
-import 'package:nini/features/team/presentation/widgets/my_teams/team_edit_sheet.dart';
-import 'package:nini/features/team/presentation/widgets/my_teams/team_options_sheet.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
+import 'package:hywork/features/team/presentation/widgets/my_teams/team_edit_sheet.dart';
+import 'package:hywork/features/team/presentation/widgets/my_teams/team_options_sheet.dart';
 
 Future<void> manageTeam(
   BuildContext context,

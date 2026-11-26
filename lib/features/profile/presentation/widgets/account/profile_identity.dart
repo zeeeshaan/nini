@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 class ProfileIdentity extends StatelessWidget {
   const ProfileIdentity({
@@ -22,7 +22,7 @@ class ProfileIdentity extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          name.isEmpty ? AppStrings.profile : name,
+          name.isEmpty ? ProfileScreenStrings.profile : name,
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.right,
           style: AppTextStyles.profileName.copyWith(height: 1.4),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
 
 import '../../../domain/public_user_profile.dart';
 import '../categories/category_chips.dart';
@@ -96,15 +96,15 @@ class SellerProfileContent extends StatelessWidget {
               posts: posts.posts,
               onPostTap: onPostTap ?? (_) {},
               emptyMessage: posts.loading
-                  ? 'Loading posts...'
+                  ? ProfileScreenStrings.postsLoading
                   : posts.error
-                  ? 'Unable to load posts.'
-                  : categoryMessage ?? AppStrings.noSellerPosts,
+                  ? ProfileScreenStrings.postsLoadFailed
+                  : categoryMessage ?? ProfileScreenStrings.noSellerPosts,
             ),
             if (posts.error)
               TextButton(
                 onPressed: onRetryPosts,
-                child: const Text(AppStrings.retry),
+                child: const Text(ProfileScreenStrings.retry),
               ),
             const SizedBox(height: 24),
           ],

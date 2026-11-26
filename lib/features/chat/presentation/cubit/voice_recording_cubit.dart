@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/domain/services/voice_recorder.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/domain/services/voice_recorder.dart';
 
 enum VoiceRecordingPhase { idle, starting, recording, processing, preview }
 

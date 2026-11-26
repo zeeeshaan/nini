@@ -1,5 +1,5 @@
-import 'package:nini/features/chat/domain/models/chat_attachment.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/chat/domain/models/chat_attachment.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
 
 abstract class ChatMediaStore {
   Future<List<ChatAttachment>> prepare(List<GalleryAttachment> selected);

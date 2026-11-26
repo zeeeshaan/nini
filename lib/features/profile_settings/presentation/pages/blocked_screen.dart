@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/profile/data/api_public_profile_repository.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/profile/data/api_public_profile_repository.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import '../cubit/blocked_users_cubit.dart';
 import '../widgets/blocked/blocked_contacts_list.dart';

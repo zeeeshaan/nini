@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 
 String paymentMoney(int hundredths) {
   final fraction = (hundredths % 100)

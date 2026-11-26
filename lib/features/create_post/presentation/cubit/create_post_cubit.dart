@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 class CreatePostCubit extends Cubit<PostDraft> {
   CreatePostCubit({PostDraft initial = const PostDraft()}) : super(initial);

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/localization/strings/saved_posts_strings.dart';
-import 'package:nini/features/home/presentation/widgets/common/home_metric.dart';
-import 'package:nini/features/home/presentation/widgets/common/home_engagement_layout.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/localization/strings/saved_posts_strings.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_metric.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_engagement_layout.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class PostEngagementBar extends StatelessWidget {
   const PostEngagementBar({
@@ -51,16 +50,16 @@ class PostEngagementBar extends StatelessWidget {
       final displayedRating = rating ?? (showSampleMetrics ? '4.5' : '');
       final ratingMetric = HomeMetric(
         label: displayedRating.isEmpty
-            ? AppStrings.postUnrated
-            : AppStrings.postRating(displayedRating),
+            ? PostDetailStrings.postUnrated
+            : PostDetailStrings.postRating(displayedRating),
         count: displayedRating,
         icon: const AppIcon(AppIcons.star, size: 26),
       );
       final actions = [
         HomeMetric(
           label: state.isBookmarked
-              ? AppStrings.removeBookmark
-              : AppStrings.bookmark,
+              ? PostDetailStrings.removeBookmark
+              : PostDetailStrings.bookmark,
           icon: AppIcon(
             state.isBookmarked ? AppIcons.bookmarkFilled : AppIcons.bookmark,
             size: 22,
@@ -87,7 +86,7 @@ class PostEngagementBar extends StatelessWidget {
           },
         ),
         HomeMetric(
-          label: AppStrings.comments,
+          label: PostDetailStrings.comments,
           icon: const AppIcon(
             AppIcons.postComment,
             size: HomeEngagementLayout.actionIconSize,
@@ -100,7 +99,7 @@ class PostEngagementBar extends StatelessWidget {
           onTap: onCommentsPressed,
         ),
         HomeMetric(
-          label: AppStrings.share,
+          label: PostDetailStrings.share,
           icon: const AppIcon(
             AppIcons.postShare,
             size: HomeEngagementLayout.actionIconSize,
@@ -109,7 +108,9 @@ class PostEngagementBar extends StatelessWidget {
           onTap: onSharePressed,
         ),
         HomeMetric(
-          label: state.isLiked ? AppStrings.unlike : AppStrings.like,
+          label: state.isLiked
+              ? PostDetailStrings.unlike
+              : PostDetailStrings.like,
           icon: AppIcon(
             state.isLiked ? AppIcons.postLikeFilled : AppIcons.postLike,
             size: HomeEngagementLayout.actionIconSize,
@@ -126,13 +127,15 @@ class PostEngagementBar extends StatelessWidget {
             if (!success && context.mounted) {
               AppToast.error(
                 context,
-                'Unable to update like. Please try again.',
+                PostDetailStrings.likeFailed,
               );
             }
           },
         ),
         HomeMetric(
-          label: isInCart ? CartStrings.remove : AppStrings.addToCart,
+          label: isInCart
+              ? PostDetailStrings.removeFromCart
+              : PostDetailStrings.addToCart,
           icon: const AppIcon(AppIcons.shoppingBag, size: 22),
           count: cartCount,
           selected: isInCart,

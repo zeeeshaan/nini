@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
-import 'package:nini/features/search/data/search_catalog.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_author_header.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
+import 'package:hywork/features/search/data/search_catalog.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'app_shimmer.dart';
 

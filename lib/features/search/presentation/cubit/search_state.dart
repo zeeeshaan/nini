@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/strings/search_strings.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
 
 enum SearchPanel { results, cities, suggestions }
 

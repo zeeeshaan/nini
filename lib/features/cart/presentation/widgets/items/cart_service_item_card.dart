@@ -1,11 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_labels.dart';
-import 'package:nini/features/cart/presentation/widgets/items/cart_item_image.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_labels.dart';
+import 'package:hywork/features/cart/presentation/widgets/items/cart_item_image.dart';
 
 /// Compact service summary, without product pieces or quantity controls.
 class CartServiceItemCard extends StatelessWidget {

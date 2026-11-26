@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 class SavedLocationList extends StatelessWidget {
   const SavedLocationList({

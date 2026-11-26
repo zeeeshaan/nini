@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
 
 import '../cubit/insights_metric_cubit.dart';
 import '../widgets/common/settings_page.dart';

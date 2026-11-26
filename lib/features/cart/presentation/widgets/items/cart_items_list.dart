@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 import '../../cubit/cart_cubit.dart';
 import '../../cubit/cart_state.dart';

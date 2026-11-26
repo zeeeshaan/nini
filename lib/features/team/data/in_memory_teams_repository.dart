@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:nini/features/chat/data/in_memory_chat_repository.dart';
-import 'package:nini/features/team/domain/team_request.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
+import 'package:hywork/features/chat/data/in_memory_chat_repository.dart';
+import 'package:hywork/features/team/domain/team_request.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
 
 /// Session-only team and group-chat previews. No disk or network operations.
 class InMemoryTeamsRepository {

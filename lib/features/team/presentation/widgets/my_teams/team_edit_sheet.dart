@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
+import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
 
 class TeamEditSheet extends StatefulWidget {
   const TeamEditSheet({super.key, required this.team});

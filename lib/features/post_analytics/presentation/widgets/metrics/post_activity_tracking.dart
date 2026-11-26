@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
-import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 /// A view is one opening of a published post. Watch time excludes covered routes
 /// and background time, and segments share a session ID for accurate averages.

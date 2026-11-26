@@ -1,8 +1,8 @@
-import 'package:nini/core/localization/strings/team_strings.dart';
+import 'package:hywork/core/localization/strings/team_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/team/presentation/widgets/common/team_member_avatars.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/team/presentation/widgets/common/team_member_avatars.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 class TeamChatMembersBar extends StatelessWidget
     implements PreferredSizeWidget {

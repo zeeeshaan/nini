@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/report_strings.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/posts/presentation/widgets/actions/post_owner_action_tile.dart';
-import 'package:nini/features/reports/data/api_reports_repository.dart';
-import 'package:nini/features/reports/presentation/helpers/open_report_sheet.dart';
+import 'package:hywork/core/localization/strings/report_strings.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/posts/presentation/widgets/actions/post_owner_action_tile.dart';
+import 'package:hywork/features/reports/data/api_reports_repository.dart';
+import 'package:hywork/features/reports/presentation/helpers/open_report_sheet.dart';
 
 /// ⋮ on a post first shows Report, then the report form sheet.
 Future<void> showPostReportMenu(

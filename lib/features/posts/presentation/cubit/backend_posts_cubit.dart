@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class BackendPostsState {
   const BackendPostsState({
@@ -253,12 +253,87 @@ class FeedCubit extends BackendPostsCubit {
 }
 
 class OwnPostsCubit extends BackendPostsCubit {
-  OwnPostsCubit(ApiPostsRepository repository)
+  OwnPostsCubit(this.repository)
     : super(
         (page) => repository.loadOwnProfilePosts(page: page),
         repository: repository,
       );
 
+  final ApiPostsRepository repository;
   String? requestedCategoryId;
   bool hasRequestedCategory = false;
+  int _enrichRevision = 0;
+
+  @override
+  Future<void> refresh({
+    Future<BackendPostsPage> Function(int page)? load,
+    bool preserve = false,
+  }) async {
+    await super.refresh(load: load, preserve: preserve);
+    await _enrichInventory();
+  }
+
+  @override
+  Future<void> loadMore() async {
+    await super.loadMore();
+    await _enrichInventory();
+  }
+
+  Future<void> _enrichInventory() async {
+    if (isClosed || state.error || state.posts.isEmpty) return;
+    final revision = ++_enrichRevision;
+    final cached = [
+      for (final post in state.posts) repository.applyCachedInventory(post),
+    ];
+    if (!_sameInventory(state.posts, cached)) {
+      _emitPosts(cached);
+    }
+    final snapshot = List<PostItem>.of(state.posts);
+    await repository.enrichInventoryProgressive(
+      snapshot,
+      onUpdated: (updated) {
+        if (isClosed || revision != _enrichRevision) return;
+        _replacePost(updated);
+      },
+    );
+  }
+
+  bool _sameInventory(List<PostItem> a, List<PostItem> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].stockCount != b[i].stockCount ||
+          a[i].metadata['unit'] != b[i].metadata['unit'] ||
+          a[i].metadata['inventoryStatus'] !=
+              b[i].metadata['inventoryStatus'] ||
+          a[i].metadata['inStock'] != b[i].metadata['inStock'] ||
+          a[i].metadata['inventoryDetail'] !=
+              b[i].metadata['inventoryDetail']) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void _replacePost(PostItem updated) {
+    final posts = state.posts;
+    final index = posts.indexWhere((post) => post.id == updated.id);
+    if (index < 0) return;
+    final next = List<PostItem>.of(posts);
+    next[index] = updated;
+    _emitPosts(next);
+  }
+
+  void _emitPosts(List<PostItem> posts) {
+    final previous = state;
+    emit(
+      BackendPostsState(
+        posts: List.unmodifiable(posts),
+        page: previous.page,
+        hasMore: previous.hasMore,
+        searchId: previous.searchId,
+        understood: previous.understood,
+        searchPositions: previous.searchPositions,
+      ),
+    );
+  }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
 
 import '../../data/auth_repo.dart';
 

@@ -1,4 +1,4 @@
-import 'package:nini/features/reports/data/api_reports_repository.dart';
+import 'package:hywork/features/reports/data/api_reports_repository.dart';
 
 /// Copy for the shared report sheet (Swagger reason enums only).
 abstract final class ReportStrings {

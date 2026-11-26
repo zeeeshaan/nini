@@ -1,13 +1,13 @@
-import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:hywork/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/receipt_strings.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/domain/models/cart_order.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/payment/presentation/helpers/receipt_navigation.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
-import 'package:nini/features/payment/presentation/widgets/success/payment_success_card.dart';
+import 'package:hywork/core/localization/strings/receipt_strings.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/domain/models/cart_order.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/payment/presentation/helpers/receipt_navigation.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/features/payment/presentation/widgets/success/payment_success_card.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
   const PaymentSuccessScreen({

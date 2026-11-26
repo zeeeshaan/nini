@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
 
 import '../domain/models/profile_category.dart';
 import '../domain/profile_categories_repository.dart';

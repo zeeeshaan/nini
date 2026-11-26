@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
 
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';
 
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 class FollowListState {
   const FollowListState({
@@ -325,11 +326,11 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
       return;
     }
     if (currentUserId.isEmpty || !isCurrentAccount()) {
-      emit(state.copyWith(blockError: 'Please sign in to continue.'));
+      emit(state.copyWith(blockError: ProfileScreenStrings.signInRequired));
       return;
     }
     if (profile.isMe == true || profile.seller.id == currentUserId) {
-      emit(state.copyWith(blockError: 'You cannot block your own account.'));
+      emit(state.copyWith(blockError: ProfileScreenStrings.cannotBlockSelf));
       return;
     }
     final revision = _request;
@@ -365,12 +366,12 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
           blockError: error is FormatException
               ? error.message
               : status == 401
-              ? 'Please sign in to continue.'
+              ? ProfileScreenStrings.signInRequired
               : status == 403
-              ? 'Your account cannot update this block.'
+              ? ProfileScreenStrings.cannotUpdateBlock
               : status == 404
-              ? 'This user is unavailable.'
-              : 'Could not update block status. Try again.',
+              ? ProfileScreenStrings.userUnavailable
+              : ProfileScreenStrings.blockUpdateFailed,
         ),
       );
     }
@@ -390,19 +391,20 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
       return;
     }
     if (accountId == null || accountId.isEmpty || !isCurrentAccount()) {
-      emit(state.copyWith(followError: 'Please sign in to follow this user.'));
+      emit(state.copyWith(followError: ProfileScreenStrings.signInToFollow));
       return;
     }
     if (profile.isMe == true || profile.seller.id == accountId) {
-      emit(state.copyWith(followError: 'You cannot follow your own profile.'));
+      emit(
+        state.copyWith(followError: ProfileScreenStrings.cannotFollowSelf),
+      );
       return;
     }
     if (profile.isFollowing == null ||
         _uncertainFollows.contains(profile.seller.id)) {
       emit(
         state.copyWith(
-          followError:
-              'Follow status could not be confirmed. Refresh the profile.',
+          followError: ProfileScreenStrings.followStatusUnconfirmed,
         ),
       );
       return;
@@ -474,12 +476,12 @@ class SellerProfileCubit extends Cubit<SellerProfileState> {
           state.copyWith(
             following: false,
             followError: uncertain
-                ? 'Follow status could not be confirmed. Check this profile before trying again.'
+                ? ProfileScreenStrings.followStatusCheckProfile
                 : status == 403
-                ? 'Your account cannot follow this user.'
+                ? ProfileScreenStrings.cannotFollowUser
                 : status == 401
-                ? 'Please sign in to follow this user.'
-                : 'Unable to update follow status. Please try again.',
+                ? ProfileScreenStrings.signInToFollow
+                : ProfileScreenStrings.followUpdateFailed,
           ),
         );
       }

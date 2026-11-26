@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/features/home/presentation/widgets/common/home_feed_header.dart';
-import 'package:nini/features/home/presentation/widgets/published/home_published_post_card.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/skeleton/post_card_skeleton.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_feed_header.dart';
+import 'package:hywork/features/home/presentation/widgets/published/home_published_post_card.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/skeleton/post_card_skeleton.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -131,9 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: error
                     ? TextButton(
                         onPressed: onRetry,
-                        child: const Text('Could not load posts. Retry'),
+                        child: const Text(HomeStrings.loadFailed),
                       )
-                    : const Text('No posts yet.'),
+                    : const Text(HomeStrings.empty),
               );
             }
 

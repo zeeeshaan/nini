@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class PostMediaView extends StatelessWidget {
   const PostMediaView({

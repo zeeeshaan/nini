@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/post_detail_strings.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_pricing.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_quantity_selector.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_pricing.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_quantity_selector.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class PostPurchaseActions extends StatelessWidget {
   const PostPurchaseActions({

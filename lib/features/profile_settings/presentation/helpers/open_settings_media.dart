@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 import 'package:open_filex/open_filex.dart';
 
 import '../../domain/settings_media_item.dart';

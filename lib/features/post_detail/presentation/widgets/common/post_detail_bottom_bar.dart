@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/post_detail_strings.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_theme/app_theme.dart';
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/presentation/widgets/dialogs/cart_amount_dialog.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
-import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/post_purchase_actions.dart';
-import 'package:nini/features/post_detail/presentation/widgets/purchase_actions/post_service_purchase_actions.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/theme/app_theme/app_theme.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/presentation/widgets/dialogs/cart_amount_dialog.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/purchase_actions/post_purchase_actions.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/purchase_actions/post_service_purchase_actions.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class PostDetailBottomBar extends StatelessWidget {
   const PostDetailBottomBar({
@@ -33,8 +32,8 @@ class PostDetailBottomBar extends StatelessWidget {
       AppToast.error(
         context,
         cart.state.storageError
-            ? AppStrings.cartStorageError
-            : AppStrings.cartStockExceeded,
+            ? PostDetailStrings.cartStorageError
+            : PostDetailStrings.cartStockExceeded,
       );
       return;
     }

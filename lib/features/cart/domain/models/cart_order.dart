@@ -1,14 +1,14 @@
 // dart format width=100
 import 'cart_item.dart';
 
-import 'package:nini/features/order_cancellation/domain/order_cancellation.dart';
+import 'package:hywork/features/order_cancellation/domain/order_cancellation.dart';
 
 import 'cart_order_status.dart';
 import '../../../payment/domain/models/payment_method.dart';
 import '../../../payment/domain/models/order_customer_details.dart';
 import '../../../payment/domain/models/order_dispute.dart';
 
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 /// Persistent local order/receipt. Demo payments are never bank confirmations.
 class CartOrder {

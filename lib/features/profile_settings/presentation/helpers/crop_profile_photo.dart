@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_edit_strings.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/profile_edit_strings.dart';
 import 'package:path/path.dart' as p;
 
 Future<Uint8List?> cropProfilePhoto(BuildContext context, String path) async {

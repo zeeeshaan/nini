@@ -1,4 +1,4 @@
-import 'package:nini/features/payment/domain/models/dispute_attachment.dart';
+import 'package:hywork/features/payment/domain/models/dispute_attachment.dart';
 
 /// Provider explanation, independent of a buyer's dispute or a bank refund.
 class OrderCancellation {

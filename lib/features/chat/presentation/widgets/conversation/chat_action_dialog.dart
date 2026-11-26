@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 Future<bool> confirmChatAction(
   BuildContext context, {

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
 
 abstract class PostAnalyticsRepository {
   Future<List<PostAnalyticsEvent>> load();

@@ -1,15 +1,15 @@
-import 'package:nini/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class OrdersBookingsSection extends StatefulWidget {
   const OrdersBookingsSection({super.key, required this.report});

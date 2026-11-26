@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'settings_empty_state.dart';
 import 'settings_posts_grid.dart';

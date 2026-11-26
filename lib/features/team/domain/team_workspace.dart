@@ -1,7 +1,7 @@
-import 'package:nini/features/team/domain/team_provider_selection.dart';
-import 'package:nini/features/team/domain/team_request.dart';
-import 'package:nini/shared/models/post/post_attributes.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/features/team/domain/team_provider_selection.dart';
+import 'package:hywork/features/team/domain/team_request.dart';
+import 'package:hywork/shared/models/post/post_attributes.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 /// A paid team preview. The original paid request remains unchanged when its
 /// working group is edited later.

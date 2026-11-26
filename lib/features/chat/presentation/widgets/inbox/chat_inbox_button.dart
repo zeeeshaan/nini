@@ -1,21 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/chat/presentation/pages/chat_inbox_screen.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/chat/presentation/cubit/chat_unread_cubit.dart';
+import 'package:hywork/features/chat/presentation/pages/chat_inbox_screen.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 /// Shared Home/Profile entry to the existing chat inbox.
 class ChatInboxButton extends StatelessWidget {
-  const ChatInboxButton({
-    super.key,
-    this.onPressed,
-    this.notificationCount = 1,
-  });
+  const ChatInboxButton({super.key, this.onPressed, this.notificationCount});
 
   final VoidCallback? onPressed;
-  final int notificationCount;
+
+  /// When null, uses shared [ChatUnreadCubit] conversation badge count.
+  final int? notificationCount;
+
+  @override
+  Widget build(BuildContext context) {
+    if (notificationCount != null) {
+      return _BadgeButton(count: notificationCount!, onPressed: onPressed);
+    }
+    return BlocBuilder<ChatUnreadCubit, ChatUnreadState>(
+      builder: (context, state) =>
+          _BadgeButton(count: state.badgeCount, onPressed: onPressed),
+    );
+  }
+}
+
+class _BadgeButton extends StatelessWidget {
+  const _BadgeButton({required this.count, this.onPressed});
+
+  final int count;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -32,7 +50,7 @@ class ChatInboxButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(minWidth: 42, minHeight: 42),
       ),
-      if (notificationCount > 0)
+      if (count > 0)
         Positioned(
           left: 1,
           top: 5,
@@ -46,9 +64,7 @@ class ChatInboxButton extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Text(
-                AppStrings.persianDigits(
-                  notificationCount > 9 ? '9+' : notificationCount,
-                ),
+                AppStrings.persianDigits(count > 9 ? '9+' : count),
                 style: AppTextStyles.notificationBadge.copyWith(
                   color: AppColors.white,
                 ),

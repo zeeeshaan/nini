@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/team/domain/team_workspace.dart';
-import 'package:nini/features/team/presentation/cubit/team_form_cubit.dart';
-import 'package:nini/features/team/presentation/helpers/select_team_members.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/team/domain/team_workspace.dart';
+import 'package:hywork/features/team/presentation/cubit/team_form_cubit.dart';
+import 'package:hywork/features/team/presentation/helpers/select_team_members.dart';
 
 Future<void> addTeamPeople(
   BuildContext context,

@@ -1,14 +1,14 @@
-import 'package:nini/features/profile_settings/presentation/cubit/profile_photo_cubit.dart';
-import 'package:nini/features/profile_settings/presentation/helpers/crop_profile_photo.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/profile_photo_cubit.dart';
+import 'package:hywork/features/profile_settings/presentation/helpers/crop_profile_photo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/profile_edit_strings.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_edit_strings.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_images/profile_image_provider.dart';
 
 /// Previews an image locally; the editor commits it only when Done is pressed.
 class ProfilePhotoPicker extends StatefulWidget {

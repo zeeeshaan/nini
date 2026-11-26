@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 
 class ProfileLogoutDialog extends StatelessWidget {
   const ProfileLogoutDialog({super.key});
@@ -21,7 +21,7 @@ class ProfileLogoutDialog extends StatelessWidget {
             onPressed: session.isLoggingOut || session.logoutCleanupRequired
                 ? null
                 : () => Navigator.of(context).pop(),
-            child: const Text(AppStrings.cancel),
+            child: const Text(ProfileScreenStrings.cancel),
           ),
           FilledButton(
             onPressed: session.isLoggingOut

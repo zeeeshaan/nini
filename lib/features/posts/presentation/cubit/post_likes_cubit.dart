@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 /// One local user's likes, shared by all views of a post for this app session.
 class PostLikesCubit extends Cubit<Set<String>> {

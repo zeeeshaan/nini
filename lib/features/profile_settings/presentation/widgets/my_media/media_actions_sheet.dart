@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 import '../../../domain/settings_media_item.dart';
 import '../../helpers/open_settings_post.dart';

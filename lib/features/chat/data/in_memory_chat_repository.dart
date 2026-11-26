@@ -1,7 +1,7 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/domain/models/chat_message.dart';
-import 'package:nini/features/chat/domain/models/chat_conversation.dart';
-import 'package:nini/features/chat/domain/repositories/chat_messages_repository.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/domain/models/chat_message.dart';
+import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
+import 'package:hywork/features/chat/domain/repositories/chat_messages_repository.dart';
 
 class InMemoryChatRepository implements ChatMessagesRepository {
   InMemoryChatRepository._() : _seedDemo = true;

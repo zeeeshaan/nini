@@ -1,7 +1,7 @@
-import 'package:nini/core/localization/strings/category_strings.dart';
+import 'package:hywork/core/localization/strings/category_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 class ProfileCategoryRow extends StatelessWidget {
   const ProfileCategoryRow({

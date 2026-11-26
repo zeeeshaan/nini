@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
 
 import '../../data/api_categories_repository.dart';
 import '../../domain/models/post_category.dart';

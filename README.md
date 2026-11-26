@@ -1,6 +1,6 @@
 # HYWORK (mobile)
 
-Flutter marketplace client for **HYWORK**. Dart package name: **`nini`**.  
+Flutter marketplace client for **HYWORK**. Dart package name: **`hywork`**.  
 Remote: [hywork-team/mobile-hywork](https://github.com/hywork-team/mobile-hywork).
 
 Authenticated flows talk to the HYWORK HTTP API. Cart, chat, calls, teams, wallet, payment, and notifications remain mostly local / demo.

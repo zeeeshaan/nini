@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/constants/app_assets/app_assets.dart';
-import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/features/otp_verification/presentation/pages/otp_verification_screen.dart';
-import 'package:nini/features/login/presentation/widgets/common/auth_screen_layout.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/constants/app_assets/app_assets.dart';
+import 'package:hywork/core/localization/strings/auth_strings.dart';
+import 'package:hywork/features/otp_verification/presentation/pages/otp_verification_screen.dart';
+import 'package:hywork/features/login/presentation/widgets/common/auth_screen_layout.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 import '../../data/auth_repo.dart';
 import '../bloc/login_bloc.dart';

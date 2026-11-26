@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 import '../../../data/wallet_sample_data.dart';
 

@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/cubit/post_likes_cubit.dart';
+import 'package:hywork/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
 
 class PostDetailState {
   const PostDetailState({
@@ -268,7 +269,7 @@ class PostDetailCubit extends Cubit<PostDetailState> {
     if (_uncertainComments.contains(attempt)) {
       emit(
         state.copyWith(
-          commentMutationError: 'This comment may already have been posted. Check all comments before trying it again later.',
+          commentMutationError: PostDetailStrings.commentMaybePosted,
         ),
       );
       return false;
@@ -307,8 +308,8 @@ class PostDetailCubit extends Cubit<PostDetailState> {
         state.copyWith(
           commentSubmitting: false,
           commentMutationError: uncertain
-              ? 'Comment could not be confirmed. Check all comments before retrying; you can still post a different comment.'
-              : 'Unable to post comment.',
+              ? PostDetailStrings.commentUnconfirmed
+              : PostDetailStrings.commentPostFailed,
         ),
       );
       if (uncertain) unawaited(loadComments());
@@ -357,7 +358,7 @@ class PostDetailCubit extends Cubit<PostDetailState> {
       emit(
         state.copyWith(
           commentSubmitting: false,
-          commentMutationError: 'Unable to confirm comment deletion.',
+          commentMutationError: PostDetailStrings.commentDeleteUnconfirmed,
         ),
       );
       return false;

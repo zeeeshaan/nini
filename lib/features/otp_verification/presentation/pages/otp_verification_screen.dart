@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/constants/app_assets/app_assets.dart';
-import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/login/presentation/pages/login_screen.dart';
-import 'package:nini/features/login/presentation/widgets/common/auth_screen_layout.dart';
-import 'package:nini/features/otp_verification/presentation/cubit/otp_verification_cubit.dart';
+import 'package:hywork/core/constants/app_assets/app_assets.dart';
+import 'package:hywork/core/localization/strings/auth_strings.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/login/presentation/pages/login_screen.dart';
+import 'package:hywork/features/login/presentation/widgets/common/auth_screen_layout.dart';
+import 'package:hywork/features/otp_verification/presentation/cubit/otp_verification_cubit.dart';
 
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
-import 'package:nini/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
+import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
 
 import '../../../login/data/auth_repo.dart';
 import '../../data/otp_verification_repo.dart';

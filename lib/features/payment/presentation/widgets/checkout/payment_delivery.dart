@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/order_information_strings.dart';
-import 'package:nini/core/localization/strings/payment_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/payment/domain/models/payment_details.dart';
+import 'package:hywork/core/localization/strings/order_information_strings.dart';
+import 'package:hywork/core/localization/strings/payment_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/payment/domain/models/payment_details.dart';
 
 /// Read-only buyer table populated from the preceding information form.
 class PaymentDelivery extends StatelessWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
 
 class PostContent extends StatelessWidget {
-  const PostContent({super.key, this.title = AppStrings.postTitle});
+  const PostContent({super.key, this.title = PostDetailStrings.postTitle});
 
   final String title;
 
@@ -24,60 +24,60 @@ class PostContent extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           const Text(
-            AppStrings.visualSuggestion,
+            PostDetailStrings.visualSuggestion,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const SizedBox(height: 20),
           const Text(
-            AppStrings.captionHeading,
+            PostDetailStrings.captionHeading,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const Text(
-            AppStrings.caption,
-            textDirection: TextDirection.ltr,
-            style: AppTextStyles.postBody,
-            textAlign: TextAlign.right,
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            AppStrings.serviceBenefits,
+            PostDetailStrings.caption,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const SizedBox(height: 20),
           const Text(
-            AppStrings.booking,
+            PostDetailStrings.serviceBenefits,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const SizedBox(height: 20),
           const Text(
-            AppStrings.hashtagsHeading,
+            PostDetailStrings.booking,
+            textDirection: TextDirection.ltr,
+            style: AppTextStyles.postBody,
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            PostDetailStrings.hashtagsHeading,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const Text(
-            AppStrings.hashtags,
+            PostDetailStrings.hashtags,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const SizedBox(height: 22),
           const Text(
-            AppStrings.callToActionHeading,
+            PostDetailStrings.callToActionHeading,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,
           ),
           const Text(
-            AppStrings.callToAction,
+            PostDetailStrings.callToAction,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.postBody,
             textAlign: TextAlign.right,

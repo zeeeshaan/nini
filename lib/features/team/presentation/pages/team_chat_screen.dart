@@ -1,13 +1,13 @@
-import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:hywork/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/chat/domain/models/chat_conversation.dart';
-import 'package:nini/features/chat/presentation/pages/conversation_screen.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/team/presentation/cubit/teams_cubit.dart';
-import 'package:nini/features/team/presentation/pages/team_people_screen.dart';
-import 'package:nini/features/team/presentation/widgets/conversation/team_chat_members_bar.dart';
-import 'package:nini/features/team/presentation/widgets/conversation/team_chat_title.dart';
+import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
+import 'package:hywork/features/chat/presentation/pages/conversation_screen.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/team/presentation/cubit/teams_cubit.dart';
+import 'package:hywork/features/team/presentation/pages/team_people_screen.dart';
+import 'package:hywork/features/team/presentation/widgets/conversation/team_chat_members_bar.dart';
+import 'package:hywork/features/team/presentation/widgets/conversation/team_chat_title.dart';
 
 class TeamChatScreen extends StatelessWidget {
   const TeamChatScreen({
@@ -54,7 +54,7 @@ class TeamChatScreen extends StatelessWidget {
             lastMessage: '',
             lastMessageAt: team.createdAt,
           ),
-          repository: repository.chats,
+          localRepository: repository.chats,
           headerTitle: TeamChatTitle(
             name: team.name,
             onTap: () => _people(context),

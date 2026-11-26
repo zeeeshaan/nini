@@ -1,6 +1,6 @@
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 /// Swagger `POST /reports` targetType enum.
 abstract final class ReportTargetType {

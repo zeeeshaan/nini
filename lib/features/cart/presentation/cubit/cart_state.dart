@@ -3,7 +3,7 @@ import '../../domain/models/cart_item.dart';
 import '../../domain/models/cart_removal.dart';
 import '../../domain/policies/order_access.dart';
 
-import 'package:nini/shared/models/local_identity.dart';
+import 'package:hywork/shared/models/local_identity.dart';
 
 import '../../domain/models/cart_order_status.dart';
 import '../../domain/models/cart_order.dart';

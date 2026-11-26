@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/search_strings.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
-import 'package:nini/features/search/presentation/cubit/search_cubit.dart';
-import 'package:nini/features/search/presentation/widgets/common/search_content.dart';
-import 'package:nini/features/search/presentation/widgets/header/search_header.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/features/search/presentation/cubit/search_cubit.dart';
+import 'package:hywork/features/search/presentation/widgets/common/search_content.dart';
+import 'package:hywork/features/search/presentation/widgets/header/search_header.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
 
 /// Connects the header's buttons to search state. The lists live in SearchContent.
 class SearchView extends StatefulWidget {
@@ -46,7 +46,6 @@ class _SearchViewState extends State<SearchView> {
     _controller.text = SearchStrings.display(_search.state.query);
     if (widget.active) {
       _request(_search.state.submittedQuery);
-      if (_search.state.query.trim().isEmpty) _search.loadDiscovery();
     }
   }
 
@@ -63,8 +62,12 @@ class _SearchViewState extends State<SearchView> {
     }
     if (!oldWidget.active && widget.active) {
       _request(_search.state.submittedQuery, refresh: true);
-      if (_search.state.query.trim().isEmpty) _search.loadDiscovery();
     }
+  }
+
+  void _focusSearch() {
+    _search.showSuggestions();
+    _search.loadDiscovery();
   }
 
   void _request(String query, {bool refresh = false}) {
@@ -94,7 +97,6 @@ class _SearchViewState extends State<SearchView> {
     _debounce?.cancel();
     _requestedQuery = null;
     context.read<BackendPostsCubit?>()?.invalidate();
-    if (query.trim().isEmpty) _search.loadDiscovery();
     _debounce = Timer(const Duration(milliseconds: 300), () {
       if (mounted) {
         _request(query.trim());
@@ -114,7 +116,6 @@ class _SearchViewState extends State<SearchView> {
   void _submit(String query) {
     _debounce?.cancel();
     _search.submit(query);
-    if (query.trim().isEmpty) _search.loadDiscovery();
     _request(_search.state.submittedQuery);
     _updateField(_search.state.query);
     _focusNode.unfocus();
@@ -190,7 +191,7 @@ class _SearchViewState extends State<SearchView> {
                           state.panel == SearchPanel.suggestions &&
                           state.query.isNotEmpty,
                       onChanged: _editQuery,
-                      onTap: _search.showSuggestions,
+                      onTap: _focusSearch,
                       onSearch: _submitField,
                       onClear: _clearQuery,
                       onCityPressed: _toggleCities,

@@ -2,8 +2,8 @@ import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 
 class HomePostMediaIndicator extends StatelessWidget {
   const HomePostMediaIndicator({

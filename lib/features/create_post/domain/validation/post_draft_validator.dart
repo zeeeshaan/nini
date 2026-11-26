@@ -1,4 +1,4 @@
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
 
 enum PostDraftIssue {
   missingAttachment,

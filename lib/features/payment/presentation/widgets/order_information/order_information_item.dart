@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_labels.dart';
-import 'package:nini/features/cart/presentation/widgets/items/cart_item_image.dart';
-import 'package:nini/features/posts/presentation/widgets/common/seller_avatar.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_labels.dart';
+import 'package:hywork/features/cart/presentation/widgets/items/cart_item_image.dart';
+import 'package:hywork/features/posts/presentation/widgets/common/seller_avatar.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class OrderInformationItem extends StatelessWidget {
   const OrderInformationItem({

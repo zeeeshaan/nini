@@ -1,5 +1,5 @@
 // dart format width=100
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 
 /// English interface copy for Cart, Checkout, and their accessibility labels.
 abstract final class CartStrings {

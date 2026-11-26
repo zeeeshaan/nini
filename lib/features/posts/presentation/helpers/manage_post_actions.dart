@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import '../cubit/posts_cubit.dart';
 import '../pages/edit_post_screen.dart';

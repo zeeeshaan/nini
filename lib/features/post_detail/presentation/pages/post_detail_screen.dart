@@ -1,33 +1,33 @@
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
-import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/post_analytics/presentation/pages/post_analytics_screen.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_detail_bottom_bar.dart';
-import 'package:nini/features/post_detail/presentation/widgets/content/post_detail_body.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/posts/presentation/helpers/manage_post_actions.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/comments_sheet.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/share_sheet.dart';
-import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
-import 'package:nini/features/chat/presentation/helpers/open_seller_conversation.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/reports/presentation/helpers/show_post_report_menu.dart';
-import 'package:nini/features/search/data/search_catalog.dart';
-import 'package:nini/shared/widgets/skeleton/detail_skeleton.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/features/post_analytics/presentation/pages/post_analytics_screen.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_detail_bottom_bar.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/content/post_detail_body.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/post_likes_cubit.dart';
+import 'package:hywork/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/posts/presentation/helpers/manage_post_actions.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/comments_sheet.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/share_sheet.dart';
+import 'package:hywork/features/profile/presentation/helpers/open_account_profile.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/features/chat/presentation/helpers/open_seller_conversation.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/reports/presentation/helpers/show_post_report_menu.dart';
+import 'package:hywork/features/search/data/search_catalog.dart';
+import 'package:hywork/shared/widgets/skeleton/detail_skeleton.dart';
 
 class PostDetailScreen extends StatelessWidget {
   const PostDetailScreen({
@@ -89,7 +89,7 @@ class PostDetailScreen extends StatelessWidget {
                       repository,
                       post.id,
                     ),
-                    child: const Text('Post unavailable. Tap to retry.'),
+                    child: const Text(PostDetailStrings.unavailable),
                   ),
                 ),
               );
@@ -179,7 +179,7 @@ class PostDetailScreen extends StatelessWidget {
                     },
                     icon: const AppIcon(AppIcons.analytics, size: 17),
                     label: const Text(
-                      AppStrings.viewAnalytics,
+                      PostDetailStrings.viewAnalytics,
                       style: AppTextStyles.label,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -258,7 +258,7 @@ class PostDetailScreen extends StatelessWidget {
         child: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: const AppIcon(AppIcons.backRight, size: 18),
-          tooltip: AppStrings.back,
+          tooltip: PostDetailStrings.back,
         ),
       ),
     ],

@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/domain/profile_categories_repository.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/profile_categories_repository.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -33,7 +33,7 @@ class LocalProfileCategoriesRepository implements ProfileCategoriesRepository {
   Future<File> _index() async {
     final documents = await _directoryProvider();
     final folder = await Directory(
-      p.join(documents.path, 'nini_profile_categories'),
+      p.join(documents.path, 'hywork_profile_categories'),
     ).create(recursive: true);
     return File(p.join(folder.path, 'categories.json'));
   }

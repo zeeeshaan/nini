@@ -2,9 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/create_post/data/gallery_media_preparer.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/create_post/data/gallery_media_preparer.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
 
 enum GalleryTab { photo, video, file }
 

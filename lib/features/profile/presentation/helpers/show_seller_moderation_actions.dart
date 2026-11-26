@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/report_strings.dart';
-import 'package:nini/features/chat/presentation/widgets/conversation/chat_action_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/posts/presentation/widgets/actions/post_owner_action_tile.dart';
-import 'package:nini/features/profile/presentation/cubit/seller_profile_cubit.dart';
-import 'package:nini/features/reports/data/api_reports_repository.dart';
-import 'package:nini/features/reports/presentation/helpers/open_report_sheet.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/localization/strings/report_strings.dart';
+import 'package:hywork/features/chat/presentation/widgets/conversation/chat_action_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/posts/presentation/widgets/actions/post_owner_action_tile.dart';
+import 'package:hywork/features/profile/presentation/cubit/seller_profile_cubit.dart';
+import 'package:hywork/features/reports/data/api_reports_repository.dart';
+import 'package:hywork/features/reports/presentation/helpers/open_report_sheet.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 enum _SellerModerationAction { report, block, unblock }
 
@@ -49,8 +49,8 @@ Future<void> showSellerModerationActions(BuildContext context) async {
             ),
             PostOwnerActionTile(
               label: blocked
-                  ? AppStrings.unblockPerson
-                  : AppStrings.blockPerson,
+                  ? ProfileScreenStrings.unblockPerson
+                  : ProfileScreenStrings.blockPerson,
               icon: blocked ? Icons.lock_open_outlined : Icons.block_outlined,
               destructive: !blocked,
               onTap: () => Navigator.of(sheetContext).pop(
@@ -86,9 +86,9 @@ Future<void> showSellerModerationActions(BuildContext context) async {
     case _SellerModerationAction.block:
       final confirmed = await confirmChatAction(
         context,
-        title: AppStrings.blockQuestion,
-        description: AppStrings.blockHelp,
-        confirmLabel: AppStrings.blockPerson,
+        title: ProfileScreenStrings.blockQuestion,
+        description: ProfileScreenStrings.blockHelp,
+        confirmLabel: ProfileScreenStrings.blockPerson,
       );
       if (!context.mounted || !confirmed || !current()) return;
       await cubit.block(
@@ -100,7 +100,7 @@ Future<void> showSellerModerationActions(BuildContext context) async {
       if (error != null) {
         AppToast.error(context, error);
       } else if (cubit.state.profile?.isBlocked == true) {
-        AppToast.success(context, AppStrings.personBlocked);
+        AppToast.success(context, ProfileScreenStrings.personBlocked);
       }
       return;
     case _SellerModerationAction.unblock:
@@ -113,7 +113,7 @@ Future<void> showSellerModerationActions(BuildContext context) async {
       if (error != null) {
         AppToast.error(context, error);
       } else if (cubit.state.profile?.isBlocked == false) {
-        AppToast.success(context, AppStrings.unblockPerson);
+        AppToast.success(context, ProfileScreenStrings.unblockPerson);
       }
   }
 }

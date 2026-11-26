@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/security/account_storage/account_storage.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/post_analytics/data/post_analytics_repository.dart';
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
-import 'package:nini/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_header.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/average_time_viewed.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/clicks_interactions.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/impressions.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/orders_bookings.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/total_views.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/shared/widgets/skeleton/list_tile_skeleton.dart';
-import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/security/account_storage/account_storage.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/post_analytics/data/post_analytics_repository.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/common/analytics_header.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/average_time_viewed.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/clicks_interactions.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/impressions.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/orders_bookings.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/total_views.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/shared/widgets/skeleton/list_tile_skeleton.dart';
+import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 
 class PostAnalyticsScreen extends StatelessWidget {
   const PostAnalyticsScreen({super.key, required this.post});

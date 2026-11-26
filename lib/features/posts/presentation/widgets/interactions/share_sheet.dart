@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
 
 // Open the share sheet from any post screen.
 Future<void> openPostShareSheet(

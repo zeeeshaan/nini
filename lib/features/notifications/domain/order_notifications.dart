@@ -1,8 +1,8 @@
-import 'package:nini/core/localization/strings/notification_strings.dart';
-import 'package:nini/core/localization/strings/provider_order_strings.dart';
-import 'package:nini/features/cart/domain/models/cart_order.dart';
-import 'package:nini/features/cart/domain/models/cart_order_status.dart';
-import 'package:nini/features/cart/domain/policies/order_access.dart';
+import 'package:hywork/core/localization/strings/notification_strings.dart';
+import 'package:hywork/core/localization/strings/provider_order_strings.dart';
+import 'package:hywork/features/cart/domain/models/cart_order.dart';
+import 'package:hywork/features/cart/domain/models/cart_order_status.dart';
+import 'package:hywork/features/cart/domain/policies/order_access.dart';
 
 import 'app_notification.dart';
 

@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_edit_strings.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/localization/strings/profile_edit_strings.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 import '../../domain/user_profile.dart';
 import '../../domain/user_profile_repository.dart';

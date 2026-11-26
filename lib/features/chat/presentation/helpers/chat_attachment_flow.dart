@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/data/device_chat_camera.dart';
-import 'package:nini/features/chat/domain/models/chat_location.dart';
-import 'package:nini/features/chat/presentation/widgets/media/chat_attachment_sheet.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/domain/models/post_options.dart';
-import 'package:nini/features/create_post/presentation/cubit/gallery_cubit.dart';
-import 'package:nini/features/create_post/presentation/pages/create_post_gallery_screen.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/data/device_chat_camera.dart';
+import 'package:hywork/features/chat/domain/models/chat_location.dart';
+import 'package:hywork/features/chat/presentation/widgets/media/chat_attachment_sheet.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/domain/models/post_options.dart';
+import 'package:hywork/features/create_post/presentation/cubit/gallery_cubit.dart';
+import 'package:hywork/features/create_post/presentation/pages/create_post_gallery_screen.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class ChatAttachmentSelection {
   ChatAttachmentSelection.photos(List<GalleryAttachment> photos)

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 import 'seller_message_button.dart';
 
@@ -54,7 +54,9 @@ class SellerProfileActions extends StatelessWidget {
               ),
             ),
             child: AppButton(
-              label: following ? AppStrings.following : AppStrings.follow,
+              label: following
+                  ? ProfileScreenStrings.unfollow
+                  : ProfileScreenStrings.follow,
               height: 44,
               isLoading: this.following,
               variant: following

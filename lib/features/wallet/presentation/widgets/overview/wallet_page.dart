@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 import 'wallet_header.dart';
 

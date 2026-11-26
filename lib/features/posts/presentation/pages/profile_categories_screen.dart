@@ -1,11 +1,11 @@
-import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
-import 'package:nini/core/localization/strings/category_strings.dart';
+import 'package:hywork/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:hywork/core/localization/strings/category_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import '../cubit/profile_categories_cubit.dart';
 import '../widgets/categories/category_delete_sheet.dart';

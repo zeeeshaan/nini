@@ -1,6 +1,6 @@
 // dart format width=100
-import 'package:nini/shared/models/post/post_unit.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/post/post_unit.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 import 'cart_order_status.dart';
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 class ProfileStats extends StatelessWidget {
   const ProfileStats({
@@ -9,8 +10,8 @@ class ProfileStats extends StatelessWidget {
     this.postCount = '—',
     this.salesCount = '—',
     this.customerCount = '—',
-    this.salesLabel = AppStrings.sales,
-    this.customerLabel = AppStrings.customers,
+    this.salesLabel = ProfileScreenStrings.sales,
+    this.customerLabel = ProfileScreenStrings.customers,
   });
 
   final String postCount, salesCount, customerCount;
@@ -21,7 +22,7 @@ class ProfileStats extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: _StatisticItem(value: postCount, label: AppStrings.posts),
+          child: _StatisticItem(value: postCount, label: ProfileScreenStrings.posts),
         ),
         Expanded(
           child: _StatisticItem(value: salesCount, label: salesLabel),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/post_detail_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'home_badge.dart';
 
@@ -95,7 +96,7 @@ class HomePostPricing extends StatelessWidget {
                       RotatedBox(
                         quarterTurns: 3,
                         child: Text(
-                          AppStrings.tomanPersian,
+                          HomeStrings.toman,
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.right,
                           style: currencyStyle,
@@ -137,11 +138,11 @@ class HomePostPricing extends StatelessWidget {
         final String? stockLabel = post.isService
             ? null
             : count != null && count > 0
-            ? AppStrings.inStock(count)
+            ? HomeStrings.inStock(count)
             : post.isExplicitlyOutOfStock
-            ? AppStrings.stockUnavailable
+            ? HomeStrings.stockUnavailable
             : post.isConfirmedAvailable
-            ? AppStrings.stockAvailable
+            ? HomeStrings.stockAvailable
             : null;
         final stock = stockLabel == null
             ? null

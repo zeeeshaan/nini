@@ -1,20 +1,20 @@
-import 'package:nini/shared/widgets/calendar/app_calendar.dart';
+import 'package:hywork/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/features/create_post/presentation/helpers/post_option_selection.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/features_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/preparation_time_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/schedule_post_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/tags_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/unit_dialog.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/presentation/helpers/post_option_selection.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/features_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/preparation_time_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/schedule_post_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/tags_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/unit_dialog.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class PostOptionsSection extends StatelessWidget {
   const PostOptionsSection({super.key});

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class PostPricing extends StatelessWidget {
   const PostPricing({
@@ -75,7 +76,7 @@ class PostPricing extends StatelessWidget {
                 RotatedBox(
                   quarterTurns: 3,
                   child: Text(
-                    AppStrings.tomanPersian,
+                    PostDetailStrings.toman,
                     style: currencyStyle,
                     textDirection: TextDirection.rtl,
                   ),

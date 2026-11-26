@@ -38,27 +38,27 @@ abstract final class AppTextStyles {
     fontWeight: heavy,
     height: 1.1,
   );
-  // Profile-grid typography uses the compact proportions of the reference.
-  // The rest of the app keeps its existing font family and text sizes.
+  // Profile-grid type is the size shown on a phone. Narrow columns must not
+  // shrink it further. The rest of the app keeps its own text sizes.
   static const profileCardText = TextStyle(
     fontFamily: 'ProfileCard',
     fontFamilyFallback: [fontFamily],
   );
   static const postCardHeading = TextStyle(
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: bold,
-    height: 1.05,
+    height: 1.2,
   );
-  static const profileCardMetadata = TextStyle(fontSize: 10, height: 1.2);
-  static const profileCardStock = TextStyle(fontSize: 10, height: 1.2);
-  static const profileCardOriginalPrice = TextStyle(fontSize: 10, height: 1);
+  static const profileCardMetadata = TextStyle(fontSize: 13, height: 1.2);
+  static const profileCardStock = TextStyle(fontSize: 13, height: 1.2);
+  static const profileCardOriginalPrice = TextStyle(fontSize: 13, height: 1.1);
   static const profileCardPrice = TextStyle(
     fontSize: 16,
     fontWeight: heavy,
     height: 1,
   );
-  static const profileCardUnit = TextStyle(fontSize: 8, height: 1.2);
-  static const profileCardRating = TextStyle(fontSize: 5, height: 1);
+  static const profileCardUnit = TextStyle(fontSize: 13, height: 1.2);
+  static const profileCardRating = TextStyle(fontSize: 13, height: 1);
   static const pricePrefix = TextStyle(
     fontSize: 14,
     fontWeight: medium,

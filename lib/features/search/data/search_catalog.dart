@@ -1,6 +1,6 @@
-import 'package:nini/core/localization/strings/search_strings.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 /// Published account-owned posts until a backend catalogue is connected.
 abstract final class SearchCatalog {

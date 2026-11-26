@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/features/posts/presentation/cubit/post_likes_cubit.dart';
+import 'package:hywork/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 class HomeCardState {
   const HomeCardState({

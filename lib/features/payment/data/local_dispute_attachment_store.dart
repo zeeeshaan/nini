@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:nini/features/payment/domain/models/dispute_attachment.dart';
-import 'package:nini/core/media/media_compressor/media_compressor.dart';
+import 'package:hywork/features/payment/domain/models/dispute_attachment.dart';
+import 'package:hywork/core/media/media_compressor/media_compressor.dart';
 
 /// Owns copies of selected evidence, never the user's picker originals.
 class LocalDisputeAttachmentStore {
@@ -11,7 +11,7 @@ class LocalDisputeAttachmentStore {
     final documents = Platform.isIOS
         ? Directory(p.join(Directory.systemTemp.parent.path, 'Documents'))
         : await getApplicationDocumentsDirectory();
-    return Directory(p.join(documents.path, 'nini_dispute_attachments'))
+    return Directory(p.join(documents.path, 'hywork_dispute_attachments'))
         .create(recursive: true);
   }
 

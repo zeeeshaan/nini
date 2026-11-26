@@ -1,6 +1,6 @@
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/payment/domain/models/payment_details.dart';
-import 'package:nini/features/payment/domain/models/payment_method.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/features/payment/domain/models/payment_details.dart';
+import 'package:hywork/features/payment/domain/models/payment_method.dart';
 
 import '../models/cart_item.dart';
 import '../models/cart_order.dart';

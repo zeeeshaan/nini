@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_preview.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/presentation/widgets/gallery/gallery_preview.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class AltTextDialog extends StatefulWidget {
   const AltTextDialog({

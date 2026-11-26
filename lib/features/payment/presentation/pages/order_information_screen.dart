@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/localization/strings/order_information_strings.dart';
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_state.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/cart/presentation/widgets/dialogs/cart_amount_dialog.dart';
-import 'package:nini/features/create_post/domain/models/post_options.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/features/payment/domain/models/order_customer_details.dart';
-import 'package:nini/features/payment/domain/models/payment_details.dart';
-import 'package:nini/features/payment/presentation/pages/payment_gateway_screen.dart';
-import 'package:nini/features/payment/presentation/pages/payment_screen.dart';
-import 'package:nini/features/payment/presentation/widgets/order_information/order_information_actions.dart';
-import 'package:nini/features/payment/presentation/widgets/order_information/order_information_fields.dart';
-import 'package:nini/features/payment/presentation/widgets/order_information/order_information_header.dart';
-import 'package:nini/features/payment/presentation/widgets/order_information/order_information_item.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/core/localization/strings/order_information_strings.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_state.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/presentation/widgets/dialogs/cart_amount_dialog.dart';
+import 'package:hywork/features/create_post/domain/models/post_options.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/payment/domain/models/order_customer_details.dart';
+import 'package:hywork/features/payment/domain/models/payment_details.dart';
+import 'package:hywork/features/payment/presentation/pages/payment_gateway_screen.dart';
+import 'package:hywork/features/payment/presentation/pages/payment_screen.dart';
+import 'package:hywork/features/payment/presentation/widgets/order_information/order_information_actions.dart';
+import 'package:hywork/features/payment/presentation/widgets/order_information/order_information_fields.dart';
+import 'package:hywork/features/payment/presentation/widgets/order_information/order_information_header.dart';
+import 'package:hywork/features/payment/presentation/widgets/order_information/order_information_item.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 /// Shared customer information step for selected product and service Cart items.
 class OrderInformationScreen extends StatefulWidget {

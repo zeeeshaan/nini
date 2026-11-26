@@ -1,4 +1,4 @@
-import 'package:nini/features/create_post/presentation/cubit/post_operation_cubit.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_operation_cubit.dart';
 
 import 'dart:async';
 
@@ -6,31 +6,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/create_post/domain/validation/post_draft_validator.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
-import 'package:nini/features/create_post/presentation/cubit/post_categories_cubit.dart';
-import 'package:nini/features/create_post/presentation/helpers/attachments_from_post_media.dart';
-import 'package:nini/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/post_basic_details_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/post_options_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/post_pricing_inventory_section.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/post_publish_actions.dart';
-import 'package:nini/features/create_post/presentation/widgets/form/selected_media_grid.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/domain/validation/post_draft_validator.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_categories_cubit.dart';
+import 'package:hywork/features/create_post/presentation/helpers/attachments_from_post_media.dart';
+import 'package:hywork/features/create_post/presentation/helpers/post_caption_synchronizer.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/post_basic_details_section.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/post_options_section.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/post_pricing_inventory_section.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/post_publish_actions.dart';
+import 'package:hywork/features/create_post/presentation/widgets/form/selected_media_grid.dart';
 import 'package:dio/dio.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/posts/presentation/helpers/confirm_discard_post_changes.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/presentation/helpers/confirm_discard_post_changes.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class CreatePostDetailsScreen extends StatefulWidget {
   const CreatePostDetailsScreen({

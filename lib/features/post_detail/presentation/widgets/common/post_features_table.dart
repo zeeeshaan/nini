@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
 
 class PostFeaturesTable extends StatelessWidget {
-  const PostFeaturesTable({super.key, this.features = AppStrings.features});
+  const PostFeaturesTable({
+    super.key,
+    this.features = PostDetailStrings.features,
+  });
 
   final List<(String, String)> features;
 
@@ -17,7 +20,7 @@ class PostFeaturesTable extends StatelessWidget {
         children: [
           const SizedBox(height: 36),
           const Text(
-            AppStrings.featuresHeading,
+            PostDetailStrings.featuresHeading,
             textDirection: TextDirection.ltr,
             style: AppTextStyles.specificationsHeading,
             textAlign: TextAlign.right,

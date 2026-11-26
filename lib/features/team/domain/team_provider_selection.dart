@@ -1,5 +1,5 @@
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 /// The chosen service and quantity for one provider, keyed by provider ID.
 class TeamProviderSelection {

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/location_strings.dart';
+import 'package:hywork/core/localization/strings/location_strings.dart';
 
 class LocationsState {
   const LocationsState({

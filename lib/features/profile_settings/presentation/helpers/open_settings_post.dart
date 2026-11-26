@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/presentation/pages/edit_post_screen.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/features/post_detail/presentation/pages/post_detail_screen.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/pages/edit_post_screen.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 void openSettingsPost(
   BuildContext context,

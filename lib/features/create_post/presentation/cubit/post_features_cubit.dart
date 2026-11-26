@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
 
 import '../../domain/models/post_options.dart';
 

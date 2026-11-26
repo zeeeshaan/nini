@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/localization/strings/payment_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/payment/domain/models/payment_details.dart';
-import 'package:nini/features/payment/presentation/helpers/payment_money.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/core/localization/strings/payment_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/payment/domain/models/payment_details.dart';
+import 'package:hywork/features/payment/presentation/helpers/payment_money.dart';
 
 class PaymentSummary extends StatelessWidget {
   const PaymentSummary({super.key, required this.details});

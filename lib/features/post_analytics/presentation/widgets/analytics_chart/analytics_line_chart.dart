@@ -1,14 +1,14 @@
-import 'package:nini/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
 
 class AnalyticsLineChart extends StatefulWidget {
   const AnalyticsLineChart({

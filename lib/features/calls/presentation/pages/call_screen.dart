@@ -1,24 +1,24 @@
 import 'dart:async';
 
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/core/theme/app_theme/app_theme.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/calls/data/preview_call_service.dart';
-import 'package:nini/features/calls/domain/call_session.dart';
-import 'package:nini/features/calls/domain/call_service.dart';
-import 'package:nini/features/calls/presentation/cubit/call_cubit.dart';
-import 'package:nini/features/calls/presentation/widgets/display/call_avatar.dart';
-import 'package:nini/features/calls/presentation/widgets/controls/call_controls.dart';
-import 'package:nini/features/calls/presentation/widgets/display/call_video_stage.dart';
-import 'package:nini/features/chat/domain/models/chat_conversation.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/theme/app_theme/app_theme.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/calls/data/preview_call_service.dart';
+import 'package:hywork/features/calls/domain/call_session.dart';
+import 'package:hywork/features/calls/domain/call_service.dart';
+import 'package:hywork/features/calls/presentation/cubit/call_cubit.dart';
+import 'package:hywork/features/calls/presentation/widgets/display/call_avatar.dart';
+import 'package:hywork/features/calls/presentation/widgets/controls/call_controls.dart';
+import 'package:hywork/features/calls/presentation/widgets/display/call_video_stage.dart';
+import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class CallScreen extends StatelessWidget {
   const CallScreen({

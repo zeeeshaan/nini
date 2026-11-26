@@ -1,5 +1,5 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/domain/models/chat_conversation.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
 
 List<ChatConversation> createDemoConversations() {
   final now = DateTime.now();

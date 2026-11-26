@@ -1,4 +1,4 @@
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class SettingsMediaItem {
   const SettingsMediaItem({required this.post, required this.media});

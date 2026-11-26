@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/search/data/search_catalog.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/features/search/data/search_catalog.dart';
 
 import '../../domain/saved_post.dart';
 import '../../domain/saved_posts_repository.dart';

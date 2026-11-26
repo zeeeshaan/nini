@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:nini/shared/models/post/post_details.dart';
-import 'package:nini/shared/models/post/post_media.dart';
+import 'package:hywork/shared/models/post/post_details.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
 
-export 'package:nini/shared/models/post/post_details.dart';
-export 'package:nini/shared/models/post/post_media.dart';
+export 'package:hywork/shared/models/post/post_details.dart';
+export 'package:hywork/shared/models/post/post_media.dart';
 
 @immutable
 class PostItem {

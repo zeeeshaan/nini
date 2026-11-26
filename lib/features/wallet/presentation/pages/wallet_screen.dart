@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/wallet_strings.dart';
+import 'package:hywork/core/localization/strings/wallet_strings.dart';
 
 import '../widgets/overview/wallet_balance_card.dart';
 import '../widgets/overview/wallet_page.dart';

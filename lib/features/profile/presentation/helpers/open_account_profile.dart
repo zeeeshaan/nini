@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
 
 import '../pages/profile_screen.dart';
 
@@ -36,7 +36,7 @@ void openAccountProfile(BuildContext context) {
 
           actions: [
             IconButton(
-              tooltip: AppStrings.back,
+              tooltip: ProfileScreenStrings.back,
               onPressed: () => Navigator.of(context).pop(),
               icon: const AppIcon(AppIcons.backRight),
             ),

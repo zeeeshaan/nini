@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/team/data/in_memory_teams_repository.dart';
-import 'package:nini/features/team/presentation/cubit/teams_cubit.dart';
-import 'package:nini/features/team/presentation/helpers/manage_team.dart';
-import 'package:nini/features/team/presentation/pages/team_chat_screen.dart';
-import 'package:nini/features/team/presentation/widgets/common/team_search_field.dart';
-import 'package:nini/features/team/presentation/widgets/my_teams/my_teams_header.dart';
-import 'package:nini/features/team/presentation/widgets/my_teams/team_card.dart';
-import 'package:nini/features/team/presentation/widgets/my_teams/team_empty_state.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
+import 'package:hywork/features/team/presentation/cubit/teams_cubit.dart';
+import 'package:hywork/features/team/presentation/helpers/manage_team.dart';
+import 'package:hywork/features/team/presentation/pages/team_chat_screen.dart';
+import 'package:hywork/features/team/presentation/widgets/common/team_search_field.dart';
+import 'package:hywork/features/team/presentation/widgets/my_teams/my_teams_header.dart';
+import 'package:hywork/features/team/presentation/widgets/my_teams/team_card.dart';
+import 'package:hywork/features/team/presentation/widgets/my_teams/team_empty_state.dart';
 
 import 'create_team.dart';
 

@@ -1,5 +1,5 @@
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 /// Rehydrates every stored editor field. In particular, use the base price,
 /// not the discounted display price, so editing never applies a discount twice.

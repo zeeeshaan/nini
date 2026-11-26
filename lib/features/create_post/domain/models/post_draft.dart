@@ -1,6 +1,6 @@
-import 'package:nini/features/create_post/domain/models/post_options.dart';
+import 'package:hywork/features/create_post/domain/models/post_options.dart';
 
-export 'package:nini/features/create_post/domain/models/post_options.dart';
+export 'package:hywork/features/create_post/domain/models/post_options.dart';
 
 enum CreatePostType { product, services }
 

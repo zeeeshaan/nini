@@ -1,8 +1,8 @@
-package com.nini.nini
+package com.hywork.hywork
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import com.nini.nini.media.DocumentCompressionChannel
+import com.hywork.hywork.media.DocumentCompressionChannel
 import android.util.AtomicFile
 import io.flutter.plugin.common.MethodChannel
 import java.io.File

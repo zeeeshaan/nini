@@ -1,4 +1,4 @@
-import 'package:nini/features/chat/domain/models/chat_message.dart';
+import 'package:hywork/features/chat/domain/models/chat_message.dart';
 
 abstract class ChatMessagesRepository {
   List<ChatMessage> getMessages(String conversationId);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
 
 import '../../../domain/public_user_profile.dart';
 
@@ -32,8 +32,8 @@ class SellerProfileHeader extends StatelessWidget {
               postCount: (postCount ?? profile.postsCount)?.toString() ?? '—',
               salesCount: profile.followersCount?.toString() ?? '—',
               customerCount: profile.followingCount?.toString() ?? '—',
-              salesLabel: AppStrings.followers,
-              customerLabel: AppStrings.following,
+              salesLabel: ProfileScreenStrings.followers,
+              customerLabel: ProfileScreenStrings.following,
             ),
           ),
           const SizedBox(width: 8),

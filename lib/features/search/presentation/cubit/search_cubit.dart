@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
 
 import 'search_state.dart';
 

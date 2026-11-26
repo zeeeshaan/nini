@@ -1,4 +1,4 @@
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 class PublicUserProfile {
   const PublicUserProfile({

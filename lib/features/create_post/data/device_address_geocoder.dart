@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:geocoding/geocoding.dart';
-import 'package:nini/features/create_post/domain/services/address_geocoder.dart';
+import 'package:hywork/features/create_post/domain/services/address_geocoder.dart';
 
 /// Uses the operating system's geocoder; it does not request GPS permission.
 class DeviceAddressGeocoder implements AddressGeocoder {

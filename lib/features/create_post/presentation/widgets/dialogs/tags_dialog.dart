@@ -1,13 +1,13 @@
-import 'package:nini/features/create_post/domain/models/post_draft.dart';
-import 'package:nini/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
 
 class TagsDialog extends StatefulWidget {
   const TagsDialog({super.key, required this.initial});

@@ -2,12 +2,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/calls/domain/call_session.dart';
-import 'package:nini/features/calls/presentation/widgets/controls/call_action_button.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/calls/domain/call_session.dart';
+import 'package:hywork/features/calls/presentation/widgets/controls/call_action_button.dart';
 
 class CallControls extends StatelessWidget {
   const CallControls({

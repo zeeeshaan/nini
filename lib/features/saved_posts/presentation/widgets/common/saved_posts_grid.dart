@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/saved_posts_strings.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
-import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/saved_posts_strings.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../../domain/saved_post.dart';
 

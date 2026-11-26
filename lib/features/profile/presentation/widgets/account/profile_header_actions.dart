@@ -1,26 +1,24 @@
-import 'package:nini/features/profile/presentation/pages/profile_settings_screen.dart';
+import 'package:hywork/features/profile/presentation/pages/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/notifications/presentation/cubit/notifications_cubit.dart';
-import 'package:nini/features/notifications/presentation/helpers/open_notifications.dart';
-import 'package:nini/features/notifications/presentation/widgets/common/notifications_button.dart';
+import 'package:hywork/features/notifications/presentation/cubit/notifications_cubit.dart';
+import 'package:hywork/features/notifications/presentation/helpers/open_notifications.dart';
+import 'package:hywork/features/notifications/presentation/widgets/common/notifications_button.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/presentation/widgets/inbox/chat_inbox_button.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/features/chat/presentation/widgets/inbox/chat_inbox_button.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class ProfileHeaderActions extends StatelessWidget {
   const ProfileHeaderActions({
     super.key,
     this.onMessagesPressed,
     this.onMenuPressed,
-    this.notificationCount = 1,
   });
 
   final VoidCallback? onMessagesPressed;
   final VoidCallback? onMenuPressed;
-  final int notificationCount;
 
   void _openSettings(BuildContext context) {
     Navigator.of(context).push(
@@ -35,22 +33,19 @@ class ProfileHeaderActions extends StatelessWidget {
       children: [
         BlocBuilder<NotificationsCubit, NotificationsState>(
           builder: (context, state) => NotificationsButton(
-            unreadCount: state.unreadCount,
+            unreadCount: state.badgeCount,
             onPressed: () => openNotifications(context),
           ),
         ),
         const SizedBox(width: 8),
-        ChatInboxButton(
-          onPressed: onMessagesPressed,
-          notificationCount: notificationCount,
-        ),
+        ChatInboxButton(onPressed: onMessagesPressed),
 
         const SizedBox(width: 8),
 
         // More options button
         IconButton(
           onPressed: onMenuPressed ?? () => _openSettings(context),
-          tooltip: AppStrings.moreOptions,
+          tooltip: ProfileScreenStrings.moreOptions,
           icon: const AppIcon(AppIcons.menu, size: 30),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(minWidth: 40, minHeight: 42),

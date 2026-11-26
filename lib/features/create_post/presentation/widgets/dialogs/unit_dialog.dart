@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/create_post_strings.dart';
-import 'package:nini/features/create_post/domain/models/post_options.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/create_post_strings.dart';
+import 'package:hywork/features/create_post/domain/models/post_options.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 
 class UnitDialog extends StatelessWidget {
   const UnitDialog({super.key, required this.selected});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/wallet_strings.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/wallet_strings.dart';
 
 import '../widgets/overview/wallet_bottom_button.dart';
 import '../widgets/overview/wallet_header.dart';

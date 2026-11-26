@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/report_strings.dart';
-import 'package:nini/features/reports/data/api_reports_repository.dart';
+import 'package:hywork/core/localization/strings/report_strings.dart';
+import 'package:hywork/features/reports/data/api_reports_repository.dart';
 
 class ReportState {
   const ReportState({

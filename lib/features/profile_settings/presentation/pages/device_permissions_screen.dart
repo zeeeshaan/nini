@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
 
 import '../../data/native_device_permissions_repository.dart';
 import '../../domain/device_permissions_repository.dart';

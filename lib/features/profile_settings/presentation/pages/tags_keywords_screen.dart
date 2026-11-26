@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
 
 import '../cubit/settings_query_cubit.dart';
 import '../widgets/common/settings_page.dart';

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:nini/shared/models/local_identity.dart';
-import 'package:nini/core/media/media_compressor/media_compressor.dart';
+import 'package:hywork/shared/models/local_identity.dart';
+import 'package:hywork/core/media/media_compressor/media_compressor.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -28,7 +28,7 @@ class LocalUserProfileRepository implements UserProfileRepository {
   Future<Directory> _folder() async {
     final documents = await _directoryProvider();
     return Directory(
-      p.join(documents.path, 'nini_profile', Uri.encodeComponent(profileId)),
+      p.join(documents.path, 'hywork_profile', Uri.encodeComponent(profileId)),
     ).create(recursive: true);
   }
 

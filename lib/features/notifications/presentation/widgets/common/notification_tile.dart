@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 import '../../../domain/app_notification.dart';
 import 'notification_avatar.dart';
@@ -38,14 +38,16 @@ class NotificationTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  notification.title,
+                  notification.localizedTitle(Localizations.localeOf(context)),
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.bodyBold,
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  notification.message,
+                  notification.localizedMessage(
+                    Localizations.localeOf(context),
+                  ),
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.right,
                   style: AppTextStyles.notificationBody,

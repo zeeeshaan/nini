@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foldable/foldable.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
 class ResponsiveConfig extends StatelessWidget {
   const ResponsiveConfig({super.key, required this.child});

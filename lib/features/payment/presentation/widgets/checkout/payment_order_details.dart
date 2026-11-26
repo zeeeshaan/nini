@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/payment_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/payment/domain/models/payment_details.dart';
-import 'package:nini/features/payment/presentation/widgets/order_information/order_information_item.dart';
+import 'package:hywork/core/localization/strings/payment_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/payment/domain/models/payment_details.dart';
+import 'package:hywork/features/payment/presentation/widgets/order_information/order_information_item.dart';
 
 class PaymentOrderDetails extends StatelessWidget {
   const PaymentOrderDetails({super.key, required this.details});

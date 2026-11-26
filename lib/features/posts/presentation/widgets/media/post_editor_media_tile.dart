@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:nini/features/create_post/presentation/widgets/gallery/gallery_preview.dart';
-import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/presentation/widgets/gallery/gallery_preview.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 

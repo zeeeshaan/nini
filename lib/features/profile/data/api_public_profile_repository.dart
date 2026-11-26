@@ -1,11 +1,11 @@
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import '../domain/public_user_profile.dart';
 
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 class FollowPeoplePage {
   const FollowPeoplePage({

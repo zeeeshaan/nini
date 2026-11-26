@@ -3,24 +3,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/features/search/data/search_catalog.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
-import 'package:nini/features/home/presentation/helpers/published_home_navigation.dart';
-import 'package:nini/core/localization/strings/search_strings.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/search/presentation/cubit/search_state.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/search/data/search_catalog.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/features/home/presentation/helpers/published_home_navigation.dart';
+import 'package:hywork/core/localization/strings/search_strings.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/search/presentation/cubit/search_state.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
 
-import 'package:nini/features/search/presentation/widgets/results/search_empty_state.dart';
-import 'package:nini/features/search/presentation/widgets/common/search_city_list.dart';
-import 'package:nini/features/search/presentation/widgets/results/search_results_grid.dart';
-import 'package:nini/features/search/presentation/widgets/common/search_suggestions.dart';
+import 'package:hywork/features/search/presentation/widgets/results/search_empty_state.dart';
+import 'package:hywork/features/search/presentation/widgets/common/search_city_list.dart';
+import 'package:hywork/features/search/presentation/widgets/results/search_results_grid.dart';
+import 'package:hywork/features/search/presentation/widgets/common/search_suggestions.dart';
 
 /// Shows results, the full city list, or suggestions below the fixed header.
 class SearchContent extends StatelessWidget {
@@ -124,85 +124,70 @@ class SearchContent extends StatelessWidget {
       );
     }
 
+    // Popular / trending only while the search field is focused.
+    if (state.panel == SearchPanel.suggestions) {
+      if (state.query.trim().isNotEmpty && state.suggestions.isNotEmpty) {
+        return SearchSuggestions(
+          suggestions: state.suggestions,
+          onSelected: onQuerySelected,
+        );
+      }
+      return ListView(
+        padding: const EdgeInsets.only(bottom: 24),
+        children: [_discovery(context)],
+      );
+    }
+
     final backend = context.read<BackendPostsCubit?>();
     if (backend != null) {
       return BlocBuilder<BackendPostsCubit, BackendPostsState>(
         builder: (context, result) {
           final posts = result.posts;
-          Widget withDiscovery(Widget child) => state.query.trim().isEmpty
-              ? Column(
-                  children: [
-                    _discovery(context),
-                    Expanded(child: child),
-                  ],
-                )
-              : child;
-          if (state.panel == SearchPanel.suggestions &&
-              state.query.trim().isNotEmpty &&
-              state.suggestions.isNotEmpty) {
-            return SearchSuggestions(
-              suggestions: state.suggestions,
-              onSelected: onQuerySelected,
-            );
+          if (result.loading && result.posts.isEmpty) {
+            return const SearchResultsGrid(posts: [], isLoading: true);
           }
-          if (result.loading && result.posts.isEmpty)
-            return withDiscovery(
-              const SearchResultsGrid(posts: [], isLoading: true),
-            );
-          if (result.error && result.posts.isEmpty)
-            return withDiscovery(
-              Center(
-                child: TextButton(
-                  onPressed: backend.loadMore,
-                  child: const Text('Could not load search results. Retry'),
-                ),
+          if (result.error && result.posts.isEmpty) {
+            return Center(
+              child: TextButton(
+                onPressed: backend.loadMore,
+                child: const Text('Could not load search results. Retry'),
               ),
             );
+          }
           if (posts.isEmpty) {
-            return withDiscovery(
-              Column(
-                children: [
-                  Expanded(
-                    child: SearchEmptyState(
-                      onReset: () => onQuerySelected(''),
-                      textAlign: emptyStateTextAlign,
-                    ),
-                  ),
-                  if (result.hasMore)
-                    TextButton(
-                      onPressed: backend.loadMore,
-                      child: const Text('More results'),
-                    ),
-                ],
-              ),
-            );
-          }
-          return withDiscovery(
-            Column(
+            return Column(
               children: [
-                if (result.error)
+                Expanded(
+                  child: SearchEmptyState(
+                    onReset: () => onQuerySelected(''),
+                    textAlign: emptyStateTextAlign,
+                  ),
+                ),
+                if (result.hasMore)
                   TextButton(
                     onPressed: backend.loadMore,
-                    child: const Text('Could not load more. Retry'),
+                    child: const Text('More results'),
                   ),
-                Expanded(
-                  child: SearchResultsGrid(
-                    posts: posts,
-                    onLoadMore: result.error ? null : backend.loadMore,
-                    onPostSelected: (post) => _openPost(context, post),
-                  ),
-                ),
               ],
-            ),
+            );
+          }
+          return Column(
+            children: [
+              if (result.error)
+                TextButton(
+                  onPressed: backend.loadMore,
+                  child: const Text('Could not load more. Retry'),
+                ),
+              Expanded(
+                child: SearchResultsGrid(
+                  posts: posts,
+                  onLoadMore: result.error ? null : backend.loadMore,
+                  onPostSelected: (post) => _openPost(context, post),
+                ),
+              ),
+            ],
           );
         },
-      );
-    }
-
-    if (state.panel == SearchPanel.suggestions) {
-      return SearchEmptyState(
-        onReset: () => onQuerySelected(''),
-        textAlign: emptyStateTextAlign,
       );
     }
 

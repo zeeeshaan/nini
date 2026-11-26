@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/features/posts/presentation/pages/edit_post_screen.dart';
-import 'package:nini/features/posts/presentation/widgets/actions/post_owner_actions_sheet.dart';
-import 'package:nini/features/posts/presentation/widgets/actions/post_delete_sheet.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/features/create_post/presentation/cubit/post_operation_cubit.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/features/posts/presentation/pages/edit_post_screen.dart';
+import 'package:hywork/features/posts/presentation/widgets/actions/post_owner_actions_sheet.dart';
+import 'package:hywork/features/posts/presentation/widgets/actions/post_delete_sheet.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/features/create_post/presentation/cubit/post_operation_cubit.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import 'dart:async';
 

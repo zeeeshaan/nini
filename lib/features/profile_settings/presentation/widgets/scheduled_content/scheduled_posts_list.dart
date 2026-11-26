@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 import '../../helpers/open_settings_post.dart';
 import '../common/settings_empty_state.dart';

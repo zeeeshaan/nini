@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/metrics/post_activity_tracking.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
 
 class ProfilePostCard extends StatelessWidget {
   const ProfilePostCard({
@@ -33,8 +35,13 @@ class ProfilePostCard extends StatelessWidget {
   final Widget? imageOverride;
   final String impressionSource;
 
-  // A reference card is 200 units wide with a square image and ~100 of details.
+  // Reference width used only by grids that still pass a contentScale.
   static const referenceWidth = 200.0;
+
+  /// Phone columns are narrower than [referenceWidth]. Keep type at the
+  /// designed size there, and only grow it when the card is wider.
+  static double textScaleFor(double contentScale) =>
+      contentScale < 1 ? 1 : contentScale;
 
   static double lineHeightFor(BuildContext context, TextStyle style) {
     final painter = TextPainter(
@@ -42,27 +49,32 @@ class ProfilePostCard extends StatelessWidget {
         text: 'Ag',
         style: AppTextStyles.profileCardText.merge(style),
       ),
-      textDirection: Directionality.of(context),
+      textDirection: TextDirection.rtl,
       textScaler: MediaQuery.textScalerOf(context),
       locale: Localizations.maybeLocaleOf(context),
       maxLines: 1,
     )..layout();
-    // Round the measured line up so font-metric fractions cannot overflow a row.
     final height = painter.height.ceilToDouble();
     painter.dispose();
     return height;
   }
 
   static double detailsHeightFor(BuildContext context, double scale) {
+    final textScale = textScaleFor(scale);
     double lineHeight(TextStyle style) => lineHeightFor(
       context,
-      style.copyWith(fontSize: style.fontSize! * scale),
+      style.copyWith(fontSize: style.fontSize! * textScale),
     );
-    return (20 * scale +
+    // Fixed slots so 1-line and 2-line titles keep the same card geometry.
+    return (10 * textScale + // top + bottom padding
             lineHeight(AppTextStyles.postCardHeading) * 2 +
+            2 * textScale +
             lineHeight(AppTextStyles.profileCardMetadata) +
+            2 * textScale +
             lineHeight(AppTextStyles.profileCardStock) +
+            8 * textScale +
             lineHeight(AppTextStyles.profileCardOriginalPrice) +
+            2 * textScale +
             lineHeight(AppTextStyles.profileCardPrice))
         .ceilToDouble();
   }
@@ -95,15 +107,44 @@ class ProfilePostCard extends StatelessWidget {
     return AppStrings.persianDigits('$value%');
   }
 
+  int? get _resolvedStock {
+    final counted = post.stockCount;
+    if (counted != null) return counted;
+    final raw = post.details.warehouseStock.trim();
+    if (raw.isEmpty) return null;
+    return int.tryParse(
+      AppStrings.latinDigits(raw).replaceAll(RegExp(r'[^\d-]'), ''),
+    );
+  }
+
   String get _stockLabel {
-    final count = post.stockCount;
-    if (count != null && count > 0) return AppStrings.inStock(count);
-    if (post.isExplicitlyOutOfStock) return AppStrings.stockUnavailable;
-    return AppStrings.stockAvailable;
+    final count = _resolvedStock;
+    if (count != null && count > 0) {
+      return ProfileScreenStrings.inStock(count);
+    }
+    if (count == 0 || post.isExplicitlyOutOfStock) {
+      return ProfileScreenStrings.stockUnavailable;
+    }
+    return ProfileScreenStrings.stockAvailable;
+  }
+
+  /// Figma always shows a unit beside price. Prefer the post unit; products
+  /// fall back to piece so the slot is never empty.
+  String? get _unitLabel {
+    final unit = post.details.unit;
+    if (unit != null) return PostDetailStrings.unit(unit);
+    final raw = post.metadata['unit'];
+    if (raw is String && raw.trim().isNotEmpty) {
+      final parsed = PostUnit.fromName(raw);
+      if (parsed != null) return PostDetailStrings.unit(parsed);
+      return raw.trim();
+    }
+    if (!post.isService) return PostDetailStrings.unit(PostUnit.piece);
+    return null;
   }
 
   String? get _ratingLabel {
-    final value = post.metadata['rating'];
+    final value = post.metadata['rating'] ?? post.metadata['averageRating'];
     if (value == null) return null;
     final rating = _number(value.toString());
     if (rating == null || !rating.isFinite || rating < 0 || rating > 5) {
@@ -116,10 +157,13 @@ class ProfilePostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final discount = _discountLabel;
-    final unit = post.details.unit?.label;
+    final unit = _unitLabel;
     final rating = _ratingLabel;
+    // Figma keeps a rating digit beside the star even when the API has none.
+    final ratingText = rating ?? '۰';
+    final textScale = textScaleFor(contentScale);
     TextStyle scaled(TextStyle style) =>
-        style.copyWith(fontSize: style.fontSize! * contentScale);
+        style.copyWith(fontSize: style.fontSize! * textScale);
     final headingStyle = scaled(AppTextStyles.postCardHeading);
     final metadataStyle = scaled(AppTextStyles.profileCardMetadata);
     final stockStyle = scaled(AppTextStyles.profileCardStock);
@@ -128,6 +172,13 @@ class ProfilePostCard extends StatelessWidget {
     final unitStyle = scaled(AppTextStyles.profileCardUnit);
     final ratingStyle = scaled(AppTextStyles.profileCardRating);
     double lineHeight(TextStyle style) => lineHeightFor(context, style);
+
+    final titleHeight = lineHeight(headingStyle) * 2;
+    final metadataHeight = lineHeight(metadataStyle);
+    final stockHeight = lineHeight(stockStyle);
+    final originalPriceHeight = lineHeight(originalPriceStyle);
+    final priceHeight = lineHeight(priceStyle);
+
     return PostImpressionTracker(
       post: post,
       source: impressionSource,
@@ -142,183 +193,158 @@ class ProfilePostCard extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 1,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      imageOverride ??
-                          (post.media.isNotEmpty
-                              ? PostMediaView(
-                                  media: post.media.first,
-                                  preferThumbnail: true,
-                                )
-                              : Image.asset(
-                                  post.imageAsset,
-                                  fit: BoxFit.cover,
-                                  filterQuality: FilterQuality.medium,
-                                  errorBuilder: (context, error, stackTrace) =>
-                                      ColoredBox(
-                                        color: colors.surfaceContainerHighest,
-                                        child: const Center(
-                                          child: AppIcon(
-                                            AppIcons.imageUnavailable,
-                                          ),
-                                        ),
+                  child: imageOverride ??
+                      (post.media.isNotEmpty
+                          ? PostMediaView(
+                              media: post.media.first,
+                              preferThumbnail: true,
+                            )
+                          : Image.asset(
+                              post.imageAsset,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.medium,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  ColoredBox(
+                                    color: colors.surfaceContainerHighest,
+                                    child: const Center(
+                                      child: AppIcon(
+                                        AppIcons.imageUnavailable,
                                       ),
-                                )),
-                      if (discount != null)
-                        Positioned(
-                          top: 3 * contentScale,
-                          right: 3 * contentScale,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: AppColors.red,
-                              borderRadius: BorderRadius.circular(
-                                10 * contentScale,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 6 * contentScale,
-                                vertical: 3 * contentScale,
-                              ),
-                              child: Text(
-                                discount,
-                                textDirection: TextDirection.ltr,
-                                style: scaled(AppTextStyles.discountBadge)
-                                    .copyWith(color: AppColors.white),
-                                textAlign: TextAlign.right,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
+                                    ),
+                                  ),
+                            )),
                 ),
                 SizedBox(
                   height: detailsHeight,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(
-                      4 * contentScale,
-                      4 * contentScale,
-                      6 * contentScale,
-                      6 * contentScale,
+                      6 * textScale,
+                      4 * textScale,
+                      6 * textScale,
+                      6 * textScale,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          titleOverride ?? post.title,
-                          textAlign: TextAlign.right,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: headingStyle,
-                          textDirection: TextDirection.rtl,
-                        ),
                         SizedBox(
-                          height: lineHeight(metadataStyle),
+                          height: titleHeight,
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              titleOverride ?? post.title,
+                              textAlign: TextAlign.right,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: headingStyle,
+                              textDirection: TextDirection.rtl,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 2 * textScale),
+                        SizedBox(
+                          height: metadataHeight,
                           child: Text(
                             categoryLabel ??
-                                AppStrings.postCategory(post.category),
+                                ProfileScreenStrings.postCategory(
+                                  post.category,
+                                ),
                             textAlign: TextAlign.right,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: metadataStyle.copyWith(
-                              color: colors.onSurface.withValues(alpha: .4),
+                              color: colors.onSurface.withValues(alpha: .45),
                             ),
-                            textDirection: TextDirection.ltr,
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
-                        Visibility(
-                          visible:
-                              statusLabel != null ||
-                              (showStock &&
-                                  !post.isService &&
-                                  (!post.isPublished ||
-                                      post.details.warehouseStock.isNotEmpty ||
-                                      post.isConfirmedAvailable ||
-                                      post.isExplicitlyOutOfStock)),
-                          maintainState: true,
-                          maintainAnimation: true,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 4 * contentScale),
-                            child: SizedBox(
-                              height: lineHeight(stockStyle),
-                              child:
-                                  statusLabel ??
-                                  Text(
-                                    _stockLabel,
-                                    textDirection: Directionality.of(context),
-                                    textAlign: TextAlign.right,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: stockStyle.copyWith(
-                                      color: AppColors.red,
-                                    ),
-                                  ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 6 * contentScale),
-                        if (discount != null && post.originalPrice.isNotEmpty)
-                          SizedBox(
-                            height: lineHeight(originalPriceStyle),
-                            child: Text(
-                              _price(post.originalPrice),
-                              textDirection: TextDirection.ltr,
-                              textAlign: TextAlign.left,
-                              style: originalPriceStyle.copyWith(
-                                color: colors.onSurface.withValues(alpha: .25),
-                                decoration: TextDecoration.lineThrough,
-                                decorationColor: colors.onSurface.withValues(
-                                  alpha: .25,
-                                ),
-                              ),
-                            ),
-                          ),
+                        SizedBox(height: 2 * textScale),
                         SizedBox(
-                          height: lineHeight(priceStyle),
+                          height: stockHeight,
+                          child: statusLabel ??
+                              (showStock && !post.isService
+                                  ? Text(
+                                      _stockLabel,
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.right,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: stockStyle.copyWith(
+                                        color: AppColors.red,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink()),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          height: originalPriceHeight,
+                          child:
+                              discount != null && post.originalPrice.isNotEmpty
+                              ? Text(
+                                  _price(post.originalPrice),
+                                  textDirection: TextDirection.ltr,
+                                  textAlign: TextAlign.left,
+                                  style: originalPriceStyle.copyWith(
+                                    color: colors.onSurface.withValues(
+                                      alpha: .45,
+                                    ),
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationColor: colors.onSurface
+                                        .withValues(alpha: .45),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                        SizedBox(height: 2 * textScale),
+                        SizedBox(
+                          height: priceHeight,
                           child: post.price.isEmpty
-                              ? null
+                              ? const SizedBox.shrink()
                               : Row(
                                   textDirection: TextDirection.ltr,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Expanded(
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        alignment: Alignment.bottomLeft,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          textDirection: TextDirection.ltr,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.baseline,
-                                          textBaseline: TextBaseline.alphabetic,
-                                          children: [
-                                            Text(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        textDirection: TextDirection.ltr,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
                                               _price(post.price),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               textDirection: TextDirection.ltr,
-                                              style: priceStyle,
                                               textAlign: TextAlign.left,
+                                              style: priceStyle,
                                             ),
-                                            if (unit != null) ...[
-                                              SizedBox(width: 4 * contentScale),
-                                              Text(
-                                                unit,
-                                                style: unitStyle,
-                                                textAlign: TextAlign.right,
-                                                textDirection:
-                                                    TextDirection.ltr,
+                                          ),
+                                          if (unit != null) ...[
+                                            SizedBox(width: 4 * textScale),
+                                            Text(
+                                              unit,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: unitStyle.copyWith(
+                                                color: colors.onSurface
+                                                    .withValues(alpha: .55),
                                               ),
-                                            ],
+                                              textAlign: TextAlign.left,
+                                              textDirection: TextDirection.ltr,
+                                            ),
                                           ],
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(width: 4 * contentScale),
+                                    SizedBox(width: 4 * textScale),
                                     Semantics(
                                       label: rating == null
-                                          ? AppStrings.postUnrated
-                                          : AppStrings.postRating(rating),
+                                          ? ProfileScreenStrings.postUnrated
+                                          : ProfileScreenStrings.postRating(
+                                              rating,
+                                            ),
                                       excludeSemantics: true,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -328,15 +354,23 @@ class ProfilePostCard extends StatelessWidget {
                                         children: [
                                           AppIcon(
                                             AppIcons.starFilled,
-                                            size: 10 * contentScale,
+                                            size: 14 * textScale,
                                           ),
-                                          if (rating != null)
-                                            Text(
-                                              AppStrings.persianDigits(rating),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              left: 2 * textScale,
+                                            ),
+                                            child: Text(
+                                              rating == null
+                                                  ? ratingText
+                                                  : AppStrings.persianDigits(
+                                                      rating,
+                                                    ),
                                               style: ratingStyle,
                                               textDirection: TextDirection.ltr,
                                               textAlign: TextAlign.right,
                                             ),
+                                          ),
                                         ],
                                       ),
                                     ),

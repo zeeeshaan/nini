@@ -1,12 +1,12 @@
-import 'package:nini/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
+import 'package:hywork/features/post_analytics/presentation/cubit/analytics_controls_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/post_analytics/domain/post_analytics.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
-import 'package:nini/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/analytics_chart/analytics_charts.dart';
+import 'package:hywork/features/post_analytics/presentation/widgets/common/analytics_controls.dart';
 
 class AverageTimeViewedSection extends StatefulWidget {
   const AverageTimeViewedSection({super.key, required this.reportForPeriod});

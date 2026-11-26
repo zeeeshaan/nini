@@ -2,12 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/core/localization/strings/profile_edit_strings.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/core/localization/strings/profile_edit_strings.dart';
+import 'package:hywork/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 
 import '../../domain/user_profile.dart';
 import '../cubit/user_profile_cubit.dart';
@@ -46,7 +46,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     _initial = profile;
     final fields = profile.toJson();
     for (final entry in _controllers.entries) {
-      entry.value.text = fields[entry.key] as String;
+      final value = fields[entry.key] as String;
+      entry.value.text = entry.key == 'gender'
+          ? ProfileEditStrings.genderDisplay(value)
+          : value;
     }
     _birthDate = profile.birthDate;
   }
@@ -69,7 +72,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       nationality: cubit.state.profile.nationality,
       username: _controllers['username']!.text.trim(),
       email: _controllers['email']!.text.trim(),
-      gender: _controllers['gender']!.text.trim(),
+      gender: ProfileEditStrings.genderApi(_controllers['gender']!.text),
       bio: _controllers['bio']!.text.trim(),
       birthDate: _birthDate,
       avatarPath: cubit.state.profile.avatarPath,
@@ -93,7 +96,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text(AppStrings.cancel),
+              child: const Text(ProfileEditStrings.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),

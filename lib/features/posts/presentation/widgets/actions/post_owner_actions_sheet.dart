@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
 
 import 'post_owner_action_tile.dart';
 

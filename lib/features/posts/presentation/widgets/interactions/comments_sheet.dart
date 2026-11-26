@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/shared/widgets/app_textfield/app_text_field.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
 
 Future<void> openPostCommentsSheet(
   BuildContext context, {

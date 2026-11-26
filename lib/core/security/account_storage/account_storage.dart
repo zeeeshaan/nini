@@ -18,7 +18,7 @@ class AccountStorage {
         ? Directory(p.join(Directory.systemTemp.parent.path, 'Documents'))
         : await getApplicationDocumentsDirectory();
     final key = base64Url.encode(utf8.encode(userId)).replaceAll('=', '');
-    return Directory(p.join(documents.path, 'nini_accounts', 'account_$key'))
+    return Directory(p.join(documents.path, 'hywork_accounts', 'account_$key'))
         .create(recursive: true);
   }
 }

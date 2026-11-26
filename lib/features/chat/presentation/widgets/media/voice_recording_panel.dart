@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
-import 'package:nini/features/chat/presentation/widgets/media/chat_voice_player.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/presentation/cubit/voice_recording_cubit.dart';
+import 'package:hywork/features/chat/presentation/widgets/media/chat_voice_player.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 class VoiceRecordingPanel extends StatelessWidget {
   const VoiceRecordingPanel({

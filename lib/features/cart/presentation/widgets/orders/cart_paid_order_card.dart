@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/receipt_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/cart/domain/models/cart_order.dart';
-import 'package:nini/features/cart/domain/models/cart_order_status.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_labels.dart';
-import 'package:nini/features/cart/presentation/widgets/items/cart_item_image.dart';
-import 'package:nini/features/payment/presentation/helpers/receipt_navigation.dart';
+import 'package:hywork/core/localization/strings/receipt_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/cart/domain/models/cart_order.dart';
+import 'package:hywork/features/cart/domain/models/cart_order_status.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_labels.dart';
+import 'package:hywork/features/cart/presentation/widgets/items/cart_item_image.dart';
+import 'package:hywork/features/payment/presentation/helpers/receipt_navigation.dart';
 
 class CartPaidOrderCard extends StatelessWidget {
   const CartPaidOrderCard({super.key, required this.order, this.onOpen});

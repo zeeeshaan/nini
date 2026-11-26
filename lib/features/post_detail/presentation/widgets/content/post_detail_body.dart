@@ -1,21 +1,22 @@
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
-import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_author_header.dart';
-import 'package:nini/features/post_detail/presentation/widgets/content/post_content.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_engagement_bar.dart';
-import 'package:nini/features/post_detail/presentation/widgets/common/post_features_table.dart';
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
-import 'package:nini/features/posts/presentation/widgets/common/published_post_content.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
+import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_author_header.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/content/post_content.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_engagement_bar.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/common/post_features_table.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/post_image_carousel/post_image_carousel.dart';
+import 'package:hywork/features/posts/presentation/widgets/common/published_post_content.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class PostDetailBody extends StatefulWidget {
   const PostDetailBody({
@@ -59,8 +60,8 @@ class _PostDetailBodyState extends State<PostDetailBody> {
         SnackBar(
           content: Text(
             cart.state.storageError
-                ? AppStrings.cartStorageError
-                : AppStrings.cartStockExceeded,
+                ? PostDetailStrings.cartStorageError
+                : PostDetailStrings.cartStockExceeded,
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),
@@ -70,7 +71,9 @@ class _PostDetailBodyState extends State<PostDetailBody> {
     }
     AppToast.success(
       context,
-      existing == null ? AppStrings.cartAdded : AppStrings.cartRemoved,
+      existing == null
+          ? PostDetailStrings.cartAdded
+          : PostDetailStrings.cartRemoved,
     );
   }
 
@@ -108,17 +111,23 @@ class _PostDetailBodyState extends State<PostDetailBody> {
         seller != null || post.isPublished || post.caption.isNotEmpty;
     final features = post.isService && post.features.isEmpty
         ? <(String, String)>[
-            (AppStrings.serviceType, AppStrings.postCategory(post.category)),
             (
-              AppStrings.serviceUnit,
-              (post.details.unit ?? PostUnit.session).label,
+              PostDetailStrings.serviceType,
+              PostDetailStrings.postCategory(post.category),
             ),
             (
-              AppStrings.serviceMinimumOrder,
-              '1 ${(post.details.unit ?? PostUnit.session).label}',
+              PostDetailStrings.serviceUnit,
+              PostDetailStrings.unit(post.details.unit ?? PostUnit.session),
+            ),
+            (
+              PostDetailStrings.serviceMinimumOrder,
+              '۱ ${PostDetailStrings.unit(post.details.unit ?? PostUnit.session)}',
             ),
             if (post.details.address?.address.isNotEmpty == true)
-              (AppStrings.serviceArea, post.details.address!.address),
+              (
+                PostDetailStrings.serviceArea,
+                post.details.address!.address,
+              ),
           ]
         : post.features;
     return SafeArea(
@@ -150,7 +159,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                         onProfilePressed: widget.onSellerPressed,
                         onMessagePressed: widget.onMessagePressed,
                         name: seller == null
-                            ? AppStrings.profile
+                            ? PostDetailStrings.profile
                             : seller.name.isEmpty
                             ? seller.username
                             : seller.name,
@@ -205,7 +214,7 @@ class _PostDetailBodyState extends State<PostDetailBody> {
                         child: PostFeaturesTable(
                           features: hasPostContent
                               ? features
-                              : AppStrings.features,
+                              : PostDetailStrings.features,
                         ),
                       ),
 

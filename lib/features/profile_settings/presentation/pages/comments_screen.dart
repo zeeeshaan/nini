@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
 
 import '../widgets/common/settings_empty_state.dart';
 import '../widgets/common/settings_page.dart';

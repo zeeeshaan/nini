@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 import 'dashboard_cart_icon.dart';
 

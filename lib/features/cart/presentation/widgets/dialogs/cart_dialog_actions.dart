@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/strings/cart_strings.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 /// Shared Persian actions for Cart amount dialogs.
 class CartDialogActions extends StatelessWidget {

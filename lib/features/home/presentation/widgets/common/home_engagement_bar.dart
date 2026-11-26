@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/cart_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
-import 'package:nini/features/home/presentation/widgets/common/home_metric.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_metric.dart';
 
 import 'home_engagement_layout.dart';
 
@@ -48,13 +47,15 @@ class HomeEngagementBar extends StatelessWidget {
     final displayedLikes =
         likeCount?.toString() ?? (backendLikes ? '' : (isLiked ? '1' : '0'));
     final rating = HomeMetric(
-      label: AppStrings.rating,
+      label: HomeStrings.rating,
       count: showSampleMetrics ? '4.5' : '',
       icon: const AppIcon(AppIcons.star, size: 24),
     );
     final actions = [
       HomeMetric(
-        label: isBookmarked ? AppStrings.removeBookmark : AppStrings.bookmark,
+        label: isBookmarked
+            ? HomeStrings.removeBookmark
+            : HomeStrings.bookmark,
         count: bookmarkCount,
         selected: isBookmarked,
         onTap: onBookmark,
@@ -64,7 +65,7 @@ class HomeEngagementBar extends StatelessWidget {
         ),
       ),
       HomeMetric(
-        label: AppStrings.comments,
+        label: HomeStrings.comments,
         count:
             commentCount?.toString() ??
             (backendLikes ? '' : (showSampleMetrics ? '886' : '0')),
@@ -75,7 +76,7 @@ class HomeEngagementBar extends StatelessWidget {
         ),
       ),
       HomeMetric(
-        label: AppStrings.share,
+        label: HomeStrings.share,
         count: showSampleMetrics ? '350' : '0',
         onTap: onSharePressed,
         icon: const AppIcon(
@@ -84,7 +85,7 @@ class HomeEngagementBar extends StatelessWidget {
         ),
       ),
       HomeMetric(
-        label: isLiked ? AppStrings.unlike : AppStrings.like,
+        label: isLiked ? HomeStrings.unlike : HomeStrings.like,
         count: displayedLikes,
         selected: isLiked,
         onTap: onLike,
@@ -96,7 +97,7 @@ class HomeEngagementBar extends StatelessWidget {
       ),
       HomeMetric(
         onTap: onAddToCart,
-        label: isInCart ? CartStrings.remove : AppStrings.addToCart,
+        label: isInCart ? HomeStrings.removeFromCart : HomeStrings.addToCart,
         count: cartCount,
         selected: isInCart,
         icon: const AppIcon(AppIcons.shoppingBag, size: 22),

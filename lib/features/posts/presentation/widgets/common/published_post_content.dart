@@ -1,9 +1,9 @@
-import 'package:nini/shared/widgets/calendar/app_calendar.dart';
+import 'package:hywork/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 class PublishedPostContent extends StatefulWidget {
   const PublishedPostContent({
@@ -82,7 +82,7 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
           const SizedBox(height: 12),
           if (widget.serviceLayout) ...[
             const Text(
-              AppStrings.serviceDescription,
+              PostDetailStrings.serviceDescription,
               textAlign: TextAlign.right,
               style: AppTextStyles.sectionTitle,
               textDirection: TextDirection.ltr,
@@ -135,7 +135,10 @@ class _PublishedPostContentState extends State<PublishedPostContent> {
           if (schedule != null) ...[
             const SizedBox(height: 12),
             Text(
-              AppStrings.scheduledFor(formatSolarDate(schedule.startsAt)),
+              PostDetailStrings.scheduledFor(
+                formatSolarDate(schedule.startsAt),
+              ),
+
               textAlign: TextAlign.right,
               textDirection: TextDirection.ltr,
             ),

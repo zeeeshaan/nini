@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/posts/presentation/widgets/common/seller_avatar.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/posts/presentation/widgets/common/seller_avatar.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 class HomeSellerHeader extends StatelessWidget {
   const HomeSellerHeader({

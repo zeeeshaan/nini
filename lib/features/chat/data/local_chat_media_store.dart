@@ -5,10 +5,10 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'package:nini/features/chat/domain/models/chat_attachment.dart';
-import 'package:nini/core/media/media_compressor/media_compressor.dart';
-import 'package:nini/features/chat/domain/services/chat_media_store.dart';
-import 'package:nini/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/chat/domain/models/chat_attachment.dart';
+import 'package:hywork/core/media/media_compressor/media_compressor.dart';
+import 'package:hywork/features/chat/domain/services/chat_media_store.dart';
+import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
 
 /// Copies picker exports into a private chat cache; picker originals are untouched.
 class LocalChatMediaStore implements ChatMediaStore {
@@ -20,7 +20,7 @@ class LocalChatMediaStore implements ChatMediaStore {
   Future<Directory> _folder() async => Directory(
     p.join(
       (await _directoryProvider()).path,
-      'nini_chat_media',
+      'hywork_chat_media',
       '${DateTime.now().microsecondsSinceEpoch}_${Random.secure().nextInt(1 << 32)}',
     ),
   ).create(recursive: true);
@@ -179,7 +179,7 @@ class LocalChatMediaStore implements ChatMediaStore {
 
   @override
   Future<void> discard(Iterable<ChatAttachment> attachments) async {
-    final root = p.join((await _directoryProvider()).path, 'nini_chat_media');
+    final root = p.join((await _directoryProvider()).path, 'hywork_chat_media');
     for (final attachment in attachments) {
       for (final path in [attachment.path, attachment.thumbnailPath]) {
         if (path == null || !p.isWithin(root, p.normalize(path))) continue;

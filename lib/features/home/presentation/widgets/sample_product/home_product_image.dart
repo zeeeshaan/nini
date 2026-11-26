@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
 
-import 'package:nini/features/home/presentation/widgets/common/home_badge.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_badge.dart';
 
 class HomeProductImage extends StatelessWidget {
   const HomeProductImage({
@@ -66,7 +66,7 @@ class HomeProductImage extends StatelessWidget {
                             foregroundColor: AppColors.black,
                           ),
                           child: const Text(
-                            AppStrings.retry,
+                            HomeStrings.retry,
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.right,
                           ),
@@ -81,7 +81,7 @@ class HomeProductImage extends StatelessWidget {
               left: 10,
               top: 8,
               child: HomeBadge(
-                label: AppStrings.preOrder,
+                label: HomeStrings.preOrder,
                 background: AppColors.black,
                 foreground: AppColors.white,
               ),

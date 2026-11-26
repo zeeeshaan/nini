@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
 
 import '../models/profile_category.dart';
 

@@ -1,6 +1,6 @@
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
-import 'package:nini/features/login/domain/email_address.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
+import 'package:hywork/features/login/domain/email_address.dart';
 
 class OtpVerificationRepository {
   OtpVerificationRepository(this._apiClient, this._tokenStore);

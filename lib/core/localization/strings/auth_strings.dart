@@ -1,28 +1,36 @@
-/// Shared copy for phone/email login and OTP verification.
+/// Persian copy for phone/email login and OTP verification.
 abstract final class AuthStrings {
-  static const brand = 'HYWORK';
-  static const logo = "HYWORK logo";
-  static const loading = "Loading";
+  static const brand = 'های‌ورک';
+  static const logo = 'لوگوی های‌ورک';
+  static const loading = 'در حال بارگذاری';
   static const sessionRestoreFailed =
-      'Could not verify your session. Check your internet connection and try again.';
-  static const retrySession = 'Try again';
-  static const login = "Login";
-  static const loginWithGoogle = 'Login with Google';
-  static const loginWithEmail = 'Continue with email';
-  static const email = 'Email address';
-  static const emailRequired = 'Enter your email address.';
-  static const invalidEmail = 'Enter a valid email address.';
-  static const emailOtpSent = 'Verification code sent to your email.';
-  static const mobile = "Mobile number";
-  static const phoneRequired = "Enter your mobile number.";
-  static const done = "Done";
-  static const enterOtp = "Enter your OTP";
-  static const continueLabel = "Continue";
-  static const selectCountry = "Select country";
-  static const searchCountry = "Search countries";
-  static const noCountries = "No countries found.";
-  static const resendCode = "Resend code";
-  static const resendCountdown = "Time until resend";
-  static String codeFor(String phone) => 'Verification code for $phone';
-  static String codeSentTo(String email) => 'Enter the code sent to $email';
+      'نتوانستیم نشست شما را تأیید کنیم. اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.';
+  static const retrySession = 'تلاش مجدد';
+  static const login = 'ورود';
+  static const loginWithGoogle = 'ورود با گوگل';
+  static const loginWithEmail = 'ادامه با ایمیل';
+  static const email = 'آدرس ایمیل';
+  static const emailRequired = 'آدرس ایمیل خود را وارد کنید.';
+  static const invalidEmail = 'یک آدرس ایمیل معتبر وارد کنید.';
+  static const emailOtpSent = 'کد تأیید به ایمیل شما ارسال شد.';
+  static const mobile = 'شماره موبایل';
+  static const phoneRequired = 'شماره موبایل خود را وارد کنید.';
+  static const invalidPhone = 'یک شماره موبایل معتبر وارد کنید.';
+  static const otpRequestFailed = 'درخواست کد ممکن نشد. دوباره تلاش کنید.';
+  static const tooManyAttempts =
+      'تلاش‌های زیادی انجام شده است. لطفاً بعداً دوباره تلاش کنید.';
+  static const serverUnavailable =
+      'سرور در دسترس نیست. لطفاً دوباره تلاش کنید.';
+  static const connectionFailed =
+      'اتصال برقرار نشد. لطفاً دوباره تلاش کنید.';
+  static const done = 'تأیید';
+  static const enterOtp = 'کد تأیید را وارد کنید';
+  static const continueLabel = 'ادامه';
+  static const selectCountry = 'انتخاب کشور';
+  static const searchCountry = 'جستجوی کشورها';
+  static const noCountries = 'کشوری یافت نشد.';
+  static const resendCode = 'ارسال مجدد کد';
+  static const resendCountdown = 'زمان تا ارسال مجدد';
+  static String codeFor(String phone) => 'کد تأیید برای $phone';
+  static String codeSentTo(String email) => 'کد ارسال‌شده به $email را وارد کنید';
 }

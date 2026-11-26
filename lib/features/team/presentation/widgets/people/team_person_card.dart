@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
-import 'package:nini/features/posts/presentation/widgets/common/seller_avatar.dart';
-import 'package:nini/features/team/domain/team_provider_selection.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
+import 'package:hywork/features/posts/presentation/widgets/common/seller_avatar.dart';
+import 'package:hywork/features/team/domain/team_provider_selection.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 class TeamPersonCard extends StatelessWidget {
   const TeamPersonCard({

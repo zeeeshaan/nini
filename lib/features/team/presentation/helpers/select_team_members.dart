@@ -1,11 +1,11 @@
-import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:hywork/shared/widgets/app_back_button/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/strings/team_strings.dart';
-import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
-import 'package:nini/features/search/presentation/pages/search_screen.dart';
-import 'package:nini/features/team/presentation/cubit/team_form_cubit.dart';
-import 'package:nini/features/team/presentation/widgets/member_request/team_provider_selection_button.dart';
+import 'package:hywork/core/localization/strings/team_strings.dart';
+import 'package:hywork/features/post_detail/presentation/pages/post_detail_screen.dart';
+import 'package:hywork/features/search/presentation/pages/search_screen.dart';
+import 'package:hywork/features/team/presentation/cubit/team_form_cubit.dart';
+import 'package:hywork/features/team/presentation/widgets/member_request/team_provider_selection_button.dart';
 
 Future<bool?> selectTeamMembers(
   BuildContext context,

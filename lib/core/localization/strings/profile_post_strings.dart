@@ -1,166 +1,168 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
 
-/// English interface copy for profile tabs and post editing. Model IDs and serialized
-/// enum names stay independent of the labels displayed in the UI.
+/// Persian interface copy for profile tabs and post editing.
 abstract final class ProfilePostStrings {
-  static const tabs = "Categories";
-  static const back = AppStrings.back;
-  static const undo = AppStrings.undo;
-  static const redo = AppStrings.redo;
+  static const tabs = 'دسته‌ها';
+  static const back = 'بازگشت';
+  static const undo = 'واگرد';
+  static const redo = 'از نو';
   static const unitNames = {
-    'piece': AppStrings.unitPiece,
-    'item': AppStrings.unitItem,
-    'hour': AppStrings.unitHour,
-    'day': AppStrings.unitDay,
-    'session': AppStrings.unitSession,
-    'project': AppStrings.unitProject,
-    'meter': AppStrings.unitMeter,
-    'centimeter': AppStrings.unitCentimeter,
-    'kilogram': AppStrings.unitKilogram,
-    'set': AppStrings.unitSet,
+    'piece': 'عدد',
+    'item': 'قلم',
+    'hour': 'ساعت',
+    'day': 'روز',
+    'session': 'جلسه',
+    'project': 'پروژه',
+    'meter': 'متر',
+    'centimeter': 'سانتی‌متر',
+    'kilogram': 'کیلوگرم',
+    'set': 'ست',
   };
   static String preparationDays(int days) =>
-      '${AppStrings.persianDigits(days)} days';
-  static const all = AppStrings.all;
-  static const addTab = "Add category";
-  static const editTab = "Edit category";
-  static const deleteTab = "Delete category";
-  static const tabName = "Category name";
-  static const cancel = AppStrings.cancel;
-  static const done = AppStrings.done;
-  static const delete = AppStrings.delete;
-  static const retry = AppStrings.retry;
-  static const category = "Profile category";
-  static const allOnly = "All only (no category)";
-  static const manageTabs = "Manage categories";
-  static const noTabs = "No categories yet. Add one to organise your posts.";
-  static const noPosts = "No posts in this category yet.";
-  static const noPublishedPosts = 'No posts have been published yet';
-  static const publicProfile = 'Profile unavailable';
+      '${AppStrings.persianDigits(days)} روز';
+  static const all = 'همه';
+  static const addTab = 'افزودن دسته';
+  static const editTab = 'ویرایش دسته';
+  static const deleteTab = 'حذف دسته';
+  static const tabName = 'نام دسته';
+  static const cancel = 'لغو';
+  static const done = 'انجام شد';
+  static const delete = 'حذف';
+  static const retry = 'تلاش مجدد';
+  static const category = 'دسته پروفایل';
+  static const allOnly = 'فقط همه (بدون دسته)';
+  static const manageTabs = 'مدیریت دسته‌ها';
+  static const noTabs = 'هنوز دسته‌ای نیست. برای سازمان‌دهی پست‌ها یکی اضافه کنید.';
+  static const noPosts = 'در این دسته هنوز پستی نیست.';
+  static const noPublishedPosts = 'هنوز پستی منتشر نشده است';
+  static const publicProfile = 'پروفایل در دسترس نیست';
   static const publicIdentityMissing =
-      'This post does not include an available backend username.';
-  static const publicUnavailable = 'This profile is unavailable.';
+      'این پست نام کاربری در دسترس در بک‌اند ندارد.';
+  static const publicUnavailable = 'این پروفایل در دسترس نیست.';
   static const publicLoadFailed =
-      'Could not load this profile. Please try again.';
+      'بارگذاری این پروفایل ممکن نشد. دوباره تلاش کنید.';
   static const publicConnectionFailed =
-      'Could not connect. Check your connection and try again.';
+      'اتصال برقرار نشد. اتصال خود را بررسی کنید و دوباره تلاش کنید.';
   static const publicTimeout =
-      'The profile request timed out. Please try again.';
+      'درخواست پروفایل زمان‌بر شد. دوباره تلاش کنید.';
   static const publicSessionFailed =
-      'Your session could not be verified. Please sign in again.';
+      'جلسه شما تأیید نشد. لطفاً دوباره وارد شوید.';
   static const publicSessionChanged =
-      'Your account changed. Reload this profile to continue.';
+      'حساب شما تغییر کرد. برای ادامه این پروفایل را دوباره بارگذاری کنید.';
   static const publicPostsUnavailable =
-      "This user's posts and services are not available here yet.";
-  static const followUnavailable = 'Follow and unfollow are not available yet.';
-  static const loadFailed = "Could not load categories. Try again.";
-  static const saveFailed = "Could not save changes. Try again.";
-  static const changesSaved = "Post edited successfully.";
-  static const changesSubmittedForReview = "Post edited successfully.";
-  static const nameRequired = "Enter a category name.";
-  static const nameTooLong = "Category names must be at most 40 characters.";
-  static const nameTooShort = 'Category names must be at least 2 characters.';
-  static const categoryLimit = 'You can have at most 20 profile categories.';
+      'پست‌ها و خدمات این کاربر هنوز اینجا در دسترس نیست.';
+  static const followUnavailable =
+      'دنبال کردن و لغو دنبال هنوز در دسترس نیست.';
+  static const loadFailed = 'بارگذاری دسته‌ها ممکن نشد. دوباره تلاش کنید.';
+  static const saveFailed = 'ذخیره تغییرات ممکن نشد. دوباره تلاش کنید.';
+  static const changesSaved = 'پست با موفقیت ویرایش شد.';
+  static const changesSubmittedForReview = 'پست با موفقیت ویرایش شد.';
+  static const nameRequired = 'نام دسته را وارد کنید.';
+  static const nameTooLong = 'نام دسته حداکثر ۴۰ نویسه باشد.';
+  static const nameTooShort = 'نام دسته حداقل ۲ نویسه باشد.';
+  static const categoryLimit = 'حداکثر ۲۰ دسته پروفایل می‌توانید داشته باشید.';
   static const categoryConflict =
-      'This name is already in use or the 20-category limit was reached. Reload categories and try again.';
+      'این نام قبلاً استفاده شده یا به سقف ۲۰ دسته رسیده‌اید. دسته‌ها را دوباره بارگذاری کنید و تلاش کنید.';
   static const categoryInvalid =
-      'Invalid category request. Check the name or category order.';
+      'درخواست دسته نامعتبر است. نام یا ترتیب دسته‌ها را بررسی کنید.';
   static const categoryResponseInvalid =
-      'The category response could not be confirmed. Reload categories before trying again.';
-  static const categoryTimeout = 'The category request timed out. Try again.';
+      'پاسخ دسته تأیید نشد. قبل از تلاش دوباره دسته‌ها را بارگذاری کنید.';
+  static const categoryTimeout =
+      'درخواست دسته زمان‌بر شد. دوباره تلاش کنید.';
   static const categoryConnectionFailed =
-      'Could not connect to the category service. Try again.';
+      'اتصال به سرویس دسته‌ها ممکن نشد. دوباره تلاش کنید.';
   static const categorySessionExpired =
-      'Your session has expired. Please sign in again.';
+      'جلسه شما منقضی شده است. لطفاً دوباره وارد شوید.';
   static const categoryAccountChanged =
-      'Your account changed. Reload categories to continue.';
+      'حساب شما تغییر کرد. برای ادامه دسته‌ها را دوباره بارگذاری کنید.';
   static const categoryUnavailable =
-      'This profile category is no longer available. Reload categories and try again.';
+      'این دسته پروفایل دیگر در دسترس نیست. دسته‌ها را دوباره بارگذاری کنید و تلاش کنید.';
   static const categoryOrderInvalid =
-      'Category order must contain each current category exactly once.';
+      'ترتیب دسته‌ها باید هر دسته فعلی را دقیقاً یک‌بار شامل شود.';
   static const categoryLegacyUnavailable =
-      'Legacy local category IDs cannot be used for backend category operations.';
-  static const publicCategoriesLoading = 'Loading profile categories…';
+      'شناسه‌های قدیمی محلی برای عملیات دسته بک‌اند قابل استفاده نیستند.';
+  static const publicCategoriesLoading = 'در حال بارگذاری دسته‌های پروفایل…';
   static const publicCategoriesFailed =
-      "Could not load this user's profile categories. Reopen the profile to try again.";
-  static const duplicateName = "A category with this name already exists.";
+      'بارگذاری دسته‌های پروفایل این کاربر ممکن نشد. پروفایل را دوباره باز کنید.';
+  static const duplicateName = 'دسته‌ای با این نام از قبل وجود دارد.';
   static const reservedName =
-      "All is a permanent section. Choose another name.";
-  static const editPost = "Edit post";
-  static const deletePost = "Delete post";
-  static const deletePostQuestion = "Delete this post?";
+      '«همه» بخش دائمی است. نام دیگری انتخاب کنید.';
+  static const editPost = 'ویرایش پست';
+  static const deletePost = 'حذف پست';
+  static const deletePostQuestion = 'این پست حذف شود؟';
   static const deletePostHelp =
-      "This post and its media will be permanently removed from your Posts.";
-  static const deleting = "Deleting…";
-  static const deleteFailed = "Could not delete the post. Try again.";
-  static const addMedia = "Add media";
-  static const removeMedia = "Remove media";
-  static const mediaRequired = "Select at least one photo, video or file.";
-  static const mediaUnavailable = "Some media is unavailable. Select it again.";
-  static const saveChanges = "Save changes";
-  static const saving = "Saving…";
-  static const postMissing = "This post is no longer available.";
-  static const media = "Media";
-  static const replaceMedia = "Replace media";
-  static const next = AppStrings.next;
-  static const title = "Title";
-  static const caption = AppStrings.postCaption;
-  static const captionHint = AppStrings.writeCaption;
-  static const type = AppStrings.postType;
-  static const product = AppStrings.product;
-  static const service = AppStrings.services;
-  static const price = "Price (toman)";
-  static const discount = "Discount (%)";
-  static const stock = "Stock";
-  static const unit = AppStrings.unit;
-  static const preparation = AppStrings.preparationTime;
-  static const noPreparation = "No preparation time";
-  static const sameDay = "Same day";
-  static const inventory = "Inventory status";
-  static const inStock = AppStrings.stockAvailable;
-  static const outOfStock = AppStrings.stockUnavailable;
-  static const preOrder = AppStrings.preOrder;
-  static const tags = "Tags (separate with commas)";
-  static const address = AppStrings.address;
-  static const latitude = "Latitude";
-  static const longitude = "Longitude";
-  static const features = AppStrings.featuresHeading;
-  static const featureName = "Specification name";
-  static const featureValue = AppStrings.featureValue;
-  static const addFeature = AppStrings.addFeature;
-  static const removeFeature = "Remove specification";
-  static const schedule = "Schedule";
-  static const start = "Start";
-  static const end = "End";
-  static const clearSchedule = AppStrings.removeSchedule;
-  static const altText = AppStrings.altText;
-  static const required = "Complete this field.";
+      'این پست و رسانه‌های آن برای همیشه از پست‌های شما حذف می‌شود.';
+  static const deleting = 'در حال حذف…';
+  static const deleteFailed = 'حذف پست ممکن نشد. دوباره تلاش کنید.';
+  static const addMedia = 'افزودن رسانه';
+  static const removeMedia = 'حذف رسانه';
+  static const mediaRequired =
+      'حداقل یک عکس، ویدیو یا فایل انتخاب کنید.';
+  static const mediaUnavailable =
+      'برخی رسانه‌ها در دسترس نیست. دوباره انتخاب کنید.';
+  static const saveChanges = 'ذخیره تغییرات';
+  static const saving = 'در حال ذخیره…';
+  static const postMissing = 'این پست دیگر در دسترس نیست.';
+  static const media = 'رسانه';
+  static const replaceMedia = 'جایگزینی رسانه';
+  static const next = 'بعدی';
+  static const title = 'عنوان';
+  static const caption = 'توضیحات';
+  static const captionHint = 'توضیحات را بنویسید';
+  static const type = 'نوع پست';
+  static const product = 'محصول';
+  static const service = 'خدمات';
+  static const price = 'قیمت (تومان)';
+  static const discount = 'تخفیف (%)';
+  static const stock = 'موجودی';
+  static const unit = 'واحد';
+  static const preparation = 'زمان آماده‌سازی';
+  static const noPreparation = 'بدون زمان آماده‌سازی';
+  static const sameDay = 'همان روز';
+  static const inventory = 'وضعیت موجودی';
+  static const inStock = 'موجود';
+  static const outOfStock = 'ناموجود';
+  static const preOrder = 'پیش‌سفارش';
+  static const tags = 'برچسب‌ها (با ویرگول جدا کنید)';
+  static const address = 'آدرس';
+  static const latitude = 'عرض جغرافیایی';
+  static const longitude = 'طول جغرافیایی';
+  static const features = 'ویژگی‌ها';
+  static const featureName = 'نام مشخصه';
+  static const featureValue = 'مقدار مشخصه';
+  static const addFeature = 'افزودن ویژگی';
+  static const removeFeature = 'حذف مشخصه';
+  static const schedule = 'زمان‌بندی';
+  static const start = 'شروع';
+  static const end = 'پایان';
+  static const clearSchedule = 'حذف زمان‌بندی';
+  static const altText = 'متن جایگزین';
+  static const required = 'این فیلد را تکمیل کنید.';
   static const invalidNumber =
-      "Enter a valid number greater than or equal to zero.";
-  static const invalidDiscount = "Enter a number between 0 and 100.";
+      'عدد معتبر بزرگ‌تر یا مساوی صفر وارد کنید.';
+  static const invalidDiscount = 'عددی بین ۰ تا ۱۰۰ وارد کنید.';
   static const invalidStock =
-      "Enter a whole number greater than or equal to zero.";
+      'عدد صحیح بزرگ‌تر یا مساوی صفر وارد کنید.';
   static const invalidLocation =
-      "Enter an address and valid latitude and longitude.";
+      'آدرس و عرض و طول جغرافیایی معتبر وارد کنید.';
   static const invalidFeatures =
-      "Enter a name and value for every specification.";
+      'برای هر مشخصه نام و مقدار وارد کنید.';
   static const invalidSchedule =
-      "Choose a future start time and an end time after the start.";
-  static const unsavedTitle = "Discard changes?";
-  static const unsavedHelp = "Your unsaved changes will be lost.";
-  static const keepEditing = "Keep editing";
-  static const discard = "Discard";
-  static String deleteQuestion(String name) => 'Remove the "$name" category?';
+      'زمان شروع آینده و زمان پایان بعد از شروع را انتخاب کنید.';
+  static const unsavedTitle = 'تغییرات نادیده گرفته شود؟';
+  static const unsavedHelp = 'تغییرات ذخیره‌نشده از بین می‌رود.';
+  static const keepEditing = 'ادامه ویرایش';
+  static const discard = 'نادیده گرفتن';
+  static String deleteQuestion(String name) => 'دسته «$name» حذف شود؟';
   static const deleteHelp =
-      "Posts in this category will remain visible under All.";
+      'پست‌های این دسته همچنان زیر بخش همه قابل مشاهده هستند.';
 
-  /// Translate only the original bundled names. Custom user names stay intact,
-  /// including renamed default tabs and names written in other languages.
   static String categoryName(String id, String name) => switch ((id, name)) {
-    ('web-development', 'Web Development') => AppStrings.webDevelopment,
-    ('electrical-wiring', 'Electrical Wiring') => AppStrings.electricalWiring,
-    ('products', 'Products') => AppStrings.products,
-    ('photography', 'Photography') => AppStrings.photography,
-    _ => name,
+    ('web-development', 'Web Development') => 'توسعه وب',
+    ('electrical-wiring', 'Electrical Wiring') => 'سیم‌کشی برق',
+    ('products', 'Products') => 'محصولات',
+    ('photography', 'Photography') => 'عکاسی',
+    _ => HomeStrings.postCategory(name),
   };
 }

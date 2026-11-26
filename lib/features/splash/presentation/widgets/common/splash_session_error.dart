@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/core/theme/app_theme/app_theme.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/localization/strings/splash_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_theme/app_theme.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 class SplashSessionError extends StatelessWidget {
   const SplashSessionError({super.key, required this.onRetry});
@@ -18,7 +18,7 @@ class SplashSessionError extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AuthStrings.sessionRestoreFailed,
+            SplashStrings.sessionRestoreFailed,
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
             style: AppTextStyles.body.copyWith(
@@ -26,7 +26,7 @@ class SplashSessionError extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          AppButton(label: AuthStrings.retrySession, onPressed: onRetry),
+          AppButton(label: SplashStrings.retrySession, onPressed: onRetry),
         ],
       ),
     ),

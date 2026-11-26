@@ -1,11 +1,11 @@
-import 'package:nini/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
+import 'package:hywork/features/post_detail/presentation/widgets/post_image_carousel/post_carousel_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/features/home/presentation/widgets/published/home_post_media_indicator.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/shared/models/post/post_media.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/features/home/presentation/widgets/published/home_post_media_indicator.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
 
 class PostImageCarousel extends StatefulWidget {
   const PostImageCarousel({

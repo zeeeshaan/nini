@@ -2,7 +2,7 @@ import 'dart:ui' show DisplayFeatureState, DisplayFeatureType;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 
 // dart format width=100
 

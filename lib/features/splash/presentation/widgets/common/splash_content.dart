@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
-import 'package:nini/core/localization/strings/auth_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/shared/widgets/app_loader/app_loader.dart';
+import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:hywork/core/localization/strings/splash_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
 
 import 'splash_brand.dart';
 
@@ -39,7 +39,7 @@ class SplashContent extends StatelessWidget {
                       child:
                           status ??
                           Semantics(
-                            label: AuthStrings.loading,
+                            label: SplashStrings.loading,
                             liveRegion: true,
                             child: AppLoader(
                               size: 24 * scale,

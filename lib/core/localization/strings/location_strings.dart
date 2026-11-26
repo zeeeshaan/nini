@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 
 /// English interface labels for location settings and the Home permission prompt.
 abstract final class LocationStrings {

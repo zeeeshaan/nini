@@ -1,17 +1,17 @@
-import 'package:nini/features/posts/presentation/widgets/common/seller_avatar.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/posts/presentation/widgets/common/seller_avatar.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/post_detail_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class PostAuthorHeader extends StatelessWidget {
   const PostAuthorHeader({
     super.key,
-    this.name = AppStrings.authorName,
-    this.location = AppStrings.authorLocation,
+    this.name = PostDetailStrings.authorName,
+    this.location = PostDetailStrings.authorLocation,
     this.avatarAsset = '',
     this.onMorePressed,
     this.onProfilePressed,
@@ -35,13 +35,13 @@ class PostAuthorHeader extends StatelessWidget {
             if (onMessagePressed != null)
               IconButton(
                 onPressed: onMessagePressed,
-                tooltip: AppStrings.message,
+                tooltip: PostDetailStrings.message,
                 icon: const AppIcon(AppIcons.chat, size: 22),
               ),
             if (onMorePressed != null)
               IconButton(
                 onPressed: onMorePressed,
-                tooltip: AppStrings.morePostOptions,
+                tooltip: PostDetailStrings.morePostOptions,
                 icon: const AppIcon(AppIcons.more, size: 24),
               ),
             Expanded(
@@ -53,7 +53,7 @@ class PostAuthorHeader extends StatelessWidget {
                     button: onProfilePressed != null,
                     label: onProfilePressed == null
                         ? null
-                        : AppStrings.viewSellerProfile(name),
+                        : PostDetailStrings.viewSellerProfile(name),
                     child: InkWell(
                       onTap: onProfilePressed,
                       child: Text(

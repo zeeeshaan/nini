@@ -3,21 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:nini/core/animations/screen_entrance/screen_entrance.dart';
-import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
+import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
-import 'package:nini/features/cart/presentation/pages/cart_screen.dart';
-import 'package:nini/features/create_post/presentation/pages/create_post_gallery_screen.dart';
-import 'package:nini/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
-import 'package:nini/features/dashboard/presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart';
-import 'package:nini/features/home/presentation/pages/home_screen.dart';
-import 'package:nini/features/profile/presentation/pages/profile_screen.dart';
-import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
-import 'package:nini/features/search/presentation/pages/search_screen.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/shared/widgets/app_images/profile_image_provider.dart';
+import 'package:hywork/features/cart/presentation/pages/cart_screen.dart';
+import 'package:hywork/features/create_post/presentation/pages/create_post_gallery_screen.dart';
+import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/features/dashboard/presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart';
+import 'package:hywork/features/home/presentation/pages/home_screen.dart';
+import 'package:hywork/features/profile/presentation/pages/profile_screen.dart';
+import 'package:hywork/features/profile/presentation/helpers/open_account_profile.dart';
+import 'package:hywork/features/search/presentation/pages/search_screen.dart';
+import 'package:hywork/features/notifications/presentation/cubit/notifications_cubit.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/shared/widgets/app_images/profile_image_provider.dart';
 
 // dart format width=100
 
@@ -37,7 +38,8 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with WidgetsBindingObserver {
   late final PageController _pageController;
   late final DashboardNavigationCubit _navigation;
 
@@ -48,10 +50,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
 
     _navigation = DashboardNavigationCubit(initialTab: widget.initialTab);
 
     _pageController = PageController(initialPage: widget.initialTab.index);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      final notifications = context.read<NotificationsCubit?>();
+      if (notifications != null) {
+        unawaited(notifications.refreshUnreadCount());
+      }
+    }
   }
 
   Future<void> _onTabSelected(DashboardTab tab) async {
@@ -140,6 +153,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _pageController.dispose();
     _navigation.close();
     super.dispose();
@@ -205,8 +219,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             (_targetTab == null ||
                                 index == _targetTab!.index)) {
                           _navigation.selectPage(index);
-                          if (index == DashboardTab.profile.index)
+                          if (index == DashboardTab.profile.index) {
                             context.read<OwnPostsCubit?>()?.refresh();
+                          }
                         }
                       },
                       children: [

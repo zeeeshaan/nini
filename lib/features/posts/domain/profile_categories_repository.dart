@@ -1,4 +1,4 @@
-import 'package:nini/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 /// Deletion removes only the tab, never posts or media. Missing category IDs on
 /// posts are treated as unassigned by consumers and remain visible in All.

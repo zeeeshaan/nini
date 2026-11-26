@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/shared/models/local_identity.dart';
-import 'package:nini/features/post_detail/presentation/pages/post_detail_screen.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/login/presentation/cubit/session_cubit.dart';
-import 'package:nini/features/profile/presentation/helpers/open_account_profile.dart';
-import 'package:nini/features/profile/presentation/pages/seller_profile_screen.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/shared/models/local_identity.dart';
+import 'package:hywork/features/post_detail/presentation/pages/post_detail_screen.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
+import 'package:hywork/features/profile/presentation/helpers/open_account_profile.dart';
+import 'package:hywork/features/profile/presentation/pages/seller_profile_screen.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 void openHomePost(
   BuildContext context,

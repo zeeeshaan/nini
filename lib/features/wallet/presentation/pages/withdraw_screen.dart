@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/wallet_strings.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/strings/wallet_strings.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import '../../data/wallet_sample_data.dart';
 import '../widgets/overview/wallet_balance_card.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
-import 'package:nini/features/team/domain/team_request.dart';
-import 'package:nini/features/team/presentation/widgets/member_request/team_request_status_sheet.dart';
-import 'package:nini/shared/widgets/app_button/app_button.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/features/team/domain/team_request.dart';
+import 'package:hywork/features/team/presentation/widgets/member_request/team_request_status_sheet.dart';
+import 'package:hywork/shared/widgets/app_button/app_button.dart';
 
 class TeamRequestReviewActions extends StatelessWidget {
   const TeamRequestReviewActions({

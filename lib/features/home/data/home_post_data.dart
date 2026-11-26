@@ -1,7 +1,8 @@
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/shared/models/local_identity.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/shared/models/local_identity.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
 
 // The existing Home preview stays separate from the user's saved Posts.
 const homeSeller = PostSeller(
@@ -24,7 +25,7 @@ PostItem homeProductPost({required String title, required String imageUrl}) =>
       id: 'home-pixel9',
       title: title,
       imageAsset: imageUrl,
-      category: AppStrings.mobile,
+      category: HomeStrings.mobile,
       stockCount: 2,
       price: '12,000',
       originalPrice: '13,000',

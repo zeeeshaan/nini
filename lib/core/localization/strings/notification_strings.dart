@@ -20,4 +20,9 @@ abstract final class NotificationStrings {
   static const saleTitle = "SALE IS LIVE";
   static const saleMessage =
       "The sale has started. Do not miss the latest offers.";
+  static const loadFailed = "Could not load notifications. Please try again.";
+  static const markReadFailed = "Could not mark the notification as read.";
+  static const signInRequired = "Sign in to view notifications.";
+  static const openFailed = "This notification destination is unavailable.";
+  static const openUnsupported = "This notification type cannot be opened yet.";
 }

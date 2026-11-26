@@ -1,4 +1,4 @@
-import 'package:nini/core/localization/strings/notification_strings.dart';
+import 'package:hywork/core/localization/strings/notification_strings.dart';
 
 import '../domain/app_notification.dart';
 

@@ -1,25 +1,25 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/saved_posts_strings.dart';
-import 'package:nini/core/theme/app_colors/app_colors.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/home/presentation/helpers/published_home_navigation.dart';
-import 'package:nini/features/post_detail/presentation/cubit/post_detail_cubit.dart';
-import 'package:nini/features/post_detail/presentation/helpers/post_cart_item.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/comments_sheet.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/share_sheet.dart';
-import 'package:nini/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
-import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/features/search/data/search_catalog.dart';
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/core/localization/strings/saved_posts_strings.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/home/presentation/helpers/published_home_navigation.dart';
+import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
+import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/presentation/cubit/post_likes_cubit.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/comments_sheet.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/share_sheet.dart';
+import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
+import 'package:hywork/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:hywork/features/search/data/search_catalog.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import 'home_post_media_slider.dart';
 import '../common/home_badge.dart';
@@ -80,8 +80,8 @@ class HomePublishedPostCard extends StatelessWidget {
 
     final seller =
         SearchCatalog.sellerFor(post) ??
-            context.read<UserProfileCubit?>()?.seller ??
-            localPostSeller;
+        context.read<UserProfileCubit?>()?.seller ??
+        localPostSeller;
 
     final existing = cart?.state.items
         .where((item) => item.id == post.id)
@@ -101,10 +101,7 @@ class HomePublishedPostCard extends StatelessWidget {
         );
       } catch (_) {
         if (context.mounted) {
-          AppToast.warning(
-            context,
-            'Could not load post details.',
-          );
+          AppToast.warning(context, HomeStrings.loadDetailsFailed);
         }
         return;
       }
@@ -116,14 +113,14 @@ class HomePublishedPostCard extends StatelessWidget {
     if (cart.toggleItem(item.withQuantity(100))) {
       AppToast.success(
         context,
-        existing == null ? AppStrings.cartAdded : AppStrings.cartRemoved,
+        existing == null ? HomeStrings.cartAdded : HomeStrings.cartRemoved,
       );
     } else {
       AppToast.show(
         context,
         message: cart.state.storageError
-            ? AppStrings.cartStorageError
-            : AppStrings.cartStockExceeded,
+            ? HomeStrings.cartStorageError
+            : HomeStrings.cartStockExceeded,
         type: AppToastType.error,
       );
     }
@@ -135,8 +132,8 @@ class HomePublishedPostCard extends StatelessWidget {
 
     final seller =
         SearchCatalog.sellerFor(post) ??
-            context.watch<UserProfileCubit?>()?.seller ??
-            localPostSeller;
+        context.watch<UserProfileCubit?>()?.seller ??
+        localPostSeller;
 
     final inCart = cart?.state.items
         .where((item) => item.id == post.id)
@@ -146,11 +143,11 @@ class HomePublishedPostCard extends StatelessWidget {
 
     final canToggle =
         cart != null &&
-            !cart.state.loading &&
-            (inCart != null ||
-                (item != null && item.accepts(100)) ||
-                (post.metadata['backend'] == true &&
-                    post.metadata['inStock'] == true));
+        !cart.state.loading &&
+        (inCart != null ||
+            (item != null && item.accepts(100)) ||
+            (post.metadata['backend'] == true &&
+                post.metadata['inStock'] == true));
 
     final discountLabel = _discountLabel();
 
@@ -201,7 +198,7 @@ class HomePublishedPostCard extends StatelessWidget {
 
           BlocBuilder<PostDetailCubit, PostDetailState>(
             buildWhen: (previous, current) =>
-            previous.isLiked != current.isLiked ||
+                previous.isLiked != current.isLiked ||
                 previous.likeCount != current.likeCount ||
                 previous.commentCount != current.commentCount ||
                 previous.isBookmarked != current.isBookmarked,
@@ -212,13 +209,9 @@ class HomePublishedPostCard extends StatelessWidget {
               commentCount: state.commentCount,
               isBookmarked: state.isBookmarked,
               showSampleMetrics: false,
-              cartCount: inCart == null
-                  ? '0'
-                  : cartQuantity(inCart.quantity),
+              cartCount: inCart == null ? '0' : cartQuantity(inCart.quantity),
               isInCart: inCart != null,
-              onAddToCart: canToggle
-                  ? () => _toggleCart(context)
-                  : null,
+              onAddToCart: canToggle ? () => _toggleCart(context) : null,
               onLike: () async {
                 final success = await context
                     .read<PostDetailCubit>()
@@ -248,10 +241,7 @@ class HomePublishedPostCard extends StatelessWidget {
                 } else if (success &&
                     context.mounted &&
                     detail.state.isBookmarked) {
-                  AppToast.success(
-                    context,
-                    SavedPostsStrings.saved,
-                  );
+                  AppToast.success(context, SavedPostsStrings.saved);
                 }
               },
               onCommentsPressed: () => openPostCommentsSheet(
@@ -289,12 +279,10 @@ class HomePublishedPostCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppStrings.postCategory(post.category),
+                  HomeStrings.postCategory(post.category),
                   textAlign: TextAlign.right,
                   style: AppTextStyles.heading.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
+                    color: Theme.of(context).colorScheme.onSurface
                         .withValues(alpha: .3),
                   ),
                   textDirection: TextDirection.ltr,

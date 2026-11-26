@@ -1,9 +1,9 @@
-import 'package:nini/features/locations/presentation/cubit/locations_cubit.dart';
+import 'package:hywork/features/locations/presentation/cubit/locations_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/location_strings.dart';
-import 'package:nini/core/localization/persian_feature/persian_feature.dart';
-import 'package:nini/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
+import 'package:hywork/core/localization/strings/location_strings.dart';
+import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
+import 'package:hywork/features/profile_settings/presentation/widgets/common/settings_detail_header.dart';
 
 import '../widgets/common/location_label_card.dart';
 import '../widgets/common/location_map_preview.dart';

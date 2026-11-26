@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class CallActionButton extends StatelessWidget {
   const CallActionButton({

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/theme/app_colors/app_colors.dart';
+import 'package:hywork/core/theme/app_colors/app_colors.dart';
 
 class AnalyticsPolarChart extends StatelessWidget {
   const AnalyticsPolarChart({super.key, required this.values});

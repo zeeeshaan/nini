@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/animations/staggered_animation/staggered_animation.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/core/localization/strings/profile_post_strings.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:nini/features/posts/presentation/cubit/profile_categories_cubit.dart';
-import 'package:nini/features/posts/data/api_posts_repository.dart';
-import 'package:nini/features/posts/domain/models/profile_category.dart';
-import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
+import 'package:hywork/core/localization/strings/profile_post_strings.dart';
+import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
+import 'package:hywork/features/posts/presentation/cubit/profile_categories_cubit.dart';
+import 'package:hywork/features/posts/data/api_posts_repository.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
+import 'package:hywork/features/profile/presentation/widgets/posts/profile_post_card.dart';
 
 import 'profile_posts_empty_state.dart';
 
-import 'package:nini/shared/models/post/post_item.dart';
-import 'package:nini/shared/widgets/skeleton/product_card_skeleton.dart';
-import 'package:nini/shared/widgets/skeleton/app_shimmer.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
+import 'package:hywork/shared/widgets/skeleton/product_card_skeleton.dart';
+import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 
 class ProfilePostGrid extends StatefulWidget {
   const ProfilePostGrid({super.key, required this.onPostTap});
@@ -142,7 +142,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
               children: [
                 const Expanded(
                   child: Text(
-                    AppStrings.savedPostsLoadFailed,
+                    ProfileScreenStrings.savedPostsLoadFailed,
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.ltr,
                   ),
@@ -152,7 +152,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                       ? context.read<PostsCubit>().load()
                       : backend.loadMore(),
                   child: const Text(
-                    AppStrings.retry,
+                    ProfileScreenStrings.retry,
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.right,
                   ),
@@ -226,9 +226,7 @@ class _ProfilePostGridState extends State<ProfilePostGrid> {
                         textDirection: Directionality.of(context),
                         child: ProfilePostCard(
                           post: post,
-                          showStock:
-                              post.metadata['backend'] != true ||
-                              post.details.warehouseStock.isNotEmpty,
+                          showStock: !post.isService,
                           detailsHeight: detailsHeight,
                           contentScale: contentScale,
                           onTap: () => widget.onPostTap(post),

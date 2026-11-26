@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
-import 'package:nini/shared/models/post/post_media.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/shared/models/post/post_media.dart';
 
 import '../common/settings_page.dart';
 

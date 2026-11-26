@@ -1,5 +1,5 @@
-import 'package:nini/core/network/api_client/api_client.dart';
-import 'package:nini/core/security/secure_token/secure_token.dart';
+import 'package:hywork/core/network/api_client/api_client.dart';
+import 'package:hywork/core/security/secure_token/secure_token.dart';
 import 'package:dio/dio.dart';
 
 import '../domain/email_address.dart';

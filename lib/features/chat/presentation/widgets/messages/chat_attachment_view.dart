@@ -1,19 +1,51 @@
-import 'package:nini/shared/widgets/app_back_button/app_back_button.dart';
+import 'package:hywork/shared/widgets/app_back_button/app_back_button.dart';
 
 import 'dart:io';
 
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 import 'package:open_filex/open_filex.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/domain/models/chat_attachment.dart';
-import 'package:nini/features/chat/presentation/widgets/media/chat_voice_player.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/domain/models/chat_attachment.dart';
+import 'package:hywork/features/chat/presentation/widgets/media/chat_voice_player.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+
+bool _isNetworkPath(String path) {
+  final uri = Uri.tryParse(path);
+  return uri != null &&
+      uri.host.isNotEmpty &&
+      (uri.scheme == 'http' || uri.scheme == 'https');
+}
+
+Widget _chatImage(
+  String path, {
+  double? width,
+  double? height,
+  BoxFit? fit,
+  required ImageErrorWidgetBuilder errorBuilder,
+}) {
+  if (_isNetworkPath(path)) {
+    return Image.network(
+      path,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: errorBuilder,
+    );
+  }
+  return Image.file(
+    File(path),
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder: errorBuilder,
+  );
+}
 
 class ChatAttachmentView extends StatelessWidget {
   const ChatAttachmentView({
@@ -52,8 +84,8 @@ class ChatAttachmentView extends StatelessWidget {
               child: InteractiveViewer(
                 minScale: .5,
                 maxScale: 5,
-                child: Image.file(
-                  File(attachment.path),
+                child: _chatImage(
+                  attachment.path,
                   errorBuilder: (_, error, stack) =>
                       const AppIcon(AppIcons.imageUnavailable, size: 48),
                 ),
@@ -100,8 +132,8 @@ class ChatAttachmentView extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.file(
-                      File(preview),
+                    _chatImage(
+                      preview,
                       width: 250,
                       height: 170,
                       fit: BoxFit.cover,

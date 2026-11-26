@@ -1,26 +1,26 @@
-import 'package:nini/features/home/data/home_post_data.dart';
-import 'package:nini/features/home/presentation/helpers/home_post_navigation.dart';
-import 'package:nini/features/home/presentation/widgets/common/home_seller_header.dart';
-import 'package:nini/shared/models/post/post_seller.dart';
-import 'package:nini/features/home/presentation/cubit/home_card_cubit.dart';
+import 'package:hywork/features/home/data/home_post_data.dart';
+import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_seller_header.dart';
+import 'package:hywork/shared/models/post/post_seller.dart';
+import 'package:hywork/features/home/presentation/cubit/home_card_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/cart/domain/models/cart_item.dart';
-import 'package:nini/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:nini/features/cart/presentation/helpers/cart_format.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/comments_sheet.dart';
-import 'package:nini/features/posts/presentation/widgets/interactions/share_sheet.dart';
-import 'package:nini/features/posts/presentation/cubit/post_likes_cubit.dart';
-import 'package:nini/core/localization/strings/saved_posts_strings.dart';
-import 'package:nini/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
-import 'package:nini/shared/widgets/app_toast/app_toast.dart';
-import 'package:nini/shared/models/post/post_unit.dart';
+import 'package:hywork/core/localization/strings/home_strings.dart';
+import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/comments_sheet.dart';
+import 'package:hywork/features/posts/presentation/widgets/interactions/share_sheet.dart';
+import 'package:hywork/features/posts/presentation/cubit/post_likes_cubit.dart';
+import 'package:hywork/core/localization/strings/saved_posts_strings.dart';
+import 'package:hywork/features/saved_posts/presentation/cubit/saved_posts_cubit.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
+import 'package:hywork/shared/models/post/post_unit.dart';
 
-import 'package:nini/features/home/presentation/widgets/common/home_engagement_bar.dart';
-import 'package:nini/features/home/presentation/widgets/sample_product/home_product_details.dart';
-import 'package:nini/features/home/presentation/widgets/sample_product/home_product_image.dart';
-import 'package:nini/features/home/presentation/widgets/sample_product/home_product_price.dart';
+import 'package:hywork/features/home/presentation/widgets/common/home_engagement_bar.dart';
+import 'package:hywork/features/home/presentation/widgets/sample_product/home_product_details.dart';
+import 'package:hywork/features/home/presentation/widgets/sample_product/home_product_image.dart';
+import 'package:hywork/features/home/presentation/widgets/sample_product/home_product_price.dart';
 
 class HomeProductCard extends StatefulWidget {
   const HomeProductCard({
@@ -67,7 +67,7 @@ class _HomeProductCardState extends State<HomeProductCard>
       CartItem(
         id: 'home-pixel9',
         title: widget.title,
-        category: AppStrings.mobile,
+        category: HomeStrings.mobile,
         unit: PostUnit.piece,
         unitPrice: 13000,
         discountPerUnit: 1000,
@@ -83,16 +83,16 @@ class _HomeProductCardState extends State<HomeProductCard>
         SnackBar(
           action: changed && !wasInCart && widget.onViewCart != null
               ? SnackBarAction(
-                  label: AppStrings.viewCart,
+                  label: HomeStrings.viewCart,
                   onPressed: widget.onViewCart!,
                 )
               : null,
           content: Text(
             changed
-                ? (wasInCart ? AppStrings.cartRemoved : AppStrings.cartAdded)
+                ? (wasInCart ? HomeStrings.cartRemoved : HomeStrings.cartAdded)
                 : cart.state.storageError
-                ? AppStrings.cartStorageError
-                : AppStrings.cartStockExceeded,
+                ? HomeStrings.cartStorageError
+                : HomeStrings.cartStockExceeded,
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.right,
           ),

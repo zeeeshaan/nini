@@ -1,4 +1,4 @@
-package com.nini.nini.media
+package com.hywork.hywork.media
 
 import android.content.Context
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader

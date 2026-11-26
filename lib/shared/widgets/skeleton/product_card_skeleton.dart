@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nini/features/profile/presentation/widgets/posts/profile_post_card.dart';
+import 'package:hywork/features/profile/presentation/widgets/posts/profile_post_card.dart';
 
 import 'app_shimmer.dart';
 

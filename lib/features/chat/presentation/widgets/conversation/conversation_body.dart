@@ -1,17 +1,17 @@
 import 'dart:math' as math;
 
-import 'package:nini/core/theme/app_text_styles/app_text_styles.dart';
+import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:nini/core/localization/app_string/app_string.dart';
-import 'package:nini/features/chat/presentation/cubit/conversation_cubit.dart';
-import 'package:nini/features/chat/presentation/cubit/voice_recording_cubit.dart';
-import 'package:nini/features/chat/presentation/widgets/conversation/chat_emoji_panel.dart';
-import 'package:nini/features/chat/presentation/widgets/conversation/conversation_empty_state.dart';
-import 'package:nini/features/chat/presentation/widgets/messages/chat_message_bubble.dart';
-import 'package:nini/features/chat/presentation/widgets/conversation/chat_message_composer.dart';
-import 'package:nini/features/chat/presentation/widgets/media/voice_recording_panel.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
+import 'package:hywork/features/chat/presentation/cubit/conversation_cubit.dart';
+import 'package:hywork/features/chat/presentation/cubit/voice_recording_cubit.dart';
+import 'package:hywork/features/chat/presentation/widgets/conversation/chat_emoji_panel.dart';
+import 'package:hywork/features/chat/presentation/widgets/conversation/conversation_empty_state.dart';
+import 'package:hywork/features/chat/presentation/widgets/messages/chat_message_bubble.dart';
+import 'package:hywork/features/chat/presentation/widgets/conversation/chat_message_composer.dart';
+import 'package:hywork/features/chat/presentation/widgets/media/voice_recording_panel.dart';
 
 class ConversationBody extends StatelessWidget {
   const ConversationBody({
@@ -36,13 +36,16 @@ class ConversationBody extends StatelessWidget {
     required this.onFiles,
     required this.onPhotos,
     this.pickingAttachment = false,
+    this.composerEnabled = true,
+    this.restrictionLabel,
   });
   final ConversationState conversation;
   final VoiceRecordingState recording;
   final ScrollController scrollController;
   final TextEditingController messageController;
   final FocusNode messageFocusNode;
-  final bool emojiVisible, pickingAttachment;
+  final bool emojiVisible, pickingAttachment, composerEnabled;
+  final String? restrictionLabel;
   final ValueChanged<String> onStartSelection, onSelect;
   final VoidCallback onUnblock,
       onOpenAttachment,
@@ -58,10 +61,16 @@ class ConversationBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recordingActive = recording.phase != VoiceRecordingPhase.idle;
+    final showBlockedBanner = conversation.blocked;
+    final showRestriction =
+        !conversation.canSend &&
+        !showBlockedBanner &&
+        restrictionLabel != null &&
+        restrictionLabel!.isNotEmpty;
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: [
-          if (conversation.blocked)
+          if (showBlockedBanner)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -83,6 +92,19 @@ class ConversationBody extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+          if (showRestriction)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  restrictionLabel!,
+                  textDirection: TextDirection.ltr,
+                  style: AppTextStyles.label,
+                  textAlign: TextAlign.right,
+                ),
               ),
             ),
           if (conversation.selectionMode)
@@ -118,6 +140,7 @@ class ConversationBody extends StatelessWidget {
                         onLongPress:
                             recordingActive ||
                                 conversation.sendingMedia ||
+                                conversation.sending ||
                                 pickingAttachment
                             ? null
                             : () => onStartSelection(message.id),
@@ -149,18 +172,15 @@ class ConversationBody extends StatelessWidget {
                       onAttachmentPressed: () => onFiles(),
                       onPhotosPressed: () => onPhotos(),
                       onKeyboardRequested: onKeyboard,
-                      enabled:
-                          !conversation.blocked &&
-                          !conversation.selectionMode &&
-                          !pickingAttachment,
-                      busy: conversation.sendingMedia,
+                      enabled: composerEnabled,
+                      busy: conversation.sendingMedia || conversation.sending,
                       emojiVisible: emojiVisible,
                     ),
             ),
           ),
           if (emojiVisible &&
               MediaQuery.viewInsetsOf(context).bottom == 0 &&
-              !conversation.blocked &&
+              composerEnabled &&
               !conversation.selectionMode &&
               !recordingActive)
             ChatEmojiPanel(

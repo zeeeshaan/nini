@@ -1,8 +1,8 @@
-import 'package:nini/shared/models/post/post_attributes.dart';
-import 'package:nini/shared/models/post/post_unit.dart';
+import 'package:hywork/shared/models/post/post_attributes.dart';
+import 'package:hywork/shared/models/post/post_unit.dart';
 
-export 'package:nini/shared/models/post/post_attributes.dart';
-export 'package:nini/shared/models/post/post_unit.dart';
+export 'package:hywork/shared/models/post/post_attributes.dart';
+export 'package:hywork/shared/models/post/post_unit.dart';
 
 /// Typed details for presentation. Legacy metadata remains lossless at the JSON
 /// boundary, including fields not yet consumed by the app.

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nini/core/constants/app_icons/app_icons.dart';
-import 'package:nini/core/localization/strings/profile_settings_strings.dart';
-import 'package:nini/core/responsiveness/app_responsiveness/app_responsiveness.dart';
-import 'package:nini/features/posts/presentation/widgets/media/post_media_view.dart';
-import 'package:nini/shared/models/post/post_item.dart';
+import 'package:hywork/core/constants/app_icons/app_icons.dart';
+import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
+import 'package:hywork/features/posts/presentation/widgets/media/post_media_view.dart';
+import 'package:hywork/shared/models/post/post_item.dart';
 
 import '../../../domain/settings_media_item.dart';
 import '../../cubit/settings_query_cubit.dart';
