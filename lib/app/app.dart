@@ -8,7 +8,7 @@ import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/responsiveness/responsive_config/config.dart';
 import 'package:hywork/core/theme/app_theme/app_theme.dart';
 import 'package:hywork/core/theme/theme_cubit/theme_cubit.dart';
-import 'package:hywork/features/cart/domain/repositories/cart_repository.dart';
+import 'package:hywork/features/cart/data/cart_repository.dart';
 import 'package:hywork/core/network/api_client/api_client.dart';
 import 'package:hywork/core/security/secure_token/secure_token.dart';
 import 'package:hywork/features/splash/presentation/pages/splash_screen.dart';

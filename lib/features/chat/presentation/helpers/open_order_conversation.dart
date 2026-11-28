@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hywork/features/cart/domain/models/cart_order.dart';
+import 'package:hywork/features/cart/models/cart_order.dart';
 import 'package:hywork/shared/models/post/post_seller.dart';
 
 import 'open_seller_conversation.dart';

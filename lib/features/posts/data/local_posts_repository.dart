@@ -85,8 +85,8 @@ class LocalPostsRepository implements PostsRepository {
       }).toList();
       return PostItem.fromJson(data);
     }).toList();
-    // Match complete historical records, not just IDs or publication dates.
-    // Edited samples and user-created posts must never be discarded here.
+    // Strip only unedited legacy seed fingerprints (complete JSON match).
+    // Edited former samples and user-created posts are retained.
     final sampleRecords = {
       for (final sample in [...demoPosts, ...createProfileSamplePosts()])
         jsonEncode(sample.toJson()),

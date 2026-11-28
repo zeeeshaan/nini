@@ -3,8 +3,7 @@ import 'package:hywork/core/localization/strings/cart_strings.dart';
 import 'package:hywork/shared/models/post/post_unit.dart';
 import 'package:hywork/shared/models/post/post_seller.dart';
 
-import '../domain/models/cart_item.dart';
-import '../domain/models/cart_order_status.dart';
+import '../models/cart_item.dart';
 
 /// Frontend fixtures matching the reference. No remote orders are implied.
 const demoCartSeller = PostSeller(id: 'demo-cart-seller', name: 'HYWORK Store', avatarAsset: '');

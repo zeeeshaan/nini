@@ -1,6 +1,6 @@
 import 'package:hywork/core/localization/strings/cart_strings.dart';
-import 'package:hywork/features/cart/domain/models/cart_order.dart';
-import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/models/cart_order.dart';
+import 'package:hywork/features/cart/utils/cart_helpers.dart';
 import 'package:hywork/features/payment/domain/models/payment_details.dart';
 
 PaymentDetails receiptDetails(CartOrder order) => PaymentDetails(

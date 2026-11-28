@@ -1,6 +1,14 @@
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 
+/// Exact historical shapes of unedited legacy seed posts.
+///
+/// Used only by [LocalPostsRepository] fingerprint matching so previously
+/// persisted demo rows can be stripped. Not a production catalog — do not
+/// surface these records in UI or seed new installs.
+///
+/// Matching compares complete `toJson()` fingerprints (not IDs alone) so
+/// user-edited former samples are retained.
 const demoPosts = <PostItem>[
   PostItem(
     id: 'post_1',

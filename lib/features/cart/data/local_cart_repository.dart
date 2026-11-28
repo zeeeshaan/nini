@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import '../domain/models/cart_snapshot.dart';
-import '../domain/repositories/cart_repository.dart';
+import '../models/cart_snapshot.dart';
+import 'cart_repository.dart';
 
 class LocalCartRepository implements CartRepository {
   LocalCartRepository({Future<Directory> Function()? directoryProvider})

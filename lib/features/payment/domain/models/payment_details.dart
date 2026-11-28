@@ -1,6 +1,6 @@
 import 'order_customer_details.dart';
 
-import 'package:hywork/features/cart/domain/models/cart_item.dart';
+import 'package:hywork/features/cart/models/cart_item.dart';
 
 /// Display data supplied by a checkout. Monetary values use hundredths of toman.
 class PaymentDetails {

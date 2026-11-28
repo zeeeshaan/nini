@@ -1,8 +1,8 @@
 import 'package:hywork/shared/models/post/post_seller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/utils/cart_helpers.dart';
 import 'package:hywork/features/post_detail/presentation/cubit/post_detail_cubit.dart';
 import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
 import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';

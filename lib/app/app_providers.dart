@@ -19,8 +19,8 @@ import 'package:hywork/features/notifications/data/api_notifications_repository.
 import 'package:hywork/features/notifications/data/push_device_sync.dart';
 import 'package:hywork/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:hywork/features/cart/data/local_cart_repository.dart';
-import 'package:hywork/features/cart/domain/repositories/cart_repository.dart';
-import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/data/cart_repository.dart';
+import 'package:hywork/features/cart/cubit/cart_cubit.dart';
 import 'package:hywork/features/post_analytics/data/post_analytics_repository.dart';
 import 'package:hywork/features/post_analytics/presentation/cubit/post_analytics_cubit.dart';
 import 'package:hywork/features/posts/data/local_posts_repository.dart';

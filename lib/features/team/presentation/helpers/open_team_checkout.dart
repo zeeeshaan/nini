@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/receipt_strings.dart';
-import 'package:hywork/features/cart/domain/models/cart_snapshot.dart';
-import 'package:hywork/features/cart/domain/repositories/cart_repository.dart';
-import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/models/cart_snapshot.dart';
+import 'package:hywork/features/cart/data/cart_repository.dart';
+import 'package:hywork/features/cart/cubit/cart_cubit.dart';
 import 'package:hywork/features/payment/presentation/pages/order_information_screen.dart';
 import 'package:hywork/features/post_detail/presentation/helpers/post_cart_item.dart';
 import 'package:hywork/features/team/domain/team_request.dart';

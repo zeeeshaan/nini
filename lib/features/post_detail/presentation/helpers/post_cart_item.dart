@@ -1,5 +1,5 @@
-import 'package:hywork/features/cart/domain/models/cart_item.dart';
-import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
+import 'package:hywork/features/cart/models/cart_item.dart';
+import 'package:hywork/features/cart/utils/cart_helpers.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 import 'package:hywork/shared/models/post/post_seller.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hywork/core/localization/strings/provider_order_strings.dart';
 import 'package:hywork/core/localization/strings/receipt_strings.dart';
 import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:hywork/features/cart/domain/models/cart_order.dart';
+import 'package:hywork/features/cart/models/cart_order.dart';
 import 'package:hywork/features/payment/presentation/helpers/receipt_details.dart';
 import 'package:hywork/features/payment/presentation/widgets/dispute/dispute_attachment_tile.dart';
 import 'package:hywork/features/payment/presentation/widgets/checkout/payment_delivery.dart';

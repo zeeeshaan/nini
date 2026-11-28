@@ -1,6 +1,5 @@
-import 'package:hywork/features/cart/domain/models/cart_order.dart';
-import 'package:hywork/features/cart/domain/models/cart_order_status.dart';
-import 'package:hywork/features/cart/domain/policies/order_access.dart';
+import 'package:hywork/features/cart/models/cart_order.dart';
+import 'package:hywork/features/cart/utils/order_access.dart';
 import 'package:hywork/features/post_analytics/domain/post_analytics.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 

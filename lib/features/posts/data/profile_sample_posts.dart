@@ -3,10 +3,11 @@ import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'demo_posts.dart';
 
-/// Bootstrap the existing profile cards as editable local records once.
-/// Kept in the local adapter's data layer, separate from real API ownership.
-/// IDs and original images stay stable; a null publication date keeps sample
-/// content out of analytics until it is actually published.
+/// Exact historical shapes of unedited legacy profile sample posts.
+///
+/// Used only by [LocalPostsRepository] fingerprint matching. These records are
+/// not seeded on fresh installs and must not be shown as live profile data.
+/// Complete JSON fingerprints preserve edited former samples.
 List<PostItem> createProfileSamplePosts() => [
   for (final post in demoPosts) _editableSample(post),
 ];

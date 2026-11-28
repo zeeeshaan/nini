@@ -7,7 +7,7 @@ import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:hywork/core/animations/staggered_animation/staggered_animation.dart';
 import 'package:hywork/core/responsiveness/app_responsiveness/app_responsiveness.dart';
 
-import 'package:hywork/features/cart/presentation/pages/cart_screen.dart';
+import 'package:hywork/features/cart/screens/cart_screen.dart';
 import 'package:hywork/features/create_post/presentation/pages/create_post_gallery_screen.dart';
 import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:hywork/features/dashboard/presentation/widgets/bottom_navbar/dashboard_bottom_nav.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:hywork/features/cart/presentation/helpers/cart_format.dart';
-import 'package:hywork/features/cart/presentation/widgets/dialogs/cart_amount_dialog.dart';
+import 'package:hywork/features/cart/utils/cart_helpers.dart';
+import 'package:hywork/features/cart/widgets/cart_dialogs/cart_dialogs.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class TeamRequestQuantity extends StatelessWidget {

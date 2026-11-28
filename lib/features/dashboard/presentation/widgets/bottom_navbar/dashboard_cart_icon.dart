@@ -5,8 +5,8 @@ import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/theme/app_colors/app_colors.dart';
 import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:hywork/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:hywork/features/cart/presentation/cubit/cart_state.dart';
+import 'package:hywork/features/cart/cubit/cart_cubit.dart';
+import 'package:hywork/features/cart/cubit/cart_state.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 // dart format width=100
