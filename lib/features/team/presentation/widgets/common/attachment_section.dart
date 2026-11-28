@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/presentation/pages/create_post_gallery_screen.dart';
-import 'package:hywork/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
-import 'package:hywork/features/create_post/presentation/widgets/form/selected_media_grid.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/screens/create_post_gallery_screen.dart';
+import 'package:hywork/features/create_post/widgets/post_form_option_tile/post_form_option_tile.dart';
+import 'package:hywork/features/create_post/widgets/selected_media_grid/selected_media_grid.dart';
 
 import 'file_list.dart';
 

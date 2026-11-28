@@ -1,4 +1,4 @@
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 import 'package:hywork/shared/models/post/post_media.dart';
 
 import '../../domain/models/post_media_changes.dart';

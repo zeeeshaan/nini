@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/features/team/domain/team_workspace.dart';
 import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';
 

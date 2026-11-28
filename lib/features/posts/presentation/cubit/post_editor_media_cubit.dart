@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 import 'package:hywork/shared/models/post/post_media.dart';
 
 import 'post_editor_media_state.dart';

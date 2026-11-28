@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hywork/core/localization/app_string/app_string.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 
 enum ChatMessageDeleteAction { deleteMyMessage }
 

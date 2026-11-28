@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/create_post_strings.dart';
 import 'package:hywork/core/localization/strings/report_strings.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/features/reports/presentation/cubit/report_cubit.dart';
 import 'package:hywork/shared/widgets/app_button/app_button.dart';
 import 'package:hywork/shared/widgets/app_textfield/app_text_field.dart';

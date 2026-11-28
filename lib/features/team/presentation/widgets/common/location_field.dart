@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:hywork/features/create_post/domain/models/post_options.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:hywork/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
+import 'package:hywork/features/create_post/models/post_options.dart';
+import 'package:hywork/features/create_post/widgets/address_dialog/address_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_form_option_tile/post_form_option_tile.dart';
 
 class TeamLocationField extends StatelessWidget {
   const TeamLocationField({

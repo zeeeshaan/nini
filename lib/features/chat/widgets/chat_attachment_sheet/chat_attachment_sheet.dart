@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/presentation/cubit/gallery_cubit.dart';
-import 'package:hywork/features/create_post/presentation/widgets/gallery/gallery_grid.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/cubit/gallery_cubit.dart';
+import 'package:hywork/features/create_post/widgets/gallery_grid/gallery_grid.dart';
 import 'package:hywork/shared/widgets/app_button/app_button.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 

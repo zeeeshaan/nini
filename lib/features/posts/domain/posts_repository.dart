@@ -1,5 +1,5 @@
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/post_draft.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 
 import 'models/post_media_changes.dart';

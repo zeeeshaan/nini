@@ -20,7 +20,7 @@ import 'package:hywork/features/posts/presentation/widgets/interactions/comments
 import 'package:hywork/features/posts/presentation/widgets/interactions/share_sheet.dart';
 import 'package:hywork/features/profile/presentation/helpers/open_account_profile.dart';
 import 'package:hywork/features/home/data/home_post_data.dart';
-import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/features/home/utils/home_post_navigation.dart';
 import 'package:hywork/features/chat/utils/open_seller_conversation.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';

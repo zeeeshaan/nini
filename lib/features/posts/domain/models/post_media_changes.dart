@@ -1,4 +1,4 @@
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 
 /// Media update request, separate from the editable post information.
 /// Retained paths reference existing media on this post; adapters must validate

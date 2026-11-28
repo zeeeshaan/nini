@@ -9,8 +9,8 @@ import 'package:hywork/features/login/presentation/pages/login_screen.dart';
 import 'package:hywork/features/login/presentation/widgets/common/auth_screen_layout.dart';
 import 'package:hywork/features/otp_verification/presentation/cubit/otp_verification_cubit.dart';
 
-import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
-import 'package:hywork/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:hywork/features/dashboard/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/features/dashboard/screens/dashboard_screen.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 import 'package:hywork/shared/widgets/app_loader/app_loader.dart';
 

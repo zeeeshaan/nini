@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/profile_post_strings.dart';
-import 'package:hywork/features/create_post/domain/models/post_draft.dart';
-import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/models/post_draft.dart';
+import 'package:hywork/features/create_post/cubit/create_post_cubit.dart';
 
 import '../../helpers/post_editor_validation.dart';
 

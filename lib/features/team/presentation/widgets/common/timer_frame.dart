@@ -1,10 +1,10 @@
 import 'package:hywork/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hywork/features/create_post/domain/models/post_options.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/schedule_post_dialog.dart';
-import 'package:hywork/features/create_post/presentation/widgets/form/post_form_option_tile.dart';
+import 'package:hywork/features/create_post/models/post_options.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/schedule_post_dialog/schedule_post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_form_option_tile/post_form_option_tile.dart';
 
 class TeamTimeFrameField extends StatelessWidget {
   const TeamTimeFrameField({

@@ -11,7 +11,7 @@ import 'package:hywork/features/profile_settings/presentation/widgets/common/set
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 import 'package:hywork/shared/widgets/skeleton/profile_skeleton.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
-import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
+import 'package:hywork/features/home/utils/home_post_navigation.dart';
 
 import '../../data/api_public_profile_repository.dart';
 import '../../domain/public_user_profile.dart';

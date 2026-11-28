@@ -2,7 +2,7 @@ import 'package:hywork/shared/widgets/calendar/app_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
-import 'package:hywork/features/create_post/presentation/widgets/form/selected_media_grid.dart';
+import 'package:hywork/features/create_post/widgets/selected_media_grid/selected_media_grid.dart';
 import 'package:hywork/features/team/domain/team_request.dart';
 import 'package:hywork/features/team/presentation/widgets/member_request/team_request_provider_list.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';

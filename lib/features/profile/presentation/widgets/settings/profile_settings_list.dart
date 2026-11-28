@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
-import 'package:hywork/features/locations/presentation/pages/locations_screen.dart';
+import 'package:hywork/features/locations/screens/locations_screen.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/notifications/presentation/helpers/open_notifications.dart';
 import 'package:hywork/features/profile_settings/presentation/pages/accessibility_screen.dart';

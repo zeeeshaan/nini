@@ -3,7 +3,7 @@ import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/profile_post_strings.dart';
-import 'package:hywork/features/create_post/presentation/cubit/create_post_cubit.dart';
+import 'package:hywork/features/create_post/cubit/create_post_cubit.dart';
 
 import 'post_feature_editor_row.dart';
 

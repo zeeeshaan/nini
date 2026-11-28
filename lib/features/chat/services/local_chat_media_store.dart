@@ -8,7 +8,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:hywork/features/chat/models/chat_attachment.dart';
 import 'package:hywork/core/media/media_compressor/media_compressor.dart';
 import 'package:hywork/features/chat/services/chat_media_store.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 
 /// Copies picker exports into a private chat cache; picker originals are untouched.
 class LocalChatMediaStore implements ChatMediaStore {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hywork/core/localization/strings/report_strings.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/features/posts/presentation/widgets/actions/post_owner_action_tile.dart';
 import 'package:hywork/features/reports/data/api_reports_repository.dart';
 import 'package:hywork/features/reports/presentation/helpers/open_report_sheet.dart';

@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/profile_post_strings.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/post_draft.dart';
 import 'package:hywork/shared/models/post/post_item.dart';
 
 import '../../domain/models/post_media_changes.dart';

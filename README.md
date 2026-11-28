@@ -96,10 +96,10 @@ Each feature under `lib/features/<name>/` usually follows:
 | **login** | Phone/email OTP request, session restore/logout | `login/data/auth_repo.dart`, `login/presentation/pages/login_screen.dart`, `session_cubit.dart` |
 | **otp_verification** | Verify OTP, save Bearer token | `otp_verification/data/otp_verification_repo.dart`, `…/pages/otp_verification_screen.dart` |
 | **splash** | Post-auth bootstrap → dashboard | `splash/presentation/pages/splash_screen.dart` |
-| **dashboard** | Bottom nav shell | `dashboard/presentation/pages/dashboard_screen.dart`, `…/widgets/bottom_navbar/` |
-| **home** | Public feed (`scope=all`) + engagement UI | `home/presentation/pages/home_screen.dart`, `posts/presentation/cubit/backend_posts_cubit.dart` |
+| **dashboard** | Bottom nav shell | `dashboard/screens/dashboard_screen.dart`, `widgets/dashboard_bottom_nav/` |
+| **home** | Public feed (`scope=all`) + engagement UI | `home/screens/home_screen.dart`, `posts/presentation/cubit/backend_posts_cubit.dart` |
 | **posts** | Backend posts API (create/edit/delete/social), local posts fallback | `posts/data/api_posts_repository.dart`, `local_posts_repository.dart`, Cubits under `posts/presentation/cubit/` |
-| **create_post** | Gallery → details form; **edit uses the same details screen** | `create_post/presentation/pages/create_post_gallery_screen.dart`, `create_post_details_screen.dart`, `helpers/attachments_from_post_media.dart`, `data/api_categories_repository.dart` |
+| **create_post** | Gallery → details form; **edit uses the same details screen** | `create_post/screens/create_post_gallery_screen.dart`, `create_post_details_screen.dart`, `utils/attachments_from_post_media.dart`, `data/api_categories_repository.dart` |
 | **post_detail** | Post detail, owner ⋮ menu (edit/delete/resubmit) | `post_detail/presentation/pages/post_detail_screen.dart`, `posts/presentation/widgets/actions/` |
 | **search** | Backend search + suggestions | `search/presentation/pages/search_screen.dart` + `ApiPostsRepository.search*` |
 | **profile** | Own profile grid + public seller profile, follow | `profile/presentation/pages/profile_screen.dart`, `seller_profile_screen.dart`, `data/api_public_profile_repository.dart` |

@@ -9,7 +9,7 @@ import 'package:hywork/features/posts/presentation/pages/edit_post_screen.dart';
 import 'package:hywork/features/posts/presentation/widgets/actions/post_owner_actions_sheet.dart';
 import 'package:hywork/features/posts/presentation/widgets/actions/post_delete_sheet.dart';
 import 'package:hywork/features/posts/presentation/cubit/backend_posts_cubit.dart';
-import 'package:hywork/features/create_post/presentation/cubit/post_operation_cubit.dart';
+import 'package:hywork/features/create_post/cubit/post_operation_cubit.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 import 'dart:async';

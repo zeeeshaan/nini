@@ -1,6 +1,6 @@
 import 'package:hywork/core/network/api_client/api_client.dart';
 
-import '../domain/models/post_category.dart';
+import 'package:hywork/features/create_post/models/post_category.dart';
 
 class ApiCategoriesRepository {
   ApiCategoriesRepository(this._client);

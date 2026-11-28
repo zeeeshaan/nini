@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hywork/features/create_post/domain/models/post_draft.dart';
+import 'package:hywork/features/create_post/models/post_draft.dart';
 
 typedef EditablePostFeature = ({int id, String name, String value});
 

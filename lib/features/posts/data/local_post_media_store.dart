@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/media/media_compressor/media_compressor.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 import 'package:hywork/features/posts/domain/posts_repository.dart';
 import 'package:hywork/shared/models/post/post_media.dart';
 import 'package:path/path.dart' as p;

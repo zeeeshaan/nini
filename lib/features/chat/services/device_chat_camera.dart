@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 
 class DeviceChatCamera {
   Future<GalleryAttachment?> takePhoto() async {

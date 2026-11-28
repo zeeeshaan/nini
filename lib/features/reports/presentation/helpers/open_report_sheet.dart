@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/report_strings.dart';
 import 'package:hywork/core/network/api_client/api_client.dart';
 import 'package:hywork/core/security/secure_token/secure_token.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/posts/domain/models/profile_category.dart';
 import 'package:hywork/features/reports/data/api_reports_repository.dart';

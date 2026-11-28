@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/persian_feature/persian_feature.dart';
 import 'package:hywork/core/localization/strings/profile_post_strings.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 import '../../cubit/profile_categories_cubit.dart';

@@ -7,8 +7,8 @@ import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:hywork/core/theme/app_colors/app_colors.dart';
 import 'package:hywork/features/login/presentation/pages/login_screen.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
-import 'package:hywork/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
+import 'package:hywork/features/dashboard/screens/dashboard_screen.dart';
+import 'package:hywork/features/dashboard/cubit/dashboard_navigation_cubit.dart';
 
 import '../widgets/common/splash_content.dart';
 import '../widgets/common/splash_session_error.dart';

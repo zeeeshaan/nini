@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 enum TeamOption { edit, delete, chat }

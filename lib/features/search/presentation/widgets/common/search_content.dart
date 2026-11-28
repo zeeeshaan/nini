@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hywork/features/search/data/search_catalog.dart';
 import 'package:hywork/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:hywork/features/home/presentation/helpers/home_post_navigation.dart';
-import 'package:hywork/features/home/presentation/helpers/published_home_navigation.dart';
+import 'package:hywork/features/home/utils/home_post_navigation.dart';
+import 'package:hywork/features/home/utils/published_home_navigation.dart';
 import 'package:hywork/core/localization/strings/search_strings.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 import 'package:hywork/shared/models/post/post_item.dart';

@@ -16,7 +16,7 @@ import 'package:hywork/features/chat/data/backend_chat_mapper.dart';
 import 'package:hywork/features/chat/utils/chat_sync.dart';
 import 'package:hywork/features/chat/models/chat_message.dart';
 import 'package:hywork/features/chat/services/chat_media_store.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 import 'package:hywork/features/posts/domain/models/profile_category.dart';
 import 'package:hywork/features/profile/data/api_public_profile_repository.dart';
 

@@ -5,12 +5,12 @@ import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/features/chat/services/device_chat_camera.dart';
 import 'package:hywork/features/chat/models/chat_location.dart';
 import 'package:hywork/features/chat/widgets/chat_attachment_sheet/chat_attachment_sheet.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/domain/models/post_options.dart';
-import 'package:hywork/features/create_post/presentation/cubit/gallery_cubit.dart';
-import 'package:hywork/features/create_post/presentation/pages/create_post_gallery_screen.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/address_dialog.dart';
-import 'package:hywork/features/create_post/presentation/widgets/dialogs/post_dialog.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/post_options.dart';
+import 'package:hywork/features/create_post/cubit/gallery_cubit.dart';
+import 'package:hywork/features/create_post/screens/create_post_gallery_screen.dart';
+import 'package:hywork/features/create_post/widgets/address_dialog/address_dialog.dart';
+import 'package:hywork/features/create_post/widgets/post_dialog/post_dialog.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class ChatAttachmentSelection {

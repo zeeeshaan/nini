@@ -2061,52 +2061,56 @@ nini/
 │   │   │               ├── gallery_preview.dart
 │   │   │               └── gallery_tab_selector.dart
 │   │   ├── dashboard/
-│   │   │   └── presentation/
-│   │   │       ├── cubit/
-│   │   │       │   └── dashboard_navigation_cubit.dart
-│   │   │       ├── pages/
-│   │   │       │   └── dashboard_screen.dart
-│   │   │       └── widgets/
-│   │   │           └── bottom_navbar/
-│   │   │               ├── dashboard_bottom_nav.dart
-│   │   │               ├── dashboard_cart_icon.dart
-│   │   │               ├── dashboard_fold_layout.dart
-│   │   │               └── dashboard_nav_item.dart
+│   │   │   ├── cubit/
+│   │   │   │   └── dashboard_navigation_cubit.dart
+│   │   │   ├── screens/
+│   │   │   │   └── dashboard_screen.dart
+│   │   │   └── widgets/
+│   │   │       └── dashboard_bottom_nav/
+│   │   │           ├── dashboard_bottom_nav.dart
+│   │   │           ├── dashboard_cart_icon.dart
+│   │   │           ├── dashboard_fold_layout.dart
+│   │   │           └── dashboard_nav_item.dart
 │   │   ├── home/
 │   │   │   ├── data/
 │   │   │   │   └── home_post_data.dart
-│   │   │   └── presentation/
-│   │   │       ├── cubit/
-│   │   │       ├── helpers/
-│   │   │       │   ├── home_post_navigation.dart
-│   │   │       │   └── published_home_navigation.dart
-│   │   │       ├── pages/
-│   │   │       │   └── home_screen.dart
-│   │   │       └── widgets/
-│   │   │           ├── common/
-│   │   │           │   ├── home_badge.dart
-│   │   │           │   ├── home_engagement_bar.dart
-│   │   │           │   ├── home_engagement_layout.dart
-│   │   │           │   ├── home_feed_header.dart
-│   │   │           │   ├── home_metric.dart
-│   │   │           │   ├── home_notification_button.dart
-│   │   │           │   ├── home_post_pricing.dart
-│   │   │           │   └── home_seller_header.dart
-│   │   │           └── published/
-│   │   │               ├── home_post_media_indicator.dart
-│   │   │               ├── home_post_media_slider.dart
-│   │   │               └── home_published_post_card.dart
+│   │   │   ├── screens/
+│   │   │   │   └── home_screen.dart
+│   │   │   ├── utils/
+│   │   │   │   ├── home_post_navigation.dart
+│   │   │   │   └── published_home_navigation.dart
+│   │   │   └── widgets/
+│   │   │       ├── home_badge/
+│   │   │       │   └── home_badge.dart
+│   │   │       ├── home_engagement_bar/
+│   │   │       │   ├── home_engagement_bar.dart
+│   │   │       │   ├── home_engagement_layout.dart
+│   │   │       │   └── home_metric.dart
+│   │   │       ├── home_feed_header/
+│   │   │       │   └── home_feed_header.dart
+│   │   │       ├── home_notification_button/
+│   │   │       │   └── home_notification_button.dart
+│   │   │       ├── home_post_pricing/
+│   │   │       │   └── home_post_pricing.dart
+│   │   │       ├── home_seller_header/
+│   │   │       │   └── home_seller_header.dart
+│   │   │       ├── home_post_media_slider/
+│   │   │       │   ├── home_post_media_slider.dart
+│   │   │       │   └── home_post_media_indicator.dart
+│   │   │       └── home_published_post_card/
+│   │   │           └── home_published_post_card.dart
 │   │   ├── locations/
-│   │   │   └── presentation/
-│   │   │       ├── cubit/
-│   │   │       │   └── locations_cubit.dart
-│   │   │       ├── pages/
-│   │   │       │   └── locations_screen.dart
-│   │   │       └── widgets/
-│   │   │           └── common/
-│   │   │               ├── location_label_card.dart
-│   │   │               ├── location_map_preview.dart
-│   │   │               └── saved_location_list.dart
+│   │   │   ├── cubit/
+│   │   │   │   └── locations_cubit.dart
+│   │   │   ├── screens/
+│   │   │   │   └── locations_screen.dart
+│   │   │   └── widgets/
+│   │   │       ├── location_label_card/
+│   │   │       │   └── location_label_card.dart
+│   │   │       ├── location_map_preview/
+│   │   │       │   └── location_map_preview.dart
+│   │   │       └── saved_location_list/
+│   │   │           └── saved_location_list.dart
 │   │   ├── login/
 │   │   │   ├── data/
 │   │   │   │   └── auth_repo.dart

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
 import 'package:hywork/features/team/domain/team_provider_selection.dart';
 import 'package:hywork/features/team/domain/team_request.dart';
 import 'package:hywork/shared/models/post/post_attributes.dart';

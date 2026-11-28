@@ -26,8 +26,8 @@ import 'package:hywork/features/chat/widgets/chat_dialogs/chat_action_dialog.dar
 import 'package:hywork/features/chat/widgets/chat_dialogs/chat_message_delete_sheet.dart';
 import 'package:hywork/features/chat/widgets/conversation_body/conversation_body.dart';
 import 'package:hywork/features/chat/widgets/conversation_header/conversation_header.dart';
-import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
-import 'package:hywork/features/create_post/presentation/cubit/gallery_cubit.dart';
+import 'package:hywork/features/create_post/models/gallery_attachment.dart';
+import 'package:hywork/features/create_post/cubit/gallery_cubit.dart';
 import 'package:hywork/features/profile/data/api_public_profile_repository.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
