@@ -174,7 +174,6 @@ class _DashboardScreenState extends State<DashboardScreen>
           final pages = [
             HomeScreen(
               active: selectedTab == DashboardTab.home,
-              onViewCart: () => _onTabSelected(DashboardTab.cart),
               onProfilePressed: _openAccountProfileTab,
             ),
             CartScreen(
