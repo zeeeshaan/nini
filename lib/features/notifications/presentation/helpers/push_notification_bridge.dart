@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/notifications/push_notifications.dart';
-import 'package:hywork/features/chat/presentation/cubit/chat_unread_cubit.dart';
+import 'package:hywork/features/chat/cubit/chat_unread_cubit.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:hywork/features/notifications/presentation/helpers/open_notification_target.dart';

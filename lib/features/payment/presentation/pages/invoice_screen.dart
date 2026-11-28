@@ -8,7 +8,7 @@ import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:hywork/features/cart/utils/order_access.dart';
 import 'package:hywork/features/cart/models/cart_order.dart';
 import 'package:hywork/features/cart/cubit/cart_cubit.dart';
-import 'package:hywork/features/chat/presentation/helpers/open_order_conversation.dart';
+import 'package:hywork/features/chat/utils/open_order_conversation.dart';
 import 'package:hywork/features/payment/presentation/pages/dispute_screen.dart';
 import 'package:hywork/features/payment/presentation/widgets/invoice/order_invoice_content.dart';
 import 'package:hywork/features/provider_invoice/presentation/helpers/open_provider_invoice.dart';

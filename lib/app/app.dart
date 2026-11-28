@@ -80,37 +80,52 @@ class _ThemedApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeMode>(
-      builder: (context, mode) => MaterialApp(
-        navigatorKey: appNavigatorKey,
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        locale: const Locale('en'),
-        supportedLocales: const [Locale('en'), Locale('fa', 'IR')],
-        localizationsDelegates: const [
-          ...GlobalMaterialLocalizations.delegates,
-          FlutterQuillLocalizations.delegate,
-        ],
-        navigatorObservers: [entranceRouteObserver],
-        // English testing locale with the existing control positions.
-        builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
-          value: Theme.of(context).appBarTheme.systemOverlayStyle!,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: DefaultTextStyle.merge(
-              textAlign: TextAlign.right,
-              child: ResponsiveConfig.materialAppBuilder(context, child),
+    // Logout (and 401-driven session clear) must leave the authenticated stack.
+    // MaterialApp.home is not rebuilt on SessionCubit changes, so navigate here.
+    return BlocListener<SessionCubit, SessionState>(
+      listenWhen: (previous, current) =>
+          current.status == SessionStatus.unauthenticated &&
+          previous.status == SessionStatus.authenticated,
+      listener: (context, state) {
+        final navigator = appNavigatorKey.currentState;
+        if (navigator == null) return;
+        navigator.pushAndRemoveUntil<void>(
+          MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
+          (_) => false,
+        );
+      },
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, mode) => MaterialApp(
+          navigatorKey: appNavigatorKey,
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.appName,
+          locale: const Locale('en'),
+          supportedLocales: const [Locale('en'), Locale('fa', 'IR')],
+          localizationsDelegates: const [
+            ...GlobalMaterialLocalizations.delegates,
+            FlutterQuillLocalizations.delegate,
+          ],
+          navigatorObservers: [entranceRouteObserver],
+          // English testing locale with the existing control positions.
+          builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
+            value: Theme.of(context).appBarTheme.systemOverlayStyle!,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: DefaultTextStyle.merge(
+                textAlign: TextAlign.right,
+                child: ResponsiveConfig.materialAppBuilder(context, child),
+              ),
             ),
           ),
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: mode,
+          home:
+              context.read<SessionCubit>().state.status ==
+                  SessionStatus.unauthenticated
+              ? const LoginScreen()
+              : const SplashScreen(),
         ),
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: mode,
-        home:
-            context.read<SessionCubit>().state.status ==
-                SessionStatus.unauthenticated
-            ? const LoginScreen()
-            : const SplashScreen(),
       ),
     );
   }

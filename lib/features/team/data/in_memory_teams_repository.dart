@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:hywork/features/chat/data/in_memory_chat_repository.dart';
 import 'package:hywork/features/team/domain/team_request.dart';
 import 'package:hywork/features/team/domain/team_workspace.dart';
 
-/// Session-only team and group-chat previews. No disk or network operations.
+/// Session-only team previews. No disk or network operations.
 class InMemoryTeamsRepository {
   InMemoryTeamsRepository();
   static final instance = InMemoryTeamsRepository();
 
-  final chats = InMemoryChatRepository.empty();
   final _teams = <String, TeamWorkspace>{};
   final _changes = StreamController<List<TeamWorkspace>>.broadcast();
   String? _accountId;
@@ -21,7 +19,6 @@ class InMemoryTeamsRepository {
     if (previous != null) _accounts[previous] = Map.of(_teams);
     _teams.clear();
     _teams.addAll(_accounts.remove(accountId) ?? {});
-    chats.useAccount(accountId);
     _accountId = accountId;
     _changes.add(teams);
   }

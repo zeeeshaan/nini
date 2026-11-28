@@ -25,7 +25,6 @@ class TeamWorkspace {
   final List<TeamProviderSelection> providers;
   final List<PostAddress> locations;
 
-  String get conversationId => 'team-$id';
   List<PostSeller> get members => List.unmodifiable(
     {
       owner.id: owner,

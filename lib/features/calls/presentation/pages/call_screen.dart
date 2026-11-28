@@ -17,7 +17,7 @@ import 'package:hywork/features/calls/presentation/cubit/call_cubit.dart';
 import 'package:hywork/features/calls/presentation/widgets/display/call_avatar.dart';
 import 'package:hywork/features/calls/presentation/widgets/controls/call_controls.dart';
 import 'package:hywork/features/calls/presentation/widgets/display/call_video_stage.dart';
-import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
+import 'package:hywork/features/chat/models/chat_conversation.dart';
 import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 
 class CallScreen extends StatelessWidget {

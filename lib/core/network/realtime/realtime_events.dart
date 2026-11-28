@@ -1,4 +1,4 @@
-import 'package:hywork/features/chat/domain/backend_chat.dart';
+import 'package:hywork/features/chat/models/backend_chat.dart';
 import 'package:hywork/features/notifications/domain/backend_notification.dart';
 import 'package:hywork/features/posts/domain/models/profile_category.dart';
 

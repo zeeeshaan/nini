@@ -84,11 +84,7 @@ class MyTeamsScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 16),
                               child: TeamCard(
                                 team: team,
-                                messageCount:
-                                    teams.chats
-                                        .existingMessages(team.conversationId)
-                                        ?.length ??
-                                    0,
+                                messageCount: 0,
                                 onTap: () => Navigator.of(context).push<void>(
                                   MaterialPageRoute(
                                     builder: (_) => TeamChatScreen(

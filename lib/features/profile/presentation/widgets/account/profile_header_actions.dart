@@ -7,7 +7,7 @@ import 'package:hywork/features/notifications/presentation/widgets/common/notifi
 
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
-import 'package:hywork/features/chat/presentation/widgets/inbox/chat_inbox_button.dart';
+import 'package:hywork/features/chat/widgets/chat_inbox_button/chat_inbox_button.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 class ProfileHeaderActions extends StatelessWidget {

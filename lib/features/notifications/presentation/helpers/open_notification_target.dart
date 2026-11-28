@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/notification_strings.dart';
-import 'package:hywork/features/chat/presentation/helpers/open_seller_conversation.dart';
+import 'package:hywork/features/chat/utils/open_seller_conversation.dart';
 import 'package:hywork/features/dashboard/presentation/cubit/dashboard_navigation_cubit.dart';
 import 'package:hywork/features/home/presentation/helpers/published_home_navigation.dart';
 import 'package:hywork/features/notifications/domain/app_notification.dart';

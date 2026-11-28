@@ -12,8 +12,7 @@ import 'package:hywork/features/login/data/auth_repo.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/otp_verification/data/otp_verification_repo.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
-import 'package:hywork/features/chat/data/in_memory_chat_repository.dart';
-import 'package:hywork/features/chat/presentation/cubit/chat_unread_cubit.dart';
+import 'package:hywork/features/chat/cubit/chat_unread_cubit.dart';
 import 'package:hywork/features/team/data/in_memory_teams_repository.dart';
 import 'package:hywork/features/notifications/data/api_notifications_repository.dart';
 import 'package:hywork/features/notifications/data/push_device_sync.dart';
@@ -123,7 +122,6 @@ class AppProviders extends StatelessWidget {
             final account = session.status == SessionStatus.authenticated
                 ? session.userId
                 : null;
-            InMemoryChatRepository.instance.useAccount(account);
             InMemoryTeamsRepository.instance.useAccount(account);
           },
           child: BlocBuilder<SessionCubit, SessionState>(

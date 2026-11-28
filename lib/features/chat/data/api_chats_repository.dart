@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hywork/core/network/api_client/api_client.dart';
 import 'package:hywork/core/security/secure_token/secure_token.dart';
-import 'package:hywork/features/chat/domain/backend_chat.dart';
+import 'package:hywork/features/chat/models/backend_chat.dart';
 import 'package:hywork/features/posts/domain/models/profile_category.dart';
 import 'package:hywork/features/profile_settings/domain/profile_limits.dart';
 import 'package:path/path.dart' as p;

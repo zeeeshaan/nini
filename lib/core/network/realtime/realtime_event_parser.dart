@@ -1,5 +1,5 @@
 import 'package:hywork/core/network/realtime/realtime_events.dart';
-import 'package:hywork/features/chat/domain/backend_chat.dart';
+import 'package:hywork/features/chat/models/backend_chat.dart';
 import 'package:hywork/features/notifications/domain/backend_notification.dart';
 
 /// Parses Socket.IO payloads using documented Swagger Realtime shapes only.

@@ -4,7 +4,7 @@ import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:hywork/core/localization/strings/profile_post_strings.dart';
 import 'package:hywork/core/localization/strings/profile_screen_strings.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
-import 'package:hywork/features/chat/presentation/helpers/open_seller_conversation.dart';
+import 'package:hywork/features/chat/utils/open_seller_conversation.dart';
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/profile_settings/presentation/cubit/user_profile_cubit.dart';
 import 'package:hywork/features/profile_settings/presentation/widgets/common/settings_empty_state.dart';
