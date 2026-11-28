@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
@@ -26,6 +28,12 @@ class _NotificationsScreenState extends State<NotificationsScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final notifications = context.read<NotificationsCubit>();
+      unawaited(notifications.refresh());
+      unawaited(notifications.refreshUnreadCount());
+    });
   }
 
   @override
@@ -37,7 +45,9 @@ class _NotificationsScreenState extends State<NotificationsScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed && mounted) {
-      context.read<NotificationsCubit>().refreshUnreadCount();
+      final notifications = context.read<NotificationsCubit>();
+      unawaited(notifications.refresh());
+      unawaited(notifications.refreshUnreadCount());
     }
   }
 

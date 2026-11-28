@@ -45,6 +45,7 @@ class ChatMessage {
     bool clearImageUrl = false,
     ChatAttachment? attachment,
     bool clearAttachment = false,
+    ChatDeliveryStatus? deliveryStatus,
   }) {
     return ChatMessage(
       id: id,
@@ -52,7 +53,7 @@ class ChatMessage {
       text: text ?? this.text,
       sentAt: sentAt,
       isMine: isMine,
-      deliveryStatus: deliveryStatus,
+      deliveryStatus: deliveryStatus ?? this.deliveryStatus,
       attachment: clearAttachment ? null : (attachment ?? this.attachment),
       location: location,
       deleted: deleted ?? this.deleted,

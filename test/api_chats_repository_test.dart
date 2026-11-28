@@ -63,6 +63,7 @@ class _Api extends ApiClient {
   Future<Map<String, dynamic>> delete(
     String endpoint, {
     required String token,
+    Map<String, dynamic>? data,
   }) async {
     deletes.add(endpoint);
     tokens.add(token);

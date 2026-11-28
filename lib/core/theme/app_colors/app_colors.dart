@@ -30,6 +30,8 @@ abstract final class AppColors {
   static const walletPending = Color(0xFFFFB000);
 
   // Indicators. Keep the existing shades distinct.
+  /// Blue double-check for own messages after peer `chat:read`.
+  static const Color chatReadReceipt = Color(0xFF53BDEB);
   static const notificationBadge = Color(0xFFFF0000);
   static const cartBadge = Color(0xFFFF2020);
   static const stockBadgeBackground = Color(0xFFFFEEEE);

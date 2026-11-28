@@ -87,6 +87,7 @@ class _Api extends ApiClient {
   Future<Map<String, dynamic>> delete(
     String endpoint, {
     required String token,
+    Map<String, dynamic>? data,
   }) async {
     deletes.add(endpoint);
     if (deleteError != null) throw deleteError!;
@@ -306,6 +307,9 @@ void main() {
     await cubit.deleteSelected();
     expect(cubit.state.messages.single.deleted, isTrue);
     expect(cubit.state.messages.single.text, isEmpty);
+    expect(cubit.state.visibleMessages, isEmpty);
+    expect(cubit.latestMessage, isNull);
+    expect(api.deletes, ['chats/$chatId/messages/$messageId']);
 
     api.messagesResponse = {
       'success': true,
@@ -320,6 +324,50 @@ void main() {
     await cubit.refresh();
     expect(cubit.state.messages.single.deleted, isTrue);
     expect(cubit.state.messages.single.text, isEmpty);
+    expect(cubit.state.visibleMessages, isEmpty);
+    await cubit.close();
+  });
+
+  test('deleteSelected ignores peer messages without calling DELETE', () async {
+    final api = _Api()
+      ..messagesResponse = {
+        'success': true,
+        'data': {
+          'items': [_message(id: messageId, text: 'theirs', isMine: false)],
+          'hasMore': false,
+          'nextBefore': null,
+        },
+      };
+    final cubit = _cubit(api);
+    await Future<void>.delayed(Duration.zero);
+    await cubit.load();
+    expect(cubit.state.visibleMessages, hasLength(1));
+    cubit.toggleSelection(messageId);
+    await cubit.deleteSelected();
+    expect(cubit.state.visibleMessages, hasLength(1));
+    expect(cubit.state.messages.single.deleted, isFalse);
+    expect(api.deletes, isEmpty);
+    await cubit.close();
+  });
+
+  test('empty backend history and failures do not invent messages', () async {
+    final api = _Api()
+      ..messagesResponse = {
+        'success': true,
+        'data': {'items': <dynamic>[], 'hasMore': false, 'nextBefore': null},
+      };
+    final cubit = _cubit(api);
+    await Future<void>.delayed(Duration.zero);
+    await cubit.load();
+    expect(cubit.state.messages, isEmpty);
+    expect(cubit.state.visibleMessages, isEmpty);
+
+    api.messagesError = DioException(
+      requestOptions: RequestOptions(path: 'chats/$chatId/messages'),
+    );
+    await cubit.refresh();
+    expect(cubit.state.messages, isEmpty);
+    expect(cubit.state.error, ChatStrings.messagesLoadFailed);
     await cubit.close();
   });
 

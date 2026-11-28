@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "742268147653",
+    "project_id": "hywork-225e9",
+    "storage_bucket": "hywork-225e9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742268147653:android:61aaf8463c7405056e5dac",
+        "android_client_info": {
+          "package_name": "com.hywork.hywork"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3gyMlEcu3z6FdxrxspOHzpYNLEtBbpUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742268147653:android:03f717784cd073146e5dac",
+        "android_client_info": {
+          "package_name": "com.nini.nini"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3gyMlEcu3z6FdxrxspOHzpYNLEtBbpUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

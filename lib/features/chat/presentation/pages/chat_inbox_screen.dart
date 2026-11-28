@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hywork/core/theme/app_text_styles/app_text_styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/chat_strings.dart';
+import 'package:hywork/core/network/realtime/realtime_socket_client.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
 import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
 import 'package:hywork/features/chat/presentation/cubit/chat_inbox_cubit.dart';
@@ -15,6 +18,7 @@ import 'package:hywork/features/chat/presentation/widgets/inbox/chat_conversatio
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/profile/data/api_public_profile_repository.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
+import 'package:hywork/shared/widgets/app_toast/app_toast.dart';
 import 'package:hywork/shared/widgets/skeleton/app_shimmer.dart';
 import 'package:hywork/shared/widgets/skeleton/list_tile_skeleton.dart';
 
@@ -42,6 +46,7 @@ class ChatInboxScreen extends StatelessWidget {
       create: (_) => ChatInboxCubit(
         context.read<ApiChatsRepository>(),
         isCurrentAccount: current,
+        realtime: context.read<RealtimeSocketClient?>(),
       ),
       child: _ChatInboxView(onOpenConversation: onOpenConversation),
     );
@@ -117,6 +122,19 @@ class _ChatInboxViewState extends State<_ChatInboxView>
   @override
   void didPush() {
     _inboxVisible = true;
+  }
+
+  Future<void> _markAllRead(BuildContext context, ChatInboxCubit cubit) async {
+    final ok = await cubit.markAllAsRead();
+    if (!context.mounted) return;
+    await context.read<ChatUnreadCubit?>()?.refresh();
+    if (!context.mounted) return;
+    if (!ok) {
+      AppToast.error(
+        context,
+        cubit.state.error ?? ChatStrings.markAllReadPartial,
+      );
+    }
   }
 
   void _openConversation(ChatConversation conversation) {
@@ -212,7 +230,7 @@ class _ChatInboxViewState extends State<_ChatInboxView>
                         cubit.toggleUnreadFilter();
                         break;
                       case _InboxMenuAction.markAllRead:
-                        cubit.markAllAsRead();
+                        unawaited(_markAllRead(context, cubit));
                         break;
                     }
                   },

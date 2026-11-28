@@ -299,28 +299,6 @@ abstract final class AppStrings {
     _ => category,
   };
 
-  // Bundled demo contacts and messages, also used by the call preview headers.
-  static const chatSupportName = "Support";
-  static const demoObidName = "Obid Amati";
-  static const demoSarahName = "Sarah Ahmed";
-  static const demoAlexName = "Alex Morgan";
-  static const demoDavidName = "David Wilson";
-  static const demoNinaName = "Nina Parker";
-  static const demoJamesName = "James Carter";
-  static const demoSupportPreview = "How can we help you today?";
-  static const demoThanksPreview = "Thanks for your message.";
-  static const demoDetailsPreview = "I will send you the details.";
-  static const demoAvailabilityPreview = "Is this product still available?";
-  static const demoPricePreview = "Can we discuss the price?";
-  static const demoSoundsGoodPreview = "Sounds good, thank you!";
-  static const demoSoonPreview = "I will reply soon.";
-  static const demoMoreInfoPreview = "Please send more information.";
-  static const demoAskAvailability = "Hello! Is this item still available?";
-  static const demoConfirmAvailability = "Hello! Yes, it is available.";
-  static const demoAskDetails = "Could you share more details?";
-  static const demoShareDetails = "Of course! I will send all the details.";
-  static const demoThankYou = "That would be great. Thank you!";
-
   static String chatFileSize(int bytes) => bytes >= 1048576
       ? '${persianDigits((bytes / 1048576).toStringAsFixed(1))} MB'
       : '${persianDigits((bytes / 1024).ceil())} KB';
@@ -394,11 +372,19 @@ abstract final class AppStrings {
   static const pauseVoice = "Pause voice message";
   static const sendingAttachment = "Preparing attachment…";
   static const selectMessages = "Select messages";
-  static const deleteMessages = "Delete messages";
+  static const deleteMessages = "Delete message";
   static const deleteSelectedMessages = "Delete selected messages";
   static const selectMessagesHelp = "Tap messages to select them";
   static const selectAllMessages = "Select all messages";
   static const delete = "Delete";
+  static const deleteChat = "Delete chat";
+  static const deleteChatQuestion = "Delete chat?";
+  static const deleteChatHelp =
+      "This will remove the conversation from your chat list.";
+
+  /// Swagger `DELETE …/messages/{messageId}` — “Delete my message”.
+  static const deleteMyMessage = "Delete my message";
+  static const deleteMyMessageQuestion = "Delete this message?";
   static const clearConversation = "Clear conversation";
   static const clearConversationQuestion =
       "Clear all messages in this conversation?";

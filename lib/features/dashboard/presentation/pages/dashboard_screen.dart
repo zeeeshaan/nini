@@ -53,6 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     WidgetsBinding.instance.addObserver(this);
 
     _navigation = DashboardNavigationCubit(initialTab: widget.initialTab);
+    _navigation.onExternalOpen = _onTabSelected;
 
     _pageController = PageController(initialPage: widget.initialTab.index);
   }

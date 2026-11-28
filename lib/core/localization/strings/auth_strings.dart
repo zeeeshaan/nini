@@ -21,8 +21,7 @@ abstract final class AuthStrings {
       'تلاش‌های زیادی انجام شده است. لطفاً بعداً دوباره تلاش کنید.';
   static const serverUnavailable =
       'سرور در دسترس نیست. لطفاً دوباره تلاش کنید.';
-  static const connectionFailed =
-      'اتصال برقرار نشد. لطفاً دوباره تلاش کنید.';
+  static const connectionFailed = 'اتصال برقرار نشد. لطفاً دوباره تلاش کنید.';
   static const done = 'تأیید';
   static const enterOtp = 'کد تأیید را وارد کنید';
   static const continueLabel = 'ادامه';
@@ -32,5 +31,6 @@ abstract final class AuthStrings {
   static const resendCode = 'ارسال مجدد کد';
   static const resendCountdown = 'زمان تا ارسال مجدد';
   static String codeFor(String phone) => 'کد تأیید برای $phone';
-  static String codeSentTo(String email) => 'کد ارسال‌شده به $email را وارد کنید';
+  static String codeSentTo(String email) =>
+      'کد ارسال‌شده به $email را وارد کنید';
 }

@@ -16,12 +16,16 @@ class _Tokens extends SecureTokenStore {
 class _Api extends ApiClient {
   final gets = <String>[];
   final posts = <String>[];
+  final deletes = <String>[];
   final bodies = <Map<String, dynamic>?>[];
+  final deleteBodies = <Map<String, dynamic>?>[];
   final tokens = <String?>[];
   Map<String, dynamic>? getResponse;
   Map<String, dynamic>? postResponse;
+  Map<String, dynamic>? deleteResponse;
   Object? getError;
   Object? postError;
+  Object? deleteError;
   bool accountStillCurrent = true;
 
   @override
@@ -62,6 +66,25 @@ class _Api extends ApiClient {
           {
             'success': true,
             'data': {'updated': 1, 'unreadCount': 0},
+          },
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> delete(
+    String endpoint, {
+    required String token,
+    Map<String, dynamic>? data,
+  }) async {
+    deletes.add(endpoint);
+    deleteBodies.add(data);
+    tokens.add(token);
+    if (deleteError != null) throw deleteError!;
+    return Map<String, dynamic>.from(
+      deleteResponse ??
+          {
+            'success': true,
+            'data': {'removed': 1},
           },
     );
   }
@@ -344,6 +367,109 @@ void main() {
       );
     await expectLater(_repo(api).list(), throwsA(isA<DioException>()));
   });
+
+  test(
+    'POST /notifications/devices registers the traditional FCM token',
+    () async {
+      final api = _Api()
+        ..postResponse = {
+          'success': true,
+          'data': {'registered': true, 'platform': 'android', 'locale': 'fa'},
+        };
+      final result = await _repo(api).registerDevice(
+        fcmToken: 'fcm-token-from-the-app',
+        platform: NotificationDevicePlatform.android,
+        locale: NotificationDeviceLocale.fa,
+      );
+      expect(api.posts.single, 'notifications/devices');
+      expect(api.bodies.single, {
+        'token': 'fcm-token-from-the-app',
+        'platform': 'android',
+        'locale': 'fa',
+      });
+      expect(result.registered, isTrue);
+      expect(result.platform, 'android');
+      expect(result.locale, 'fa');
+    },
+  );
+
+  test('POST /notifications/devices rejects invalid input', () async {
+    final api = _Api();
+    final repo = _repo(api);
+    await expectLater(
+      repo.registerDevice(fcmToken: '', platform: 'android'),
+      throwsFormatException,
+    );
+    await expectLater(
+      repo.registerDevice(fcmToken: 'token', platform: 'desktop'),
+      throwsFormatException,
+    );
+    await expectLater(
+      repo.registerDevice(fcmToken: 'token', platform: 'android', locale: 'de'),
+      throwsFormatException,
+    );
+    expect(api.posts, isEmpty);
+  });
+
+  test(
+    'POST /notifications/devices requires a confirmed success envelope',
+    () async {
+      final api = _Api()
+        ..postResponse = {
+          'success': true,
+          'data': {'registered': false, 'platform': 'android', 'locale': 'fa'},
+        };
+      final result = await _repo(api)
+          .registerDevice(fcmToken: 'token', platform: 'android');
+      expect(result.registered, isFalse);
+
+      api.postResponse = {
+        'success': true,
+        'data': {'platform': 'android', 'locale': 'fa'},
+      };
+      await expectLater(
+        _repo(api).registerDevice(fcmToken: 'token', platform: 'android'),
+        throwsFormatException,
+      );
+    },
+  );
+
+  test(
+    'DELETE /notifications/devices removes the traditional FCM token',
+    () async {
+      final api = _Api()
+        ..deleteResponse = {
+          'success': true,
+          'data': {'removed': 1},
+        };
+      final result = await _repo(api)
+          .unregisterDevice(fcmToken: 'fcm-token-from-the-app');
+      expect(api.deletes.single, 'notifications/devices');
+      expect(api.deleteBodies.single, {'token': 'fcm-token-from-the-app'});
+      expect(result.removed, 1);
+    },
+  );
+
+  test(
+    'device registration rejects stale responses after account switch',
+    () async {
+      final switching = _SwitchingApi()
+        ..postResponse = {
+          'success': true,
+          'data': {'registered': true, 'platform': 'android', 'locale': 'fa'},
+        };
+      final repo = ApiNotificationsRepository(
+        switching,
+        _Tokens(),
+        isCurrentAccount: () => switching.current,
+        onUnauthorized: () async {},
+      );
+      await expectLater(
+        repo.registerDevice(fcmToken: 'token', platform: 'android'),
+        throwsFormatException,
+      );
+    },
+  );
 }
 
 class _SwitchingApi extends _Api {
@@ -355,6 +481,17 @@ class _SwitchingApi extends _Api {
     required String token,
   }) async {
     final response = await super.get(endpoint, token: token);
+    current = false;
+    return response;
+  }
+
+  @override
+  Future<Map<String, dynamic>> post(
+    String endpoint, {
+    Map<String, dynamic>? data,
+    String? token,
+  }) async {
+    final response = await super.post(endpoint, data: data, token: token);
     current = false;
     return response;
   }

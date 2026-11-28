@@ -27,6 +27,7 @@ class ConversationHeader extends StatelessWidget
     required this.onVoiceCall,
     required this.onVideoCall,
     this.canCopy = false,
+    this.peerTyping = false,
     this.toolbarHeight = 70,
     this.titleContent,
     this.bottom,
@@ -37,7 +38,7 @@ class ConversationHeader extends StatelessWidget
   final Widget? titleContent;
   final PreferredSizeWidget? bottom;
   final bool allowBlocking;
-  final bool selectionMode, blocked, hasMessages, busy, canCopy;
+  final bool selectionMode, blocked, hasMessages, busy, canCopy, peerTyping;
   final int selectedCount;
   final double toolbarHeight;
   final VoidCallback onBack, onDelete, onSelectAll, onVoiceCall, onVideoCall;
@@ -92,9 +93,12 @@ class ConversationHeader extends StatelessWidget
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: AppTextStyles.helper.copyWith(
-                                  color: colors.onSurface.withValues(
-                                    alpha: .45,
-                                  ),
+                                  color: peerTyping
+                                      ? colors.primary
+                                      : colors.onSurface.withValues(alpha: .45),
+                                  fontWeight: peerTyping
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
                                 ),
                                 textAlign: TextAlign.right,
                                 textDirection: TextDirection.ltr,

@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/chat_strings.dart';
 import 'package:hywork/core/network/api_client/api_client.dart';
 import 'package:hywork/core/security/secure_token/secure_token.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
+import 'package:hywork/features/chat/domain/models/chat_message.dart';
 import 'package:hywork/features/chat/presentation/cubit/chat_inbox_cubit.dart';
 
 class _Tokens extends SecureTokenStore {
@@ -13,8 +15,12 @@ class _Tokens extends SecureTokenStore {
 
 class _Api extends ApiClient {
   final gets = <String>[];
+  final posts = <String>[];
   Map<String, dynamic>? listResponse;
+  Map<String, dynamic>? unreadResponse;
   Object? listError;
+  Object? readError;
+  Object? unreadError;
 
   @override
   Future<Map<String, dynamic>> get(
@@ -22,6 +28,16 @@ class _Api extends ApiClient {
     required String token,
   }) async {
     gets.add(endpoint);
+    if (endpoint.startsWith('chats/unread-count')) {
+      if (unreadError != null) throw unreadError!;
+      return Map<String, dynamic>.from(
+        unreadResponse ??
+            {
+              'success': true,
+              'data': {'chats': 0, 'messages': 0},
+            },
+      );
+    }
     if (listError != null) throw listError!;
     return Map<String, dynamic>.from(
       listResponse ??
@@ -30,6 +46,20 @@ class _Api extends ApiClient {
             'data': {'items': <dynamic>[], 'total': 0, 'page': 1, 'limit': 20},
           },
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> post(
+    String endpoint, {
+    Map<String, dynamic>? data,
+    String? token,
+  }) async {
+    posts.add(endpoint);
+    if (readError != null) throw readError!;
+    return {
+      'success': true,
+      'data': {'read': 1},
+    };
   }
 }
 
@@ -245,4 +275,172 @@ void main() {
     expect(cubit.state.conversations, isEmpty);
     await cubit.close();
   });
+
+  test('markAllAsRead posts read for each loaded unread chat', () async {
+    final unreadA = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+    final unreadB = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+    final readId = 'cccccccc-cccc-4ccc-8ccc-cccccccccccc';
+    final api = _Api()
+      ..listResponse = {
+        'success': true,
+        'data': {
+          'items': [
+            _chatItem(id: unreadA, unread: 3),
+            _chatItem(id: unreadB, unread: 1),
+            _chatItem(id: readId, unread: 0),
+          ],
+          'total': 3,
+          'page': 1,
+          'limit': 20,
+        },
+      };
+    final cubit = _cubit(api);
+    await Future<void>.delayed(Duration.zero);
+    await cubit.load();
+
+    // Backend list after successful per-chat mark-read.
+    api.listResponse = {
+      'success': true,
+      'data': {
+        'items': [
+          _chatItem(id: unreadA, unread: 0),
+          _chatItem(id: unreadB, unread: 0),
+          _chatItem(id: readId, unread: 0),
+        ],
+        'total': 3,
+        'page': 1,
+        'limit': 20,
+      },
+    };
+    api.unreadResponse = {
+      'success': true,
+      'data': {'chats': 0, 'messages': 0},
+    };
+
+    final ok = await cubit.markAllAsRead();
+    expect(ok, isTrue);
+    expect(api.posts, ['chats/$unreadA/read', 'chats/$unreadB/read']);
+    expect(cubit.state.conversations.every((c) => c.unreadCount == 0), isTrue);
+    await cubit.close();
+  });
+
+  test(
+    'markAllAsRead reports partial failure without inventing success',
+    () async {
+      final unreadA = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+      final unreadB = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+      final api = _Api()
+        ..listResponse = {
+          'success': true,
+          'data': {
+            'items': [
+              _chatItem(id: unreadA, unread: 2),
+              _chatItem(id: unreadB, unread: 1),
+            ],
+            'total': 2,
+            'page': 1,
+            'limit': 20,
+          },
+        }
+        ..readError = DioException(
+          requestOptions: RequestOptions(path: 'chats/$unreadA/read'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: 'chats/$unreadA/read'),
+            statusCode: 500,
+          ),
+        )
+        ..unreadResponse = {
+          'success': true,
+          'data': {'chats': 2, 'messages': 3},
+        };
+      final cubit = _cubit(api);
+      await Future<void>.delayed(Duration.zero);
+      await cubit.load();
+
+      final ok = await cubit.markAllAsRead();
+      expect(ok, isFalse);
+      expect(cubit.state.error, ChatStrings.markAllReadPartial);
+      await cubit.close();
+    },
+  );
+
+  test(
+    'updateConversationPreview never shows deleted message content',
+    () async {
+      final api = _Api()
+        ..listResponse = {
+          'success': true,
+          'data': {
+            'items': [_chatItem(id: chatId)],
+            'total': 1,
+            'page': 1,
+            'limit': 20,
+          },
+        };
+      final cubit = _cubit(api);
+      await Future<void>.delayed(Duration.zero);
+      await cubit.load();
+      expect(cubit.state.conversations, hasLength(1));
+
+      cubit.updateConversationPreview(
+        chatId,
+        ChatMessage(
+          id: '33333333-3333-4333-8333-333333333333',
+          conversationId: chatId,
+          text: 'should not appear',
+          sentAt: DateTime.utc(2026, 11, 21),
+          isMine: true,
+          deleted: true,
+        ),
+      );
+      expect(
+        cubit.state.conversations.single.lastMessage,
+        AppStrings.noMessages,
+      );
+      expect(cubit.state.conversations, hasLength(1));
+      await cubit.close();
+    },
+  );
+
+  test(
+    'markAllAsRead does not claim success when unread remain unloaded',
+    () async {
+      final loadedUnread = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+      final api = _Api()
+        ..listResponse = {
+          'success': true,
+          'data': {
+            'items': [_chatItem(id: loadedUnread, unread: 1)],
+            'total': 40,
+            'page': 1,
+            'limit': 20,
+          },
+        }
+        ..unreadResponse = {
+          'success': true,
+          'data': {'chats': 5, 'messages': 12},
+        };
+      final cubit = _cubit(api);
+      await Future<void>.delayed(Duration.zero);
+      await cubit.load();
+      expect(cubit.state.hasMore, isTrue);
+
+      api.listResponse = {
+        'success': true,
+        'data': {
+          'items': [_chatItem(id: loadedUnread, unread: 0)],
+          'total': 40,
+          'page': 1,
+          'limit': 20,
+        },
+      };
+
+      final ok = await cubit.markAllAsRead();
+      expect(ok, isFalse);
+      expect(cubit.state.error, ChatStrings.markAllReadPartial);
+      expect(api.posts, ['chats/$loadedUnread/read']);
+      await cubit.close();
+    },
+  );
 }

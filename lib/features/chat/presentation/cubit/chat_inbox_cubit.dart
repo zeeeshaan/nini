@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/chat_strings.dart';
+import 'package:hywork/core/network/realtime/realtime_events.dart';
+import 'package:hywork/core/network/realtime/realtime_socket_client.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
+import 'package:hywork/features/chat/domain/backend_chat.dart';
 import 'package:hywork/features/chat/domain/backend_chat_mapper.dart';
 import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
 import 'package:hywork/features/chat/domain/models/chat_message.dart';
@@ -68,8 +71,12 @@ class ChatInboxState {
 
 /// Inbox backed by `ApiChatsRepository` (`GET /chats` with `q` / page / limit).
 class ChatInboxCubit extends Cubit<ChatInboxState> {
-  ChatInboxCubit(this._repository, {required this.isCurrentAccount})
-    : super(const ChatInboxState(loading: true)) {
+  ChatInboxCubit(
+    this._repository, {
+    required this.isCurrentAccount,
+    RealtimeSocketClient? realtime,
+  }) : super(const ChatInboxState(loading: true)) {
+    _bindRealtime(realtime);
     if (isCurrentAccount()) {
       unawaited(load());
     } else {
@@ -84,11 +91,125 @@ class ChatInboxCubit extends Cubit<ChatInboxState> {
 
   int _listRevision = 0;
   Future<void>? _loadMoreInFlight;
+  Future<void>? _refreshInFlight;
   Timer? _searchDebounce;
+  StreamSubscription<RealtimeEvent>? _realtimeEvents;
+  final Set<String> _deletedMessageIds = {};
+
+  void _bindRealtime(RealtimeSocketClient? realtime) {
+    if (realtime == null) return;
+    _realtimeEvents = realtime.events.listen(_onRealtimeEvent);
+  }
+
+  void _onRealtimeEvent(RealtimeEvent event) {
+    if (isClosed || !isCurrentAccount()) return;
+    switch (event) {
+      case RealtimeRecovered():
+        unawaited(_coalescedRefresh());
+      case RealtimeChatMessage(
+        :final conversationId,
+        :final message,
+        :final unread,
+      ):
+        _applySocketMessage(
+          conversationId: conversationId,
+          message: message,
+          unread: unread,
+        );
+      case RealtimeChatMessageDeleted(:final conversationId, :final messageId):
+        _applySocketDeleted(
+          conversationId: conversationId,
+          messageId: messageId,
+        );
+      case RealtimeChatUnread(:final conversationId, :final unread):
+        _applyConversationUnread(conversationId, unread);
+      default:
+        break;
+    }
+  }
+
+  Future<void> _coalescedRefresh() {
+    if (_refreshInFlight != null) return _refreshInFlight!;
+    late final Future<void> future;
+    future = refresh().whenComplete(() {
+      if (identical(_refreshInFlight, future)) _refreshInFlight = null;
+    });
+    _refreshInFlight = future;
+    return future;
+  }
+
+  void _applySocketMessage({
+    required String conversationId,
+    required BackendChatMessage message,
+    required int? unread,
+  }) {
+    if (_deletedMessageIds.contains(message.id) && !message.deleted) {
+      return;
+    }
+    final index = state.conversations.indexWhere(
+      (conversation) => conversation.id == conversationId,
+    );
+    if (index < 0) {
+      // Do not fabricate conversation metadata — refresh authoritative list.
+      unawaited(_coalescedRefresh());
+      return;
+    }
+
+    final current = state.conversations[index];
+    final mapped = chatMessageFromBackend(message);
+    final preview = chatMessagePreview(mapped);
+    final nextUnread = unread != null
+        ? (unread < 0 ? 0 : unread)
+        : (mapped.isMine
+              ? current.unreadCount
+              : current.unreadCount + (mapped.deleted ? 0 : 1));
+    final updated = current.copyWith(
+      lastMessage: preview,
+      lastMessageAt: mapped.sentAt,
+      unreadCount: nextUnread,
+    );
+    final others = [
+      for (final item in state.conversations)
+        if (item.id != conversationId) item,
+    ];
+    emit(
+      state.copyWith(conversations: List.unmodifiable([updated, ...others])),
+    );
+  }
+
+  void _applySocketDeleted({
+    required String conversationId,
+    required String messageId,
+  }) {
+    _deletedMessageIds.add(messageId);
+    final index = state.conversations.indexWhere(
+      (conversation) => conversation.id == conversationId,
+    );
+    if (index < 0) {
+      unawaited(_coalescedRefresh());
+      return;
+    }
+    // Preview text is not keyed by message id — refresh metadata via REST.
+    unawaited(_coalescedRefresh());
+  }
+
+  void _applyConversationUnread(String conversationId, int unread) {
+    if (isClosed) return;
+    final safe = unread < 0 ? 0 : unread;
+    final updated = state.conversations
+        .map((conversation) {
+          if (conversation.id != conversationId) return conversation;
+          return conversation.copyWith(unreadCount: safe);
+        })
+        .toList(growable: false);
+    emit(state.copyWith(conversations: List.unmodifiable(updated)));
+  }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     _searchDebounce?.cancel();
+    await _realtimeEvents?.cancel();
+    _realtimeEvents = null;
     return super.close();
   }
 
@@ -126,13 +247,69 @@ class ChatInboxCubit extends Cubit<ChatInboxState> {
     emit(state.copyWith(unreadOnly: !state.unreadOnly));
   }
 
-  /// Local-only list adjustment — there is no mark-all chats API in v0.18.0.
-  void markAllAsRead() {
-    if (isClosed) return;
-    final updated = state.conversations
-        .map((chat) => chat.copyWith(unreadCount: 0))
+  /// Marks each **currently loaded** unread chat via `POST /chats/{id}/read`.
+  ///
+  /// There is no bulk mark-all chats endpoint in API 0.20.0. Never reports full
+  /// success when unloaded unread chats may remain (`hasMore`) or when
+  /// `GET /chats/unread-count` still reports unread after the attempt.
+  Future<bool> markAllAsRead() async {
+    if (isClosed || !isCurrentAccount()) return false;
+    final coverageIncomplete = state.hasMore;
+    final targets = state.conversations
+        .where((chat) => chat.unreadCount > 0)
+        .map((chat) => chat.id)
         .toList(growable: false);
-    emit(state.copyWith(conversations: updated));
+
+    if (targets.isEmpty) {
+      return _confirmMarkAllComplete(coverageIncomplete: coverageIncomplete);
+    }
+
+    var failures = 0;
+    for (final id in targets) {
+      if (isClosed || !isCurrentAccount()) return false;
+      try {
+        await _repository.markRead(id);
+        if (isClosed || !isCurrentAccount()) return false;
+        markAsRead(id);
+      } catch (_) {
+        failures++;
+      }
+    }
+    if (isClosed) return false;
+    await refresh();
+    if (isClosed) return false;
+
+    final stillLoadedUnread = state.conversations.any(
+      (chat) => chat.unreadCount > 0,
+    );
+    final ok = await _confirmMarkAllComplete(
+      coverageIncomplete:
+          coverageIncomplete || stillLoadedUnread || failures > 0,
+    );
+    return ok && failures == 0 && !stillLoadedUnread;
+  }
+
+  /// Uses authoritative unread-count when available; never claims success while
+  /// more inbox pages (or a positive badge) indicate remaining unread chats.
+  Future<bool> _confirmMarkAllComplete({
+    required bool coverageIncomplete,
+  }) async {
+    if (isClosed || !isCurrentAccount()) return false;
+    try {
+      final badge = await _repository.unreadCount();
+      if (isClosed || !isCurrentAccount()) return false;
+      if (badge.chats > 0 || badge.messages > 0) {
+        emit(state.copyWith(error: ChatStrings.markAllReadPartial));
+        return false;
+      }
+      return true;
+    } catch (_) {
+      if (coverageIncomplete) {
+        emit(state.copyWith(error: ChatStrings.markAllReadPartial));
+        return false;
+      }
+      return true;
+    }
   }
 
   void markAsRead(String conversationId) {

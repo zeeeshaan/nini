@@ -28,7 +28,7 @@ class ApiChatsRepository {
   final Set<String> _sendInFlight = {};
   final Set<String> _openInFlight = {};
   final Set<String> _deleteInFlight = {};
-  final Set<String> _readInFlight = {};
+  final Map<String, Future<MarkChatReadResult>> _readInFlight = {};
 
   Future<String> _token() async {
     if (!isCurrentAccount()) {
@@ -291,27 +291,33 @@ class ApiChatsRepository {
     return sendMessage(chatId, text: text, imageUrl: upload.url);
   }
 
-  /// `POST /chats/{id}/read`.
+  /// `POST /chats/{id}/read`. Concurrent callers share one in-flight request.
   Future<MarkChatReadResult> markRead(String chatId) async {
     _requireChatId(chatId);
-    if (!_readInFlight.add(chatId)) {
-      throw const FormatException('Chat is already being marked read.');
-    }
-    try {
-      final response = await _request(
-        (token) => _apiClient.post(
-          'chats/${Uri.encodeComponent(chatId)}/read',
-          token: token,
-        ),
-      );
-      final data = response['data'];
-      if (response['success'] != true || data is! Map<String, dynamic>) {
-        throw const FormatException('Mark chat read was not confirmed.');
-      }
-      return MarkChatReadResult.fromJson(data);
-    } finally {
-      _readInFlight.remove(chatId);
-    }
+    final existing = _readInFlight[chatId];
+    if (existing != null) return existing;
+
+    late final Future<MarkChatReadResult> future;
+    future =
+        () async {
+          final response = await _request(
+            (token) => _apiClient.post(
+              'chats/${Uri.encodeComponent(chatId)}/read',
+              token: token,
+            ),
+          );
+          final data = response['data'];
+          if (response['success'] != true || data is! Map<String, dynamic>) {
+            throw const FormatException('Mark chat read was not confirmed.');
+          }
+          return MarkChatReadResult.fromJson(data);
+        }().whenComplete(() {
+          if (identical(_readInFlight[chatId], future)) {
+            _readInFlight.remove(chatId);
+          }
+        });
+    _readInFlight[chatId] = future;
+    return future;
   }
 
   /// `DELETE /chats/{id}/messages/{messageId}` — soft-delete own message.

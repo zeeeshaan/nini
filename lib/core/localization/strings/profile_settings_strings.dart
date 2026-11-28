@@ -90,8 +90,7 @@ abstract final class ProfileSettingsStrings {
   static const mediaNotice =
       'پیوست‌ها را در ویرایشگر پست مدیریت کنید. فایل‌های رسانه از این صفحه حذف نمی‌شوند.';
   static const noTags = 'هنوز برچسب یا کلیدواژه‌ای نیست';
-  static const tagsHelp =
-      'در ایجاد پست یا ویرایش پست موجود برچسب اضافه کنید.';
+  static const tagsHelp = 'در ایجاد پست یا ویرایش پست موجود برچسب اضافه کنید.';
   static const tagsNotice =
       'روی یک کلیدواژه بزنید تا پست‌هایش را ببینید و برچسب‌ها را ویرایش کنید.';
   static const noArchive = 'بایگانی متصل نیست';
@@ -115,6 +114,5 @@ abstract final class ProfileSettingsStrings {
   static const analyticsFailed = 'بارگذاری تاریخچه آمار محلی ممکن نشد.';
   static const analyticsHelp =
       'شمارش‌ها از پست‌های منتشرشده، رویدادهای محلی ثبت‌شده و سفارش‌های غیرنمایشی استفاده می‌کنند. آمار سراسری سرور نیستند.';
-  static String tagPosts(int count) =>
-      '${AppStrings.persianDigits(count)} پست';
+  static String tagPosts(int count) => '${AppStrings.persianDigits(count)} پست';
 }

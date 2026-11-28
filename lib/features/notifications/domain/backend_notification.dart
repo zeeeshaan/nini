@@ -222,3 +222,64 @@ class MarkNotificationsReadResult {
     );
   }
 }
+
+/// Swagger `platform` values for `POST /notifications/devices`.
+abstract final class NotificationDevicePlatform {
+  static const android = 'android';
+  static const ios = 'ios';
+  static const web = 'web';
+  static const known = {android, ios, web};
+}
+
+/// Swagger `locale` values for `POST /notifications/devices`.
+abstract final class NotificationDeviceLocale {
+  static const fa = 'fa';
+  static const en = 'en';
+  static const known = {fa, en};
+}
+
+/// Confirmed `POST /notifications/devices` result.
+class DeviceRegistrationResult {
+  const DeviceRegistrationResult({
+    required this.registered,
+    required this.platform,
+    required this.locale,
+  });
+
+  final bool registered;
+  final String platform;
+  final String locale;
+
+  factory DeviceRegistrationResult.fromJson(Map<String, dynamic> json) {
+    final registered = json['registered'];
+    final platform = json['platform'];
+    final locale = json['locale'];
+    if (registered is! bool ||
+        platform is! String ||
+        !NotificationDevicePlatform.known.contains(platform) ||
+        locale is! String ||
+        !NotificationDeviceLocale.known.contains(locale)) {
+      throw const FormatException('Device registration was not confirmed.');
+    }
+    return DeviceRegistrationResult(
+      registered: registered,
+      platform: platform,
+      locale: locale,
+    );
+  }
+}
+
+/// Confirmed `DELETE /notifications/devices` result.
+class DeviceRemovalResult {
+  const DeviceRemovalResult({required this.removed});
+
+  final int removed;
+
+  factory DeviceRemovalResult.fromJson(Map<String, dynamic> json) {
+    final removed = json['removed'];
+    if (removed is! int || removed < 0) {
+      throw const FormatException('Device removal was not confirmed.');
+    }
+    return DeviceRemovalResult(removed: removed);
+  }
+}

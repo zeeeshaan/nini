@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hywork/core/network/api_client/api_client.dart';
 import 'package:hywork/core/security/secure_token/secure_token.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
+import 'package:hywork/features/chat/domain/chat_sync.dart';
 import 'package:hywork/features/chat/presentation/cubit/conversation_cubit.dart';
 
 class _Tokens extends SecureTokenStore {
@@ -68,6 +69,7 @@ class _Api extends ApiClient {
   Future<Map<String, dynamic>> delete(
     String endpoint, {
     required String token,
+    Map<String, dynamic>? data,
   }) async {
     return {'success': true, 'data': <String, dynamic>{}};
   }
@@ -368,6 +370,8 @@ void main() {
     cubit.toggleSelection(messageId);
     await cubit.deleteSelected();
     expect(cubit.state.messages.single.deleted, isTrue);
+    expect(cubit.state.visibleMessages, isEmpty);
+    expect(cubit.latestMessage, isNull);
 
     api.messagesResponse = {
       'success': true,
@@ -382,8 +386,54 @@ void main() {
     await cubit.debugPollOnce();
     expect(cubit.state.messages.single.deleted, isTrue);
     expect(cubit.state.messages.single.text, isEmpty);
+    expect(cubit.state.visibleMessages, isEmpty);
     await cubit.close();
   });
+
+  test(
+    'incomplete gap fill beyond maxGapPages is not treated as success',
+    () async {
+      final api = _IncompleteGapApi();
+      final cubit = ConversationCubit(
+        conversationId: chatId,
+        repository: ApiChatsRepository(
+          api,
+          _Tokens(),
+          isCurrentAccount: () => true,
+          onUnauthorized: () async {},
+        ),
+        isCurrentAccount: () => true,
+        currentUserId: () => meId,
+        pollInterval: const Duration(hours: 1),
+        detailsInterval: const Duration(hours: 1),
+      );
+      cubit.setLifecycle(visible: true, foreground: true);
+      await Future<void>.delayed(Duration.zero);
+      await cubit.load();
+      expect(cubit.state.messages.map((m) => m.id), [messageId]);
+
+      api.phase = 1;
+      final ok = await cubit.debugPollOnce();
+      expect(ok, isFalse);
+      expect(api.beforePages, ChatSync.maxGapPages);
+      final firstWalk = List<String>.from(api.beforeCursors);
+      // Newest page still merges what was fetched.
+      expect(cubit.state.messages.map((m) => m.id).contains(newerId), isTrue);
+      // Seed remains; gap was too large to prove continuity.
+      expect(cubit.state.messages.map((m) => m.id).contains(messageId), isTrue);
+
+      // Subsequent sync resumes past the previous walk — no tip re-walk.
+      final ok2 = await cubit.debugPollOnce();
+      expect(ok2, isFalse);
+      expect(api.beforePages, ChatSync.maxGapPages * 2);
+      final secondWalk = api.beforeCursors.sublist(firstWalk.length);
+      expect(secondWalk, isNotEmpty);
+      expect(firstWalk.first, newerId);
+      expect(secondWalk.first, isNot(newerId));
+      expect(firstWalk.contains(secondWalk.first), isFalse);
+      await cubit.close();
+    },
+  );
 
   test('silent poll failures do not clear messages or set error', () async {
     final api = _Api()
@@ -531,6 +581,89 @@ class _GapApi extends ApiClient {
         ],
         'hasMore': true,
         'nextBefore': gapId,
+      },
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> post(
+    String endpoint, {
+    Map<String, dynamic>? data,
+    String? token,
+  }) async {
+    return {
+      'success': true,
+      'data': {'read': 1},
+    };
+  }
+}
+
+/// Never overlaps the seed message within [ChatSync.maxGapPages].
+class _IncompleteGapApi extends ApiClient {
+  int phase = 0;
+  int beforePages = 0;
+  final beforeCursors = <String>[];
+
+  @override
+  Future<Map<String, dynamic>> get(
+    String endpoint, {
+    required String token,
+  }) async {
+    if (!endpoint.contains('/messages')) {
+      return {'success': true, 'data': _detail()};
+    }
+    if (phase == 0) {
+      return {
+        'success': true,
+        'data': {
+          'items': [
+            _message(
+              id: messageId,
+              text: 'seed',
+              createdAt: '2026-11-20T09:00:00.000Z',
+            ),
+          ],
+          'hasMore': false,
+          'nextBefore': null,
+        },
+      };
+    }
+    if (endpoint.contains('before=')) {
+      beforePages++;
+      final uri = Uri.parse(
+        endpoint.contains('?') ? 'x://x/$endpoint' : 'x://x/$endpoint',
+      );
+      beforeCursors.add(uri.queryParameters['before'] ?? '');
+      final pageId =
+          '77777777-7777-4777-8777-${beforePages.toString().padLeft(12, '0')}';
+      return {
+        'success': true,
+        'data': {
+          'items': [
+            _message(
+              id: pageId,
+              text: 'orphan-$beforePages',
+              createdAt:
+                  '2026-11-20T10:${beforePages.toString().padLeft(2, '0')}:00.000Z',
+            ),
+          ],
+          'hasMore': true,
+          'nextBefore': pageId,
+        },
+      };
+    }
+    return {
+      'success': true,
+      'data': {
+        'items': [
+          _message(
+            id: newerId,
+            text: 'newest',
+            createdAt: '2026-11-20T11:00:00.000Z',
+          ),
+        ],
+        'hasMore': true,
+        'nextBefore': newerId,
       },
     };
   }

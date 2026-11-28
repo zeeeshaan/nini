@@ -33,7 +33,8 @@ abstract final class ProfilePostStrings {
   static const category = 'دسته پروفایل';
   static const allOnly = 'فقط همه (بدون دسته)';
   static const manageTabs = 'مدیریت دسته‌ها';
-  static const noTabs = 'هنوز دسته‌ای نیست. برای سازمان‌دهی پست‌ها یکی اضافه کنید.';
+  static const noTabs =
+      'هنوز دسته‌ای نیست. برای سازمان‌دهی پست‌ها یکی اضافه کنید.';
   static const noPosts = 'در این دسته هنوز پستی نیست.';
   static const noPublishedPosts = 'هنوز پستی منتشر نشده است';
   static const publicProfile = 'پروفایل در دسترس نیست';
@@ -44,16 +45,14 @@ abstract final class ProfilePostStrings {
       'بارگذاری این پروفایل ممکن نشد. دوباره تلاش کنید.';
   static const publicConnectionFailed =
       'اتصال برقرار نشد. اتصال خود را بررسی کنید و دوباره تلاش کنید.';
-  static const publicTimeout =
-      'درخواست پروفایل زمان‌بر شد. دوباره تلاش کنید.';
+  static const publicTimeout = 'درخواست پروفایل زمان‌بر شد. دوباره تلاش کنید.';
   static const publicSessionFailed =
       'جلسه شما تأیید نشد. لطفاً دوباره وارد شوید.';
   static const publicSessionChanged =
       'حساب شما تغییر کرد. برای ادامه این پروفایل را دوباره بارگذاری کنید.';
   static const publicPostsUnavailable =
       'پست‌ها و خدمات این کاربر هنوز اینجا در دسترس نیست.';
-  static const followUnavailable =
-      'دنبال کردن و لغو دنبال هنوز در دسترس نیست.';
+  static const followUnavailable = 'دنبال کردن و لغو دنبال هنوز در دسترس نیست.';
   static const loadFailed = 'بارگذاری دسته‌ها ممکن نشد. دوباره تلاش کنید.';
   static const saveFailed = 'ذخیره تغییرات ممکن نشد. دوباره تلاش کنید.';
   static const changesSaved = 'پست با موفقیت ویرایش شد.';
@@ -68,8 +67,7 @@ abstract final class ProfilePostStrings {
       'درخواست دسته نامعتبر است. نام یا ترتیب دسته‌ها را بررسی کنید.';
   static const categoryResponseInvalid =
       'پاسخ دسته تأیید نشد. قبل از تلاش دوباره دسته‌ها را بارگذاری کنید.';
-  static const categoryTimeout =
-      'درخواست دسته زمان‌بر شد. دوباره تلاش کنید.';
+  static const categoryTimeout = 'درخواست دسته زمان‌بر شد. دوباره تلاش کنید.';
   static const categoryConnectionFailed =
       'اتصال به سرویس دسته‌ها ممکن نشد. دوباره تلاش کنید.';
   static const categorySessionExpired =
@@ -86,8 +84,7 @@ abstract final class ProfilePostStrings {
   static const publicCategoriesFailed =
       'بارگذاری دسته‌های پروفایل این کاربر ممکن نشد. پروفایل را دوباره باز کنید.';
   static const duplicateName = 'دسته‌ای با این نام از قبل وجود دارد.';
-  static const reservedName =
-      '«همه» بخش دائمی است. نام دیگری انتخاب کنید.';
+  static const reservedName = '«همه» بخش دائمی است. نام دیگری انتخاب کنید.';
   static const editPost = 'ویرایش پست';
   static const deletePost = 'حذف پست';
   static const deletePostQuestion = 'این پست حذف شود؟';
@@ -97,8 +94,7 @@ abstract final class ProfilePostStrings {
   static const deleteFailed = 'حذف پست ممکن نشد. دوباره تلاش کنید.';
   static const addMedia = 'افزودن رسانه';
   static const removeMedia = 'حذف رسانه';
-  static const mediaRequired =
-      'حداقل یک عکس، ویدیو یا فایل انتخاب کنید.';
+  static const mediaRequired = 'حداقل یک عکس، ویدیو یا فایل انتخاب کنید.';
   static const mediaUnavailable =
       'برخی رسانه‌ها در دسترس نیست. دوباره انتخاب کنید.';
   static const saveChanges = 'ذخیره تغییرات';
@@ -139,15 +135,11 @@ abstract final class ProfilePostStrings {
   static const clearSchedule = 'حذف زمان‌بندی';
   static const altText = 'متن جایگزین';
   static const required = 'این فیلد را تکمیل کنید.';
-  static const invalidNumber =
-      'عدد معتبر بزرگ‌تر یا مساوی صفر وارد کنید.';
+  static const invalidNumber = 'عدد معتبر بزرگ‌تر یا مساوی صفر وارد کنید.';
   static const invalidDiscount = 'عددی بین ۰ تا ۱۰۰ وارد کنید.';
-  static const invalidStock =
-      'عدد صحیح بزرگ‌تر یا مساوی صفر وارد کنید.';
-  static const invalidLocation =
-      'آدرس و عرض و طول جغرافیایی معتبر وارد کنید.';
-  static const invalidFeatures =
-      'برای هر مشخصه نام و مقدار وارد کنید.';
+  static const invalidStock = 'عدد صحیح بزرگ‌تر یا مساوی صفر وارد کنید.';
+  static const invalidLocation = 'آدرس و عرض و طول جغرافیایی معتبر وارد کنید.';
+  static const invalidFeatures = 'برای هر مشخصه نام و مقدار وارد کنید.';
   static const invalidSchedule =
       'زمان شروع آینده و زمان پایان بعد از شروع را انتخاب کنید.';
   static const unsavedTitle = 'تغییرات نادیده گرفته شود؟';

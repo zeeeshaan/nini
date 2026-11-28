@@ -1,12 +1,11 @@
-import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/features/chat/domain/models/chat_message.dart';
 import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
 import 'package:hywork/features/chat/domain/repositories/chat_messages_repository.dart';
 
+/// Local/team chat store. Starts empty — no demo conversations or messages.
 class InMemoryChatRepository implements ChatMessagesRepository {
-  InMemoryChatRepository._() : _seedDemo = true;
-  InMemoryChatRepository.empty() : _seedDemo = false;
-  final bool _seedDemo;
+  InMemoryChatRepository._();
+  InMemoryChatRepository.empty();
 
   static final InMemoryChatRepository instance = InMemoryChatRepository._();
 
@@ -52,18 +51,13 @@ class InMemoryChatRepository implements ChatMessagesRepository {
   Set<String> get blockedConversationIds => Set.unmodifiable(_blocked);
 
   ChatConversation openConversation(ChatConversation conversation) {
-    // A new contact starts empty; sample replies belong only to demo chats.
     _messages.putIfAbsent(conversation.id, () => []);
     return _conversations.putIfAbsent(conversation.id, () => conversation);
   }
 
   @override
   List<ChatMessage> getMessages(String conversationId) {
-    final messages = _messages.putIfAbsent(
-      conversationId,
-      () => _createDemoMessages(conversationId),
-    );
-
+    final messages = _messages.putIfAbsent(conversationId, () => []);
     return List.unmodifiable(messages);
   }
 
@@ -72,12 +66,7 @@ class InMemoryChatRepository implements ChatMessagesRepository {
     if (isBlocked(message.conversationId)) {
       throw StateError('Conversation blocked');
     }
-    _messages
-        .putIfAbsent(
-          message.conversationId,
-          () => _createDemoMessages(message.conversationId),
-        )
-        .add(message);
+    _messages.putIfAbsent(message.conversationId, () => []).add(message);
   }
 
   @override
@@ -100,51 +89,5 @@ class InMemoryChatRepository implements ChatMessagesRepository {
     } else {
       _blocked.remove(id);
     }
-  }
-
-  List<ChatMessage> _createDemoMessages(String conversationId) {
-    if (!_seedDemo) return [];
-    final now = DateTime.now();
-
-    return [
-      ChatMessage(
-        id: '${conversationId}_1',
-        conversationId: conversationId,
-        text: AppStrings.demoAskAvailability,
-        sentAt: now.subtract(const Duration(minutes: 25)),
-        isMine: true,
-        deliveryStatus: ChatDeliveryStatus.read,
-      ),
-      ChatMessage(
-        id: '${conversationId}_2',
-        conversationId: conversationId,
-        text: AppStrings.demoConfirmAvailability,
-        sentAt: now.subtract(const Duration(minutes: 24)),
-        isMine: false,
-      ),
-      ChatMessage(
-        id: '${conversationId}_3',
-        conversationId: conversationId,
-        text: AppStrings.demoAskDetails,
-        sentAt: now.subtract(const Duration(minutes: 22)),
-        isMine: true,
-        deliveryStatus: ChatDeliveryStatus.read,
-      ),
-      ChatMessage(
-        id: '${conversationId}_4',
-        conversationId: conversationId,
-        text: AppStrings.demoShareDetails,
-        sentAt: now.subtract(const Duration(minutes: 20)),
-        isMine: false,
-      ),
-      ChatMessage(
-        id: '${conversationId}_5',
-        conversationId: conversationId,
-        text: AppStrings.demoThankYou,
-        sentAt: now.subtract(const Duration(minutes: 18)),
-        isMine: true,
-        deliveryStatus: ChatDeliveryStatus.read,
-      ),
-    ];
   }
 }

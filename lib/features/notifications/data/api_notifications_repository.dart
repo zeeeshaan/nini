@@ -6,8 +6,9 @@ import 'package:hywork/features/posts/domain/models/profile_category.dart';
 
 /// Authenticated notification REST client (Swagger Notifications).
 ///
-/// Independent of Firebase push registration. Account-scoped via
-/// [isCurrentAccount]; stale responses after logout / switch are rejected.
+/// Includes device registration (`POST`/`DELETE /notifications/devices`).
+/// Account-scoped via [isCurrentAccount]; stale responses after logout /
+/// switch are rejected.
 class ApiNotificationsRepository {
   ApiNotificationsRepository(
     this._apiClient,
@@ -142,5 +143,57 @@ class ApiNotificationsRepository {
       throw const FormatException('Mark-as-read was not confirmed.');
     }
     return MarkNotificationsReadResult.fromJson(data);
+  }
+
+  /// `POST /notifications/devices` — traditional FCM registration token.
+  Future<DeviceRegistrationResult> registerDevice({
+    required String fcmToken,
+    required String platform,
+    String locale = NotificationDeviceLocale.fa,
+  }) async {
+    final token = fcmToken.trim();
+    if (token.isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid FCM registration token.');
+    }
+    if (!NotificationDevicePlatform.known.contains(platform)) {
+      throw const FormatException('Invalid notification device platform.');
+    }
+    if (!NotificationDeviceLocale.known.contains(locale)) {
+      throw const FormatException('Invalid notification device locale.');
+    }
+    final response = await _request(
+      (auth) => _apiClient.post(
+        'notifications/devices',
+        token: auth,
+        data: {'token': token, 'platform': platform, 'locale': locale},
+      ),
+    );
+    final data = response['data'];
+    if (response['success'] != true || data is! Map<String, dynamic>) {
+      throw const FormatException('Device registration was not confirmed.');
+    }
+    return DeviceRegistrationResult.fromJson(data);
+  }
+
+  /// `DELETE /notifications/devices` — stop push for this FCM token.
+  Future<DeviceRemovalResult> unregisterDevice({
+    required String fcmToken,
+  }) async {
+    final token = fcmToken.trim();
+    if (token.isEmpty || token.contains(RegExp(r'[\r\n]'))) {
+      throw const FormatException('Invalid FCM registration token.');
+    }
+    final response = await _request(
+      (auth) => _apiClient.delete(
+        'notifications/devices',
+        token: auth,
+        data: {'token': token},
+      ),
+    );
+    final data = response['data'];
+    if (response['success'] != true || data is! Map<String, dynamic>) {
+      throw const FormatException('Device removal was not confirmed.');
+    }
+    return DeviceRemovalResult.fromJson(data);
   }
 }

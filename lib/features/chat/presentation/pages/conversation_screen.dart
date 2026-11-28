@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/animations/screen_entrance/screen_entrance.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/chat_strings.dart';
+import 'package:hywork/core/network/realtime/realtime_socket_client.dart';
+import 'package:hywork/core/notifications/push_notifications.dart';
 import 'package:hywork/features/calls/domain/call_session.dart';
 import 'package:hywork/features/calls/presentation/pages/call_screen.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
@@ -25,6 +27,7 @@ import 'package:hywork/features/chat/presentation/cubit/voice_playback_cubit.dar
 import 'package:hywork/features/chat/presentation/helpers/chat_attachment_flow.dart';
 import 'package:hywork/features/chat/presentation/cubit/voice_recording_cubit.dart';
 import 'package:hywork/features/chat/presentation/widgets/conversation/chat_action_dialog.dart';
+import 'package:hywork/features/chat/presentation/widgets/conversation/chat_message_delete_sheet.dart';
 import 'package:hywork/features/chat/presentation/widgets/conversation/conversation_body.dart';
 import 'package:hywork/features/chat/presentation/widgets/conversation/conversation_header.dart';
 import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
@@ -118,6 +121,7 @@ class ConversationScreen extends StatelessWidget {
                   isCurrentAccount: current,
                   currentUserId: userId,
                   onMarkedRead: onMarkedRead,
+                  realtime: context.read<RealtimeSocketClient?>(),
                 ),
         ),
         BlocProvider(
@@ -189,9 +193,47 @@ class _ConversationViewState extends State<_ConversationView>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _scrollController.addListener(_onScroll);
+    _messageController.addListener(_onComposerChanged);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _syncLifecycle();
+      if (!mounted) return;
+      _syncLifecycle();
+      _bindActiveConversation();
     });
+  }
+
+  void _onComposerChanged() {
+    final typing = _messageController.text.trim().isNotEmpty;
+    _conversation.setComposerTyping(typing);
+  }
+
+  String? _headerSubtitle(ConversationState conversation) {
+    if (conversation.peerTyping) {
+      final english = Localizations.localeOf(context).languageCode == 'en';
+      return ChatStrings.typingLabel(english: english);
+    }
+    return widget.subtitle;
+  }
+
+  void _bindActiveConversation() {
+    final conversation = _conversation;
+    if (conversation is! ConversationCubit) return;
+    final id = conversation.conversationId;
+    PushNotifications.activeConversationId = id;
+    // Coalesce with silent sync so FCM + Socket.IO do not wipe/reload the list.
+    PushNotifications.refreshActiveConversation = () {
+      if (PushNotifications.activeConversationId != id) {
+        return Future.value();
+      }
+      return conversation.reconcileSilently();
+    };
+  }
+
+  void _clearActiveConversation() {
+    if (PushNotifications.activeConversationId != widget.conversation.id) {
+      return;
+    }
+    PushNotifications.activeConversationId = null;
+    PushNotifications.refreshActiveConversation = null;
   }
 
   void _syncLifecycle() {
@@ -229,9 +271,12 @@ class _ConversationViewState extends State<_ConversationView>
   @override
   void dispose() {
     // BlocProvider disposes ConversationCubit, which stops polling timers.
+    _clearActiveConversation();
     WidgetsBinding.instance.removeObserver(this);
     entranceRouteObserver.unsubscribe(this);
     _scrollController.removeListener(_onScroll);
+    _messageController.removeListener(_onComposerChanged);
+    _conversation.setComposerTyping(false);
     _messageController.dispose();
     _messageFocusNode.dispose();
     _scrollController.dispose();
@@ -301,6 +346,7 @@ class _ConversationViewState extends State<_ConversationView>
 
   Future<void> _sendText() async {
     final text = _messageController.text;
+    _conversation.setComposerTyping(false);
     final sent = await _conversation.sendMessage(text);
     if (sent && mounted) {
       _scrollToNewestAfterSend = true;
@@ -405,18 +451,60 @@ class _ConversationViewState extends State<_ConversationView>
     );
   }
 
+  Future<void> _onMessageLongPress(String id) async {
+    _messageFocusNode.unfocus();
+    _keyboard();
+    final message = _conversation.state.messages
+        .where((item) => item.id == id && !item.deleted)
+        .firstOrNull;
+    if (message == null) return;
+
+    // Swagger only documents deleting own messages (soft-delete for the chat).
+    if (!message.isMine) {
+      _conversation.startSelection(id);
+      return;
+    }
+
+    final action = await showChatMessageDeleteSheet(context);
+    if (!mounted || action == null) return;
+    _conversation.startSelection(id);
+    await _deleteSelected();
+  }
+
   Future<void> _deleteSelected() async {
-    final count = _conversation.state.selected.length;
-    if (count == 0) return;
+    final deletable = [
+      for (final message in _conversation.state.messages)
+        if (_conversation.state.selected.contains(message.id) &&
+            message.isMine &&
+            !message.deleted)
+          message,
+    ];
+    if (deletable.isEmpty) {
+      _conversation.cancelSelection();
+      return;
+    }
+
     final confirmed = await confirmChatAction(
       context,
-      title: AppStrings.deleteMessageQuestion(count),
-      description: AppStrings.localDeleteHelp,
+      title: deletable.length == 1
+          ? AppStrings.deleteMyMessageQuestion
+          : AppStrings.deleteMessageQuestion(deletable.length),
+      description: ChatStrings.deleteMyMessageHelp,
       confirmLabel: AppStrings.delete,
     );
-    if (!mounted || !confirmed) return;
+    if (!mounted || !confirmed) {
+      _conversation.cancelSelection();
+      return;
+    }
     await _playback.pause();
-    if (mounted) await _conversation.deleteSelected();
+    if (!mounted) return;
+    await _conversation.deleteSelected();
+    if (!mounted) return;
+    if (_conversation.state.error != null) {
+      AppToast.error(context, _conversation.state.error!);
+      return;
+    }
+    widget.onLatestMessageChanged?.call(_conversation.latestMessage);
   }
 
   Future<void> _action(ConversationAction action) async {
@@ -481,12 +569,12 @@ class _ConversationViewState extends State<_ConversationView>
     listeners: [
       BlocListener<ConversationController, ConversationState>(
         listenWhen: (before, after) {
-          final beforeLast = before.messages.isEmpty
+          final beforeLast = before.visibleMessages.isEmpty
               ? null
-              : before.messages.last.id;
-          final afterLast = after.messages.isEmpty
+              : before.visibleMessages.last.id;
+          final afterLast = after.visibleMessages.isEmpty
               ? null
-              : after.messages.last.id;
+              : after.visibleMessages.last.id;
           return beforeLast != afterLast || before.blocked != after.blocked;
         },
         listener: (context, state) {
@@ -525,7 +613,7 @@ class _ConversationViewState extends State<_ConversationView>
                             8)
                         .clamp(70, double.infinity),
                 conversation: widget.conversation,
-                subtitle: widget.subtitle,
+                subtitle: _headerSubtitle(conversation),
                 titleContent: widget.headerTitle,
                 bottom: widget.headerBottom,
                 allowBlocking: false,
@@ -560,7 +648,7 @@ class _ConversationViewState extends State<_ConversationView>
                             8)
                         .clamp(70, double.infinity),
                 conversation: widget.conversation,
-                subtitle: widget.subtitle,
+                subtitle: _headerSubtitle(conversation),
                 titleContent: widget.headerTitle,
                 bottom: widget.headerBottom,
                 allowBlocking: false,
@@ -637,14 +725,15 @@ class _ConversationViewState extends State<_ConversationView>
                                 8)
                             .clamp(70, double.infinity),
                     conversation: widget.conversation,
-                    subtitle: widget.subtitle,
+                    subtitle: _headerSubtitle(conversation),
                     titleContent: widget.headerTitle,
                     bottom: widget.headerBottom,
                     allowBlocking: widget.allowBlocking,
+                    peerTyping: conversation.peerTyping,
                     selectionMode: conversation.selectionMode,
                     selectedCount: conversation.selected.length,
                     blocked: conversation.blocked,
-                    hasMessages: conversation.messages.isNotEmpty,
+                    hasMessages: conversation.visibleMessages.isNotEmpty,
                     busy:
                         conversation.sendingMedia ||
                         conversation.sending ||
@@ -672,11 +761,8 @@ class _ConversationViewState extends State<_ConversationView>
                     composerEnabled: composerEnabled,
                     restrictionLabel: conversation.restrictionLabel,
                     onUnblock: () => unawaited(_conversation.setBlocked(false)),
-                    onStartSelection: (id) {
-                      _messageFocusNode.unfocus();
-                      _keyboard();
-                      _conversation.startSelection(id);
-                    },
+                    onStartSelection: (id) =>
+                        unawaited(_onMessageLongPress(id)),
                     onSelect: _conversation.toggleSelection,
                     onOpenAttachment: () => unawaited(_playback.pause()),
                     onCancelRecording: _cancelRecording,

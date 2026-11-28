@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/strings/profile_settings_strings.dart';
+import 'package:hywork/features/notifications/data/push_device_sync.dart';
 
 import '../../data/auth_repo.dart';
 
@@ -66,6 +67,12 @@ class SessionCubit extends Cubit<SessionState> {
     await _pending;
     if (isClosed) return;
     final previous = state;
+
+    // Remove this device association while isCurrentAccount is still true.
+    // Failures never block logout; the next register upserts the token.
+    await PushDeviceSync.instance.unregisterBestEffort();
+    if (isClosed) return;
+
     emit(
       SessionState(
         previous.status,
@@ -78,6 +85,7 @@ class SessionCubit extends Cubit<SessionState> {
     try {
       await _repository.logout();
       if (isClosed) return;
+      PushDeviceSync.instance.detach(accountRevision: previous.accountRevision);
       emit(
         SessionState(
           SessionStatus.unauthenticated,
@@ -86,6 +94,9 @@ class SessionCubit extends Cubit<SessionState> {
       );
     } catch (error) {
       if (isClosed) return;
+      // Unregister may have already cleared the device; resume push sync while
+      // the session remains authenticated.
+      PushDeviceSync.instance.onLogoutAborted();
       final cleanupRequired = error is LogoutCleanupException;
       emit(
         SessionState(
@@ -127,17 +138,25 @@ class SessionCubit extends Cubit<SessionState> {
     try {
       final userId = await _repository.restoreSession();
       if (isClosed) return;
+      if (userId == null) {
+        emit(
+          SessionState(
+            SessionStatus.unauthenticated,
+            accountRevision: revision,
+          ),
+        );
+        return;
+      }
+      // Bump revision when entering an authenticated account so account-scoped
+      // providers/cubits are recreated with this userId. Otherwise cubits built
+      // during splash (userId == null) keep an isCurrentAccount closure that
+      // never matches after login, and notifications/chat badges never load.
       emit(
-        userId == null
-            ? SessionState(
-                SessionStatus.unauthenticated,
-                accountRevision: revision,
-              )
-            : SessionState(
-                SessionStatus.authenticated,
-                userId: userId,
-                accountRevision: revision,
-              ),
+        SessionState(
+          SessionStatus.authenticated,
+          userId: userId,
+          accountRevision: revision + 1,
+        ),
       );
     } catch (_) {
       if (!isClosed) {

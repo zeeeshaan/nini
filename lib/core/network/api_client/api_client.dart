@@ -23,13 +23,14 @@ class ApiClient {
     final url = AppConfig.apiBaseUrl.trim();
     final uri = Uri.tryParse(url);
 
-    // The development server can use HTTP; production must use HTTPS.
-    final allowHttp = kDebugMode && uri?.scheme == 'http';
+    // HTTP is allowed in debug, or in client demo builds with ALLOW_HTTP_API.
+    final allowHttp =
+        uri?.scheme == 'http' && (kDebugMode || AppConfig.allowHttpApi);
     if (uri == null ||
         uri.host.isEmpty ||
         (uri.scheme != 'https' && !allowHttp)) {
       throw StateError(
-        kDebugMode
+        kDebugMode || AppConfig.allowHttpApi
             ? 'Set API_BASE_URL to a valid HTTP or HTTPS API URL.'
             : 'A valid HTTPS API URL is required outside debug builds.',
       );
@@ -158,12 +159,14 @@ class ApiClient {
   Future<Map<String, dynamic>> delete(
     String endpoint, {
     required String token,
+    Map<String, dynamic>? data,
   }) async {
     if (token.trim().isEmpty || token.contains(RegExp(r'[\r\n]'))) {
       throw const FormatException('Invalid authentication credential.');
     }
     final response = await _dio.delete<dynamic>(
       endpoint,
+      data: data,
       options: Options(headers: {'Authorization': 'Bearer $token'}),
     );
     final body = response.data;

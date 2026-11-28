@@ -296,6 +296,39 @@ void main() {
     await cubit.close();
   });
 
+  test('markReadFromPush updates badge without a loaded list item', () async {
+    final api = _Api()
+      ..listResponse = {
+        'success': true,
+        'data': {
+          'items': <dynamic>[],
+          'total': 0,
+          'page': 1,
+          'limit': 20,
+          'unreadCount': 0,
+        },
+      }
+      ..unreadResponse = {
+        'success': true,
+        'data': {'count': 2},
+      }
+      ..readResponse = {
+        'success': true,
+        'data': {'updated': 1, 'unreadCount': 1},
+      };
+    final cubit = _cubit(api);
+    await cubit.load();
+    await cubit.refreshUnreadCount();
+    expect(cubit.state.unreadCount, 2);
+    final ok = await cubit.markReadFromPush(
+      '0193f0a1-2b3c-7d4e-8f50-6a7b8c9d0e1f',
+    );
+    expect(ok, isTrue);
+    expect(cubit.state.unreadCount, 1);
+    expect(api.posts, contains('notifications/read'));
+    await cubit.close();
+  });
+
   test(
     'failed mark-as-read keeps unread state and surfaces actionError',
     () async {

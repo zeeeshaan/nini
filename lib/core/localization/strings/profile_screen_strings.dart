@@ -44,7 +44,8 @@ abstract final class ProfileScreenStrings {
       'به‌روزرسانی وضعیت دنبال کردن ممکن نشد. دوباره تلاش کنید.';
   static const signInRequired = 'برای ادامه وارد شوید.';
   static const cannotBlockSelf = 'نمی‌توانید حساب خود را مسدود کنید.';
-  static const cannotUpdateBlock = 'حساب شما نمی‌تواند این مسدودیت را به‌روز کند.';
+  static const cannotUpdateBlock =
+      'حساب شما نمی‌تواند این مسدودیت را به‌روز کند.';
   static const userUnavailable = 'این کاربر در دسترس نیست.';
   static const blockUpdateFailed =
       'به‌روزرسانی وضعیت مسدودیت ممکن نشد. دوباره تلاش کنید.';

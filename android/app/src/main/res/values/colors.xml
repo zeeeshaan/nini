@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Accent tint applied to the white notification status icon. -->
+    <color name="hywork_notification">#FF111111</color>
+</resources>

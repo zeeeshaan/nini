@@ -8,7 +8,6 @@ import 'package:hywork/core/constants/app_icons/app_icons.dart';
 import 'package:hywork/shared/widgets/app_icons/app_icon.dart';
 
 import 'package:hywork/core/localization/app_string/app_string.dart';
-import 'package:hywork/core/localization/strings/chat_strings.dart';
 import 'package:hywork/core/theme/app_colors/app_colors.dart';
 import 'package:hywork/features/chat/domain/backend_chat.dart';
 import 'package:hywork/features/chat/domain/models/chat_message.dart';
@@ -30,6 +29,8 @@ class ChatMessageBubble extends StatelessWidget {
   final bool selected, selectionMode;
   @override
   Widget build(BuildContext context) {
+    // Soft-deleted messages are filtered before render; never show placeholders.
+    if (message.deleted) return const SizedBox.shrink();
     final colors = Theme.of(context).colorScheme;
     final isSystem = message.type == BackendChatMessageType.system;
     final foreground = isSystem
@@ -39,9 +40,7 @@ class ChatMessageBubble extends StatelessWidget {
         : colors.onSurface;
     final hour =
         '${message.sentAt.hour.toString().padLeft(2, '0')}:${message.sentAt.minute.toString().padLeft(2, '0')}';
-    final networkImage = message.deleted
-        ? null
-        : message.imageUrl?.trim().isNotEmpty == true
+    final networkImage = message.imageUrl?.trim().isNotEmpty == true
         ? message.imageUrl!.trim()
         : null;
     final content = Padding(
@@ -70,52 +69,40 @@ class ChatMessageBubble extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                if (message.deleted)
+                if (networkImage != null)
+                  ChatAttachmentView(
+                    id: message.id,
+                    attachment: ChatAttachment(
+                      path: networkImage,
+                      name: AppStrings.photo,
+                      type: ChatAttachmentType.image,
+                      sizeBytes: 0,
+                    ),
+                    foreground: foreground,
+                    onOpen: onOpenAttachment,
+                  ),
+                if (message.attachment != null && networkImage == null)
+                  ChatAttachmentView(
+                    id: message.id,
+                    attachment: message.attachment!,
+                    foreground: foreground,
+                    onOpen: onOpenAttachment,
+                  ),
+                if (message.location != null)
+                  ChatLocationView(
+                    location: message.location!,
+                    foreground: foreground,
+                    onOpen: onOpenAttachment,
+                  ),
+                if (message.text.isNotEmpty)
                   Text(
-                    ChatStrings.messageDeleted,
+                    message.text,
                     textDirection: TextDirection.ltr,
                     style: AppTextStyles.messageBody.copyWith(
-                      color: foreground.withValues(alpha: 0.8),
-                      fontStyle: FontStyle.italic,
+                      color: foreground,
                     ),
                     textAlign: TextAlign.right,
-                  )
-                else ...[
-                  if (networkImage != null)
-                    ChatAttachmentView(
-                      id: message.id,
-                      attachment: ChatAttachment(
-                        path: networkImage,
-                        name: AppStrings.photo,
-                        type: ChatAttachmentType.image,
-                        sizeBytes: 0,
-                      ),
-                      foreground: foreground,
-                      onOpen: onOpenAttachment,
-                    ),
-                  if (message.attachment != null && networkImage == null)
-                    ChatAttachmentView(
-                      id: message.id,
-                      attachment: message.attachment!,
-                      foreground: foreground,
-                      onOpen: onOpenAttachment,
-                    ),
-                  if (message.location != null)
-                    ChatLocationView(
-                      location: message.location!,
-                      foreground: foreground,
-                      onOpen: onOpenAttachment,
-                    ),
-                  if (message.text.isNotEmpty)
-                    Text(
-                      message.text,
-                      textDirection: TextDirection.ltr,
-                      style: AppTextStyles.messageBody.copyWith(
-                        color: foreground,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                ],
+                  ),
                 const SizedBox(height: 5),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -135,7 +122,10 @@ class ChatMessageBubble extends StatelessWidget {
                             ? AppIcons.checkAll
                             : AppIcons.check,
                         size: 14,
-                        color: foreground,
+                        // Spec: peer `chat:read` → blue ticks (not bubble ink).
+                        color: message.deliveryStatus == ChatDeliveryStatus.read
+                            ? AppColors.chatReadReceipt
+                            : foreground.withValues(alpha: .85),
                       ),
                     ],
                   ],

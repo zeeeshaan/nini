@@ -12,10 +12,12 @@ class ChatConversationTile extends StatelessWidget {
     super.key,
     required this.conversation,
     required this.onTap,
+    this.onLongPress,
   });
 
   final ChatConversation conversation;
   final VoidCallback onTap;
+  final VoidCallback? onLongPress;
 
   String _formatTime(DateTime date) => AppStrings.persianDigits(
     '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
@@ -31,6 +33,7 @@ class ChatConversationTile extends StatelessWidget {
           '${conversation.name}, ${AppStrings.unreadMessageCount(conversation.unreadCount)}',
       child: InkWell(
         onTap: onTap,
+        onLongPress: onLongPress,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(

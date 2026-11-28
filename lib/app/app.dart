@@ -22,6 +22,11 @@ import 'app_providers.dart';
 
 import 'package:hywork/features/login/presentation/cubit/session_cubit.dart';
 import 'package:hywork/features/login/presentation/pages/login_screen.dart';
+import 'package:hywork/core/network/realtime/realtime_socket_binder.dart';
+import 'package:hywork/features/notifications/presentation/helpers/push_notification_bridge.dart';
+
+/// Root navigator key for authenticated push tap navigation.
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 /// Configures the app and connects it to its shared state.
 class MyApp extends StatelessWidget {
@@ -60,7 +65,12 @@ class MyApp extends StatelessWidget {
       userProfileRepository: userProfileRepository,
       apiClient: apiClient,
       tokenStore: tokenStore,
-      child: const _ThemedApp(),
+      child: RealtimeSocketBinder(
+        child: PushNotificationBridge(
+          navigatorKey: appNavigatorKey,
+          child: const _ThemedApp(),
+        ),
+      ),
     );
   }
 }
@@ -72,6 +82,7 @@ class _ThemedApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, mode) => MaterialApp(
+        navigatorKey: appNavigatorKey,
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
         locale: const Locale('en'),

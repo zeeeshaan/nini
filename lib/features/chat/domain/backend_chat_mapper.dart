@@ -1,5 +1,4 @@
 import 'package:hywork/core/localization/app_string/app_string.dart';
-import 'package:hywork/core/localization/strings/chat_strings.dart';
 import 'package:hywork/features/chat/domain/backend_chat.dart';
 import 'package:hywork/features/chat/domain/models/chat_conversation.dart';
 import 'package:hywork/features/chat/domain/models/chat_message.dart';
@@ -41,14 +40,17 @@ ChatConversation chatConversationFromDetail(BackendChatDetail detail) {
 
 ChatMessage chatMessageFromBackend(BackendChatMessage message) {
   final deleted = message.deleted;
+  // Documented `readAt` only — never invent delivered/read without it.
+  final deliveryStatus = !deleted && message.isMine && message.readAt != null
+      ? ChatDeliveryStatus.read
+      : ChatDeliveryStatus.sent;
   return ChatMessage(
     id: message.id,
     conversationId: message.conversationId,
     text: deleted ? '' : (message.text ?? ''),
     sentAt: message.createdAt,
     isMine: message.isMine,
-    // Never fabricate read receipts from incomplete backend metadata.
-    deliveryStatus: ChatDeliveryStatus.sent,
+    deliveryStatus: deliveryStatus,
     deleted: deleted,
     type: message.type,
     imageUrl: deleted ? null : message.imageUrl,
@@ -66,8 +68,7 @@ List<ChatMessage> chronologicalMessagesFromBackend(
 }
 
 String backendChatMessagePreview(BackendChatMessage? message) {
-  if (message == null) return AppStrings.noMessages;
-  if (message.deleted) return ChatStrings.messageDeleted;
+  if (message == null || message.deleted) return AppStrings.noMessages;
   if (!message.isKnownType) return AppStrings.noMessages;
   switch (message.type) {
     case BackendChatMessageType.image:

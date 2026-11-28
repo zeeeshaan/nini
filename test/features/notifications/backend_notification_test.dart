@@ -110,4 +110,31 @@ void main() {
     expect(result.updated, 2);
     expect(result.unreadCount, 1);
   });
+
+  test('parses device registration and removal confirmations', () {
+    final registered = DeviceRegistrationResult.fromJson({
+      'registered': true,
+      'platform': 'android',
+      'locale': 'fa',
+    });
+    expect(registered.registered, isTrue);
+    expect(registered.platform, NotificationDevicePlatform.android);
+    expect(registered.locale, NotificationDeviceLocale.fa);
+
+    expect(
+      () => DeviceRegistrationResult.fromJson({
+        'registered': true,
+        'platform': 'desktop',
+        'locale': 'fa',
+      }),
+      throwsFormatException,
+    );
+
+    final removed = DeviceRemovalResult.fromJson({'removed': 1});
+    expect(removed.removed, 1);
+    expect(
+      () => DeviceRemovalResult.fromJson({'removed': -1}),
+      throwsFormatException,
+    );
+  });
 }

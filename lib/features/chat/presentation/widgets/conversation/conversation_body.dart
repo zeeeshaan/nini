@@ -67,6 +67,7 @@ class ConversationBody extends StatelessWidget {
         !showBlockedBanner &&
         restrictionLabel != null &&
         restrictionLabel!.isNotEmpty;
+    final visible = conversation.visibleMessages;
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: [
@@ -120,7 +121,7 @@ class ConversationBody extends StatelessWidget {
               ),
             ),
           Expanded(
-            child: conversation.messages.isEmpty
+            child: visible.isEmpty
                 ? const ConversationEmptyState()
                 : ListView.builder(
                     controller: scrollController,
@@ -128,10 +129,9 @@ class ConversationBody extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
-                    itemCount: conversation.messages.length,
+                    itemCount: visible.length,
                     itemBuilder: (context, index) {
-                      final message = conversation
-                          .messages[conversation.messages.length - 1 - index];
+                      final message = visible[visible.length - 1 - index];
                       return ChatMessageBubble(
                         key: ValueKey(message.id),
                         message: message,

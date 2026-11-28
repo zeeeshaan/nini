@@ -35,8 +35,12 @@ class LocalConversationCubit extends ConversationController {
       !state.sendingMedia;
 
   @override
-  ChatMessage? get latestMessage =>
-      state.messages.isEmpty ? null : state.messages.last;
+  ChatMessage? get latestMessage {
+    for (var i = state.messages.length - 1; i >= 0; i--) {
+      if (!state.messages[i].deleted) return state.messages[i];
+    }
+    return null;
+  }
 
   @override
   void showEmoji(bool visible) =>
@@ -147,7 +151,7 @@ class LocalConversationCubit extends ConversationController {
 
   @override
   void startSelection([String? id]) {
-    if (state.messages.isEmpty || state.sendingMedia) return;
+    if (state.visibleMessages.isEmpty || state.sendingMedia) return;
     emit(state.copyWith(selectionMode: true, selected: id == null ? {} : {id}));
   }
 
@@ -165,7 +169,9 @@ class LocalConversationCubit extends ConversationController {
   void selectAll() => emit(
     state.copyWith(
       selectionMode: true,
-      selected: Set.unmodifiable(state.messages.map((message) => message.id)),
+      selected: Set.unmodifiable(
+        state.visibleMessages.map((message) => message.id),
+      ),
     ),
   );
 

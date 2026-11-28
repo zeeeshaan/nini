@@ -18,16 +18,13 @@ abstract final class ProfileEditStrings {
   static const photoError =
       'آماده‌سازی تصویر پروفایل ممکن نشد. دوباره تلاش کنید.';
   static const saved = 'پروفایل به‌روزرسانی شد';
-  static const saveFailed =
-      'ذخیره پروفایل ممکن نشد. دوباره تلاش کنید.';
-  static const loadFailed =
-      'بارگذاری پروفایل ممکن نشد. دوباره تلاش کنید.';
+  static const saveFailed = 'ذخیره پروفایل ممکن نشد. دوباره تلاش کنید.';
+  static const loadFailed = 'بارگذاری پروفایل ممکن نشد. دوباره تلاش کنید.';
   static const photoUploadUnavailable =
       'آپلود تصویر در دسترس نیست (۴۰۴). پروفایل شما تغییر نکرد. ویرایش‌ها و پیش‌نمایش تصویر هنوز در فرم هستند.';
   static const photoUploadFailed =
       'سرور آپلود تصویر را تأیید نکرد. پروفایل شما تغییر نکرد. دوباره تلاش کنید.';
-  static const invalidPhoto =
-      'یک تصویر پروفایل JPG، PNG یا WebP انتخاب کنید.';
+  static const invalidPhoto = 'یک تصویر پروفایل JPG، PNG یا WebP انتخاب کنید.';
   static const photoTooLarge =
       'حجم تصویر پروفایل نباید بیشتر از ۵ مگابایت باشد.';
   static const photoUploadLimited =
@@ -43,13 +40,13 @@ abstract final class ProfileEditStrings {
   static const genderOther = 'سایر';
 
   /// Show API gender values in Persian without changing stored keys.
-  static String genderDisplay(String value) => switch (value.trim()
-      .toLowerCase()) {
-    'male' || 'مرد' => genderMale,
-    'female' || 'زن' => genderFemale,
-    'other' || 'سایر' => genderOther,
-    _ => value,
-  };
+  static String genderDisplay(String value) =>
+      switch (value.trim().toLowerCase()) {
+        'male' || 'مرد' => genderMale,
+        'female' || 'زن' => genderFemale,
+        'other' || 'سایر' => genderOther,
+        _ => value,
+      };
 
   /// Map typed/displayed gender back to API values.
   static String genderApi(String value) => switch (value.trim().toLowerCase()) {
@@ -101,6 +98,5 @@ abstract final class ProfileEditStrings {
       'جلسه شما منقضی شده است. لطفاً دوباره وارد شوید.';
   static const connectionFailed =
       'اتصال به سرور ممکن نشد. اتصال خود را بررسی کنید و دوباره تلاش کنید.';
-  static const timeout =
-      'درخواست پروفایل زمان‌بر شد. دوباره تلاش کنید.';
+  static const timeout = 'درخواست پروفایل زمان‌بر شد. دوباره تلاش کنید.';
 }

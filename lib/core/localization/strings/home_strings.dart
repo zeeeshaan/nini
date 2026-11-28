@@ -46,8 +46,9 @@ abstract final class HomeStrings {
       'mobile' || 'موبایل' => mobile,
       'electronics' || 'electronic' || 'الکترونیک' => electronics,
       'web development' || 'web_development' || 'توسعه وب' => 'توسعه وب',
-      'electrical wiring' || 'electrical_wiring' || 'سیم‌کشی برق' =>
-        'سیم‌کشی برق',
+      'electrical wiring' ||
+      'electrical_wiring' ||
+      'سیم‌کشی برق' => 'سیم‌کشی برق',
       'photography' || 'عکاسی' => 'عکاسی',
       'products' || 'محصولات' => 'محصولات',
       'fashion and clothing' || 'fashion' || 'مد و پوشاک' => 'مد و پوشاک',

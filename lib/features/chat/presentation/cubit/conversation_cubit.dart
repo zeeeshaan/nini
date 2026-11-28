@@ -7,6 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hywork/core/localization/app_string/app_string.dart';
 import 'package:hywork/core/localization/strings/chat_strings.dart';
+import 'package:hywork/core/network/realtime/realtime_connection_state.dart';
+import 'package:hywork/core/network/realtime/realtime_events.dart';
+import 'package:hywork/core/network/realtime/realtime_socket_client.dart';
 import 'package:hywork/features/chat/data/api_chats_repository.dart';
 import 'package:hywork/features/chat/domain/backend_chat.dart';
 import 'package:hywork/features/chat/domain/backend_chat_mapper.dart';
@@ -14,6 +17,7 @@ import 'package:hywork/features/chat/domain/chat_sync.dart';
 import 'package:hywork/features/chat/domain/models/chat_message.dart';
 import 'package:hywork/features/chat/domain/services/chat_media_store.dart';
 import 'package:hywork/features/create_post/domain/models/gallery_attachment.dart';
+import 'package:hywork/features/posts/domain/models/profile_category.dart';
 import 'package:hywork/features/profile/data/api_public_profile_repository.dart';
 
 class ConversationState {
@@ -37,6 +41,7 @@ class ConversationState {
     this.selected = const {},
     this.error,
     this.markedRead = false,
+    this.peerTyping = false,
   });
 
   final List<ChatMessage> messages;
@@ -58,6 +63,14 @@ class ConversationState {
   final Set<String> selected;
   final String? error;
   final bool markedRead;
+  final bool peerTyping;
+
+  /// Messages shown in the bubble list — soft-deleted rows stay in [messages]
+  /// for tombstone / pagination sync but are never rendered.
+  List<ChatMessage> get visibleMessages => [
+    for (final message in messages)
+      if (!message.deleted) message,
+  ];
 
   String? get restrictionLabel =>
       canSend ? null : ChatStrings.cannotSendReason(cannotSendReason);
@@ -85,6 +98,7 @@ class ConversationState {
     String? error,
     bool clearError = false,
     bool? markedRead,
+    bool? peerTyping,
   }) => ConversationState(
     messages: messages ?? this.messages,
     loading: loading ?? this.loading,
@@ -107,6 +121,7 @@ class ConversationState {
     selected: selected ?? this.selected,
     error: clearError ? null : (error ?? this.error),
     markedRead: markedRead ?? this.markedRead,
+    peerTyping: peerTyping ?? this.peerTyping,
   );
 }
 
@@ -135,9 +150,16 @@ abstract class ConversationController extends Cubit<ConversationState> {
 
   /// Route + app foreground visibility for Phase 3 REST polling.
   void setLifecycle({required bool visible, required bool foreground}) {}
+
+  /// Outgoing typing signal (throttled by [RealtimeSocketClient]).
+  void setComposerTyping(bool typing) {}
+
+  /// Coalesced REST reconcile (FCM / reconnect) without loading indicators.
+  Future<void> reconcileSilently({bool refreshDetails = true}) async {}
 }
 
-/// Conversation screen cubit backed by Chat REST with lifecycle polling.
+/// Conversation screen cubit backed by Chat REST with lifecycle polling +
+/// Phase C Socket.IO live updates (shared [RealtimeSocketClient]).
 class ConversationCubit extends ConversationController {
   ConversationCubit({
     required this.conversationId,
@@ -147,9 +169,12 @@ class ConversationCubit extends ConversationController {
     this.mediaStore,
     this.profiles,
     this.onMarkedRead,
+    this.realtime,
     this.pollInterval = ChatSync.messagePollInterval,
     this.detailsInterval = ChatSync.detailsPollInterval,
+    this.peerTypingTimeout = ChatSync.peerTypingTimeout,
   }) : super(const ConversationState(loading: true)) {
+    _bindRealtime();
     if (isCurrentAccount()) {
       unawaited(load());
     } else {
@@ -164,10 +189,12 @@ class ConversationCubit extends ConversationController {
   final ChatMediaStore? mediaStore;
   final ApiPublicProfileRepository? profiles;
   final void Function()? onMarkedRead;
+  final RealtimeSocketClient? realtime;
 
   /// Overridable for deterministic tests (production uses [ChatSync]).
   final Duration pollInterval;
   final Duration detailsInterval;
+  final Duration peerTypingTimeout;
 
   static const _pageSize = 30;
 
@@ -176,28 +203,283 @@ class ConversationCubit extends ConversationController {
   int _pollGeneration = 0;
   int _pollFailures = 0;
   Future<void>? _loadMoreInFlight;
-  Future<void>? _silentInFlight;
+  Future<bool>? _silentInFlight;
+  int? _silentInFlightGeneration;
   Timer? _pollTimer;
+  Timer? _detailsTimer;
+  Timer? _peerTypingTimer;
+  Timer? _typingHeartbeat;
+  StreamSubscription<RealtimeEvent>? _realtimeEvents;
+  StreamSubscription<RealtimeConnectionState>? _realtimeStates;
   bool _markingRead = false;
   bool _initialReady = false;
   bool _routeVisible = false;
   bool _appForeground = true;
+  bool _socketReady = false;
+  bool _socketReconciled = false;
+  bool _composerTyping = false;
   DateTime? _lastDetailsAt;
+  DateTime? _peerReadAt;
+
+  /// Soft-delete tombstones for this open conversation (cleared on cubit close).
+  /// Not hard-capped: FIFO eviction can let REST restore deleted content.
   final Set<String> _locallyDeleted = {};
 
-  bool get _shouldPoll =>
+  /// When gap fill hits [ChatSync.maxGapPages] without overlap, resume from this
+  /// `before` cursor on the next sync so the same tip pages are not re-fetched.
+  String? _gapResumeBefore;
+
+  bool get _isActive =>
       !isClosed &&
       _initialReady &&
       _routeVisible &&
       _appForeground &&
       isCurrentAccount();
 
+  /// Continuous 4s message polling until socket is ready *and* REST-reconciled.
+  bool get _shouldMessagePoll =>
+      _isActive && !(_socketReady && _socketReconciled);
+
+  /// 24s details refresh stays on while the conversation is visible.
+  bool get _shouldDetailsPoll => _isActive;
+
   @visibleForTesting
   bool get isPollingScheduled => _pollTimer != null;
 
   @visibleForTesting
-  Future<void> debugPollOnce({bool refreshDetails = false}) =>
+  bool get isDetailsPollingScheduled => _detailsTimer != null;
+
+  @visibleForTesting
+  bool get isSocketReadyForPolling => _socketReady;
+
+  @visibleForTesting
+  Future<bool> debugPollOnce({bool refreshDetails = false}) =>
       _silentSync(_pollGeneration, refreshDetails: refreshDetails);
+
+  void _bindRealtime() {
+    final client = realtime;
+    if (client == null) return;
+    _socketReady = client.isReady;
+    _realtimeStates = client.connectionStates.listen(_onRealtimeState);
+    _realtimeEvents = client.events.listen(_onRealtimeEvent);
+  }
+
+  void _onRealtimeState(RealtimeConnectionState next) {
+    if (isClosed || !isCurrentAccount()) return;
+    final ready = next == RealtimeConnectionState.ready;
+    if (ready == _socketReady) {
+      _syncSyncTimers();
+      return;
+    }
+    _socketReady = ready;
+    if (!ready) {
+      _socketReconciled = false;
+      _clearPeerTyping();
+      _syncSyncTimers();
+      return;
+    }
+    unawaited(_onSocketBecameReady());
+  }
+
+  Future<void> _onSocketBecameReady() async {
+    if (isClosed || !isCurrentAccount()) return;
+    if (!_initialReady) {
+      _syncSyncTimers();
+      return;
+    }
+    final generation = ++_pollGeneration;
+    // Drop orphaned poll timers tied to the previous generation.
+    _pollTimer?.cancel();
+    _pollTimer = null;
+    _stopDetailsTimer();
+    final ok = await _silentSync(generation, refreshDetails: true);
+    if (isClosed || generation != _pollGeneration || !isCurrentAccount()) {
+      return;
+    }
+    // Only pause message polling after a successful REST reconcile.
+    _socketReconciled = ok && _socketReady;
+    if (_socketReconciled && _routeVisible && _appForeground) {
+      await _markReadNow();
+    }
+    // Replay composer typing once the socket is ready (earlier emits were dropped).
+    _flushComposerTyping(force: true);
+    if (isClosed || generation != _pollGeneration) return;
+    _syncSyncTimers();
+  }
+
+  void _onRealtimeEvent(RealtimeEvent event) {
+    if (isClosed || !isCurrentAccount()) return;
+    switch (event) {
+      case RealtimeRecovered():
+        unawaited(_recoverAfterReconnect());
+      case RealtimeChatMessage(:final conversationId, :final message):
+        if (conversationId != this.conversationId) return;
+        _applySocketMessage(message);
+      case RealtimeChatRead(
+        :final conversationId,
+        :final readBy,
+        :final readAt,
+      ):
+        if (conversationId != this.conversationId) return;
+        _applySocketRead(readBy: readBy, readAt: readAt);
+      case RealtimeChatTyping(
+        :final conversationId,
+        :final userId,
+        :final typing,
+      ):
+        if (conversationId != this.conversationId) return;
+        _applySocketTyping(userId: userId, typing: typing);
+      case RealtimeChatMessageDeleted(:final conversationId, :final messageId):
+        if (conversationId != this.conversationId) return;
+        _applySocketDeleted(messageId);
+      default:
+        break;
+    }
+  }
+
+  Future<void> _recoverAfterReconnect() async {
+    if (isClosed || !isCurrentAccount()) return;
+    _socketReady = realtime?.isReady == true;
+    _socketReconciled = false;
+    if (!_initialReady) {
+      _syncSyncTimers();
+      return;
+    }
+    final generation = ++_pollGeneration;
+    _pollTimer?.cancel();
+    _pollTimer = null;
+    _stopDetailsTimer();
+    // Keep message polling until recovery REST completes successfully.
+    _syncSyncTimers();
+    final ok = await _silentSync(generation, refreshDetails: true);
+    if (isClosed || generation != _pollGeneration || !isCurrentAccount()) {
+      return;
+    }
+    _socketReconciled = ok && _socketReady;
+    if (_socketReconciled && _routeVisible && _appForeground) {
+      await _markReadNow();
+    }
+    _flushComposerTyping(force: true);
+    if (isClosed || generation != _pollGeneration) return;
+    _syncSyncTimers();
+  }
+
+  void _applySocketMessage(BackendChatMessage backend) {
+    if (isClosed || !isCurrentAccount()) return;
+    final mapped = chatMessageFromBackend(backend);
+    final before = state.messages;
+    final merged = _mergeMessages(existing: before, incoming: [mapped]);
+    if (!_sameMessages(before, merged)) {
+      emit(
+        state.copyWith(
+          messages: merged,
+          loading: false,
+          refreshing: false,
+          clearError: true,
+        ),
+      );
+    }
+    final isNewIncoming =
+        !mapped.isMine &&
+        !mapped.deleted &&
+        !before.any((prior) => prior.id == mapped.id);
+    if (isNewIncoming && _routeVisible && _appForeground) {
+      unawaited(_markReadNow());
+    }
+  }
+
+  void _applySocketRead({required String readBy, required DateTime readAt}) {
+    if (isClosed || !isCurrentAccount()) return;
+    final me = currentUserId();
+    if (me != null && readBy == me) {
+      // Own mark-read — ticks are for the peer reading our messages.
+      return;
+    }
+    final readAtUtc = readAt.toUtc();
+    if (_peerReadAt != null && readAtUtc.isBefore(_peerReadAt!.toUtc())) {
+      return;
+    }
+    _peerReadAt = readAtUtc;
+    final before = state.messages;
+    final updated = [
+      for (final message in before)
+        if (message.isMine &&
+            !message.deleted &&
+            !message.sentAt.toUtc().isAfter(readAtUtc) &&
+            message.deliveryStatus != ChatDeliveryStatus.read)
+          message.copyWith(deliveryStatus: ChatDeliveryStatus.read)
+        else
+          message,
+    ];
+    if (!_sameMessages(before, updated)) {
+      emit(state.copyWith(messages: List.unmodifiable(updated)));
+    }
+  }
+
+  void _applySocketTyping({required String userId, required bool typing}) {
+    if (isClosed || !isCurrentAccount()) return;
+    final me = currentUserId();
+    if (me != null && userId == me) return;
+    _peerTypingTimer?.cancel();
+    _peerTypingTimer = null;
+    if (!typing) {
+      _clearPeerTyping();
+      return;
+    }
+    if (!state.peerTyping) {
+      emit(state.copyWith(peerTyping: true));
+    }
+    _peerTypingTimer = Timer(peerTypingTimeout, _clearPeerTyping);
+  }
+
+  void _clearPeerTyping() {
+    _peerTypingTimer?.cancel();
+    _peerTypingTimer = null;
+    if (!isClosed && state.peerTyping) {
+      emit(state.copyWith(peerTyping: false));
+    }
+  }
+
+  void _rememberLocalDelete(String messageId) {
+    _locallyDeleted.add(messageId);
+  }
+
+  void _applySocketDeleted(String messageId) {
+    if (isClosed || !isCurrentAccount()) return;
+    _rememberLocalDelete(messageId);
+    final before = state.messages;
+    final known = before.any((message) => message.id == messageId);
+    if (!known) {
+      // Tombstone id so a later REST page cannot restore content.
+      return;
+    }
+    final updated = [
+      for (final message in before)
+        message.id == messageId
+            ? _applyLocalDelete(message.copyWith(deleted: true))
+            : message,
+    ];
+    if (!_sameMessages(before, updated)) {
+      emit(state.copyWith(messages: List.unmodifiable(updated)));
+    }
+  }
+
+  void _syncSyncTimers() {
+    if (!_isActive) {
+      _stopPolling(invalidateInFlight: true);
+      _stopDetailsTimer();
+      return;
+    }
+    // Pause 4s message polling only after socket is ready *and* reconciled.
+    final live = _socketReady && _socketReconciled;
+    if (live) {
+      _stopPolling();
+      _maybeStartDetailsTimer();
+    } else {
+      _stopDetailsTimer();
+      _maybeStartPolling();
+    }
+  }
 
   @override
   bool get canSend =>
@@ -209,8 +491,12 @@ class ConversationCubit extends ConversationController {
       isCurrentAccount();
 
   @override
-  ChatMessage? get latestMessage =>
-      state.messages.isEmpty ? null : state.messages.last;
+  ChatMessage? get latestMessage {
+    for (var i = state.messages.length - 1; i >= 0; i--) {
+      if (!state.messages[i].deleted) return state.messages[i];
+    }
+    return null;
+  }
 
   @override
   void showEmoji(bool visible) {
@@ -231,21 +517,78 @@ class ConversationCubit extends ConversationController {
 
   @override
   void setLifecycle({required bool visible, required bool foreground}) {
-    final wasActive = _shouldPoll;
+    final wasActive = _isActive;
     _routeVisible = visible;
     _appForeground = foreground;
-    if (!_shouldPoll) {
+    if (!_routeVisible) {
+      setComposerTyping(false);
+      _clearPeerTyping();
+    }
+    if (!_isActive) {
       _stopPolling(invalidateInFlight: true);
+      _stopDetailsTimer();
       return;
     }
     if (!wasActive) {
       unawaited(_resumeActive());
+    } else {
+      _syncSyncTimers();
     }
   }
 
   @override
-  Future<void> close() {
+  void setComposerTyping(bool typing) {
+    if (!isCurrentAccount()) return;
+    _composerTyping = typing;
+    if (!typing) {
+      _typingHeartbeat?.cancel();
+      _typingHeartbeat = null;
+      realtime?.sendTyping(conversationId: conversationId, typing: false);
+      return;
+    }
+    _flushComposerTyping();
+    // Spec: peer hides typing after ~5s without a new event — heartbeat ≤2s.
+    _typingHeartbeat ??= Timer.periodic(const Duration(seconds: 2), (_) {
+      if (isClosed || !_composerTyping || !isCurrentAccount()) {
+        _typingHeartbeat?.cancel();
+        _typingHeartbeat = null;
+        return;
+      }
+      _flushComposerTyping();
+    });
+  }
+
+  void _flushComposerTyping({bool force = false}) {
+    if (!_composerTyping || !isCurrentAccount()) return;
+    realtime?.sendTyping(
+      conversationId: conversationId,
+      typing: true,
+      force: force,
+    );
+  }
+
+  @override
+  Future<void> reconcileSilently({bool refreshDetails = true}) async {
+    if (isClosed || !_initialReady || !isCurrentAccount()) return;
+    await _silentSync(_pollGeneration, refreshDetails: refreshDetails);
+  }
+
+  @override
+  Future<void> close() async {
     _stopPolling(invalidateInFlight: true);
+    _stopDetailsTimer();
+    _peerTypingTimer?.cancel();
+    _peerTypingTimer = null;
+    _typingHeartbeat?.cancel();
+    _typingHeartbeat = null;
+    _composerTyping = false;
+    await _realtimeEvents?.cancel();
+    await _realtimeStates?.cancel();
+    _realtimeEvents = null;
+    _realtimeStates = null;
+    if (_socketReady) {
+      realtime?.sendTyping(conversationId: conversationId, typing: false);
+    }
     return super.close();
   }
 
@@ -255,6 +598,11 @@ class ConversationCubit extends ConversationController {
     if (invalidateInFlight) _pollGeneration++;
   }
 
+  void _stopDetailsTimer() {
+    _detailsTimer?.cancel();
+    _detailsTimer = null;
+  }
+
   Future<void> _resumeActive() async {
     if (!_routeVisible || !_appForeground || !isCurrentAccount() || isClosed) {
       return;
@@ -262,21 +610,34 @@ class ConversationCubit extends ConversationController {
     final generation = ++_pollGeneration;
     _pollTimer?.cancel();
     _pollTimer = null;
+    _stopDetailsTimer();
     if (!_initialReady) return;
     await _silentSync(generation, refreshDetails: true);
     if (isClosed || generation != _pollGeneration) return;
     await _markReadNow();
-    if (isClosed || generation != _pollGeneration || !_shouldPoll) return;
-    _scheduleNextPoll(generation);
+    if (isClosed || generation != _pollGeneration || !_isActive) return;
+    if (_socketReady) {
+      _socketReconciled = true;
+    }
+    _syncSyncTimers();
   }
 
   void _maybeStartPolling() {
-    if (!_shouldPoll) {
+    if (!_shouldMessagePoll) {
       _stopPolling();
       return;
     }
     if (_pollTimer != null || _silentInFlight != null) return;
     _scheduleNextPoll(_pollGeneration);
+  }
+
+  void _maybeStartDetailsTimer() {
+    if (!_shouldDetailsPoll || !_socketReady || !_socketReconciled) {
+      _stopDetailsTimer();
+      return;
+    }
+    if (_detailsTimer != null) return;
+    _scheduleNextDetails(_pollGeneration);
   }
 
   Duration _backoffDelay() {
@@ -287,7 +648,7 @@ class ConversationCubit extends ConversationController {
 
   void _scheduleNextPoll(int generation) {
     _pollTimer?.cancel();
-    if (isClosed || generation != _pollGeneration || !_shouldPoll) {
+    if (isClosed || generation != _pollGeneration || !_shouldMessagePoll) {
       _pollTimer = null;
       return;
     }
@@ -297,25 +658,72 @@ class ConversationCubit extends ConversationController {
     });
   }
 
+  void _scheduleNextDetails(int generation) {
+    _detailsTimer?.cancel();
+    if (isClosed ||
+        generation != _pollGeneration ||
+        !_shouldDetailsPoll ||
+        !_socketReady ||
+        !_socketReconciled) {
+      _detailsTimer = null;
+      return;
+    }
+    final elapsed = _lastDetailsAt == null
+        ? detailsInterval
+        : detailsInterval - DateTime.now().difference(_lastDetailsAt!);
+    final delay = elapsed.isNegative ? Duration.zero : elapsed;
+    _detailsTimer = Timer(delay, () {
+      if (isClosed || generation != _pollGeneration) return;
+      unawaited(_onDetailsTick(generation));
+    });
+  }
+
   Future<void> _onPollTick(int generation) async {
-    if (isClosed || generation != _pollGeneration || !_shouldPoll) return;
+    if (isClosed || generation != _pollGeneration || !_shouldMessagePoll) {
+      return;
+    }
     await _silentSync(generation);
     if (isClosed || generation != _pollGeneration) return;
     _scheduleNextPoll(generation);
   }
 
-  Future<void> _silentSync(int generation, {bool refreshDetails = false}) {
-    if (_silentInFlight != null) return _silentInFlight!;
-    late final Future<void> future;
+  Future<void> _onDetailsTick(int generation) async {
+    if (isClosed ||
+        generation != _pollGeneration ||
+        !_shouldDetailsPoll ||
+        !_socketReady ||
+        !_socketReconciled) {
+      return;
+    }
+    try {
+      await _refreshPermissions(silent: true);
+      _lastDetailsAt = DateTime.now();
+    } catch (_) {}
+    if (isClosed || generation != _pollGeneration) return;
+    _scheduleNextDetails(generation);
+  }
+
+  /// Returns `true` when the silent REST pass finished without error.
+  Future<bool> _silentSync(int generation, {bool refreshDetails = false}) {
+    // Only coalesce within the same poll generation — a newer reconcile must
+    // not inherit a superseded in-flight result.
+    if (_silentInFlight != null && _silentInFlightGeneration == generation) {
+      return _silentInFlight!;
+    }
+    late final Future<bool> future;
     future = _runSilentSync(generation, refreshDetails: refreshDetails)
         .whenComplete(() {
-          if (identical(_silentInFlight, future)) _silentInFlight = null;
+          if (identical(_silentInFlight, future)) {
+            _silentInFlight = null;
+            _silentInFlightGeneration = null;
+          }
         });
     _silentInFlight = future;
+    _silentInFlightGeneration = generation;
     return future;
   }
 
-  Future<void> _runSilentSync(
+  Future<bool> _runSilentSync(
     int generation, {
     required bool refreshDetails,
   }) async {
@@ -323,7 +731,7 @@ class ConversationCubit extends ConversationController {
         generation != _pollGeneration ||
         !_initialReady ||
         !isCurrentAccount()) {
-      return;
+      return false;
     }
 
     final before = state.messages;
@@ -336,18 +744,18 @@ class ConversationCubit extends ConversationController {
         await _refreshPermissions(silent: true);
         _lastDetailsAt = DateTime.now();
         if (isClosed || generation != _pollGeneration || !isCurrentAccount()) {
-          return;
+          return false;
         }
       }
 
-      final incoming = await _fetchLatestWithGapFill(before);
+      final fill = await _fetchLatestWithGapFill(before);
       if (isClosed || generation != _pollGeneration || !isCurrentAccount()) {
-        return;
+        return false;
       }
 
       final merged = _mergeMessages(
         existing: state.messages,
-        incoming: incoming,
+        incoming: fill.messages,
       );
       if (!_sameMessages(before, merged)) {
         // Preserve older-page cursor (hasMore / nextBefore) during latest polls.
@@ -372,22 +780,32 @@ class ConversationCubit extends ConversationController {
       }
 
       _pollFailures = 0;
+      // Incomplete gap fill must keep fallback polling / retry reconcile.
+      return fill.complete;
     } on DioException catch (error) {
-      if (isClosed || generation != _pollGeneration) return;
+      if (isClosed || generation != _pollGeneration) return false;
       _pollFailures++;
       final status = error.response?.statusCode;
-      if (status == 401) return;
+      if (status == 401) return false;
       if (status == 403 || status == 409 || status == 422) {
         await _refreshPermissions(silent: true);
       }
       // Silent: keep conversation visible; no snackbar / loading wipe.
+      return false;
     } catch (_) {
-      if (isClosed || generation != _pollGeneration) return;
+      if (isClosed || generation != _pollGeneration) return false;
       _pollFailures++;
+      return false;
     }
   }
 
-  Future<List<ChatMessage>> _fetchLatestWithGapFill(
+  /// Fetches latest messages and walks older pages until history overlaps.
+  ///
+  /// [complete] is false when the gap still exceeds [ChatSync.maxGapPages] —
+  /// callers must not treat that as a finished live reconcile. The next call
+  /// resumes from [_gapResumeBefore] so progress continues without re-walking
+  /// the same tip pages indefinitely.
+  Future<({List<ChatMessage> messages, bool complete})> _fetchLatestWithGapFill(
     List<ChatMessage> existing,
   ) async {
     final knownIds = {for (final message in existing) message.id};
@@ -400,6 +818,14 @@ class ConversationCubit extends ConversationController {
     var cursor = page.nextBefore;
     var hasMore = page.hasMore;
     var pages = 0;
+
+    final resume = _gapResumeBefore;
+    if (resume != null && ProfileCategory.isBackendId(resume)) {
+      // Continue the unfinished walk instead of restarting at the tip.
+      cursor = resume;
+      hasMore = true;
+      overlaps = false;
+    }
 
     while (!overlaps &&
         knownIds.isNotEmpty &&
@@ -418,7 +844,19 @@ class ConversationCubit extends ConversationController {
       hasMore = older.hasMore;
     }
 
-    return chronologicalMessagesFromBackend(collected);
+    final hitPageCapWithoutOverlap =
+        knownIds.isNotEmpty &&
+        !overlaps &&
+        hasMore &&
+        cursor != null &&
+        pages >= ChatSync.maxGapPages;
+
+    _gapResumeBefore = hitPageCapWithoutOverlap ? cursor : null;
+
+    return (
+      messages: chronologicalMessagesFromBackend(collected),
+      complete: !hitPageCapWithoutOverlap,
+    );
   }
 
   bool _sameMessages(List<ChatMessage> a, List<ChatMessage> b) {
@@ -428,7 +866,8 @@ class ConversationCubit extends ConversationController {
       if (a[i].id != b[i].id ||
           a[i].deleted != b[i].deleted ||
           a[i].text != b[i].text ||
-          a[i].imageUrl != b[i].imageUrl) {
+          a[i].imageUrl != b[i].imageUrl ||
+          a[i].deliveryStatus != b[i].deliveryStatus) {
         return false;
       }
     }
@@ -506,11 +945,15 @@ class ConversationCubit extends ConversationController {
       _initialReady = true;
       _lastDetailsAt = DateTime.now();
       _pollFailures = 0;
+      _socketReady = realtime?.isReady == true;
+      if (_socketReady) {
+        _socketReconciled = true;
+      }
 
       if (_routeVisible && _appForeground) {
         unawaited(_markReadNow());
       }
-      _maybeStartPolling();
+      _syncSyncTimers();
     } catch (_) {
       if (isClosed || revision != _loadRevision) return;
       emit(
@@ -596,6 +1039,7 @@ class ConversationCubit extends ConversationController {
     }
 
     final sendVersion = ++_sendVersion;
+    setComposerTyping(false);
     emit(state.copyWith(sending: true, clearError: true));
     try {
       final confirmed = await repository.sendMessage(
@@ -745,8 +1189,29 @@ class ConversationCubit extends ConversationController {
       final prior = byId[next.id];
       if (prior != null && prior.deleted && !next.deleted) {
         byId[next.id] = prior;
+        continue;
+      }
+      if (prior != null &&
+          prior.deliveryStatus == ChatDeliveryStatus.read &&
+          next.deliveryStatus == ChatDeliveryStatus.sent) {
+        // Monotonic read ticks — stale REST without readAt must not regress.
+        byId[next.id] = next.copyWith(deliveryStatus: ChatDeliveryStatus.read);
       } else {
         byId[next.id] = next;
+      }
+    }
+    if (_peerReadAt != null) {
+      final readAtUtc = _peerReadAt!.toUtc();
+      for (final entry in byId.entries.toList()) {
+        final message = entry.value;
+        if (message.isMine &&
+            !message.deleted &&
+            !message.sentAt.toUtc().isAfter(readAtUtc) &&
+            message.deliveryStatus != ChatDeliveryStatus.read) {
+          byId[entry.key] = message.copyWith(
+            deliveryStatus: ChatDeliveryStatus.read,
+          );
+        }
       }
     }
     final ordered = byId.values.toList()
@@ -762,7 +1227,7 @@ class ConversationCubit extends ConversationController {
     if (!_locallyDeleted.contains(message.id) && !message.deleted) {
       return message;
     }
-    _locallyDeleted.add(message.id);
+    _rememberLocalDelete(message.id);
     if (message.deleted &&
         message.text.isEmpty &&
         message.imageUrl == null &&
@@ -779,7 +1244,9 @@ class ConversationCubit extends ConversationController {
 
   @override
   void startSelection([String? id]) {
-    if (state.messages.isEmpty || state.sendingMedia || state.sending) return;
+    if (state.visibleMessages.isEmpty || state.sendingMedia || state.sending) {
+      return;
+    }
     emit(state.copyWith(selectionMode: true, selected: id == null ? {} : {id}));
   }
 
@@ -831,7 +1298,7 @@ class ConversationCubit extends ConversationController {
       for (final id in ids) {
         await repository.deleteMessage(conversationId, id);
         if (!isCurrentAccount()) return;
-        _locallyDeleted.add(id);
+        _rememberLocalDelete(id);
       }
       if (isClosed) return;
       final updated = [
